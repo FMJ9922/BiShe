@@ -17,10 +17,10 @@ public class ActorViewer : MonoBehaviour
         Vector3 normal = Vector3.Cross(fromVector, toVector);//叉乘求出法线向量
         angle *= Mathf.Sign(Vector3.Dot(normal, Vector3.up));  //求法线向量与物体上方向向量点乘，结果为1或-1，修正旋转方向
         transform.LookAt(Camera.main.transform.position);
-        Debug.Log(Mathf.FloorToInt(8 * (angle + 180) / 360));
+        //Debug.Log(Mathf.FloorToInt(8 * (angle + 180) / 360));
         int index = (Mathf.Clamp(Mathf.FloorToInt(8 * (angle + 180) / 360), 0, 7)+9)%8;
         spriteRenderer.sprite = sprites[index];
-        Debug.Log(angle);
+        //Debug.Log(angle);
     }
 
     private Vector3 PlantVector3(Vector3 vector3)
