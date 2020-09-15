@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class CameraMovement : Singleton<CameraMovement>
 {
     public float speed = 0.5f;
     public Transform target;
+
+    public delegate void CameraMove();
+    public event CameraMove OnCameraMove;
     // Update is called once per frame
     void Update()
     {

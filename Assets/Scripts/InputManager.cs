@@ -16,6 +16,8 @@ public partial class InputManager : Singleton<InputManager>
         if (Input.anyKey)
         {
             OnKeyDown();
+            //当有按键输入的时候响应
+            EventManager.TriggerEvent(ConstEvent.OnCameraMove);
         }
     }
 
@@ -39,11 +41,11 @@ public partial class InputManager : Singleton<InputManager>
         }
         if (Input.GetKey(KeyCode.E))
         {
-            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * _CameraRotateSpeed,Space.World);
+            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * -_CameraRotateSpeed,Space.World);
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * -_CameraRotateSpeed, Space.World);
+            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * _CameraRotateSpeed, Space.World);
         }
     }
 
