@@ -23,30 +23,30 @@ public partial class InputManager : Singleton<InputManager>
 
     private void OnKeyDown()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * _CameraMoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            Camera.main.transform.parent.position += Camera.main.transform.parent.right * Time.deltaTime * -_CameraMoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            Camera.main.transform.parent.position += Camera.main.transform.parent.right * Time.deltaTime * _CameraMoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * -_CameraMoveSpeed;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * -_CameraRotateSpeed,Space.World);
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            Camera.main.transform.parent.Rotate(Vector3.up,Time.deltaTime * _CameraRotateSpeed, Space.World);
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * _CameraMoveSpeed;
+        //}
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    Camera.main.transform.parent.position += Camera.main.transform.parent.right * Time.deltaTime * -_CameraMoveSpeed;
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    Camera.main.transform.parent.position += Camera.main.transform.parent.right * Time.deltaTime * _CameraMoveSpeed;
+        //}
+        //if (Input.GetKey(KeyCode.S))
+        //{
+        //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * -_CameraMoveSpeed;
+        //}
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        //    Camera.main.transform.parent.Rotate(Vector3.up, Time.deltaTime * -_CameraRotateSpeed, Space.World);
+        //}
+        //if (Input.GetKey(KeyCode.Q))
+        //{
+        //    Camera.main.transform.parent.Rotate(Vector3.up, Time.deltaTime * _CameraRotateSpeed, Space.World);
+        //}
     }
 
 }

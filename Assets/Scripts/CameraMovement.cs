@@ -4,41 +4,69 @@ using UnityEngine;
 
 public class CameraMovement : Singleton<CameraMovement>
 {
-    public float speed = 0.5f;
-    public Transform target;
+    [Header("摄像机运动参数")]
+    public float MaxSpeed = 0.5f;
+    public float Accelerate = 0.5f;
+    public float StopAccelerate = 1f;
+    public float ScrollWheelSpeed = 10f;
+    public float MaxScrollValue = 200f;
+    public float MinScrollValue = -100f;
 
     public delegate void CameraMove();
     public event CameraMove OnCameraMove;
-    // Update is called once per frame
+
+    private Transform _cameraTrans;
+    private float _forwardSpeed = 0;
+    private float _rightSpeed = 0;
+    private float _scrollValue = 0;
+
+    private void Awake()
+    {
+        _cameraTrans = transform.GetChild(0);
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += PlantVector3(transform.forward) * speed;
+            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= PlantVector3(transform.forward) * speed;
+            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= PlantVector3(transform.right) * speed;
+            _rightSpeed = Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += PlantVector3(transform.right * speed);
+            _rightSpeed = Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime);
         }
-        /*if (Input.GetKey(KeyCode.Q))
+        if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
         {
-            transform.Rotate(new Vector3(0, -0.3f, 0), Space.World);
+            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.E))
+        if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
         {
-            transform.Rotate(new Vector3(0, 0.3f, 0), Space.World);
-        }*/
-        transform.LookAt(target);
+            _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            _scrollValue = Mathf.MoveTowards(_scrollValue, MaxScrollValue, ScrollWheelSpeed);
+        }
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            _scrollValue = Mathf.MoveTowards(_scrollValue, MinScrollValue, ScrollWheelSpeed);
+        }
+        transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
+        _cameraTrans.localPosition = _cameraTrans.forward * _scrollValue;
+
     }
 
+    private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
+    {
+        return new Vector3(rightSpeed, 0, forwardSpeed);
+    }
     private Vector3 PlantVector3(Vector3 vector3)
     {
         return new Vector3(vector3.x, 0, vector3.z);
