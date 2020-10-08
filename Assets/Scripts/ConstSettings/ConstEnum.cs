@@ -34,3 +34,9 @@ public enum TechTreeAction
     Upgrade,//升级
     Select,//选择带入关卡的相关科技建筑
 }
+
+public enum IconType
+{
+    Tech = 0,
+    Level = 1,
+}

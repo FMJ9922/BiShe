@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 970805942108662193}
   - component: {fileID: 970805942108662194}
   - component: {fileID: 970805942108662195}
-  - component: {fileID: 5260970720402813662}
+  - component: {fileID: 341331435683993521}
   m_Layer: 5
-  m_Name: TechIcon
+  m_Name: CommonIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.9058824, g: 0.5411765, b: 0.5411765, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5260970720402813662
+--- !u!114 &341331435683993521
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,11 +129,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 970805942108662157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3144cf2cc77d41d4db473b24957644e1, type: 3}
+  m_Script: {fileID: 11500000, guid: cb6927bc663d62145b5384a4899ae21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _techName: {fileID: 970805942627770450}
-  _techIndex: 0
+  _indexName: {fileID: 970805942627770450}
+  _Index: 0
+  _IconType: 0
 --- !u!1 &970805942627770540
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u79D1\u62801"
+  m_text: "\u5173\u53611"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3c85486da792e5d4eaf5bc5b13ea96d0, type: 2}
   m_sharedMaterial: {fileID: 6684154323411051464, guid: 3c85486da792e5d4eaf5bc5b13ea96d0,
