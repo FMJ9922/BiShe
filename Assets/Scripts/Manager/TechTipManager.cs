@@ -20,6 +20,8 @@ public class TechTipManager : Singleton<TechTipManager>
     /// 当前显示的科技索引序号
     /// </summary>
     public int CurrentIndex { get; private set; } = -1;
+
+    public TechTreeAction techTreeAction;
     #endregion
 
     #region 初始化

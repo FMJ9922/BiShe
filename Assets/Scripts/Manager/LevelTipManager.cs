@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelTipManager : Singleton<LevelTipManager>
 {
     #region 组件
     [SerializeField] private TMP_Text _levelName;
     [SerializeField] private TMP_Text _levelExplain;
+    [SerializeField] private GameObject _selectBtnPfb;
     #endregion
 
     #region 属性&字段
@@ -20,6 +22,11 @@ public class LevelTipManager : Singleton<LevelTipManager>
     /// 当前显示的关卡索引序号
     /// </summary>
     public int CurrentIndex { get; private set; } = -1;
+    //最大可选科技数量，可配置
+    private int maxTechNum = 3;
+    //当前已选科技数量
+    private int curTechNum = 0;
+
     #endregion
 
     #region 初始化
@@ -73,6 +80,11 @@ public class LevelTipManager : Singleton<LevelTipManager>
     {
         SetGameObject(false);
     }
+
+    public void OpenScene()
+    {
+        SceneManager.LoadScene("MainScene", LoadSceneMode.Single);
+    }
     #endregion
 
     #region 私有方法
@@ -80,6 +92,14 @@ public class LevelTipManager : Singleton<LevelTipManager>
     private void SetGameObject(bool active)
     {
         gameObject.SetActive(active);
+    }
+
+    /// <summary>
+    /// 选择科技的按钮
+    /// </summary>
+    private void SelectTechBtn(TechType techType,int index)
+    {
+
     }
     #endregion
 }
