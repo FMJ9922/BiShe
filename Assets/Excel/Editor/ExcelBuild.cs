@@ -29,5 +29,6 @@ public class ExcelBuild : Editor
         AssetDatabase.CreateAsset(manager, assetPath);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        Debug.Log("生成成功！");
     }
 }
