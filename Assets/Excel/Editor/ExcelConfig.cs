@@ -10,7 +10,7 @@ public class ExcelConfig
     /// <summary>
     /// 存放excel表文件夹的的路径，本例excel表放在了"Assets/Excel/"当中
     /// </summary>
-    public static readonly string excelsFolderPath = Application.dataPath + "/Resources/Data/RawData";
+    public static readonly string excelsFolderPath = Application.dataPath + "/Resources/Data/RawData/";
 
     /// <summary>
     /// 存放Excel转化CS文件的文件夹路径
@@ -20,42 +20,101 @@ public class ExcelConfig
 
 public class ExcelTool
 {
-
-    /// <summary>
-    /// 读取表数据，生成对应的数组
-    /// </summary>
-    /// <param name="filePath">excel文件全路径</param>
-    /// <returns>Item数组</returns>
-    public static BuildingItem[] CreateItemArrayWithExcel(string filePath)
+    public static ItemData[] CreateItemArrayWithExcel(string filePath)
     {
-        //获得表数据
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-
-        Debug.Log(columnNum+" "+rowNum);
-        //根据excel的定义，第二行开始才是数据
-        BuildingItem[] array = new BuildingItem[rowNum - 1];
-        for (int i = 1; i < rowNum; i++)
+        ItemData[] array = new ItemData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
         {
-            BuildingItem item = new BuildingItem();
-            //解析每列的数据
-            item.Id = uint.Parse(collect[i][0].ToString());
+            ItemData item = new ItemData();
+            item.Id = int.Parse(collect[i][0].ToString());
             item.Name = collect[i][1].ToString();
-            item.Cost = uint.Parse(collect[i][2].ToString());
-            item.Rate = uint.Parse(collect[i][3].ToString());
-            item.Price = uint.Parse(collect[i][4].ToString());
-            array[i - 1] = item;
+            item.ProductCycle = int.Parse(collect[i][2].ToString());
+            item.Price = int.Parse(collect[i][3].ToString());
+            item.BuildingID = int.Parse(collect[i][4].ToString());
+            array[i - 2] = item;
         }
         return array;
     }
 
-    /// <summary>
-    /// 读取excel文件内容
-    /// </summary>
-    /// <param name="filePath">文件路径</param>
-    /// <param name="columnNum">行数</param>
-    /// <param name="rowNum">列数</param>
-    /// <returns></returns>
+    public static LevelData[] CreateLevelArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        LevelData[] array = new LevelData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            LevelData levelData = new LevelData();
+            levelData.Id = int.Parse(collect[i][0].ToString());
+            levelData.Name = collect[i][1].ToString();
+            levelData.Introduce = collect[i][2].ToString();
+            array[i - 2] = levelData;
+        }
+        return array;
+    }
+
+    public static TechData[] CreateTechArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        TechData[] array = new TechData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            TechData techData = new TechData();
+            techData.Id = int.Parse(collect[i][0].ToString());
+            techData.Name = collect[i][1].ToString();
+            techData.Cost = int.Parse(collect[i][2].ToString());
+            techData.Introduce = collect[i][3].ToString();
+            array[i - 2] = techData;
+        }
+        return array;
+    }
+
+    public static BuildData[] CreateBuildArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        BuildData[] array = new BuildData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            BuildData buildData = new BuildData();
+            buildData.Id = int.Parse(collect[i][0].ToString());
+            buildData.Name = collect[i][1].ToString();
+            buildData.Length = int.Parse(collect[i][2].ToString());
+            buildData.Width = int.Parse(collect[i][3].ToString());
+            buildData.Price = int.Parse(collect[i][4].ToString());
+            buildData.costResources = new List<CostResource>();
+            for (int j = 5; j <= 9; j += 2)
+            {
+                if (collect[i][j].ToString() != "Null")
+                {
+                    buildData.costResources.Add(new CostResource(
+                        int.Parse(collect[i][j].ToString()),
+                        int.Parse(collect[i][j + 1].ToString()))
+                        );
+                }
+            }
+            buildData.Return = int.Parse(collect[i][11].ToString());
+            buildData.ProductId = int.Parse(collect[i][12].ToString());
+            buildData.ProductNum = int.Parse(collect[i][13].ToString());
+            buildData.ProductTime = int.Parse(collect[i][14].ToString());
+            buildData.InfluenceRange = int.Parse(collect[i][15].ToString());
+            if (collect[i][16].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][16].ToString());
+            }
+            if (collect[i][17].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][17].ToString());
+            }
+            buildData.Storage = int.Parse(collect[i][18].ToString());
+            buildData.WorkerNum = int.Parse(collect[i][19].ToString());
+            array[i - 2] = buildData;
+        }
+        return array;
+    }
+
     static DataRowCollection ReadExcel(string filePath, ref int columnNum, ref int rowNum)
     {
         FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);

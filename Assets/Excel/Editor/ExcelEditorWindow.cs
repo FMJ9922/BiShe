@@ -53,7 +53,7 @@ public class ExcelEditorWindow : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
 
-        for (int i = 0; i < ItemManager.Instance.dataArray.Length; i++)
+        for (int i = 0; i < DataManager.Instance.ItemArray.Length; i++)
         {
             EditorGUILayout.BeginHorizontal();
             toggleValues.Add(false);
@@ -66,7 +66,7 @@ public class ExcelEditorWindow : EditorWindow
             }
             for (int j = 0; j < itemFieldInfoArray.Length; j++)
             {
-                EditorGUILayout.LabelField(itemFieldInfoArray[j].GetValue(ItemManager.Instance.dataArray[i])?.ToString(), GUILayout.Width(100));
+                EditorGUILayout.LabelField(itemFieldInfoArray[j].GetValue(DataManager.Instance.ItemArray[i])?.ToString(), GUILayout.Width(100));
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -118,7 +118,7 @@ public class ExcelEditorWindow : EditorWindow
     //读取Asset数据
     void LoadExcelData()
     {
-        itemFieldInfoArray = typeof(BuildingItem).GetFields();
+        itemFieldInfoArray = typeof(ItemData).GetFields();
     }
 
     //选择某行数据
@@ -142,7 +142,7 @@ public class ExcelEditorWindow : EditorWindow
         temperDataValues.Clear();
         for (int i = 0; i < itemFieldInfoArray.Length; i++)
         {
-            var value = itemFieldInfoArray[i].GetValue(ItemManager.Instance.dataArray[selectedIndex]);
+            var value = itemFieldInfoArray[i].GetValue(DataManager.Instance.ItemArray[selectedIndex]);
             if (value != null)
             {
                 temperDataValues.Add(value.ToString());
@@ -155,7 +155,7 @@ public class ExcelEditorWindow : EditorWindow
     {
         SaveToAsset();
 
-        string path = ExcelConfig.excelsFolderPath + "/Item.xlsx";
+        string path = ExcelConfig.excelsFolderPath + "Data.xlsx";
         FileInfo xlsxFile = new FileInfo(path);
 
         if (xlsxFile.Exists)
@@ -181,15 +181,15 @@ public class ExcelEditorWindow : EditorWindow
     //修改的数据保存到Asset文件中
     void SaveToAsset()
     {
-        ItemManager.Instance.dataArray[selectedIndex] = GetNewItem();
+        DataManager.Instance.ItemArray[selectedIndex] = GetNewItem();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("SaveToAsset Success");
     }
 
-    BuildingItem GetNewItem()
+    ItemData GetNewItem()
     {
-        BuildingItem item = new BuildingItem();
+        ItemData item = new ItemData();
         for (int i = 0; i < itemFieldInfoArray.Length; i++)
         {
             var v = ConvertObject(temperDataValues[i], itemFieldInfoArray[i].FieldType);
