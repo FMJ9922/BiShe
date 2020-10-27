@@ -24,16 +24,16 @@ public class ExcelTool
     {
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-        ItemData[] array = new ItemData[rowNum - 1];
-        for (int i = 1; i < rowNum; i++)
+        ItemData[] array = new ItemData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
         {
             ItemData item = new ItemData();
-            item.Id = uint.Parse(collect[i][0].ToString());
+            item.Id = int.Parse(collect[i][0].ToString());
             item.Name = collect[i][1].ToString();
-            item.Cost = uint.Parse(collect[i][2].ToString());
-            item.Rate = uint.Parse(collect[i][3].ToString());
-            item.Price = uint.Parse(collect[i][4].ToString());
-            array[i - 1] = item;
+            item.ProductCycle = int.Parse(collect[i][2].ToString());
+            item.Price = int.Parse(collect[i][3].ToString());
+            item.BuildingID = int.Parse(collect[i][4].ToString());
+            array[i - 2] = item;
         }
         return array;
     }
@@ -42,10 +42,14 @@ public class ExcelTool
     {
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-        LevelData[] array = new LevelData[rowNum - 1];
-        for (int i = 1; i < rowNum; i++)
+        LevelData[] array = new LevelData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
         {
-            
+            LevelData levelData = new LevelData();
+            levelData.Id = int.Parse(collect[i][0].ToString());
+            levelData.Name = collect[i][1].ToString();
+            levelData.Introduce = collect[i][2].ToString();
+            array[i - 2] = levelData;
         }
         return array;
     }
@@ -54,10 +58,15 @@ public class ExcelTool
     {
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-        TechData[] array = new TechData[rowNum - 1];
-        for (int i = 1; i < rowNum; i++)
+        TechData[] array = new TechData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
         {
-
+            TechData techData = new TechData();
+            techData.Id = int.Parse(collect[i][0].ToString());
+            techData.Name = collect[i][1].ToString();
+            techData.Cost = int.Parse(collect[i][2].ToString());
+            techData.Introduce = collect[i][3].ToString();
+            array[i - 2] = techData;
         }
         return array;
     }
@@ -66,10 +75,42 @@ public class ExcelTool
     {
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-        BuildData[] array = new BuildData[rowNum - 1];
-        for (int i = 1; i < rowNum; i++)
+        BuildData[] array = new BuildData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
         {
-
+            BuildData buildData = new BuildData();
+            buildData.Id = int.Parse(collect[i][0].ToString());
+            buildData.Name = collect[i][1].ToString();
+            buildData.Length = int.Parse(collect[i][2].ToString());
+            buildData.Width = int.Parse(collect[i][3].ToString());
+            buildData.Price = int.Parse(collect[i][4].ToString());
+            buildData.costResources = new List<CostResource>();
+            for (int j = 5; j <= 9; j += 2)
+            {
+                if (collect[i][j].ToString() != "Null")
+                {
+                    buildData.costResources.Add(new CostResource(
+                        int.Parse(collect[i][j].ToString()),
+                        int.Parse(collect[i][j + 1].ToString()))
+                        );
+                }
+            }
+            buildData.Return = int.Parse(collect[i][11].ToString());
+            buildData.ProductId = int.Parse(collect[i][12].ToString());
+            buildData.ProductNum = int.Parse(collect[i][13].ToString());
+            buildData.ProductTime = int.Parse(collect[i][14].ToString());
+            buildData.InfluenceRange = int.Parse(collect[i][15].ToString());
+            if (collect[i][16].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][16].ToString());
+            }
+            if (collect[i][17].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][17].ToString());
+            }
+            buildData.Storage = int.Parse(collect[i][18].ToString());
+            buildData.WorkerNum = int.Parse(collect[i][19].ToString());
+            array[i - 2] = buildData;
         }
         return array;
     }

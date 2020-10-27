@@ -1,9 +1,9 @@
 ﻿[System.Serializable]
 public class ItemData
 {
-    public uint Id;
+    public int Id;
     public string Name;
-    public uint Cost;
-    public uint Rate;
-    public uint Price;
+    public int ProductCycle;
+    public int Price;
+    public int BuildingID;//需要该物品的建筑
 }

@@ -43,3 +43,4 @@ public class BuildManager : Singleton<BuildManager>
         building.transform.Rotate(Vector3.up, dir, Space.World);
     }
 }
+

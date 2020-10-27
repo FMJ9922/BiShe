@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bea788306012a44af273b682a458dd, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  ItemArray:
+  - Id: 10001
+    Name: "\u5C0F\u9EA6"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10002
+    Name: "\u6C34\u7A3B"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10003
+    Name: "\u539F\u6728"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10004
+    Name: "\u6728\u6599"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10005
+    Name: "\u751F\u8089"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10006
+    Name: "\u9762\u7C89"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  - Id: 10007
+    Name: "\u52B3\u52A8\u529B"
+    ProductCycle: 3
+    Price: 500
+    BuildingID: 20007
+  LevelArray:
+  - Id: 40001
+    Name: "\u5173\u53611"
+    Introduce: "\u5173\u5361\u4ECB\u7ECD111"
+  TechArray:
+  - Id: 30001
+    Name: "\u79D1\u62801"
+    Cost: 100
+    Introduce: "\u4ECB\u7ECD\u4ECB\u7ECD\u4ECB\u7ECD"
+  BuildArray:
+  - Id: 20001
+    Name: "\u6C11\u623F"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 10
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20002
+    Name: "\u571F\u8DEF"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20003
+    Name: "\u7B80\u6613\u4ED3\u5E93"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20004
+    Name: "\u96C6\u5E02"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20005
+    Name: "\u9EA6\u7530"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20006
+    Name: "\u7A3B\u7530"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20007
+    Name: "\u78E8\u574A"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20008
+    Name: "\u517B\u6B96\u573A"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20009
+    Name: "\u5C60\u5BB0\u573A"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20010
+    Name: "\u52A0\u5DE5\u5382"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20011
+    Name: "\u4F10\u6728\u573A"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
+  - Id: 20012
+    Name: "\u6750\u6599\u5382"
+    Length: 2
+    Width: 2
+    Price: 200
+    Return: 50
+    ProductId: 10007
+    ProductNum: 0
+    ProductTime: 10
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Storage: 50
+    WorkerNum: 5
