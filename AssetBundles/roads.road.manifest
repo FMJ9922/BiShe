@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3389809617
+CRC: 2949312213
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 00e3f1023ba4d0a169f83c1d02b7abce
+    Hash: f5951cf6c37429c005451c027c39c638
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6a3eba316372b2f69b09604b127ff833
+    Hash: 60d3bbed58921ad50f3e015d0752ec1d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -21,10 +21,12 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 33
   Script: {instanceID: 0}
-- Class: 43
-  Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc30ed954da58f04d831624e7d0e55fb, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/House01.prefab
+- Assets/Prefabs/RoadPfb.prefab
 Dependencies: []

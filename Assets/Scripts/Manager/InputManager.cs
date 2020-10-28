@@ -5,7 +5,7 @@ using UnityEngine;
 public partial class InputManager : Singleton<InputManager>
 {
     #region 字段
-    private Vector3 _lastGroundRayPos = new Vector3(0, 0, 0);
+    public Vector3 LastGroundRayPos = new Vector3(0, 0, 0);
     #endregion
     /// <summary>
     /// 处理玩家输入事件
@@ -23,9 +23,9 @@ public partial class InputManager : Singleton<InputManager>
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.CompareTag("Ground") && _lastGroundRayPos != hit.point && Cursor.lockState != CursorLockMode.Locked)
+            if (hit.collider.CompareTag("Ground") && LastGroundRayPos != hit.point && Cursor.lockState != CursorLockMode.Locked)
             {
-                _lastGroundRayPos = hit.point;
+                LastGroundRayPos = hit.point;
                 EventManager.TriggerEvent(ConstEvent.OnGroundRayPosMove, hit.point);
             }
         }

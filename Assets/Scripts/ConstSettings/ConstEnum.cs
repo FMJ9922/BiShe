@@ -40,3 +40,10 @@ public enum IconType
     Tech = 0,
     Level = 1,
 }
+
+public enum RoadOption
+{
+    start = 0,
+    normal = 1,
+    end = 2,
+}

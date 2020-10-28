@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class RoadObject : MonoBehaviour
 {
-    [SerializeField]
-    private List<Vector3> wayPoints;
 
     private List<Vector3> vertices = new List<Vector3>();
 
@@ -23,30 +21,18 @@ public class RoadObject : MonoBehaviour
     private float sampleLength { get; } = 2.0f;
 
     //道路拐角长度
-    private float turingLength { get; } = 4.0f;
+    public float turingLength { get; set; } = 4.0f;
 
     //转弯处取样的间隔
-    private float deltaAngle { get; } = 1f;
+    private float deltaAngle { get; } = 10f;
 
     private void Start()
     {
-        Init();
     }
     private void Init()
     {
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
         mesh.name = "testMesh";
-        int count = wayPoints.Count;
-        if (count <= 1)
-        {
-            Debug.Log("路径点剩余长度小于2");
-            return;
-        }
-
-        ///BuildStraightRoad(wayPoints[count - 1], wayPoints[count - 2]);
-        //BuildTurningRoad(wayPoints[count - 3], wayPoints[count - 2], wayPoints[count - 1]);
-        BuildRoads(wayPoints);
-        RecalculateMesh();
     }
 
     private void BuildRoads(List<Vector3> wayPoints)
@@ -75,10 +61,12 @@ public class RoadObject : MonoBehaviour
                 //BuildStraightRoad(outPos, nextInPos);
             }
         }
+        
     }
-    private void BuildStraightRoad(Vector3 firstPoint, Vector3 secondPoint)
+    public void BuildStraightRoad(Vector3 firstPoint, Vector3 secondPoint)
     {
-        Debug.Log(firstPoint + " " + secondPoint);
+        Init();
+        Debug.Log("BuildStraight:"+firstPoint + "->" + secondPoint);
         //取路径点最后两个点计算
         Vector3 forwardVector = firstPoint - secondPoint;
         //利用相似三角形求出道路两侧距离中心点的偏移量
@@ -115,11 +103,13 @@ public class RoadObject : MonoBehaviour
             triangle[ti + 5] = 2 * x + 3;
         }
         triangles.AddRange(triangle);
+        RecalculateMesh();
     }
 
-    private void BuildTurningRoad(Vector3 beforePoint, Vector3 turningPoint, Vector3 afterPoint)
+    public void BuildTurningRoad(Vector3 beforePoint, Vector3 turningPoint, Vector3 afterPoint)
     {
-        Debug.Log(beforePoint + " " + turningPoint + " " + afterPoint);
+        Init();
+        Debug.Log("Build:"+beforePoint + "->" + turningPoint + "->" + afterPoint);
         Vector3 midCenter = (beforePoint + afterPoint) / 2;
         Vector3 a = turningPoint - midCenter;
         Vector3 b = beforePoint - midCenter;
@@ -181,10 +171,10 @@ public class RoadObject : MonoBehaviour
             triangle[ti + 5] = 2 * x + 3;
         }
         triangles.AddRange(triangle);
-
+        RecalculateMesh();
     }
 
-    private void RecalculateMesh()
+    public void RecalculateMesh()
     {
         mesh.vertices = vertices.ToArray();
         mesh.uv = uv.ToArray();
