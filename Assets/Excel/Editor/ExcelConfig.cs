@@ -110,6 +110,9 @@ public class ExcelTool
             }
             buildData.Storage = int.Parse(collect[i][18].ToString());
             buildData.WorkerNum = int.Parse(collect[i][19].ToString());
+            buildData.BundleName = collect[i][20].ToString();
+            buildData.PfbName = collect[i][21].ToString();
+            buildData.tabType = (BuildTabType)int.Parse(collect[i][22].ToString());
             array[i - 2] = buildData;
         }
         return array;

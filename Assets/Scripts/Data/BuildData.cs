@@ -18,6 +18,9 @@ public class BuildData
     public int RearBuildingId;//后置建筑Id
     public int Storage;//存储量
     public int WorkerNum;//工人数量
+    public string BundleName;
+    public string PfbName;
+    public BuildTabType tabType;
 }
 
 public struct CostResource

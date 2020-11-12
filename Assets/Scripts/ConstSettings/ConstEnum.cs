@@ -1,13 +1,14 @@
 ﻿
+using System.ComponentModel;
 /// <summary>
 /// 科技类型，可以是建筑，建筑的升级版，加成等
 /// </summary>
 public enum TechType
 {
-    Agriculture = 0,
-    Industry = 1,
-    Manufacturing = 2,
-    Service = 3,
+    Agriculture = 0,//农业
+    Industry = 1,//工业
+    Manufacturing = 2,//制造业
+    Service = 3,//服务业
 }
 
 /// <summary>
@@ -47,3 +48,38 @@ public enum RoadOption
     normal = 1,
     end = 2,
 }
+
+public enum BundlePrimaryType
+{
+    building,
+    road,
+}
+
+public enum BundleSecondaryType
+{
+    l1_northhouse,
+    l2_northhouse,
+    sandroad,
+    rockroad,
+    asphaltroad,
+}
+
+/// <summary>
+/// 建造页签的枚举
+/// </summary>
+public enum BuildTabType
+{
+    [Description("住房")]
+    house = 0,
+    [Description("农业")]
+    agriculture = 1,
+    [Description("林业")]
+    forest = 2,
+    [Description("制造业")]
+    manufacturing = 3,
+    [Description("路")]
+    road = 4,//路
+    [Description("公共设施")]
+    utility = 5,
+}
+

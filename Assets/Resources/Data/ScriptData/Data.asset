@@ -49,14 +49,16 @@ MonoBehaviour:
     Price: 500
     BuildingID: 20007
   LevelArray:
-  - Id: 40001
-    Name: "\u5173\u53611"
-    Introduce: "\u5173\u5361\u4ECB\u7ECD111"
-  TechArray:
   - Id: 30001
-    Name: "\u79D1\u62801"
-    Cost: 100
-    Introduce: "\u4ECB\u7ECD\u4ECB\u7ECD\u4ECB\u7ECD"
+    Name: "\u519C\u4EA7\u54C1"
+    Introduce: Null
+  - Id: 30002
+    Name: "\u5DE5\u4E1A\u4EA7\u54C1"
+    Introduce: 30001
+  - Id: 30003
+    Name: "\u7ED3\u5408\u4EA7\u4E1A"
+    Introduce: 30002
+  TechArray: []
   BuildArray:
   - Id: 20001
     Name: "\u6C11\u623F"
@@ -66,12 +68,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 10
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l1_northhouse
+    PfbName: L1_Northhouse001
+    tabType: 0
   - Id: 20002
     Name: "\u571F\u8DEF"
     Length: 2
@@ -80,12 +85,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l2_northhouse
+    PfbName: L1_Northhouse002
+    tabType: 4
   - Id: 20003
     Name: "\u7B80\u6613\u4ED3\u5E93"
     Length: 2
@@ -94,12 +102,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l3_northhouse
+    PfbName: L1_Northhouse003
+    tabType: 5
   - Id: 20004
     Name: "\u96C6\u5E02"
     Length: 2
@@ -108,12 +119,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l4_northhouse
+    PfbName: L1_Northhouse004
+    tabType: 5
   - Id: 20005
     Name: "\u9EA6\u7530"
     Length: 2
@@ -122,12 +136,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l5_northhouse
+    PfbName: L1_Northhouse005
+    tabType: 1
   - Id: 20006
     Name: "\u7A3B\u7530"
     Length: 2
@@ -136,12 +153,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l6_northhouse
+    PfbName: L1_Northhouse006
+    tabType: 1
   - Id: 20007
     Name: "\u78E8\u574A"
     Length: 2
@@ -150,12 +170,15 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l7_northhouse
+    PfbName: L1_Northhouse007
+    tabType: 3
   - Id: 20008
     Name: "\u517B\u6B96\u573A"
     Length: 2
@@ -164,27 +187,16 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
+    BundleName: building.l8_northhouse
+    PfbName: L1_Northhouse008
+    tabType: 1
   - Id: 20009
-    Name: "\u5C60\u5BB0\u573A"
-    Length: 2
-    Width: 2
-    Price: 200
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 10
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
-  - Id: 20010
     Name: "\u52A0\u5DE5\u5382"
     Length: 2
     Width: 2
@@ -192,13 +204,16 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-  - Id: 20011
+    BundleName: building.l9_northhouse
+    PfbName: L1_Northhouse009
+    tabType: 3
+  - Id: 20010
     Name: "\u4F10\u6728\u573A"
     Length: 2
     Width: 2
@@ -206,23 +221,12 @@ MonoBehaviour:
     Return: 50
     ProductId: 10007
     ProductNum: 0
-    ProductTime: 10
+    ProductTime: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-  - Id: 20012
-    Name: "\u6750\u6599\u5382"
-    Length: 2
-    Width: 2
-    Price: 200
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 10
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
+    BundleName: building.l10_northhouse
+    PfbName: L1_Northhouse010
+    tabType: 2

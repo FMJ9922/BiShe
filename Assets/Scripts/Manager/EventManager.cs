@@ -58,6 +58,7 @@ public class EventManager
     /// <param name="listener">Listener.</param>
     public static void StartListening(string eventName, UnityAction listener)
     {
+        UnityEngine.Debug.Log("监听：" + eventName);
         if (string.IsNullOrEmpty(eventName))
         {
             AssertionFail("非法的参数：事件名称为空!");
@@ -103,6 +104,7 @@ public class EventManager
 
     public static void StartListening<T>(string eventName, UnityAction<T> listener)
     {
+        UnityEngine.Debug.Log("监听：" + eventName);
         if (string.IsNullOrEmpty(eventName))
         {
             AssertionFail("非法的参数：事件名称为空!");
@@ -171,6 +173,7 @@ public class EventManager
     /// <param name="listener">Listener.</param>
     public static void StopListening(string eventName, UnityAction listener)
     {
+        UnityEngine.Debug.Log("取消监听：" + eventName);
         GameEvent thisEvent = null;
         if (Instance._eventDictionary.TryGetValue(eventName, out thisEvent))
         {
@@ -186,6 +189,7 @@ public class EventManager
 
     public static void StopListening<T>(string eventName, UnityAction<T> listener)
     {
+        UnityEngine.Debug.Log("取消监听：" + eventName);
         var tType = typeof(T);
         var paramEventsTable = Instance._paramEventsTable;
         if (paramEventsTable.ContainsKey(tType))

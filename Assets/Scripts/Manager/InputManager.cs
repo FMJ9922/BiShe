@@ -37,7 +37,10 @@ public partial class InputManager : Singleton<InputManager>
         {
             EventManager.TriggerEvent(ConstEvent.OnMouseLeftButtonDown);
         }
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            EventManager.TriggerEvent(ConstEvent.OnMouseRightButtonDown);
+        }
         //if (Input.GetKey(KeyCode.W))
         //{
         //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * _CameraMoveSpeed;
@@ -54,13 +57,13 @@ public partial class InputManager : Singleton<InputManager>
         //{
         //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * -_CameraMoveSpeed;
         //}
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, 3f);
+            EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, 90f);
         }
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, -3f);
+            EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, -90f);
         }
     }
 

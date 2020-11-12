@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 2870314807
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 513556db339a89290781779931a8109c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f097dc1d0a3f962e70630054e26a1345
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/Building/House/L1_Northhouse001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse003.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse002.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse004.fbx
+Dependencies: []

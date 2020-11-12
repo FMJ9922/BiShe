@@ -11,7 +11,7 @@ public class DataManager : ScriptableObject
         {
             if (mInstance == null)
             {
-                mInstance = Resources.Load<DataManager>("Data/ScriptData/Item");
+                mInstance = Resources.Load<DataManager>("Data/ScriptData/Data");
             }
             return mInstance;
         }
@@ -21,4 +21,29 @@ public class DataManager : ScriptableObject
     public LevelData[] LevelArray;
     public TechData[] TechArray;
     public BuildData[] BuildArray;
+
+    public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
+
+    
+
+    public void InitTabDic()
+    {
+        for (int i = 0; i < BuildArray.Length; i++)
+        {
+            BuildTabType tabType = BuildArray[i].tabType;
+            if (TabDic.ContainsKey(tabType))
+            {
+                List<BuildData> buildDatas = TabDic[tabType];
+                buildDatas.Add(BuildArray[i]);
+                TabDic[tabType] = buildDatas;
+            }
+            else
+            {
+                List<BuildData> buildDatas = new List<BuildData>();
+                buildDatas.Add(BuildArray[i]);
+                TabDic.Add(tabType, buildDatas);
+            }
+        }
+        Debug.Log("创建TabDic成功！");
+    }
 }
