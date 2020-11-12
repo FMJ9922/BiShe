@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using System.ComponentModel;
 using System;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BuildingCanvas : MonoBehaviour
 {
@@ -62,9 +64,16 @@ public class BuildingCanvas : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
-            newTab.GetComponent<TMP_Text>().text = ((BuildTabType)i).GetDescription();
+            newTab.name = i.ToString();
+            newTab.GetComponentInChildren<TMP_Text>().text = ((BuildTabType)i).GetDescription();
+            newTab.GetComponent<Button>().interactable = true;
+            newTab.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                ChangeTab(int.Parse(newTab.name));
+            });
         }
     }
+
 
     /// <summary>
     /// 清除一个物体下的所有子物体
@@ -86,34 +95,44 @@ public class BuildingCanvas : MonoBehaviour
     /// <summary>
     /// 建造建筑按钮激活时，打开建造面板
     /// </summary>
-    public void OnClickBuildingBtn()
+    public void OnEnterBuildMode()
     {
-        if (!_mainCanvas.activeInHierarchy)
-        {
-            _mainCanvas.SetActive(true);
-        }
-        if (_activeBtns.activeInHierarchy)
-        {
-            _activeBtns.SetActive(false);
-        }
+        _mainCanvas.SetActive(true);
+        _activeBtns.SetActive(false);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
     }
 
+    public void OnExitBuildMode()
+    {
+        _mainCanvas.SetActive(false);
+        _activeBtns.SetActive(true);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
+    }
     public void ChangeTab(int tabType)
     {
         this.tabType = (BuildTabType)tabType;
+        //TODO:替换背景图片
         currentTabDatas = DataManager.Instance.TabDic[this.tabType].ToArray();
+        CleanUpAllAttachedChildren(_buildingIcons);
+        for (int i = 0; i < currentTabDatas.Length; i++)
+        {
+            GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);
+            newIcon.GetComponent<BuildIcon>().Init(currentTabDatas[i], this);
+        }
 
     }
 
     public void OnClickIconToBuild(BuildData buildData)
     {
         HideOrShowCanvasToggle(false);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
         EventManager.StartListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         BuildManager.Instance.CreateBuildingOnMouse(buildData.BundleName, buildData.PfbName);
     }
 
     public void OnFinishBuilding()
     {
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
         EventManager.StopListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         HideOrShowCanvasToggle(true);
     }

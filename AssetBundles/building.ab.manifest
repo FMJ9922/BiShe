@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2870314807
+CRC: 3515169920
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 513556db339a89290781779931a8109c
+    Hash: 384fbc6e2e93f548a759024938ea683a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f097dc1d0a3f962e70630054e26a1345
+    Hash: e1c43588b31b995975de75e2b03c9c4d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -29,8 +29,5 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Building/House/L1_Northhouse001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse003.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse002.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse004.fbx
+- Assets/Prefabs/Building/House/L1_Storehouse001.prefab
 Dependencies: []

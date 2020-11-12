@@ -27,6 +27,7 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     public void CreateBuildingOnMouse(string bundleName, string pfbName)
     {
+        Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, transform);
         currentBuilding = building.GetComponent<BuildingBase>();

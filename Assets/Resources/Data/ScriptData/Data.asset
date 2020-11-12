@@ -74,7 +74,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l1_northhouse
+    BundleName: building.ab
     PfbName: L1_Northhouse001
     tabType: 0
   - Id: 20002
@@ -91,8 +91,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l2_northhouse
-    PfbName: L1_Northhouse002
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 4
   - Id: 20003
     Name: "\u7B80\u6613\u4ED3\u5E93"
@@ -108,8 +108,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l3_northhouse
-    PfbName: L1_Northhouse003
+    BundleName: building.ab
+    PfbName: L1_Storehouse001
     tabType: 5
   - Id: 20004
     Name: "\u96C6\u5E02"
@@ -125,8 +125,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l4_northhouse
-    PfbName: L1_Northhouse004
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 5
   - Id: 20005
     Name: "\u9EA6\u7530"
@@ -142,8 +142,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l5_northhouse
-    PfbName: L1_Northhouse005
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 1
   - Id: 20006
     Name: "\u7A3B\u7530"
@@ -159,8 +159,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l6_northhouse
-    PfbName: L1_Northhouse006
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 1
   - Id: 20007
     Name: "\u78E8\u574A"
@@ -176,8 +176,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l7_northhouse
-    PfbName: L1_Northhouse007
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 3
   - Id: 20008
     Name: "\u517B\u6B96\u573A"
@@ -193,8 +193,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l8_northhouse
-    PfbName: L1_Northhouse008
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 1
   - Id: 20009
     Name: "\u52A0\u5DE5\u5382"
@@ -210,8 +210,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l9_northhouse
-    PfbName: L1_Northhouse009
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 3
   - Id: 20010
     Name: "\u4F10\u6728\u573A"
@@ -227,6 +227,6 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.l10_northhouse
-    PfbName: L1_Northhouse010
+    BundleName: building.ab
+    PfbName: L1_Northhouse001
     tabType: 2

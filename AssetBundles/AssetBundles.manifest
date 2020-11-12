@@ -1,19 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2203406842
+CRC: 4275365091
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: building.l1_northhouse
-      Dependencies: {}
-    Info_1:
-      Name: road.sandroad
-      Dependencies: {}
-    Info_2:
-      Name: building.l2_northhouse
-      Dependencies: {}
-    Info_3:
-      Name: road.rockroad
-      Dependencies: {}
-    Info_4:
-      Name: road.asphaltroad
+      Name: building.ab
       Dependencies: {}

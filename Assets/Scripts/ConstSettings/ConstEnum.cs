@@ -59,6 +59,7 @@ public enum BundleSecondaryType
 {
     l1_northhouse,
     l2_northhouse,
+    l1_storehouse,
     sandroad,
     rockroad,
     asphaltroad,
