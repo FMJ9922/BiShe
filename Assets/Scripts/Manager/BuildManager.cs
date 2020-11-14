@@ -168,14 +168,15 @@ public class BuildManager : Singleton<BuildManager>
 
     private static bool IsOverLap(AreaInfo rc1, AreaInfo rc2)
     {
-        if (rc1.x + rc1.Width > rc2.x &&
-        rc2.x + rc2.Width > rc1.x &&
-        rc1.y + rc1.Height > rc2.y &&
-        rc2.y + rc2.Height > rc1.y
-       )
-            return true;
-        else
+        if (Mathf.Abs(rc1.x - rc2.x) > (rc1.Width + rc2.Width) / 2)
+        {
             return false;
+        }
+        if(Mathf.Abs(rc1.y - rc2.y) > (rc1.Height + rc2.Height) / 2)
+        {
+            return false;
+        }
+        return true;
     }
 
     private bool CheckNewBuildingIsOverLap(AreaInfo areaInfo)
