@@ -28,19 +28,27 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         if (Input.GetKey(KeyCode.W))
         {
-            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime);
+            _forwardSpeed = _forwardSpeed >= 0 ?
+                Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
+                Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime);
+            _forwardSpeed = _forwardSpeed <= 0 ?
+                Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
+                Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            _rightSpeed = Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime);
+            _rightSpeed = _rightSpeed <= 0 ?
+                Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
+                Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _rightSpeed = Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime);
+            _rightSpeed = _rightSpeed >= 0 ?
+                Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
+                Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
         }
         if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
         {
@@ -59,13 +67,12 @@ public class CameraMovement : Singleton<CameraMovement>
             _scrollValue = Mathf.MoveTowards(_scrollValue, MinScrollValue, ScrollWheelSpeed);
         }
         transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
-        _cameraTrans.localPosition = _cameraTrans.forward * _scrollValue;
-
+        _cameraTrans.localPosition = new Vector3(-1f, -1.42f, 1f) * _scrollValue;
     }
 
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {
-        return new Vector3(rightSpeed, 0, forwardSpeed);
+        return new Vector3(rightSpeed - forwardSpeed, 0, rightSpeed + forwardSpeed);
     }
     private Vector3 PlantVector3(Vector3 vector3)
     {
