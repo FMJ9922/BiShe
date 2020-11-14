@@ -8,7 +8,7 @@ public class BuildData
     public int Length;//占地长
     public int Width;//占地宽
     public int Price;//购买价格
-    public List<CostResource> costResources;//购买花费原料
+    public List<CostResource> costResources = new List<CostResource>();//购买花费原料
     public int Return;//拆除返还
     public int ProductId;//产出产品
     public int ProductNum;//产品数量
@@ -23,10 +23,11 @@ public class BuildData
     public BuildTabType tabType;
 }
 
+[System.Serializable]
 public struct CostResource
 {
-    int ItemId;
-    int ItemNum;
+    public int ItemId;
+    public int ItemNum;
     public CostResource(int id, int num)
     {
         ItemId = id;

@@ -18,6 +18,14 @@ public class BuildingCanvas : MonoBehaviour
     private Transform _buildingTabs;
     [SerializeField]
     private Transform _buildingIcons;
+    [SerializeField]
+    private GameObject _InfoCanvas;
+    [SerializeField]
+    private TMP_Text _nameLabel;
+    [SerializeField]
+    private TMP_Text _introduceLabel;
+    [SerializeField]
+    private TMP_Text _costLabel;
 
     private BuildTabType tabType;
     #endregion
@@ -39,6 +47,7 @@ public class BuildingCanvas : MonoBehaviour
     {
         InitTabs();
         ChangeTab(0);
+        _InfoCanvas.SetActive(false);
     }
 
     #endregion
@@ -125,6 +134,7 @@ public class BuildingCanvas : MonoBehaviour
     public void OnClickIconToBuild(BuildData buildData)
     {
         HideOrShowCanvasToggle(false);
+        _InfoCanvas.SetActive(false);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
         EventManager.StartListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         BuildManager.Instance.CreateBuildingOnMouse(buildData.BundleName, buildData.PfbName);
@@ -138,13 +148,21 @@ public class BuildingCanvas : MonoBehaviour
     }
     public void OnEnterHoverIcon(BuildData buildData)
     {
-
+        _nameLabel.text = buildData.Name;
+        string cost = buildData.Price + "金钱";
+        for (int i = 0; i < buildData.costResources.Count; i++)
+        {
+            cost += "，"+buildData.costResources[i].ItemNum+" id" + buildData.costResources[i].ItemId;
+        }
+        _costLabel.text = string.Format("花费：\n{0}", cost);
+        _introduceLabel.text = "这是简介这是简介这是简介";
+        _InfoCanvas.SetActive(true);
     }
 
 
     public void OnExitHoverIcon(BuildData buildData)
     {
-
+        _InfoCanvas.SetActive(false);
     }
     #endregion
 }

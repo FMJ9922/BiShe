@@ -62,9 +62,12 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: "\u6C11\u623F"
-    Length: 2
-    Width: 2
+    Length: 5
+    Width: 3
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 10
@@ -82,6 +85,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -99,6 +105,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -116,6 +125,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -133,6 +145,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -150,6 +165,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -167,6 +185,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -184,6 +205,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -201,6 +225,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
@@ -218,6 +245,9 @@ MonoBehaviour:
     Length: 2
     Width: 2
     Price: 200
+    costResources:
+    - ItemId: 10004
+      ItemNum: 5
     Return: 50
     ProductId: 10007
     ProductNum: 0
