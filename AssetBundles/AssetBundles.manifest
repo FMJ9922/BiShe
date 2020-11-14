@@ -1,7 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1508584653
+CRC: 684476638
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: building.ab
+      Dependencies:
+        Dependency_0: mat.ab
+    Info_1:
+      Name: road.ab
+      Dependencies:
+        Dependency_0: mat.ab
+    Info_2:
+      Name: mat.ab
       Dependencies: {}

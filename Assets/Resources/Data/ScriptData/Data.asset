@@ -97,8 +97,8 @@ MonoBehaviour:
     RearBuildingId: 0
     Storage: 50
     WorkerNum: 5
-    BundleName: building.ab
-    PfbName: L1_Northhouse001
+    BundleName: road.ab
+    PfbName: L1_Road001
     tabType: 4
   - Id: 20003
     Name: "\u7B80\u6613\u4ED3\u5E93"

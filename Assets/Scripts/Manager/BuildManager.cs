@@ -27,6 +27,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private void Start()
     {
+        LoadAB.Init();
         ShowGrid(false);
     }
     #region 公共函数

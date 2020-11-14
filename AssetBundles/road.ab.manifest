@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1024658529
+CRC: 1181946959
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e10f770c9774661f4893060fb38374dc
+    Hash: d539f95b073c9ed903abcdab9bdfefad
   TypeTreeHash:
     serializedVersion: 2
     Hash: ea29cafa4d683e911ef413261d30e5cb
@@ -26,9 +26,7 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Building/House/L1_Northhouse001.prefab
-- Assets/Prefabs/Building/House/L1_Storehouse001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Storehouse001.fbx
+- Assets/Prefabs/Building/Road/L1_Road001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L1_Road001.fbx
 Dependencies:
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab

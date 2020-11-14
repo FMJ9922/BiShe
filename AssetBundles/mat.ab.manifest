@@ -1,0 +1,37 @@
+ManifestFileVersion: 0
+CRC: 1773959116
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 683ebcd5e859fc145c6355a110154c60
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 10a6a558690295dadb3dd990eda0821a
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
+- Assets/ArtAssets/Model/Building/Materials/oldRidge.mat
+- Assets/ArtAssets/Model/Building/Materials/roadblack.mat
+- Assets/ArtAssets/Model/Building/Materials/road.mat
+- Assets/ArtAssets/Model/Building/Materials/WallStone.mat
+- Assets/ArtAssets/Model/Building/Materials/road3.mat
+- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof2.mat
+- Assets/ArtAssets/Model/Building/Materials/StorehouseWall.mat
+- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof3.mat
+- Assets/ArtAssets/Model/Building/Materials/Door.mat
+- Assets/ArtAssets/Model/Building/Materials/StorehouseStone.mat
+- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
+- Assets/ArtAssets/Model/Building/Materials/oldRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/Roof.mat
+- Assets/ArtAssets/Model/Building/Materials/road2.mat
+- Assets/ArtAssets/Model/Building/Materials/lambert16.mat
+- Assets/ArtAssets/Model/Building/Materials/Wall.mat
+- Assets/ArtAssets/Model/Building/Materials/roadwhite.mat
+- Assets/ArtAssets/Model/Building/Materials/Ridge.mat
+Dependencies: []
