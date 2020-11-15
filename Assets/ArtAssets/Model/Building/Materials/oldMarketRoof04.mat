@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: lambert16
+  m_Name: oldMarketRoof04
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.195, g: 0.1570212, b: 0.15092999, a: 1}
+    - _Color: {r: 0.12048193, g: 0.053212643, b: 0.02578313, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
