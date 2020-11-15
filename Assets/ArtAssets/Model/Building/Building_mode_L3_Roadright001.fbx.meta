@@ -14,21 +14,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: road2
     second: {fileID: 2100000, guid: 950cdf9cd4a72a44eb3329760f07ccf1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: road3
-    second: {fileID: 2100000, guid: 3dfe2d44bbcb19c4ea763c317bd9bf38, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: roadblack
-    second: {fileID: 2100000, guid: 48f67980fe15d754dab5780cf7b98096, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: roadwhite
-    second: {fileID: 2100000, guid: d0f5200f0cbe58f41ae3ee53c0498186, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

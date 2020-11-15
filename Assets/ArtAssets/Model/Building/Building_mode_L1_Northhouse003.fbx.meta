@@ -7,36 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Door
-    second: {fileID: 2100000, guid: 3a60949ad054b3140b4eb2d9634314e1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall
-    second: {fileID: 2100000, guid: 7a5a79feaaf8b8f4b94c00d0f952f3c2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WindowGlass
-    second: {fileID: 2100000, guid: afae25106218d564894889a5f23d495f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WindowWood
-    second: {fileID: 2100000, guid: 8bcada0c576bf5c45ae4714a9324b5fb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert16
-    second: {fileID: 2100000, guid: bd41c7304f3ca83499f73da7bc8df02f, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: oldRoof
-    second: {fileID: 2100000, guid: a722707c2cc6aaa42a21cbb1bd4b4175, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: road
     second: {fileID: 2100000, guid: 9a89f38255dce564f8f99ec397d687dc, type: 2}
   - first:
