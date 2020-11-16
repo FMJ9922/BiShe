@@ -13,10 +13,8 @@ public class BuildingBase : MonoBehaviour
     [SerializeField]
     private BundlePrimaryType BundlePrimaryType;
 
-    [SerializeField]
-    private BundleSecondaryType BundleSecondaryType;
 
-    public string BundleName => string.Format("{0}.{1}", BundlePrimaryType.ToString(), BundleSecondaryType.ToString());
+    public string BundleName => string.Format("{0}.ab", BundlePrimaryType.ToString());
 
     public string PfbName => this.gameObject.name;
 

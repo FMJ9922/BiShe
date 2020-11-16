@@ -11,13 +11,14 @@ public class BuildData
     public List<CostResource> costResources = new List<CostResource>();//购买花费原料
     public int Return;//拆除返还
     public int ProductId;//产出产品
-    public int ProductNum;//产品数量
     public int ProductTime;//生产时长
+    public float ProductNum;//产品数量
+    public int WorkerNum;//工人数量
+    public int MaxStorage;//存储上限
     public int InfluenceRange;//影响范围
     public int FrontBuildingId;//前置建筑Id
     public int RearBuildingId;//后置建筑Id
-    public int Storage;//存储量
-    public int WorkerNum;//工人数量
+    
     public string BundleName;
     public string PfbName;
     public BuildTabType tabType;

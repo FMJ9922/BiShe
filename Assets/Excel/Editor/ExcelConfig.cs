@@ -96,20 +96,23 @@ public class ExcelTool
                 }
             }
             buildData.Return = int.Parse(collect[i][11].ToString());
-            buildData.ProductId = int.Parse(collect[i][12].ToString());
-            buildData.ProductNum = int.Parse(collect[i][13].ToString());
-            buildData.ProductTime = int.Parse(collect[i][14].ToString());
-            buildData.InfluenceRange = int.Parse(collect[i][15].ToString());
-            if (collect[i][16].ToString() != "Null")
+            if(collect[i][12].ToString() != "Null")
             {
-                buildData.FrontBuildingId = int.Parse(collect[i][16].ToString());
+                buildData.ProductId = int.Parse(collect[i][12].ToString());
             }
-            if (collect[i][17].ToString() != "Null")
+            buildData.ProductTime = int.Parse(collect[i][13].ToString());
+            buildData.ProductNum = float.Parse(collect[i][14].ToString());
+            buildData.WorkerNum = int.Parse(collect[i][15].ToString());
+            buildData.MaxStorage = int.Parse(collect[i][16].ToString());
+            buildData.InfluenceRange = int.Parse(collect[i][17].ToString());
+            if (collect[i][18].ToString() != "Null")
             {
-                buildData.FrontBuildingId = int.Parse(collect[i][17].ToString());
+                buildData.FrontBuildingId = int.Parse(collect[i][18].ToString());
             }
-            buildData.Storage = int.Parse(collect[i][18].ToString());
-            buildData.WorkerNum = int.Parse(collect[i][19].ToString());
+            if (collect[i][19].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][19].ToString());
+            }
             buildData.BundleName = collect[i][20].ToString();
             buildData.PfbName = collect[i][21].ToString();
             buildData.tabType = (BuildTabType)int.Parse(collect[i][22].ToString());

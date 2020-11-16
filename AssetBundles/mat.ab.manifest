@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1773959116
+CRC: 2101646530
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 683ebcd5e859fc145c6355a110154c60
+    Hash: b50f82a1ed7e6ee4d0963bcbae4f797e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10a6a558690295dadb3dd990eda0821a
@@ -30,7 +30,7 @@ Assets:
 - Assets/ArtAssets/Model/Building/Materials/oldRoof.mat
 - Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/ArtAssets/Model/Building/Materials/road2.mat
-- Assets/ArtAssets/Model/Building/Materials/lambert16.mat
+- Assets/ArtAssets/Model/Building/Materials/oldHouseRidge.mat
 - Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/ArtAssets/Model/Building/Materials/roadwhite.mat
 - Assets/ArtAssets/Model/Building/Materials/Ridge.mat

@@ -16,37 +16,42 @@ MonoBehaviour:
   - Id: 10001
     Name: "\u5C0F\u9EA6"
     ProductCycle: 3
-    Price: 500
+    Price: 100
     BuildingID: 20007
   - Id: 10002
     Name: "\u6C34\u7A3B"
     ProductCycle: 3
-    Price: 500
+    Price: 95
     BuildingID: 20007
   - Id: 10003
     Name: "\u539F\u6728"
     ProductCycle: 3
-    Price: 500
+    Price: 300
     BuildingID: 20007
   - Id: 10004
     Name: "\u6728\u6599"
     ProductCycle: 3
-    Price: 500
+    Price: 450
     BuildingID: 20007
   - Id: 10005
     Name: "\u751F\u8089"
     ProductCycle: 3
-    Price: 500
+    Price: 125
     BuildingID: 20007
   - Id: 10006
     Name: "\u9762\u7C89"
     ProductCycle: 3
-    Price: 500
+    Price: 115
     BuildingID: 20007
   - Id: 10007
     Name: "\u52B3\u52A8\u529B"
     ProductCycle: 3
-    Price: 500
+    Price: 0
+    BuildingID: 20007
+  - Id: 10008
+    Name: "\u52A0\u5DE5\u8089"
+    ProductCycle: 3
+    Price: 400
     BuildingID: 20007
   LevelArray:
   - Id: 30001
@@ -64,199 +69,179 @@ MonoBehaviour:
     Name: "\u6C11\u623F"
     Length: 5
     Width: 3
-    Price: 200
+    Price: 100
     costResources:
     - ItemId: 10004
-      ItemNum: 5
+      ItemNum: 10
     Return: 50
     ProductId: 10007
+    ProductTime: 0
     ProductNum: 10
-    ProductTime: 100
+    WorkerNum: 0
+    MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
     PfbName: L1_Northhouse001
     tabType: 0
   - Id: 20002
     Name: "\u571F\u8DEF"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 3
+    Width: 3
+    Price: 30
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
+      ItemNum: 1
+    Return: 15
+    ProductId: 0
+    ProductTime: 0
     ProductNum: 0
-    ProductTime: 100
+    WorkerNum: 0
+    MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 4
   - Id: 20003
     Name: "\u7B80\u6613\u4ED3\u5E93"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 5
+    Width: 11
+    Price: 300
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
+      ItemNum: 30
+    Return: 150
+    ProductId: 0
+    ProductTime: 0
     ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+    WorkerNum: 0
+    MaxStorage: 100
+    InfluenceRange: 50
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
     PfbName: L1_Storehouse001
     tabType: 5
   - Id: 20004
     Name: "\u96C6\u5E02"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 12
+    Width: 14
+    Price: 500
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
+      ItemNum: 80
+    Return: 250
+    ProductId: 0
+    ProductTime: 0
     ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+    WorkerNum: 0
+    MaxStorage: 100
+    InfluenceRange: 200
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Market001
     tabType: 5
   - Id: 20005
     Name: "\u9EA6\u7530"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 3
+    Width: 3
+    Price: 120
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+      ItemNum: 0
+    Return: 60
+    ProductId: 10001
+    ProductTime: 24
+    ProductNum: 1
+    WorkerNum: 5
+    MaxStorage: 100
+    InfluenceRange: 5
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
     PfbName: L1_Northhouse001
     tabType: 1
   - Id: 20006
     Name: "\u7A3B\u7530"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 3
+    Width: 3
+    Price: 125
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+      ItemNum: 0
+    Return: 63
+    ProductId: 10002
+    ProductTime: 18
+    ProductNum: 1.2
+    WorkerNum: 6
+    MaxStorage: 100
+    InfluenceRange: 5
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
     PfbName: L1_Northhouse001
     tabType: 1
   - Id: 20007
-    Name: "\u78E8\u574A"
-    Length: 2
-    Width: 2
-    Price: 200
-    costResources:
-    - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
-    BundleName: building.ab
-    PfbName: L1_Northhouse001
-    tabType: 3
-  - Id: 20008
     Name: "\u517B\u6B96\u573A"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 14
+    Width: 20
+    Price: 280
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+      ItemNum: 50
+    Return: 140
+    ProductId: 10005
+    ProductTime: 48
+    ProductNum: 20
+    WorkerNum: 30
+    MaxStorage: 100
+    InfluenceRange: 30
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Farm001
     tabType: 1
-  - Id: 20009
+  - Id: 20008
     Name: "\u52A0\u5DE5\u5382"
-    Length: 2
-    Width: 2
-    Price: 200
+    Length: 4
+    Width: 6
+    Price: 400
     costResources:
     - ItemId: 10004
-      ItemNum: 5
-    Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+      ItemNum: 70
+    Return: 200
+    ProductId: 10006
+    ProductTime: 2
+    ProductNum: 10
+    WorkerNum: 20
+    MaxStorage: 100
+    InfluenceRange: 45
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Factory001
     tabType: 3
-  - Id: 20010
+  - Id: 20009
     Name: "\u4F10\u6728\u573A"
-    Length: 2
-    Width: 2
+    Length: 7
+    Width: 8
     Price: 200
     costResources:
     - ItemId: 10004
-      ItemNum: 5
+      ItemNum: 45
     Return: 50
-    ProductId: 10007
-    ProductNum: 0
-    ProductTime: 100
-    InfluenceRange: 0
+    ProductId: 10003
+    ProductTime: 20
+    ProductNum: 15
+    WorkerNum: 25
+    MaxStorage: 100
+    InfluenceRange: 60
     FrontBuildingId: 0
     RearBuildingId: 0
-    Storage: 50
-    WorkerNum: 5
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Sawmill001
     tabType: 2

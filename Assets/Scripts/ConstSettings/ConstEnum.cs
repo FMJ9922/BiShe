@@ -55,15 +55,7 @@ public enum BundlePrimaryType
     road,
 }
 
-public enum BundleSecondaryType
-{
-    l1_northhouse,
-    l2_northhouse,
-    l1_storehouse,
-    sandroad,
-    rockroad,
-    asphaltroad,
-}
+
 
 /// <summary>
 /// 建造页签的枚举

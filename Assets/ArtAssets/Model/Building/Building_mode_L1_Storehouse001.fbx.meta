@@ -7,6 +7,46 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 3a60949ad054b3140b4eb2d9634314e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseRoof
+    second: {fileID: 2100000, guid: a117c6facfa14c942a1901ee95ea9bee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseRoof2
+    second: {fileID: 2100000, guid: 9b83bf54117598a438b87af62e602ab5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseRoof3
+    second: {fileID: 2100000, guid: 6da67ee8e35b87b4ebf4bb58b26393a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseStone
+    second: {fileID: 2100000, guid: f0759caa338b7b949b3336363edd2063, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseWall
+    second: {fileID: 2100000, guid: d623d4869e500e94f9628d35aebd38a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowGlass
+    second: {fileID: 2100000, guid: afae25106218d564894889a5f23d495f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WindowWood
+    second: {fileID: 2100000, guid: 8bcada0c576bf5c45ae4714a9324b5fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: road
     second: {fileID: 2100000, guid: 9a89f38255dce564f8f99ec397d687dc, type: 2}
   - first:
@@ -103,5 +143,5 @@ ModelImporter:
   avatarSetup: 0
   additionalBone: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: building
+  assetBundleVariant: ab
