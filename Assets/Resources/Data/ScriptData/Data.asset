@@ -163,7 +163,7 @@ MonoBehaviour:
     FrontBuildingId: 0
     RearBuildingId: 0
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Fieldedge001
     tabType: 1
   - Id: 20006
     Name: "\u7A3B\u7530"
@@ -183,7 +183,7 @@ MonoBehaviour:
     FrontBuildingId: 0
     RearBuildingId: 0
     BundleName: building.ab
-    PfbName: L1_Northhouse001
+    PfbName: L1_Fieldedge001
     tabType: 1
   - Id: 20007
     Name: "\u517B\u6B96\u573A"

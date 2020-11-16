@@ -7,6 +7,36 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: oldMarketRoof01
+    second: {fileID: 2100000, guid: 154593abf8090ab42929943fd982e178, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oldMarketRoof02
+    second: {fileID: 2100000, guid: 5f54c5c1de692b041a3788b4b40e0c3c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oldMarketRoof03
+    second: {fileID: 2100000, guid: d22d8aa1cd976a545a25bda3a91eca87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oldMarketRoof04
+    second: {fileID: 2100000, guid: 0e3c95ebbc8acac48adbc0260d294249, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oldMarketWall
+    second: {fileID: 2100000, guid: b47e2400bd0750448b1370a2713935de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oldMarketWood
+    second: {fileID: 2100000, guid: 7e1c7c3dd0f054e438226db1f5430468, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: road
     second: {fileID: 2100000, guid: 9a89f38255dce564f8f99ec397d687dc, type: 2}
   - first:
@@ -103,5 +133,5 @@ ModelImporter:
   avatarSetup: 0
   additionalBone: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: building
+  assetBundleVariant: ab

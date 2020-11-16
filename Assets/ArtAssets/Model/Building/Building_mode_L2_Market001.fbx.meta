@@ -7,6 +7,41 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MarketRoof
+    second: {fileID: 2100000, guid: d3741716a55a8f94c802e5f604f97201, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarketRoof1
+    second: {fileID: 2100000, guid: 940417f1abb786c47b2ea96aaadb489c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarketRoof2
+    second: {fileID: 2100000, guid: 990f3b053ced2a8459193653ffa6bf23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarketWall
+    second: {fileID: 2100000, guid: 2190c93d80295464085f5127700e746d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarketWall2
+    second: {fileID: 2100000, guid: d8a7f0a0fb483564ba28df3fdf4369ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MarketWall3
+    second: {fileID: 2100000, guid: 18d7692be26ad064690b2a33483c680d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: b8727de3c9ef5ad40a28edb1c7e1b99f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: road
     second: {fileID: 2100000, guid: 9a89f38255dce564f8f99ec397d687dc, type: 2}
   - first:
@@ -103,5 +138,5 @@ ModelImporter:
   avatarSetup: 0
   additionalBone: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: building
+  assetBundleVariant: ab
