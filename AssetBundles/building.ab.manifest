@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3572258408
+CRC: 1381936676
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0dbb99ee343df63f925050ec2ef88296
+    Hash: a9c6c10a34fb382d8fce84c0130784c6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bdf9a5b07acb399271e36962af703b56
+    Hash: 6bf2124616c744d677cb7b5f3bc72ba1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,31 +22,55 @@ ClassTypes:
 - Class: 43
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 Assets:
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse005.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse003.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Market001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Factory001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse024.fbx
 - Assets/Prefabs/Building/House/L1_Northhouse001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse021.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse013.fbx
 - Assets/ArtAssets/Model/Building/Building_model_0_Fieldedge001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Market001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse014.fbx
 - Assets/Prefabs/Building/Field/L1_Fieldedge001.prefab
 - Assets/ArtAssets/Model/Plant/Plant_mode_LOD2_Wheat001.fbx
 - Assets/Prefabs/Building/Farm/L1_Farm001.prefab
 - Assets/Prefabs/Building/House/L1_Storehouse001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse002.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Farm001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse007.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse016.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse010.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse022.fbx
 - Assets/Prefabs/Building/Factory/L2_Factory001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse017.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse020.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse012.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse018.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse006.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Factory001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse008.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse019.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse015.fbx
 - Assets/Prefabs/Building/Farm/L2_Farm001.prefab
 - Assets/Prefabs/Building/Factory/L1_Factory001.prefab
 - Assets/Prefabs/Building/Sawmill/L1_Sawmill001.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Sawmill001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse023.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse009.fbx
 - Assets/Prefabs/Building/Market/L1_Market001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse001.fbx
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse004.fbx
 - Assets/Prefabs/Building/Market/L2_Market001.prefab
+- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse011.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Farm001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Storehouse001.fbx
 Dependencies:
