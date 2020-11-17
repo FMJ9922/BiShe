@@ -28,11 +28,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 0.59
+    - _Cutoff: 0.256
     - _Shininess: 0.078125
     - _TimeDelay: 0.2
     - _TimeScale: 1
     m_Colors:
     - _Color: {r: 1, g: 0.85335153, b: 0.15566039, a: 1}
-    - _Direction: {r: 10, g: 4.56, b: 10, a: 0}
+    - _Direction: {r: 0.1, g: 0.1, b: 0.1, a: 0}
     - _SpecColor: {r: 1, g: 0.08690039, b: 0, a: 0}

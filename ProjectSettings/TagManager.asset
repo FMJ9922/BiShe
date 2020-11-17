@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Unit
   - Ground
+  - car
   layers:
   - Default
   - TransparentFX

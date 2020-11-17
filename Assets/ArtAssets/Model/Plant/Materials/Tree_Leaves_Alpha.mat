@@ -84,7 +84,7 @@ Material:
     - _BillboardShadowFade: 0.5
     - _BumpScale: 1
     - _Cull: 0
-    - _Cutoff: 0.7
+    - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _GlossMapScale: 1
@@ -96,7 +96,7 @@ Material:
     - _NormalMapKwToggle: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Shininess: 2.2
+    - _Shininess: 1.17
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SquashAmount: 1
@@ -110,8 +110,8 @@ Material:
     - _WindQuality: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.3019608, g: 0.48235294, b: 0.31460902, a: 1}
-    - _Direction: {r: 0.15, g: 0.15, b: 0.15, a: 0.1}
+    - _Color: {r: 0.21867213, g: 0.3962264, b: 0.23135456, a: 1}
+    - _Direction: {r: 0.15, g: 0.15, b: 0.15, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _HueVariationColor: {r: 1, g: 0.5, b: 0, a: 0.1}
