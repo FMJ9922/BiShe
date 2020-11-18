@@ -7,6 +7,6 @@ public class LookAtCamera : MonoBehaviour
     
     void FixedUpdate()
     {
-        transform.LookAt(Camera.main.transform);
+        transform.LookAt(InputManager.Instance.transform);
     }
 }

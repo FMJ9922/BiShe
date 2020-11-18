@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1381936676
+CRC: 2219978178
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a9c6c10a34fb382d8fce84c0130784c6
+    Hash: f4b9b0897e98803af6d36112c1c0dfdf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6bf2124616c744d677cb7b5f3bc72ba1
+    Hash: 6b45f7e2b8039ebd821def18b35db70a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,6 +20,12 @@ ClassTypes:
 - Class: 33
   Script: {instanceID: 0}
 - Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 111
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
@@ -69,6 +75,7 @@ Assets:
 - Assets/Prefabs/Building/Market/L1_Market001.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse004.fbx
+- Assets/Prefabs/Building/House/L2_Northhouse011.prefab
 - Assets/Prefabs/Building/Market/L2_Market001.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse011.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Farm001.fbx

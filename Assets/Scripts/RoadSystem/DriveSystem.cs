@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DriveSystem : MonoBehaviour
 {
     public List<Vector3> WayPoints;
+    public List<GameObject> wayObjects;
     public float Speed = 3f;
     public float StopDistance = 1f;
     public DriveType driveType;
@@ -15,7 +16,8 @@ public class DriveSystem : MonoBehaviour
     private bool isForward = true;
     private void Start()
     {
-        StartDriving(WayPoints, driveType);
+        
+        StartDriving(ObjectsToVector3s(wayObjects), driveType);
 
     }
     private void Update()
@@ -74,6 +76,15 @@ public class DriveSystem : MonoBehaviour
         }
     }
 
+    private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
+    {
+        List<Vector3> lists = new List<Vector3>();
+        for (int i = 0; i < objs.Count; i++)
+        {
+            lists.Add(objs[i].transform.position);
+        }
+        return lists;
+    }
     private void DriveLoop(List<Vector3> targets)
     {
         if (Vector3.Distance(targets[wayCount], transform.position) < StopDistance)

@@ -11,7 +11,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Door
-    second: {fileID: 2100000, guid: 3a60949ad054b3140b4eb2d9634314e1, type: 2}
+    second: {fileID: 2100000, guid: ce17255a9e5ebb74d99b63b5ae66c17d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -30,6 +30,31 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: StorehouseRoof
+    second: {fileID: 2100000, guid: b82f87aa775eb0344b0097447463feb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseRoof2
+    second: {fileID: 2100000, guid: de77d0cb4ff6f074087a3e5d6749c901, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseRoof3
+    second: {fileID: 2100000, guid: 5fe57eaa4a033694db84cfe664654245, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseStone
+    second: {fileID: 2100000, guid: b46c619a6b35cd9409f3a5b38276e729, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StorehouseWall
+    second: {fileID: 2100000, guid: fc2bbe31fa440b74ba3993e83f2fadb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wall
     second: {fileID: 2100000, guid: 7a5a79feaaf8b8f4b94c00d0f952f3c2, type: 2}
   - first:
@@ -41,16 +66,16 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WindowGlass
-    second: {fileID: 2100000, guid: afae25106218d564894889a5f23d495f, type: 2}
+    second: {fileID: 2100000, guid: 90fcbc8d4d9ea7641982f3f1c40e35b4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WindowWood
-    second: {fileID: 2100000, guid: 8bcada0c576bf5c45ae4714a9324b5fb, type: 2}
+    second: {fileID: 2100000, guid: 9e6717b66c91236469aaaa9657d8c470, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 0
   animations:
     legacyGenerateAnimations: 4

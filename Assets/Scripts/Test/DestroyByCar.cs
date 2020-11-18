@@ -8,7 +8,7 @@ public class DestroyByCar : MonoBehaviour
     {
         if (other.CompareTag("car"))
         {
-            Debug.Log("delete");
+            //Debug.Log("delete");
             Destroy(this.gameObject);
         }
     }

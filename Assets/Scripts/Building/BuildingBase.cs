@@ -20,6 +20,12 @@ public class BuildingBase : MonoBehaviour
 
     public Vector2Int Size => new Vector2Int(Width,Height);
 
+    public bool hasAnima = false;
+
+    public Animation animation;
+
+    public GameObject body;
+
     public bool buildFlag = false;
 
     public AreaInfo AreaInfo; 
@@ -27,5 +33,19 @@ public class BuildingBase : MonoBehaviour
     public virtual void OnConfirmBuild()
     {
         buildFlag = true;
+        if (hasAnima)
+        {
+            body.SetActive(false);
+            animation.gameObject.SetActive(true);
+            float time = animation.clip.length;
+            Invoke("ShowBody", time);
+            animation.Play();
+        }
+    }
+
+    public void ShowBody()
+    {
+        body.SetActive(true);
+        animation.gameObject.SetActive(false);
     }
 }

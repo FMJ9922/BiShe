@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1906252136
+CRC: 276771681
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7817768eb1da3f020c6e06cade559653
+    Hash: 87d51e3620b47b30da8386420e0e418e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -34,10 +34,12 @@ Assets:
 - Assets/ArtAssets/Model/Building/Materials/FactoryRoof.mat
 - Assets/ArtAssets/Model/Building/Materials/SawmillWall1.mat
 - Assets/ArtAssets/Model/Building/Materials/lambert1.mat
+- Assets/ArtAssets/Model/Building/Materials/oldFarmRoof.mat
 - Assets/ArtAssets/Model/Building/Materials/road3.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseRoof2.mat
 - Assets/ArtAssets/Model/Building/Materials/oldFactoryRoof.mat
 - Assets/ArtAssets/Model/Building/Materials/SawmillRoof2.mat
+- Assets/ArtAssets/Model/Building/Materials/Roof 1.mat
 - Assets/ArtAssets/Model/Building/Materials/MarketRoof2.mat
 - Assets/ArtAssets/Model/Building/Materials/FieldSoil2.mat
 - Assets/ArtAssets/Model/Building/Materials/Door2.mat
@@ -45,6 +47,7 @@ Assets:
 - Assets/ArtAssets/Model/Building/Materials/StorehouseWall.mat
 - Assets/ArtAssets/Model/Building/Materials/FieldSoil1.mat
 - Assets/ArtAssets/Model/Building/Materials/FarmFence.mat
+- Assets/ArtAssets/Model/Building/Materials/oldFarmRoof 1.mat
 - Assets/ArtAssets/Shader/DynamicGrass.shader
 - Assets/ArtAssets/Texture/Wheat_alpha.psd
 - Assets/ArtAssets/Model/Building/Materials/SawmillWall2.mat

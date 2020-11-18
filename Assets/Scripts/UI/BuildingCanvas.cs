@@ -152,7 +152,7 @@ public class BuildingCanvas : MonoBehaviour
         string cost = buildData.Price + "金钱";
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
-            cost += "，"+buildData.costResources[i].ItemNum+" id" + buildData.costResources[i].ItemId;
+            cost += "，"+buildData.costResources[i].ItemNum+"木头";
         }
         _costLabel.text = string.Format("花费：\n{0}", cost);
         _introduceLabel.text = "这是简介这是简介这是简介";

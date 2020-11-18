@@ -8,7 +8,7 @@ public class CameraMovement : Singleton<CameraMovement>
     public float MaxSpeed = 0.5f;
     public float Accelerate = 0.5f;
     public float StopAccelerate = 1f;
-    public float ScrollWheelSpeed = 10f;
+    private float ScrollWheelSpeed = 1f;
     public float MaxScrollValue = 200f;
     public float MinScrollValue = -100f;
 
@@ -18,7 +18,7 @@ public class CameraMovement : Singleton<CameraMovement>
     private Transform _cameraTrans;
     private float _forwardSpeed = 0;
     private float _rightSpeed = 0;
-    private float _scrollValue = 0;
+    private float _scrollValue = 40;
 
     private void Awake()
     {
