@@ -7,6 +7,81 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Door
+    second: {fileID: 2100000, guid: 3a60949ad054b3140b4eb2d9634314e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Door2
+    second: {fileID: 2100000, guid: 7d216ce50089e184889bc35b67370c39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillMachine1
+    second: {fileID: 2100000, guid: 25c13dcf8d7fd48428ba6a07e0e5dd72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillMachine2
+    second: {fileID: 2100000, guid: 09143a0b5049abe4ebeb1020aee30d7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillMachine3
+    second: {fileID: 2100000, guid: a74fd1fecd2959b4cbb4243fd5ce16cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillMachine4
+    second: {fileID: 2100000, guid: 664816ee7ceb43341ad836e2f0067a65, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillRoof1
+    second: {fileID: 2100000, guid: 2f77f66cb6243df4faaf26513afa8b5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillRoof2
+    second: {fileID: 2100000, guid: a7b54fa4159d850499d9848141bc635d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillRoof3
+    second: {fileID: 2100000, guid: 7351458ce62e28e41b2ce96afb75ab6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillRoof4
+    second: {fileID: 2100000, guid: 8b4313c2153240a4e834b4a6eae073d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillWall1
+    second: {fileID: 2100000, guid: 1d757be356eb9cf4688bcc3b897354d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillWall2
+    second: {fileID: 2100000, guid: 9eb2bde8f702a734ca7aeea0da6f629a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillWall3
+    second: {fileID: 2100000, guid: 320dd0ffa14716743b64e756893044e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SawmillWood
+    second: {fileID: 2100000, guid: 60aa791ebdcc64c47948aaa9c0a3e6ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeWood
+    second: {fileID: 2100000, guid: 5c6dea69e5631a749aff87335ae1df93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: road
     second: {fileID: 2100000, guid: 9a89f38255dce564f8f99ec397d687dc, type: 2}
   - first:
@@ -103,5 +178,5 @@ ModelImporter:
   avatarSetup: 0
   additionalBone: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: building
+  assetBundleVariant: ab

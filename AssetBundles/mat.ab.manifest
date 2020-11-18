@@ -1,37 +1,81 @@
 ManifestFileVersion: 0
-CRC: 2101646530
+CRC: 1906252136
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b50f82a1ed7e6ee4d0963bcbae4f797e
+    Hash: 7817768eb1da3f020c6e06cade559653
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 10a6a558690295dadb3dd990eda0821a
+    Hash: 21c99c86a43ad817b2cb7f65458ae090
 HashAppended: 0
 ClassTypes:
 - Class: 21
   Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
 Assets:
+- Assets/ArtAssets/Model/Building/Materials/oldMarketWall.mat
 - Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
 - Assets/ArtAssets/Model/Building/Materials/oldRidge.mat
 - Assets/ArtAssets/Model/Building/Materials/roadblack.mat
+- Assets/ArtAssets/Model/Building/Materials/FactoryWall2.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketWall2.mat
+- Assets/ArtAssets/Shader/Custom_DynamicGrass.mat
+- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof03.mat
+- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof02.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketRoof1.mat
+- Assets/ArtAssets/Model/Building/Materials/FactoryWall.mat
+- Assets/ArtAssets/Model/Building/Materials/oldFarmWall.mat
 - Assets/ArtAssets/Model/Building/Materials/road.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillRoof4.mat
 - Assets/ArtAssets/Model/Building/Materials/WallStone.mat
+- Assets/ArtAssets/Model/Building/Materials/FactoryRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillWall1.mat
+- Assets/ArtAssets/Model/Building/Materials/lambert1.mat
 - Assets/ArtAssets/Model/Building/Materials/road3.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseRoof2.mat
+- Assets/ArtAssets/Model/Building/Materials/oldFactoryRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillRoof2.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketRoof2.mat
+- Assets/ArtAssets/Model/Building/Materials/FieldSoil2.mat
+- Assets/ArtAssets/Model/Building/Materials/Door2.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketRoof.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseWall.mat
+- Assets/ArtAssets/Model/Building/Materials/FieldSoil1.mat
+- Assets/ArtAssets/Model/Building/Materials/FarmFence.mat
+- Assets/ArtAssets/Shader/DynamicGrass.shader
+- Assets/ArtAssets/Texture/Wheat_alpha.psd
+- Assets/ArtAssets/Model/Building/Materials/SawmillWall2.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseRoof3.mat
+- Assets/ArtAssets/Model/Building/Materials/TreeWood.mat
 - Assets/ArtAssets/Model/Building/Materials/Door.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseStone.mat
 - Assets/ArtAssets/Model/Building/Materials/StorehouseRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillMachine2.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketWall3.mat
+- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof01.mat
+- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof04.mat
 - Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
+- Assets/ArtAssets/Model/Building/Materials/FactoryWall3.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillRoof1.mat
 - Assets/ArtAssets/Model/Building/Materials/oldRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillRoof3.mat
 - Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/ArtAssets/Model/Building/Materials/road2.mat
+- Assets/ArtAssets/Model/Building/Materials/FarmRoof.mat
+- Assets/ArtAssets/Model/Building/Materials/MarketWall.mat
+- Assets/ArtAssets/Model/Building/Materials/oldMarketWood.mat
+- Assets/ArtAssets/Model/Plant/Materials/Wheat_Alpha.mat
 - Assets/ArtAssets/Model/Building/Materials/oldHouseRidge.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillWood.mat
+- Assets/ArtAssets/Model/Building/Materials/FarmWall.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillMachine4.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillMachine3.mat
 - Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/ArtAssets/Model/Building/Materials/roadwhite.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillMachine1.mat
+- Assets/ArtAssets/Model/Building/Materials/SawmillWall3.mat
 - Assets/ArtAssets/Model/Building/Materials/Ridge.mat
 Dependencies: []

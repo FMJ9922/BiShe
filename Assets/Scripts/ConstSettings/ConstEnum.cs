@@ -76,3 +76,14 @@ public enum BuildTabType
     utility = 5,
 }
 
+public enum DriveType
+{
+    [Description("单次")]
+    once,
+    [Description("循环")]
+    loop,
+    [Description("往返")]
+    yoyo,
+}
+
+
