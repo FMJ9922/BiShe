@@ -46,8 +46,8 @@ public class BuildManager : Singleton<BuildManager>
         GameObject building = Instantiate(pfb, transform);
         currentBuilding = building.GetComponent<BuildingBase>();
         building.transform.position = Input.mousePosition;
-        currentAreaInfo = new AreaInfo(building.transform.position.x, 
-            building.transform.position.z, currentBuilding.Size,false);
+        currentAreaInfo = new AreaInfo(building.transform.position.x,
+            building.transform.position.z, currentBuilding.Size, false);
         WhenStartBuild();
     }
 
@@ -78,10 +78,10 @@ public class BuildManager : Singleton<BuildManager>
 
     private void OnMouseMove(Vector3 p)
     {
-        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size);
-        gridHightLight.transform.position = CalculateCenterPos(p, currentBuilding.Size) + new Vector3(0, 0.02f, 0);
+        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, currentAreaInfo.isExchangeFlag);
+        gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         Vector3 curPos = currentBuilding.transform.position;
-        currentAreaInfo = new AreaInfo(curPos.x, curPos.z, currentBuilding.Size,currentAreaInfo.isExchangeFlag);
+        currentAreaInfo = new AreaInfo(curPos.x, curPos.z, currentBuilding.Size, currentAreaInfo.isExchangeFlag);
         isCurOverLap = CheckNewBuildingIsOverLap(currentAreaInfo) ? true : false;
         gridHightLight.GetComponent<MeshRenderer>().material = isCurOverLap ? mat_grid_red : mat_grid_green;
     }
@@ -144,24 +144,30 @@ public class BuildManager : Singleton<BuildManager>
     /// <param name="pos"></param>
     /// <param name="size"></param>
     /// <returns></returns>
-    private Vector3 CalculateCenterPos(Vector3 pos, Vector2Int size)
+    private Vector3 CalculateCenterPos(Vector3 pos, Vector2Int size,bool isExchange = false)
     {
+        Vector2Int vector2Int = size;
+        if (isExchange)
+        {
+            vector2Int = new Vector2Int(size.y, size.x);
+        }
+
         Vector3 newPos = pos;
-        if (size.x % 2 == 0)
+        if (vector2Int.x % 2 != 0)
         {
-            newPos.x = Mathf.Round(pos.x);
+            newPos.x = Mathf.Round(pos.x / 3) * 3;
         }
         else
         {
-            newPos.x = Mathf.Round(pos.x + 0.5f) - 0.5f;
+            newPos.x = Mathf.Round(pos.x / 3 + 0.5f) * 3 - 1.5f;
         }
-        if (size.y % 2 == 0)
+        if (size.y % 2 != 0)
         {
-            newPos.z = Mathf.Round(pos.z);
+            newPos.z = Mathf.Round(pos.z / 3) * 3;
         }
         else
         {
-            newPos.z = Mathf.Round(pos.z + 0.5f) - 0.5f;
+            newPos.z = Mathf.Round(pos.z / 3 + 0.5f) * 3 - 1.5f;
         }
         return newPos;
     }
@@ -169,11 +175,11 @@ public class BuildManager : Singleton<BuildManager>
 
     private static bool IsOverLap(AreaInfo rc1, AreaInfo rc2)
     {
-        if (Mathf.Abs(rc1.x - rc2.x) > (rc1.Width + rc2.Width) / 2)
+        if (Mathf.Abs(rc1.x - rc2.x) > (rc1.Width * 3 + rc2.Width * 3) / 2)
         {
             return false;
         }
-        if(Mathf.Abs(rc1.y - rc2.y) > (rc1.Height + rc2.Height) / 2)
+        if (Mathf.Abs(rc1.y - rc2.y) > (rc1.Height* 3  + rc2.Height * 3) / 2)
         {
             return false;
         }
@@ -201,12 +207,12 @@ public struct AreaInfo
     public float x;
     public float y;
     public int Height { get { return isExchangeFlag ? width : height; } }
-    public int Width { get { return isExchangeFlag ? height :width ; } }
+    public int Width { get { return isExchangeFlag ? height : width; } }
     private int height;
     private int width;
     public bool isExchangeFlag;//长宽是否交换
 
-    public AreaInfo(float _x, float _y, Vector2Int _size,bool _isExchange)
+    public AreaInfo(float _x, float _y, Vector2Int _size, bool _isExchange)
     {
         x = _x;
         y = _y;
@@ -225,8 +231,8 @@ public struct AreaInfo
     }
     public override string ToString()
     {
-        return string.Format("Pos:({0},{1})Size:({2},{3})Exchange:{4}", 
-                                x, y, width, height,isExchangeFlag.ToString());
+        return string.Format("Pos:({0},{1})Size:({2},{3})Exchange:{4}",
+                                x, y, width, height, isExchangeFlag.ToString());
     }
 
     public void ExchangeWidthHeight()

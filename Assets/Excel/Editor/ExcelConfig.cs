@@ -48,7 +48,16 @@ public class ExcelTool
             LevelData levelData = new LevelData();
             levelData.Id = int.Parse(collect[i][0].ToString());
             levelData.Name = collect[i][1].ToString();
-            levelData.Introduce = collect[i][2].ToString();
+            levelData.FrontLevelId = int.Parse(collect[i][2].ToString());
+            levelData.RearLevelId = int.Parse(collect[i][3].ToString());
+            levelData.Aim1 = collect[i][4].ToString();
+            levelData.Aim2 = collect[i][5].ToString();
+            levelData.Aim3 = collect[i][6].ToString();
+            levelData.RewardBuildingId = int.Parse(collect[i][7].ToString());
+            levelData.RewardTechId = int.Parse(collect[i][8].ToString());
+            levelData.Length = int.Parse(collect[i][9].ToString());
+            levelData.Width = int.Parse(collect[i][10].ToString());
+            levelData.Introduce = collect[i][11].ToString();
             array[i - 2] = levelData;
         }
         return array;

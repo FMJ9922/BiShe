@@ -85,5 +85,12 @@ public enum DriveType
     [Description("往返")]
     yoyo,
 }
+public enum GridType
+{
+    empty,
+    occupy,
+    inherent,
+    road,
+}
 
 

@@ -124,8 +124,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 2
-  Height: 2
+  Width: 1
+  Height: 1
   BundlePrimaryType: 1
-  BundleSecondaryType: 3
+  hasAnima: 0
+  animation: {fileID: 0}
+  body: {fileID: 0}
   buildFlag: 0

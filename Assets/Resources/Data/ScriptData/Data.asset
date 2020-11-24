@@ -56,13 +56,40 @@ MonoBehaviour:
   LevelArray:
   - Id: 30001
     Name: "\u519C\u4EA7\u54C1"
-    Introduce: Null
+    FrontLevelId: 0
+    RearLevelId: 30002
+    Aim1: "\u91D1\u94B1\u5927\u4E8E20000"
+    Aim2: "\u6728\u6750\u8D44\u6E90\u5927\u4E8E500"
+    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230200"
+    RewardBuildingId: 0
+    RewardTechId: 0
+    Length: 200
+    Width: 200
+    Introduce: "\u8BF4\u660E"
   - Id: 30002
     Name: "\u5DE5\u4E1A\u4EA7\u54C1"
-    Introduce: 30001
+    FrontLevelId: 30001
+    RearLevelId: 30003
+    Aim1: "\u91D1\u94B1\u5927\u4E8E30000"
+    Aim2: "\u5DE5\u4E1A\u8D44\u6E90\u5927\u4E8E300"
+    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
+    RewardBuildingId: 0
+    RewardTechId: 0
+    Length: 200
+    Width: 200
+    Introduce: "\u8BF4\u660E"
   - Id: 30003
     Name: "\u7ED3\u5408\u4EA7\u4E1A"
-    Introduce: 30002
+    FrontLevelId: 30002
+    RearLevelId: 0
+    Aim1: Null
+    Aim2: Null
+    Aim3: Null
+    RewardBuildingId: 0
+    RewardTechId: 0
+    Length: 200
+    Width: 200
+    Introduce: "\u8BF4\u660E"
   TechArray: []
   BuildArray:
   - Id: 20001

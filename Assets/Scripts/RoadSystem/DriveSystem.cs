@@ -61,7 +61,7 @@ public class DriveSystem : MonoBehaviour
             {
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (StopDistance / Speed);
-                Debug.Log("转弯");
+                //Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
             }
 
@@ -94,7 +94,7 @@ public class DriveSystem : MonoBehaviour
             {
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
-                Debug.Log("转弯");
+                //Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
             }
 
@@ -107,7 +107,7 @@ public class DriveSystem : MonoBehaviour
         {
             UnityAction temp = action;
             RotateSpeed = Vector3.Angle(transform.position - targets[0], targets[targets.Count - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
-            Debug.Log("转弯");
+            //Debug.Log("转弯");
             action = () => DriveTurn(targets[0] - targets[targets.Count - 1], temp);
             wayCount = 0;
         }
@@ -130,7 +130,7 @@ public class DriveSystem : MonoBehaviour
             {
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[old] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
-                Debug.Log("转弯");
+                //Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[old], temp);
             }
 
@@ -145,7 +145,7 @@ public class DriveSystem : MonoBehaviour
             if (isForward)
             {
                 RotateSpeed = 90;
-                Debug.Log("转弯");
+                //Debug.Log("转弯");
                 action = () => StopTurn(targets[targets.Count - 2] - targets[targets.Count - 1], temp);
                 wayCount = targets.Count - 1;
                 isForward = false;
@@ -153,7 +153,7 @@ public class DriveSystem : MonoBehaviour
             else
             {
                 RotateSpeed = 90;
-                Debug.Log("转弯");
+                //Debug.Log("转弯");
                 action = () => StopTurn(targets[1] - targets[0], temp);
                 wayCount = 0;
                 isForward = true;
@@ -175,7 +175,7 @@ public class DriveSystem : MonoBehaviour
         transform.position += transform.forward.normalized * Speed * Time.deltaTime;
         if (Vector3.Angle(transform.forward, to) < 2f)
         {
-            Debug.Log("前进");
+            //Debug.Log("前进");
             action = callback;
         }
     }
@@ -193,13 +193,13 @@ public class DriveSystem : MonoBehaviour
         }
         if (Vector3.Angle(transform.forward, to) < 2f)
         {
-            Debug.Log("前进");
+            //Debug.Log("前进");
             action = callback;
         }
     }
     private void DriveStop()
     {
-        Debug.Log("停车");
+        //Debug.Log("停车");
         action = null;
     }
 }

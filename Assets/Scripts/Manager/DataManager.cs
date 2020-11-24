@@ -24,7 +24,7 @@ public class DataManager : ScriptableObject
 
     public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
 
-    
+
 
     public void InitTabDic()
     {
@@ -45,5 +45,18 @@ public class DataManager : ScriptableObject
             }
         }
         Debug.Log("创建TabDic成功！");
+    }
+
+    public static LevelData GetLevelData(int levelId)
+    {
+        for (int i = 0; i < mInstance.LevelArray.Length; i++)
+        {
+            if (mInstance.LevelArray[i].Id == levelId)
+            {
+                return mInstance.LevelArray[i];
+            }
+        }
+        Debug.Log("无效的关卡ID");
+        return null;
     }
 }
