@@ -131,7 +131,7 @@ MonoBehaviour:
     RearBuildingId: 0
     BundleName: road.ab
     PfbName: L1_Road001
-    tabType: 4
+    tabType: 101
   - Id: 20003
     Name: "\u7B80\u6613\u4ED3\u5E93"
     Length: 5
@@ -151,7 +151,7 @@ MonoBehaviour:
     RearBuildingId: 0
     BundleName: building.ab
     PfbName: L1_Storehouse001
-    tabType: 5
+    tabType: 4
   - Id: 20004
     Name: "\u96C6\u5E02"
     Length: 12
@@ -171,7 +171,7 @@ MonoBehaviour:
     RearBuildingId: 0
     BundleName: building.ab
     PfbName: L1_Market001
-    tabType: 5
+    tabType: 4
   - Id: 20005
     Name: "\u9EA6\u7530"
     Length: 3

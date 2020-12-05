@@ -70,7 +70,7 @@ public class BuildingCanvas : MonoBehaviour
     {
         DataManager.Instance.InitTabDic();
         CleanUpAllAttachedChildren(_buildingTabs);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
             newTab.name = i.ToString();

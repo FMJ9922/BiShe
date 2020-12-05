@@ -8,6 +8,7 @@ public class ConstEvent
     #region 点击事件
     public const string OnMaskClicked = "OnMaskClicked";//点击背景遮罩
     public const string OnMouseLeftButtonDown = "OnMouseLeftButtonDown";//鼠标左键点击事件
+    public const string OnMouseLeftButtonHeld = "OnMouseLeftButtonHeld";//鼠标左键按住事件
     public const string OnMouseRightButtonDown = "OnMouseRightButtonDown";//鼠标右键点击事件
     #endregion
 

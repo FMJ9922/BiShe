@@ -41,6 +41,10 @@ public partial class InputManager : Singleton<InputManager>
         {
             EventManager.TriggerEvent(ConstEvent.OnMouseRightButtonDown);
         }
+        if (Input.GetMouseButton(0))
+        {
+            EventManager.TriggerEvent(ConstEvent.OnMouseLeftButtonHeld);
+        }
         //if (Input.GetKey(KeyCode.W))
         //{
         //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * _CameraMoveSpeed;

@@ -70,10 +70,10 @@ public enum BuildTabType
     forest = 2,
     [Description("制造业")]
     manufacturing = 3,
-    [Description("路")]
-    road = 4,//路
     [Description("公共设施")]
-    utility = 5,
+    utility = 4,
+    [Description("路")]
+    road = 5,
 }
 
 public enum DriveType

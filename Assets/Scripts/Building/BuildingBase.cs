@@ -18,7 +18,7 @@ public class BuildingBase : MonoBehaviour
 
     public string PfbName => this.gameObject.name;
 
-    public Vector2Int Size => new Vector2Int(Width,Height);
+    public Vector2Int Size => new Vector2Int(Height, Width);
 
     public bool hasAnima = false;
 
@@ -27,8 +27,6 @@ public class BuildingBase : MonoBehaviour
     public GameObject body;
 
     public bool buildFlag = false;
-
-    public AreaInfo AreaInfo; 
      
     public virtual void OnConfirmBuild()
     {

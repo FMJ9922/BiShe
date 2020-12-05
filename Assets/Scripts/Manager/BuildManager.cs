@@ -15,11 +15,12 @@ public class BuildManager : Singleton<BuildManager>
     private Material mat_grid_red;
 
     private BuildingBase currentBuilding;
-    private AreaInfo currentAreaInfo;
-    private bool isCurOverLap = false;//当前建筑是否重叠
-    private List<AreaInfo> areaInfos = new List<AreaInfo>();
+    private bool isCurOverlap = false;//当前建筑是否重叠
+    private bool isTurn = false;//当前建筑是否旋转
+    private Vector2Int[] targetGrids;
+    private Vector2Int lastGrid;
 
-    private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMove(p);
+    private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMoveSetBuildingPos(p);
     private UnityAction<float> rotateAc = (float dir) => Instance.OnRotateBuilding(dir);
     private UnityAction confirmAc = () => Instance.OnConfirmBuild();
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
@@ -46,8 +47,6 @@ public class BuildManager : Singleton<BuildManager>
         GameObject building = Instantiate(pfb, transform);
         currentBuilding = building.GetComponent<BuildingBase>();
         building.transform.position = Input.mousePosition;
-        currentAreaInfo = new AreaInfo(building.transform.position.x,
-            building.transform.position.z, currentBuilding.Size, false);
         WhenStartBuild();
     }
 
@@ -56,8 +55,7 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     public void CreateRoads()
     {
-        RoadManager.Instance.ResetRoad();
-        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, RoadManager.Instance.BuildRoads);
+        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnConfirmBuildRoad);
     }
 
@@ -65,9 +63,22 @@ public class BuildManager : Singleton<BuildManager>
 
     #region 私有函数
 
+    private void OnMouseMoveSetGridPos()
+    {
+
+    }
+    private void OnConfirmRoadStartPos()
+    {
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
+    }
+
+    private void OnConfirmRoadEndPos()
+    {
+
+    }
     private void OnConfirmBuildRoad()
     {
-        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, RoadManager.Instance.BuildRoads);
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnConfirmBuildRoad);
     }
 
@@ -76,30 +87,36 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, RoadManager.Instance.BuildRoads);
     }
 
-    private void OnMouseMove(Vector3 p)
+    private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
-        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, currentAreaInfo.isExchangeFlag);
+        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
         gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
-        Vector3 curPos = currentBuilding.transform.position;
-        currentAreaInfo = new AreaInfo(curPos.x, curPos.z, currentBuilding.Size, currentAreaInfo.isExchangeFlag);
-        isCurOverLap = CheckNewBuildingIsOverLap(currentAreaInfo) ? true : false;
-        gridHightLight.GetComponent<MeshRenderer>().material = isCurOverLap ? mat_grid_red : mat_grid_green;
+        CheckOverlap();
     }
 
     private void OnRotateBuilding(float dir)
     {
         currentBuilding.transform.Rotate(Vector3.up, dir, Space.World);
-        currentAreaInfo.ExchangeWidthHeight();
-        isCurOverLap = CheckNewBuildingIsOverLap(currentAreaInfo) ? true : false;
-        gridHightLight.GetComponent<MeshRenderer>().material = isCurOverLap ? mat_grid_red : mat_grid_green;
+        isTurn = !isTurn;
+        currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
+        gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
+        CheckOverlap();
+    }
+
+    private void CheckOverlap()
+    {
+        Vector3 curPos = currentBuilding.transform.position;
+        targetGrids = GetAllGrids(currentBuilding.Size.x,currentBuilding.Size.y, curPos);
+        isCurOverlap = MapManager.CheckGridOverlap(targetGrids);
+        gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuild()
     {
-        if (!isCurOverLap)
+        if (!isCurOverlap)
         {
-            areaInfos.Add(currentAreaInfo);
-            Debug.Log(currentAreaInfo.ToString());
             currentBuilding.OnConfirmBuild();
+            MapManager.SetGridTypeToOccupy(targetGrids);
+            MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
         else
@@ -117,7 +134,8 @@ public class BuildManager : Singleton<BuildManager>
     private void WhenStartBuild()
     {
         ShowGrid(true);
-        isCurOverLap = false;
+        isTurn = false;
+        isCurOverlap = false;
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
@@ -132,6 +150,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
         currentBuilding = null;
+        targetGrids = null;
     }
     private void ShowGrid(bool isShow)
     {
@@ -144,7 +163,7 @@ public class BuildManager : Singleton<BuildManager>
     /// <param name="pos"></param>
     /// <param name="size"></param>
     /// <returns></returns>
-    private Vector3 CalculateCenterPos(Vector3 pos, Vector2Int size,bool isExchange = false)
+    private Vector3 CalculateCenterPos(Vector3 pos, Vector2Int size, bool isExchange = false)
     {
         Vector2Int vector2Int = size;
         if (isExchange)
@@ -159,86 +178,63 @@ public class BuildManager : Singleton<BuildManager>
         }
         else
         {
-            newPos.x = Mathf.Round(pos.x / 3 + 0.5f) * 3 - 1.5f;
+            newPos.x = (Mathf.Round(pos.x / 3 - 0.5f) + 0.5f) * 3;
         }
-        if (size.y % 2 != 0)
+        if (vector2Int.y % 2 != 0)
         {
             newPos.z = Mathf.Round(pos.z / 3) * 3;
         }
         else
         {
-            newPos.z = Mathf.Round(pos.z / 3 + 0.5f) * 3 - 1.5f;
+            newPos.z = (Mathf.Round(pos.z / 3 - 0.5f) + 0.5f) * 3;
         }
         return newPos;
     }
 
-
-    private static bool IsOverLap(AreaInfo rc1, AreaInfo rc2)
+    /// <summary>
+    /// 获取当前待造建筑所占用的所有格子
+    /// </summary>
+    /// <returns></returns>
+    private Vector2Int[] GetAllGrids(int sizeX,int sizeY, Vector3 centerPos)
     {
-        if (Mathf.Abs(rc1.x - rc2.x) > (rc1.Width * 3 + rc2.Width * 3) / 2)
+        int startX, endX, startZ, endZ;
+        int width = isTurn ? sizeY : sizeX;
+        int height = isTurn ? sizeX : sizeY;
+        Vector3 centerGrid = centerPos / 3;
+        if (width % 2 == 0)
         {
-            return false;
+            startX = Mathf.FloorToInt(centerGrid.x) - width / 2 + 1;
+            endX = Mathf.FloorToInt(centerGrid.x) + width / 2;
         }
-        if (Mathf.Abs(rc1.y - rc2.y) > (rc1.Height* 3  + rc2.Height * 3) / 2)
+        else
         {
-            return false;
+            startX = Mathf.RoundToInt(centerGrid.x) - (width - 1) / 2;
+            endX = Mathf.RoundToInt(centerGrid.x) + (width - 1) / 2;
         }
-        return true;
-    }
+        if (height % 2 == 0)
+        {
+            startZ = Mathf.FloorToInt(centerGrid.z) - height / 2 + 1;
+            endZ = Mathf.FloorToInt(centerGrid.z) + height / 2;
+        }
+        else
+        {
+            startZ = Mathf.RoundToInt(centerGrid.z) - (height - 1) / 2;
+            endZ = Mathf.RoundToInt(centerGrid.z) + (height - 1) / 2;
+        }
 
-    private bool CheckNewBuildingIsOverLap(AreaInfo areaInfo)
-    {
-        //Debug.Log("origin:"+areaInfo.ToString());
-        foreach (AreaInfo info in areaInfos)
+        Vector2Int[] grids = new Vector2Int[width * height];
+        int index = 0;
+        for (int i = startX; i <= endX; i ++)
         {
-            //Debug.Log("compare:" + info.ToString());
-            if (IsOverLap(areaInfo, info))
+            for (int j = startZ; j <= endZ; j ++)
             {
-                return true;
+                grids[index] = new Vector2Int(i, j);
+                index++;
             }
         }
-        return false;
+        return grids;
     }
+
     #endregion
 }
-
-public struct AreaInfo
-{
-    public float x;
-    public float y;
-    public int Height { get { return isExchangeFlag ? width : height; } }
-    public int Width { get { return isExchangeFlag ? height : width; } }
-    private int height;
-    private int width;
-    public bool isExchangeFlag;//长宽是否交换
-
-    public AreaInfo(float _x, float _y, Vector2Int _size, bool _isExchange)
-    {
-        x = _x;
-        y = _y;
-        width = _size.y;
-        height = _size.x;
-        isExchangeFlag = _isExchange;
-    }
-
-    public AreaInfo(float _x, float _y, Vector2Int _size)
-    {
-        x = _x;
-        y = _y;
-        width = _size.x;
-        height = _size.y;
-        isExchangeFlag = false;
-    }
-    public override string ToString()
-    {
-        return string.Format("Pos:({0},{1})Size:({2},{3})Exchange:{4}",
-                                x, y, width, height, isExchangeFlag.ToString());
-    }
-
-    public void ExchangeWidthHeight()
-    {
-        isExchangeFlag = !isExchangeFlag;
-    }
-}
-
 

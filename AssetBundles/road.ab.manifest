@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2574265191
+CRC: 1495754056
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6c04329ab46e92cd971f96879b69c6b2
+    Hash: f01ee92fa2abefec3fcac782b31123a4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 17d47ae410c2d2da80490c2d6ca4b4aa
@@ -26,7 +26,7 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/Prefabs/Building/Road/L1_Road001.prefab
+- Assets/Prefabs/Building/Road/L1_RoadStraight1.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L1_Roadlright001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L3_Roadleft001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L1_RoadTcross002.fbx
@@ -37,13 +37,19 @@ Assets:
 - Assets/ArtAssets/Model/Building/Building_mode_L3_RoadTcross001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Road002.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_RoadTcross002.fbx
+- Assets/Prefabs/Building/Road/L1_RoadStraight3.prefab
+- Assets/Prefabs/Building/Road/L1_RoadTCross.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Road001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L3_Roadcross001.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Roadleft003.fbx
+- Assets/Prefabs/Building/Road/L1_RoadStraight2.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Road003.fbx
 - Assets/ArtAssets/Model/Building/Building_mode_L3_Road001.fbx
+- Assets/Prefabs/Building/Road/L1_RoadRight.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L3_Roadstra001.fbx
+- Assets/Prefabs/Building/Road/L1_RoadCross.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Roadright003.fbx
+- Assets/Prefabs/Building/Road/L1_RoadLeft.prefab
 - Assets/ArtAssets/Model/Building/Building_mode_L2_Roadcross002.fbx
 Dependencies:
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab

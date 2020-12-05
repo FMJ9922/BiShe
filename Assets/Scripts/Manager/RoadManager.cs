@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 已弃用
+/// </summary>
 public class RoadManager : Singleton<RoadManager>
 {
     //储存修路信息路径点
