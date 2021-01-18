@@ -7,17 +7,18 @@ public class MapManager : Singleton<MapManager>
     public Vector2Int MapSize { get; private set; }
     private Dictionary<Vector2Int, SingleGrid> _gridDic = new Dictionary<Vector2Int, SingleGrid>();
     private LevelData _leveldata;
-    [SerializeField] GameObject gridPfb;
-    private void Start()
+    //[SerializeField] GameObject gridPfb;
+
+
+    public void InitMapMnager(int levelId)
     {
-        InitLevelData();
+        InitLevelData(levelId);
         InitGrid();
     }
-
     /// <summary>
     /// 加载关卡的时候调用
     /// </summary>
-    private void InitLevelData(int levelId = 30001)
+    private void InitLevelData(int levelId)
     {
         _leveldata = DataManager.GetLevelData(levelId);
         MapSize = new Vector2Int(_leveldata.Length, _leveldata.Width);
@@ -81,7 +82,7 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < grids.Length; i++)
         {
-            Instantiate(gridPfb, new Vector3(grids[i].x*3, 0.1f, grids[i].y*3), Quaternion.identity, transform);
+            //Instantiate(gridPfb, new Vector3(grids[i].x*3, 0.1f, grids[i].y*3), Quaternion.identity, transform);
         }
     }
     public static void SetGridTypeToEmpty(Vector2Int grid)

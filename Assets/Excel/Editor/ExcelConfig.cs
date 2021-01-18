@@ -58,6 +58,9 @@ public class ExcelTool
             levelData.Length = int.Parse(collect[i][9].ToString());
             levelData.Width = int.Parse(collect[i][10].ToString());
             levelData.Introduce = collect[i][11].ToString();
+            levelData.wood = int.Parse(collect[i][12].ToString());
+            levelData.stone = int.Parse(collect[i][13].ToString());
+            levelData.money = int.Parse(collect[i][14].ToString());
             array[i - 2] = levelData;
         }
         return array;
@@ -105,7 +108,7 @@ public class ExcelTool
                 }
             }
             buildData.Return = int.Parse(collect[i][11].ToString());
-            if(collect[i][12].ToString() != "Null")
+            if (collect[i][12].ToString() != "Null")
             {
                 buildData.ProductId = int.Parse(collect[i][12].ToString());
             }
@@ -130,6 +133,21 @@ public class ExcelTool
         return array;
     }
 
+    public static LocalizationData CreateLocalizationDataWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        LocalizationData data= new LocalizationData();
+        LocalizationCombine[] combines = new LocalizationCombine[rowNum-1];
+        for (int i = 1; i < rowNum; i++)
+        {
+            combines[i - 1] = new LocalizationCombine(collect[i][0].ToString(),
+                collect[i][1].ToString(), collect[i][2].ToString());
+        }
+        data.combines = combines;
+        return data;
+
+    }
     static DataRowCollection ReadExcel(string filePath, ref int columnNum, ref int rowNum)
     {
         FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);

@@ -53,6 +53,11 @@ MonoBehaviour:
     ProductCycle: 3
     Price: 400
     BuildingID: 20007
+  - Id: 10009
+    Name: "\u77F3\u5934"
+    ProductCycle: 3
+    Price: 2
+    BuildingID: 20007
   LevelArray:
   - Id: 30001
     Name: "\u519C\u4EA7\u54C1"
@@ -66,6 +71,9 @@ MonoBehaviour:
     Length: 200
     Width: 200
     Introduce: "\u8BF4\u660E"
+    wood: 50
+    stone: 10
+    money: 100
   - Id: 30002
     Name: "\u5DE5\u4E1A\u4EA7\u54C1"
     FrontLevelId: 30001
@@ -78,6 +86,9 @@ MonoBehaviour:
     Length: 200
     Width: 200
     Introduce: "\u8BF4\u660E"
+    wood: 50
+    stone: 10
+    money: 100
   - Id: 30003
     Name: "\u7ED3\u5408\u4EA7\u4E1A"
     FrontLevelId: 30002
@@ -90,6 +101,9 @@ MonoBehaviour:
     Length: 200
     Width: 200
     Introduce: "\u8BF4\u660E"
+    wood: 50
+    stone: 10
+    money: 100
   TechArray: []
   BuildArray:
   - Id: 20001
@@ -272,3 +286,23 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: L1_Sawmill001
     tabType: 2
+  LocalizationData:
+    combines:
+    - code: Wood
+      chinese: "\u6728\u5934"
+      english: Wood
+    - code: Stone
+      chinese: "\u77F3\u5934"
+      english: Stone
+    - code: Money
+      chinese: "\u91D1\u94B1"
+      english: Money
+    - code: Resource
+      chinese: "\u8D44\u6E90"
+      english: Resource
+    - code: Name
+      chinese: "\u540D\u79F0"
+      english: Name
+    - code: Amount
+      chinese: "\u6570\u91CF"
+      english: Amount

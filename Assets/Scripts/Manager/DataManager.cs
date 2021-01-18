@@ -21,7 +21,7 @@ public class DataManager : ScriptableObject
     public LevelData[] LevelArray;
     public TechData[] TechArray;
     public BuildData[] BuildArray;
-
+    public LocalizationData LocalizationData;
     public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
 
 
@@ -49,11 +49,11 @@ public class DataManager : ScriptableObject
 
     public static LevelData GetLevelData(int levelId)
     {
-        for (int i = 0; i < mInstance.LevelArray.Length; i++)
+        for (int i = 0; i < Instance.LevelArray.Length; i++)
         {
-            if (mInstance.LevelArray[i].Id == levelId)
+            if (Instance.LevelArray[i].Id == levelId)
             {
-                return mInstance.LevelArray[i];
+                return Instance.LevelArray[i];
             }
         }
         Debug.Log("无效的关卡ID");

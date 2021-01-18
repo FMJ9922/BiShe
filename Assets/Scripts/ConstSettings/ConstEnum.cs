@@ -93,4 +93,13 @@ public enum GridType
     road,
 }
 
+public enum ItemType
+{
+
+}
+public enum LanguageType
+{
+    chinese = 0,
+    english = 1,
+}
 

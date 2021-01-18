@@ -26,12 +26,14 @@ public class BuildManager : Singleton<BuildManager>
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
     #endregion
 
-    private void Start()
+   
+    #region 公共函数
+
+    public void InitBuildManager()
     {
         LoadAB.Init();
         ShowGrid(false);
     }
-    #region 公共函数
     public void BuildTest()
     {
         CreateBuildingOnMouse("building.l1_northhouse", "L1_Northhouse001");
@@ -116,7 +118,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild();
             MapManager.SetGridTypeToOccupy(targetGrids);
-            MapManager.Instance.ShowGrid(targetGrids);
+            //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
         else
