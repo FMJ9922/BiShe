@@ -23,7 +23,7 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         BuildData = buildData;
         _buildingCanvas = buildingCanvas;
         //ToDo初始化图片
-        _name.text = BuildData.Name;
+        _name.text = Localization.ToSettingLanguage(BuildData.Name);
     }
 
     public void OnPointerClick(PointerEventData eventData)

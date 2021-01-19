@@ -7,7 +7,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class BuildingCanvas : MonoBehaviour
+public class BuildingCanvas : CanvasBase
 {
     #region 组件&成员
     [SerializeField]
@@ -42,14 +42,26 @@ public class BuildingCanvas : MonoBehaviour
     private BuildData[] currentTabDatas;
     #endregion
 
-    #region 初始化
-    private void Start()
+    #region 实现基类
+
+    public override void InitCanvas()
     {
         InitTabs();
         ChangeTab(0);
         _InfoCanvas.SetActive(false);
     }
 
+    public override void OnOpen()
+    {
+        _mainCanvas.SetActive(true);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnClose);
+    }
+
+    public override void OnClose()
+    {
+        _mainCanvas.SetActive(false);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);
+    }
     #endregion
 
     #region 私有函数
@@ -60,7 +72,7 @@ public class BuildingCanvas : MonoBehaviour
     private void HideOrShowCanvasToggle(bool isShow)
     {
         _mainCanvas.SetActive(isShow);
-        _activeBtns.SetActive(isShow);
+        //_activeBtns.SetActive(isShow);
     }
 
     /// <summary>
@@ -74,7 +86,7 @@ public class BuildingCanvas : MonoBehaviour
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
             newTab.name = i.ToString();
-            newTab.GetComponentInChildren<TMP_Text>().text = ((BuildTabType)i).GetDescription();
+            newTab.GetComponentInChildren<TMP_Text>().text = Localization.ToSettingLanguage(((BuildTabType)i).GetDescription());
             newTab.GetComponent<Button>().interactable = true;
             newTab.GetComponent<Button>().onClick.AddListener(() =>
             {
@@ -101,22 +113,7 @@ public class BuildingCanvas : MonoBehaviour
 
     #region 公共函数
 
-    /// <summary>
-    /// 建造建筑按钮激活时，打开建造面板
-    /// </summary>
-    public void OnEnterBuildMode()
-    {
-        _mainCanvas.SetActive(true);
-        _activeBtns.SetActive(false);
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
-    }
-
-    public void OnExitBuildMode()
-    {
-        _mainCanvas.SetActive(false);
-        _activeBtns.SetActive(true);
-        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
-    }
+   
     public void ChangeTab(int tabType)
     {
         this.tabType = (BuildTabType)tabType;
@@ -135,27 +132,29 @@ public class BuildingCanvas : MonoBehaviour
     {
         HideOrShowCanvasToggle(false);
         _InfoCanvas.SetActive(false);
-        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);
         EventManager.StartListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         BuildManager.Instance.CreateBuildingOnMouse(buildData.BundleName, buildData.PfbName);
     }
 
     public void OnFinishBuilding()
     {
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnExitBuildMode);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnClose);
         EventManager.StopListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         HideOrShowCanvasToggle(true);
     }
     public void OnEnterHoverIcon(BuildData buildData)
     {
-        _nameLabel.text = buildData.Name;
-        string cost = buildData.Price + "金钱";
+        _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
+        string cost = buildData.Price + Localization.ToSettingLanguage("Gold");
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
-            cost += "，"+buildData.costResources[i].ItemNum+"木头";
+            cost += "，"+buildData.costResources[i].ItemNum +" "+ 
+                Localization.ToSettingLanguage(
+                    DataManager.GetItemNameById(buildData.costResources[i].ItemId));
         }
-        _costLabel.text = string.Format("花费：\n{0}", cost);
-        _introduceLabel.text = "这是简介这是简介这是简介";
+        _costLabel.text = string.Format(Localization.ToSettingLanguage("Cost")+":\n{0}", cost);
+        _introduceLabel.text = Localization.ToSettingLanguage("TempIntroduction");
         _InfoCanvas.SetActive(true);
     }
 

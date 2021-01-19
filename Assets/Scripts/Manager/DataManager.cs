@@ -59,4 +59,17 @@ public class DataManager : ScriptableObject
         Debug.Log("无效的关卡ID");
         return null;
     }
+
+    public static string GetItemNameById(int ID)
+    {
+        for (int i = 0; i < Instance.ItemArray.Length; i++)
+        {
+            if (Instance.ItemArray[i].Id == ID)
+            {
+                return Instance.ItemArray[i].Name;
+            }
+        }
+        Debug.Log("无效的物品ID");
+        return string.Empty;
+    }
 }

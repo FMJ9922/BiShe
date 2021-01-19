@@ -14,47 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemArray:
   - Id: 10001
-    Name: "\u5C0F\u9EA6"
+    Name: Wheat
     ProductCycle: 3
     Price: 100
     BuildingID: 20007
   - Id: 10002
-    Name: "\u6C34\u7A3B"
+    Name: Rice
     ProductCycle: 3
     Price: 95
     BuildingID: 20007
   - Id: 10003
-    Name: "\u539F\u6728"
+    Name: Log
     ProductCycle: 3
     Price: 300
     BuildingID: 20007
   - Id: 10004
-    Name: "\u6728\u6599"
+    Name: Timber
     ProductCycle: 3
     Price: 450
     BuildingID: 20007
   - Id: 10005
-    Name: "\u751F\u8089"
+    Name: RawMeat
     ProductCycle: 3
     Price: 125
     BuildingID: 20007
   - Id: 10006
-    Name: "\u9762\u7C89"
+    Name: Flour
     ProductCycle: 3
     Price: 115
     BuildingID: 20007
   - Id: 10007
-    Name: "\u52B3\u52A8\u529B"
+    Name: LaborForce
     ProductCycle: 3
     Price: 0
     BuildingID: 20007
   - Id: 10008
-    Name: "\u52A0\u5DE5\u8089"
+    Name: ProcessedMeat
     ProductCycle: 3
     Price: 400
     BuildingID: 20007
   - Id: 10009
-    Name: "\u77F3\u5934"
+    Name: Stone
     ProductCycle: 3
     Price: 2
     BuildingID: 20007
@@ -107,7 +107,7 @@ MonoBehaviour:
   TechArray: []
   BuildArray:
   - Id: 20001
-    Name: "\u6C11\u623F"
+    Name: Hut
     Length: 5
     Width: 3
     Price: 100
@@ -127,7 +127,7 @@ MonoBehaviour:
     PfbName: L2_Northhouse011
     tabType: 0
   - Id: 20002
-    Name: "\u571F\u8DEF"
+    Name: MudRoad
     Length: 3
     Width: 3
     Price: 30
@@ -147,7 +147,7 @@ MonoBehaviour:
     PfbName: L1_Road001
     tabType: 101
   - Id: 20003
-    Name: "\u7B80\u6613\u4ED3\u5E93"
+    Name: Warehouse
     Length: 5
     Width: 11
     Price: 300
@@ -167,7 +167,7 @@ MonoBehaviour:
     PfbName: L1_Storehouse001
     tabType: 4
   - Id: 20004
-    Name: "\u96C6\u5E02"
+    Name: Market
     Length: 12
     Width: 14
     Price: 500
@@ -187,7 +187,7 @@ MonoBehaviour:
     PfbName: L1_Market001
     tabType: 4
   - Id: 20005
-    Name: "\u9EA6\u7530"
+    Name: Farmland
     Length: 3
     Width: 3
     Price: 120
@@ -207,27 +207,7 @@ MonoBehaviour:
     PfbName: L1_Fieldedge001
     tabType: 1
   - Id: 20006
-    Name: "\u7A3B\u7530"
-    Length: 3
-    Width: 3
-    Price: 125
-    costResources:
-    - ItemId: 10004
-      ItemNum: 0
-    Return: 63
-    ProductId: 10002
-    ProductTime: 18
-    ProductNum: 1.2
-    WorkerNum: 6
-    MaxStorage: 100
-    InfluenceRange: 5
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    BundleName: building.ab
-    PfbName: L1_Fieldedge001
-    tabType: 1
-  - Id: 20007
-    Name: "\u517B\u6B96\u573A"
+    Name: LivestockFarm
     Length: 14
     Width: 20
     Price: 280
@@ -246,8 +226,8 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: L1_Farm001
     tabType: 1
-  - Id: 20008
-    Name: "\u52A0\u5DE5\u5382"
+  - Id: 20007
+    Name: Factory
     Length: 4
     Width: 6
     Price: 400
@@ -266,8 +246,8 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: L1_Factory001
     tabType: 3
-  - Id: 20009
-    Name: "\u4F10\u6728\u573A"
+  - Id: 20008
+    Name: LoggingCamps
     Length: 7
     Width: 8
     Price: 200
@@ -306,3 +286,84 @@ MonoBehaviour:
     - code: Amount
       chinese: "\u6570\u91CF"
       english: Amount
+    - code: Destroy
+      chinese: "\u62C6\u9664"
+      english: Destroy
+    - code: Build
+      chinese: "\u5EFA\u9020"
+      english: Build
+    - code: Market
+      chinese: "\u5E02\u573A"
+      english: Market
+    - code: Warehouse
+      chinese: "\u4ED3\u5E93"
+      english: Warehouse
+    - code: Hut
+      chinese: "\u571F\u623F"
+      english: Hut
+    - code: MudRoad
+      chinese: "\u571F\u8DEF"
+      english: Mud Road
+    - code: Farmland
+      chinese: "\u519C\u7530"
+      english: Farmland
+    - code: LivestockFarm
+      chinese: "\u517B\u6B96\u573A"
+      english: Livestock Farm
+    - code: Factory
+      chinese: "\u52A0\u5DE5\u5382"
+      english: Factory
+    - code: LoggingCamps
+      chinese: "\u4F10\u6728\u573A"
+      english: Logging Camps
+    - code: Housing
+      chinese: "\u4F4F\u623F"
+      english: Housing
+    - code: Agriculture
+      chinese: "\u519C\u4E1A"
+      english: Agriculture
+    - code: Forestry
+      chinese: "\u6797\u4E1A"
+      english: Forestry
+    - code: Manufacturing
+      chinese: "\u5236\u9020\u4E1A"
+      english: Manufacturing
+    - code: Utilitiy
+      chinese: "\u516C\u5171\u670D\u52A1"
+      english: Utilitiy
+    - code: Road
+      chinese: "\u8DEF"
+      english: Road
+    - code: Gold
+      chinese: "\u91D1\u5E01"
+      english: Gold
+    - code: Cost
+      chinese: "\u82B1\u8D39"
+      english: Cost
+    - code: TempIntroduction
+      chinese: "\u8FD9\u662F\u7B80\u4ECB"
+      english: This is introduction
+    - code: Wheat
+      chinese: "\u5C0F\u9EA6"
+      english: Wheat
+    - code: Rice
+      chinese: "\u7A3B\u7C73"
+      english: Rice
+    - code: Log
+      chinese: "\u539F\u6728"
+      english: Log
+    - code: Timber
+      chinese: "\u6728\u6599"
+      english: Timber
+    - code: RawMeat
+      chinese: "\u751F\u8089"
+      english: Raw Meat
+    - code: Flour
+      chinese: "\u9762\u7C89"
+      english: Flour
+    - code: LaborForce
+      chinese: "\u52B3\u52A8\u529B"
+      english: Labor Force
+    - code: ProcessedMeat
+      chinese: "\u52A0\u5DE5\u8089"
+      english: Processed Meat

@@ -4,24 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ResourceCanvas : MonoBehaviour
+public class ResourceCanvas : CanvasBase
 {
     [SerializeField] private Transform itemContent;//挂载物品的地方
     [SerializeField] private GameObject itemPfb;//物体预制体
     [SerializeField] private Color oddColor;
     [SerializeField] private Color evenColor;
+    [SerializeField] private GameObject mainCanvas;
 
     private List<GameObject> itemList = new List<GameObject>();//显示物品列表
 
-    private void OnEnable()
+    #region 实现基类
+    public override void InitCanvas()
     {
         CreateItemList();
     }
+    public override void OnOpen()
+    {
+        CreateItemList();
+        mainCanvas.SetActive(true);
+    }
 
-    private void OnDisable()
+    public override void OnClose()
     {
         DestroyList();
+        mainCanvas.SetActive(false);
     }
+    #endregion
+
     private void CreateItemList()
     {
         itemList.Clear();

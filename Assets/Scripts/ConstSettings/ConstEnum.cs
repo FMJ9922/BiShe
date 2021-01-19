@@ -62,17 +62,17 @@ public enum BundlePrimaryType
 /// </summary>
 public enum BuildTabType
 {
-    [Description("住房")]
+    [Description("Housing")]
     house = 0,
-    [Description("农业")]
+    [Description("Agriculture")]
     agriculture = 1,
-    [Description("林业")]
+    [Description("Forestry")]
     forest = 2,
-    [Description("制造业")]
+    [Description("Manufacturing")]
     manufacturing = 3,
-    [Description("公共设施")]
+    [Description("Utilitiy")]
     utility = 4,
-    [Description("路")]
+    [Description("Road")]
     road = 5,
 }
 

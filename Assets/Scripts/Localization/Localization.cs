@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Localization
 {
-    public static LanguageType language = LanguageType.english;
+    public static LanguageType language = LanguageType.chinese;
 
     public static string ToSettingLanguage(string itemName)
     {
