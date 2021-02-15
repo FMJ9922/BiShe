@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 447308322606216528}
   - component: {fileID: 9151890437711897815}
+  - component: {fileID: 3664809479985339776}
   m_Layer: 0
   m_Name: L2_Northhouse011
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +53,19 @@ MonoBehaviour:
   animation: {fileID: 1360589540858155413}
   body: {fileID: 3222314053273042331}
   buildFlag: 0
+--- !u!65 &3664809479985339776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183460383382426360}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3805542, y: 2.8683434, z: 6.1994324}
+  m_Center: {x: -0.000061035156, y: 1.4622021, z: 0.040481567}
 --- !u!1001 &881082949303886512
 PrefabInstance:
   m_ObjectHideFlags: 0

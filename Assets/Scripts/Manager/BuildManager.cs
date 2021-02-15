@@ -24,6 +24,8 @@ public class BuildManager : Singleton<BuildManager>
     private UnityAction<float> rotateAc = (float dir) => Instance.OnRotateBuilding(dir);
     private UnityAction confirmAc = () => Instance.OnConfirmBuild();
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
+
+    public static bool IsInBuildMode { get; set; }
     #endregion
 
    
@@ -33,21 +35,25 @@ public class BuildManager : Singleton<BuildManager>
     {
         LoadAB.Init();
         ShowGrid(false);
+        IsInBuildMode = false;
     }
     public void BuildTest()
     {
-        CreateBuildingOnMouse("building.l1_northhouse", "L1_Northhouse001");
+        
     }
 
     /// <summary>
     /// 盖建筑
     /// </summary>
-    public void CreateBuildingOnMouse(string bundleName, string pfbName)
+    public void CreateBuildingOnMouse(BuildData buildData)
     {
+        string bundleName = buildData.BundleName;
+        string pfbName = buildData.PfbName;
         Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, transform);
         currentBuilding = building.GetComponent<BuildingBase>();
+        currentBuilding.buildData = buildData;
         building.transform.position = Input.mousePosition;
         WhenStartBuild();
     }
@@ -138,6 +144,7 @@ public class BuildManager : Singleton<BuildManager>
         ShowGrid(true);
         isTurn = false;
         isCurOverlap = false;
+        IsInBuildMode = true;
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
@@ -153,6 +160,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
         currentBuilding = null;
         targetGrids = null;
+        IsInBuildMode = false;
     }
     private void ShowGrid(bool isShow)
     {

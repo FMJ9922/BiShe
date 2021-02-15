@@ -17,4 +17,8 @@ public class ConstEvent
     public const string OnRotateBuilding = "OnRotateBuilding";//旋转建筑
     public const string OnFinishBuilding = "OnFinishBuilding";//确认建造或者取消事件
     #endregion
+
+    #region 交互事件
+    public const string OnTriggerInfoPanel = "OnTriggerInfoPanel";//点击建筑显示详细面板
+    #endregion
 }

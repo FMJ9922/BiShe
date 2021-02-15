@@ -17,7 +17,7 @@ public class ResourceCanvas : CanvasBase
     #region 实现基类
     public override void InitCanvas()
     {
-        CreateItemList();
+
     }
     public override void OnOpen()
     {
@@ -34,6 +34,7 @@ public class ResourceCanvas : CanvasBase
 
     private void CreateItemList()
     {
+        DestroyList();
         itemList.Clear();
         Dictionary<string, float> dic = ResourceManager.Instance.GetAllResource();
         int count = 0;

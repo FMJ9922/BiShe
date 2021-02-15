@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4404233642181084841}
   m_Layer: 0
   m_Name: L1_Farm001
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

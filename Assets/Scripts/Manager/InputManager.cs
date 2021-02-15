@@ -7,6 +7,16 @@ public partial class InputManager : Singleton<InputManager>
     #region 字段
     public Vector3 LastGroundRayPos = new Vector3(0, 0, 0);
     #endregion
+
+    private void Start()
+    {
+        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, TriggerInfoPanel);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, TriggerInfoPanel);
+    }
+
     /// <summary>
     /// 处理玩家输入事件
     /// </summary>
@@ -71,4 +81,21 @@ public partial class InputManager : Singleton<InputManager>
         }
     }
 
+    /// <summary>
+    /// 鼠标左键点击建筑显示详细面板
+    /// </summary>
+    private void TriggerInfoPanel()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.CompareTag("Building") && !BuildManager.IsInBuildMode)
+            {
+                BuildingBase buildingBase;
+                buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
+                EventManager.TriggerEvent<BuildData>(ConstEvent.OnTriggerInfoPanel, buildingBase.buildData);
+            }
+        }
+    }
 }

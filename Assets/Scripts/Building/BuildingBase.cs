@@ -13,7 +13,7 @@ public class BuildingBase : MonoBehaviour
     [SerializeField]
     private BundlePrimaryType BundlePrimaryType;
 
-
+    
     public string BundleName => string.Format("{0}.ab", BundlePrimaryType.ToString());
 
     public string PfbName => this.gameObject.name;
@@ -26,11 +26,14 @@ public class BuildingBase : MonoBehaviour
 
     public GameObject body;
 
+    public BuildData buildData;
+
     public bool buildFlag = false;
      
     public virtual void OnConfirmBuild()
     {
         buildFlag = true;
+        gameObject.tag = "Building";
         if (hasAnima)
         {
             body.SetActive(false);
@@ -45,5 +48,10 @@ public class BuildingBase : MonoBehaviour
     {
         body.SetActive(true);
         animation.gameObject.SetActive(false);
+    }
+
+    public virtual string GetIntroduce()
+    {
+        return string.Empty;
     }
 }

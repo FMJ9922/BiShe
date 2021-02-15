@@ -15,48 +15,53 @@ MonoBehaviour:
   ItemArray:
   - Id: 10001
     Name: Wheat
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 100
     BuildingID: 20007
   - Id: 10002
     Name: Rice
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 95
     BuildingID: 20007
   - Id: 10003
     Name: Log
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 300
     BuildingID: 20007
   - Id: 10004
     Name: Timber
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 450
     BuildingID: 20007
   - Id: 10005
     Name: RawMeat
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 125
     BuildingID: 20007
   - Id: 10006
     Name: Flour
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 115
     BuildingID: 20007
   - Id: 10007
     Name: LaborForce
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 0
     BuildingID: 20007
   - Id: 10008
     Name: ProcessedMeat
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 400
     BuildingID: 20007
   - Id: 10009
     Name: Stone
-    ProductCycle: 3
+    ProductCycle: 1
     Price: 2
+    BuildingID: 20007
+  - Id: 10010
+    Name: HumanResource
+    ProductCycle: 0
+    Price: 1000
     BuildingID: 20007
   LevelArray:
   - Id: 30001
@@ -115,14 +120,20 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 10
     Return: 50
-    ProductId: 10007
     ProductTime: 0
-    ProductNum: 10
-    WorkerNum: 0
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 0
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources:
+    - ItemId: 10007
+      ItemNum: 10
     BundleName: building.ab
     PfbName: L2_Northhouse011
     tabType: 0
@@ -135,14 +146,18 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 1
     Return: 15
-    ProductId: 0
     ProductTime: 0
-    ProductNum: 0
-    WorkerNum: 0
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 0
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources: []
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 101
@@ -155,14 +170,18 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 30
     Return: 150
-    ProductId: 0
     ProductTime: 0
-    ProductNum: 0
-    WorkerNum: 0
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 0
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources: []
     BundleName: building.ab
     PfbName: L1_Storehouse001
     tabType: 4
@@ -175,14 +194,18 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 80
     Return: 250
-    ProductId: 0
     ProductTime: 0
-    ProductNum: 0
-    WorkerNum: 0
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 0
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources: []
     BundleName: building.ab
     PfbName: L1_Market001
     tabType: 4
@@ -195,14 +218,20 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 0
     Return: 60
-    ProductId: 10001
     ProductTime: 24
-    ProductNum: 1
-    WorkerNum: 5
     MaxStorage: 100
     InfluenceRange: 5
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 5
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources:
+    - ItemId: 10001
+      ItemNum: 1
     BundleName: building.ab
     PfbName: L1_Fieldedge001
     tabType: 1
@@ -215,14 +244,20 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 50
     Return: 140
-    ProductId: 10005
     ProductTime: 48
-    ProductNum: 20
-    WorkerNum: 30
     MaxStorage: 100
     InfluenceRange: 30
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 30
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources:
+    - ItemId: 10005
+      ItemNum: 20
     BundleName: building.ab
     PfbName: L1_Farm001
     tabType: 1
@@ -235,14 +270,20 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 70
     Return: 200
-    ProductId: 10006
     ProductTime: 2
-    ProductNum: 10
-    WorkerNum: 20
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 20
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources:
+    - ItemId: 10006
+      ItemNum: 10
     BundleName: building.ab
     PfbName: L1_Factory001
     tabType: 3
@@ -255,14 +296,20 @@ MonoBehaviour:
     - ItemId: 10004
       ItemNum: 45
     Return: 50
-    ProductId: 10003
     ProductTime: 20
-    ProductNum: 15
-    WorkerNum: 25
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
     RearBuildingId: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    inputResources:
+    - ItemId: 10010
+      ItemNum: 25
+    - ItemId: 10001
+      ItemNum: 100
+    outputResources:
+    - ItemId: 10003
+      ItemNum: 15
     BundleName: building.ab
     PfbName: L1_Sawmill001
     tabType: 2
@@ -367,3 +414,18 @@ MonoBehaviour:
     - code: ProcessedMeat
       chinese: "\u52A0\u5DE5\u8089"
       english: Processed Meat
+    - code: Stock
+      chinese: "\u5E93\u5B58"
+      english: Stock
+    - code: BidPrice
+      chinese: "\u4E70\u5165\u4EF7\u683C"
+      english: Bid Price
+    - code: OfferPrice
+      chinese: "\u5356\u51FA\u4EF7\u683C"
+      english: Offer Price
+    - code: Consumption
+      chinese: "\u6D88\u8017\u91CF"
+      english: Consumption
+    - code: HumanResource
+      chinese: "\u4EBA\u529B"
+      english: HumanResource

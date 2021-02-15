@@ -134,7 +134,7 @@ public class BuildingCanvas : CanvasBase
         _InfoCanvas.SetActive(false);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);
         EventManager.StartListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
-        BuildManager.Instance.CreateBuildingOnMouse(buildData.BundleName, buildData.PfbName);
+        BuildManager.Instance.CreateBuildingOnMouse(buildData);
     }
 
     public void OnFinishBuilding()
@@ -154,7 +154,7 @@ public class BuildingCanvas : CanvasBase
                     DataManager.GetItemNameById(buildData.costResources[i].ItemId));
         }
         _costLabel.text = string.Format(Localization.ToSettingLanguage("Cost")+":\n{0}", cost);
-        _introduceLabel.text = Localization.ToSettingLanguage("TempIntroduction");
+        _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
         _InfoCanvas.SetActive(true);
     }
 
