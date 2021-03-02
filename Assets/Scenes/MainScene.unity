@@ -2699,7 +2699,7 @@ GameObject:
   - component: {fileID: 719181464}
   - component: {fileID: 719181463}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4540,6 +4540,8 @@ MonoBehaviour:
   _outputsObj: {fileID: 1942068957}
   _effectiveObj: {fileID: 177526059}
   _introduceObj: {fileID: 6511598}
+  _pauseBtn: {fileID: 719181463}
+  _upgradeBtn: {fileID: 1530155527}
   _nameLabel: {fileID: 888884752}
   _inputsLabel: {fileID: 1051093768}
   _outputsLabel: {fileID: 1271738946}
@@ -6662,7 +6664,7 @@ GameObject:
   - component: {fileID: 1530155528}
   - component: {fileID: 1530155527}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8422,6 +8424,7 @@ MonoBehaviour:
     BundleName: 
     PfbName: 
     tabType: 0
+    MaxLevel: 0
 --- !u!1 &1849590101
 GameObject:
   m_ObjectHideFlags: 0

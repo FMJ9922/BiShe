@@ -96,7 +96,9 @@ public enum GridType
 public enum ItemType
 {
     human = 0,//人力资源
-    normal = 1,//一般的物品
+    food = 1,//食物
+    industry = 2,//工业品
+
 }
 public enum LanguageType
 {

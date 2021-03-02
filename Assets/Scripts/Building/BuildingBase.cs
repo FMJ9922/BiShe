@@ -26,7 +26,7 @@ public class BuildingBase : MonoBehaviour
 
     public GameObject body;
 
-    public BuildData buildData;
+    public RuntimeBuildData runtimeBuildData;
 
     public bool buildFlag = false;
      
@@ -42,16 +42,54 @@ public class BuildingBase : MonoBehaviour
             Invoke("ShowBody", time);
             animation.Play();
         }
+        InitBuildingFunction();
     }
-
+    /// <summary>
+    /// 建造完后初始化建筑功能
+    /// </summary>
+    public virtual void InitBuildingFunction()
+    {
+        Debug.Log("1");
+    }
     public void ShowBody()
     {
         body.SetActive(true);
         animation.gameObject.SetActive(false);
     }
 
-    public virtual string GetIntroduce()
+    //public virtual string GetIntroduce()
+    //{
+    //    return string.Empty;
+    //}
+
+    public static RuntimeBuildData CastBuildDataToRuntime(BuildData buildData)
     {
-        return string.Empty;
+        RuntimeBuildData runtimeBuildData = new RuntimeBuildData();
+        runtimeBuildData.Id = buildData.Id;
+        runtimeBuildData.Name = buildData.Name;
+        runtimeBuildData.Length = buildData.Length;
+        runtimeBuildData.Width = buildData.Width;
+        runtimeBuildData.Price = buildData.Price;
+        runtimeBuildData.costResources = buildData.costResources;
+        runtimeBuildData.Return = buildData.Return;
+        runtimeBuildData.ProductTime = buildData.ProductTime;
+        runtimeBuildData.MaxStorage = buildData.MaxStorage;
+        runtimeBuildData.InfluenceRange = buildData.InfluenceRange;
+        runtimeBuildData.FrontBuildingId = buildData.FrontBuildingId;
+        runtimeBuildData.RearBuildingId = buildData.RearBuildingId;
+        runtimeBuildData.Introduce = buildData.Introduce;
+        runtimeBuildData.inputResources = buildData.inputResources;
+        runtimeBuildData.outputResources = buildData.outputResources;
+        runtimeBuildData.BundleName = buildData.BundleName;
+        runtimeBuildData.PfbName = buildData.PfbName;
+        runtimeBuildData.tabType = buildData.tabType;
+        runtimeBuildData.MaxLevel = buildData.MaxLevel;
+        return runtimeBuildData;
     }
+}
+
+public class RuntimeBuildData : BuildData
+{
+    public bool Pause = true;//是否暂停生产
+    public int CurLevel = 0;//当前等级
 }

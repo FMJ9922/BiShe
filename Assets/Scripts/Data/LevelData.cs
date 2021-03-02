@@ -13,7 +13,7 @@ public class LevelData
     public int Length;
     public int Width;
     public string Introduce;
-    public int wood;
-    public int stone;
+    public int log;
+    public int rice;
     public int money;
 }

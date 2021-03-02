@@ -53,7 +53,7 @@ public class BuildManager : Singleton<BuildManager>
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, transform);
         currentBuilding = building.GetComponent<BuildingBase>();
-        currentBuilding.buildData = buildData;
+        currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
         building.transform.position = Input.mousePosition;
         WhenStartBuild();
     }
@@ -120,19 +120,36 @@ public class BuildManager : Singleton<BuildManager>
     }
     private void OnConfirmBuild()
     {
-        if (!isCurOverlap)
+        if (isCurOverlap)
+        {
+            Debug.Log("当前建筑重叠，无法建造！");
+            return;
+        }
+        if(CheckBuildResourcesEnoughAndUse())
         {
             currentBuilding.OnConfirmBuild();
             MapManager.SetGridTypeToOccupy(targetGrids);
             //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
-        else
-        {
-            Debug.Log("当前建筑重叠，无法建造！");
-        }
     }
 
+    /// <summary>
+    /// 检查建造所需的资源是否足够，如果足够就使用掉，不足够就返回false
+    /// </summary>
+    private bool CheckBuildResourcesEnoughAndUse()
+    {
+        List<CostResource> rescources = currentBuilding.runtimeBuildData.costResources;
+        for (int i = 0; i < rescources.Count; i++)
+        {
+            if (!ResourceManager.Instance.TryUseResource(rescources[i]))
+            {
+                return false;
+            }
+        }
+        return true;
+
+    }
     private void OnCancelBuild()
     {
         Destroy(currentBuilding.gameObject);

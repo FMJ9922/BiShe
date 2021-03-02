@@ -21,4 +21,9 @@ public class ConstEvent
     #region 交互事件
     public const string OnTriggerInfoPanel = "OnTriggerInfoPanel";//点击建筑显示详细面板
     #endregion
+
+    #region 资源事件
+    public const string OnOutputResources = "OnOutputResources";//每周输出资源结算
+    public const string OnInputResources = "OnInputResources";//每周输入资源结算
+    #endregion
 }

@@ -69,7 +69,20 @@ public class DataManager : ScriptableObject
                 return Instance.ItemArray[i].Name;
             }
         }
-        Debug.Log("无效的物品ID");
+        Debug.Log("无效的物品ID"+ ID);
         return string.Empty;
+    }
+
+    public static int GetItemIdByName(string name)
+    {
+        for (int i = 0; i < Instance.ItemArray.Length; i++)
+        {
+            if (Instance.ItemArray[i].Name == name)
+            {
+                return Instance.ItemArray[i].Id;
+            }
+        }
+        Debug.Log("无效的物品名称" + name);
+        return 0;
     }
 }

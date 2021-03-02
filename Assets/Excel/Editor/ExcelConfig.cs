@@ -58,8 +58,8 @@ public class ExcelTool
             levelData.Length = int.Parse(collect[i][9].ToString());
             levelData.Width = int.Parse(collect[i][10].ToString());
             levelData.Introduce = collect[i][11].ToString();
-            levelData.wood = int.Parse(collect[i][12].ToString());
-            levelData.stone = int.Parse(collect[i][13].ToString());
+            levelData.log = int.Parse(collect[i][12].ToString());
+            levelData.rice = int.Parse(collect[i][13].ToString());
             levelData.money = int.Parse(collect[i][14].ToString());
             array[i - 2] = levelData;
         }
@@ -107,6 +107,7 @@ public class ExcelTool
                         );
                 }
             }
+            buildData.costResources.Add(new CostResource(99999, buildData.Price));
             buildData.Return = int.Parse(collect[i][11].ToString());
             buildData.outputResources = new List<CostResource>();
             if (collect[i][12].ToString() != "Null")
@@ -116,7 +117,7 @@ public class ExcelTool
             }
             buildData.ProductTime = int.Parse(collect[i][13].ToString());
             buildData.inputResources = new List<CostResource>();
-            buildData.inputResources.Add(new CostResource(10010, int.Parse(collect[i][15].ToString())));
+            buildData.inputResources.Add(new CostResource(99999, int.Parse(collect[i][15].ToString())));
             buildData.MaxStorage = int.Parse(collect[i][16].ToString());
             buildData.InfluenceRange = int.Parse(collect[i][17].ToString());
             if (collect[i][18].ToString() != "Null")

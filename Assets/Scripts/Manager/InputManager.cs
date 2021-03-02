@@ -94,7 +94,7 @@ public partial class InputManager : Singleton<InputManager>
             {
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
-                EventManager.TriggerEvent<BuildData>(ConstEvent.OnTriggerInfoPanel, buildingBase.buildData);
+                EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnTriggerInfoPanel, buildingBase.runtimeBuildData);
             }
         }
     }

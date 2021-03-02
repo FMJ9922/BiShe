@@ -21,6 +21,7 @@ public class BuildData
     public string BundleName;
     public string PfbName;
     public BuildTabType tabType;
+    public int MaxLevel;//最大等级
 }
 
 [System.Serializable]

@@ -22,12 +22,14 @@ public class ResourceCanvas : CanvasBase
     public override void OnOpen()
     {
         CreateItemList();
+        EventManager.StartListening(ConstEvent.OnOutputResources, CreateItemList);
         mainCanvas.SetActive(true);
     }
 
     public override void OnClose()
     {
         DestroyList();
+        EventManager.StopListening(ConstEvent.OnOutputResources, CreateItemList);
         mainCanvas.SetActive(false);
     }
     #endregion
@@ -36,9 +38,9 @@ public class ResourceCanvas : CanvasBase
     {
         DestroyList();
         itemList.Clear();
-        Dictionary<string, float> dic = ResourceManager.Instance.GetAllResource();
+        Dictionary<int, float> dic = ResourceManager.Instance.GetAllResource();
         int count = 0;
-        foreach(KeyValuePair<string,float> keyValuePair in dic)
+        foreach(KeyValuePair<int,float> keyValuePair in dic)
         {
             InitItemPfb(count, keyValuePair.Key, keyValuePair.Value);
             count++;
@@ -52,13 +54,13 @@ public class ResourceCanvas : CanvasBase
             Destroy(itemList[i]);
         }
     }
-    private void InitItemPfb(int place,string itemName,float itemNum)
+    private void InitItemPfb(int place,int itemId,float itemNum)
     {
         GameObject item = Instantiate(itemPfb, itemContent);
-        item.name = itemName;
+        item.name = DataManager.GetItemNameById(itemId);
         item.GetComponentInChildren<Image>().color = place % 2 == 1 ? evenColor : oddColor;
         TMP_Text[] texts = item.GetComponentsInChildren<TMP_Text>();
-        texts[0].text = Localization.ToSettingLanguage(itemName);
+        texts[0].text = Localization.ToSettingLanguage(item.name);
         texts[1].text = string.Format("{0:F}", itemNum);
         itemList.Add(item);
     }
