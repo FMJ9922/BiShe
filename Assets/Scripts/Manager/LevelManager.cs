@@ -5,7 +5,7 @@ using System;
 public class LevelManager : Singleton<LevelManager>
 {
     public int LevelID { get; set; }
-    private int year, month, week;
+    private int year, month, week,day;
     public int Year
     {
         get
@@ -55,24 +55,43 @@ public class LevelManager : Singleton<LevelManager>
             }
         }
     }
+    public int Day
+    {
+        get
+        {
+            return day;
+        }
+        set
+        {
+            if (value > 7)
+            {
+                Week++;
+                day = value - 7;
+                EventManager.TriggerEvent(ConstEvent.OnOutputResources);
+                EventManager.TriggerEvent(ConstEvent.OnInputResources);
+            }
+            else
+            {
+                day = value;
+            }
+        }
+    }
 
     private float Timer = 0;
+
+    private string yearstr, monthstr, weekstr, daystr;
     private string LogDate()
     {
-        string yearstr = Localization.ToSettingLanguage("Year");
-        string monthstr = Localization.ToSettingLanguage("Month");
-        string weekstr = Localization.ToSettingLanguage("Week");
-
-        string date = string.Format("{0}{3} {1}{4} {2}{5}", Year, Month, Week, yearstr, monthstr, weekstr);
-        Debug.Log(date);
+        string date = string.Format("{4}：{0}  {5}：{1}  {6}：{2}  {7}：{3}", Year, Month, Week,Day, yearstr, monthstr, weekstr,daystr);
+        //Debug.Log(date);
         return date;
         
     }
 
-    private void AddWeek()
+    private void AddDay(out string date)
     {
-        Week++;
-        LogDate();
+        Day++;
+        date = LogDate();
     }
 
     private void Start()
@@ -81,18 +100,21 @@ public class LevelManager : Singleton<LevelManager>
         year = 1;
         month = 1;
         week = 1;
-        LogDate();
+        day = 1;
+        yearstr = Localization.ToSettingLanguage("Year");
+        monthstr = Localization.ToSettingLanguage("Month");
+        weekstr = Localization.ToSettingLanguage("Week");
+        daystr = Localization.ToSettingLanguage("Day");
     }
 
     private void Update()
     {
-        if (Timer >= 3f)
+        if (Timer >= 1f)
         {
             Timer = 0;
-
-            EventManager.TriggerEvent(ConstEvent.OnOutputResources);
-            EventManager.TriggerEvent(ConstEvent.OnInputResources);
-            AddWeek();
+            string date;
+            AddDay(out date);
+            EventManager.TriggerEvent<string>(ConstEvent.OnDayWentBy, date);
         }
         else
         {

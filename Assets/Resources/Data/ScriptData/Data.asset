@@ -470,3 +470,6 @@ MonoBehaviour:
     - code: Week
       chinese: "\u5468"
       english: Week
+    - code: Day
+      chinese: "\u65E5"
+      english: Day

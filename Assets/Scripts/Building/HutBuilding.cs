@@ -30,7 +30,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     public void Input()
     {
-        Debug.Log(runtimeBuildData.inputResources[0].ItemId);
+        //Debug.Log(runtimeBuildData.inputResources[0].ItemId);
         for (int i = 0; i < runtimeBuildData.inputResources.Count; i++)
         {
             ResourceManager.Instance.TryUseResource(runtimeBuildData.inputResources[i]);
