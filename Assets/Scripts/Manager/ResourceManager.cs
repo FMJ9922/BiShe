@@ -113,7 +113,7 @@ public class ResourceManager : Singleton<ResourceManager>
         float storedNum;
         float num = costResource.ItemNum;
         int Id = costResource.ItemId;
-        Debug.Log(costResource.ItemId + " " + costResource.ItemNum);
+        //Debug.Log(costResource.ItemId + " " + costResource.ItemNum);
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
             if (num <= storedNum)//物品数量足够消耗

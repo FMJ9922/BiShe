@@ -264,7 +264,7 @@ MonoBehaviour:
     - ItemId: 99999
       ItemNum: 280
     Return: 140
-    ProductTime: 48
+    ProductTime: 2
     MaxStorage: 100
     InfluenceRange: 30
     FrontBuildingId: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
     - ItemId: 99999
       ItemNum: 100
     outputResources:
-    - ItemId: 10005
+    - ItemId: 11005
       ItemNum: 20
     people: 30
     BundleName: building.ab
@@ -302,7 +302,7 @@ MonoBehaviour:
     - ItemId: 99999
       ItemNum: 100
     outputResources:
-    - ItemId: 10006
+    - ItemId: 12006
       ItemNum: 10
     people: 20
     BundleName: building.ab
@@ -320,7 +320,7 @@ MonoBehaviour:
     - ItemId: 99999
       ItemNum: 200
     Return: 50
-    ProductTime: 20
+    ProductTime: 2
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
     - ItemId: 99999
       ItemNum: 100
     outputResources:
-    - ItemId: 10003
+    - ItemId: 12003
       ItemNum: 15
     people: 25
     BundleName: building.ab

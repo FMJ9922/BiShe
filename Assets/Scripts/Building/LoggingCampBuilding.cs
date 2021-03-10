@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FarmLandBuilding : BuildingBase
+public class LoggingCampBuilding : BuildingBase
 {
-    
     public override void InitBuildingFunction()
     {
         base.InitBuildingFunction();

@@ -49,7 +49,9 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void InitBuildingFunction()
     {
-        
+        EventManager.StartListening(ConstEvent.OnOutputResources, Output);
+        EventManager.StartListening(ConstEvent.OnInputResources, Input);
+        productTime = runtimeBuildData.ProductTime;
     }
     public void ShowBody()
     {
@@ -85,6 +87,35 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.tabType = buildData.tabType;
         runtimeBuildData.MaxLevel = buildData.MaxLevel;
         return runtimeBuildData;
+    }
+
+    protected int productTime;//生产周期（周）
+
+    protected virtual void OnDestroy()
+    {
+        EventManager.StopListening(ConstEvent.OnOutputResources, Output);
+        EventManager.StopListening(ConstEvent.OnInputResources, Input);
+    }
+
+    protected virtual void Output()
+    {
+        productTime--;
+        if (productTime <= 0)
+        {
+            productTime = runtimeBuildData.ProductTime;
+            for (int i = 0; i < runtimeBuildData.outputResources.Count; i++)
+            {
+                ResourceManager.Instance.AddResource(runtimeBuildData.outputResources[i]);
+            }
+        }
+    }
+
+    protected virtual void Input()
+    {
+        for (int i = 0; i < runtimeBuildData.inputResources.Count; i++)
+        {
+            ResourceManager.Instance.TryUseResource(runtimeBuildData.inputResources[i]);
+        }
     }
 }
 
