@@ -40,11 +40,12 @@ public class ResourceCanvas : CanvasBase
         itemList.Clear();
         Dictionary<int, float> dic = ResourceManager.Instance.GetAllResource();
         int count = 0;
-        foreach(KeyValuePair<int,float> keyValuePair in dic)
+        foreach (KeyValuePair<int, float> keyValuePair in dic)
         {
             InitItemPfb(count, keyValuePair.Key, keyValuePair.Value);
             count++;
         }
+        EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
     }
 
     private void DestroyList()

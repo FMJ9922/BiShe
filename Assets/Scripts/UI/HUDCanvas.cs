@@ -7,6 +7,10 @@ public class HUDCanvas : CanvasBase
 {
     [SerializeField] TMP_Text _date, _money, _log, _stone,_food;
     private string strMoney, strLog, strStone, strFood;
+    private void OnDestroy()
+    {
+        EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
+    }
     public override void InitCanvas()
     {
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, RefreshDate);

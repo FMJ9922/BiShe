@@ -137,13 +137,12 @@ MonoBehaviour:
     RearBuildingId: 0
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     inputResources:
-    - ItemId: 99999
-      ItemNum: 0
     - ItemId: 11002
       ItemNum: 10
     outputResources:
     - ItemId: 10000
       ItemNum: 10
+    people: 0
     BundleName: building.ab
     PfbName: L2_Northhouse011
     tabType: 0
@@ -167,10 +166,9 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 0
-    - ItemId: 11000
       ItemNum: 100
     outputResources: []
+    people: 0
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 101
@@ -194,10 +192,9 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 0
-    - ItemId: 11000
       ItemNum: 100
     outputResources: []
+    people: 0
     BundleName: building.ab
     PfbName: L1_Storehouse001
     tabType: 4
@@ -221,10 +218,9 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 0
-    - ItemId: 11000
       ItemNum: 100
     outputResources: []
+    people: 0
     BundleName: building.ab
     PfbName: L1_Market001
     tabType: 4
@@ -233,14 +229,14 @@ MonoBehaviour:
     Name: Farmland
     Length: 3
     Width: 3
-    Price: 120
+    Price: 1000
     costResources:
     - ItemId: 12003
-      ItemNum: 0
+      ItemNum: 10
     - ItemId: 99999
-      ItemNum: 120
+      ItemNum: 1000
     Return: 60
-    ProductTime: 24
+    ProductTime: 2
     MaxStorage: 100
     InfluenceRange: 5
     FrontBuildingId: 0
@@ -248,12 +244,11 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 5
-    - ItemId: 11000
       ItemNum: 100
     outputResources:
-    - ItemId: 10001
-      ItemNum: 1
+    - ItemId: 11002
+      ItemNum: 8
+    people: 5
     BundleName: building.ab
     PfbName: L1_Fieldedge001
     tabType: 1
@@ -277,12 +272,11 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 30
-    - ItemId: 11000
       ItemNum: 100
     outputResources:
     - ItemId: 10005
       ItemNum: 20
+    people: 30
     BundleName: building.ab
     PfbName: L1_Farm001
     tabType: 1
@@ -306,12 +300,11 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 20
-    - ItemId: 11000
       ItemNum: 100
     outputResources:
     - ItemId: 10006
       ItemNum: 10
+    people: 20
     BundleName: building.ab
     PfbName: L1_Factory001
     tabType: 3
@@ -335,12 +328,11 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
     inputResources:
     - ItemId: 99999
-      ItemNum: 25
-    - ItemId: 11000
       ItemNum: 100
     outputResources:
     - ItemId: 10003
       ItemNum: 15
+    people: 25
     BundleName: building.ab
     PfbName: L1_Sawmill001
     tabType: 2

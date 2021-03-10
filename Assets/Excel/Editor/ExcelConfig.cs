@@ -117,8 +117,8 @@ public class ExcelTool
                    int.Parse(collect[i][14].ToString())));
             }
             buildData.ProductTime = int.Parse(collect[i][13].ToString());
-            buildData.inputResources = new List<CostResource>();
-            buildData.inputResources.Add(new CostResource(99999, int.Parse(collect[i][15].ToString())));
+            
+            buildData.people = int.Parse(collect[i][15].ToString());
             buildData.MaxStorage = int.Parse(collect[i][16].ToString());
             buildData.InfluenceRange = int.Parse(collect[i][17].ToString());
             if (collect[i][18].ToString() != "Null")
@@ -133,6 +133,7 @@ public class ExcelTool
             buildData.PfbName = collect[i][21].ToString();
             buildData.tabType = (BuildTabType)int.Parse(collect[i][22].ToString());
             buildData.Introduce = collect[i][23].ToString();
+            buildData.inputResources = new List<CostResource>();
             buildData.inputResources.Add(new CostResource(int.Parse(collect[i][24].ToString()), int.Parse(collect[i][25].ToString())));
             array[i - 2] = buildData;
         }

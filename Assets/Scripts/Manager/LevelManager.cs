@@ -115,6 +115,7 @@ public class LevelManager : Singleton<LevelManager>
             string date;
             AddDay(out date);
             EventManager.TriggerEvent<string>(ConstEvent.OnDayWentBy, date);
+            EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         }
         else
         {

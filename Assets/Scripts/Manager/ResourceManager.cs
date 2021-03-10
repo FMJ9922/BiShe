@@ -42,7 +42,17 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             _storedItemDic.Add(Id, num);
         }
-        EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
+    }
+    public void AddResource(CostResource costResource)
+    {
+        if (_storedItemDic.ContainsKey(costResource.ItemId))
+        {
+            _storedItemDic[costResource.ItemId] += costResource.ItemNum;
+        }
+        else
+        {
+            _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
+        }
     }
 
     /// <summary>
@@ -59,7 +69,6 @@ public class ResourceManager : Singleton<ResourceManager>
             if (num <= storedNum)//物品数量足够消耗
             {
                 _storedItemDic[Id] -= num;//消耗物品
-                EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
                 return true;//返回成功
             }
             else
@@ -104,13 +113,12 @@ public class ResourceManager : Singleton<ResourceManager>
         float storedNum;
         float num = costResource.ItemNum;
         int Id = costResource.ItemId;
-        //Debug.Log(costResource.ItemId + " " + costResource.ItemNum);
+        Debug.Log(costResource.ItemId + " " + costResource.ItemNum);
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
             if (num <= storedNum)//物品数量足够消耗
             {
                 _storedItemDic[Id] -= num;//消耗物品
-                EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
                 return true;//返回成功
             }
             else

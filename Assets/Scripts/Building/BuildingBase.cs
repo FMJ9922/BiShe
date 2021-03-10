@@ -49,7 +49,7 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void InitBuildingFunction()
     {
-        Debug.Log("1");
+        
     }
     public void ShowBody()
     {

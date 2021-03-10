@@ -20,7 +20,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     public void ProvidePopulation()
     {
-        int num = runtimeBuildData.outputResources[0].ItemNum;
+        int num = runtimeBuildData.people;
         bool success;
         ResourceManager.Instance.AddMaxPopulation(num,out success);
     }

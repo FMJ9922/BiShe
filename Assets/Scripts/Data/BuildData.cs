@@ -18,6 +18,7 @@ public class BuildData
     public string Introduce;//简介
     public List<CostResource> inputResources;//生产需要的物品
     public List<CostResource> outputResources;//产出的物品
+    public int people;//建筑物所需的人口
     public string BundleName;
     public string PfbName;
     public BuildTabType tabType;
