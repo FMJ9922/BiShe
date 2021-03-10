@@ -30,7 +30,7 @@ public class ExcelTool
             ItemData item = new ItemData();
             item.Id = int.Parse(collect[i][0].ToString());
             item.Name = collect[i][1].ToString();
-            item.ProductCycle = int.Parse(collect[i][2].ToString());
+            item.ItemType = int.Parse(collect[i][2].ToString());
             item.Price = int.Parse(collect[i][3].ToString());
             item.BuildingID = int.Parse(collect[i][4].ToString());
             array[i - 2] = item;
@@ -61,6 +61,7 @@ public class ExcelTool
             levelData.log = int.Parse(collect[i][12].ToString());
             levelData.rice = int.Parse(collect[i][13].ToString());
             levelData.money = int.Parse(collect[i][14].ToString());
+            levelData.stone = int.Parse(collect[i][15].ToString());
             array[i - 2] = levelData;
         }
         return array;

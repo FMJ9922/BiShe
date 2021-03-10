@@ -15,57 +15,57 @@ MonoBehaviour:
   ItemArray:
   - Id: 11000
     Name: Food
-    ProductCycle: 1
+    ItemType: 1
     Price: 0
     BuildingID: 0
   - Id: 11001
     Name: Wheat
-    ProductCycle: 1
+    ItemType: 1
     Price: 100
     BuildingID: 0
   - Id: 11002
     Name: Rice
-    ProductCycle: 1
+    ItemType: 1
     Price: 95
     BuildingID: 0
   - Id: 12003
     Name: Log
-    ProductCycle: 2
+    ItemType: 2
     Price: 300
     BuildingID: 0
   - Id: 12004
     Name: Timber
-    ProductCycle: 2
+    ItemType: 2
     Price: 450
     BuildingID: 0
   - Id: 11005
     Name: RawMeat
-    ProductCycle: 1
+    ItemType: 1
     Price: 125
     BuildingID: 0
   - Id: 12006
     Name: Flour
-    ProductCycle: 2
+    ItemType: 2
     Price: 115
     BuildingID: 0
   - Id: 11008
     Name: ProcessedMeat
-    ProductCycle: 1
+    ItemType: 1
     Price: 400
     BuildingID: 0
   - Id: 12009
     Name: Stone
-    ProductCycle: 2
+    ItemType: 2
     Price: 2
     BuildingID: 0
   - Id: 10000
     Name: HumanResource
-    ProductCycle: 0
+    ItemType: 0
     Price: 1000
     BuildingID: 0
   - Id: 99999
     Name: Money
-    ProductCycle: 2
+    ItemType: 2
     Price: 1
     BuildingID: 0
   LevelArray:
@@ -84,6 +84,7 @@ MonoBehaviour:
     log: 999
     rice: 999
     money: 9999
+    stone: 999
   - Id: 30002
     Name: "\u5DE5\u4E1A\u4EA7\u54C1"
     FrontLevelId: 30001
@@ -99,6 +100,7 @@ MonoBehaviour:
     log: 50
     rice: 10
     money: 100
+    stone: 20
   - Id: 30003
     Name: "\u7ED3\u5408\u4EA7\u4E1A"
     FrontLevelId: 30002
@@ -114,6 +116,7 @@ MonoBehaviour:
     log: 50
     rice: 10
     money: 100
+    stone: 20
   TechArray: []
   BuildArray:
   - Id: 20001

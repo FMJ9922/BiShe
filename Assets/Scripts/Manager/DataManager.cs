@@ -23,7 +23,8 @@ public class DataManager : ScriptableObject
     public BuildData[] BuildArray;
     public LocalizationData LocalizationData;
     public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
-
+    public static string[] foodNames;
+    public static int[] foodIds;
 
 
     public void InitTabDic()
@@ -73,6 +74,39 @@ public class DataManager : ScriptableObject
         return string.Empty;
     }
 
+    public static string[] GetFoodNameList()
+    {
+        if (foodNames == null)
+        {
+            List<string> list = new List<string>();
+            for (int i = 0; i < Instance.ItemArray.Length; i++)
+            {
+                if (Instance.ItemArray[i].ItemType == (int)ItemType.food)
+                {
+                    list.Add(Instance.ItemArray[i].Name);
+                }
+            }
+            foodNames = list.ToArray();
+        }
+        return foodNames;
+    }
+
+    public static int[] GetFoodIDList()
+    {
+        if (foodIds == null)
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i < Instance.ItemArray.Length; i++)
+            {
+                if (Instance.ItemArray[i].ItemType == (int)ItemType.food)
+                {
+                    list.Add(Instance.ItemArray[i].Id);
+                }
+            }
+            foodIds = list.ToArray();
+        }
+        return foodIds;
+    }
     public static int GetItemIdByName(string name)
     {
         for (int i = 0; i < Instance.ItemArray.Length; i++)

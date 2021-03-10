@@ -16,4 +16,5 @@ public class LevelData
     public int log;
     public int rice;
     public int money;
+    public int stone;
 }

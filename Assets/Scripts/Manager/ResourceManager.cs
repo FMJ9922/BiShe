@@ -24,6 +24,7 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Log"), data.log);
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
         AddResource(DataManager.GetItemIdByName("Money"), data.money);
+        AddResource(DataManager.GetItemIdByName("Stone"), data.stone);
     }
 
     /// <summary>
@@ -83,6 +84,20 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             return 0;
         }
+    }
+
+    public float TryGetResourceTotalNum(int[] Ids)
+    {
+        float storedNum =0;
+        for (int i = 0; i < Ids.Length; i++)
+        {
+            float num;
+            if (_storedItemDic.TryGetValue(Ids[i], out num))//字典里已存该物品
+            {
+                storedNum += num;
+            }
+        }
+        return storedNum;
     }
     public bool TryUseResource(CostResource costResource)
     {
