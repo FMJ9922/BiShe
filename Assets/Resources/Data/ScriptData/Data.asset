@@ -68,6 +68,11 @@ MonoBehaviour:
     ItemType: 2
     Price: 1
     BuildingID: 0
+  - Id: 11010
+    Name: Sausage
+    ItemType: 1
+    Price: 1000
+    BuildingID: 0
   LevelArray:
   - Id: 30001
     Name: "\u519C\u4EA7\u54C1"
@@ -121,222 +126,231 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: Hut
+    CostPerWeek: 0
+    Formulas: 5ac30000
+    People: -10
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 5
     Width: 3
     Price: 100
     costResources:
     - ItemId: 12003
       ItemNum: 10
-    - ItemId: 99999
-      ItemNum: 100
-    Return: 50
-    ProductTime: 0
+    - ItemId: 12009
+      ItemNum: 5
+    BundleName: building.ab
+    PfbName: L2_Northhouse011
+    tabType: 0
+    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+  - Id: 20002
+    Name: MudRoad
+    CostPerWeek: 0
+    Formulas: 
+    People: 0
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 0
-    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
-    inputResources:
-    - ItemId: 11002
-      ItemNum: 10
-    outputResources:
-    - ItemId: 10000
-      ItemNum: 10
-    people: 0
-    BundleName: building.ab
-    PfbName: L2_Northhouse011
-    tabType: 0
-    MaxLevel: 0
-  - Id: 20002
-    Name: MudRoad
     Length: 3
     Width: 3
     Price: 30
     costResources:
     - ItemId: 12003
       ItemNum: 1
-    - ItemId: 99999
-      ItemNum: 30
-    Return: 15
-    ProductTime: 0
-    MaxStorage: 100
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources: []
-    people: 0
+    - ItemId: 12009
+      ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 101
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20003
     Name: Warehouse
+    CostPerWeek: 20
+    Formulas: 
+    People: 0
+    MaxStorage: 100
+    InfluenceRange: 50
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 5
     Width: 11
     Price: 300
     costResources:
     - ItemId: 12003
       ItemNum: 30
-    - ItemId: 99999
-      ItemNum: 300
-    Return: 150
-    ProductTime: 0
-    MaxStorage: 100
-    InfluenceRange: 50
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources: []
-    people: 0
+    - ItemId: 12009
+      ItemNum: 35
     BundleName: building.ab
     PfbName: L1_Storehouse001
     tabType: 4
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20004
     Name: Market
+    CostPerWeek: 20
+    Formulas: 
+    People: 0
+    MaxStorage: 100
+    InfluenceRange: 200
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 12
     Width: 14
     Price: 500
     costResources:
     - ItemId: 12003
       ItemNum: 80
-    - ItemId: 99999
-      ItemNum: 500
-    Return: 250
-    ProductTime: 0
-    MaxStorage: 100
-    InfluenceRange: 200
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources: []
-    people: 0
+    - ItemId: 12009
+      ItemNum: 60
     BundleName: building.ab
     PfbName: L1_Market001
     tabType: 4
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20005
     Name: Farmland
+    CostPerWeek: 20
+    Formulas: 56c3000057c30000
+    People: 5
+    MaxStorage: 100
+    InfluenceRange: 5
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 3
     Width: 3
     Price: 1000
     costResources:
     - ItemId: 12003
-      ItemNum: 10
-    - ItemId: 99999
-      ItemNum: 1000
-    Return: 60
-    ProductTime: 2
-    MaxStorage: 100
-    InfluenceRange: 5
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources:
-    - ItemId: 11002
-      ItemNum: 8
-    people: 5
+      ItemNum: 5
     BundleName: building.ab
     PfbName: L1_Fieldedge001
     tabType: 1
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20006
     Name: LivestockFarm
+    CostPerWeek: 15
+    Formulas: 51c3000052c30000
+    People: 30
+    MaxStorage: 100
+    InfluenceRange: 30
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 14
     Width: 20
     Price: 280
     costResources:
     - ItemId: 12003
       ItemNum: 50
-    - ItemId: 99999
-      ItemNum: 280
-    Return: 140
-    ProductTime: 2
-    MaxStorage: 100
-    InfluenceRange: 30
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources:
-    - ItemId: 11005
-      ItemNum: 20
-    people: 30
+    - ItemId: 12009
+      ItemNum: 30
     BundleName: building.ab
     PfbName: L1_Farm001
     tabType: 1
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20007
     Name: Factory
+    CostPerWeek: 30
+    Formulas: 53c3000054c3000055c3000058c30000
+    People: 20
+    MaxStorage: 100
+    InfluenceRange: 45
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 4
     Width: 6
     Price: 400
     costResources:
     - ItemId: 12003
       ItemNum: 70
-    - ItemId: 99999
-      ItemNum: 400
-    Return: 200
-    ProductTime: 2
-    MaxStorage: 100
-    InfluenceRange: 45
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources:
-    - ItemId: 12006
-      ItemNum: 10
-    people: 20
+    - ItemId: 12009
+      ItemNum: 80
     BundleName: building.ab
     PfbName: L1_Factory001
     tabType: 3
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   - Id: 20008
     Name: LoggingCamps
+    CostPerWeek: 10
+    Formulas: 59c30000
+    People: 25
+    MaxStorage: 100
+    InfluenceRange: 60
+    FrontBuildingId: 0
+    RearBuildingId: 0
     Length: 7
     Width: 8
     Price: 200
     costResources:
     - ItemId: 12003
       ItemNum: 45
-    - ItemId: 99999
-      ItemNum: 200
-    Return: 50
-    ProductTime: 2
-    MaxStorage: 100
-    InfluenceRange: 60
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-    inputResources:
-    - ItemId: 99999
-      ItemNum: 100
-    outputResources:
-    - ItemId: 12003
-      ItemNum: 15
-    people: 25
+    - ItemId: 12009
+      ItemNum: 20
     BundleName: building.ab
     PfbName: L1_Sawmill001
     tabType: 2
-    MaxLevel: 0
+    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+  FormulaArray:
+  - ID: 50001
+    InputItemID: f92a0000
+    InputNum: 05000000
+    OutputItemID: fd2a0000
+    ProductNum: 14000000
+    ProductTime: 3
+  - ID: 50002
+    InputItemID: fa2a0000
+    InputNum: 03000000
+    OutputItemID: fd2a0000
+    ProductNum: 14000000
+    ProductTime: 3
+  - ID: 50003
+    InputItemID: f92a0000
+    InputNum: 0a000000
+    OutputItemID: e62e0000
+    ProductNum: 08000000
+    ProductTime: 3
+  - ID: 50004
+    InputItemID: e32e0000
+    InputNum: 0c000000
+    OutputItemID: e42e0000
+    ProductNum: 09000000
+    ProductTime: 4
+  - ID: 50005
+    InputItemID: fd2a0000
+    InputNum: 0c000000
+    OutputItemID: 002b0000
+    ProductNum: 09000000
+    ProductTime: 4
+  - ID: 50006
+    InputItemID: 
+    InputNum: 
+    OutputItemID: f92a0000
+    ProductNum: 0a000000
+    ProductTime: 2
+  - ID: 50007
+    InputItemID: 
+    InputNum: 
+    OutputItemID: fa2a0000
+    ProductNum: 0c000000
+    ProductTime: 2
+  - ID: 50008
+    InputItemID: f92a0000fd2a0000
+    InputNum: 0a00000005000000
+    OutputItemID: 022b0000
+    ProductNum: 0d000000
+    ProductTime: 1
+  - ID: 50009
+    InputItemID: 
+    InputNum: 
+    OutputItemID: e32e0000
+    ProductNum: 14000000
+    ProductTime: 1
+  - ID: 50010
+    InputItemID: 
+    InputNum: 
+    OutputItemID: 10270000
+    ProductNum: 0a000000
+    ProductTime: 0
   LocalizationData:
     combines:
     - code: Log

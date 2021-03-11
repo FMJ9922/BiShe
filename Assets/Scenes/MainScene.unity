@@ -5206,75 +5206,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099304655}
   m_CullTransparentMesh: 0
---- !u!1001 &1108958856
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 327
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 327
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 447308322606216528, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6183460383382426360, guid: 2046d63e596cf6f4cbd9da0679399249,
-        type: 3}
-      propertyPath: m_Name
-      value: L2_Northhouse011
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2046d63e596cf6f4cbd9da0679399249, type: 3}
 --- !u!1 &1109650009
 GameObject:
   m_ObjectHideFlags: 0
@@ -9364,6 +9295,7 @@ MonoBehaviour:
     Introduce: 
     inputResources: []
     outputResources: []
+    people: 0
     BundleName: 
     PfbName: 
     tabType: 0

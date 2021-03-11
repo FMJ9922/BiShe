@@ -67,6 +67,25 @@ public class ExcelTool
         return array;
     }
 
+    public static FormulaData[] CreateFormulaArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        FormulaData[] array = new FormulaData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            FormulaData formulaData = new FormulaData();
+            formulaData.ID = int.Parse(collect[i][0].ToString());
+            formulaData.InputItemID = StringToIntList(collect[i][2].ToString());
+            formulaData.InputNum = StringToIntList(collect[i][3].ToString());
+            formulaData.OutputItemID = StringToIntList(collect[i][4].ToString());
+            formulaData.ProductNum = StringToIntList(collect[i][5].ToString());
+            formulaData.ProductTime = int.Parse(collect[i][6].ToString());
+            array[i - 2] = formulaData;
+        }
+        return array;
+    }
+
     public static TechData[] CreateTechArrayWithExcel(string filePath)
     {
         int columnNum = 0, rowNum = 0;
@@ -94,47 +113,33 @@ public class ExcelTool
             BuildData buildData = new BuildData();
             buildData.Id = int.Parse(collect[i][0].ToString());
             buildData.Name = collect[i][1].ToString();
-            buildData.Length = int.Parse(collect[i][2].ToString());
-            buildData.Width = int.Parse(collect[i][3].ToString());
-            buildData.Price = int.Parse(collect[i][4].ToString());
+            buildData.CostPerWeek = int.Parse(collect[i][3].ToString());
+            buildData.Formulas = StringToIntList(collect[i][4].ToString());
+            buildData.People = int.Parse(collect[i][5].ToString());
+            buildData.MaxStorage = int.Parse(collect[i][6].ToString());
+            buildData.InfluenceRange = int.Parse(collect[i][7].ToString());
+            if (collect[i][8].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][8].ToString());
+            }
+            if (collect[i][9].ToString() != "Null")
+            {
+                buildData.FrontBuildingId = int.Parse(collect[i][9].ToString());
+            }
+            buildData.Length = int.Parse(collect[i][10].ToString());
+            buildData.Width = int.Parse(collect[i][11].ToString());
+            buildData.Price = int.Parse(collect[i][12].ToString());
             buildData.costResources = new List<CostResource>();
-            for (int j = 5; j <= 9; j += 2)
+            List<int> ItemIDs = StringToIntList(collect[i][13].ToString());
+            List<int> Nums = StringToIntList(collect[i][14].ToString());
+            for (int j = 0; j < ItemIDs.Count; j++)
             {
-                if (collect[i][j].ToString() != "Null")
-                {
-                    buildData.costResources.Add(new CostResource(
-                        int.Parse(collect[i][j].ToString()),
-                        int.Parse(collect[i][j + 1].ToString()))
-                        );
-                }
+                buildData.costResources.Add(new CostResource(ItemIDs[j],Nums[j]));
             }
-            buildData.costResources.Add(new CostResource(99999, buildData.Price));
-            buildData.Return = int.Parse(collect[i][11].ToString());
-            buildData.outputResources = new List<CostResource>();
-            if (collect[i][12].ToString() != "Null")
-            {
-                buildData.outputResources.Add(new CostResource(int.Parse(collect[i][12].ToString()),
-                   int.Parse(collect[i][14].ToString())));
-            }
-            buildData.ProductTime = int.Parse(collect[i][13].ToString());
-            
-            buildData.people = int.Parse(collect[i][15].ToString());
-            buildData.MaxStorage = int.Parse(collect[i][16].ToString());
-            buildData.InfluenceRange = int.Parse(collect[i][17].ToString());
-            if (collect[i][18].ToString() != "Null")
-            {
-                buildData.FrontBuildingId = int.Parse(collect[i][18].ToString());
-            }
-            if (collect[i][19].ToString() != "Null")
-            {
-                buildData.FrontBuildingId = int.Parse(collect[i][19].ToString());
-            }
-            buildData.BundleName = collect[i][20].ToString();
-            buildData.PfbName = collect[i][21].ToString();
-            buildData.tabType = (BuildTabType)int.Parse(collect[i][22].ToString());
-            buildData.Introduce = collect[i][23].ToString();
-            buildData.inputResources = new List<CostResource>();
-            buildData.inputResources.Add(new CostResource(int.Parse(collect[i][24].ToString()), int.Parse(collect[i][25].ToString())));
+            buildData.BundleName = collect[i][15].ToString();
+            buildData.PfbName = collect[i][16].ToString();
+            buildData.tabType = (BuildTabType)int.Parse(collect[i][17].ToString());
+            buildData.Introduce = collect[i][18].ToString();
             array[i - 2] = buildData;
         }
         return array;
@@ -144,8 +149,8 @@ public class ExcelTool
     {
         int columnNum = 0, rowNum = 0;
         DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
-        LocalizationData data= new LocalizationData();
-        LocalizationCombine[] combines = new LocalizationCombine[rowNum-1];
+        LocalizationData data = new LocalizationData();
+        LocalizationCombine[] combines = new LocalizationCombine[rowNum - 1];
         for (int i = 1; i < rowNum; i++)
         {
             combines[i - 1] = new LocalizationCombine(collect[i][0].ToString(),
@@ -164,5 +169,20 @@ public class ExcelTool
         columnNum = result.Tables[0].Columns.Count;
         rowNum = result.Tables[0].Rows.Count;
         return result.Tables[0].Rows;
+    }
+
+    public static List<int> StringToIntList(string str)
+    {
+        List<int> list = new List<int>();
+        if (str == "Null")
+        {
+            return list;
+        }
+        string[] array = str.Split(',');
+        for (int i = 0; i < array.Length; i++)
+        {
+            list.Add(int.Parse(array[i]));
+        }
+        return list;
     }
 }

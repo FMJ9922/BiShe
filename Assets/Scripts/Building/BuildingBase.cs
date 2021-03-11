@@ -29,6 +29,8 @@ public class BuildingBase : MonoBehaviour
     public RuntimeBuildData runtimeBuildData;
 
     public bool buildFlag = false;
+
+    protected FormulaData formula = new FormulaData();
      
     public virtual void OnConfirmBuild()
     {
@@ -51,7 +53,8 @@ public class BuildingBase : MonoBehaviour
     {
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
-        productTime = runtimeBuildData.ProductTime;
+        formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+        productTime = formula.ProductTime;
     }
     public void ShowBody()
     {
@@ -73,19 +76,20 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.Width = buildData.Width;
         runtimeBuildData.Price = buildData.Price;
         runtimeBuildData.costResources = buildData.costResources;
-        runtimeBuildData.Return = buildData.Return;
-        runtimeBuildData.ProductTime = buildData.ProductTime;
         runtimeBuildData.MaxStorage = buildData.MaxStorage;
         runtimeBuildData.InfluenceRange = buildData.InfluenceRange;
         runtimeBuildData.FrontBuildingId = buildData.FrontBuildingId;
         runtimeBuildData.RearBuildingId = buildData.RearBuildingId;
         runtimeBuildData.Introduce = buildData.Introduce;
-        runtimeBuildData.inputResources = buildData.inputResources;
-        runtimeBuildData.outputResources = buildData.outputResources;
         runtimeBuildData.BundleName = buildData.BundleName;
         runtimeBuildData.PfbName = buildData.PfbName;
         runtimeBuildData.tabType = buildData.tabType;
-        runtimeBuildData.MaxLevel = buildData.MaxLevel;
+        runtimeBuildData.formulaDatas = new FormulaData[buildData.Formulas.Count];
+        for (int i = 0; i < buildData.Formulas.Count; i++)
+        {
+            runtimeBuildData.formulaDatas[i] = DataManager.GetFormulaById(buildData.Formulas[i]);
+        }
+        runtimeBuildData.CurFormula = 0;
         return runtimeBuildData;
     }
 
@@ -102,19 +106,19 @@ public class BuildingBase : MonoBehaviour
         productTime--;
         if (productTime <= 0)
         {
-            productTime = runtimeBuildData.ProductTime;
-            for (int i = 0; i < runtimeBuildData.outputResources.Count; i++)
+            productTime = formula.ProductTime;
+            for (int i = 0; i < formula.OutputItemID.Count; i++)
             {
-                ResourceManager.Instance.AddResource(runtimeBuildData.outputResources[i]);
+                ResourceManager.Instance.AddResource(formula.OutputItemID[i],formula.ProductNum[i]);
             }
         }
     }
 
     protected virtual void Input()
     {
-        for (int i = 0; i < runtimeBuildData.inputResources.Count; i++)
+        for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            ResourceManager.Instance.TryUseResource(runtimeBuildData.inputResources[i]);
+            ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);
         }
     }
 }
@@ -123,4 +127,6 @@ public class RuntimeBuildData : BuildData
 {
     public bool Pause = true;//是否暂停生产
     public int CurLevel = 0;//当前等级
+    public int CurFormula;//当前配方
+    public FormulaData[] formulaDatas;//当前建筑的配方们
 }

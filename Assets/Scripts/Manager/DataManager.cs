@@ -21,6 +21,7 @@ public class DataManager : ScriptableObject
     public LevelData[] LevelArray;
     public TechData[] TechArray;
     public BuildData[] BuildArray;
+    public FormulaData[] FormulaArray;
     public LocalizationData LocalizationData;
     public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
     public static string[] foodNames;
@@ -74,6 +75,18 @@ public class DataManager : ScriptableObject
         return string.Empty;
     }
 
+    public static FormulaData GetFormulaById(int ID)
+    {
+        for (int i = 0; i < Instance.FormulaArray.Length; i++)
+        {
+            if (Instance.FormulaArray[i].ID == ID)
+            {
+                return Instance.FormulaArray[i];
+            }
+        }
+        Debug.Log("无效的物品ID" + ID);
+        return null;
+    }
     public static string[] GetFoodNameList()
     {
         if (foodNames == null)

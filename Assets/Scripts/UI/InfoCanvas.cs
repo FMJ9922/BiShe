@@ -55,7 +55,7 @@ public class InfoCanvas : CanvasBase
                     _effectiveObj.SetActive(true);
                     _introduceObj.SetActive(true);
                     _pauseBtn.gameObject.SetActive(true);
-                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < buildData.MaxLevel);
+                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
 
                 }
@@ -67,7 +67,7 @@ public class InfoCanvas : CanvasBase
                     _effectiveObj.SetActive(false);
                     _introduceObj.SetActive(true);
                     _pauseBtn.gameObject.SetActive(false);
-                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < buildData.MaxLevel);
+                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
                 }
 
@@ -93,28 +93,29 @@ public class InfoCanvas : CanvasBase
     private void ChangeLabels(RuntimeBuildData buildData)
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
+        FormulaData formula = buildData.formulaDatas[buildData.CurFormula];
         string input = string.Empty;
-        for (int i = 0; i < buildData.inputResources.Count; i++)
+        for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            if (buildData.inputResources[i].ItemNum == 0)
+            if (formula.InputNum[i] == 0)
             {
                 continue;
             }
-            input += buildData.inputResources[i].ItemNum + " " +
+            input += formula.InputNum[i] + " " +
                 Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(buildData.inputResources[i].ItemId));
+                    DataManager.GetItemNameById(formula.InputItemID[i]));
         }
         _inputsLabel.text = input;
         string output = string.Empty;
-        for (int i = 0; i < buildData.outputResources.Count; i++)
+        for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
-            if (buildData.outputResources[i].ItemNum == 0)
+            if (formula.ProductNum[i] == 0)
             {
                 continue;
             }
-            output += buildData.outputResources[i].ItemNum + " " +
+            output += formula.ProductNum[i] + " " +
                 Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(buildData.outputResources[i].ItemId));
+                    DataManager.GetItemNameById(formula.OutputItemID[i]));
         }
         _outputsLabel.text = output;
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);

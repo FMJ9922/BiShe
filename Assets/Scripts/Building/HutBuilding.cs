@@ -13,6 +13,8 @@ public class HutBuilding : BuildingBase
         Debug.Log("2");
         ProvidePopulation();
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
+        formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+        productTime = formula.ProductTime;
     }
 
     /// <summary>
@@ -20,22 +22,12 @@ public class HutBuilding : BuildingBase
     /// </summary>
     public void ProvidePopulation()
     {
-        int num = runtimeBuildData.people;
+        int num = runtimeBuildData.People;
         bool success;
         ResourceManager.Instance.AddMaxPopulation(num,out success);
     }
 
-    /// <summary>
-    /// 每周输入资源
-    /// </summary>
-    public void Input()
-    {
-        //Debug.Log(runtimeBuildData.inputResources[0].ItemId);
-        for (int i = 0; i < runtimeBuildData.inputResources.Count; i++)
-        {
-            ResourceManager.Instance.TryUseResource(runtimeBuildData.inputResources[i]);
-        }
-    }
+    
     //public override string GetIntroduce()
     //{
     //    return string.Empty;

@@ -17,7 +17,7 @@ public class ExcelBuild : Editor
         manager.LevelArray = ExcelTool.CreateLevelArrayWithExcel(ExcelConfig.excelsFolderPath + "Levels.xlsx");
         //manager.TechArray = ExcelTool.CreateTechArrayWithExcel(ExcelConfig.excelsFolderPath + "Tech.xlsx");
         manager.LocalizationData = ExcelTool.CreateLocalizationDataWithExcel(ExcelConfig.excelsFolderPath + "Localization.xlsx");
-        
+        manager.FormulaArray = ExcelTool.CreateFormulaArrayWithExcel(ExcelConfig.excelsFolderPath + "Formula.xlsx");
         //确保文件夹存在
         if (!Directory.Exists(ExcelConfig.assetPath))
         {
