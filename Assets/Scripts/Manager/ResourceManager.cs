@@ -138,28 +138,30 @@ public class ResourceManager : Singleton<ResourceManager>
         return _storedItemDic;
     }
 
-    public void AddMaxPopulation(int num,out bool success)
+    public bool AddMaxPopulation(int num)
     {
         maxPopulation += num;
         if (maxPopulation >= 0 && maxPopulation <= 200)
         {
-            success = true;
-            return;
+            return true;
         }
         maxPopulation = Mathf.Clamp(maxPopulation, 0, 200);
-        success = false;
+        Debug.Log("人口操作可能有问题，请检查");
+        return false;
     }
 
-    public void AddCurPopulation(int num, out bool success)
+    public bool AddCurPopulation(int num)
     {
         curPopulation += num;
         if (curPopulation >= 0 && curPopulation <= maxPopulation)
         {
-            success = true;
-            return;
+            return true;
         }
-        curPopulation = Mathf.Clamp(curPopulation, 0, maxPopulation);
-        success = false;
+        else
+        {
+            curPopulation -= num;
+            return false;
+        }
     }
 }
 

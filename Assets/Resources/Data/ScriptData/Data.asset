@@ -346,11 +346,11 @@ MonoBehaviour:
     ProductNum: 14000000
     ProductTime: 1
   - ID: 50010
-    InputItemID: 
-    InputNum: 
-    OutputItemID: 10270000
-    ProductNum: 0a000000
-    ProductTime: 0
+    InputItemID: f92a0000fa2a0000
+    InputNum: 0a000000
+    OutputItemID: 
+    ProductNum: 
+    ProductTime: 1
   LocalizationData:
     combines:
     - code: Log

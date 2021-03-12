@@ -97,13 +97,20 @@ public class InfoCanvas : CanvasBase
         string input = string.Empty;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            if (formula.InputNum[i] == 0)
+            //如果是民房
+            if (formula.InputNum.Count - 1 < i)
             {
-                continue;
-            }
-            input += formula.InputNum[i] + " " +
+                input +="/" +
                 Localization.ToSettingLanguage(
                     DataManager.GetItemNameById(formula.InputItemID[i]));
+            }
+            else
+            if (formula.InputNum[i] != 0)
+            {
+                input += formula.InputNum[i] + " " +
+                Localization.ToSettingLanguage(
+                    DataManager.GetItemNameById(formula.InputItemID[i]));
+            }
         }
         _inputsLabel.text = input;
         string output = string.Empty;

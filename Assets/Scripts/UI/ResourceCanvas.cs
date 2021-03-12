@@ -22,14 +22,14 @@ public class ResourceCanvas : CanvasBase
     public override void OnOpen()
     {
         CreateItemList();
-        EventManager.StartListening(ConstEvent.OnOutputResources, CreateItemList);
+        EventManager.StartListening(ConstEvent.OnInputResources, CreateItemList);
         mainCanvas.SetActive(true);
     }
 
     public override void OnClose()
     {
         DestroyList();
-        EventManager.StopListening(ConstEvent.OnOutputResources, CreateItemList);
+        EventManager.StopListening(ConstEvent.OnInputResources, CreateItemList);
         mainCanvas.SetActive(false);
     }
     #endregion
@@ -62,7 +62,14 @@ public class ResourceCanvas : CanvasBase
         item.GetComponentInChildren<Image>().color = place % 2 == 1 ? evenColor : oddColor;
         TMP_Text[] texts = item.GetComponentsInChildren<TMP_Text>();
         texts[0].text = Localization.ToSettingLanguage(item.name);
-        texts[1].text = string.Format("{0:F}", itemNum);
+        if (Mathf.Approximately(itemNum, Mathf.Round(itemNum)))
+        {
+            texts[1].text = string.Format("{0}", Mathf.Round(itemNum));
+        }
+        else
+        {
+            texts[1].text = string.Format("{0:F}", itemNum);
+        }
         itemList.Add(item);
     }
 }

@@ -128,5 +128,5 @@ public class RuntimeBuildData : BuildData
     public bool Pause = true;//是否暂停生产
     public int CurLevel = 0;//当前等级
     public int CurFormula;//当前配方
-    public FormulaData[] formulaDatas;//当前建筑的配方们
+    public FormulaData[] formulaDatas;//当前建筑可用的配方们
 }
