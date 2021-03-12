@@ -7,7 +7,7 @@ public class BuildData
     public string Name;//名称
     public int CostPerWeek;//维护费用
     public List<int> Formulas;//生产可用配方
-    public int People;//建筑物所需的人口(负表示产出)
+    public int Population;//建筑物所需的人口(负表示产出)
     public int MaxStorage;//存储上限
     public int InfluenceRange;//影响范围
     public int FrontBuildingId;//前置建筑Id

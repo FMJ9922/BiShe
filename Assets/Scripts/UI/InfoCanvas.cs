@@ -10,9 +10,10 @@ public class InfoCanvas : CanvasBase
     [SerializeField] GameObject _outputsObj;//输出
     [SerializeField] GameObject _effectiveObj;//效率
     [SerializeField] GameObject _introduceObj;//简介说明
+    [SerializeField] GameObject _populationObj;//人口
     [SerializeField] Button _pauseBtn;//暂停生产
     [SerializeField] Button _upgradeBtn;//升级
-    [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel;
+    [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
     [SerializeField] private GameObject mainCanvas;
     public override void InitCanvas()
     {
@@ -21,20 +22,24 @@ public class InfoCanvas : CanvasBase
     }
     public override void OnOpen()
     {
+        
     }
     public void OnOpen(RuntimeBuildData buildData)
     {
         ChangeShowItems(buildData);
         ChangeLabels(buildData);
         mainCanvas.SetActive(true);
+        EventManager.StartListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange,ChangeLabels);
     }
 
     public override void OnClose()
     {
+        EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
         mainCanvas.SetActive(false);
     }
     private void OnDestroy()
     {
+        EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
         EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
 
@@ -54,6 +59,7 @@ public class InfoCanvas : CanvasBase
                     _outputsObj.SetActive(true);
                     _effectiveObj.SetActive(true);
                     _introduceObj.SetActive(true);
+                    _populationObj.SetActive(true);
                     _pauseBtn.gameObject.SetActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
@@ -63,9 +69,10 @@ public class InfoCanvas : CanvasBase
             case BuildTabType.house:
                 {
                     _inputsObj.SetActive(true);
-                    _outputsObj.SetActive(true);
+                    _outputsObj.SetActive(false);
                     _effectiveObj.SetActive(false);
                     _introduceObj.SetActive(true);
+                    _populationObj.SetActive(true);
                     _pauseBtn.gameObject.SetActive(false);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
@@ -95,14 +102,16 @@ public class InfoCanvas : CanvasBase
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
         FormulaData formula = buildData.formulaDatas[buildData.CurFormula];
         string input = string.Empty;
+        int count = 0;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             //如果是民房
             if (formula.InputNum.Count - 1 < i)
             {
-                input +="/" +
+                input += " 或 " +
                 Localization.ToSettingLanguage(
                     DataManager.GetItemNameById(formula.InputItemID[i]));
+                count++;
             }
             else
             if (formula.InputNum[i] != 0)
@@ -110,7 +119,12 @@ public class InfoCanvas : CanvasBase
                 input += formula.InputNum[i] + " " +
                 Localization.ToSettingLanguage(
                     DataManager.GetItemNameById(formula.InputItemID[i]));
+                count++;
             }
+        }
+        if(count == 0)
+        {
+            _inputsObj.SetActive(false);
         }
         _inputsLabel.text = input;
         string output = string.Empty;
@@ -125,6 +139,8 @@ public class InfoCanvas : CanvasBase
                     DataManager.GetItemNameById(formula.OutputItemID[i]));
         }
         _outputsLabel.text = output;
+        _populationLabel.text = Localization.ToSettingLanguage(buildData.Population > 0 ? "Worker" : "Resident") + "：" +
+            buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
     }
 }

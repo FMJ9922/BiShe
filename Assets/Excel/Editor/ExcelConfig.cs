@@ -115,7 +115,7 @@ public class ExcelTool
             buildData.Name = collect[i][1].ToString();
             buildData.CostPerWeek = int.Parse(collect[i][3].ToString());
             buildData.Formulas = StringToIntList(collect[i][4].ToString());
-            buildData.People = int.Parse(collect[i][5].ToString());
+            buildData.Population = int.Parse(collect[i][5].ToString());
             buildData.MaxStorage = int.Parse(collect[i][6].ToString());
             buildData.InfluenceRange = int.Parse(collect[i][7].ToString());
             if (collect[i][8].ToString() != "Null")

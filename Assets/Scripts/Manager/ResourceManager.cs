@@ -14,6 +14,8 @@ public class ResourceManager : Singleton<ResourceManager>
 
     private int curPopulation = 0;
     private int maxPopulation = 0;
+    public int MaxPopulation { get { return maxPopulation; } }
+    public int CurPopulation { get { return curPopulation; } }
 
     /// <summary>
     /// 初始化关卡资源
@@ -97,7 +99,7 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public float TryGetResourceTotalNum(int[] Ids)
     {
-        float storedNum =0;
+        float storedNum = 0;
         for (int i = 0; i < Ids.Length; i++)
         {
             float num;
@@ -138,11 +140,17 @@ public class ResourceManager : Singleton<ResourceManager>
         return _storedItemDic;
     }
 
+    /// <summary>
+    /// 增大人口上限
+    /// </summary>
+    /// <param name="num"></param>
+    /// <returns></returns>
     public bool AddMaxPopulation(int num)
     {
         maxPopulation += num;
         if (maxPopulation >= 0 && maxPopulation <= 200)
         {
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             return true;
         }
         maxPopulation = Mathf.Clamp(maxPopulation, 0, 200);
@@ -150,17 +158,30 @@ public class ResourceManager : Singleton<ResourceManager>
         return false;
     }
 
-    public bool AddCurPopulation(int num)
+    /// <summary>
+    /// 占用人口
+    /// </summary>
+    /// <param name="num">申请的人口数量</param>
+    /// <returns>实际提供下来的人口数量</returns>
+    public int TryAddCurPopulation(int num)
     {
         curPopulation += num;
-        if (curPopulation >= 0 && curPopulation <= maxPopulation)
+        if (curPopulation <= 0)
         {
-            return true;
+            Debug.Log("人口操作可能有问题，请检查");
+        }
+        if (curPopulation <= maxPopulation)
+        {
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            return num;
         }
         else
         {
             curPopulation -= num;
-            return false;
+            int maxProvide = maxPopulation - curPopulation;
+            curPopulation += maxProvide;
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            return maxProvide;
         }
     }
 }

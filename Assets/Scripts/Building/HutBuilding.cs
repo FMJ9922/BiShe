@@ -47,8 +47,10 @@ public class HutBuilding : BuildingBase
     /// </summary>
     public void ProvidePopulation()
     {
-        int num = -runtimeBuildData.People;//负人口表示增加
+        int num = -runtimeBuildData.Population;//负人口表示增加
         hasProvidePopulation = ResourceManager.Instance.AddMaxPopulation(num);
+        runtimeBuildData.CurPeople = num;
+        EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange,runtimeBuildData);
     }
 
     /// <summary>
@@ -56,8 +58,11 @@ public class HutBuilding : BuildingBase
     /// </summary>
     public void RemovePopulation()
     {
-        int num = -runtimeBuildData.People;//负人口表示增加
+        int num = -runtimeBuildData.Population;//负人口表示增加
         hasProvidePopulation = !ResourceManager.Instance.AddMaxPopulation(-num);
+        //todo:表现出饥饿
+        runtimeBuildData.CurPeople = num;
+        EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, runtimeBuildData);
     }
     
     //public override string GetIntroduce()

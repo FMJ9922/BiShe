@@ -128,7 +128,7 @@ MonoBehaviour:
     Name: Hut
     CostPerWeek: 0
     Formulas: 5ac30000
-    People: -10
+    Population: -10
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
     Name: MudRoad
     CostPerWeek: 0
     Formulas: 
-    People: 0
+    Population: 0
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
     Name: Warehouse
     CostPerWeek: 20
     Formulas: 
-    People: 0
+    Population: 0
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
     Name: Market
     CostPerWeek: 20
     Formulas: 
-    People: 0
+    Population: 0
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
     Name: Farmland
     CostPerWeek: 20
     Formulas: 56c3000057c30000
-    People: 5
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 5
     FrontBuildingId: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
     Name: LivestockFarm
     CostPerWeek: 15
     Formulas: 51c3000052c30000
-    People: 30
+    Population: 30
     MaxStorage: 100
     InfluenceRange: 30
     FrontBuildingId: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
     Name: Factory
     CostPerWeek: 30
     Formulas: 53c3000054c3000055c3000058c30000
-    People: 20
+    Population: 20
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
     Name: LoggingCamps
     CostPerWeek: 10
     Formulas: 59c30000
-    People: 25
+    Population: 25
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
@@ -482,3 +482,12 @@ MonoBehaviour:
     - code: Day
       chinese: "\u65E5"
       english: Day
+    - code: Worker
+      chinese: "\u5DE5\u4EBA"
+      english: Worker
+    - code: Resident
+      chinese: "\u5C45\u6C11"
+      english: Resident
+    - code: Population
+      chinese: "\u4EBA\u53E3"
+      english: Population

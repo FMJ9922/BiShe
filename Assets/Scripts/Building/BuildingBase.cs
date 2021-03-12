@@ -55,6 +55,10 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         productTime = formula.ProductTime;
+        if (runtimeBuildData.Population > 0)
+        {
+            runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population);
+        }
     }
     public void ShowBody()
     {
@@ -84,6 +88,7 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.BundleName = buildData.BundleName;
         runtimeBuildData.PfbName = buildData.PfbName;
         runtimeBuildData.tabType = buildData.tabType;
+        runtimeBuildData.Population = buildData.Population;
         runtimeBuildData.formulaDatas = new FormulaData[buildData.Formulas.Count];
         for (int i = 0; i < buildData.Formulas.Count; i++)
         {
@@ -129,4 +134,5 @@ public class RuntimeBuildData : BuildData
     public int CurLevel = 0;//当前等级
     public int CurFormula;//当前配方
     public FormulaData[] formulaDatas;//当前建筑可用的配方们
+    public int CurPeople = 0;//当前建筑的工人或居民
 }

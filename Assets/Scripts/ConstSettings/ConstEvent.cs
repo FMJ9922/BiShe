@@ -27,5 +27,6 @@ public class ConstEvent
     public const string OnInputResources = "OnInputResources";//每周输入资源结算
     public const string OnDayWentBy = "OnDayWentBy";//一天过去事件
     public const string OnRefreshResources = "OnRefreshResources";//资源更新显示事件
+    public const string OnPopulaitionChange = "OnPopulaitioChange";//人口增减事件
     #endregion
 }
