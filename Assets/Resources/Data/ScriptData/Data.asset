@@ -457,10 +457,10 @@ MonoBehaviour:
       english: Stock
     - code: BidPrice
       chinese: "\u4E70\u5165\u4EF7\u683C"
-      english: Bid Price
+      english: Buy Price
     - code: OfferPrice
       chinese: "\u5356\u51FA\u4EF7\u683C"
-      english: Offer Price
+      english: Sell Price
     - code: Consumption
       chinese: "\u6D88\u8017\u91CF"
       english: Consumption
@@ -491,3 +491,12 @@ MonoBehaviour:
     - code: Population
       chinese: "\u4EBA\u53E3"
       english: Population
+    - code: TradeOption
+      chinese: "\u8D38\u6613\u76EE\u6807"
+      english: Trade Option
+    - code: ExpectedProfit
+      chinese: "\u9884\u671F\u5229\u6DA6"
+      english: Expected Profit
+    - code: Sausage
+      chinese: "\u9999\u80A0"
+      english: Sausage

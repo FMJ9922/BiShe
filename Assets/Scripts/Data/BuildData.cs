@@ -27,10 +27,11 @@ public class BuildData
 public struct CostResource
 {
     public int ItemId;
-    public int ItemNum;
-    public CostResource(int id, int num)
+    public float ItemNum;
+    public CostResource(int id, float num)
     {
         ItemId = id;
         ItemNum = num;
     }
 }
+

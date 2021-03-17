@@ -15,5 +15,10 @@ public class CastTool : MonoBehaviour
     //        _ => TechType.Service
     //    };
     //}
-
+    public static string RoundOrFloat(float num)
+    {
+        return Mathf.Approximately(num, Mathf.Round(num)) ?
+            string.Format("{0}", Mathf.Round(num)) :
+            string.Format("{0:F}", num);
+    }
 }

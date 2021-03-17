@@ -66,7 +66,7 @@ public class HUDCanvas : CanvasBase
 
     public void RefreshPopulation()
     {
-        Debug.Log(ResourceManager.Instance.CurPopulation + " " + ResourceManager.Instance.MaxPopulation);
+        //Debug.Log(ResourceManager.Instance.CurPopulation + " " + ResourceManager.Instance.MaxPopulation);
         _population.text = string.Format("{0}：{1}/{2}", strPopulation,
             ResourceManager.Instance.CurPopulation,ResourceManager.Instance.MaxPopulation);
     }

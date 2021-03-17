@@ -74,6 +74,23 @@ public class DataManager : ScriptableObject
         Debug.Log("无效的物品ID"+ ID);
         return string.Empty;
     }
+    public static ItemData GetItemDataById(int ID)
+    {
+        for (int i = 0; i < Instance.ItemArray.Length; i++)
+        {
+            if (Instance.ItemArray[i].Id == ID)
+            {
+                return Instance.ItemArray[i];
+            }
+        }
+        Debug.Log("无效的物品ID" + ID);
+        return null;
+    }
+
+    public static ItemData[] GetItemDatas()
+    {
+        return Instance.ItemArray;
+    }
 
     public static FormulaData GetFormulaById(int ID)
     {

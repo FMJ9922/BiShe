@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public class LevelManager : Singleton<LevelManager>
 {
+    [SerializeField] MainInteractCanvas MainInteractCanvas;
     public int LevelID { get; set; }
     private int year, month, week,day;
     public int Year
@@ -69,6 +70,7 @@ public class LevelManager : Singleton<LevelManager>
                 day = value - 7;
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
+                EventManager.TriggerEvent(ConstEvent.OnSettleAccount);
             }
             else
             {
@@ -131,6 +133,8 @@ public class LevelManager : Singleton<LevelManager>
         ResourceManager.Instance.InitResourceManager(LevelID);
         MapManager.Instance.InitMapMnager(LevelID);
         BuildManager.Instance.InitBuildManager();
+        MarketManager.Instance.InitMarketManager();
+        MainInteractCanvas.InitCanvas();
     }
 
     /// <summary>

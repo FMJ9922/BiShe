@@ -8,10 +8,6 @@ public class MainInteractCanvas : CanvasBase
     [SerializeField] private Button[] buttons;
     [SerializeField] public CanvasBase[] canvas; 
 
-    private void Start()
-    {
-        InitCanvas();
-    }
 
     #region 实现接口
     public override void InitCanvas()

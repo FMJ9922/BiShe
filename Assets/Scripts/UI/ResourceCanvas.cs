@@ -55,21 +55,14 @@ public class ResourceCanvas : CanvasBase
             Destroy(itemList[i]);
         }
     }
-    private void InitItemPfb(int place,int itemId,float itemNum)
+    private void InitItemPfb(int place, int itemId, float itemNum)
     {
         GameObject item = Instantiate(itemPfb, itemContent);
         item.name = DataManager.GetItemNameById(itemId);
         item.GetComponentInChildren<Image>().color = place % 2 == 1 ? evenColor : oddColor;
         TMP_Text[] texts = item.GetComponentsInChildren<TMP_Text>();
         texts[0].text = Localization.ToSettingLanguage(item.name);
-        if (Mathf.Approximately(itemNum, Mathf.Round(itemNum)))
-        {
-            texts[1].text = string.Format("{0}", Mathf.Round(itemNum));
-        }
-        else
-        {
-            texts[1].text = string.Format("{0:F}", itemNum);
-        }
+        texts[1].text = CastTool.RoundOrFloat(itemNum);
         itemList.Add(item);
     }
 }
