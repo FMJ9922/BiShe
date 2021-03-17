@@ -126,6 +126,24 @@ public class BuildingBase : MonoBehaviour
             ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);
         }
     }
+
+    public virtual void AddOne()
+    {
+        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(1);
+    }
+    public virtual void AddTen()
+    {
+        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(10);
+    }
+    public virtual void DeleteOne()
+    {
+        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-1);
+    }
+    public virtual void DeleteTen()
+    {
+        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-10);
+    }
+
 }
 
 public class RuntimeBuildData : BuildData

@@ -13,6 +13,7 @@ public class InfoCanvas : CanvasBase
     [SerializeField] GameObject _populationObj;//人口
     [SerializeField] Button _pauseBtn;//暂停生产
     [SerializeField] Button _upgradeBtn;//升级
+    [SerializeField] Button[] _populationBtns;//人口相关按钮
     [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
     [SerializeField] private GameObject mainCanvas;
     public override void InitCanvas()

@@ -106,3 +106,11 @@ public enum LanguageType
     english = 1,
 }
 
+public enum TimeScale
+{
+    stop = 0,
+    one = 1,
+    two = 2,
+    four = 4,
+}
+

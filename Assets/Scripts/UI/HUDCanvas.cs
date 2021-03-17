@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class HUDCanvas : CanvasBase
 {
     [SerializeField] TMP_Text _date, _money, _log, _stone, _food, _population;
+    [SerializeField] Button time_stop,time_one,time_two,time_four;
     private string strMoney, strLog, strStone, strFood, strPopulation;
     private void OnDestroy()
     {
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StopListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StopListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        time_stop.onClick.RemoveAllListeners();
+        time_one.onClick.RemoveAllListeners();
+        time_two.onClick.RemoveAllListeners();
+        time_four.onClick.RemoveAllListeners();
     }
     public override void InitCanvas()
     {
@@ -23,6 +29,10 @@ public class HUDCanvas : CanvasBase
         strStone = Localization.ToSettingLanguage("Stone");
         strFood = Localization.ToSettingLanguage("Food");
         strPopulation = Localization.ToSettingLanguage("Population");
+        time_stop.onClick.AddListener(()=> { GameManager.Instance.SetTimeScale(TimeScale.stop); });
+        time_one.onClick.AddListener(()=> { GameManager.Instance.SetTimeScale(TimeScale.one); });
+        time_two.onClick.AddListener(()=> { GameManager.Instance.SetTimeScale(TimeScale.two); });
+        time_four.onClick.AddListener(()=> { GameManager.Instance.SetTimeScale(TimeScale.four); });
         RefreshResources();
         RefreshPopulation();
     }

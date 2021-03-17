@@ -168,8 +168,13 @@ public class ResourceManager : Singleton<ResourceManager>
         curPopulation += num;
         if (curPopulation <= 0)
         {
-            Debug.Log("人口操作可能有问题，请检查");
+            curPopulation -= num;
+            int maxProvide = 0 - curPopulation;
+            curPopulation += maxProvide;
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            return maxProvide;
         }
+        else
         if (curPopulation <= maxPopulation)
         {
             EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
