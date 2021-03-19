@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8237265889370283048}
   - component: {fileID: 3258395720127304596}
+  - component: {fileID: 3040278516482070324}
   m_Layer: 0
   m_Name: L1_Market001
   m_TagString: Building
@@ -51,6 +52,19 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 0}
   buildFlag: 0
+--- !u!65 &3040278516482070324
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4679988329664353005}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 13.387067, y: 2.6836815, z: 12.224541}
+  m_Center: {x: -0.06013155, y: 1.3228912, z: 0.08018184}
 --- !u!1001 &6311345792115435130
 PrefabInstance:
   m_ObjectHideFlags: 0

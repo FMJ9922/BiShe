@@ -171,13 +171,11 @@ public class ResourceManager : Singleton<ResourceManager>
             curPopulation -= num;
             int maxProvide = 0 - curPopulation;
             curPopulation += maxProvide;
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             return maxProvide;
         }
         else
         if (curPopulation <= maxPopulation)
         {
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             return num;
         }
         else
@@ -185,7 +183,6 @@ public class ResourceManager : Singleton<ResourceManager>
             curPopulation -= num;
             int maxProvide = maxPopulation - curPopulation;
             curPopulation += maxProvide;
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             return maxProvide;
         }
     }

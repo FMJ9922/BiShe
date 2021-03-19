@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3568383551459418149}
   - component: {fileID: -6889040789609593486}
+  - component: {fileID: 5766019137707363353}
   m_Layer: 0
   m_Name: L1_Factory001
   m_TagString: Building
@@ -51,6 +52,19 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 0}
   buildFlag: 0
+--- !u!65 &5766019137707363353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859432457036527477}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.3469715, y: 5.2199144, z: 9.649521}
+  m_Center: {x: 0.0000019073486, y: 2.5293279, z: 0}
 --- !u!1001 &7710990138930424139
 PrefabInstance:
   m_ObjectHideFlags: 0

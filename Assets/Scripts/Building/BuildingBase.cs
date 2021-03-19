@@ -53,7 +53,11 @@ public class BuildingBase : MonoBehaviour
     {
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
-        formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+        if (runtimeBuildData.formulaDatas.Length>0)
+        {
+            Debug.Log(runtimeBuildData.CurFormula);
+            formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+        }
         productTime = formula.ProductTime;
         if (runtimeBuildData.Population > 0)
         {
@@ -108,6 +112,7 @@ public class BuildingBase : MonoBehaviour
 
     protected virtual void Output()
     {
+        if (formula == null) return;
         productTime--;
         if (productTime <= 0)
         {
@@ -121,27 +126,42 @@ public class BuildingBase : MonoBehaviour
 
     protected virtual void Input()
     {
+        if (formula == null) return;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);
         }
     }
 
-    public virtual void AddOne()
+    public virtual void AddCurPeople(int num)
     {
-        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(1);
+        //Debug.Log("Add");
+        int cur = runtimeBuildData.CurPeople;
+        int max = runtimeBuildData.Population;
+        if (cur + num <= max)
+        {
+            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
+        }
+        else
+        {
+            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num+cur-max);
+        }
+        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
-    public virtual void AddTen()
+    public virtual void DeleteCurPeople(int num)
     {
-        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(10);
-    }
-    public virtual void DeleteOne()
-    {
-        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-1);
-    }
-    public virtual void DeleteTen()
-    {
-        runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-10);
+        //Debug.Log("Delete");
+        int cur = runtimeBuildData.CurPeople;
+        int max = runtimeBuildData.Population;
+        if (cur - num >= 0)
+        {
+            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
+        }
+        else
+        {
+            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
+        }
+        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
 
 }

@@ -292,60 +292,70 @@ MonoBehaviour:
     Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
   FormulaArray:
   - ID: 50001
+    Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
     InputItemID: f92a0000
     InputNum: 05000000
     OutputItemID: fd2a0000
     ProductNum: 14000000
     ProductTime: 3
   - ID: 50002
+    Describe: "\u7A3B\u7C73\u4EA7\u751F\u8089"
     InputItemID: fa2a0000
     InputNum: 03000000
     OutputItemID: fd2a0000
     ProductNum: 14000000
     ProductTime: 3
   - ID: 50003
+    Describe: "\u5C0F\u9EA6\u4EA7\u9762\u7C89"
     InputItemID: f92a0000
     InputNum: 0a000000
     OutputItemID: e62e0000
     ProductNum: 08000000
     ProductTime: 3
   - ID: 50004
+    Describe: "\u539F\u6728\u4EA7\u6728\u6599"
     InputItemID: e32e0000
     InputNum: 0c000000
     OutputItemID: e42e0000
     ProductNum: 09000000
     ProductTime: 4
   - ID: 50005
+    Describe: "\u751F\u8089\u4EA7\u52A0\u5DE5\u8089"
     InputItemID: fd2a0000
     InputNum: 0c000000
     OutputItemID: 002b0000
     ProductNum: 09000000
     ProductTime: 4
   - ID: 50006
+    Describe: "\u7530\u5730\u4EA7\u5C0F\u9EA6"
     InputItemID: 
     InputNum: 
     OutputItemID: f92a0000
     ProductNum: 0a000000
     ProductTime: 2
   - ID: 50007
+    Describe: "\u7530\u5730\u4EA7\u7A3B\u7C73"
     InputItemID: 
     InputNum: 
     OutputItemID: fa2a0000
     ProductNum: 0c000000
     ProductTime: 2
   - ID: 50008
+    Describe: "\u751F\u8089\u9762\u7C89\u4EA7\u9999\u80A0"
     InputItemID: f92a0000fd2a0000
     InputNum: 0a00000005000000
     OutputItemID: 022b0000
     ProductNum: 0d000000
     ProductTime: 1
   - ID: 50009
+    Describe: "\u4F10\u6728\u4EA7\u539F\u6728"
     InputItemID: 
     InputNum: 
     OutputItemID: e32e0000
     ProductNum: 14000000
     ProductTime: 1
   - ID: 50010
+    Describe: "\u4F4F\u623F\u63D0\u4F9B\u4EBA\u53E3"
     InputItemID: f92a0000fa2a0000
     InputNum: 0a000000
     OutputItemID: 

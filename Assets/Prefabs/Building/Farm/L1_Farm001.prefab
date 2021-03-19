@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1694728187361024607}
   - component: {fileID: 4404233642181084841}
+  - component: {fileID: 7231940246197429592}
   m_Layer: 0
   m_Name: L1_Farm001
   m_TagString: Building
@@ -51,6 +52,19 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 0}
   buildFlag: 0
+--- !u!65 &7231940246197429592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929049924142526475}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.7959018, y: 2.7514563, z: 6.1258173}
+  m_Center: {x: 0.016068459, y: 1.3577805, z: 0.008033276}
 --- !u!1001 &6060561211459615128
 PrefabInstance:
   m_ObjectHideFlags: 0

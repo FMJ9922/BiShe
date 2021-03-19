@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class InfoCanvas : CanvasBase
 {
     [SerializeField] GameObject _inputsObj;//挂载输入资源说明的UI
@@ -11,39 +11,77 @@ public class InfoCanvas : CanvasBase
     [SerializeField] GameObject _effectiveObj;//效率
     [SerializeField] GameObject _introduceObj;//简介说明
     [SerializeField] GameObject _populationObj;//人口
+    [SerializeField] GameObject _formulaObj;//配方
     [SerializeField] Button _pauseBtn;//暂停生产
     [SerializeField] Button _upgradeBtn;//升级
     [SerializeField] Button[] _populationBtns;//人口相关按钮
     [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
+    [SerializeField] TMP_Dropdown _dropDown;
     [SerializeField] private GameObject mainCanvas;
+    UnityAction populationChange;
+    private RuntimeBuildData _buildData;
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
-        EventManager.StartListening<RuntimeBuildData>(ConstEvent.OnTriggerInfoPanel, OnOpen);
+        populationChange = () => ChangeLabels(_buildData);
+        EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
     public override void OnOpen()
     {
         
     }
-    public void OnOpen(RuntimeBuildData buildData)
+    public void OnOpen(BuildingBase buildbase)
     {
-        ChangeShowItems(buildData);
-        ChangeLabels(buildData);
+        _buildData = buildbase.runtimeBuildData;
+        ChangeShowItems(_buildData);
+        ChangeLabels(_buildData);
         mainCanvas.SetActive(true);
-        EventManager.StartListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange,ChangeLabels);
+        ChangeFormula(_buildData.formulaDatas);
+        AddBtnsListener(buildbase);
+        _dropDown.onValueChanged.AddListener(OnDropDownValueChanged);
+        EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
+    }
+
+    private void SetBtnsActive(bool isActive)
+    {
+        for (int i = 0; i < _populationBtns.Length; i++)
+        {
+            _populationBtns[i].gameObject.SetActive(isActive);
+        }
+    }
+    private void AddBtnsListener(BuildingBase buildingBase)
+    {
+        _populationBtns[0].onClick.AddListener(()=>buildingBase.DeleteCurPeople(10));
+        _populationBtns[1].onClick.AddListener(()=>buildingBase.DeleteCurPeople(1));
+        _populationBtns[2].onClick.AddListener(()=>buildingBase.AddCurPeople(1));
+        _populationBtns[3].onClick.AddListener(()=>buildingBase.AddCurPeople(10));
+    }
+
+    private void RemoveBtnsListener()
+    {
+        _populationBtns[0].onClick.RemoveAllListeners();
+        _populationBtns[1].onClick.RemoveAllListeners();
+        _populationBtns[2].onClick.RemoveAllListeners();
+        _populationBtns[3].onClick.RemoveAllListeners();
     }
 
     public override void OnClose()
     {
+        RemoveBtnsListener();
         EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
         mainCanvas.SetActive(false);
     }
     private void OnDestroy()
     {
-        EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
-        EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnTriggerInfoPanel, OnOpen);
+        EventManager.StopListening(ConstEvent.OnPopulaitionChange, populationChange);
+        EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
 
+    void OnDropDownValueChanged(int n)
+    {
+        _buildData.CurFormula = n;
+        ChangeLabels(_buildData);
+    }
     /// <summary>
     /// 修改显示的条目
     /// </summary>
@@ -62,6 +100,8 @@ public class InfoCanvas : CanvasBase
                     _introduceObj.SetActive(true);
                     _populationObj.SetActive(true);
                     _pauseBtn.gameObject.SetActive(true);
+                    _formulaObj.SetActive(true);
+                    SetBtnsActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
 
@@ -74,7 +114,9 @@ public class InfoCanvas : CanvasBase
                     _effectiveObj.SetActive(false);
                     _introduceObj.SetActive(true);
                     _populationObj.SetActive(true);
+                    SetBtnsActive(false);
                     _pauseBtn.gameObject.SetActive(false);
+                    _formulaObj.SetActive(false);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
                 }
@@ -93,6 +135,24 @@ public class InfoCanvas : CanvasBase
     private void TogglePause()
     {
 
+    }
+
+    private void ChangeFormula(FormulaData[] formulaDatas)
+    {
+        _dropDown.options.Clear();
+        _dropDown.captionText.text = formulaDatas[_buildData.CurFormula].Describe;
+        if (formulaDatas == null || formulaDatas.Length == 0)
+        {
+            _formulaObj.SetActive(false);
+            return;
+        }
+        TMP_Dropdown.OptionData optionData;
+        for (int i = 0; i < formulaDatas.Length; i++)
+        {
+            optionData = new TMP_Dropdown.OptionData();
+            optionData.text = formulaDatas[i].Describe;
+            _dropDown.options.Add(optionData);
+        }
     }
     /// <summary>
     /// 修改显示的文本

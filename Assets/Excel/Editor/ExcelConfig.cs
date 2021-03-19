@@ -76,6 +76,7 @@ public class ExcelTool
         {
             FormulaData formulaData = new FormulaData();
             formulaData.ID = int.Parse(collect[i][0].ToString());
+            formulaData.Describe = collect[i][1].ToString();
             formulaData.InputItemID = StringToIntList(collect[i][2].ToString());
             formulaData.InputNum = StringToIntList(collect[i][3].ToString());
             formulaData.OutputItemID = StringToIntList(collect[i][4].ToString());
