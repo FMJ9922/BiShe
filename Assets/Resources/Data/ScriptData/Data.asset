@@ -21,37 +21,37 @@ MonoBehaviour:
   - Id: 11001
     Name: Wheat
     ItemType: 1
-    Price: 100
+    Price: 12
     BuildingID: 0
   - Id: 11002
     Name: Rice
     ItemType: 1
-    Price: 95
+    Price: 12
     BuildingID: 0
   - Id: 12003
     Name: Log
     ItemType: 2
-    Price: 300
+    Price: 16
     BuildingID: 0
   - Id: 12004
     Name: Timber
     ItemType: 2
-    Price: 450
+    Price: 28
     BuildingID: 0
   - Id: 11005
     Name: RawMeat
     ItemType: 1
-    Price: 125
+    Price: 18
     BuildingID: 0
   - Id: 12006
     Name: Flour
     ItemType: 2
-    Price: 115
+    Price: 25
     BuildingID: 0
   - Id: 11008
     Name: ProcessedMeat
     ItemType: 1
-    Price: 400
+    Price: 30
     BuildingID: 0
   - Id: 12009
     Name: Stone
@@ -71,7 +71,7 @@ MonoBehaviour:
   - Id: 11010
     Name: Sausage
     ItemType: 1
-    Price: 1000
+    Price: 32
     BuildingID: 0
   LevelArray:
   - Id: 30001
@@ -135,10 +135,10 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 5
     Width: 3
-    Price: 100
+    Price: 90
     costResources:
     - ItemId: 12003
-      ItemNum: 10
+      ItemNum: 5
     - ItemId: 12009
       ItemNum: 5
     BundleName: building.ab
@@ -156,7 +156,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 3
     Width: 3
-    Price: 30
+    Price: 5
     costResources:
     - ItemId: 12003
       ItemNum: 1
@@ -165,19 +165,19 @@ MonoBehaviour:
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 101
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
   - Id: 20003
     Name: Warehouse
-    CostPerWeek: 20
+    CostPerWeek: 5
     Formulas: 
-    Population: 0
+    Population: 6
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 0
     RearBuildingId: 0
     Length: 5
     Width: 11
-    Price: 300
+    Price: 150
     costResources:
     - ItemId: 12003
       ItemNum: 30
@@ -186,58 +186,18 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: L1_Storehouse001
     tabType: 4
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
   - Id: 20004
     Name: Market
-    CostPerWeek: 20
+    CostPerWeek: 10
     Formulas: 
-    Population: 0
+    Population: 15
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
     RearBuildingId: 0
     Length: 12
     Width: 14
-    Price: 500
-    costResources:
-    - ItemId: 12003
-      ItemNum: 80
-    - ItemId: 12009
-      ItemNum: 60
-    BundleName: building.ab
-    PfbName: L1_Market001
-    tabType: 4
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-  - Id: 20005
-    Name: Farmland
-    CostPerWeek: 20
-    Formulas: 56c3000057c30000
-    Population: 5
-    MaxStorage: 100
-    InfluenceRange: 5
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Length: 3
-    Width: 3
-    Price: 1000
-    costResources:
-    - ItemId: 12003
-      ItemNum: 5
-    BundleName: building.ab
-    PfbName: L1_Fieldedge001
-    tabType: 1
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
-  - Id: 20006
-    Name: LivestockFarm
-    CostPerWeek: 15
-    Formulas: 51c3000052c30000
-    Population: 30
-    MaxStorage: 100
-    InfluenceRange: 30
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Length: 14
-    Width: 20
     Price: 280
     costResources:
     - ItemId: 12003
@@ -245,51 +205,91 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 30
     BundleName: building.ab
+    PfbName: L1_Market001
+    tabType: 4
+    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+  - Id: 20005
+    Name: Farmland
+    CostPerWeek: 1
+    Formulas: 56c3000057c30000
+    Population: 1
+    MaxStorage: 100
+    InfluenceRange: 5
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 3
+    Width: 3
+    Price: 15
+    costResources:
+    - ItemId: 12003
+      ItemNum: 5
+    BundleName: building.ab
+    PfbName: L1_Fieldedge001
+    tabType: 1
+    Introduce: "\u7CAE\u98DF\u4F5C\u7269\u6700\u4E3B\u8981\u7684\u4EA7\u51FA\u5355\u4F4D"
+  - Id: 20006
+    Name: LivestockFarm
+    CostPerWeek: 3
+    Formulas: 51c3000052c30000
+    Population: 8
+    MaxStorage: 100
+    InfluenceRange: 30
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 14
+    Width: 20
+    Price: 180
+    costResources:
+    - ItemId: 12003
+      ItemNum: 40
+    - ItemId: 12009
+      ItemNum: 35
+    BundleName: building.ab
     PfbName: L1_Farm001
     tabType: 1
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
   - Id: 20007
     Name: Factory
-    CostPerWeek: 30
+    CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
-    Population: 20
+    Population: 12
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 0
     RearBuildingId: 0
     Length: 4
     Width: 6
-    Price: 400
+    Price: 200
     costResources:
     - ItemId: 12003
-      ItemNum: 70
+      ItemNum: 50
     - ItemId: 12009
-      ItemNum: 80
+      ItemNum: 50
     BundleName: building.ab
     PfbName: L1_Factory001
     tabType: 3
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
   - Id: 20008
     Name: LoggingCamps
-    CostPerWeek: 10
+    CostPerWeek: 4
     Formulas: 59c30000
-    Population: 25
+    Population: 9
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
     RearBuildingId: 0
     Length: 7
     Width: 8
-    Price: 200
+    Price: 160
     costResources:
     - ItemId: 12003
-      ItemNum: 45
+      ItemNum: 35
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
     PfbName: L1_Sawmill001
     tabType: 2
-    Introduce: "\u7B80\u4ECB\u7B80\u4ECB\u7B80\u4ECB"
+    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
