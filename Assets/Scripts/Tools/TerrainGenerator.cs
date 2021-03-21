@@ -11,12 +11,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private Vector3[] verticles;
     private Mesh mesh;
     public Texture2D tx;
+    long width, lenth;
+    
 
     [ContextMenu("CalculateHeights")]
     public void CalculateHeights()
     {
-        int width = (int)(terrain.terrainData.size.x / 2) + 1;
-        int lenth = (int)(terrain.terrainData.size.z / 2) + 1;
+        width = (int)(terrain.terrainData.size.x / 2) + 1;
+        lenth = (int)(terrain.terrainData.size.z / 2) + 1;
         height = new float[width][];
         for (int i = 0; i < height.Length; i++)
         {
@@ -100,7 +102,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
-        Debug.Log(h + " " + x);
+        //Debug.Log(h + " " + x);
         uv[4 * index + dir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (1 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
@@ -108,6 +110,42 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mesh.uv = uv;
         mesh.RecalculateNormals();
     }
+    
+    
+    public void OnReTriangle(Vector3 pos, int dir)
+    {
+        CalculateHeights();
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        Vector3 delta = pos - terrain.transform.position;
+        int x = Mathf.FloorToInt(delta.x / 2);
+        int z = Mathf.FloorToInt(delta.z / 2);
+        int index = z * (height.Length - 1) + x;
+        int[] triangles = mesh.triangles;
+        int vi = index;
+        int ti = index * 6;
+        if (dir == 0)
+        {
+            triangles[ti] = vi * 4;
+            triangles[ti + 1] = vi * 4 + 3;
+            triangles[ti + 2] = vi * 4 + 1;
+            triangles[ti + 3] = vi * 4 + 1;
+            triangles[ti + 4] = vi * 4 + 3;
+            triangles[ti + 5] = vi * 4 + 2;
+        }
+        else
+        {
+            triangles[ti] = vi * 4;
+            triangles[ti + 1] = vi * 4 + 2;
+            triangles[ti + 2] = vi * 4 + 1;
+            triangles[ti + 3] = vi * 4;
+            triangles[ti + 4] = vi * 4 + 3;
+            triangles[ti + 5] = vi * 4 + 2;
+        }
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
+    }
+
     public void OnFlatGround(Vector3 pos, int range, int targetHeight)
     {
         CalculateHeights();
@@ -115,7 +153,95 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int x = Mathf.FloorToInt(delta.x / 2);
         int z = Mathf.FloorToInt(delta.z / 2);
         int index = z * (height.Length - 1) + x;
+        FlatGround(index, range, targetHeight/1.5f);
+    }
+    public void OnFlatGround(Vector3 pos, int range, float targetHeight)
+    {
+        CalculateHeights();
+        Vector3 delta = pos - terrain.transform.position;
+        int x = Mathf.FloorToInt(delta.x / 2);
+        int z = Mathf.FloorToInt(delta.z / 2);
+        int index = z * (height.Length - 1) + x;
         FlatGround(index, range, targetHeight);
+    }
+
+    void FlatGround(int index, int range, float targetHeight)
+    {
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        verticles = mesh.vertices;
+        int length = height.Length - 1;
+        int z = index / (height.Length - 1);
+        int x = index % (height.Length - 1);
+        Debug.Log(x + " " + z);
+        for (int i = -range + 1; i < range; i++)
+        {
+            for (int j = -range + 1; j < range; j++)
+            {
+                if ((i + x) < 0 || (i + x) > length - 1 || (j + z) < 0 || (j + z) > length - 1)
+                {
+                    continue;
+                }
+                int p = (z + j) * length + (i + x);
+                verticles[4 * p] = ChangeHeight(verticles[4 * p], targetHeight);
+                verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+                verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+                verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+            }
+        }
+        for (int i = -range + 1; i < range; i++)
+        {
+            int p;
+            if (z - range >= 0)
+            {
+                p = (z - range) * length + (i + x);
+                verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+                verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+            }
+            if (z + range < length)
+            {
+                p = (z + range) * length + (i + x);
+                verticles[4 * p + 0] = ChangeHeight(verticles[4 * p + 0], targetHeight);
+                verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+            }
+            if (x - range >= 0)
+            {
+                p = (z + i) * length + (-range + x);
+                verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+                verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+            }
+            if (x + range < length)
+            {
+                p = (z + i) * length + (range + x);
+                verticles[4 * p + 0] = ChangeHeight(verticles[4 * p + 0], targetHeight);
+                verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+            }
+        }
+        int pl;
+        if (z - range >= 0 && -range + x >= 0)
+        {
+            pl = (z - range) * length + (-range + x);
+            verticles[4 * pl + 2] = ChangeHeight(verticles[4 * pl + 2], targetHeight);
+        }
+        if (z - range >= 0 && range + x < length)
+        {
+            pl = (z - range) * length + (range + x);
+            verticles[4 * pl + 3] = ChangeHeight(verticles[4 * pl + 3], targetHeight);
+        }
+        if (z + range < length && range + x < length)
+        {
+            pl = (z + range) * length + (range + x);
+            verticles[4 * pl + 0] = ChangeHeight(verticles[4 * pl + 0], targetHeight);
+        }
+        if (z + range < length && -range + x >= 0)
+        {
+            pl = (z + range) * length + (-range + x);
+            verticles[4 * pl + 1] = ChangeHeight(verticles[4 * pl + 1], targetHeight);
+        }
+
+
+        mesh.vertices = verticles;
+        mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
     }
     void FlatGround(int index, int range, int targetHeight)
     {
@@ -204,15 +330,18 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     void SaveAsset()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        AssetDatabase.CreateAsset(mesh, "Assets/" +  "myMesh.asset");
+        AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
     }
+
     [ContextMenu("GenerateMeshes")]
     void GenerateMeshes()
     {
-        int xSize = height.Length - 1;
-        int ySize = height.Length - 1;
+        long xSize = width - 1;
+        long ySize = width - 1;
         Vector3 origin = terrain.transform.position;
-        verticles = new Vector3[(height.Length - 1) * (height.Length - 1) * 4];
+        long size = xSize * ySize * 4;
+        Debug.Log(xSize+" "+ySize+" "+size);
+        verticles = new Vector3[size];
         Vector2[] uv = new Vector2[verticles.Length];
         for (int i = 0, y = 0; y < height.Length - 1; y++)
         {
@@ -222,10 +351,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 verticles[4 * i + 1] = origin + new Vector3((x + 1) * 2, height[x + 1][y], y * 2);
                 verticles[4 * i + 2] = origin + new Vector3((x + 1) * 2, height[x + 1][y + 1], (y + 1) * 2);
                 verticles[4 * i + 3] = origin + new Vector3(x * 2, height[x][y + 1], (y + 1) * 2);
-                uv[4 * i] = new Vector2(0, 0);
-                uv[4 * i + 1] = new Vector2(0.24f, 0);
-                uv[4 * i + 2] = new Vector2(0.24f, 0.24f);
-                uv[4 * i + 3] = new Vector2(0, 0.24f);
+                //uv[4 * i] = new Vector2(0.01F, 0.01F);
+                //uv[4 * i + 1] = new Vector2(0.24f, 0.01F);
+                //uv[4 * i + 2] = new Vector2(0.24f, 0.24f);
+                //uv[4 * i + 3] = new Vector2(0.01F, 0.24f);
+                uv[4 * i] = new Vector2((float)x/ height.Length, (float)y / height.Length);
+                uv[4 * i + 1] = new Vector2((float)x / height.Length, (float)y / height.Length);
+                uv[4 * i + 2] = new Vector2((float)x / height.Length, (float)y / height.Length);
+                uv[4 * i + 3] = new Vector2((float)x / height.Length, (float)y / height.Length);
             }
         }
         transform.GetComponent<MeshFilter>().mesh = mesh = new Mesh();
@@ -246,12 +379,13 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 triangles[ti + 5] = vi * 4 + 2;
             }
         }
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
         //DestroyChildren();
     }
 
-    [ContextMenu("CombineMeshes")]
+    //[ContextMenu("CombineMeshes")]
     void CombineMeshes()
     {
 

@@ -13,6 +13,8 @@ public class BuildManager : Singleton<BuildManager>
     private Material mat_grid_green;
     [SerializeField]
     private Material mat_grid_red;
+    [SerializeField]
+    private TerrainGenerator terrainGenerator;
 
     private BuildingBase currentBuilding;
     private bool isCurOverlap = false;//当前建筑是否重叠
@@ -129,6 +131,8 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild();
             MapManager.SetGridTypeToOccupy(targetGrids);
+
+            terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
@@ -203,19 +207,19 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 newPos = pos;
         if (vector2Int.x % 2 != 0)
         {
-            newPos.x = Mathf.Round(pos.x / 3) * 3;
+            newPos.x = Mathf.Round(pos.x / 2) * 2;
         }
         else
         {
-            newPos.x = (Mathf.Round(pos.x / 3 - 0.5f) + 0.5f) * 3;
+            newPos.x = (Mathf.Round(pos.x / 2 - 0.5f) + 0.5f) * 2;
         }
         if (vector2Int.y % 2 != 0)
         {
-            newPos.z = Mathf.Round(pos.z / 3) * 3;
+            newPos.z = Mathf.Round(pos.z / 2) * 2;
         }
         else
         {
-            newPos.z = (Mathf.Round(pos.z / 3 - 0.5f) + 0.5f) * 3;
+            newPos.z = (Mathf.Round(pos.z / 2 - 0.5f) + 0.5f) * 2;
         }
         return newPos;
     }
@@ -229,7 +233,7 @@ public class BuildManager : Singleton<BuildManager>
         int startX, endX, startZ, endZ;
         int width = isTurn ? sizeY : sizeX;
         int height = isTurn ? sizeX : sizeY;
-        Vector3 centerGrid = centerPos / 3;
+        Vector3 centerGrid = centerPos / 2;
         if (width % 2 == 0)
         {
             startX = Mathf.FloorToInt(centerGrid.x) - width / 2 + 1;

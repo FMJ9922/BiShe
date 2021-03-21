@@ -8,7 +8,7 @@ public class CameraMovement : Singleton<CameraMovement>
     public float MaxSpeed = 0.5f;
     public float Accelerate = 0.5f;
     public float StopAccelerate = 1f;
-    private float ScrollWheelSpeed = 1f;
+    private float ScrollWheelSpeed = 10f;
     public float MaxScrollValue = 200f;
     public float MinScrollValue = -100f;
 

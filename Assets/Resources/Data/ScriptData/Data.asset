@@ -83,8 +83,8 @@ MonoBehaviour:
     Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230200"
     RewardBuildingId: 0
     RewardTechId: 0
-    Length: 200
-    Width: 200
+    Length: 300
+    Width: 300
     Introduce: "\u8BF4\u660E"
     log: 999
     rice: 999

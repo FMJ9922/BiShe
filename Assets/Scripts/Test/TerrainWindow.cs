@@ -7,9 +7,11 @@ public class TerrainWindow : EditorWindow
     int index = 0;
     bool canPaint = false;
     bool canSmooth = false;
+    bool canDir = false;
     int dir = 0;
     int range = 0;
     int height = 0;
+    int triDir = 0;
     public delegate void Paint();
     public static event Paint OnPaint;
 
@@ -39,7 +41,7 @@ public class TerrainWindow : EditorWindow
 
     private void OnSceneGUI(SceneView sceneView)
     {
-        if (!canPaint&&!canSmooth)
+        if (!canPaint&&!canSmooth&&!canDir)
         {
             return;
         }
@@ -54,6 +56,10 @@ public class TerrainWindow : EditorWindow
                 if (canPaint)
                 {
                     gen.OnPaint(index, hit.point, dir);
+                }
+                else if (canDir)
+                {
+                    gen.OnReTriangle(hit.point, triDir);
                 }
                 else if(canSmooth)
                 {
@@ -92,6 +98,21 @@ public class TerrainWindow : EditorWindow
         if (GUILayout.Button("取消平整"))
         {
             canSmooth = false;
+        }
+        if (GUILayout.Button("改地形0"))
+        {
+            canDir = true;
+            triDir = 0;
+        }
+        if (GUILayout.Button("改地形1"))
+        {
+            canDir = true;
+            triDir = 1;
+        }
+        if (GUILayout.Button("取消改地形"))
+        {
+
+            canDir= false;
         }
     }
 

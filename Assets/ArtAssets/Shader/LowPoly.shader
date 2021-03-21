@@ -1,7 +1,7 @@
 ﻿Shader "Custom/Lowpoly" {
     Properties{
         _Color("Color", Color) = (1,1,1,1)
-
+        _MainTex("Albedo (RGB)", 2D) = "white" {}
     }
 
         SubShader{
@@ -64,7 +64,7 @@
                            float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
                            /// Final Color:
                                float3 finalColor = diffuse;
-                               fixed4 finalRGBA = fixed4(finalColor,1);
+                               fixed4 finalRGBA = fixed4(finalColor,1); 
                                UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                                return finalRGBA;
                            }
