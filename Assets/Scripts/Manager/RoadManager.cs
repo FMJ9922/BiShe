@@ -26,7 +26,7 @@ public class RoadManager : Singleton<RoadManager>
         _wayPointDic = new Dictionary<int, GameObject>();
         _partCounter = 0;
     }
-
+    /*
     public void BuildRoads()
     {
         RoadPfb = LoadAB.Load("roads.road", "RoadPfb");
@@ -58,7 +58,7 @@ public class RoadManager : Singleton<RoadManager>
             InstantiateStraightRoad(_wayPoints[count - 2], _wayPoints[count - 1], RoadOption.end);
         }
 
-    }
+    }*/
    
 
     #endregion
@@ -76,9 +76,9 @@ public class RoadManager : Singleton<RoadManager>
         Vector3 secondP;
         GameObject newRoad = Instantiate(RoadPfb, transform);
         newRoad.name = string.Format("{0}->{1}", startP.ToString(), endP.ToString());
-        CalculateWayPoints(startP, endP, out firstP, out secondP, roadOption);
+        //CalculateWayPoints(startP, endP, out firstP, out secondP, roadOption);
         RoadObject roadObject = newRoad.GetComponent<RoadObject>();
-        roadObject.BuildStraightRoad(firstP, secondP);
+        //roadObject.BuildStraightRoad(firstP, secondP);
         _partCounter++;
         _wayPointDic.Add(_partCounter, newRoad);
     }
@@ -104,7 +104,7 @@ public class RoadManager : Singleton<RoadManager>
     /// <param name="firstP"></param>
     /// <param name="secondP"></param>
     /// <param name="roadOption"></param>
-    private void CalculateWayPoints(Vector3 startP, Vector3 endP,
+   /* private void CalculateWayPoints(Vector3 startP, Vector3 endP,
         out Vector3 firstP, out Vector3 secondP, RoadOption roadOption)
     {
         Vector3 vector = endP - startP;
@@ -125,7 +125,7 @@ public class RoadManager : Singleton<RoadManager>
             secondP = endP;
         }
 
-    }
+    }*/
 
     /// <summary>
     /// 计算拐点的入点和出点

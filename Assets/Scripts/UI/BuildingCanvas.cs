@@ -26,8 +26,16 @@ public class BuildingCanvas : CanvasBase
     private TMP_Text _introduceLabel;
     [SerializeField]
     private TMP_Text _costLabel;
+    [SerializeField]
+    private GameObject _confirmBtns;
+    [SerializeField]
+    private Button _confirm;
+    [SerializeField]
+    private Button _cancel;
 
     private BuildTabType tabType;
+
+    
     #endregion
 
     #region 预制体
@@ -82,7 +90,7 @@ public class BuildingCanvas : CanvasBase
     {
         DataManager.Instance.InitTabDic();
         CleanUpAllAttachedChildren(_buildingTabs);
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
             newTab.name = i.ToString();
@@ -127,6 +135,11 @@ public class BuildingCanvas : CanvasBase
         }
 
     }
+    public void ShowConfirmButtons()
+    {
+        _confirmBtns.SetActive(true);
+    }
+
 
     public void OnClickIconToBuild(BuildData buildData)
     {
@@ -134,9 +147,34 @@ public class BuildingCanvas : CanvasBase
         _InfoCanvas.SetActive(false);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);
         EventManager.StartListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
-        BuildManager.Instance.CreateBuildingOnMouse(buildData);
+        if (buildData.tabType != BuildTabType.road)
+        {
+            BuildManager.Instance.CreateBuildingOnMouse(buildData);
+        }
+        else
+        {
+            EventManager.StartListening(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+            BuildManager.Instance.StartCreateRoads();
+        }
+        
+    }
+    public void OnBuildToBeConfirmed()
+    {
+        ShowConfirmButtons();
+        EventManager.StopListening(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
     }
 
+    public void OnCancel()
+    {
+        BuildManager.Instance.OnCancelBuildRoad();
+        _confirmBtns.SetActive(false);
+    }
+
+    public void OnConfirm()
+    {
+        BuildManager.Instance.OnConfirmBuildRoad();
+        _confirmBtns.SetActive(false);
+    }
     public void OnFinishBuilding()
     {
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnClose);

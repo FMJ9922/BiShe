@@ -99,8 +99,8 @@ MonoBehaviour:
     Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
     RewardBuildingId: 0
     RewardTechId: 0
-    Length: 200
-    Width: 200
+    Length: 300
+    Width: 300
     Introduce: "\u8BF4\u660E"
     log: 50
     rice: 10
@@ -115,8 +115,8 @@ MonoBehaviour:
     Aim3: Null
     RewardBuildingId: 0
     RewardTechId: 0
-    Length: 200
-    Width: 200
+    Length: 300
+    Width: 300
     Introduce: "\u8BF4\u660E"
     log: 50
     rice: 10
@@ -164,7 +164,7 @@ MonoBehaviour:
       ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
-    tabType: 101
+    tabType: 5
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
   - Id: 20003
     Name: Warehouse

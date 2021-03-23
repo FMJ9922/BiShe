@@ -16,6 +16,7 @@ public class ConstEvent
     public const string OnGroundRayPosMove = "OnGroundRayPosMove";//鼠标投影地面位置移动事件
     public const string OnRotateBuilding = "OnRotateBuilding";//旋转建筑
     public const string OnFinishBuilding = "OnFinishBuilding";//确认建造或者取消事件
+    public const string OnBuildToBeConfirmed = "OnBuildToBeConfirmed";//等待建筑确认建造
     #endregion
 
     #region 交互事件
