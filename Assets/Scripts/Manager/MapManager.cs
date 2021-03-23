@@ -7,6 +7,9 @@ public class MapManager : Singleton<MapManager>
     public Vector2Int MapSize { get; private set; }
     private Dictionary<Vector2Int, SingleGrid> _gridDic = new Dictionary<Vector2Int, SingleGrid>();
     private LevelData _leveldata;
+    private Vector3[] _vertices;//存储地形顶点数据
+    private const int unit = 2;//地形一格的长度（单位米）
+    [SerializeField] private TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
 
 
@@ -22,6 +25,7 @@ public class MapManager : Singleton<MapManager>
     {
         _leveldata = DataManager.GetLevelData(levelId);
         MapSize = new Vector2Int(_leveldata.Length, _leveldata.Width);
+        _vertices = generator.GetTerrainMeshVertices();
     }
     private void InitGrid()
     {
@@ -40,6 +44,15 @@ public class MapManager : Singleton<MapManager>
         Debug.Log("地图已初始化！");
     }
 
+    /// <summary>
+    /// 获取地面某处的坐标
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetTerrainPosition(Vector2Int gridPos)
+    {
+        int p = gridPos.x * 4 + gridPos.y * _leveldata.Width * 4;
+        return _vertices[p];
+    }
     public GridType GetGridType(Vector2Int grid)
     {
         SingleGrid result;
@@ -116,8 +129,6 @@ public class MapManager : Singleton<MapManager>
 public class SingleGrid
 {
     public Vector2Int GridPos { get; private set; }
-    public Vector2Int Position { get { return 3 * GridPos; } }
-
     public GridType GridType { get; set; }
 
     public SingleGrid(int x, int z, GridType gridType)

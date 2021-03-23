@@ -87,10 +87,10 @@ public enum DriveType
 }
 public enum GridType
 {
-    empty,
-    occupy,
-    inherent,
-    road,
+    empty,//空
+    occupy,//占有
+    inherent,//固有
+    road,//路
 }
 
 public enum ItemType

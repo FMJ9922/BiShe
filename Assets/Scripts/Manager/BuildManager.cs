@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class BuildManager : Singleton<BuildManager>
 {
     #region
-    [SerializeField]
-    private GameObject gridHightLight;
+    //[SerializeField]
+    //private GameObject gridHightLight;
     [SerializeField]
     private Material mat_grid_green;
     [SerializeField]
@@ -36,7 +36,7 @@ public class BuildManager : Singleton<BuildManager>
     public void InitBuildManager()
     {
         LoadAB.Init();
-        ShowGrid(false);
+        //ShowGrid(false);
         IsInBuildMode = false;
     }
     public void BuildTest()
@@ -80,6 +80,7 @@ public class BuildManager : Singleton<BuildManager>
     private void OnConfirmRoadStartPos()
     {
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
+       
     }
 
     private void OnConfirmRoadEndPos()
@@ -100,7 +101,7 @@ public class BuildManager : Singleton<BuildManager>
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
         currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
-        gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
+        //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
 
@@ -109,7 +110,7 @@ public class BuildManager : Singleton<BuildManager>
         currentBuilding.transform.Rotate(Vector3.up, dir, Space.World);
         isTurn = !isTurn;
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
-        gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
+        //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
 
@@ -118,7 +119,7 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 curPos = currentBuilding.transform.position;
         targetGrids = GetAllGrids(currentBuilding.Size.x,currentBuilding.Size.y, curPos);
         isCurOverlap = MapManager.CheckGridOverlap(targetGrids);
-        gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
+        //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuild()
     {
@@ -133,6 +134,10 @@ public class BuildManager : Singleton<BuildManager>
             MapManager.SetGridTypeToOccupy(targetGrids);
 
             terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
+            //for (int i = 0; i < targetGrids.Length; i++)
+            //{
+            //    Debug.Log(MapManager.Instance.GetTerrainPosition(targetGrids[i]));
+            //}
             //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
@@ -162,7 +167,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private void WhenStartBuild()
     {
-        ShowGrid(true);
+        //ShowGrid(true);
         isTurn = false;
         isCurOverlap = false;
         IsInBuildMode = true;
@@ -174,7 +179,7 @@ public class BuildManager : Singleton<BuildManager>
     }
     private void WhenFinishBuild()
     {
-        ShowGrid(false);
+        //ShowGrid(false);
         GameManager.Instance.SetTimeScale(TimeScale.one);
         EventManager.StopListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
@@ -185,10 +190,10 @@ public class BuildManager : Singleton<BuildManager>
         targetGrids = null;
         IsInBuildMode = false;
     }
-    private void ShowGrid(bool isShow)
-    {
-        gridHightLight.SetActive(isShow);
-    }
+    //private void ShowGrid(bool isShow)
+    //{
+    //    gridHightLight.SetActive(isShow);
+    //}
 
     /// <summary>
     /// 对齐网格

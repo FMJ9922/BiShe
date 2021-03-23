@@ -55,7 +55,7 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         if (runtimeBuildData.formulaDatas.Length>0)
         {
-            Debug.Log(runtimeBuildData.CurFormula);
+            //Debug.Log(runtimeBuildData.CurFormula);
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         }
         productTime = formula.ProductTime;
