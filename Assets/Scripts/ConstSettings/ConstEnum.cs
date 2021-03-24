@@ -44,9 +44,9 @@ public enum IconType
 
 public enum RoadOption
 {
-    start = 0,
-    normal = 1,
-    end = 2,
+    straight = 0,
+    inner = 1,
+    outter = 2,
 }
 
 public enum BundlePrimaryType
@@ -55,8 +55,18 @@ public enum BundlePrimaryType
     road,
 }
 
+public enum Direction
+{
+    right = 1,
+    up = 2,
+    left = 3,
+    down = 0
+}
 
+public enum RoadType
+{
 
+}
 /// <summary>
 /// 建造页签的枚举
 /// </summary>
@@ -87,10 +97,10 @@ public enum DriveType
 }
 public enum GridType
 {
-    empty,
-    occupy,
-    inherent,
-    road,
+    empty,//空
+    occupy,//占有
+    inherent,//固有
+    road,//路
 }
 
 public enum ItemType

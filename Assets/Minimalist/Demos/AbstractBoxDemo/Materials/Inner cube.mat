@@ -55,9 +55,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: af4b6c30bc5c3474a810362abf4c30e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: aa421236fdb29fd40ad53e2cbe712f08, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.11, y: 0}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -101,14 +101,14 @@ Material:
     - _GradientHeight_F: 0
     - _GradientHeight_G: 0
     - _GradientHeight_L: 1
-    - _GradientHeight_R: 1
+    - _GradientHeight_R: 0
     - _GradientHeight_T: 5.0521727
     - _GradientSpace: 0
     - _HFogEnable: 0
     - _LMPower: 0
     - _LmapBlendingMode: 0
     - _LmapEnable: 0
-    - _MainTexturePower: 0
+    - _MainTexturePower: 0.07
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -135,7 +135,7 @@ Material:
     - _ShadowInfluence: 1
     - _ShowAO: 1
     - _ShowAmbientSettings: 0
-    - _ShowBack: 0
+    - _ShowBack: 1
     - _ShowBottom: 0
     - _ShowColorCorrection: 1
     - _ShowCustomShading: 1
@@ -143,8 +143,8 @@ Material:
     - _ShowFront: 1
     - _ShowGlobalGradientSettings: 1
     - _ShowLMap: 1
-    - _ShowLeft: 0
-    - _ShowRight: 0
+    - _ShowLeft: 1
+    - _ShowRight: 1
     - _ShowTexture: 1
     - _ShowTop: 0
     - _SmoothnessTextureChannel: 0
@@ -162,7 +162,7 @@ Material:
     - _Color1_D: {r: 0.4044118, g: 0.4044118, b: 0.4044118, a: 1}
     - _Color1_F: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
     - _Color1_L: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1_R: {r: 0.854902, g: 0.5176471, b: 0.86274517, a: 1}
+    - _Color1_R: {r: 1, g: 1, b: 1, a: 1}
     - _Color1_T: {r: 0.9960785, g: 0.92549026, b: 0.8431373, a: 1}
     - _Color2_B: {r: 1, g: 1, b: 1, a: 1}
     - _Color2_D: {r: 1, g: 1, b: 1, a: 1}

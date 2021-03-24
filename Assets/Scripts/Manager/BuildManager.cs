@@ -7,21 +7,32 @@ using UnityEngine.Events;
 public class BuildManager : Singleton<BuildManager>
 {
     #region
-    [SerializeField]
-    private GameObject gridHightLight;
+    //[SerializeField]
+    //private GameObject gridHightLight;
     [SerializeField]
     private Material mat_grid_green;
     [SerializeField]
     private Material mat_grid_red;
     [SerializeField]
     private TerrainGenerator terrainGenerator;
+    [SerializeField]
+    private GameObject preRoadPfb;
 
+    //修建筑相关
     private BuildingBase currentBuilding;
     private bool isCurOverlap = false;//当前建筑是否重叠
     private bool isTurn = false;//当前建筑是否旋转
     private Vector2Int[] targetGrids;
     private Vector2Int lastGrid;
 
+    //修路相关
+    private Vector3 roadStartPos;//道路建造起始点
+    private Vector3 roadEndPos;//道路建造终点
+    private List<GameObject> preRoads = new List<GameObject>();
+    private Direction roadDirection = Direction.right;
+    private int roadCount = 0;
+
+    //事件相关
     private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMoveSetBuildingPos(p);
     private UnityAction<float> rotateAc = (float dir) => Instance.OnRotateBuilding(dir);
     private UnityAction confirmAc = () => Instance.OnConfirmBuild();
@@ -30,18 +41,18 @@ public class BuildManager : Singleton<BuildManager>
     public static bool IsInBuildMode { get; set; }
     #endregion
 
-   
+
     #region 公共函数
 
     public void InitBuildManager()
     {
         LoadAB.Init();
-        ShowGrid(false);
+        //ShowGrid(false);
         IsInBuildMode = false;
     }
     public void BuildTest()
     {
-        
+
     }
 
     /// <summary>
@@ -61,46 +72,171 @@ public class BuildManager : Singleton<BuildManager>
     }
 
     /// <summary>
-    /// 修路
+    /// 开始修路
     /// </summary>
-    public void CreateRoads()
+    public void StartCreateRoads(int roadLevel = 0)
     {
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnConfirmBuildRoad);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
     }
 
     #endregion
 
     #region 私有函数
 
-    private void OnMouseMoveSetGridPos()
-    {
-
-    }
+    /// <summary>
+    /// 点下起点
+    /// </summary>
     private void OnConfirmRoadStartPos()
     {
+        roadStartPos = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.one);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
+        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
+        EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
     }
 
+    /// <summary>
+    /// 点下终点
+    /// </summary>
     private void OnConfirmRoadEndPos()
     {
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
+        EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
+        EventManager.TriggerEvent(ConstEvent.OnBuildToBeConfirmed);
+        //ChangeRoadCount(0);
 
     }
-    private void OnConfirmBuildRoad()
+
+    /// <summary>
+    /// 确认修建
+    /// </summary>
+    public void OnConfirmBuildRoad()
     {
+        List<Vector2Int> grids = new List<Vector2Int>();
+        Vector3 delta = CastTool.CastDirectionToVector(((int)roadDirection + 3) % 4);
+        for (int i = 0; i < preRoads.Count; i++)
+        {
+            grids.Add(GetCenterGrid(preRoads[i].transform.position));
+            grids.Add(GetCenterGrid(preRoads[i].transform.position+delta));
+        }
+        MapManager.Instance.GenerateRoad(grids.ToArray());
+        ChangeRoadCount(0);
+        EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+    }
+
+    /// <summary>
+    /// 取消修建
+    /// </summary>
+    public void OnCancelBuildRoad()
+    {
+        EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
-        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnConfirmBuildRoad);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
+        EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
+        ChangeRoadCount(0);
+    }
+    /// <summary>
+    /// 修路时显示预计建造的路
+    /// </summary>
+    /// <param name="pos"></param>
+    private void OnPreShowRoad(Vector3 pos)
+    {
+        Vector3 vector = pos - roadStartPos;
+        Direction dir;
+        int count;
+        CalculateLongestDir(vector, out dir, out count);
+        if (dir != roadDirection)
+        {
+            ChangeRoadDirection(dir);
+        }
+        if (count != roadCount)
+        {
+            try
+            {
+                ChangeRoadCount(count);
+            }
+            catch 
+            {
+                Debug.Log(count); 
+            }
+        }
     }
 
-    private void OnCancelLastRoad()
+
+    /// <summary>
+    /// 修改路的长度
+    /// </summary>
+    private void ChangeRoadCount(int newCount)
     {
-        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, RoadManager.Instance.BuildRoads);
+        Vector3 extensionDir = CastTool.CastDirectionToVector(roadDirection);
+        if (newCount > roadCount)
+        {
+            for (int i = roadCount; i < newCount; i++)
+            {
+                GameObject newRoad = Instantiate(preRoadPfb, transform);
+                newRoad.name = i.ToString();
+                newRoad.transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i)+new Vector3(0,0.2f,0);
+                preRoads.Add(newRoad);
+            }
+        }
+        else if (newCount == roadCount)
+        {
+            return;
+        }
+        else
+        {
+            for (int i = newCount; i < roadCount; i++)
+            {
+                GameObject deleteRoad = preRoads[preRoads.Count - 1];
+                preRoads.RemoveAt(preRoads.Count-1);
+                Destroy(deleteRoad);
+            }
+        }
+        roadCount = newCount;
+        roadEndPos = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * roadCount);
     }
+
+    /// <summary>
+    /// 修改路的延伸方向
+    /// </summary>
+    private void ChangeRoadDirection(Direction direction)
+    {
+        roadDirection = direction;
+        Vector3 extensionDir = CastTool.CastDirectionToVector(roadDirection);
+        for (int i = 0; i < preRoads.Count; i++)
+        {
+            preRoads[i].transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.2f, 0);
+        }
+    }
+
+    /// <summary>
+    /// 获得用户鼠标输入的最长的道路延伸方向
+    /// </summary>
+    /// <param name="input"></param>
+    /// <param name="dir"></param>
+    /// <param name="count"></param>
+    private void CalculateLongestDir(Vector3 input, out Direction dir, out int count)
+    {
+        int n;
+        if (Mathf.Abs(input.x) >= Mathf.Abs(input.z))
+        {
+            dir = input.x >= 0 ? Direction.right : Direction.left;
+            n = Mathf.CeilToInt(Mathf.Abs(input.x) / MapManager.unit);
+        }
+        else
+        {
+            dir = input.z >= 0 ? Direction.up : Direction.down;
+            n = Mathf.CeilToInt(Mathf.Abs(input.z) / MapManager.unit);
+        }
+        count = n > 1 ? n : 1;
+    }
+
 
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
         currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
-        gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
+        //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
 
@@ -109,16 +245,16 @@ public class BuildManager : Singleton<BuildManager>
         currentBuilding.transform.Rotate(Vector3.up, dir, Space.World);
         isTurn = !isTurn;
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
-        gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
+        //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
 
     private void CheckOverlap()
     {
         Vector3 curPos = currentBuilding.transform.position;
-        targetGrids = GetAllGrids(currentBuilding.Size.x,currentBuilding.Size.y, curPos);
+        targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos);
         isCurOverlap = MapManager.CheckGridOverlap(targetGrids);
-        gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
+        //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuild()
     {
@@ -127,12 +263,16 @@ public class BuildManager : Singleton<BuildManager>
             Debug.Log("当前建筑重叠，无法建造！");
             return;
         }
-        if(CheckBuildResourcesEnoughAndUse())
+        if (CheckBuildResourcesEnoughAndUse())
         {
             currentBuilding.OnConfirmBuild();
             MapManager.SetGridTypeToOccupy(targetGrids);
 
             terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
+            //for (int i = 0; i < targetGrids.Length; i++)
+            //{
+            //    Debug.Log(MapManager.Instance.GetTerrainPosition(targetGrids[i]));
+            //}
             //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
         }
@@ -162,7 +302,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private void WhenStartBuild()
     {
-        ShowGrid(true);
+        //ShowGrid(true);
         isTurn = false;
         isCurOverlap = false;
         IsInBuildMode = true;
@@ -174,7 +314,7 @@ public class BuildManager : Singleton<BuildManager>
     }
     private void WhenFinishBuild()
     {
-        ShowGrid(false);
+        //ShowGrid(false);
         GameManager.Instance.SetTimeScale(TimeScale.one);
         EventManager.StopListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
@@ -185,10 +325,10 @@ public class BuildManager : Singleton<BuildManager>
         targetGrids = null;
         IsInBuildMode = false;
     }
-    private void ShowGrid(bool isShow)
-    {
-        gridHightLight.SetActive(isShow);
-    }
+    //private void ShowGrid(bool isShow)
+    //{
+    //    gridHightLight.SetActive(isShow);
+    //}
 
     /// <summary>
     /// 对齐网格
@@ -223,12 +363,18 @@ public class BuildManager : Singleton<BuildManager>
         }
         return newPos;
     }
-
+    private Vector2Int GetCenterGrid(Vector3 centerPos)
+    {
+        Vector3 centerGrid = centerPos / 2;
+        int x = Mathf.FloorToInt(centerGrid.x);
+        int z = Mathf.FloorToInt(centerGrid.z);
+        return new Vector2Int(x, z);
+    }
     /// <summary>
     /// 获取当前待造建筑所占用的所有格子
     /// </summary>
     /// <returns></returns>
-    private Vector2Int[] GetAllGrids(int sizeX,int sizeY, Vector3 centerPos)
+    private Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos)
     {
         int startX, endX, startZ, endZ;
         int width = isTurn ? sizeY : sizeX;
@@ -257,9 +403,9 @@ public class BuildManager : Singleton<BuildManager>
 
         Vector2Int[] grids = new Vector2Int[width * height];
         int index = 0;
-        for (int i = startX; i <= endX; i ++)
+        for (int i = startX; i <= endX; i++)
         {
-            for (int j = startZ; j <= endZ; j ++)
+            for (int j = startZ; j <= endZ; j++)
             {
                 grids[index] = new Vector2Int(i, j);
                 index++;

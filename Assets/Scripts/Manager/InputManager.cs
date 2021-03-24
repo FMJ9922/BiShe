@@ -31,7 +31,7 @@ public partial class InputManager : Singleton<InputManager>
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray,out hit,1000,1<<LayerMask.NameToLayer("Ground")))
         {
             if (hit.collider.CompareTag("Ground") && LastGroundRayPos != hit.point && Cursor.lockState != CursorLockMode.Locked)
             {

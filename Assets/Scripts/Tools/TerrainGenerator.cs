@@ -31,7 +31,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         //Debug.Log("处理完毕");
     }
 
-    [ContextMenu("ReplaceTerrain")]
+    //[ContextMenu("ReplaceTerrain")]
     public void ReplaceTerrain()
     {
         for (int j = 0; j < height.Length - 1; j++)
@@ -96,7 +96,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int index = z * (height.Length - 1) + x;
         RefreshUV(tex, 4, index, dir);
     }
-    void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
+    public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
     {
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         Vector2[] uv = mesh.uv;
@@ -107,6 +107,35 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         uv[4 * index + (1 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
         uv[4 * index + (3 + dir) % 4] = new Vector2((x / length) + adjust, ((length - h) / length) - adjust);
+        mesh.uv = uv;
+        mesh.RecalculateNormals();
+    }
+    /// <summary>
+    /// 刷UV
+    /// </summary>
+    /// <param name="tex">贴图</param>
+    /// <param name="length">贴图大小</param>
+    /// <param name="indexs">要修改的顶点索引</param>
+    /// <param name="dir">方向</param>
+    /// <param name="adjust">调整边缘</param>
+    public void RefreshUV(int tex,int length,int[] indexs ,int dir =0,float adjust = 0.01f) 
+    {
+        mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        Vector2[] uv = mesh.uv;
+        float h = Mathf.FloorToInt(tex / length);
+        float x = tex - length * h;
+        //Debug.Log(h + " " + x);
+        Vector2 one = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
+        Vector2 two = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
+        Vector2 three = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
+        Vector2 four = new Vector2((x / length) + adjust, ((length - h) / length) - adjust);
+        for (int i = 0; i < indexs.Length; i++)
+        {
+            uv[4 * indexs[i] + dir % 4] = one;
+            uv[4 * indexs[i] + (1 + dir) % 4] = two;
+            uv[4 * indexs[i] + (2 + dir) % 4] = three;
+            uv[4 * indexs[i] + (3 + dir) % 4] = four;
+        }
         mesh.uv = uv;
         mesh.RecalculateNormals();
     }
@@ -333,6 +362,16 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
     }
 
+    /// <summary>
+    /// 获得地形的顶点数据
+    /// </summary>
+    /// <returns></returns>
+    public Vector3[] GetTerrainMeshVertices()
+    {
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        verticles = mesh.vertices;
+        return verticles;
+    }
     [ContextMenu("GenerateMeshes")]
     void GenerateMeshes()
     {
@@ -351,14 +390,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 verticles[4 * i + 1] = origin + new Vector3((x + 1) * 2, height[x + 1][y], y * 2);
                 verticles[4 * i + 2] = origin + new Vector3((x + 1) * 2, height[x + 1][y + 1], (y + 1) * 2);
                 verticles[4 * i + 3] = origin + new Vector3(x * 2, height[x][y + 1], (y + 1) * 2);
-                //uv[4 * i] = new Vector2(0.01F, 0.01F);
-                //uv[4 * i + 1] = new Vector2(0.24f, 0.01F);
-                //uv[4 * i + 2] = new Vector2(0.24f, 0.24f);
-                //uv[4 * i + 3] = new Vector2(0.01F, 0.24f);
-                uv[4 * i] = new Vector2((float)x/ height.Length, (float)y / height.Length);
-                uv[4 * i + 1] = new Vector2((float)x / height.Length, (float)y / height.Length);
-                uv[4 * i + 2] = new Vector2((float)x / height.Length, (float)y / height.Length);
-                uv[4 * i + 3] = new Vector2((float)x / height.Length, (float)y / height.Length);
+                uv[4 * i] = new Vector2(0.01F, 1-0.01F);
+                uv[4 * i + 1] = new Vector2(0.24f, 1-0.01F);
+                uv[4 * i + 2] = new Vector2(0.24f, 1-0.24f);
+                uv[4 * i + 3] = new Vector2(0.01F, 1-0.24f);
+                //uv[4 * i] = new Vector2((float)x/ height.Length, (float)y / height.Length);
+                //uv[4 * i + 1] = new Vector2((float)x / height.Length, (float)y / height.Length);
+                //uv[4 * i + 2] = new Vector2((float)x / height.Length, (float)y / height.Length);
+                //uv[4 * i + 3] = new Vector2((float)x / height.Length, (float)y / height.Length);
             }
         }
         transform.GetComponent<MeshFilter>().mesh = mesh = new Mesh();
