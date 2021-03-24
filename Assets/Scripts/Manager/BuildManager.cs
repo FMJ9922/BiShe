@@ -41,7 +41,7 @@ public class BuildManager : Singleton<BuildManager>
     public static bool IsInBuildMode { get; set; }
     #endregion
 
-
+    
     #region 公共函数
 
     public void InitBuildManager()
@@ -90,6 +90,7 @@ public class BuildManager : Singleton<BuildManager>
     private void OnConfirmRoadStartPos()
     {
         roadStartPos = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.one);
+        Debug.Log(roadStartPos);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
         EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
@@ -117,7 +118,7 @@ public class BuildManager : Singleton<BuildManager>
         for (int i = 0; i < preRoads.Count; i++)
         {
             grids.Add(GetCenterGrid(preRoads[i].transform.position));
-            grids.Add(GetCenterGrid(preRoads[i].transform.position+delta));
+            grids.Add(GetCenterGrid(preRoads[i].transform.position - delta));
         }
         MapManager.Instance.GenerateRoad(grids.ToArray());
         ChangeRoadCount(0);
@@ -156,9 +157,9 @@ public class BuildManager : Singleton<BuildManager>
             {
                 ChangeRoadCount(count);
             }
-            catch 
+            catch
             {
-                Debug.Log(count); 
+                Debug.Log(count);
             }
         }
     }
@@ -176,7 +177,8 @@ public class BuildManager : Singleton<BuildManager>
             {
                 GameObject newRoad = Instantiate(preRoadPfb, transform);
                 newRoad.name = i.ToString();
-                newRoad.transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i)+new Vector3(0,0.2f,0);
+                newRoad.transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
+                newRoad.transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
                 preRoads.Add(newRoad);
             }
         }
@@ -189,7 +191,7 @@ public class BuildManager : Singleton<BuildManager>
             for (int i = newCount; i < roadCount; i++)
             {
                 GameObject deleteRoad = preRoads[preRoads.Count - 1];
-                preRoads.RemoveAt(preRoads.Count-1);
+                preRoads.RemoveAt(preRoads.Count - 1);
                 Destroy(deleteRoad);
             }
         }
@@ -206,7 +208,8 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 extensionDir = CastTool.CastDirectionToVector(roadDirection);
         for (int i = 0; i < preRoads.Count; i++)
         {
-            preRoads[i].transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.2f, 0);
+            preRoads[i].transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
+            preRoads[i].transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i+1)) + new Vector3(0, 0.01f, 0));
         }
     }
 
@@ -347,19 +350,19 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 newPos = pos;
         if (vector2Int.x % 2 != 0)
         {
-            newPos.x = Mathf.Round(pos.x / 2) * 2;
+            newPos.x = Mathf.Floor(pos.x / 2) * 2 + 1f;
         }
         else
         {
-            newPos.x = (Mathf.Round(pos.x / 2 - 0.5f) + 0.5f) * 2;
+            newPos.x = Mathf.Floor(pos.x / 2) * 2;
         }
         if (vector2Int.y % 2 != 0)
         {
-            newPos.z = Mathf.Round(pos.z / 2) * 2;
+            newPos.z = Mathf.Floor(pos.z / 2) * 2 + 1f;
         }
         else
         {
-            newPos.z = (Mathf.Round(pos.z / 2 - 0.5f) + 0.5f) * 2;
+            newPos.z = Mathf.Floor(pos.z / 2) * 2;
         }
         return newPos;
     }
@@ -400,6 +403,7 @@ public class BuildManager : Singleton<BuildManager>
             startZ = Mathf.RoundToInt(centerGrid.z) - (height - 1) / 2;
             endZ = Mathf.RoundToInt(centerGrid.z) + (height - 1) / 2;
         }
+
 
         Vector2Int[] grids = new Vector2Int[width * height];
         int index = 0;

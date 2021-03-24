@@ -28,7 +28,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert16
-    second: {fileID: 2100000, guid: 6e36daed5c059204e99ecaf557b6d3fa, type: 2}
+    second: {fileID: 2100000, guid: 0c1dc34725d0de94c86dbd07ce73a3b1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -133,5 +133,5 @@ ModelImporter:
   avatarSetup: 0
   additionalBone: 0
   userData: 
-  assetBundleName: building
-  assetBundleVariant: ab
+  assetBundleName: 
+  assetBundleVariant: 

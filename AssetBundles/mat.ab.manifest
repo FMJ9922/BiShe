@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2826478920
+CRC: 3163216147
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4822a7fbfc8e774825699cc68981ab48
+    Hash: 0c8166c30d091f6386e62c9261869cae
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -16,69 +16,24 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 Assets:
-- Assets/ArtAssets/Model/Building/Materials/oldMarketWall.mat
-- Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
-- Assets/ArtAssets/Model/Building/Materials/oldRidge.mat
-- Assets/ArtAssets/Model/Building/Materials/roadblack.mat
-- Assets/ArtAssets/Model/Building/Materials/FactoryWall2.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketWall2.mat
-- Assets/ArtAssets/Shader/Custom_DynamicGrass.mat
-- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof03.mat
-- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof02.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketRoof1.mat
-- Assets/ArtAssets/Model/Building/Materials/FactoryWall.mat
-- Assets/ArtAssets/Model/Building/Materials/oldFarmWall.mat
-- Assets/ArtAssets/Model/Building/Materials/road.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillRoof4.mat
-- Assets/ArtAssets/Model/Building/Materials/WallStone.mat
-- Assets/ArtAssets/Model/Building/Materials/FactoryRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillWall1.mat
-- Assets/ArtAssets/Model/Building/Materials/lambert1.mat
-- Assets/ArtAssets/Model/Building/Materials/oldFarmRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/road3.mat
-- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof2.mat
-- Assets/ArtAssets/Model/Building/Materials/oldFactoryRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillRoof2.mat
-- Assets/ArtAssets/Model/Building/Materials/Roof 1.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketRoof2.mat
-- Assets/ArtAssets/Model/Building/Materials/FieldSoil2.mat
-- Assets/ArtAssets/Model/Building/Materials/Door2.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/StorehouseWall.mat
-- Assets/ArtAssets/Model/Building/Materials/FieldSoil1.mat
-- Assets/ArtAssets/Model/Building/Materials/FarmFence.mat
-- Assets/ArtAssets/Model/Building/Materials/oldFarmRoof 1.mat
-- Assets/ArtAssets/Shader/DynamicGrass.shader
-- Assets/ArtAssets/Texture/Wheat_alpha.psd
-- Assets/ArtAssets/Model/Building/Materials/SawmillWall2.mat
-- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof3.mat
-- Assets/ArtAssets/Model/Building/Materials/TreeWood.mat
-- Assets/ArtAssets/Model/Building/Materials/Door.mat
-- Assets/ArtAssets/Model/Building/Materials/StorehouseStone.mat
-- Assets/ArtAssets/Model/Building/Materials/StorehouseRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillMachine2.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketWall3.mat
-- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof01.mat
-- Assets/ArtAssets/Model/Building/Materials/oldMarketRoof04.mat
-- Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
-- Assets/ArtAssets/Model/Building/Materials/FactoryWall3.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillRoof1.mat
-- Assets/ArtAssets/Model/Building/Materials/oldRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillRoof3.mat
-- Assets/ArtAssets/Model/Building/Materials/Roof.mat
-- Assets/ArtAssets/Model/Building/Materials/road2.mat
-- Assets/ArtAssets/Model/Building/Materials/FarmRoof.mat
-- Assets/ArtAssets/Model/Building/Materials/MarketWall.mat
-- Assets/ArtAssets/Model/Building/Materials/oldMarketWood.mat
-- Assets/ArtAssets/Model/Plant/Materials/Wheat_Alpha.mat
-- Assets/ArtAssets/Model/Building/Materials/oldHouseRidge.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillWood.mat
-- Assets/ArtAssets/Model/Building/Materials/FarmWall.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillMachine4.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillMachine3.mat
-- Assets/ArtAssets/Model/Building/Materials/Wall.mat
-- Assets/ArtAssets/Model/Building/Materials/roadwhite.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillMachine1.mat
-- Assets/ArtAssets/Model/Building/Materials/SawmillWall3.mat
-- Assets/ArtAssets/Model/Building/Materials/Ridge.mat
+- Assets/Scenes Assets/Material/Universal_Terrain_GrassLand_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_Flag_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Factory_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Sawmill_L1L2L3_Tex.tga
+- Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_MarketWarehouse_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Terrain_BareGround_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Factory_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Plain_Building_Ground_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Plant_TreeTrunk_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2_Mat.mat
 Dependencies: []

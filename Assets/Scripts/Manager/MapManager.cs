@@ -56,7 +56,7 @@ public class MapManager : Singleton<MapManager>
     {
         generator.RefreshUV(12 - level * 4, 4, index, (int)direction);
     }
-    public void GenerateRoad(Vector2Int[] roadGrid,int level = 0)
+    public void GenerateRoad(Vector2Int[] roadGrid, int level = 0)
     {
         for (int i = 0; i < roadGrid.Length; i++)
         {
@@ -80,7 +80,7 @@ public class MapManager : Singleton<MapManager>
                     break;
             }
         }
-        
+
     }
 
     public void GetRoadTypeAndDir(Vector2Int roadGrid, out RoadOption roadOption, out Direction direction)
@@ -92,16 +92,16 @@ public class MapManager : Singleton<MapManager>
         around[1] = GridType.road == GetGridType(roadGrid + new Vector2Int(1, -1));
         around[2] = GridType.road == GetGridType(roadGrid + new Vector2Int(1, 1));
         around[3] = GridType.road == GetGridType(roadGrid + new Vector2Int(-1, 1));
-        around[4] = GridType.road == GetGridType(roadGrid + new Vector2Int(-1, 0));
+        around[4] = GridType.road == GetGridType(roadGrid + new Vector2Int(0, -1));
         around[5] = GridType.road == GetGridType(roadGrid + new Vector2Int(1, 0));
         around[6] = GridType.road == GetGridType(roadGrid + new Vector2Int(0, 1));
-        around[7] = GridType.road == GetGridType(roadGrid + new Vector2Int(0, -1));
+        around[7] = GridType.road == GetGridType(roadGrid + new Vector2Int(-1, 0));
         int count = 0;
         for (int i = 0; i < around.Length; i++)
         {
             if (around[i]) count++;
         }
-        Debug.Log(count);
+        //Debug.Log(count);
         if (count == 7)
         {
             roadOption = RoadOption.inner;
@@ -109,24 +109,26 @@ public class MapManager : Singleton<MapManager>
             {
                 if (around[i] && !around[(i + 1) % 4])
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i ) % 4);
+                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i) % 4);
                     return;
                 }
             }
         }
         else
-        if (count >3)
+        if (count > 3)
         {
             roadOption = RoadOption.straight;
             for (int i = 0; i < 4; i++)
             {
-                if (around[i] && around[(i + 1) % 4]&&count!=6) {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i+1)%4);
+                if (around[i] && around[(i + 1) % 4] && count != 6)
+                {
+                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
                     return;
                 }
-                if (!around[i] && around[(i + 1) % 4] && count == 6)
+                if (!around[(i+4)] && count == 6)
                 {
                     direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 3) % 4);
+                    Debug.Log((int)direction);
                     return;
                 }
             }
@@ -138,7 +140,7 @@ public class MapManager : Singleton<MapManager>
             {
                 if (around[i] && !around[(i + 1) % 4])
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i +1) % 4);
+                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
                     return;
                 }
             }
@@ -170,8 +172,8 @@ public class MapManager : Singleton<MapManager>
     private Vector2Int GetCenterGrid(Vector3 centerPos)
     {
         Vector3 centerGrid = centerPos / 2;
-        int x = Mathf.RoundToInt(centerGrid.x);
-        int z = Mathf.RoundToInt(centerGrid.z);
+        int x = Mathf.FloorToInt(centerGrid.x);
+        int z = Mathf.FloorToInt(centerGrid.z);
         return new Vector2Int(x, z);
     }
     public GridType GetGridType(Vector2Int grid)

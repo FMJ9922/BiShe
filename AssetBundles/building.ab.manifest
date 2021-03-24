@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2900068396
+CRC: 858636352
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d611c0ecdb597696165d208b80b12bcc
+    Hash: 7bed8fda2b33a6fdf9d4406e0deed64e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 085f6eb894ebab805a60f22f36e41d69
+    Hash: 9224f856b29b46dd4d6cbb725f026133
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -25,66 +25,76 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 65
   Script: {instanceID: 0}
-- Class: 74
-  Script: {instanceID: 0}
-- Class: 111
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 6883a93cb9e9e9645853de0e726afc2c, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 73eecc9f0eeee0044a06bb58885ec9fb, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse005.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse003.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Market001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Factory001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse024.fbx
-- Assets/Prefabs/Building/House/L1_Northhouse001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse021.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse013.fbx
-- Assets/ArtAssets/Model/Building/Building_model_0_Fieldedge001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Market001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse014.fbx
-- Assets/Prefabs/Building/Field/L1_Fieldedge001.prefab
-- Assets/ArtAssets/Model/Plant/Plant_mode_LOD2_Wheat001.fbx
-- Assets/Prefabs/Building/Farm/L1_Farm001.prefab
-- Assets/Prefabs/Building/House/L1_Storehouse001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse002.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Northhouse001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Farm001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse007.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse016.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse010.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse022.fbx
-- Assets/Prefabs/Building/Factory/L2_Factory001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse017.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse020.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse012.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse018.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse006.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Factory001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse008.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse019.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse015.fbx
-- Assets/Prefabs/Building/Farm/L2_Farm001.prefab
-- Assets/Prefabs/Building/Factory/L1_Factory001.prefab
-- Assets/Prefabs/Building/Sawmill/L1_Sawmill001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Sawmill001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse023.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse009.fbx
-- Assets/Prefabs/Building/Market/L1_Market001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse004.fbx
-- Assets/Prefabs/Building/House/L2_Northhouse011.prefab
-- Assets/Prefabs/Building/Market/L2_Market001.prefab
-- Assets/ArtAssets/Model/Building/Building_mode_L2_Northhouse011.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Farm001.fbx
-- Assets/ArtAssets/Model/Building/Building_mode_L1_Storehouse001.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_04_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L3_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L3_01_Mod.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L1_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L2_01_Mod.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L2_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L3_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_04_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Mod.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_01_Mod.fbx
 Dependencies:
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab
