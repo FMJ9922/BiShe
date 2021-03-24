@@ -2,19 +2,21 @@
 using UnityEditor;
 
 // 自定义编辑器窗口中实现Scene射线
+
 public class TerrainWindow : EditorWindow
 {
     int index = 0;
     bool canPaint = false;
     bool canSmooth = false;
     bool canDir = false;
+    bool canBuildRoad = false;
     int dir = 0;
     int range = 0;
     int height = 0;
     int triDir = 0;
+    private int buildRoadState;//cancel = 0,waitEnterStartPos = 1,waitEnterEndPos =2,waitEnterConfirm = 3.
     public delegate void Paint();
     public static event Paint OnPaint;
-
     [MenuItem("Window/TerrainWindow")]//在unity菜单Window下有MyWindow选项
 
     static void Init()
@@ -41,6 +43,7 @@ public class TerrainWindow : EditorWindow
 
     private void OnSceneGUI(SceneView sceneView)
     {
+        //Debug.Log(canPaint);
         if (!canPaint&&!canSmooth&&!canDir)
         {
             return;
@@ -111,9 +114,18 @@ public class TerrainWindow : EditorWindow
         }
         if (GUILayout.Button("取消改地形"))
         {
-
             canDir= false;
         }
+        /*if (GUILayout.Button("开始修路"))
+        {
+            buildRoadState = 0;
+            canBuildRoad = true;
+        }
+        if (GUILayout.Button("取消修路"))
+        {
+            buildRoadState = 0;
+            canBuildRoad = false;
+        }*/
     }
-
+    
 }

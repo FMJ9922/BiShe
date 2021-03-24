@@ -46,6 +46,7 @@ public class CastTool : MonoBehaviour
     }
     public static Vector3 CastDirectionToVector(int direction)
     {
+        direction %= 4;
         int unit = MapManager.unit;
         switch (direction)
         {

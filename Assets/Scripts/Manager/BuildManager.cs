@@ -10,9 +10,9 @@ public class BuildManager : Singleton<BuildManager>
     //[SerializeField]
     //private GameObject gridHightLight;
     [SerializeField]
-    private Material mat_grid_green;
+    private Material mat_road_green;
     [SerializeField]
-    private Material mat_grid_red;
+    private Material mat_road_red;
     [SerializeField]
     private TerrainGenerator terrainGenerator;
     [SerializeField]
@@ -41,7 +41,7 @@ public class BuildManager : Singleton<BuildManager>
     public static bool IsInBuildMode { get; set; }
     #endregion
 
-    
+
     #region 公共函数
 
     public void InitBuildManager()
@@ -83,17 +83,29 @@ public class BuildManager : Singleton<BuildManager>
     #endregion
 
     #region 私有函数
-
+    private bool CheckRoadStartPosAvalible()
+    {
+        Vector2Int startGrid = GetCenterGrid(roadStartPos);
+        if (MapManager.Instance.GetGridType(startGrid)==GridType.road)
+        {
+            return true;
+        }
+        Debug.Log("应与已有道路相连");
+        return false;
+    }
     /// <summary>
     /// 点下起点
     /// </summary>
     private void OnConfirmRoadStartPos()
     {
         roadStartPos = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.one);
-        Debug.Log(roadStartPos);
-        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
-        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
-        EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
+        if (CheckRoadStartPosAvalible())
+        {
+            EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
+            EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
+            EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
+
+        }
     }
 
     /// <summary>
@@ -114,11 +126,31 @@ public class BuildManager : Singleton<BuildManager>
     public void OnConfirmBuildRoad()
     {
         List<Vector2Int> grids = new List<Vector2Int>();
-        Vector3 delta = CastTool.CastDirectionToVector(((int)roadDirection + 3) % 4);
+        int dir = 0;
+        Vector3 adjust = Vector3.zero;
+        switch (roadDirection)
+        {
+            case Direction.down:
+                dir = 1;
+                adjust += new Vector3(0, 0, -2);
+                break;
+            case Direction.up:
+                dir = 1;
+                break;
+            case Direction.right:
+                dir = 2;
+                break;
+            case Direction.left:
+                adjust += new Vector3(-2, 0, 0);
+                dir = 2;
+                break;
+        }
+        Vector3 delta = CastTool.CastDirectionToVector(dir);
+        //Debug.Log(delta.ToString());
         for (int i = 0; i < preRoads.Count; i++)
         {
-            grids.Add(GetCenterGrid(preRoads[i].transform.position));
-            grids.Add(GetCenterGrid(preRoads[i].transform.position - delta));
+            grids.Add(GetCenterGrid(preRoads[i].transform.position + adjust));
+            grids.Add(GetCenterGrid(preRoads[i].transform.position - delta + adjust));
         }
         MapManager.Instance.GenerateRoad(grids.ToArray());
         ChangeRoadCount(0);
@@ -209,7 +241,7 @@ public class BuildManager : Singleton<BuildManager>
         for (int i = 0; i < preRoads.Count; i++)
         {
             preRoads[i].transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
-            preRoads[i].transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i+1)) + new Vector3(0, 0.01f, 0));
+            preRoads[i].transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
         }
     }
 
@@ -221,6 +253,7 @@ public class BuildManager : Singleton<BuildManager>
     /// <param name="count"></param>
     private void CalculateLongestDir(Vector3 input, out Direction dir, out int count)
     {
+        input += new Vector3(0.5f, 0f, 0.5f);
         int n;
         if (Mathf.Abs(input.x) >= Mathf.Abs(input.z))
         {

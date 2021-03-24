@@ -41,6 +41,12 @@ public class MapManager : Singleton<MapManager>
                 _gridDic.Add(new Vector2Int(i, j), new SingleGrid(i, j, GridType.empty));
             }
         }
+        MapData mapData = TerrainGenerator.Instance.GetMapData();
+        for (int i = 0; i < mapData.roadGrids.Count; i++)
+        {
+            SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
+            Debug.Log(mapData.roadGrids[i].Vector2Int);
+        }
         Debug.Log("地图已初始化！");
     }
 
@@ -67,6 +73,7 @@ public class MapManager : Singleton<MapManager>
             RoadOption roadOption;
             Direction direction;
             GetRoadTypeAndDir(roadGrid[i], out roadOption, out direction);
+            SetGridType(roadGrid[i], GridType.road);
             switch (roadOption)
             {
                 case RoadOption.straight:

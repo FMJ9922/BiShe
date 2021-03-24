@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class TerrainGenerator : Singleton<TerrainGenerator>
 {
     public Terrain terrain;
     public static float[][] height;
-    public GameObject tri1, tri2, tri3, tri4;
     private Vector3[] verticles;
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
-    
-
+    public const string pathName = "/mapData.bin";//路径名称
+    public Vector3 start, end;
+    #region 顶点处理
     [ContextMenu("CalculateHeights")]
     public void CalculateHeights()
     {
@@ -32,7 +34,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
 
     //[ContextMenu("ReplaceTerrain")]
-    public void ReplaceTerrain()
+    /*public void ReplaceTerrain()
     {
         for (int j = 0; j < height.Length - 1; j++)
         {
@@ -77,7 +79,8 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
             }
         }
         Debug.Log("生成完毕");
-    }
+    }*/
+
     public Mesh CopyMesh(Mesh originMesh)
     {
         Mesh m = new Mesh();
@@ -95,6 +98,23 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int z = Mathf.FloorToInt(delta.z / 2);
         int index = z * (height.Length - 1) + x;
         RefreshUV(tex, 4, index, dir);
+        MapData mapData = GetMapData();
+        if (tex == 4|| tex == 5|| tex == 6|| tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
+        {
+            mapData.roadGrids.Add(new Vector2IntSerializer(x,z));
+            SaveMapData(mapData);
+        }
+        else
+        {
+            for (int i = 0; i < mapData.roadGrids.Count; i++)
+            {
+                if (mapData.roadGrids[i].Vector2Int == new Vector2Int(x, z)) 
+                {
+                    mapData.roadGrids.RemoveAt(i);
+                }
+            }
+            SaveMapData(mapData);
+        }
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
     {
@@ -102,7 +122,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
-        //Debug.Log(h + " " + x);
+        Debug.Log(h + " " + x);
         uv[4 * index + dir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (1 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
@@ -355,13 +375,12 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         return new Vector3(vector3.x, height, vector3.z);
     }
-    [ContextMenu("Save")]
     void SaveAsset()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
+        //AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
     }
-
+    
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>
@@ -515,5 +534,96 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         }
         return false;
     }
+    #endregion
 
+    public void OnBuildRoad(Vector3 pos,int buildRoadState)
+    {
+        buildRoadState++;
+        switch (buildRoadState)
+        {
+            case 0:
+                return;
+            case 1:
+                start = pos;
+                Debug.Log("起点：" + pos);
+                Debug.Log("请点击终点");
+                break;
+            case 2:
+                end = pos;
+                Debug.Log("终点：" + pos);
+                Debug.Log("正在修改并保存数据");
+
+                break;
+            default:
+                
+                break;
+        }
+    }
+
+
+    #region 存储与读取数据
+    [ContextMenu("生成地图配置文件")]
+    public void InitMapData()
+    {
+        MapData mapData = new MapData();
+        mapData.roadGrids = new List<Vector2IntSerializer>();
+        mapData.buildingGrids = new List<Vector2IntSerializer>();
+        SaveMapData(mapData);
+    }
+
+    private void SaveMapData(MapData mapData)
+    {
+        string path = GetPath();
+        FileStream file;
+        BinaryFormatter bf = new BinaryFormatter();
+        file = File.Open(path, FileMode.Create);
+        bf.Serialize(file, mapData);
+        file.Close();
+        Debug.Log("存储成功！");
+
+    }
+
+    public MapData GetMapData()
+    {
+        string path = GetPath();
+        MapData mapData;
+        FileStream file;
+        BinaryFormatter bf = new BinaryFormatter();
+        file = File.Open(path, FileMode.Open);
+        mapData = (MapData)bf.Deserialize(file);
+        file.Close();
+        return mapData;
+    }
+    private string GetPath()
+    {
+        string path = string.Format("{0}{1}", Application.streamingAssetsPath, pathName);
+        return path;
+    }
+    #endregion
+}
+
+[System.Serializable]
+public class MapData
+{
+    public List<Vector2IntSerializer> roadGrids;//已有道路的格子
+    public List<Vector2IntSerializer> buildingGrids;//已有建筑的格子
+
+}
+
+[System.Serializable]
+public struct Vector2IntSerializer
+{
+    public int x;
+    public int y;
+
+    public Vector2IntSerializer(int x,int z)
+    {
+        this.x = x;
+        this.y = z;
+    }
+
+    public Vector2Int Vector2Int
+    {
+        get { return new Vector2Int(x, y); }
+    }
 }
