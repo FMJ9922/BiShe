@@ -1,12 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_03_Preb.prefab.meta
 guid: cb877d9decb17404d8ce94c4cbb79c76
 PrefabImporter:
-=======
-guid: 8f45e171c1b0c824c8ee28fba89f60d9
-DefaultImporter:
->>>>>>> d2662436aaf96cc4534febe2eeb3068480f911c5:Assets/JMO Assets/Toony Colors Pro/Demo TCP2/Cat Demo LWRP.unitypackage.meta
   externalObjects: {}
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: building
+  assetBundleVariant: ab

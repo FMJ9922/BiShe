@@ -184,7 +184,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: L1_Storehouse001
+    PfbName: Universal_Building_Warehouse_L1_01_Preb
     tabType: 4
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
   - Id: 20004
@@ -205,7 +205,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 30
     BundleName: building.ab
-    PfbName: L1_Market001
+    PfbName: Universal_Building_Market_L1_01_Preb
     tabType: 4
     Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
   - Id: 20005
@@ -266,7 +266,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 50
     BundleName: building.ab
-    PfbName: L1_Factory001
+    PfbName: Universal_Building_Factory_L1_01_Preb
     tabType: 3
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
   - Id: 20008
@@ -287,9 +287,198 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
-    PfbName: L1_Sawmill001
+    PfbName: Universal_Building_Sawmill_L1_01_Preb
     tabType: 2
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+  - Id: 20009
+    Name: "Hut\u2161"
+    CostPerWeek: 0
+    Formulas: 5ac30000
+    Population: -10
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 5
+    Width: 3
+    Price: 90
+    costResources:
+    - ItemId: 12003
+      ItemNum: 5
+    - ItemId: 12009
+      ItemNum: 5
+    BundleName: building.ab
+    PfbName: Plain_Building_Residential_L1_02_Preb
+    tabType: 0
+    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+  - Id: 20010
+    Name: "Factory\u2161"
+    CostPerWeek: 8
+    Formulas: 53c3000054c3000055c3000058c30000
+    Population: 12
+    MaxStorage: 100
+    InfluenceRange: 45
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 4
+    Width: 6
+    Price: 200
+    costResources:
+    - ItemId: 12003
+      ItemNum: 50
+    - ItemId: 12009
+      ItemNum: 50
+    BundleName: building.ab
+    PfbName: Universal_Building_Factory_L2_01_Preb
+    tabType: 3
+    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
+  - Id: 20011
+    Name: "Factory\u2162"
+    CostPerWeek: 8
+    Formulas: 53c3000054c3000055c3000058c30000
+    Population: 12
+    MaxStorage: 100
+    InfluenceRange: 45
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 4
+    Width: 6
+    Price: 200
+    costResources:
+    - ItemId: 12003
+      ItemNum: 50
+    - ItemId: 12009
+      ItemNum: 50
+    BundleName: building.ab
+    PfbName: Universal_Building_Factory_L3_01_Preb
+    tabType: 3
+    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
+  - Id: 20012
+    Name: "Market\u2161"
+    CostPerWeek: 10
+    Formulas: 
+    Population: 15
+    MaxStorage: 100
+    InfluenceRange: 200
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 12
+    Width: 14
+    Price: 280
+    costResources:
+    - ItemId: 12003
+      ItemNum: 50
+    - ItemId: 12009
+      ItemNum: 30
+    BundleName: building.ab
+    PfbName: Universal_Building_Market_L2_01_Preb
+    tabType: 4
+    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+  - Id: 20013
+    Name: "Market\u2162"
+    CostPerWeek: 10
+    Formulas: 
+    Population: 15
+    MaxStorage: 100
+    InfluenceRange: 200
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 12
+    Width: 14
+    Price: 280
+    costResources:
+    - ItemId: 12003
+      ItemNum: 50
+    - ItemId: 12009
+      ItemNum: 30
+    BundleName: building.ab
+    PfbName: Universal_Building_Market_L3_01_Preb
+    tabType: 4
+    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+  - Id: 20014
+    Name: LoggingCamps
+    CostPerWeek: 4
+    Formulas: 59c30000
+    Population: 9
+    MaxStorage: 100
+    InfluenceRange: 60
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 7
+    Width: 8
+    Price: 160
+    costResources:
+    - ItemId: 12003
+      ItemNum: 35
+    - ItemId: 12009
+      ItemNum: 20
+    BundleName: building.ab
+    PfbName: Universal_Building_Sawmill_L2_01_Preb
+    tabType: 2
+    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+  - Id: 20015
+    Name: LoggingCamps
+    CostPerWeek: 4
+    Formulas: 59c30000
+    Population: 9
+    MaxStorage: 100
+    InfluenceRange: 60
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 7
+    Width: 8
+    Price: 160
+    costResources:
+    - ItemId: 12003
+      ItemNum: 35
+    - ItemId: 12009
+      ItemNum: 20
+    BundleName: building.ab
+    PfbName: Universal_Building_Sawmill_L3_01_Preb
+    tabType: 2
+    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+  - Id: 20016
+    Name: Warehouse
+    CostPerWeek: 5
+    Formulas: 
+    Population: 6
+    MaxStorage: 100
+    InfluenceRange: 50
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 5
+    Width: 11
+    Price: 150
+    costResources:
+    - ItemId: 12003
+      ItemNum: 30
+    - ItemId: 12009
+      ItemNum: 35
+    BundleName: building.ab
+    PfbName: Universal_Building_Warehouse_L2_01_Preb
+    tabType: 4
+    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
+  - Id: 20017
+    Name: Warehouse
+    CostPerWeek: 5
+    Formulas: 
+    Population: 6
+    MaxStorage: 100
+    InfluenceRange: 50
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 5
+    Width: 11
+    Price: 150
+    costResources:
+    - ItemId: 12003
+      ItemNum: 30
+    - ItemId: 12009
+      ItemNum: 35
+    BundleName: building.ab
+    PfbName: Universal_Building_Warehouse_L3_01_Preb
+    tabType: 4
+    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"

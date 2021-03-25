@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 858636352
+CRC: 3573399763
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7bed8fda2b33a6fdf9d4406e0deed64e
+    Hash: e4cec38dd4b2a88610bf4caac1847d82
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9224f856b29b46dd4d6cbb725f026133
@@ -34,10 +34,12 @@ ClassTypes:
 Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_02_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_04_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Market_L3_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L1_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_03_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L3_01_Mod.prefab
@@ -49,28 +51,40 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L1_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L2_01_Mod.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L3_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_02_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L3_01_Mod.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L1_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_03_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L3_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_03_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L2_01_Mod.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_03_Mod.fbx
@@ -82,15 +96,20 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_03_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_02_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_03_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_03_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Mod.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_02_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L1_01_Mod.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_01_Mod.fbx
