@@ -135,9 +135,10 @@ public class BuildingCanvas : CanvasBase
         }
 
     }
-    public void ShowConfirmButtons()
+    public void ShowConfirmButtons(Vector2 vector2)
     {
         _confirmBtns.SetActive(true);
+        _confirmBtns.transform.position = vector2;
     }
 
 
@@ -153,15 +154,15 @@ public class BuildingCanvas : CanvasBase
         }
         else
         {
-            EventManager.StartListening(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+            EventManager.StartListening<Vector2>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
             BuildManager.Instance.StartCreateRoads();
         }
         
     }
-    public void OnBuildToBeConfirmed()
+    public void OnBuildToBeConfirmed(Vector2 vector2)
     {
-        ShowConfirmButtons();
-        EventManager.StopListening(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+        ShowConfirmButtons(vector2);
+        EventManager.StopListening<Vector2>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
     }
 
     public void OnCancel()

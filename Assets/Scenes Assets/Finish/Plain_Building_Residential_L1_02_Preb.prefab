@@ -65,6 +65,8 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 8488358169596772729}
   buildFlag: 0
+  takenGrids: []
+  mat: {fileID: 2100000, guid: 1ea775bff5de65346ac29e41c64e6585, type: 2}
 --- !u!1001 &626916719232275361
 PrefabInstance:
   m_ObjectHideFlags: 0

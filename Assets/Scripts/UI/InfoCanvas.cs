@@ -12,7 +12,7 @@ public class InfoCanvas : CanvasBase
     [SerializeField] GameObject _introduceObj;//简介说明
     [SerializeField] GameObject _populationObj;//人口
     [SerializeField] GameObject _formulaObj;//配方
-    [SerializeField] Button _pauseBtn;//暂停生产
+    [SerializeField] Button _destroyBtn;//拆除建筑
     [SerializeField] Button _upgradeBtn;//升级
     [SerializeField] Button[] _populationBtns;//人口相关按钮
     [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
@@ -55,6 +55,7 @@ public class InfoCanvas : CanvasBase
         _populationBtns[1].onClick.AddListener(()=>buildingBase.DeleteCurPeople(1));
         _populationBtns[2].onClick.AddListener(()=>buildingBase.AddCurPeople(1));
         _populationBtns[3].onClick.AddListener(()=>buildingBase.AddCurPeople(10));
+        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding();OnClose(); });
     }
 
     private void RemoveBtnsListener()
@@ -63,6 +64,7 @@ public class InfoCanvas : CanvasBase
         _populationBtns[1].onClick.RemoveAllListeners();
         _populationBtns[2].onClick.RemoveAllListeners();
         _populationBtns[3].onClick.RemoveAllListeners();
+        _destroyBtn.onClick.RemoveAllListeners();
     }
 
     public override void OnClose()
@@ -99,7 +101,7 @@ public class InfoCanvas : CanvasBase
                     _effectiveObj.SetActive(true);
                     _introduceObj.SetActive(true);
                     _populationObj.SetActive(true);
-                    _pauseBtn.gameObject.SetActive(true);
+                    _destroyBtn.gameObject.SetActive(true);
                     _formulaObj.SetActive(true);
                     SetBtnsActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
@@ -115,7 +117,7 @@ public class InfoCanvas : CanvasBase
                     _introduceObj.SetActive(true);
                     _populationObj.SetActive(true);
                     SetBtnsActive(false);
-                    _pauseBtn.gameObject.SetActive(false);
+                    _destroyBtn.gameObject.SetActive(true);
                     _formulaObj.SetActive(false);
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
@@ -124,18 +126,6 @@ public class InfoCanvas : CanvasBase
         }
     }
 
-    private void UpdateButtonsListener()
-    {
-        _pauseBtn.onClick.RemoveAllListeners();
-        _upgradeBtn.onClick.RemoveAllListeners();
-        _pauseBtn.onClick.AddListener(TogglePause);
-        //todo:升到满级锁定，暂停生产切换
-    }
-
-    private void TogglePause()
-    {
-
-    }
 
     private void ChangeFormula(FormulaData[] formulaDatas)
     {

@@ -30,12 +30,17 @@ public class BuildingBase : MonoBehaviour
 
     public bool buildFlag = false;
 
+    public Vector2Int[] takenGrids;
+
+    public Material mat;
+
     protected FormulaData formula = new FormulaData();
      
-    public virtual void OnConfirmBuild()
+    public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
         buildFlag = true;
         gameObject.tag = "Building";
+        takenGrids = vector2Ints;
         if (hasAnima)
         {
             body.SetActive(false);
@@ -108,6 +113,12 @@ public class BuildingBase : MonoBehaviour
     {
         EventManager.StopListening(ConstEvent.OnOutputResources, Output);
         EventManager.StopListening(ConstEvent.OnInputResources, Input);
+    }
+
+    public virtual void DestroyBuilding()
+    {
+        MapManager.SetGridTypeToEmpty(takenGrids);
+        Destroy(this.gameObject);
     }
 
     protected virtual void Output()

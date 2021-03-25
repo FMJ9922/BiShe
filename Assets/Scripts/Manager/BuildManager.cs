@@ -24,6 +24,7 @@ public class BuildManager : Singleton<BuildManager>
     private bool isTurn = false;//当前建筑是否旋转
     private Vector2Int[] targetGrids;
     private Vector2Int lastGrid;
+    private Material[] mats;
 
     //修路相关
     private Vector3 roadStartPos;//道路建造起始点
@@ -68,6 +69,12 @@ public class BuildManager : Singleton<BuildManager>
         currentBuilding = building.GetComponent<BuildingBase>();
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
         building.transform.position = Input.mousePosition;
+        var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
+        mats = new Material[meshRenderers.Length];
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            mats[i] = meshRenderers[i].material;
+        }
         WhenStartBuild();
     }
 
@@ -115,7 +122,8 @@ public class BuildManager : Singleton<BuildManager>
     {
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
         EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
-        EventManager.TriggerEvent(ConstEvent.OnBuildToBeConfirmed);
+        Vector2 vec = RectTransformUtility.WorldToScreenPoint(Camera.main, InputManager.Instance.LastGroundRayPos);
+        EventManager.TriggerEvent<Vector2>(ConstEvent.OnBuildToBeConfirmed,vec);
         //ChangeRoadCount(0);
 
     }
@@ -290,6 +298,10 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 curPos = currentBuilding.transform.position;
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos);
         isCurOverlap = MapManager.CheckGridOverlap(targetGrids);
+        for (int i = 0; i < mats.Length; i++)
+        {
+            mats[i].color = isCurOverlap ? Color.red : Color.green;
+        }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuild()
@@ -301,9 +313,8 @@ public class BuildManager : Singleton<BuildManager>
         }
         if (CheckBuildResourcesEnoughAndUse())
         {
-            currentBuilding.OnConfirmBuild();
+            currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-
             terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             //for (int i = 0; i < targetGrids.Length; i++)
             //{
@@ -357,6 +368,10 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+        for (int i = 0; i < mats.Length; i++)
+        {
+            mats[i].color = Color.white;
+        }
         currentBuilding = null;
         targetGrids = null;
         IsInBuildMode = false;

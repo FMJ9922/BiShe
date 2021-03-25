@@ -122,7 +122,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
-        Debug.Log(h + " " + x);
+        //Debug.Log(h + " " + x);
         uv[4 * index + dir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (1 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
@@ -221,7 +221,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int length = height.Length - 1;
         int z = index / (height.Length - 1);
         int x = index % (height.Length - 1);
-        Debug.Log(x + " " + z);
+        //Debug.Log(x + " " + z);
         for (int i = -range + 1; i < range; i++)
         {
             for (int j = -range + 1; j < range; j++)

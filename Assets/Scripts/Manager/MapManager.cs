@@ -135,7 +135,7 @@ public class MapManager : Singleton<MapManager>
                 if (!around[(i+4)] && count == 6)
                 {
                     direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 3) % 4);
-                    Debug.Log((int)direction);
+                    //Debug.Log((int)direction);
                     return;
                 }
             }
@@ -231,6 +231,14 @@ public class MapManager : Singleton<MapManager>
     public static void SetGridTypeToEmpty(Vector2Int grid)
     {
         Instance.SetGridType(grid, GridType.empty);
+    }
+
+    public static void SetGridTypeToEmpty(Vector2Int[] grids)
+    {
+        for (int i = 0; i < grids.Length; i++)
+        {
+            Instance.SetGridType(grids[i], GridType.empty);
+        }
     }
 
     public static void SetGridTypeToOccupy(Vector2Int grid)
