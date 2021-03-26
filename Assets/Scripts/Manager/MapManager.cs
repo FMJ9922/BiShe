@@ -45,7 +45,7 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < mapData.roadGrids.Count; i++)
         {
             SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
-            Debug.Log(mapData.roadGrids[i].Vector2Int);
+            //Debug.Log(mapData.roadGrids[i].Vector2Int);
         }
         Debug.Log("地图已初始化！");
     }
@@ -196,11 +196,42 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    public static bool CheckGridOverlap(Vector2Int[] grids)
+    public static bool CheckCanBuild(Vector2Int[] grids,int width,int height)
+    {
+        //检测安放地点占用
+        bool hasOverlap = CheckOverlap(grids);
+        //检测道路是否贴近
+        bool hasNearRoad = CheckNearRoad(grids, width, height);
+        return !hasOverlap && hasNearRoad; 
+    }
+
+    public static bool CheckOverlap(Vector2Int[] grids)
     {
         for (int i = 0; i < grids.Length; i++)
         {
             if (Instance.GetGridType(grids[i]) != GridType.empty)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height)
+    {
+        Vector2Int start = grids[0];
+        for (int i = 0; i < width; i++)
+        {
+            if (Instance.GetGridType(start + new Vector2Int(i, -1)) == GridType.road||
+                Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
+            {
+                return true;
+            }
+        }
+        for (int i = 0; i < height; i++)
+        {
+            if (Instance.GetGridType(start + new Vector2Int(-1, i)) == GridType.road ||
+                Instance.GetGridType(start + new Vector2Int(height,i)) == GridType.road)
             {
                 return true;
             }

@@ -20,7 +20,7 @@ public class BuildManager : Singleton<BuildManager>
 
     //修建筑相关
     private BuildingBase currentBuilding;
-    private bool isCurOverlap = false;//当前建筑是否重叠
+    private bool isCurCanBuild = false;//当前建筑是否重叠
     private bool isTurn = false;//当前建筑是否旋转
     private Vector2Int[] targetGrids;
     private Vector2Int lastGrid;
@@ -296,17 +296,18 @@ public class BuildManager : Singleton<BuildManager>
     private void CheckOverlap()
     {
         Vector3 curPos = currentBuilding.transform.position;
-        targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos);
-        isCurOverlap = MapManager.CheckGridOverlap(targetGrids);
+        int width, height;
+        targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos,out width,out height);
+        isCurCanBuild = MapManager.CheckCanBuild(targetGrids,width,height); 
         for (int i = 0; i < mats.Length; i++)
         {
-            mats[i].color = isCurOverlap ? Color.red : Color.green;
+            mats[i].color = isCurCanBuild ? Color.green : Color.red;
         }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuild()
     {
-        if (isCurOverlap)
+        if (!isCurCanBuild)
         {
             Debug.Log("当前建筑重叠，无法建造！");
             return;
@@ -351,7 +352,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         //ShowGrid(true);
         isTurn = false;
-        isCurOverlap = false;
+        isCurCanBuild = false;
         IsInBuildMode = true;
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
@@ -425,11 +426,11 @@ public class BuildManager : Singleton<BuildManager>
     /// 获取当前待造建筑所占用的所有格子
     /// </summary>
     /// <returns></returns>
-    private Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos)
+    private Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos,out int width,out int height)
     {
         int startX, endX, startZ, endZ;
-        int width = isTurn ? sizeY : sizeX;
-        int height = isTurn ? sizeX : sizeY;
+        width = isTurn ? sizeY : sizeX;
+        height = isTurn ? sizeX : sizeY;
         Vector3 centerGrid = centerPos / 2;
         if (width % 2 == 0)
         {
@@ -459,7 +460,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             for (int j = startZ; j <= endZ; j++)
             {
-                grids[index] = new Vector2Int(i, j);
+                grids[index] = new Vector2Int(i-1, j-1);
                 index++;
             }
         }
