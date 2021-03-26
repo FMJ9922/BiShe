@@ -20,7 +20,7 @@ public class BuildData
     public string PfbName;
     public BuildTabType tabType;
     public string Introduce;//简介
-    
+    public int Level;//等级
 }
 
 [System.Serializable]

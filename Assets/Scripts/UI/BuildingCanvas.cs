@@ -130,8 +130,12 @@ public class BuildingCanvas : CanvasBase
         CleanUpAllAttachedChildren(_buildingIcons);
         for (int i = 0; i < currentTabDatas.Length; i++)
         {
-            GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);
-            newIcon.GetComponent<BuildIcon>().Init(currentTabDatas[i], this);
+            int level= currentTabDatas[i].Level;
+            if (level <= 1)
+            {
+                GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);
+                newIcon.GetComponent<BuildIcon>().Init(currentTabDatas[i], this);
+            }
         }
 
     }

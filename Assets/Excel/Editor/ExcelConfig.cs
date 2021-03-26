@@ -141,6 +141,7 @@ public class ExcelTool
             buildData.PfbName = collect[i][16].ToString();
             buildData.tabType = (BuildTabType)int.Parse(collect[i][17].ToString());
             buildData.Introduce = collect[i][18].ToString();
+            buildData.Level = int.Parse(collect[i][19].ToString());
             array[i - 2] = buildData;
         }
         return array;
