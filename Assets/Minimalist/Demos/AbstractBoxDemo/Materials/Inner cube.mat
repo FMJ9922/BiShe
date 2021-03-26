@@ -108,7 +108,7 @@ Material:
     - _LMPower: 0
     - _LmapBlendingMode: 0
     - _LmapEnable: 0
-    - _MainTexturePower: 0.07
+    - _MainTexturePower: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
