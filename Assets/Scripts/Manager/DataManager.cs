@@ -62,6 +62,19 @@ public class DataManager : ScriptableObject
         return null;
     }
 
+    public static BuildData GetBuildData(int buildId)
+    {
+        for (int i = 0; i < Instance.BuildArray.Length; i++)
+        {
+            if(Instance.BuildArray[i].Id == buildId)
+            {
+                return Instance.BuildArray[i];
+            }
+        }
+        Debug.Log("无效的建筑id"+buildId);
+        return null;
+    }
+
     public static string GetItemNameById(int ID)
     {
         for (int i = 0; i < Instance.ItemArray.Length; i++)

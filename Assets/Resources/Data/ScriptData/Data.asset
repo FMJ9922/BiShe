@@ -132,7 +132,7 @@ MonoBehaviour:
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20009
     Length: 5
     Width: 3
     Price: 90

@@ -117,10 +117,21 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void DestroyBuilding()
     {
+        ReturnBuildResources();
         MapManager.SetGridTypeToEmpty(takenGrids);
         Destroy(this.gameObject);
     }
+    public virtual bool ReturnBuildResources()
+    {
+        List<CostResource> rescources = runtimeBuildData.costResources;
+        for (int i = 0; i < rescources.Count; i++)
+        {
+            rescources[i].ItemNum *= 0.75f;
+            ResourceManager.Instance.AddResource(rescources[i]);
+        }
+        return true;
 
+    }
     protected virtual void Output()
     {
         if (formula == null) return;
@@ -173,6 +184,14 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
         }
         EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+    }
+
+    public virtual void Upgrade()
+    {
+        //todo：检查是否有足够的资源升级
+        int nextId = runtimeBuildData.RearBuildingId;
+        BuildData data = DataManager.GetBuildData(nextId);
+        BuildManager.Instance.UpgradeBuilding(data, transform.position,transform.rotation);
     }
 
 }

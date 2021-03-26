@@ -61,13 +61,7 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     public void CreateBuildingOnMouse(BuildData buildData)
     {
-        string bundleName = buildData.BundleName;
-        string pfbName = buildData.PfbName;
-        Debug.Log("load:" + bundleName + " " + pfbName);
-        GameObject pfb = LoadAB.Load(bundleName, pfbName);
-        GameObject building = Instantiate(pfb, transform);
-        currentBuilding = building.GetComponent<BuildingBase>();
-        currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
+        GameObject building = InitBuilding(buildData);
         building.transform.position = Input.mousePosition;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
@@ -76,6 +70,17 @@ public class BuildManager : Singleton<BuildManager>
             mats[i] = meshRenderers[i].material;
         }
         WhenStartBuild();
+    }
+    public GameObject InitBuilding(BuildData buildData)
+    {
+        string bundleName = buildData.BundleName;
+        string pfbName = buildData.PfbName;
+        Debug.Log("load:" + bundleName + " " + pfbName);
+        GameObject pfb = LoadAB.Load(bundleName, pfbName);
+        GameObject building = Instantiate(pfb, transform);
+        currentBuilding = building.GetComponent<BuildingBase>();
+        currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
+        return building;
     }
 
     /// <summary>
@@ -307,6 +312,7 @@ public class BuildManager : Singleton<BuildManager>
     }
     private void OnConfirmBuild()
     {
+        CheckOverlap();
         if (!isCurCanBuild)
         {
             Debug.Log("当前建筑重叠，无法建造！");
@@ -323,6 +329,24 @@ public class BuildManager : Singleton<BuildManager>
             //}
             //MapManager.Instance.ShowGrid(targetGrids);
             WhenFinishBuild();
+        }
+    }
+
+    public void UpgradeBuilding(BuildData buildData,Vector3 pos,Quaternion quaternion)
+    {
+        GameObject building = InitBuilding(buildData);
+        building.transform.position = pos;
+        building.transform.rotation = quaternion;
+        if (CheckBuildResourcesEnoughAndUse())
+        {
+            currentBuilding.OnConfirmBuild(targetGrids);
+            //MapManager.SetGridTypeToOccupy(targetGrids);
+            //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
+
+        }
+        else
+        {
+            Destroy(building);
         }
     }
 

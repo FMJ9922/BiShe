@@ -24,7 +24,7 @@ public class BuildData
 }
 
 [System.Serializable]
-public struct CostResource
+public class CostResource
 {
     public int ItemId;
     public float ItemNum;

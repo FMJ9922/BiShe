@@ -125,7 +125,7 @@ public class ExcelTool
             }
             if (collect[i][9].ToString() != "Null")
             {
-                buildData.FrontBuildingId = int.Parse(collect[i][9].ToString());
+                buildData.RearBuildingId = int.Parse(collect[i][9].ToString());
             }
             buildData.Length = int.Parse(collect[i][10].ToString());
             buildData.Width = int.Parse(collect[i][11].ToString());

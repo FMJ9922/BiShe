@@ -56,6 +56,7 @@ public class InfoCanvas : CanvasBase
         _populationBtns[2].onClick.AddListener(()=>buildingBase.AddCurPeople(1));
         _populationBtns[3].onClick.AddListener(()=>buildingBase.AddCurPeople(10));
         _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding();OnClose(); });
+        _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(); OnClose(); });
     }
 
     private void RemoveBtnsListener()
@@ -65,6 +66,7 @@ public class InfoCanvas : CanvasBase
         _populationBtns[2].onClick.RemoveAllListeners();
         _populationBtns[3].onClick.RemoveAllListeners();
         _destroyBtn.onClick.RemoveAllListeners();
+        _upgradeBtn.onClick.RemoveAllListeners();
     }
 
     public override void OnClose()
