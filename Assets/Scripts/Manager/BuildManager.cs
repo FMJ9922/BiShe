@@ -382,12 +382,12 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
-        GameManager.Instance.SetTimeScale(TimeScale.stop);
+        GameManager.Instance.TogglePauseGame();
     }
     private void WhenFinishBuild()
     {
         //ShowGrid(false);
-        GameManager.Instance.SetTimeScale(TimeScale.one);
+        GameManager.Instance.TogglePauseGame();
         EventManager.StopListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);

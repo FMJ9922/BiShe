@@ -72,18 +72,16 @@ public enum RoadType
 /// </summary>
 public enum BuildTabType
 {
+    [Description("Road")]
+    road = 0,
     [Description("Housing")]
-    house = 0,
-    [Description("Agriculture")]
-    agriculture = 1,
-    [Description("Forestry")]
-    forest = 2,
+    house = 1,
+    [Description("Produce")]
+    produce = 2,
     [Description("Manufacturing")]
     manufacturing = 3,
     [Description("Utilitiy")]
     utility = 4,
-    [Description("Road")]
-    road = 5,
 }
 
 public enum DriveType
@@ -121,6 +119,6 @@ public enum TimeScale
     stop = 0,
     one = 1,
     two = 2,
-    four = 4,
+    four = 3,
 }
 

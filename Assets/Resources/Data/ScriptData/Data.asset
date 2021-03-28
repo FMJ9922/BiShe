@@ -125,7 +125,7 @@ MonoBehaviour:
   TechArray: []
   BuildArray:
   - Id: 20001
-    Name: Hut
+    Name: Cottage
     CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
@@ -135,7 +135,7 @@ MonoBehaviour:
     RearBuildingId: 20009
     Length: 5
     Width: 3
-    Price: 90
+    Price: 60
     costResources:
     - ItemId: 12003
       ItemNum: 5
@@ -143,18 +143,18 @@ MonoBehaviour:
       ItemNum: 5
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_01_Preb
-    tabType: 0
+    tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
   - Id: 20002
-    Name: MudRoad
+    Name: CountryRoad
     CostPerWeek: 0
     Formulas: 
     Population: 0
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20018
     Length: 3
     Width: 3
     Price: 5
@@ -165,7 +165,7 @@ MonoBehaviour:
       ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
-    tabType: 5
+    tabType: 0
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
     Level: 0
   - Id: 20003
@@ -176,10 +176,10 @@ MonoBehaviour:
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20016
     Length: 5
     Width: 11
-    Price: 150
+    Price: 180
     costResources:
     - ItemId: 12003
       ItemNum: 30
@@ -188,20 +188,20 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L1_01_Preb
     tabType: 4
-    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
+    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u8D44\u6E90"
     Level: 1
   - Id: 20004
-    Name: Market
+    Name: Bazaar
     CostPerWeek: 10
     Formulas: 
     Population: 15
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20012
     Length: 12
     Width: 14
-    Price: 280
+    Price: 300
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -223,13 +223,13 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 3
     Width: 3
-    Price: 15
+    Price: 12
     costResources:
     - ItemId: 12003
       ItemNum: 5
     BundleName: building.ab
     PfbName: L1_Fieldedge001
-    tabType: 1
+    tabType: 2
     Introduce: "\u7CAE\u98DF\u4F5C\u7269\u6700\u4E3B\u8981\u7684\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
   - Id: 20006
@@ -243,7 +243,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 14
     Width: 20
-    Price: 180
+    Price: 150
     costResources:
     - ItemId: 12003
       ItemNum: 40
@@ -251,21 +251,21 @@ MonoBehaviour:
       ItemNum: 35
     BundleName: building.ab
     PfbName: L1_Farm001
-    tabType: 1
+    tabType: 2
     Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
   - Id: 20007
-    Name: Factory
+    Name: Workshop
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
     Population: 12
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20010
     Length: 4
     Width: 6
-    Price: 200
+    Price: 240
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -284,10 +284,10 @@ MonoBehaviour:
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
-    RearBuildingId: 0
+    RearBuildingId: 20014
     Length: 7
     Width: 8
-    Price: 160
+    Price: 120
     costResources:
     - ItemId: 12003
       ItemNum: 35
@@ -299,13 +299,13 @@ MonoBehaviour:
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
     Level: 1
   - Id: 20009
-    Name: "Hut\u2161"
+    Name: Large residential
     CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
     InfluenceRange: 0
-    FrontBuildingId: 0
+    FrontBuildingId: 20001
     RearBuildingId: 0
     Length: 5
     Width: 3
@@ -317,21 +317,21 @@ MonoBehaviour:
       ItemNum: 5
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_02_Preb
-    tabType: 0
+    tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
   - Id: 20010
-    Name: "Factory\u2161"
+    Name: Factory
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
     Population: 12
     MaxStorage: 100
     InfluenceRange: 45
-    FrontBuildingId: 0
-    RearBuildingId: 0
+    FrontBuildingId: 20007
+    RearBuildingId: 20011
     Length: 4
     Width: 6
-    Price: 200
+    Price: 300
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -343,17 +343,17 @@ MonoBehaviour:
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
     Level: 2
   - Id: 20011
-    Name: "Factory\u2162"
+    Name: Integrated mill
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
     Population: 12
     MaxStorage: 100
     InfluenceRange: 45
-    FrontBuildingId: 0
+    FrontBuildingId: 20010
     RearBuildingId: 0
     Length: 4
     Width: 6
-    Price: 200
+    Price: 380
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -365,17 +365,17 @@ MonoBehaviour:
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
     Level: 3
   - Id: 20012
-    Name: "Market\u2161"
+    Name: Market
     CostPerWeek: 10
     Formulas: 
     Population: 15
     MaxStorage: 100
     InfluenceRange: 200
-    FrontBuildingId: 0
-    RearBuildingId: 0
+    FrontBuildingId: 20004
+    RearBuildingId: 20013
     Length: 12
     Width: 14
-    Price: 280
+    Price: 360
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -387,17 +387,17 @@ MonoBehaviour:
     Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
     Level: 2
   - Id: 20013
-    Name: "Market\u2162"
+    Name: Shopping Mall
     CostPerWeek: 10
     Formulas: 
     Population: 15
     MaxStorage: 100
     InfluenceRange: 200
-    FrontBuildingId: 0
+    FrontBuildingId: 20012
     RearBuildingId: 0
     Length: 12
     Width: 14
-    Price: 280
+    Price: 480
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -415,8 +415,8 @@ MonoBehaviour:
     Population: 9
     MaxStorage: 100
     InfluenceRange: 60
-    FrontBuildingId: 0
-    RearBuildingId: 0
+    FrontBuildingId: 20008
+    RearBuildingId: 20015
     Length: 7
     Width: 8
     Price: 160
@@ -437,11 +437,11 @@ MonoBehaviour:
     Population: 9
     MaxStorage: 100
     InfluenceRange: 60
-    FrontBuildingId: 0
+    FrontBuildingId: 20014
     RearBuildingId: 0
     Length: 7
     Width: 8
-    Price: 160
+    Price: 190
     costResources:
     - ItemId: 12003
       ItemNum: 35
@@ -453,17 +453,17 @@ MonoBehaviour:
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
     Level: 3
   - Id: 20016
-    Name: Warehouse
+    Name: Warehouse Lv3
     CostPerWeek: 5
     Formulas: 
     Population: 6
     MaxStorage: 100
     InfluenceRange: 50
-    FrontBuildingId: 0
-    RearBuildingId: 0
+    FrontBuildingId: 20003
+    RearBuildingId: 20017
     Length: 5
     Width: 11
-    Price: 150
+    Price: 240
     costResources:
     - ItemId: 12003
       ItemNum: 30
@@ -475,17 +475,17 @@ MonoBehaviour:
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
     Level: 2
   - Id: 20017
-    Name: Warehouse
+    Name: Warehouse Lv3
     CostPerWeek: 5
     Formulas: 
     Population: 6
     MaxStorage: 100
     InfluenceRange: 50
-    FrontBuildingId: 0
+    FrontBuildingId: 20016
     RearBuildingId: 0
     Length: 5
     Width: 11
-    Price: 150
+    Price: 290
     costResources:
     - ItemId: 12003
       ItemNum: 30
@@ -496,6 +496,50 @@ MonoBehaviour:
     tabType: 4
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
     Level: 3
+  - Id: 20018
+    Name: "Cement\_road"
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 20002
+    RearBuildingId: 20019
+    Length: 3
+    Width: 3
+    Price: 6
+    costResources:
+    - ItemId: 12003
+      ItemNum: 1
+    - ItemId: 12009
+      ItemNum: 1
+    BundleName: road.ab
+    PfbName: L1_Road001
+    tabType: 0
+    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
+    Level: 0
+  - Id: 20019
+    Name: "Asphalt\_road"
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 20018
+    RearBuildingId: 0
+    Length: 3
+    Width: 3
+    Price: 8
+    costResources:
+    - ItemId: 12003
+      ItemNum: 1
+    - ItemId: 12009
+      ItemNum: 1
+    BundleName: road.ab
+    PfbName: L1_Road001
+    tabType: 0
+    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
+    Level: 0
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -599,12 +643,12 @@ MonoBehaviour:
     - code: Warehouse
       chinese: "\u4ED3\u5E93"
       english: Warehouse
-    - code: Hut
-      chinese: "\u571F\u623F"
-      english: Hut
-    - code: MudRoad
-      chinese: "\u571F\u8DEF"
-      english: Mud Road
+    - code: Cottage
+      chinese: "\u4E61\u95F4\u5C0F\u5C4B"
+      english: Cottage
+    - code: CountryRoad
+      chinese: "\u4E61\u95F4\u5C0F\u9053"
+      english: Country road
     - code: Farmland
       chinese: "\u519C\u7530"
       english: Farmland
@@ -623,17 +667,17 @@ MonoBehaviour:
     - code: Agriculture
       chinese: "\u519C\u4E1A"
       english: Agriculture
-    - code: Forestry
-      chinese: "\u6797\u4E1A"
-      english: Forestry
+    - code: Produce
+      chinese: "\u751F\u4EA7"
+      english: Produce
     - code: Manufacturing
-      chinese: "\u5236\u9020\u4E1A"
+      chinese: "\u5236\u9020"
       english: Manufacturing
     - code: Utilitiy
-      chinese: "\u516C\u5171\u670D\u52A1"
+      chinese: "\u670D\u52A1"
       english: Utilitiy
     - code: Road
-      chinese: "\u8DEF"
+      chinese: "\u9053\u8DEF"
       english: Road
     - code: Gold
       chinese: "\u91D1\u5E01"
@@ -716,3 +760,30 @@ MonoBehaviour:
     - code: Sausage
       chinese: "\u9999\u80A0"
       english: Sausage
+    - code: Large residential
+      chinese: "\u5927\u578B\u4F4F\u5B85"
+      english: Large residential
+    - code: Apartment
+      chinese: "\u57CE\u9547\u516C\u5BD3"
+      english: Apartment
+    - code: "Cement\_road"
+      chinese: "\u6C34\u6CE5\u8DEF"
+      english: "Cement\_road"
+    - code: "Asphalt\_road"
+      chinese: "\u67CF\u6CB9\u8DEF"
+      english: Asphalt road
+    - code: Bazaar
+      chinese: "\u96C6\u5E02"
+      english: Bazaar
+    - code: Market
+      chinese: "\u7EFC\u5408\u5E02\u573A"
+      english: Market
+    - code: Shopping Mall
+      chinese: "\u5927\u578B\u5546\u57CE"
+      english: Shopping Mall
+    - code: Workshop
+      chinese: "\u5DE5\u574A"
+      english: Workshop
+    - code: Integrated mill
+      chinese: "\u7EFC\u5408\u5DE5\u5382"
+      english: Integrated mill

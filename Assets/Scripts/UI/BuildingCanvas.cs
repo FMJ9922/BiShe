@@ -43,11 +43,14 @@ public class BuildingCanvas : CanvasBase
     private GameObject pfbTab;
     [SerializeField]
     private GameObject pfbIcon;
+    [SerializeField]
+    private GameObject pfbDividingLine;
     #endregion
 
     #region 数据
     //当前页签的数据
     private BuildData[] currentTabDatas;
+    private BuildTabAnim curTab =null;
     #endregion
 
     #region 实现基类
@@ -62,13 +65,11 @@ public class BuildingCanvas : CanvasBase
     public override void OnOpen()
     {
         _mainCanvas.SetActive(true);
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnClose);
     }
 
     public override void OnClose()
     {
         _mainCanvas.SetActive(false);
-        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);
     }
     #endregion
 
@@ -90,16 +91,25 @@ public class BuildingCanvas : CanvasBase
     {
         DataManager.Instance.InitTabDic();
         CleanUpAllAttachedChildren(_buildingTabs);
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
             newTab.name = i.ToString();
             newTab.GetComponentInChildren<TMP_Text>().text = Localization.ToSettingLanguage(((BuildTabType)i).GetDescription());
-            newTab.GetComponent<Button>().interactable = true;
-            newTab.GetComponent<Button>().onClick.AddListener(() =>
+            Button btn = newTab.GetComponent<Button>();
+            btn.interactable = true;
+            btn.onClick.AddListener(() =>
             {
                 ChangeTab(int.Parse(newTab.name));
+                newTab.GetComponent<BuildTabAnim>().Rise();
+                curTab.Hide();
+                curTab = newTab.GetComponent<BuildTabAnim>();
             });
+            if (i == 0)
+            {
+                newTab.GetComponent<BuildTabAnim>().Rise();
+                curTab = newTab.GetComponent<BuildTabAnim>();
+            }
         }
     }
 
@@ -121,6 +131,19 @@ public class BuildingCanvas : CanvasBase
 
     #region 公共函数
 
+    public bool ToggleBuildingCanvas()
+    {
+        if (_mainCanvas.activeInHierarchy)
+        {
+            OnClose();
+            return false;
+        }
+        else
+        {
+            OnOpen();
+            return true;
+        }
+    }
    
     public void ChangeTab(int tabType)
     {
@@ -133,11 +156,12 @@ public class BuildingCanvas : CanvasBase
             int level= currentTabDatas[i].Level;
             if (level <= 1)
             {
+                GameObject newDivide = Instantiate(pfbDividingLine, _buildingIcons);
                 GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);
                 newIcon.GetComponent<BuildIcon>().Init(currentTabDatas[i], this);
             }
         }
-
+        GameObject newDivide1 = Instantiate(pfbDividingLine, _buildingIcons);
     }
     public void ShowConfirmButtons(Vector2 vector2)
     {

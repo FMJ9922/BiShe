@@ -94,8 +94,8 @@ public class InfoCanvas : CanvasBase
     {
         switch (buildData.tabType)
         {
-            case BuildTabType.agriculture:
-            case BuildTabType.forest:
+            case BuildTabType.produce:
+            case BuildTabType.road:
             case BuildTabType.manufacturing:
                 {
                     _inputsObj.SetActive(true);

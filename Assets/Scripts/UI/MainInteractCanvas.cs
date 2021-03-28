@@ -29,9 +29,18 @@ public class MainInteractCanvas : CanvasBase
     }
     #endregion
 
-    private void InitInteractCanvas()
+    public void ToggleBuildingCanvas()
     {
-
+        BuildingCanvas build = (BuildingCanvas)canvas[0];
+        bool open = build.ToggleBuildingCanvas();
+        if (open)
+        {
+            canvas[3].OnClose();
+        }
+        else
+        {
+            canvas[3].OnOpen();
+        }
     }
 
     private void CloseAllOpenedUI()

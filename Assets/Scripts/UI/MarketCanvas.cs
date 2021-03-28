@@ -18,13 +18,13 @@ public class MarketCanvas : CanvasBase
     public override void OnOpen()
     {
         mainCanvas.SetActive(true);
-        GameManager.Instance.SetTimeScale(TimeScale.stop);
+        GameManager.Instance.PauseGame();
     }
 
     public override void OnClose()
     {
         mainCanvas.SetActive(false);
-        GameManager.Instance.SetTimeScale(TimeScale.one);
+        GameManager.Instance.ContinueGame();
     }
     #endregion
 

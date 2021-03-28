@@ -109,7 +109,7 @@ public class LevelManager : Singleton<LevelManager>
         daystr = Localization.ToSettingLanguage("Day");
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Timer >= 1f)
         {

@@ -23,6 +23,10 @@ public class ConstEvent
     public const string OnTriggerInfoPanel = "OnTriggerInfoPanel";//点击建筑显示详细面板
     #endregion
 
+    #region 时间倍速事件
+    public const string OnTimeScaleChanged = "OnTimeScaleChanged";//时间倍速变化事件
+    #endregion
+
     #region 资源事件
     public const string OnOutputResources = "OnOutputResources";//每周输出资源结算
     public const string OnInputResources = "OnInputResources";//每周输入资源结算
