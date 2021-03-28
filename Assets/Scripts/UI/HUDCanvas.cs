@@ -9,6 +9,7 @@ public class HUDCanvas : CanvasBase
     [SerializeField] TMP_Text _date, _money, _log, _stone, _food, _population;
     [SerializeField] Button time_stop,time_add;
     [SerializeField] GameObject _mainCanvas;
+    [SerializeField] private Slider progress;
     private string strMoney, strLog, strStone, strFood, strPopulation;
     private void OnDestroy()
     {
@@ -34,6 +35,10 @@ public class HUDCanvas : CanvasBase
         RefreshPopulation();
     }
 
+    private void FixedUpdate()
+    {
+        RefreshSliderValue();
+    }
     public override void OnOpen()
     {
         _mainCanvas.SetActive(true);
@@ -49,6 +54,10 @@ public class HUDCanvas : CanvasBase
         _date.text = date;
     }
 
+    public void RefreshSliderValue()
+    {
+        progress.value =LevelManager.Instance.WeekProgress;
+    }
     public void RefreshResources()
     {
         float money = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Money"));

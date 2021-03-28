@@ -35,7 +35,6 @@ public class BuildManager : Singleton<BuildManager>
 
     //事件相关
     private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMoveSetBuildingPos(p);
-    private UnityAction<float> rotateAc = (float dir) => Instance.OnRotateBuilding(dir);
     private UnityAction confirmAc = () => Instance.OnConfirmBuild();
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
 
@@ -289,13 +288,19 @@ public class BuildManager : Singleton<BuildManager>
         CheckOverlap();
     }
 
-    private void OnRotateBuilding(float dir)
+    private void OnRotateBuilding(Direction direction)
     {
-        currentBuilding.transform.Rotate(Vector3.up, dir, Space.World);
-        isTurn = !isTurn;
+        currentBuilding.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)direction+1), Vector3.up);
+        if(direction == Direction.down || direction == Direction.up)
+        {
+            isTurn = false;
+        }
+        else
+        {
+            isTurn = true;
+        }
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
-        CheckOverlap();
     }
 
     private void CheckOverlap()
@@ -303,7 +308,8 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 curPos = currentBuilding.transform.position;
         int width, height;
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos,out width,out height);
-        isCurCanBuild = MapManager.CheckCanBuild(targetGrids,width,height); 
+        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, width, height, out Direction direction);
+        OnRotateBuilding(direction);
         for (int i = 0; i < mats.Length; i++)
         {
             mats[i].color = isCurCanBuild ? Color.green : Color.red;
@@ -381,7 +387,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
-        EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
+        //EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
         GameManager.Instance.TogglePauseGame();
     }
     private void WhenFinishBuild()
@@ -389,7 +395,7 @@ public class BuildManager : Singleton<BuildManager>
         //ShowGrid(false);
         GameManager.Instance.TogglePauseGame();
         EventManager.StopListening(ConstEvent.OnGroundRayPosMove, moveAc);
-        EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
+        //EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);

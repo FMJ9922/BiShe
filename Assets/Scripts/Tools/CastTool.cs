@@ -41,7 +41,7 @@ public class CastTool : MonoBehaviour
             case Direction.down:
                 return new Vector3(0, 0, -1) * unit;
             default:
-                return Vector3.zero;
+                return Vector3.one;
         }
     }
     public static Vector3 CastDirectionToVector(int direction)

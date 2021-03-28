@@ -5,6 +5,8 @@ using System;
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] MainInteractCanvas MainInteractCanvas;
+
+    public float dayTime = 3f;
     public int LevelID { get; set; }
     private int year, month, week,day;
     public int Year
@@ -67,7 +69,7 @@ public class LevelManager : Singleton<LevelManager>
             if (value > 7)
             {
                 Week++;
-                day = value - 7;
+                day = value -7;
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
                 EventManager.TriggerEvent(ConstEvent.OnSettleAccount);
@@ -80,11 +82,11 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     private float Timer = 0;
-
+    public float WeekProgress = 0;
     private string yearstr, monthstr, weekstr, daystr;
     private string LogDate()
     {
-        string date = string.Format("{4}：{0}  {5}：{1}  {6}：{2}  {7}：{3}", Year, Month, Week,Day, yearstr, monthstr, weekstr,daystr);
+        string date = string.Format("{0}/{1}/{2}", Year+1999, Month, Day+(Week-1)*7);
         //Debug.Log(date);
         return date;
         
@@ -111,7 +113,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void FixedUpdate()
     {
-        if (Timer >= 1f)
+        if (Timer >= dayTime)
         {
             Timer = 0;
             string date;
@@ -122,6 +124,7 @@ public class LevelManager : Singleton<LevelManager>
         else
         {
             Timer += Time.deltaTime;
+            WeekProgress = (dayTime * (day - 1) + Timer) / (dayTime * 7);
         }
     }
     /// <summary>

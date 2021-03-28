@@ -196,12 +196,12 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    public static bool CheckCanBuild(Vector2Int[] grids,int width,int height)
+    public static bool CheckCanBuild(Vector2Int[] grids,int width,int height,out Direction direction)
     {
         //检测安放地点占用
         bool hasOverlap = CheckOverlap(grids);
         //检测道路是否贴近
-        bool hasNearRoad = CheckNearRoad(grids, width, height);
+        bool hasNearRoad = CheckNearRoad(grids, width, height,out direction);
         return !hasOverlap && hasNearRoad; 
     }
 
@@ -217,25 +217,36 @@ public class MapManager : Singleton<MapManager>
         return false;
     }
 
-    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height)
+    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height,out Direction direction)
     {
         Vector2Int start = grids[0];
         for (int i = 0; i < width; i++)
         {
-            if (Instance.GetGridType(start + new Vector2Int(i, -1)) == GridType.road||
-                Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
+            if (Instance.GetGridType(start + new Vector2Int(i, -1)) == GridType.road)
             {
+                direction = Direction.down;
+                return true;
+            }
+            if(Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
+            {
+                direction = Direction.up;
                 return true;
             }
         }
         for (int i = 0; i < height; i++)
         {
-            if (Instance.GetGridType(start + new Vector2Int(-1, i)) == GridType.road ||
-                Instance.GetGridType(start + new Vector2Int(height,i)) == GridType.road)
+            if (Instance.GetGridType(start + new Vector2Int(-1, i)) == GridType.road)
             {
+                direction = Direction.left;
+                return true;
+            }
+            if(Instance.GetGridType(start + new Vector2Int(width, i)) == GridType.road)
+            {
+                direction = Direction.right;
                 return true;
             }
         }
+        direction = Direction.right;
         return false;
     }
 
