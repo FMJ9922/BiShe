@@ -294,6 +294,7 @@ public class BuildManager : Singleton<BuildManager>
     private void OnRotateBuilding(Direction direction)
     {
         currentBuilding.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)direction+1), Vector3.up);
+        currentBuilding.direction = direction;
         if(direction == Direction.down || direction == Direction.up)
         {
             isTurn = false;

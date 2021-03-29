@@ -123,3 +123,9 @@ public enum TimeScale
     four = 3,
 }
 
+public enum TransportationType
+{
+    van = 0,
+    mini = 1,
+    medium = 2,
+}

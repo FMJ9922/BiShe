@@ -180,10 +180,21 @@ public class MapManager : Singleton<MapManager>
     /// 获取地面某处的坐标
     /// </summary>
     /// <returns></returns>
+    /// 
     public Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
         int p = gridPos.x * 4 + gridPos.y * _leveldata.Width * 4;
         return _vertices[p];
+    }
+
+    public List<Vector3> GetTerrainPosition(List<Vector2Int> gridPos)
+    {
+        List<Vector3> result = new List<Vector3>();
+        for (int i = 0; i < gridPos.Count; i++)
+        {
+            result.Add(GetTerrainPosition(gridPos[i]));
+        }
+        return result;
     }
     public Vector3 GetTerrainPosition(Vector3 mistakeHeightWorldPos)
     {
@@ -191,7 +202,7 @@ public class MapManager : Singleton<MapManager>
         Vector2Int gridPos = GetCenterGrid(localPos);
         return GetTerrainPosition(gridPos);
     }
-    private Vector2Int GetCenterGrid(Vector3 centerPos)
+    public Vector2Int GetCenterGrid(Vector3 centerPos)
     {
         Vector3 centerGrid = centerPos / 2;
         int x = Mathf.FloorToInt(centerGrid.x);
@@ -211,6 +222,19 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    public SingleGrid GetSingleGrid(Vector2Int grid)
+    {
+        SingleGrid result;
+        if (_gridDic.TryGetValue(grid, out result))
+        {
+            return result;
+        }
+        else
+        {
+            Debug.LogError("不合法输入"+grid.ToString());
+            return null;
+        }
+    }
     public static bool CheckCanBuild(Vector2Int[] grids,int width,int height,out Direction direction)
     {
         //检测安放地点占用
@@ -323,12 +347,19 @@ public class MapManager : Singleton<MapManager>
 
 public class SingleGrid
 {
+    private List<Direction> originDir = new List<Direction> { Direction.down, Direction.left, Direction.right, Direction.up };
     public Vector2Int GridPos { get; private set; }
     public GridType GridType { get; set; }
 
+    public List<Direction> AvailableDir = new List<Direction> { Direction.down, Direction.left, Direction.right, Direction.up };
     public SingleGrid(int x, int z, GridType gridType)
     {
         this.GridPos = new Vector2Int(x, z);
         GridType = gridType;
+    }
+    
+    public void RefreshGridDirInfo()
+    {
+        AvailableDir = originDir;
     }
 }

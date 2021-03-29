@@ -44,6 +44,27 @@ public class CastTool : MonoBehaviour
                 return Vector3.one;
         }
     }
+
+    public static Direction CastVector2ToDirection(Vector2 vector2)
+    {
+        if (vector2.x > 0)
+        {
+            return Direction.right;
+        }
+        else if (vector2.x < 0)
+        {
+            return Direction.left;
+        }
+        else if (vector2.y > 0)
+        {
+            return Direction.up;
+        }
+        else
+        {
+            return Direction.down;
+        }
+    }
+
     public static Vector3 CastDirectionToVector(int direction)
     {
         direction %= 4;
@@ -60,6 +81,27 @@ public class CastTool : MonoBehaviour
                 return new Vector3(0, 0, -1) * unit;
             default:
                 return Vector3.zero;
+        }
+    }
+
+    public static Vector2Int CastDirectionToVector2Int(int direction)
+    {
+        direction += 4;
+        direction %= 4;
+        int unit = MapManager.unit;
+        switch (direction)
+        {
+            case (int)Direction.right:
+                return new Vector2Int(1, 0) * unit;
+            case (int)Direction.left:
+                return new Vector2Int(-1, 0) * (unit);
+            case (int)Direction.up:
+                return new Vector2Int(0, 1) * unit;
+            case (int)Direction.down:
+                return new Vector2Int(0, -1) * (unit);
+            default:
+                Debug.Log(direction);
+                return Vector2Int.zero;
         }
     }
 }

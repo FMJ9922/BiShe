@@ -29,6 +29,7 @@ public class HutBuilding : BuildingBase
 
     protected override void Input()
     {
+        TrafficManager.Instance.UseCar(TransportationType.mini, this, GovernmentBuilding.Instance, DriveType.once);
         //遍历所有可吃的食物，数量够吃就返回
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {

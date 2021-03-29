@@ -32,9 +32,11 @@ public class BuildingBase : MonoBehaviour
 
     public Vector2Int[] takenGrids;
 
-    public Material mat;
-
     protected FormulaData formula = new FormulaData();
+
+    public GameObject parking;//停车的位置
+
+    public Direction direction;
      
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
