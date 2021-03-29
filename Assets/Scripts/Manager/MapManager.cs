@@ -47,9 +47,24 @@ public class MapManager : Singleton<MapManager>
             SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
         }
+        List<StaticBuilding> lists = StaticBuilding.lists;
+        for (int i = 0; i < lists.Count; i++)
+        {
+            lists[i].SetGrids();
+        }
         Debug.Log("地图已初始化！");
     }
 
+    /// <summary>
+    /// 刷地基
+    /// </summary>
+    public void BuildFoundation(Vector2Int[] takenGirds, int tex)
+    {
+        for (int i = 0; i < takenGirds.Length; i++)
+        {
+            generator.RefreshUV(tex, 4, takenGirds[i].x + takenGirds[i].y * MapSize.x);
+        }
+    }
     public void BuildOutCornerRoad(int level, int index, Direction direction)
     {
         generator.RefreshUV(12 - level * 4 + 2, 4, index, (int)direction);

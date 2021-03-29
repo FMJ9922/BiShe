@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9184580706390751609}
   m_Layer: 0
   m_Name: Plain_Building_Residential_L1_03_Preb
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +65,8 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 3208407985656759359}
   buildFlag: 0
+  takenGrids: []
+  mat: {fileID: 0}
 --- !u!1001 &8103862750862230344
 PrefabInstance:
   m_ObjectHideFlags: 0

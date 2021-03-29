@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7894589191617915936}
   m_Layer: 0
   m_Name: Universal_Building_Warehouse_L2_01_Preb
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,8 @@ MonoBehaviour:
   animation: {fileID: 0}
   body: {fileID: 6263194639184342762}
   buildFlag: 0
+  takenGrids: []
+  mat: {fileID: 0}
 --- !u!65 &7894589191617915936
 BoxCollider:
   m_ObjectHideFlags: 0

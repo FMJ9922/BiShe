@@ -124,6 +124,19 @@ public class InfoCanvas : CanvasBase
                     _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
                     break;
                 }
+            case BuildTabType.hide:
+                {
+                    _inputsObj.SetActive(false);
+                    _outputsObj.SetActive(false);
+                    _effectiveObj.SetActive(false);
+                    _introduceObj.SetActive(true);
+                    _populationObj.SetActive(false);
+                    SetBtnsActive(false);
+                    _destroyBtn.gameObject.SetActive(false);
+                    _formulaObj.SetActive(false);
+                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
+                    break;
+                }
 
         }
     }
@@ -131,6 +144,7 @@ public class InfoCanvas : CanvasBase
 
     private void ChangeFormula(FormulaData[] formulaDatas)
     {
+        if (formulaDatas.Length <= 0) return;
         _dropDown.options.Clear();
         _dropDown.captionText.text = formulaDatas[_buildData.CurFormula].Describe;
         if (formulaDatas == null || formulaDatas.Length == 0)
@@ -153,45 +167,49 @@ public class InfoCanvas : CanvasBase
     private void ChangeLabels(RuntimeBuildData buildData)
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
-        FormulaData formula = buildData.formulaDatas[buildData.CurFormula];
-        string input = string.Empty;
-        int count = 0;
-        for (int i = 0; i < formula.InputItemID.Count; i++)
+        FormulaData formula;
+        if (buildData.formulaDatas.Length>0)
         {
-            //如果是民房
-            if (formula.InputNum.Count - 1 < i)
+            formula = buildData.formulaDatas[buildData.CurFormula];
+            string input = string.Empty;
+            int count = 0;
+            for (int i = 0; i < formula.InputItemID.Count; i++)
             {
-                input += " 或 " +
-                Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(formula.InputItemID[i]));
-                count++;
+                //如果是民房
+                if (formula.InputNum.Count - 1 < i)
+                {
+                    input += " 或 " +
+                    Localization.ToSettingLanguage(
+                        DataManager.GetItemNameById(formula.InputItemID[i]));
+                    count++;
+                }
+                else
+                if (formula.InputNum[i] != 0)
+                {
+                    input += formula.InputNum[i] + " " +
+                    Localization.ToSettingLanguage(
+                        DataManager.GetItemNameById(formula.InputItemID[i]));
+                    count++;
+                }
             }
-            else
-            if (formula.InputNum[i] != 0)
+            if (count == 0)
             {
-                input += formula.InputNum[i] + " " +
-                Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(formula.InputItemID[i]));
-                count++;
+                _inputsObj.SetActive(false);
             }
-        }
-        if(count == 0)
-        {
-            _inputsObj.SetActive(false);
-        }
-        _inputsLabel.text = input;
-        string output = string.Empty;
-        for (int i = 0; i < formula.OutputItemID.Count; i++)
-        {
-            if (formula.ProductNum[i] == 0)
+            _inputsLabel.text = input;
+            string output = string.Empty;
+            for (int i = 0; i < formula.OutputItemID.Count; i++)
             {
-                continue;
+                if (formula.ProductNum[i] == 0)
+                {
+                    continue;
+                }
+                output += formula.ProductNum[i] + " " +
+                    Localization.ToSettingLanguage(
+                        DataManager.GetItemNameById(formula.OutputItemID[i]));
             }
-            output += formula.ProductNum[i] + " " +
-                Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(formula.OutputItemID[i]));
+            _outputsLabel.text = output;
         }
-        _outputsLabel.text = output;
         _populationLabel.text = Localization.ToSettingLanguage(buildData.Population > 0 ? "Worker" : "Resident") + "：" +
             buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);

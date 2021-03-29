@@ -540,6 +540,28 @@ MonoBehaviour:
     tabType: 0
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
     Level: 3
+  - Id: 20020
+    Name: Government
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 8
+    Width: 8
+    Price: 0
+    costResources:
+    - ItemId: 12003
+      ItemNum: 1
+    - ItemId: 12010
+      ItemNum: 2
+    BundleName: building.ab
+    PfbName: Universal_Building_Government_L1_01_Perb
+    tabType: 5
+    Introduce: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
+    Level: 1
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -787,3 +809,6 @@ MonoBehaviour:
     - code: Integrated mill
       chinese: "\u7EFC\u5408\u5DE5\u5382"
       english: Integrated mill
+    - code: Government
+      chinese: "\u653F\u5E9C"
+      english: Government

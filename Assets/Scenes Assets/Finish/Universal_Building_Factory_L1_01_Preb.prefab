@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5455915311625031067}
   m_Layer: 0
   m_Name: Universal_Building_Factory_L1_01_Preb
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 12
-  Height: 6
+  Width: 6
+  Height: 10
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}

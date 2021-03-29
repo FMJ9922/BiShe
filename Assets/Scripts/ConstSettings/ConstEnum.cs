@@ -82,6 +82,7 @@ public enum BuildTabType
     manufacturing = 3,
     [Description("Utilitiy")]
     utility = 4,
+    hide = 5,
 }
 
 public enum DriveType

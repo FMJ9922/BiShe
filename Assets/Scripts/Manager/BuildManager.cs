@@ -331,6 +331,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
+            MapManager.Instance.BuildFoundation(targetGrids, 15);
             terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             //for (int i = 0; i < targetGrids.Length; i++)
             //{
@@ -459,7 +460,7 @@ public class BuildManager : Singleton<BuildManager>
     /// 获取当前待造建筑所占用的所有格子
     /// </summary>
     /// <returns></returns>
-    private Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos,out int width,out int height)
+    public Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos,out int width,out int height)
     {
         int startX, endX, startZ, endZ;
         width = isTurn ? sizeY : sizeX;
@@ -500,6 +501,46 @@ public class BuildManager : Singleton<BuildManager>
         return grids;
     }
 
+    public Vector2Int[] GetAllGrids(int sizeX, int sizeY, Vector3 centerPos,bool _isTurn)
+    {
+        int startX, endX, startZ, endZ;
+        int width = _isTurn ? sizeY : sizeX;
+        int height = _isTurn ? sizeX : sizeY;
+        Vector3 centerGrid = centerPos / 2;
+        if (width % 2 == 0)
+        {
+            startX = Mathf.FloorToInt(centerGrid.x) - width / 2 + 1;
+            endX = Mathf.FloorToInt(centerGrid.x) + width / 2;
+        }
+        else
+        {
+            startX = Mathf.RoundToInt(centerGrid.x) - (width - 1) / 2;
+            endX = Mathf.RoundToInt(centerGrid.x) + (width - 1) / 2;
+        }
+        if (height % 2 == 0)
+        {
+            startZ = Mathf.FloorToInt(centerGrid.z) - height / 2 + 1;
+            endZ = Mathf.FloorToInt(centerGrid.z) + height / 2;
+        }
+        else
+        {
+            startZ = Mathf.RoundToInt(centerGrid.z) - (height - 1) / 2;
+            endZ = Mathf.RoundToInt(centerGrid.z) + (height - 1) / 2;
+        }
+
+
+        Vector2Int[] grids = new Vector2Int[width * height];
+        int index = 0;
+        for (int i = startX; i <= endX; i++)
+        {
+            for (int j = startZ; j <= endZ; j++)
+            {
+                grids[index] = new Vector2Int(i - 1, j - 1);
+                index++;
+            }
+        }
+        return grids;
+    }
     #endregion
 }
 

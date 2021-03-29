@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 149995925896744277}
   m_Layer: 0
   m_Name: Plain_Building_Residential_L1_01_Preb
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

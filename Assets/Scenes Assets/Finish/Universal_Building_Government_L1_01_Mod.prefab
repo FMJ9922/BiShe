@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4014779805792866844}
   - component: {fileID: 8552304826742765368}
   - component: {fileID: 396838182051388007}
+  - component: {fileID: 6982003867659295232}
   m_Layer: 0
   m_Name: Universal_Building_Government_L1_01_Mod
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 8
-  Height: 6
+  Height: 8
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}
@@ -67,6 +68,20 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   mat: {fileID: 0}
+--- !u!114 &6982003867659295232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954929645561425687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFacingX: 1
+  BuildID: 20020
 --- !u!1001 &2763063651703221689
 PrefabInstance:
   m_ObjectHideFlags: 0
