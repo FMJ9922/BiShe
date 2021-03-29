@@ -62,7 +62,7 @@ public class MapManager : Singleton<MapManager>
     {
         generator.RefreshUV(12 - level * 4, 4, index, (int)direction);
     }
-    public void GenerateRoad(Vector2Int[] roadGrid, int level = 0)
+    public void GenerateRoad(Vector2Int[] roadGrid, int level = 1)
     {
         for (int i = 0; i < roadGrid.Length; i++)
         {
@@ -77,13 +77,13 @@ public class MapManager : Singleton<MapManager>
             switch (roadOption)
             {
                 case RoadOption.straight:
-                    BuildStraightRoad(level, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildStraightRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
                 case RoadOption.inner:
-                    BuildInCornerRoad(level, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildInCornerRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
                 case RoadOption.outter:
-                    BuildOutCornerRoad(level, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildOutCornerRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
             }
         }

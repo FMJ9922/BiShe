@@ -19,13 +19,18 @@ public class CameraMovement : Singleton<CameraMovement>
     private float _forwardSpeed = 0;
     private float _rightSpeed = 0;
     private float _scrollValue = 40;
+    private bool canMove = true;
 
-    private void Awake()
+    protected override void InstanceAwake()
     {
         _cameraTrans = transform.GetChild(0);
     }
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.W))
         {
             _forwardSpeed = _forwardSpeed >= 0 ?
@@ -70,6 +75,16 @@ public class CameraMovement : Singleton<CameraMovement>
         _cameraTrans.localPosition = new Vector3(-1f, -1.42f, 1f) * _scrollValue;
     }
 
+    public void StopMovement()
+    {
+        canMove = false;
+        _forwardSpeed = 0;
+        _rightSpeed = 0;
+    }
+    public void AllowMovement()
+    {
+        canMove = true;
+    }
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {
         return new Vector3(rightSpeed - forwardSpeed, 0, rightSpeed + forwardSpeed);

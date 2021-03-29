@@ -167,7 +167,7 @@ MonoBehaviour:
     PfbName: L1_Road001
     tabType: 0
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
-    Level: 0
+    Level: 1
   - Id: 20003
     Name: Warehouse
     CostPerWeek: 5
@@ -517,7 +517,7 @@ MonoBehaviour:
     PfbName: L1_Road001
     tabType: 0
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
-    Level: 0
+    Level: 2
   - Id: 20019
     Name: "Asphalt\_road"
     CostPerWeek: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
     PfbName: L1_Road001
     tabType: 0
     Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
-    Level: 0
+    Level: 3
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"

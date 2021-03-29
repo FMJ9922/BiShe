@@ -32,6 +32,7 @@ public class BuildManager : Singleton<BuildManager>
     private List<GameObject> preRoads = new List<GameObject>();
     private Direction roadDirection = Direction.right;
     private int roadCount = 0;
+    private int roadLevel = 1;//道路等级
 
     //事件相关
     private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMoveSetBuildingPos(p);
@@ -85,10 +86,11 @@ public class BuildManager : Singleton<BuildManager>
     /// <summary>
     /// 开始修路
     /// </summary>
-    public void StartCreateRoads(int roadLevel = 0)
+    public void StartCreateRoads(int _roadLevel = 1)
     {
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
+        roadLevel = _roadLevel;
     }
 
     #endregion
@@ -164,7 +166,7 @@ public class BuildManager : Singleton<BuildManager>
             grids.Add(GetCenterGrid(preRoads[i].transform.position + adjust));
             grids.Add(GetCenterGrid(preRoads[i].transform.position - delta + adjust));
         }
-        MapManager.Instance.GenerateRoad(grids.ToArray());
+        MapManager.Instance.GenerateRoad(grids.ToArray(),roadLevel);
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
     }
@@ -223,6 +225,7 @@ public class BuildManager : Singleton<BuildManager>
                 newRoad.name = i.ToString();
                 newRoad.transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
                 newRoad.transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
+                newRoad.GetComponent<RoadPreview>().SetRoadPreviewMat(roadLevel);
                 preRoads.Add(newRoad);
             }
         }

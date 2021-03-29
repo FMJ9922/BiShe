@@ -52,15 +52,19 @@ public class GameManager : Singleton<GameManager>
         {
             case TimeScale.stop:
                 Time.timeScale = 0.0f;
+                CameraMovement.Instance.StopMovement();
                 break;
             case TimeScale.one:
                 Time.timeScale = 1.0f;
+                CameraMovement.Instance.AllowMovement();
                 break;
             case TimeScale.two:
                 Time.timeScale = 2.0f;
+                CameraMovement.Instance.AllowMovement();
                 break;
             case TimeScale.four:
                 Time.timeScale = 4.0f;
+                CameraMovement.Instance.AllowMovement();
                 break;
         }
     }
