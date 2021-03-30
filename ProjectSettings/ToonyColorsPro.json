@@ -5,7 +5,15 @@
     "LoadAllShaders": false,
     "CustomOutputPath": "/JMO Assets/Toony Colors Pro/Shaders Generated/",
     "LastImplementationExportImportPath": "E:/Unity/BiShe/Assets",
-    "OpenedFoldouts": [],
+    "OpenedFoldouts": [
+        "OPTIONS",
+        "SHADER STATES",
+        "LIGHTING",
+        "STYLIZATION",
+        "SURFACE",
+        "TRANSPARENCY/BLENDING",
+        "SPECIAL EFFECTS"
+    ],
     "UseCustomFont": true,
     "CustomFont": {
         "fileID": 12800000,
