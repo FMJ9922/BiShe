@@ -152,10 +152,10 @@ Material:
     - _UseRimLightMask: 1
     - _UseShadowTexture: 0
     - _UseSpecular: 0
-    - _WindFrequency: 0.5
-    - _WindSpeed: 3
-    - _WindStrength: 0.15
-    - _WindTimeOffset: 0.1
+    - _WindFrequency: 2
+    - _WindSpeed: 5
+    - _WindStrength: 0.1
+    - _WindTimeOffset: 0.3
     - _ZWrite: 1
     - __dummy__: 0
     m_Colors:
@@ -170,4 +170,4 @@ Material:
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
     - _SColor: {r: 0.8723077, g: 0.88085973, b: 0.945, a: 1}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-    - _WindDirection: {r: 3, g: 1, b: 3, a: 0}
+    - _WindDirection: {r: 5, g: 2, b: 5, a: 0}

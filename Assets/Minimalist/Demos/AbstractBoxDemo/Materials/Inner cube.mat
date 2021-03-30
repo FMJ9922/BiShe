@@ -132,7 +132,7 @@ Material:
     - _Shading_R: 2
     - _Shading_T: 2
     - _ShadowBlend: 0.58
-    - _ShadowInfluence: 1
+    - _ShadowInfluence: 0.35
     - _ShowAO: 1
     - _ShowAmbientSettings: 0
     - _ShowBack: 0
@@ -187,5 +187,5 @@ Material:
     - _GradientYStartPos_R: {r: 0, g: 0, b: 0, a: 0}
     - _LMColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+    - _ShadowColor: {r: 0.22, g: 0.22, b: 0.22, a: 1}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
