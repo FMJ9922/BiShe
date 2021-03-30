@@ -154,13 +154,13 @@ Material:
     - _UseSpecular: 0
     - _WindFrequency: 0.9
     - _WindSpeed: 1.7
-    - _WindStrength: 0.07
+    - _WindStrength: 0.2
     - _WindTimeOffset: 0.35
     - _ZWrite: 1
     - __dummy__: 0
     m_Colors:
     - _BaseColor: {r: 0.5482257, g: 0.6509804, b: 0.4752157, a: 1}
-    - _Color: {r: 0.336144, g: 0.752, b: 0.34508714, a: 1}
+    - _Color: {r: 0.4859884, g: 0.8301887, b: 0.3563546, a: 1}
     - _ColorBack: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}

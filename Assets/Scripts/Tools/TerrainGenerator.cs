@@ -90,31 +90,39 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         m.uv = originMesh.uv;
         return m;
     }
-    public void OnPaint(int tex, Vector3 pos, int dir)
+    public void OnPaint(int tex, Vector3 pos, int dir,int size)
     {
         CalculateHeights();
         Vector3 delta = pos - terrain.transform.position;
         int x = Mathf.FloorToInt(delta.x / 2);
         int z = Mathf.FloorToInt(delta.z / 2);
-        int index = z * (height.Length - 1) + x;
-        RefreshUV(tex, 4, index, dir);
+        int[] indexes = new int[(2*size-1)*(2*size -1)];
         MapData mapData = GetMapData();
-        if (tex == 4|| tex == 5|| tex == 6|| tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
+        for (int j = -size+1; j < size; j++)
         {
-            mapData.roadGrids.Add(new Vector2IntSerializer(x,z));
-            SaveMapData(mapData);
-        }
-        else
-        {
-            for (int i = 0; i < mapData.roadGrids.Count; i++)
+            for (int i = -size+1; i < size; i++)
             {
-                if (mapData.roadGrids[i].Vector2Int == new Vector2Int(x, z)) 
+                indexes[(j+size -1) * (2 * size - 1) + i + size - 1] = (z + j) * (height.Length - 1) + x + i;
+
+                RefreshUV(tex, 4, indexes, dir);
+                if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
                 {
-                    mapData.roadGrids.RemoveAt(i);
+                    mapData.roadGrids.Add(new Vector2IntSerializer(x+i, z+j));
+                }
+                else
+                {
+                    for (int k = 0; k < mapData.roadGrids.Count; k++)
+                    {
+                        if (mapData.roadGrids[k].Vector2Int == new Vector2Int(x+i, z+j))
+                        {
+                            mapData.roadGrids.RemoveAt(k);
+                        }
+                    }
                 }
             }
-            SaveMapData(mapData);
         }
+        SaveMapData(mapData);
+
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
     {
@@ -375,10 +383,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         return new Vector3(vector3.x, height, vector3.z);
     }
+    [ContextMenu("存储地形")]
     void SaveAsset()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        //AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
+        AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
     }
     
     /// <summary>

@@ -11,6 +11,7 @@ public class TerrainWindow : EditorWindow
     bool canDir = false;
     bool canBuildRoad = false;
     int dir = 0;
+    int brushSize = 1;
     int range = 0;
     int height = 0;
     int triDir = 0;
@@ -58,7 +59,7 @@ public class TerrainWindow : EditorWindow
                 TerrainGenerator gen = hit.collider.GetComponent<TerrainGenerator>();
                 if (canPaint)
                 {
-                    gen.OnPaint(index, hit.point, dir);
+                    gen.OnPaint(index, hit.point, dir,brushSize);
                 }
                 else if (canDir)
                 {
@@ -81,6 +82,8 @@ public class TerrainWindow : EditorWindow
                                                           "12", "13", "14", "15"});
         GUILayout.Label("选择方向");
         dir = GUILayout.Toolbar(dir, new string[4] { "0", "1", "2", "3" });
+        GUILayout.Label("选择笔刷大小");
+        brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "3", "5" });
         if (GUILayout.Button("涂色"))
         {
             canPaint = true;
