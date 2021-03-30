@@ -332,14 +332,6 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            if(currentBuilding.runtimeBuildData.Id == 20005)
-            {
-                MapManager.Instance.BuildFoundation(targetGrids, 2);
-            }
-            else
-            {
-                MapManager.Instance.BuildFoundation(targetGrids, 15);
-            }
             terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             //for (int i = 0; i < targetGrids.Length; i++)
             //{

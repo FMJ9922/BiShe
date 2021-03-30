@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3644480662
+CRC: 445954811
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9a1dc7685f333c085aca19a56c1b6161
+    Hash: 48d61161d7bb878e559c625b857a8ee0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -19,6 +19,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Terrain_GrassLand_01_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Flag Wind.shader
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Government_Flag_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Factory_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat

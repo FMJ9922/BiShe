@@ -23,6 +23,11 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         BuildData = buildData;
         _buildingCanvas = buildingCanvas;
         //ToDo初始化图片
+        if (!string.IsNullOrEmpty(buildData.iconName))
+        {
+            _image.sprite = LoadAB.LoadSprite("icon.ab", buildData.iconName);
+        }
+        _image.SetNativeSize();
         _name.text = Localization.ToSettingLanguage(BuildData.Name);
     }
 
@@ -33,11 +38,13 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _buildingCanvas.OnEnterHoverIcon(BuildData);
+        _image.transform.position += Vector3.up * 10;
+        _buildingCanvas.OnEnterHoverIcon(BuildData,transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        _image.transform.position -= Vector3.up * 10;
         _buildingCanvas.OnExitHoverIcon(BuildData);
     }
 }

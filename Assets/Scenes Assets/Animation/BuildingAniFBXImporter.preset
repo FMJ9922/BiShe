@@ -162,7 +162,7 @@ Preset:
     objectReference: {fileID: 2100000, guid: 8bcada0c576bf5c45ae4714a9324b5fb, type: 2}
   - target: {fileID: 0}
     propertyPath: m_MaterialImportMode
-    value: 0
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_MaterialName

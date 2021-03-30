@@ -48,8 +48,18 @@ public class BuildingBase : MonoBehaviour
             body.SetActive(false);
             animation.gameObject.SetActive(true);
             float time = animation.clip.length;
-            Invoke("ShowBody", time);
+            Invoke("ShowBody", time * 2);
+            animation["Take 001"].speed = 0.5f;
             animation.Play();
+        }
+
+        if (runtimeBuildData.Id == 20005)
+        {
+            MapManager.Instance.BuildFoundation(vector2Ints, 2);
+        }
+        else
+        {
+            MapManager.Instance.BuildFoundation(vector2Ints, 15);
         }
         InitBuildingFunction();
     }
@@ -136,7 +146,7 @@ public class BuildingBase : MonoBehaviour
     }
     protected virtual void Output()
     {
-        if (formula == null) return;
+        if (formula == null|| formula.OutputItemID ==null) return;
         productTime--;
         if (productTime <= 0)
         {
@@ -150,7 +160,7 @@ public class BuildingBase : MonoBehaviour
 
     protected virtual void Input()
     {
-        if (formula == null) return;
+        if (formula == null|| formula.InputItemID==null) return;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);

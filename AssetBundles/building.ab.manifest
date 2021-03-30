@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1062231494
+CRC: 2611683921
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f54762dc605d65efd203f693f34e09f4
+    Hash: ffa5d60abb6a9bd27e33b37cac074415
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 5402de1683e6dd39f07dbbe6432bbec8
+    Hash: 1e76ceee48da8832db0c1bd4b2bd383c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,6 +28,10 @@ ClassTypes:
 - Class: 64
   Script: {instanceID: 0}
 - Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 111
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
@@ -75,17 +79,21 @@ Assets:
 - Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L2_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Animation/Plain_Building_Residential_L1_03_Ani_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
+- Assets/Prefabs/WheatsPfb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Government_L3_01_Mod.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L1_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Animation/Universal_Building_Sawmill_L1_01_Ani_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_03_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L3_01_Preb.prefab
@@ -128,4 +136,5 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_01_Mod.fbx
 Dependencies:
+- D:/UnityProjects/BiShe/AssetBundles/plant.ab
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab

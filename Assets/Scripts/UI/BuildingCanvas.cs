@@ -25,14 +25,15 @@ public class BuildingCanvas : CanvasBase
     [SerializeField]
     private TMP_Text _introduceLabel;
     [SerializeField]
-    private TMP_Text _costLabel;
-    [SerializeField]
     private GameObject _confirmBtns;
     [SerializeField]
     private Button _confirm;
     [SerializeField]
     private Button _cancel;
-
+    [SerializeField] 
+    private Transform _iconsParent;
+    [SerializeField]
+    private TMP_Text _tabLabel;
     private BuildTabType tabType;
 
     
@@ -95,9 +96,10 @@ public class BuildingCanvas : CanvasBase
         {
             GameObject newTab = Instantiate(pfbTab, _buildingTabs);
             newTab.name = i.ToString();
-            newTab.GetComponentInChildren<TMP_Text>().text = Localization.ToSettingLanguage(((BuildTabType)i).GetDescription());
             Button btn = newTab.GetComponent<Button>();
             btn.interactable = true;
+            newTab.GetComponent<BuildTabAnim>().iconName = ((BuildTabType)i).GetDescription();
+            newTab.GetComponent<BuildTabAnim>().InitSprite();
             btn.onClick.AddListener(() =>
             {
                 ChangeTab(int.Parse(newTab.name));
@@ -109,6 +111,7 @@ public class BuildingCanvas : CanvasBase
             {
                 newTab.GetComponent<BuildTabAnim>().Rise();
                 curTab = newTab.GetComponent<BuildTabAnim>();
+                _tabLabel.text = Localization.ToSettingLanguage(((BuildTabType)i).GetDescription());
             }
         }
     }
@@ -148,7 +151,6 @@ public class BuildingCanvas : CanvasBase
     public void ChangeTab(int tabType)
     {
         this.tabType = (BuildTabType)tabType;
-        //TODO:替换背景图片
         currentTabDatas = DataManager.Instance.TabDic[this.tabType].ToArray();
         CleanUpAllAttachedChildren(_buildingIcons);
         for (int i = 0; i < currentTabDatas.Length; i++)
@@ -162,6 +164,7 @@ public class BuildingCanvas : CanvasBase
             }
         }
         GameObject newDivide1 = Instantiate(pfbDividingLine, _buildingIcons);
+        _tabLabel.text = Localization.ToSettingLanguage(((BuildTabType)tabType).GetDescription());
     }
     public void ShowConfirmButtons(Vector2 vector2)
     {
@@ -210,17 +213,18 @@ public class BuildingCanvas : CanvasBase
         EventManager.StopListening(ConstEvent.OnFinishBuilding, this.OnFinishBuilding);
         HideOrShowCanvasToggle(true);
     }
-    public void OnEnterHoverIcon(BuildData buildData)
+    public void OnEnterHoverIcon(BuildData buildData,Vector3 adjustPosition)
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
-        string cost = buildData.Price + Localization.ToSettingLanguage("Gold");
+        CleanUpAllAttachedChildren(_iconsParent);
+        GameObject money = CommonIcon.GetIcon(99999, buildData.Price);
+        money.transform.parent = _iconsParent;
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
-            cost += "，"+buildData.costResources[i].ItemNum +" "+ 
-                Localization.ToSettingLanguage(
-                    DataManager.GetItemNameById(buildData.costResources[i].ItemId));
+            GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum);
+            resource.transform.parent = _iconsParent;
         }
-        _costLabel.text = string.Format(Localization.ToSettingLanguage("Cost")+":\n{0}", cost);
+        _InfoCanvas.transform.position = adjustPosition + new Vector3(230,240,0);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
         _InfoCanvas.SetActive(true);
     }

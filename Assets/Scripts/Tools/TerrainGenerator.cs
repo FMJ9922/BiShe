@@ -90,6 +90,37 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         m.uv = originMesh.uv;
         return m;
     }
+
+    [ContextMenu("RecalculateUV")]
+    /// <summary>
+    /// 4->8
+    /// </summary>
+    public void RecalculateUV()
+    {
+        CalculateHeights();
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        long xSize = width - 1;
+        long ySize = width - 1;
+        long size = xSize * ySize * 4;
+        Vector2[] uv = mesh.uv;
+        for (int i = 0, y = 0; y < height.Length - 1; y++)
+        {
+            for (int x = 0; x < height.Length - 1; x++, i++)
+            {
+                int tex = GetBeforeTex(uv[4 * i]);
+                float hl = Mathf.FloorToInt(tex / 8);
+                float xl = tex - 8 * hl;
+                long index = x + y * xSize;
+                int length = 8;
+                float adjust = 0.005f;
+                uv[4 * index ] = new Vector2((xl / length) + adjust, ((length - hl - 1) / length) + adjust);
+                uv[4 * index + (1 ) % 4] = new Vector2(((xl + 1) / length) - adjust, ((length - hl - 1) / length) + adjust);
+                uv[4 * index + (2 ) % 4] = new Vector2(((xl + 1) / length) - adjust, ((length - hl) / length) - adjust);
+                uv[4 * index + (3 ) % 4] = new Vector2((xl / length) + adjust, ((length - hl) / length) - adjust);
+            }
+        }
+        mesh.uv = uv;
+    }
     public void OnPaint(int tex, Vector3 pos, int dir,int size)
     {
         CalculateHeights();
@@ -121,8 +152,16 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 }
             }
         }
-        SaveMapData(mapData);
+        //SaveMapData(mapData);
 
+    }
+
+    public int GetBeforeTex(Vector2 uv,float adjust = 0.01f,int length = 4)
+    {
+        int x = Mathf.RoundToInt(uv.x - adjust) * length;
+        int h = -(Mathf.RoundToInt(uv.y - adjust) * length + 1 - length);
+        int tex = x + h * length;
+        return tex;
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
     {
@@ -166,6 +205,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         }
         mesh.uv = uv;
         mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
     }
     
     

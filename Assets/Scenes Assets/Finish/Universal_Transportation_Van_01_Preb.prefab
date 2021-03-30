@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WayPoints: []
   wayObjects: []
-  Speed: 8
+  Speed: 7
   StopDistance: 4
   driveType: 0
   carType: 0

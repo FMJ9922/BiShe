@@ -21,6 +21,7 @@ public class BuildData
     public BuildTabType tabType;
     public string Introduce;//简介
     public int Level;//等级
+    public string iconName;//图标在包中的名称
 }
 
 [System.Serializable]

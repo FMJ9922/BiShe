@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3293938482
+CRC: 2731668877
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 803eddb4f0836e34800005bda6369824
+    Hash: e127c6fed45d6e6abcf7b2969dc42dd5
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ae2cf77de671e115b4e55d2b65767202
+    Hash: 4e7e8fdac03ebc056e65d761d2ef7551
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,6 +22,10 @@ ClassTypes:
 - Class: 43
   Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: c4ce140af63ea254ea5ac2f988335745, type: 3}
+- Class: 115
   Script: {instanceID: 0}
 Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_08_Preb.prefab
@@ -44,6 +48,8 @@ Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_04_Preb.prefab
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_09_Mod.fbx
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_Wheat_01_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Wheat_01_Mod.fbx
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_04_Mod.fbx
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_02_Mod.fbx
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_02_Preb.prefab

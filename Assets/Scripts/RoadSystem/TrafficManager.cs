@@ -12,11 +12,34 @@ public class TrafficManager : Singleton<TrafficManager>
 
     private List<Vector2Int> RoadNodes;
     private readonly Vector3 hidePos = new Vector3(0, -100, 0);
+
+    public List<GameObject> FakeRoute1;
+    public List<GameObject> FakeRoute2;
+    public List<GameObject> FakeRoute3;
+    public List<GameObject> FakeRoute4;
     enum FindRoadState
     {
         straight = 0,//在笔直的路上走
         backward = 1,//走到死胡同了
         turing = 2,//在拐弯路口
+    }
+
+    private void Start()
+    {
+        UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute1), DriveType.yoyo);
+        UseCar(TransportationType.mini, ObjectsToVector3s(FakeRoute2), DriveType.yoyo);
+        UseCar(TransportationType.van, ObjectsToVector3s(FakeRoute3), DriveType.loop);
+        UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute4), DriveType.yoyo);
+    }
+
+    private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
+    {
+        List<Vector3> lists = new List<Vector3>();
+        for (int i = 0; i < objs.Count; i++)
+        {
+            lists.Add(objs[i].transform.position);
+        }
+        return lists;
     }
     public void UseCar(TransportationType type, BuildingBase startBuilding, BuildingBase endBuilding, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
@@ -24,7 +47,7 @@ public class TrafficManager : Singleton<TrafficManager>
         Vector2Int start = MapManager.Instance.GetCenterGrid(startBuilding.parking.transform.position);
         Vector2Int end = MapManager.Instance.GetCenterGrid(endBuilding.parking.transform.position);
         //Debug.Log(start+" "+end);
-        List<Vector3> wayPoints = GetWayPoints(start, end,startBuilding.direction); 
+        List<Vector3> wayPoints = GetWayPoints(start, end, startBuilding.direction);
         Vector3 delta = new Vector3(0, 0, 0);
         for (int i = 0; i < wayPoints.Count; i++)
         {
@@ -35,21 +58,21 @@ public class TrafficManager : Singleton<TrafficManager>
     }
 
 
-    public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once,UnityAction unityAction = null)
+    public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
-        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys)=> { RecycleCar(sys, unityAction); });
+        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys) => { RecycleCar(sys, unityAction); });
     }
 
-    public bool CloseToTarget(Vector2 cur,Vector2 target)
+    public bool CloseToTarget(Vector2 cur, Vector2 target)
     {
-        return Vector2.Distance(cur, target)>=2;
+        return Vector2.Distance(cur, target) >= 2;
     }
     /// <summary>
     /// 获得车辆的行驶路径
     /// </summary>
     /// <returns></returns>
-    private List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end,Direction direction)
+    private List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end, Direction direction)
     {
         RoadNodes = new List<Vector2Int>();
         Vector2Int tempGrid = start;
@@ -57,10 +80,10 @@ public class TrafficManager : Singleton<TrafficManager>
         Vector2Int forwardVec = CastTool.CastDirectionToVector2Int((int)curDir);
         FindRoadState state = FindRoadState.straight;
         RoadNodes.Add(start);
-        int count = 500; 
-        while (CloseToTarget(tempGrid , end)&&count>0)
+        int count = 500;
+        while (CloseToTarget(tempGrid, end) && count > 0)
         {
-            Debug.Log(tempGrid+" "+forwardVec + " "+ state);
+            //Debug.Log(tempGrid+" "+forwardVec + " "+ state);
             count--;
             switch (state)
             {
@@ -222,7 +245,7 @@ public class TrafficManager : Singleton<TrafficManager>
         return system;
     }
 
-    private void RecycleCar(DriveSystem driveSystem,UnityAction unityAction)
+    private void RecycleCar(DriveSystem driveSystem, UnityAction unityAction)
     {
         carUsingPool.Remove(driveSystem);
         carUnusedPool.Add(driveSystem);
