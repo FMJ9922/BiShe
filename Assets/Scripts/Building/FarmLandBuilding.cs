@@ -9,12 +9,15 @@ public class FarmLandBuilding : BuildingBase
     [SerializeField] GameObject wheatGridPfb;
     [SerializeField] Transform wheatTrans;
     [SerializeField] GameObject previewObj;
+    public List<GameObject> lists;
+    bool isharvesting = false;
 
     private GameObject[] grids;
     public override void InitBuildingFunction()
     {
         base.InitBuildingFunction();
         InitWheatGrids();
+        previewObj.SetActive(false);
     }
      private void InitWheatGrids()
     {
@@ -24,25 +27,39 @@ public class FarmLandBuilding : BuildingBase
             GameObject newGrid = Instantiate(wheatGridPfb, wheatTrans);
             grids[i] = newGrid;
             newGrid.transform.position = MapManager.Instance.GetTerrainPosition(takenGrids[i]);
-            wheatGridPfb.SetActive(false);
+            newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction-1), Space.Self);
         }
         wheatTrans.localPosition = new Vector3(0, -0.8f, 0);
     }
     protected override void Output()
     {
         if (formula == null) return;
-        productTime--;
-        float progress = (float)productTime / formula.ProductTime;
-        wheatTrans.localPosition = new Vector3(0, -0.7f * progress, 0);
-        if (productTime <= 0)
+        if (!isharvesting)
         {
-            productTime = formula.ProductTime;
-            for (int i = 0; i < formula.OutputItemID.Count; i++)
+            productTime--;
+            float progress = (float)productTime / formula.ProductTime;
+            wheatTrans.localPosition = new Vector3(0, -0.7f * progress, 0);
+            if (productTime <= 0)
             {
-                ResourceManager.Instance.AddResource(formula.OutputItemID[i], formula.ProductNum[i]);
+                for (int i = 0; i < formula.OutputItemID.Count; i++)
+                {
+                    ResourceManager.Instance.AddResource(formula.OutputItemID[i], formula.ProductNum[i]);
+                }
+                isharvesting = true;
+                List<Vector3> vecs = new List<Vector3>();
+                for (int i = 0; i < lists.Count; i++)
+                {
+                    vecs.Add(lists[i].transform.position);
+                }
+                TrafficManager.Instance.UseCar(TransportationType.harvester, vecs, DriveType.once, OnFinishHarvest);
             }
         }
-
+    }
+    public void OnFinishHarvest()
+    {
+        isharvesting = false;
+        productTime = formula.ProductTime;
+        InitWheatGrids();
     }
 
     protected override void Input()

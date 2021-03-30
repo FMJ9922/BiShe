@@ -71,7 +71,7 @@ public class DriveSystem : MonoBehaviour
             {
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (StopDistance*Mathf.PI / (Speed*2));
-                //Debug.Log("转弯");
+                Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
             }
 

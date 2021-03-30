@@ -128,4 +128,5 @@ public enum TransportationType
     van = 0,
     mini = 1,
     medium = 2,
+    harvester = 3,
 }

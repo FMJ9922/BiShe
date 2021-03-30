@@ -383,6 +383,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         return new Vector3(vector3.x, height, vector3.z);
     }
+    /*
     [ContextMenu("存储地形")]
     void SaveAsset()
     {
@@ -390,6 +391,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
     }
     
+    [ContextMenu("加载地形")]
+    void LoadAsset()
+    {
+        transform.GetComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>("Assets/" + "myMesh.asset");
+    }*/
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>

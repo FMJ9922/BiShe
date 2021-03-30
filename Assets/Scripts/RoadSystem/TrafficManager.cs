@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TrafficManager : Singleton<TrafficManager>
 {
@@ -17,7 +18,7 @@ public class TrafficManager : Singleton<TrafficManager>
         backward = 1,//走到死胡同了
         turing = 2,//在拐弯路口
     }
-    public void UseCar(TransportationType type, BuildingBase startBuilding, BuildingBase endBuilding, DriveType driveType = DriveType.once)
+    public void UseCar(TransportationType type, BuildingBase startBuilding, BuildingBase endBuilding, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
         Vector2Int start = MapManager.Instance.GetCenterGrid(startBuilding.parking.transform.position);
@@ -30,7 +31,14 @@ public class TrafficManager : Singleton<TrafficManager>
             wayPoints[i] += delta;
         }
         //Debug.Log(wayPoints.Count);
-        driveSystem.StartDriving(wayPoints, driveType, RecycleCar);
+        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys) => { RecycleCar(sys, unityAction); });
+    }
+
+
+    public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once,UnityAction unityAction = null)
+    {
+        DriveSystem driveSystem = GetCarFromPool(type);
+        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys)=> { RecycleCar(sys, unityAction); });
     }
 
     public bool CloseToTarget(Vector2 cur,Vector2 target)
@@ -214,12 +222,13 @@ public class TrafficManager : Singleton<TrafficManager>
         return system;
     }
 
-    private void RecycleCar(DriveSystem driveSystem)
+    private void RecycleCar(DriveSystem driveSystem,UnityAction unityAction)
     {
         carUsingPool.Remove(driveSystem);
         carUnusedPool.Add(driveSystem);
         driveSystem.transform.position = hidePos;
         driveSystem.action = null;
+        unityAction.Invoke();
         //Debug.Log("hide");
     }
 }

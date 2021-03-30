@@ -221,14 +221,14 @@ MonoBehaviour:
     InfluenceRange: 5
     FrontBuildingId: 0
     RearBuildingId: 0
-    Length: 3
-    Width: 3
+    Length: 6
+    Width: 4
     Price: 12
     costResources:
     - ItemId: 12003
       ItemNum: 5
     BundleName: building.ab
-    PfbName: L1_Fieldedge001
+    PfbName: Universal_Building_Farmland_L1_01_Preb
     tabType: 2
     Introduce: "\u7CAE\u98DF\u4F5C\u7269\u6700\u4E3B\u8981\u7684\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
@@ -603,15 +603,15 @@ MonoBehaviour:
     InputItemID: 
     InputNum: 
     OutputItemID: f92a0000
-    ProductNum: 0a000000
-    ProductTime: 2
+    ProductNum: 32000000
+    ProductTime: 3
   - ID: 50007
     Describe: "\u7530\u5730\u4EA7\u7A3B\u7C73"
     InputItemID: 
     InputNum: 
     OutputItemID: fa2a0000
-    ProductNum: 0c000000
-    ProductTime: 2
+    ProductNum: 32000000
+    ProductTime: 3
   - ID: 50008
     Describe: "\u751F\u8089\u9762\u7C89\u4EA7\u9999\u80A0"
     InputItemID: f92a0000fd2a0000
