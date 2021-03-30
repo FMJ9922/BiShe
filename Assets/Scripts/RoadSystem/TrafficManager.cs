@@ -23,7 +23,7 @@ public class TrafficManager : Singleton<TrafficManager>
         Vector2Int start = MapManager.Instance.GetCenterGrid(startBuilding.parking.transform.position);
         Vector2Int end = MapManager.Instance.GetCenterGrid(endBuilding.parking.transform.position);
         //Debug.Log(start+" "+end);
-        List<Vector3> wayPoints = GetWayPoints(start, end,startBuilding.direction);
+        List<Vector3> wayPoints = GetWayPoints(start, end,startBuilding.direction); 
         Vector3 delta = new Vector3(0, 0, 0);
         for (int i = 0; i < wayPoints.Count; i++)
         {
