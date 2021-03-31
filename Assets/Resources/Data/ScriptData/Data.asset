@@ -142,7 +142,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 5
     BundleName: building.ab
-    PfbName: Plain_Building_Residential_L1_01_Preb
+    PfbName: Plain_Building_Residential_L1_03_Preb
     tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1

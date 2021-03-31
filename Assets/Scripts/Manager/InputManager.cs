@@ -94,7 +94,8 @@ public partial class InputManager : Singleton<InputManager>
             {
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
-                if(buildingBase.runtimeBuildData.Id == 20003)
+                Debug.Log(buildingBase.transform.name);
+                if (buildingBase.runtimeBuildData.Id == 20003)
                 {
                     MainInteractCanvas.Instance.OpenResourceCanvas();
                 }

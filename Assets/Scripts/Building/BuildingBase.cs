@@ -48,8 +48,8 @@ public class BuildingBase : MonoBehaviour
             body.SetActive(false);
             animation.gameObject.SetActive(true);
             float time = animation.clip.length;
-            Invoke("ShowBody", time * 2);
-            animation["Take 001"].speed = 0.5f;
+            Invoke("ShowBody", time * 1.25f);
+            animation["Take 001"].speed = 0.8f;
             animation.Play();
         }
 

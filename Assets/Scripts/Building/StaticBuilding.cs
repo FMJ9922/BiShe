@@ -9,7 +9,7 @@ public class StaticBuilding : MonoBehaviour
     public int BuildID;
     BuildingBase currentBuilding;
     public static List<StaticBuilding> lists = new List<StaticBuilding>();
-    private void Start()
+    private void Awake()
     {
         lists.Add(this);
     }
@@ -20,6 +20,7 @@ public class StaticBuilding : MonoBehaviour
             currentBuilding.transform.position, isFacingX);
         MapManager.SetGridTypeToOccupy(targetGrids);
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
+        Debug.Log(currentBuilding.transform.name);
         Vector2Int[] grids = BuildManager.Instance.GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, transform.position, !isFacingX);
         currentBuilding.OnConfirmBuild(grids);
     }
