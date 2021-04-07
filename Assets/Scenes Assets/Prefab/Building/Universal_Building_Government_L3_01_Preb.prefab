@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6238586549959020622}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0000005, y: 6.568545, z: -8.079978}
+  m_LocalPosition: {x: 2.0000005, y: 6.568545, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9093028124856708946}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5305019850252837111}
   - component: {fileID: 7961168129141740605}
   m_Layer: 0
-  m_Name: Universal_Building_Government_L3_01_Mod
+  m_Name: Universal_Building_Government_L3_01_Preb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
