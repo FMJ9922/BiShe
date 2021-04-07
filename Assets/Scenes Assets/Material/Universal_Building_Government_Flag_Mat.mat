@@ -175,4 +175,4 @@ Material:
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
     - _SColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
-    - _WindDirection: {r: 4, g: 0.2, b: 0.1, a: 0}
+    - _WindDirection: {r: 1000, g: 0.1, b: 0, a: 0}
