@@ -62,20 +62,20 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
-            generator.RefreshUV(tex, 4, takenGirds[i].x + takenGirds[i].y * MapSize.x);
+            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x);
         }
     }
     public void BuildOutCornerRoad(int level, int index, Direction direction)
     {
-        generator.RefreshUV(12 - level * 4 + 2, 4, index, (int)direction);
+        generator.RefreshUV(12 - level * 4 + 2, 8, index, (int)direction);
     }
     public void BuildInCornerRoad(int level, int index, Direction direction)
     {
-        generator.RefreshUV(12 - level * 4 + 1, 4, index, (int)direction);
+        generator.RefreshUV(12 - level * 4 + 1, 8, index, (int)direction);
     }
     public void BuildStraightRoad(int level, int index, Direction direction)
     {
-        generator.RefreshUV(12 - level * 4, 4, index, (int)direction);
+        generator.RefreshUV(12 - level * 4, 8, index, (int)direction);
     }
     public void GenerateRoad(Vector2Int[] roadGrid, int level = 1)
     {
