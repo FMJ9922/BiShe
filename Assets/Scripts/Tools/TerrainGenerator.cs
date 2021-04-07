@@ -107,16 +107,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         {
             for (int x = 0; x < height.Length - 1; x++, i++)
             {
-                int tex = GetBeforeTex(uv[4 * i]);
-                float hl = Mathf.FloorToInt(tex / 8);
-                float xl = tex - 8 * hl;
-                long index = x + y * xSize;
-                int length = 8;
-                float adjust = 0.005f;
-                uv[4 * index ] = new Vector2((xl / length) + adjust, ((length - hl - 1) / length) + adjust);
-                uv[4 * index + (1 ) % 4] = new Vector2(((xl + 1) / length) - adjust, ((length - hl - 1) / length) + adjust);
-                uv[4 * index + (2 ) % 4] = new Vector2(((xl + 1) / length) - adjust, ((length - hl) / length) - adjust);
-                uv[4 * index + (3 ) % 4] = new Vector2((xl / length) + adjust, ((length - hl) / length) - adjust);
+                int dir = Random.Range((int)0, (int)4);
+                uv[4 * i + dir % 4] = new Vector2(0.001F, 1 - 0.001F);
+                uv[4 * i + (1 + dir) % 4] = new Vector2(0.125F-0.001F, 1 - 0.001F);
+                uv[4 * i + (2 + dir) % 4] = new Vector2(0.125F - 0.001F, 1 - 0.125f+0.001F);
+                uv[4 * i + (3 + dir) % 4] = new Vector2(0.001F, 1 - 0.125f + 0.001F);
             }
         }
         mesh.uv = uv;
@@ -135,7 +130,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
             {
                 indexes[(j+size -1) * (2 * size - 1) + i + size - 1] = (z + j) * (height.Length - 1) + x + i;
 
-                RefreshUV(tex, 4, indexes, dir);
+                RefreshUV(tex, 8, indexes, dir);
                 if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
                 {
                     mapData.roadGrids.Add(new Vector2IntSerializer(x+i, z+j));
