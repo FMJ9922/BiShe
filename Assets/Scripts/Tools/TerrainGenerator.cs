@@ -13,7 +13,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
-    public string pathName = "/MapData";//路径名称
+    private string pathName = "/MapData";//路径名称
     public Vector3 start, end;
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
