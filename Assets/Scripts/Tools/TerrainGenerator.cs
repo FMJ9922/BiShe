@@ -13,7 +13,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
-    public string pathName = Application.streamingAssetsPath+"/MapData";//路径名称
+    public string pathName = "/MapData";//路径名称
     public Vector3 start, end;
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
@@ -651,7 +651,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     private string GetPath(string fileName)
     {
-        string path = string.Format("{0}/{1}{2}", pathName,LevelManager.LevelID,fileName);
+        string path = string.Format("{0}/{1}{2}", Application.streamingAssetsPath + pathName,LevelManager.LevelID,fileName);
         return path;
     }
     #endregion
