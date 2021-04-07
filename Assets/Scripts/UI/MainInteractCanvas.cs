@@ -45,14 +45,6 @@ public class MainInteractCanvas : CanvasBase
     {
         BuildingCanvas build = (BuildingCanvas)canvas[0];
         bool open = build.ToggleBuildingCanvas();
-        if (open)
-        {
-            canvas[3].OnClose();
-        }
-        else
-        {
-            canvas[3].OnOpen();
-        }
     }
 
     public void OpenResourceCanvas()
