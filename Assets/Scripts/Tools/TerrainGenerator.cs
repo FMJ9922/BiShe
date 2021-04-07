@@ -13,7 +13,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
-    public const string pathName = "/mapData.bin";//路径名称
+    public string pathName = Application.streamingAssetsPath+"/MapData";//路径名称
     public Vector3 start, end;
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
@@ -423,19 +423,19 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         return new Vector3(vector3.x, height, vector3.z);
     }
-    /*
+    
     [ContextMenu("存储地形")]
     void SaveAsset()
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        AssetDatabase.CreateAsset(mesh, "Assets/" + "myMesh.asset");
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        AssetDatabase.CreateAsset(mesh, GetPath("meshData.asset"));
     }
     
     [ContextMenu("加载地形")]
     void LoadAsset()
     {
-        transform.GetComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>("Assets/" + "myMesh.asset");
-    }*/
+        transform.GetComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(GetPath("meshData.asset"));
+    }
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>
@@ -628,7 +628,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     private void SaveMapData(MapData mapData)
     {
-        string path = GetPath();
+        string path = GetPath("staticData.bin");
         FileStream file;
         BinaryFormatter bf = new BinaryFormatter();
         file = File.Open(path, FileMode.Create);
@@ -640,7 +640,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public MapData GetMapData()
     {
-        string path = GetPath();
+        string path = GetPath("staticData.bin");
         MapData mapData;
         FileStream file;
         BinaryFormatter bf = new BinaryFormatter();
@@ -649,9 +649,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         file.Close();
         return mapData;
     }
-    private string GetPath()
+    private string GetPath(string fileName)
     {
-        string path = string.Format("{0}{1}", Application.streamingAssetsPath, pathName);
+        string path = string.Format("{0}/{1}{2}", pathName,LevelManager.LevelID,fileName);
         return path;
     }
     #endregion

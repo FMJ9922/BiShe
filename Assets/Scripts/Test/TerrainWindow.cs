@@ -2,7 +2,7 @@
 using UnityEditor;
 
 // 自定义编辑器窗口中实现Scene射线
-/*
+
 public class TerrainWindow : EditorWindow
 {
     int index = 0;
@@ -119,6 +119,10 @@ public class TerrainWindow : EditorWindow
         {
             canDir= false;
         }
+        if (GUILayout.Button("保存地图")) 
+        { 
+
+        }
         //if (GUILayout.Button("开始修路"))
         //{
         //    buildRoadState = 0;
@@ -131,4 +135,4 @@ public class TerrainWindow : EditorWindow
         //}
     }
     
-}*/
+}
