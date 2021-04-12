@@ -13,7 +13,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
-    private string pathName = "/MapData";//路径名称
+    private string pathName = "Assets/StreamingAssets/MapData";//路径名称
     public Vector3 start, end;
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
@@ -422,7 +422,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     [ContextMenu("存储地形")]
     void SaveAsset()
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         AssetDatabase.CreateAsset(mesh, GetPath("meshData.asset"));
     }
     
@@ -646,7 +646,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     private string GetPath(string fileName)
     {
-        string path = string.Format("{0}/{1}{2}", Application.streamingAssetsPath + pathName,LevelManager.LevelID,fileName);
+        string path = string.Format("{0}/{1}{2}", "Assets/StreamingAssets/MapData", LevelManager.LevelID,fileName);
         return path;
     }
     #endregion
