@@ -109,49 +109,49 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
             {
                 int dir = Random.Range((int)0, (int)4);
                 uv[4 * i + dir % 4] = new Vector2(0.001F, 1 - 0.001F);
-                uv[4 * i + (1 + dir) % 4] = new Vector2(0.125F-0.001F, 1 - 0.001F);
-                uv[4 * i + (2 + dir) % 4] = new Vector2(0.125F - 0.001F, 1 - 0.125f+0.001F);
+                uv[4 * i + (1 + dir) % 4] = new Vector2(0.125F - 0.001F, 1 - 0.001F);
+                uv[4 * i + (2 + dir) % 4] = new Vector2(0.125F - 0.001F, 1 - 0.125f + 0.001F);
                 uv[4 * i + (3 + dir) % 4] = new Vector2(0.001F, 1 - 0.125f + 0.001F);
             }
         }
         mesh.uv = uv;
     }
-    public void OnPaint(int tex, Vector3 pos, int dir,int size)
+    public void OnPaint(int tex, Vector3 pos, int dir, int size)
     {
         CalculateHeights();
         Vector3 delta = pos - terrain.transform.position;
         int x = Mathf.FloorToInt(delta.x / 2);
         int z = Mathf.FloorToInt(delta.z / 2);
-        int[] indexes = new int[(2*size-1)*(2*size -1)];
-        MapData mapData = GetMapData();
-        for (int j = -size+1; j < size; j++)
+        int[] indexes = new int[(2 * size - 1) * (2 * size - 1)];
+        //MapData mapData = GetMapData();
+        for (int j = -size + 1; j < size; j++)
         {
-            for (int i = -size+1; i < size; i++)
+            for (int i = -size + 1; i < size; i++)
             {
-                indexes[(j+size -1) * (2 * size - 1) + i + size - 1] = (z + j) * (height.Length - 1) + x + i;
+                indexes[(j + size - 1) * (2 * size - 1) + i + size - 1] = (z + j) * (height.Length - 1) + x + i;
 
                 RefreshUV(tex, 8, indexes, dir);
-                if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
+                /*if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
                 {
-                    mapData.roadGrids.Add(new Vector2IntSerializer(x+i, z+j));
+                    mapData.roadGrids.Add(new Vector2IntSerializer(x + i, z + j));
                 }
                 else
                 {
                     for (int k = 0; k < mapData.roadGrids.Count; k++)
                     {
-                        if (mapData.roadGrids[k].Vector2Int == new Vector2Int(x+i, z+j))
+                        if (mapData.roadGrids[k].Vector2Int == new Vector2Int(x + i, z + j))
                         {
                             mapData.roadGrids.RemoveAt(k);
                         }
                     }
-                }
+                }*/
             }
         }
         //SaveMapData(mapData);
 
     }
 
-    public int GetBeforeTex(Vector2 uv,float adjust = 0.01f,int length = 4)
+    public int GetBeforeTex(Vector2 uv, float adjust = 0.01f, int length = 4)
     {
         int x = Mathf.RoundToInt(uv.x - adjust) * length;
         int h = -(Mathf.RoundToInt(uv.y - adjust) * length + 1 - length);
@@ -180,7 +180,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <param name="indexs">要修改的顶点索引</param>
     /// <param name="dir">方向</param>
     /// <param name="adjust">调整边缘</param>
-    public void RefreshUV(int tex,int length,int[] indexs ,int dir =0,float adjust = 0.01f) 
+    public void RefreshUV(int tex, int length, int[] indexs, int dir = 0, float adjust = 0.01f)
     {
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         Vector2[] uv = mesh.uv;
@@ -202,8 +202,8 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mesh.RecalculateNormals();
         transform.GetComponent<MeshFilter>().mesh = mesh;
     }
-    
-    
+
+
     public void OnReTriangle(Vector3 pos, int dir)
     {
         CalculateHeights();
@@ -245,7 +245,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int x = Mathf.FloorToInt(delta.x / 2);
         int z = Mathf.FloorToInt(delta.z / 2);
         int index = z * (height.Length - 1) + x;
-        FlatGround(index, range, targetHeight/1.5f);
+        FlatGround(index, range, targetHeight / 1.5f);
     }
     public void OnFlatGround(Vector3 pos, int range, float targetHeight)
     {
@@ -418,19 +418,21 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         return new Vector3(vector3.x, height, vector3.z);
     }
-    
+#if UNITY_EDITOR
     [ContextMenu("存储地形")]
     void SaveAsset()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         AssetDatabase.CreateAsset(mesh, GetPath("meshData.asset"));
     }
-    
+
     [ContextMenu("加载地形")]
     void LoadAsset()
     {
         transform.GetComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(GetPath("meshData.asset"));
     }
+
+#endif
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>
@@ -448,7 +450,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         long ySize = width - 1;
         Vector3 origin = terrain.transform.position;
         long size = xSize * ySize * 4;
-        Debug.Log(xSize+" "+ySize+" "+size);
+        Debug.Log(xSize + " " + ySize + " " + size);
         verticles = new Vector3[size];
         Vector2[] uv = new Vector2[verticles.Length];
         for (int i = 0, y = 0; y < height.Length - 1; y++)
@@ -459,10 +461,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 verticles[4 * i + 1] = origin + new Vector3((x + 1) * 2, height[x + 1][y], y * 2);
                 verticles[4 * i + 2] = origin + new Vector3((x + 1) * 2, height[x + 1][y + 1], (y + 1) * 2);
                 verticles[4 * i + 3] = origin + new Vector3(x * 2, height[x][y + 1], (y + 1) * 2);
-                uv[4 * i] = new Vector2(0.01F, 1-0.01F);
-                uv[4 * i + 1] = new Vector2(0.24f, 1-0.01F);
-                uv[4 * i + 2] = new Vector2(0.24f, 1-0.24f);
-                uv[4 * i + 3] = new Vector2(0.01F, 1-0.24f);
+                uv[4 * i] = new Vector2(0.01F, 1 - 0.01F);
+                uv[4 * i + 1] = new Vector2(0.24f, 1 - 0.01F);
+                uv[4 * i + 2] = new Vector2(0.24f, 1 - 0.24f);
+                uv[4 * i + 3] = new Vector2(0.01F, 1 - 0.24f);
                 //uv[4 * i] = new Vector2((float)x/ height.Length, (float)y / height.Length);
                 //uv[4 * i + 1] = new Vector2((float)x / height.Length, (float)y / height.Length);
                 //uv[4 * i + 2] = new Vector2((float)x / height.Length, (float)y / height.Length);
@@ -586,7 +588,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     #endregion
 
-    public void OnBuildRoad(Vector3 pos,int buildRoadState)
+    public void OnBuildRoad(Vector3 pos, int buildRoadState)
     {
         buildRoadState++;
         switch (buildRoadState)
@@ -605,7 +607,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
                 break;
             default:
-                
+
                 break;
         }
     }
@@ -620,7 +622,51 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mapData.buildingGrids = new List<Vector2IntSerializer>();
         SaveMapData(mapData);
     }
-
+    [ContextMenu("更新地图配置文件")]
+    public void SaveRoadToMapData()
+    {
+        SaveRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8);
+    }
+    /// <summary>
+    /// 保存地图信息
+    /// </summary>
+    /// <param name="mesh"></param>
+    /// <param name="length">纹理图集的长度</param>
+    /// <param name="mapSize">地图大小</param>
+    /// <returns></returns>
+    private void SaveRoadToMapData(Mesh mesh, Vector2 mapSize,int length = 8)
+    {
+        Vector2[] vec = mesh.uv;
+        MapData mapData = GetMapData();
+        for (int i = 0; i < vec.Length; i += 4)
+        {
+            int x = Mathf.FloorToInt(vec[i].x * length);
+            int y = Mathf.FloorToInt(vec[i].y * length);
+            int tex = 8 * (7-y) + x;
+            //Debug.Log(i/4f);
+            int gridX = (i/4) % (int)mapSize.x;
+            //Debug.Log(gridX);
+            int gridZ = Mathf.FloorToInt((i/4) / (int)mapSize.y);
+            //Debug.Log(gridZ);
+            if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
+            {
+                //Debug.Log(gridX + " " + gridZ);
+                //Debug.DrawLine(new Vector3(gridX*2,11,gridZ*2), new Vector3(gridX * 2+1, 11, gridZ * 2+1),Color.red,100f);
+                mapData.roadGrids.Add(new Vector2IntSerializer(gridX,gridZ));
+            }
+            else
+            {
+                for (int k = 0; k < mapData.roadGrids.Count; k++)
+                {
+                    if (mapData.roadGrids[k].Vector2Int == new Vector2Int(gridX,gridZ))
+                    {
+                        mapData.roadGrids.RemoveAt(k);
+                    }
+                }
+            }
+        }
+        SaveMapData(mapData);
+    }
     private void SaveMapData(MapData mapData)
     {
         string path = GetPath("staticData.bin");
@@ -646,7 +692,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     private string GetPath(string fileName)
     {
-        string path = string.Format("{0}/{1}{2}", "Assets/StreamingAssets/MapData", LevelManager.LevelID,fileName);
+        string path = string.Format("{0}/{1}{2}", "Assets/StreamingAssets/MapData", LevelManager.LevelID, fileName);
         return path;
     }
     #endregion
@@ -666,7 +712,7 @@ public struct Vector2IntSerializer
     public int x;
     public int y;
 
-    public Vector2IntSerializer(int x,int z)
+    public Vector2IntSerializer(int x, int z)
     {
         this.x = x;
         this.y = z;
