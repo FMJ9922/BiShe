@@ -77,13 +77,13 @@ public class CameraMovement : Singleton<CameraMovement>
 
     public void StopMovement()
     {
-        //canMove = false;
+        canMove = false;
         _forwardSpeed = 0;
         _rightSpeed = 0;
     }
     public void AllowMovement()
     {
-        //canMove = true;
+        canMove = true;
     }
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {

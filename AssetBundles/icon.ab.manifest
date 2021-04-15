@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1947594527
+CRC: 1796365418
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cffa609ac0ce61573e19169c22dcefa5
+    Hash: 15d568ef2dc1ac5d7f7bdca4ab7ce067
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4908fa12115d35930b278507ea5b410b
@@ -41,12 +41,10 @@ Assets:
 - Assets/ArtAssets/UI/BuildUI/UnclickManufacturingIcon.png
 - Assets/Scenes Assets/BuildingIcon/FoodIcon.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL2.png
-- Assets/ArtAssets/UI/MainUI/PlayButton.png
 - Assets/ArtAssets/UI/BuildUI/UnclickUtilitiyIcon.png
 - Assets/Scenes Assets/BuildingIcon/PopulationsIcon.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL3.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL3.png
-- Assets/ArtAssets/UI/MainUI/PauseButton.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL1.png
 - Assets/Scenes Assets/BuildingIcon/RoadL2.png
 - Assets/ArtAssets/UI/BuildUI/ClickHousingIcon.png
@@ -68,8 +66,6 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/FactoryL1.png
 - Assets/ArtAssets/UI/BuildUI/UnclickProduceIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL3.png
-- Assets/ArtAssets/UI/MainUI/HollowSpeed.png
-- Assets/ArtAssets/UI/MainUI/SolidSpeed.png
 - Assets/Scenes Assets/BuildingIcon/MarketL1.png
 - Assets/Scenes Assets/BuildingIcon/FarmL3.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL1.png
