@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3109649112
+CRC: 998853803
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ffaa83891143f4b6c684a9a9d57824f7
+    Hash: b6a893a2bc6ddaca1adaa861c88016d4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1e76ceee48da8832db0c1bd4b2bd383c
+    Hash: c177c81d630d52eb2085c927eb229a5e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -48,6 +48,10 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 73eecc9f0eeee0044a06bb58885ec9fb, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
   Script: {instanceID: 0}
 Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
