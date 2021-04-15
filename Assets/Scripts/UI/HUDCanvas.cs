@@ -9,6 +9,8 @@ public class HUDCanvas : CanvasBase
     [SerializeField] TMP_Text _date, _money, _log, _stone, _food, _population;
     [SerializeField] GameObject _mainCanvas;
     [SerializeField] private Slider progress;
+    [SerializeField] Image _pause;
+    [SerializeField] Image[] _scale;
     private string strMoney, strLog, strStone, strFood, strPopulation;
     private void OnDestroy()
     {
@@ -28,19 +30,57 @@ public class HUDCanvas : CanvasBase
         strPopulation = Localization.ToSettingLanguage("Population");
         RefreshResources();
         RefreshPopulation();
+        ChangeTimeScaleImage(GameManager.Instance.GetTimeScale());
+        ChangePauseBtnImage(GameManager.Instance.GetTimeScale());
     }
 
     public void TogglePauseGame()
     {
         Debug.Log("pause");
-        GameManager.Instance.TogglePauseGame();
+        GameManager.Instance.TogglePauseGame(out TimeScale scale);
+        ChangePauseBtnImage(scale);
+        ChangeTimeScaleImage(scale);
+    }
+
+    private void ChangePauseBtnImage(TimeScale scale)
+    {
+        switch (scale)
+        {
+            case TimeScale.stop:
+                _pause.sprite = LoadAB.LoadSprite(ConstString.IconBundle, ConstString.PlayButton);
+                break;
+            default:
+                _pause.sprite = LoadAB.LoadSprite(ConstString.IconBundle, ConstString.PauseButton);
+                break;
+        }
+        _pause.SetNativeSize();
     }
 
     public void AddTimeScale()
     {
         Debug.Log("add");
-        GameManager.Instance.AddTimeScale();
+        GameManager.Instance.AddTimeScale(out TimeScale scale);
+        ChangeTimeScaleImage(scale);
+        ChangePauseBtnImage(scale);
     }
+
+    private void ChangeTimeScaleImage(TimeScale scale)
+    {
+        int speed = (int)scale;
+        for (int i = 0; i < _scale.Length; i++)
+        {
+            if (i < speed)
+            {
+                _scale[i].sprite = LoadAB.LoadSprite(ConstString.IconBundle, ConstString.SolidPlay);
+            }
+            else
+            {
+                _scale[i].sprite = LoadAB.LoadSprite(ConstString.IconBundle, ConstString.HollowPlay);
+            }
+            _scale[i].SetNativeSize();
+        }
+    }
+
     private void FixedUpdate()
     {
         RefreshSliderValue();

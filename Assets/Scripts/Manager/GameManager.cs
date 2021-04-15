@@ -10,15 +10,17 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    public void TogglePauseGame()
+    public void TogglePauseGame(out TimeScale scale)
     {
         if(timeScale != TimeScale.stop)
         {
             SetTimeScale(TimeScale.stop);
+            scale = TimeScale.stop;
         }
         else
         {
             SetTimeScale(TimeScale.one);
+            scale = TimeScale.one;
         }
     }
 
@@ -31,11 +33,15 @@ public class GameManager : Singleton<GameManager>
     {
         SetTimeScale(TimeScale.one);
     }
-
-    public void AddTimeScale()
+    public TimeScale GetTimeScale()
+    {
+        return timeScale;
+    }
+    public void AddTimeScale(out TimeScale addedScale)
     {
         int scale = ((int)timeScale+1)%4;
         timeScale = (TimeScale)System.Enum.ToObject(typeof(TimeScale), scale);
+        addedScale = timeScale;
         SetTimeScale(timeScale);
         EventManager.TriggerEvent<TimeScale>(ConstEvent.OnTimeScaleChanged, timeScale);
     }
