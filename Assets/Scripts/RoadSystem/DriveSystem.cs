@@ -69,10 +69,14 @@ public class DriveSystem : MonoBehaviour
             wayCount++;
             if (wayCount < targets.Count)
             {
-                UnityAction temp = action;
-                RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (StopDistance*Mathf.PI / (Speed*2));
-                Debug.Log("转弯");
-                action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
+                float angle = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position);
+                if (angle > 5 && angle < 175)
+                {
+                    UnityAction temp = action;
+                    RotateSpeed = 90 / (Mathf.PI / 2 * StopDistance / Speed);
+                    //Debug.Log("转弯");
+                    action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
+                }
             }
 
         }
@@ -85,6 +89,7 @@ public class DriveSystem : MonoBehaviour
             DriveStop();
         }
     }
+
 
     private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
     {

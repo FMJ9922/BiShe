@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8026304953790401228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9064593159882159249}
+  m_Layer: 0
+  m_Name: Parking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9064593159882159249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026304953790401228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8, y: 0, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5072519169493107029}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8876285464317317064
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5072519169493107029}
   - component: {fileID: 2443537449052298535}
-  - component: {fileID: 6989831680502570557}
+  - component: {fileID: 5530925523627694434}
+  - component: {fileID: 5512357897320507413}
   m_Layer: 0
   m_Name: Plain_Building_Residential_L2_01_Preb
   m_TagString: Building
@@ -30,6 +61,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1687385809138967101}
+  - {fileID: 9064593159882159249}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,7 +78,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.356823, y: 7.8782063, z: 11.300106}
   m_Center: {x: 0.23718524, y: 3.8739328, z: -0.06788826}
---- !u!114 &6989831680502570557
+--- !u!114 &5530925523627694434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8876285464317317064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 6
@@ -66,7 +98,21 @@ MonoBehaviour:
   body: {fileID: 2026933023788972167}
   buildFlag: 0
   takenGrids: []
-  mat: {fileID: 0}
+  parking: {fileID: 8026304953790401228}
+  parkingGrid: {x: 0, y: 0}
+  direction: 0
+--- !u!114 &5512357897320507413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876285464317317064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6790932912437790091
 PrefabInstance:
   m_ObjectHideFlags: 0

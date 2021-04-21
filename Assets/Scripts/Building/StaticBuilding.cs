@@ -20,8 +20,10 @@ public class StaticBuilding : MonoBehaviour
             currentBuilding.transform.position, isFacingX);
         MapManager.SetGridTypeToOccupy(targetGrids);
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
-        Debug.Log(currentBuilding.transform.name);
+        //Debug.Log(currentBuilding.transform.name);
         Vector2Int[] grids = BuildManager.Instance.GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, transform.position, !isFacingX);
         currentBuilding.OnConfirmBuild(grids);
+        //Debug.Log("Add:" + currentBuilding.parkingGrid);
+        RoadManager.Instance.AddCrossNode(currentBuilding.parkingGrid, currentBuilding.direction);
     }
 }

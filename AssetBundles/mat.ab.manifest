@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3671561007
+CRC: 3839062763
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 58fad40db44a9258654956bebc1e9754
+    Hash: cb7ca916bd0ec1c11292293d0fa0e890
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -49,4 +49,5 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat 1.mat
 - Assets/JMO Assets/Toony Colors Pro/Textures/TCP2_NoTileNoise.png
 - Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Hui_Building_Residential_L1L2L3_Mat.mat
 Dependencies: []

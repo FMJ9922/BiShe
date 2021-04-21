@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1501422762146079670}
   - component: {fileID: 5183085784964195551}
   - component: {fileID: 5249366712368865032}
+  - component: {fileID: 5077208565317437241}
   m_Layer: 0
   m_Name: Universal_Building_Market_L2_01_Preb
   m_TagString: Building
@@ -66,7 +67,21 @@ MonoBehaviour:
   body: {fileID: 8960682015786094623}
   buildFlag: 0
   takenGrids: []
-  mat: {fileID: 0}
+  parking: {fileID: 0}
+  parkingGrid: {x: 0, y: 0}
+  direction: 0
+--- !u!114 &5077208565317437241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6814043702715172794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1235852155131680527
 PrefabInstance:
   m_ObjectHideFlags: 0

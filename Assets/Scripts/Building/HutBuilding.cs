@@ -6,12 +6,15 @@ public class HutBuilding : BuildingBase
 {
     private bool hasFoodThisWeek = true;//这周是否获得了食物
     private bool hasProvidePopulation = false;//这周是否提供了人口
+    private Storage storage;
     protected override void OnDestroy()
     {
         base.OnDestroy();
     }
     public override void InitBuildingFunction()
     {
+        storage = transform.GetComponent<Storage>();
+        storage.AddResource(11001, 2);
         base.InitBuildingFunction();
     }
 
@@ -29,18 +32,22 @@ public class HutBuilding : BuildingBase
 
     protected override void Input()
     {
-        //TrafficManager.Instance.UseCar(TransportationType.mini, this, GovernmentBuilding.Instance, DriveType.once);
+        TrafficManager.Instance.UseCar(TransportationType.mini, this, GovernmentBuilding.Instance, DriveType.once);
         //遍历所有可吃的食物，数量够吃就返回
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             //ToDo:消耗食物数量会变化？
-            if(ResourceManager.Instance.TryUseResource(formula.InputItemID[i], formula.InputNum[0]))
+            if(!storage.TryUseResource(formula.InputItemID[i], formula.InputNum[0]))
             {
-                hasFoodThisWeek = true;
+                hasFoodThisWeek = false;
                 return;
             }
         }
-        hasFoodThisWeek = false;
+        //if (storage.GetAllFoodNum() < 10)
+        {
+            //TrafficManager.Instance.UseCar(TransportationType.mini, this, GovernmentBuilding.Instance, DriveType.once);
+        }
+        hasFoodThisWeek = true;
     }
 
     /// <summary>

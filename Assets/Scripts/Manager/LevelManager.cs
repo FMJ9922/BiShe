@@ -134,6 +134,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         LevelManager.LevelID = levelID;
         ResourceManager.Instance.InitResourceManager(LevelID);
+        RoadManager.Instance.InitRoadManager();
         MapManager.Instance.InitMapMnager(LevelID);
         BuildManager.Instance.InitBuildManager();
         MarketManager.Instance.InitMarketManager();

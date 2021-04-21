@@ -36,6 +36,8 @@ public class BuildingBase : MonoBehaviour
 
     public GameObject parking;//停车的位置
 
+    public Vector2Int parkingGrid;
+
     public Direction direction;
      
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
@@ -52,7 +54,7 @@ public class BuildingBase : MonoBehaviour
             animation["Take 001"].speed = 0.8f;
             animation.Play();
         }
-
+        parkingGrid = MapManager.Instance.GetCenterGrid(parking.transform.position);
         if (runtimeBuildData.Id == 20005)
         {
             MapManager.Instance.BuildFoundation(vector2Ints, 2);
@@ -165,6 +167,11 @@ public class BuildingBase : MonoBehaviour
         {
             ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);
         }
+    }
+
+    public virtual void OnRecieveCar()
+    {
+
     }
 
     public virtual void AddCurPeople(int num)

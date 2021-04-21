@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2151437240810148693}
   - component: {fileID: 8219093728121325095}
   - component: {fileID: 4524741797051577223}
+  - component: {fileID: -7792054937391746929}
   m_Layer: 0
   m_Name: Universal_Building_Sawmill_L2_01_Preb
   m_TagString: Building
@@ -53,7 +54,9 @@ MonoBehaviour:
   body: {fileID: 891963364807089899}
   buildFlag: 0
   takenGrids: []
-  mat: {fileID: 0}
+  parking: {fileID: 0}
+  parkingGrid: {x: 0, y: 0}
+  direction: 0
 --- !u!65 &4524741797051577223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,6 +70,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.486917, y: 5.600727, z: 15.737605}
   m_Center: {x: -1.1939626, y: 2.431879, z: 0.041710377}
+--- !u!114 &-7792054937391746929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5181180776102677635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4119412554621548555
 PrefabInstance:
   m_ObjectHideFlags: 0

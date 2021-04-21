@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 330200209314839729}
   - component: {fileID: 435613497914916623}
   - component: {fileID: 3924483181661417250}
+  - component: {fileID: -3288182012387885999}
   m_Layer: 0
   m_Name: Universal_Building_Warehouse_L1_01_Preb
   m_TagString: Building
@@ -66,7 +67,21 @@ MonoBehaviour:
   body: {fileID: 5461592927480066382}
   buildFlag: 0
   takenGrids: []
-  mat: {fileID: 0}
+  parking: {fileID: 0}
+  parkingGrid: {x: 0, y: 0}
+  direction: 0
+--- !u!114 &-3288182012387885999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268610643954123140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5461592927480066382
 GameObject:
   m_ObjectHideFlags: 0

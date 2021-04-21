@@ -47,7 +47,7 @@ MonoBehaviour:
   WayPoints: []
   wayObjects: []
   Speed: 8
-  StopDistance: 4
+  StopDistance: 1.5
   driveType: 0
   carType: 2
 --- !u!1001 &8595845349979736779

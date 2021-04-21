@@ -117,6 +117,18 @@ public class DataManager : ScriptableObject
         Debug.Log("无效的物品ID" + ID);
         return null;
     }
+    public static ItemType GetItemType(int id)
+    {
+        for (int i = 0; i < Instance.ItemArray.Length; i++)
+        {
+            if (Instance.ItemArray[i].Id == id)
+            {
+                return (ItemType)Instance.ItemArray[i].ItemType;
+            }
+        }
+        Debug.Log("无效的物品ID" + id);
+        return ItemType.industry;
+    }
     public static string[] GetFoodNameList()
     {
         if (foodNames == null)

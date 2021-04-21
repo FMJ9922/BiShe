@@ -10,6 +10,10 @@ public class TrafficManager : Singleton<TrafficManager>
     private List<DriveSystem> carUsingPool = new List<DriveSystem>();
     private List<DriveSystem> carUnusedPool = new List<DriveSystem>();
 
+    //寻路节点
+    public List<RoadNode> reachable = new List<RoadNode>();
+    public List<RoadNode> explored = new List<RoadNode>();
+
     private List<Vector2Int> RoadNodes;
     private readonly Vector3 hidePos = new Vector3(0, -100, 0);
 
@@ -26,10 +30,10 @@ public class TrafficManager : Singleton<TrafficManager>
 
     private void Start()
     {
-        UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute1), DriveType.yoyo);
-        UseCar(TransportationType.mini, ObjectsToVector3s(FakeRoute2), DriveType.yoyo);
-        UseCar(TransportationType.van, ObjectsToVector3s(FakeRoute3), DriveType.loop);
-        UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute4), DriveType.yoyo);
+        //UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute1), DriveType.yoyo);
+        //UseCar(TransportationType.mini, ObjectsToVector3s(FakeRoute2), DriveType.yoyo);
+        //UseCar(TransportationType.van, ObjectsToVector3s(FakeRoute3), DriveType.loop);
+        //UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute4), DriveType.yoyo);
     }
 
     private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
@@ -44,10 +48,10 @@ public class TrafficManager : Singleton<TrafficManager>
     public void UseCar(TransportationType type, BuildingBase startBuilding, BuildingBase endBuilding, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
-        Vector2Int start = MapManager.Instance.GetCenterGrid(startBuilding.parking.transform.position);
-        Vector2Int end = MapManager.Instance.GetCenterGrid(endBuilding.parking.transform.position);
+        Vector2Int start = startBuilding.parkingGrid;
+        Vector2Int end = endBuilding.parkingGrid;
         //Debug.Log(start+" "+end);
-        List<Vector3> wayPoints = GetWayPoints(start, end, startBuilding.direction);
+        List<Vector3> wayPoints = RoadManager.Instance.GetWayPoints(start, end);
         Vector3 delta = new Vector3(0, 0, 0);
         for (int i = 0; i < wayPoints.Count; i++)
         {
@@ -68,6 +72,22 @@ public class TrafficManager : Singleton<TrafficManager>
     {
         return Vector2.Distance(cur, target) >= 2;
     }
+
+    private Direction ChooseStartDirection(Vector2Int start, Vector2Int end, Direction roadDir)
+    {
+        Vector2Int delta = end - start;
+        switch (roadDir)
+        {
+            case Direction.left:
+            case Direction.right:
+                return delta.x > 0 ? Direction.right : Direction.left;
+            case Direction.down:
+            case Direction.up:
+            default:
+                return delta.y > 0 ? Direction.up : Direction.down;
+        }
+    }
+
     /// <summary>
     /// 获得车辆的行驶路径
     /// </summary>
@@ -251,8 +271,17 @@ public class TrafficManager : Singleton<TrafficManager>
         carUnusedPool.Add(driveSystem);
         driveSystem.transform.position = hidePos;
         driveSystem.action = null;
-        unityAction.Invoke();
+        if (unityAction != null)
+        {
+            unityAction.Invoke();
+        }
         //Debug.Log("hide");
     }
 }
 
+public class CarMission
+{
+    public List<Vector3> route;
+    public List<CostResource> costResources;
+    public CarMissionType missionType;
+}

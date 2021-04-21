@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8552304826742765368}
   - component: {fileID: 6982003867659295232}
   - component: {fileID: 5138543818484171643}
+  - component: {fileID: 6733904123791653078}
   m_Layer: 0
   m_Name: Universal_Building_Government_L1_01_Mod
   m_TagString: Building
@@ -83,7 +84,20 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 5463267784420166447}
+  parkingGrid: {x: 0, y: 0}
   direction: 0
+--- !u!114 &6733904123791653078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2954929645561425687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5463267784420166447
 GameObject:
   m_ObjectHideFlags: 0

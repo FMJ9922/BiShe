@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 149995925896744279}
   - component: {fileID: 149995925896744278}
   - component: {fileID: 149995925896744277}
+  - component: {fileID: 5996934165298142902}
   m_Layer: 0
   m_Name: Plain_Building_Residential_L1_01_Preb
   m_TagString: Building
@@ -70,7 +71,20 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 4215505030345228263}
+  parkingGrid: {x: 0, y: 0}
   direction: 0
+--- !u!114 &5996934165298142902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149995925896744276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4215505030345228263
 GameObject:
   m_ObjectHideFlags: 0

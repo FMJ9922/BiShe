@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1369329232848544975}
   - component: {fileID: 7732428703527030263}
   - component: {fileID: 1872165269728432904}
+  - component: {fileID: 8347379121064515223}
   m_Layer: 0
   m_Name: Universal_Building_Factory_L3_01_Preb
   m_TagString: Building
@@ -53,7 +54,9 @@ MonoBehaviour:
   body: {fileID: 2523193626720690671}
   buildFlag: 0
   takenGrids: []
-  mat: {fileID: 0}
+  parking: {fileID: 0}
+  parkingGrid: {x: 0, y: 0}
+  direction: 0
 --- !u!65 &1872165269728432904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,6 +70,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.871794, y: 6.379181, z: 16.66029}
   m_Center: {x: 0.28014088, y: 3.2668228, z: -0.41769266}
+--- !u!114 &8347379121064515223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836150510921796063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &849691777823039079
 PrefabInstance:
   m_ObjectHideFlags: 0

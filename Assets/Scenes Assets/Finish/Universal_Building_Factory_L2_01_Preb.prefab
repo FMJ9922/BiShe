@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3045907311203315761}
   - component: {fileID: 3435953309059262374}
   - component: {fileID: 30630214395241024}
+  - component: {fileID: 6938376933128175939}
   m_Layer: 0
   m_Name: Universal_Building_Factory_L2_01_Preb
   m_TagString: Building
@@ -68,7 +69,20 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 0}
+  parkingGrid: {x: 0, y: 0}
   direction: 0
+--- !u!114 &6938376933128175939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278486875882416908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3504551216176793614
 PrefabInstance:
   m_ObjectHideFlags: 0
