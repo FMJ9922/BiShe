@@ -9,6 +9,7 @@ public class MapManager : Singleton<MapManager>
     private LevelData _leveldata;
     private Vector3[] _vertices;//存储地形顶点数据
     public const int unit = 2;//地形一格的长度（单位米）
+    public List<GameObject> _buildings = new List<GameObject>();
     [SerializeField] private TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
 
@@ -342,6 +343,31 @@ public class MapManager : Singleton<MapManager>
     public static void SetGridTypeToRoad(Vector2Int grid)
     {
         Instance.SetGridType(grid, GridType.road);
+    }
+
+    public static GameObject GetNearestMarket(Vector2Int grid)
+    {
+        float dis = Mathf.Infinity;
+        GameObject p = null;
+        for (int i = 0; i < Instance._buildings.Count; i++)
+        {
+            //Debug.Log(Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id);
+            if (Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id == 20004)
+            {
+                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGrid, grid);
+                if (cur < dis)
+                {
+                    dis = cur;
+                    p = Instance._buildings[i];
+                }
+            }
+        }
+        return p;
+    }
+
+    private static float GetDistance(Vector2Int cur, Vector2Int target)
+    {
+        return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
     }
 }
 

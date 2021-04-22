@@ -175,7 +175,7 @@ public class RoadManager : Singleton<RoadManager>
         path.Add(startNode);
         RoadNode temp = startNode;
         int n = 20;
-        while (temp != endNode&&n-->0)
+        while (temp != endNode && n-- > 0)
         {
             if (openList.Count <= 0)
             {
@@ -183,6 +183,7 @@ public class RoadManager : Singleton<RoadManager>
                 return null;
             }
             //Debug.Log("——");
+            temp = openList[0];
             for (int i = 0; i < openList.Count; i++)
             {
                 //Debug.Log(openList[i].GridPos+" "+temp.H+" "+openList[i].H);
@@ -191,25 +192,25 @@ public class RoadManager : Singleton<RoadManager>
                     temp = openList[i];
                 }
             }
-            //Debug.Log("选择:"+temp.GridPos);
             openList.Remove(temp);
             closeList.Add(temp);
-            if(temp == endNode)
+            //Debug.Log("选择:"+temp.GridPos);
+            if (temp == endNode)
             {
                 List<Vector3> list = new List<Vector3>();
                 while (temp != startNode)
                 {
                     //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
-                    list.Add(MapManager.Instance.GetTerrainPosition(temp.GridPos));
+                    list.Add(MapManager.Instance.GetTerrainPosition(temp.GridPos) + new Vector3(1, 0, 1));
                     temp = temp.Parent;
                     //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(temp.GridPos), Quaternion.identity, transform);
                 }
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
-                list.Add(MapManager.Instance.GetTerrainPosition(startNode.GridPos)+new Vector3(1,0,1));
+                list.Add(MapManager.Instance.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse();
                 return list;
             }
-            for(int i = 0; i < temp.NearbyNode.Count; i++)
+            for (int i = 0; i < temp.NearbyNode.Count; i++)
             {
                 if (closeList.Contains(temp.NearbyNode[i])) continue;
                 temp.NearbyNode[i].H = GetDistance(temp.NearbyNode[i].GridPos, end);
@@ -221,7 +222,7 @@ public class RoadManager : Singleton<RoadManager>
         return null;
     }
 
-    private float GetDistance(Vector2Int cur,Vector2Int target)
+    private float GetDistance(Vector2Int cur, Vector2Int target)
     {
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
     }

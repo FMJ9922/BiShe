@@ -33,4 +33,9 @@ public class GovernmentBuilding : BuildingBase
     {
         base.InitBuildingFunction();
     }
+
+    public override void OnRecieveCar(CarMission carMission)
+    {
+        base.OnRecieveCar(carMission);
+    }
 }

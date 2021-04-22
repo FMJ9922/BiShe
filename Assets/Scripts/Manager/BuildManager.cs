@@ -343,7 +343,7 @@ public class BuildManager : Singleton<BuildManager>
         }
     }
 
-    public void UpgradeBuilding(BuildData buildData,Vector3 pos,Quaternion quaternion)
+    public void UpgradeBuilding(BuildData buildData,Vector3 pos,Quaternion quaternion,out bool success)
     {
         GameObject building = InitBuilding(buildData);
         building.transform.position = pos;
@@ -353,11 +353,12 @@ public class BuildManager : Singleton<BuildManager>
             currentBuilding.OnConfirmBuild(targetGrids);
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
-
+            success = true;
         }
         else
         {
             Destroy(building);
+            success = false;
         }
     }
 

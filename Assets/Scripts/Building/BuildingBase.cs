@@ -70,6 +70,7 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void InitBuildingFunction()
     {
+        MapManager.Instance._buildings.Add(this.gameObject);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         if (runtimeBuildData.formulaDatas.Length>0)
@@ -133,6 +134,7 @@ public class BuildingBase : MonoBehaviour
     {
         ReturnBuildResources();
         MapManager.SetGridTypeToEmpty(takenGrids);
+        MapManager.Instance._buildings.Remove(gameObject);
         Destroy(this.gameObject);
     }
     public virtual bool ReturnBuildResources()
@@ -169,7 +171,7 @@ public class BuildingBase : MonoBehaviour
         }
     }
 
-    public virtual void OnRecieveCar()
+    public virtual void OnRecieveCar(CarMission carMission)
     {
 
     }
@@ -210,7 +212,16 @@ public class BuildingBase : MonoBehaviour
         //todo：检查是否有足够的资源升级
         int nextId = runtimeBuildData.RearBuildingId;
         BuildData data = DataManager.GetBuildData(nextId);
-        BuildManager.Instance.UpgradeBuilding(data, transform.position,transform.rotation);
+        RuntimeBuildData buildData = BuildingBase.CastBuildDataToRuntime(data);
+        buildData.Pause = runtimeBuildData.Pause;
+        buildData.CurLevel = runtimeBuildData.CurLevel;
+        buildData.CurFormula = runtimeBuildData.CurFormula;
+        buildData.CurPeople = runtimeBuildData.CurPeople;
+        BuildManager.Instance.UpgradeBuilding(data, transform.position,transform.rotation,out bool success);
+        if (success)
+        {
+            DestroyBuilding();
+        }
     }
 
 }
@@ -222,4 +233,6 @@ public class RuntimeBuildData : BuildData
     public int CurFormula;//当前配方
     public FormulaData[] formulaDatas;//当前建筑可用的配方们
     public int CurPeople = 0;//当前建筑的工人或居民
+
+    
 }

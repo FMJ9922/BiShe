@@ -281,7 +281,10 @@ public class TrafficManager : Singleton<TrafficManager>
 
 public class CarMission
 {
-    public List<Vector3> route;
-    public List<CostResource> costResources;
-    public CarMissionType missionType;
+    public List<Vector3> route;//路线
+    public List<CostResource> requestResources;//请求的资源
+    public List<CostResource> transportResources;//运输的资源
+    public CarMissionType missionType;//任务种类
+    public BuildingBase StartBuilding;
+    public BuildingBase EndBuilding;
 }

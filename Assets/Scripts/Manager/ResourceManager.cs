@@ -83,6 +83,39 @@ public class ResourceManager : Singleton<ResourceManager>
             return false;//不存在该物品就返回失败
         }
     }
+    /// <summary>
+    /// 取物品有多少用多少
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <param name="num"></param>
+    /// <returns></returns>
+    public bool TryUseUpResource(int Id, float num)
+    {
+        float storedNum;
+        if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
+        {
+            if (num <= storedNum)//物品数量足够消耗
+            {
+                _storedItemDic[Id] -= num;//消耗物品
+                return true;//返回成功
+            }
+            else if(storedNum<=0)
+            {
+                _storedItemDic.Remove(Id);
+                return false;
+            }
+            else
+            {
+                _storedItemDic[Id] -= storedNum;
+                return true;
+            }
+        }
+        else
+        {
+            return false;//不存在该物品就返回失败
+        }
+    }
+
 
     public float TryGetResourceNum(int Id)
     {
@@ -132,6 +165,35 @@ public class ResourceManager : Singleton<ResourceManager>
         else
         {
             Debug.Log("不存在物品：" + Id);
+            return false;//不存在该物品就返回失败
+        }
+    }
+
+    public bool TryUseUpResource(CostResource costResource)
+    {
+        float storedNum;
+        float num = costResource.ItemNum;
+        int Id = costResource.ItemId;
+        if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
+        {
+            if (num <= storedNum)//物品数量足够消耗
+            {
+                _storedItemDic[Id] -= num;//消耗物品
+                return true;//返回成功
+            }
+            else if (storedNum <= 0)
+            {
+                _storedItemDic.Remove(Id);
+                return false;
+            }
+            else
+            {
+                _storedItemDic[Id] -= storedNum;
+                return true;
+            }
+        }
+        else
+        {
             return false;//不存在该物品就返回失败
         }
     }

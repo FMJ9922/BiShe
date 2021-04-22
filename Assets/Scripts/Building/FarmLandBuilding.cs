@@ -15,9 +15,9 @@ public class FarmLandBuilding : BuildingBase
     private GameObject[] grids;
     public override void InitBuildingFunction()
     {
-        base.InitBuildingFunction();
         InitWheatGrids();
         previewObj.SetActive(false);
+        base.InitBuildingFunction();
     }
      private void InitWheatGrids()
     {
