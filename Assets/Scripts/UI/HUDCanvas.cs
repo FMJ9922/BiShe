@@ -58,7 +58,7 @@ public class HUDCanvas : CanvasBase
 
     public void AddTimeScale()
     {
-        Debug.Log("add");
+        //Debug.Log("add");
         GameManager.Instance.AddTimeScale(out TimeScale scale);
         ChangeTimeScaleImage(scale);
         ChangePauseBtnImage(scale);

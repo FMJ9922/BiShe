@@ -36,7 +36,8 @@ public class BuildingBase : MonoBehaviour
 
     public GameObject parking;//停车的位置
 
-    public Vector2Int parkingGrid;
+    public Vector2Int parkingGridIn;
+    public Vector2Int parkingGridOut;
 
     public Direction direction;
      
@@ -54,7 +55,7 @@ public class BuildingBase : MonoBehaviour
             animation["Take 001"].speed = 0.8f;
             animation.Play();
         }
-        parkingGrid = MapManager.Instance.GetCenterGrid(parking.transform.position);
+        parkingGridIn = InitParkingGrid();
         if (runtimeBuildData.Id == 20005)
         {
             MapManager.Instance.BuildFoundation(vector2Ints, 2);
@@ -64,6 +65,23 @@ public class BuildingBase : MonoBehaviour
             MapManager.Instance.BuildFoundation(vector2Ints, 15);
         }
         InitBuildingFunction();
+    }
+
+    private Vector2Int InitParkingGrid()
+    {
+        switch (direction)
+        {
+            case Direction.down:
+                return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.down);
+            case Direction.right:
+                return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
+            case Direction.up:
+                return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.down);
+            case Direction.left:
+                return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
+
+        }
+        return MapManager.Instance.GetCenterGrid(parking.transform.position);
     }
     /// <summary>
     /// 建造完后初始化建筑功能

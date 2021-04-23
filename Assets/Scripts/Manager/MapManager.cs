@@ -354,7 +354,7 @@ public class MapManager : Singleton<MapManager>
             //Debug.Log(Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id);
             if (Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id == 20004)
             {
-                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGrid, grid);
+                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGridIn, grid);
                 if (cur < dis)
                 {
                     dis = cur;

@@ -34,5 +34,9 @@ public class CostResource
         ItemId = id;
         ItemNum = num;
     }
+    public override string ToString()
+    {
+        return DataManager.GetItemNameById(ItemId) + ItemNum;
+    }
 }
 

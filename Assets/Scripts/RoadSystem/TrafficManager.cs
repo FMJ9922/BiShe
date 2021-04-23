@@ -45,27 +45,22 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return lists;
     }
-    public void UseCar(TransportationType type, BuildingBase startBuilding, BuildingBase endBuilding, DriveType driveType = DriveType.once, UnityAction unityAction = null)
+    public void UseCar(TransportationType type, CarMission mission, UnityAction unityAction,DriveType driveType = DriveType.once)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
-        Vector2Int start = startBuilding.parkingGrid;
-        Vector2Int end = endBuilding.parkingGrid;
+        Vector2Int start = mission.StartBuilding.parkingGridIn;
+        Vector2Int end = mission.EndBuilding.parkingGridIn;
         //Debug.Log(start+" "+end);
         List<Vector3> wayPoints = RoadManager.Instance.GetWayPoints(start, end);
-        Vector3 delta = new Vector3(0, 0, 0);
-        for (int i = 0; i < wayPoints.Count; i++)
-        {
-            wayPoints[i] += delta;
-        }
         //Debug.Log(wayPoints.Count);
-        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys) => { RecycleCar(sys, unityAction); });
+        driveSystem.StartDriving(wayPoints, driveType, () => {  RecycleCar(driveSystem); unityAction.Invoke(); });
     }
 
 
     public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
-        driveSystem.StartDriving(wayPoints, driveType, (DriveSystem sys) => { RecycleCar(sys, unityAction); });
+        driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem, unityAction); });
     }
 
     public bool CloseToTarget(Vector2 cur, Vector2 target)
@@ -265,8 +260,9 @@ public class TrafficManager : Singleton<TrafficManager>
         return system;
     }
 
-    private void RecycleCar(DriveSystem driveSystem, UnityAction unityAction)
+    private void RecycleCar(DriveSystem driveSystem, UnityAction unityAction = null)
     {
+        //Debug.Log("recycle");
         carUsingPool.Remove(driveSystem);
         carUnusedPool.Add(driveSystem);
         driveSystem.transform.position = hidePos;
@@ -282,6 +278,7 @@ public class TrafficManager : Singleton<TrafficManager>
 public class CarMission
 {
     public List<Vector3> route;//路线
+    public bool isAnd;//请求的资源是否是并，而不是或
     public List<CostResource> requestResources;//请求的资源
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类

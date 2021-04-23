@@ -65,7 +65,7 @@ public class RoadManager : Singleton<RoadManager>
             }
             RoadNodeDic[RoadNodes[i].GridPos] = RoadNodes[i];
         }
-
+        
         //连接在拐点被多删的节点
         for (int i = 0; i < mapData.roadGrids.Count; i++)
         {
@@ -111,17 +111,66 @@ public class RoadManager : Singleton<RoadManager>
                     //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(RoadNodes[i].GridPos), Quaternion.identity, transform);
                 }
             }
+            RoadNodes[i].NearNodeCount = RoadNodes[i].NearbyNode.Count;
+        }
+
+        //删除反向的结点
+        for (int i = 0; i < RoadNodes.Count; i++)
+        {
+            for (int j = 0; j < RoadNodes[i].NearbyNode.Count; j++)
+            {
+                Vector2Int dirVec = RoadNodes[i].NearbyNode[j].GridPos - RoadNodes[i].GridPos;
+                Direction dir = CastTool.CastVector2ToDirection(dirVec);
+                dir++;
+                //若某点->邻点的逆时针的相邻不为路，则说明这是逆向的路
+                Vector2Int triggerGrid = RoadNodes[i].GridPos + CastTool.CastDirectionToVector2Int((int)dir) / 2;
+                //Debug.Log(RoadNodes[i].GridPos + "=>" + RoadNodes[i].NearbyNode[j].GridPos + " " + triggerGrid);
+                if(!RoadNodeDic.TryGetValue(triggerGrid,out RoadNode roadNode))
+                {
+                    RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                    //Debug.Log("remove");
+                }
+                else
+                {
+                    if (!IsCrossNode(roadNode))
+                    {
+                        RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                        //Debug.Log("remove");
+                    }
+                }
+            }
+            RoadNodeDic[RoadNodes[i].GridPos] = RoadNodes[i];
         }
         TrafficManager.Instance.reachable = RoadNodes;
         CrossNodes = RoadNodes;
-        /*
-        for (int i = 0; i < RoadNodes.Count; i++)
+        Invoke("Show",1f);
+    }
+
+    private bool IsCrossNode(RoadNode roadNode)
+    {
+        for (int i = 0; i < CrossNodes.Count; i++)
         {
-            if(!RoadNodeDic.TryGetValue(RoadNodes[i].GridPos+new Vector2Int(1,1), out RoadNode node))
+            if(CrossNodes[i] == roadNode)
             {
-                
+                return true;
             }
-        }*/
+        }
+        return false;
+    }
+
+    public void Show()
+    {
+        for (int i = 0; i < CrossNodes.Count; i++)
+        {
+            for (int j = 0; j < CrossNodes[i].NearbyNode.Count; j++)
+            {
+                Debug.DrawLine(MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos),
+                    MapManager.Instance.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos), Color.red, 100f);
+                Vector3 delta = MapManager.Instance.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos) -
+                    MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos);
+                Instantiate(pfb, MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos) + delta / 2, Quaternion.LookRotation(delta), transform);
+            }
+        }
     }
     public int Compare(RoadNode a, RoadNode b)
     {
@@ -148,12 +197,18 @@ public class RoadManager : Singleton<RoadManager>
             RoadNode node1 = GetNearestCross(grid, dir);
             RoadNode node2 = GetNearestCross(grid, dir + 2);
             //Debug.Log(node0.GridPos + " " + node1.GridPos + " " + node2.GridPos);
-            node1.RemoveNearbyNode(node2);
-            node2.RemoveNearbyNode(node1);
-            node1.AddNearbyNode(node0);
-            node2.AddNearbyNode(node0);
-            node0.AddNearbyNode(node1);
-            node0.AddNearbyNode(node2);
+            if (node1.IsNearbyRoad(node2))
+            {
+                node1.RemoveNearbyNode(node2);
+                node1.AddNearbyNode(node0);
+                node0.AddNearbyNode(node2);
+            }
+            else
+            {
+                node2.RemoveNearbyNode(node1);
+                node2.AddNearbyNode(node0);
+                node0.AddNearbyNode(node1);
+            }
             CrossNodes.Add(node0);
         }
         else
@@ -249,10 +304,10 @@ public class RoadManager : Singleton<RoadManager>
         //{
         //    Debug.Log(r.GridPos);
         //}
-        while (temp.NearbyNode.Count <= 2)
+        while (temp.NearNodeCount <= 2)
         {
             Vector2Int next = temp.GridPos + CastTool.CastDirectionToVector2Int((int)dir + 1) / 2;
-            //Debug.Log(next);
+            Debug.Log(next);
             temp = RoadNodeDic[next];
         }
         return temp;
@@ -278,6 +333,8 @@ public class RoadNode
     }
     */
     public List<RoadNode> NearbyNode { get; private set; }
+
+    public int NearNodeCount = 0;//上面只存可通向的的节点，这个存储所有邻点的个数
     public Vector2Int GridPos { get; set; }
 
     public RoadNode Parent { get; set; }
@@ -287,6 +344,7 @@ public class RoadNode
     {
         Parent = null;
         H = 0;
+        NearNodeCount = 0;
     }
     public void AddNearbyNode(RoadNode roadNode)
     {

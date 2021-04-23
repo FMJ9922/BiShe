@@ -83,38 +83,6 @@ public class ResourceManager : Singleton<ResourceManager>
             return false;//不存在该物品就返回失败
         }
     }
-    /// <summary>
-    /// 取物品有多少用多少
-    /// </summary>
-    /// <param name="Id"></param>
-    /// <param name="num"></param>
-    /// <returns></returns>
-    public bool TryUseUpResource(int Id, float num)
-    {
-        float storedNum;
-        if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
-        {
-            if (num <= storedNum)//物品数量足够消耗
-            {
-                _storedItemDic[Id] -= num;//消耗物品
-                return true;//返回成功
-            }
-            else if(storedNum<=0)
-            {
-                _storedItemDic.Remove(Id);
-                return false;
-            }
-            else
-            {
-                _storedItemDic[Id] -= storedNum;
-                return true;
-            }
-        }
-        else
-        {
-            return false;//不存在该物品就返回失败
-        }
-    }
 
 
     public float TryGetResourceNum(int Id)
@@ -169,7 +137,7 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
-    public bool TryUseUpResource(CostResource costResource)
+    public CostResource TryUseUpResource(CostResource costResource)
     {
         float storedNum;
         float num = costResource.ItemNum;
@@ -179,22 +147,22 @@ public class ResourceManager : Singleton<ResourceManager>
             if (num <= storedNum)//物品数量足够消耗
             {
                 _storedItemDic[Id] -= num;//消耗物品
-                return true;//返回成功
+                return costResource;//返回成功
             }
             else if (storedNum <= 0)
             {
                 _storedItemDic.Remove(Id);
-                return false;
+                return null;
             }
             else
             {
                 _storedItemDic[Id] -= storedNum;
-                return true;
+                return new CostResource(Id,storedNum);
             }
         }
         else
         {
-            return false;//不存在该物品就返回失败
+            return null;
         }
     }
     public Dictionary<int, float> GetAllResource()

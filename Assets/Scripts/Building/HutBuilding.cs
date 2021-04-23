@@ -32,25 +32,45 @@ public class HutBuilding : BuildingBase
 
     protected override void Input()
     {
-        BuildingBase destination = MapManager.GetNearestMarket(parkingGrid).GetComponent<BuildingBase>();
-        TrafficManager.Instance.UseCar(TransportationType.mini, this, destination, DriveType.once);
+        //食物少于指定数量就去取货
+        //if (storage.GetAllFoodNum() < 10)
+        {
+            CarMission mission = MakeCarMission();
+            TrafficManager.Instance.UseCar(TransportationType.mini, mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
+        }
         //遍历所有可吃的食物，数量够吃就返回
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             //ToDo:消耗食物数量会变化？
-            if(!storage.TryUseResource(formula.InputItemID[i], formula.InputNum[0]))
+            if(storage.TryUseResource(formula.InputItemID[i], formula.InputNum[0]))
             {
-                hasFoodThisWeek = false;
+                hasFoodThisWeek = true;
                 return;
             }
         }
-        //if (storage.GetAllFoodNum() < 10)
-        {
-            //TrafficManager.Instance.UseCar(TransportationType.mini, this, GovernmentBuilding.Instance, DriveType.once);
-        }
-        hasFoodThisWeek = true;
+        hasFoodThisWeek = false;
     }
 
+    /// <summary>
+    /// 配置运货清单
+    /// </summary>
+    /// <param name="ratio">运送多少个周期的货</param>
+    /// <returns></returns>
+    private CarMission MakeCarMission(float ratio = 10)
+    {
+        CarMission mission = new CarMission();
+        mission.StartBuilding = this;
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.missionType = CarMissionType.requestResources;
+        mission.isAnd = false;
+        mission.requestResources = new List<CostResource>();
+        for (int i = 0; i < formula.InputItemID.Count; i++)
+        {
+            mission.requestResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[0]*ratio));
+            
+        }
+        return mission;
+    }
     /// <summary>
     /// 食物充足时，住房提供人口
     /// </summary>
@@ -73,7 +93,28 @@ public class HutBuilding : BuildingBase
         runtimeBuildData.CurPeople = num;
         EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, runtimeBuildData);
     }
-    
+
+    public override void OnRecieveCar(CarMission carMission)
+    {
+        //Debug.Log(this.PfbName + " recieve");
+        //Debug.Log("recieveGoods");
+        switch (carMission.missionType)
+        {
+            case CarMissionType.requestResources:
+                break;
+            case CarMissionType.transportResources:
+                {
+                    foreach (var goods in carMission.transportResources)
+                    {
+                        //Debug.Log("recieve:" + goods.ToString());
+                        storage.AddResource(goods);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
     //public override string GetIntroduce()
     //{
     //    return string.Empty;

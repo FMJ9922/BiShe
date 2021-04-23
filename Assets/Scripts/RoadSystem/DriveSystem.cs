@@ -7,21 +7,16 @@ public class DriveSystem : MonoBehaviour
 {
     public List<Vector3> WayPoints;
     public List<GameObject> wayObjects;
-    public float Speed = 3f;
+    public float MaxSpeed = 3f;
+    private float speed;
     public float StopDistance = 1f;
+    private float a { get { return (MaxSpeed * MaxSpeed) / (2 * StopDistance); } }
     public DriveType driveType;
     public TransportationType carType;
     private float RotateSpeed = 10f;
     private int wayCount = 0;
     public UnityAction action = null;
-    private UnityAction<DriveSystem> callBack = null;
     private bool isForward = true;
-    private void Start()
-    {
-        
-        //StartDriving(ObjectsToVector3s(wayObjects), driveType);
-
-    }
     private void FixedUpdate()
     {
         if (null != action)
@@ -30,14 +25,16 @@ public class DriveSystem : MonoBehaviour
         }
     }
 
-    public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once,UnityAction<DriveSystem> _callBack = null)
+    public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction _callBack = null)
     {
+        //Debug.Log("startDrive");
         action = null;
         wayCount = 0;
-        callBack = _callBack;
+        speed = 0;
+        //Debug.Log((callBack != null).ToString());
         WayPoints = wayPoints;
         transform.position = WayPoints[0];
-        if(WayPoints[0] == WayPoints[1])
+        if (WayPoints[0] == WayPoints[1])
         {
             WayPoints.RemoveAt(0);
         }
@@ -46,7 +43,7 @@ public class DriveSystem : MonoBehaviour
         {
             case DriveType.once:
                 {
-                    action = () => DriveOnce(WayPoints);
+                    action = () => DriveOnce(WayPoints, _callBack);
                     break;
                 }
             case DriveType.loop:
@@ -62,31 +59,43 @@ public class DriveSystem : MonoBehaviour
         }
     }
 
-    private void DriveOnce(List<Vector3> targets)
+    private void DriveOnce(List<Vector3> targets, UnityAction callBack)
     {
-        if (Vector3.Distance(targets[wayCount], transform.position) < StopDistance)
+        if (speed < MaxSpeed && wayCount < targets.Count)
+        {
+            speed += a * Time.fixedDeltaTime;
+        }
+        if (speed > 0 && wayCount == targets.Count)
+        {
+            speed -=  a * Time.fixedDeltaTime;
+        }
+        if (wayCount < targets.Count && Vector3.Distance(targets[wayCount], transform.position) < StopDistance )
         {
             wayCount++;
-            if (wayCount < targets.Count)
+            if(wayCount < targets.Count)
             {
                 float angle = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position);
                 if (angle > 5 && angle < 175)
                 {
                     UnityAction temp = action;
-                    RotateSpeed = 90 / (Mathf.PI / 2 * StopDistance / Speed);
+                    RotateSpeed = 90 / (Mathf.PI / 2 * StopDistance / speed);
                     //Debug.Log("转弯");
                     action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
                 }
             }
-
         }
         if (wayCount < targets.Count)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], Speed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], speed * Time.fixedDeltaTime);
+        }
+        else if(wayCount>0&&Vector3.Distance(targets[wayCount-1], transform.position) >0.1f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount-1], speed * Time.fixedDeltaTime);
+            
         }
         else
         {
-            DriveStop();
+            DriveStop(callBack);
         }
     }
 
@@ -108,7 +117,7 @@ public class DriveSystem : MonoBehaviour
             if (wayCount < targets.Count)
             {
                 UnityAction temp = action;
-                RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
+                RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
                 //Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
             }
@@ -116,12 +125,12 @@ public class DriveSystem : MonoBehaviour
         }
         if (wayCount < targets.Count)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], Speed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], speed * Time.fixedDeltaTime);
         }
         else
         {
             UnityAction temp = action;
-            RotateSpeed = Vector3.Angle(transform.position - targets[0], targets[targets.Count - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
+            RotateSpeed = Vector3.Angle(transform.position - targets[0], targets[targets.Count - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
             //Debug.Log("转弯");
             action = () => DriveTurn(targets[0] - targets[targets.Count - 1], temp);
             wayCount = 0;
@@ -144,7 +153,7 @@ public class DriveSystem : MonoBehaviour
             if (wayCount < targets.Count && wayCount >= 0)
             {
                 UnityAction temp = action;
-                RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[old] - transform.position) / (Mathf.PI / 2 * StopDistance / Speed);
+                RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[old] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
                 //Debug.Log("转弯");
                 action = () => DriveTurn(targets[wayCount] - targets[old], temp);
             }
@@ -152,7 +161,7 @@ public class DriveSystem : MonoBehaviour
         }
         if (wayCount < targets.Count && wayCount >= 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], Speed * Time.fixedDeltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], speed * Time.fixedDeltaTime);
         }
         else
         {
@@ -187,7 +196,7 @@ public class DriveSystem : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, -RotateSpeed * Time.fixedDeltaTime, 0), Space.Self);
         }
-        transform.position += transform.forward.normalized * Speed * Time.fixedDeltaTime;
+        transform.position += transform.forward.normalized * speed * Time.fixedDeltaTime;
         if (Vector3.Angle(transform.forward, to) < 2f)
         {
             //Debug.Log("前进");
@@ -212,14 +221,11 @@ public class DriveSystem : MonoBehaviour
             action = callback;
         }
     }
-    private void DriveStop()
+    private void DriveStop(UnityAction callBack)
     {
-        //Debug.Log("停车");
+        //Debug.Log("停车"+(callBack!=null).ToString());
         action = null;
-        if (callBack != null)
-        {
-            callBack.Invoke(this);
-            callBack = null;
-        }
+        callBack.Invoke();
+        callBack = null;
     }
 }

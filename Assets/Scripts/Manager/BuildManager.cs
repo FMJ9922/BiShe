@@ -338,7 +338,7 @@ public class BuildManager : Singleton<BuildManager>
             //    Debug.Log(MapManager.Instance.GetTerrainPosition(targetGrids[i]));
             //}
             //MapManager.Instance.ShowGrid(targetGrids);
-            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGrid, currentBuilding.direction);
+            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
             WhenFinishBuild();
         }
     }
