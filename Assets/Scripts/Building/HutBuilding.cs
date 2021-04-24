@@ -36,7 +36,7 @@ public class HutBuilding : BuildingBase
         //if (storage.GetAllFoodNum() < 10)
         {
             CarMission mission = MakeCarMission();
-            TrafficManager.Instance.UseCar(TransportationType.mini, mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
+            TrafficManager.Instance.UseCar(mission.transportationType, mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
         }
         //遍历所有可吃的食物，数量够吃就返回
         for (int i = 0; i < formula.InputItemID.Count; i++)
@@ -60,6 +60,7 @@ public class HutBuilding : BuildingBase
     {
         CarMission mission = new CarMission();
         mission.StartBuilding = this;
+        mission.transportationType = TransportationType.van;
         mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;

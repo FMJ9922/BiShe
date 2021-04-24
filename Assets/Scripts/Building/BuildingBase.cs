@@ -39,6 +39,7 @@ public class BuildingBase : MonoBehaviour
     public Vector2Int parkingGridIn;
     public Vector2Int parkingGridOut;
 
+
     public Direction direction;
      
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
@@ -69,7 +70,7 @@ public class BuildingBase : MonoBehaviour
 
     private Vector2Int InitParkingGrid()
     {
-        switch (direction)
+        /*switch (direction)
         {
             case Direction.down:
                 return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.down);
@@ -80,7 +81,7 @@ public class BuildingBase : MonoBehaviour
             case Direction.left:
                 return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
 
-        }
+        }*/
         return MapManager.Instance.GetCenterGrid(parking.transform.position);
     }
     /// <summary>

@@ -188,6 +188,10 @@ public class MapManager : Singleton<MapManager>
         return _vertices[p];
     }
 
+    public static Vector3 GetTerrainStaticPosition(Vector2Int gridPos)
+    {
+        return new Vector3(gridPos.x * 2, 10, gridPos.y * 2);
+    }
     public List<Vector3> GetTerrainPosition(List<Vector2Int> gridPos)
     {
         List<Vector3> result = new List<Vector3>();

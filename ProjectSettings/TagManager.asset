@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - car
   - Building
+  - Senser
   layers:
   - Default
   - TransparentFX

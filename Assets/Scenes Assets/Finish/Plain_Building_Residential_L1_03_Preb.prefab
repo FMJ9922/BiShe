@@ -71,7 +71,8 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 8978869022186822607}
-  parkingGrid: {x: 0, y: 0}
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
   direction: 0
 --- !u!114 &-7806264361497938071
 MonoBehaviour:
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8978869022186822607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: -2}
+  m_LocalPosition: {x: 7, y: 0, z: -3.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6958132340424998054}

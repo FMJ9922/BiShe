@@ -60,7 +60,10 @@ public class RoadManager : Singleton<RoadManager>
                 Vector2Int trigger = 2 * dirVec + RoadNodes[i].GridPos;
                 if (!RoadNodeDic.TryGetValue(trigger, out RoadNode node))
                 {
-                    RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                    if (RoadNodes[i].NearbyNode.Count > 2)
+                    {
+                        RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                    }
                 }
             }
             RoadNodeDic[RoadNodes[i].GridPos] = RoadNodes[i];
@@ -83,10 +86,11 @@ public class RoadManager : Singleton<RoadManager>
             RoadNodeDic[RoadNodes[i].GridPos] = RoadNodes[i];
         }
         RoadNodes.Sort(Compare);
-
+        
         //删除中间节点
         for (int i = RoadNodes.Count - 1; i >= 0; i--)
         {
+            RoadNodes[i].NearNodeCount = RoadNodes[i].NearbyNode.Count;
             //Debug.Log(RoadNodes[i].GridPos);
             //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(RoadNodes[i].GridPos), Quaternion.identity, transform);
             if (RoadNodes[i].NearbyNode.Count == 2)
@@ -111,38 +115,62 @@ public class RoadManager : Singleton<RoadManager>
                     //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(RoadNodes[i].GridPos), Quaternion.identity, transform);
                 }
             }
-            RoadNodes[i].NearNodeCount = RoadNodes[i].NearbyNode.Count;
         }
-
-        //删除反向的结点
-        for (int i = 0; i < RoadNodes.Count; i++)
+        /*for (int i = 0; i < RoadNodes.Count; i++)
         {
             for (int j = 0; j < RoadNodes[i].NearbyNode.Count; j++)
             {
+                Instantiate(pfb, MapManager.GetTerrainStaticPosition(RoadNodes[i].GridPos)+new Vector3(0,j,0), Quaternion.identity, transform);
+            }
+        }*/
+        TrafficManager.Instance.reachable = RoadNodes;
+        CrossNodes = RoadNodes;
+        //删除反向的结点
+        for (int i = 0; i < RoadNodes.Count; i++)
+        {
+            //Debug.Log("_____" + RoadNodes[i].GridPos + " " + RoadNodes[i].NearbyNode.Count);
+            for (int j = RoadNodes[i].NearbyNode.Count-1; j >=0; j--)
+            {
+                //Debug.Log(j);
                 Vector2Int dirVec = RoadNodes[i].NearbyNode[j].GridPos - RoadNodes[i].GridPos;
                 Direction dir = CastTool.CastVector2ToDirection(dirVec);
                 dir++;
                 //若某点->邻点的逆时针的相邻不为路，则说明这是逆向的路
                 Vector2Int triggerGrid = RoadNodes[i].GridPos + CastTool.CastDirectionToVector2Int((int)dir) / 2;
                 //Debug.Log(RoadNodes[i].GridPos + "=>" + RoadNodes[i].NearbyNode[j].GridPos + " " + triggerGrid);
-                if(!RoadNodeDic.TryGetValue(triggerGrid,out RoadNode roadNode))
+                if(RoadNodeDic.TryGetValue(triggerGrid,out RoadNode triggerNode))
                 {
-                    RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
-                    //Debug.Log("remove");
+                    //Debug.Log(triggerNode.NearNodeCount);
+                    if (RoadNodes[i].NearNodeCount == 4 && triggerNode.NearNodeCount<=2)
+                    {
+                        //Debug.Log("remove1"+ RoadNodes[i].NearbyNode[j].GridPos);
+                        RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                    }
+                    if(RoadNodes[i].NearNodeCount == 3 && !IsCrossNode(triggerNode))
+                    {
+                        //Debug.Log("remove2" + RoadNodes[i].NearbyNode[j].GridPos);
+                        RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
+                    }
                 }
                 else
                 {
-                    if (!IsCrossNode(roadNode))
+                    if(RoadNodes[i].NearNodeCount == 4)
                     {
+                        //Debug.Log("remove3" + RoadNodes[i].NearbyNode[j].GridPos);
                         RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
-                        //Debug.Log("remove");
+                    }
+                    if(RoadNodes[i].NearNodeCount == 3)
+                    {
+                        //Debug.Log("remove4" + RoadNodes[i].NearbyNode[j].GridPos);
+                        RoadNodes[i].RemoveNearbyNode(RoadNodes[i].NearbyNode[j]);
                     }
                 }
+
             }
             RoadNodeDic[RoadNodes[i].GridPos] = RoadNodes[i];
         }
-        TrafficManager.Instance.reachable = RoadNodes;
-        CrossNodes = RoadNodes;
+
+        
         Invoke("Show",1f);
     }
 
@@ -196,18 +224,19 @@ public class RoadManager : Singleton<RoadManager>
         {
             RoadNode node1 = GetNearestCross(grid, dir);
             RoadNode node2 = GetNearestCross(grid, dir + 2);
-            //Debug.Log(node0.GridPos + " " + node1.GridPos + " " + node2.GridPos);
             if (node1.IsNearbyRoad(node2))
             {
                 node1.RemoveNearbyNode(node2);
                 node1.AddNearbyNode(node0);
                 node0.AddNearbyNode(node2);
+                Debug.Log(node1.GridPos + " => " + node0.GridPos + " =>  " + node2.GridPos);
             }
             else
             {
                 node2.RemoveNearbyNode(node1);
                 node2.AddNearbyNode(node0);
                 node0.AddNearbyNode(node1);
+                Debug.Log(node2.GridPos + " => " + node0.GridPos + " =>  " + node1.GridPos);
             }
             CrossNodes.Add(node0);
         }
@@ -304,10 +333,10 @@ public class RoadManager : Singleton<RoadManager>
         //{
         //    Debug.Log(r.GridPos);
         //}
-        while (temp.NearNodeCount <= 2)
+        while (!IsCrossNode(temp))
         {
             Vector2Int next = temp.GridPos + CastTool.CastDirectionToVector2Int((int)dir + 1) / 2;
-            Debug.Log(next);
+            //Debug.Log(next+" "+ temp.NearNodeCount);
             temp = RoadNodeDic[next];
         }
         return temp;

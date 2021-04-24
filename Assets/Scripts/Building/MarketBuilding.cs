@@ -20,7 +20,7 @@ public class MarketBuilding : BuildingBase
         BuildRecievedCarMission(carMission);
         CarMission car = carMission;
         void ac() { car.EndBuilding.OnRecieveCar(car);}
-        TrafficManager.Instance.UseCar(TransportationType.mini, car, ac, DriveType.once);
+        TrafficManager.Instance.UseCar(car.transportationType, car, ac, DriveType.once);
     }
 
     private void BuildRecievedCarMission(CarMission carMission)

@@ -13,10 +13,17 @@ public class DriveSystem : MonoBehaviour
     private float a { get { return (MaxSpeed * MaxSpeed) / (2 * StopDistance); } }
     public DriveType driveType;
     public TransportationType carType;
+    public bool isbraking;//是否在刹车
     private float RotateSpeed = 10f;
     private int wayCount = 0;
+    public CarSensor carSensor;
     public UnityAction action = null;
     private bool isForward = true;
+    private void Start()
+    {
+        carSensor.OnBrake += () => isbraking = true;
+        carSensor.OnStopBrake += () => isbraking = false;
+    }
     private void FixedUpdate()
     {
         if (null != action)
@@ -24,7 +31,7 @@ public class DriveSystem : MonoBehaviour
             action.Invoke();
         }
     }
-
+    
     public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction _callBack = null)
     {
         //Debug.Log("startDrive");
@@ -58,17 +65,30 @@ public class DriveSystem : MonoBehaviour
                 }
         }
     }
-
+    private void ControlSpeed(List<Vector3> targets)
+    {
+        if (isbraking)
+        {
+            if (speed > 0 )
+            {
+                speed -= a * Time.fixedDeltaTime;
+            }
+        }
+        else
+        {
+            if (speed < MaxSpeed && wayCount < targets.Count)
+            {
+                speed += a * Time.fixedDeltaTime;
+            }
+            if (speed > 0 && wayCount == targets.Count)
+            {
+                speed -= a * Time.fixedDeltaTime;
+            }
+        }
+    }
     private void DriveOnce(List<Vector3> targets, UnityAction callBack)
     {
-        if (speed < MaxSpeed && wayCount < targets.Count)
-        {
-            speed += a * Time.fixedDeltaTime;
-        }
-        if (speed > 0 && wayCount == targets.Count)
-        {
-            speed -=  a * Time.fixedDeltaTime;
-        }
+        ControlSpeed(targets);
         if (wayCount < targets.Count && Vector3.Distance(targets[wayCount], transform.position) < StopDistance )
         {
             wayCount++;
@@ -88,7 +108,7 @@ public class DriveSystem : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], speed * Time.fixedDeltaTime);
         }
-        else if(wayCount>0&&Vector3.Distance(targets[wayCount-1], transform.position) >0.1f)
+        else if(wayCount>0&&Vector3.Distance(targets[wayCount-1], transform.position) >0.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targets[wayCount-1], speed * Time.fixedDeltaTime);
             

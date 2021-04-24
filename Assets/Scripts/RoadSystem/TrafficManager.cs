@@ -282,6 +282,7 @@ public class CarMission
     public List<CostResource> requestResources;//请求的资源
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类
+    public TransportationType transportationType;
     public BuildingBase StartBuilding;
     public BuildingBase EndBuilding;
 }
