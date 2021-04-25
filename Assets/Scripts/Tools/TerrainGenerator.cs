@@ -15,6 +15,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     long width, lenth;
     private string pathName = "Assets/StreamingAssets/MapData";//路径名称
     public Vector3 start, end;
+    public GameObject shower;
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
     public void CalculateHeights()
@@ -115,6 +116,29 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
             }
         }
         mesh.uv = uv;
+    }
+
+    public void ChangeShower(bool open,Vector3 pos,int dir,int tex)
+    {
+        shower.SetActive(open);
+        shower.transform.position = pos;
+        shower.transform.rotation = Quaternion.identity;
+        int temp = dir;
+        if(temp ==1)
+        {
+            dir = 3;
+        }
+        if(temp == 3)
+        {
+            dir = 1;
+        }
+        shower.transform.Rotate(new Vector3(0, dir * 90, 0), Space.Self);
+        Material mat = shower.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+        float h = Mathf.FloorToInt(tex / 8);
+        float x = tex - 8 * h;
+        Vector2 one = new Vector2((x / 8), ((8 - h - 1) / 8));
+        mat.mainTextureOffset = one;
+        shower.GetComponentInChildren<MeshRenderer>().sharedMaterial = mat;
     }
     public void OnPaint(int tex, Vector3 pos, int dir, int size)
     {
