@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4514908726269795318}
   - component: {fileID: 650759174670537811}
   - component: {fileID: 3378545573173960857}
+  - component: {fileID: -6530408023443599273}
   m_Layer: 0
-  m_Name: Universal_Plant_Tree_07_Mod
+  m_Name: Universal_Plant_TreeDark_07_Preb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,3 +81,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-6530408023443599273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3883225739409949004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -192,11 +192,11 @@ public class RoadManager : Singleton<RoadManager>
         {
             for (int j = 0; j < CrossNodes[i].NearbyNode.Count; j++)
             {
-                Debug.DrawLine(MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos),
-                    MapManager.Instance.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos), Color.red, 100f);
-                Vector3 delta = MapManager.Instance.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos) -
-                    MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos);
-                Instantiate(pfb, MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos) + delta / 2, Quaternion.LookRotation(delta), transform);
+                Debug.DrawLine(MapManager.GetTerrainPosition(CrossNodes[i].GridPos),
+                    MapManager.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos), Color.red, 100f);
+                Vector3 delta = MapManager.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos) -
+                    MapManager.GetTerrainPosition(CrossNodes[i].GridPos);
+                Instantiate(pfb, MapManager.GetTerrainPosition(CrossNodes[i].GridPos) + delta / 2, Quaternion.LookRotation(delta), transform);
             }
         }
     }
@@ -285,12 +285,12 @@ public class RoadManager : Singleton<RoadManager>
                 while (temp != startNode)
                 {
                     //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
-                    list.Add(MapManager.Instance.GetTerrainPosition(temp.GridPos) + new Vector3(1, 0, 1));
+                    list.Add(MapManager.GetTerrainPosition(temp.GridPos) + new Vector3(1, 0, 1));
                     temp = temp.Parent;
                     //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(temp.GridPos), Quaternion.identity, transform);
                 }
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
-                list.Add(MapManager.Instance.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
+                list.Add(MapManager.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse();
                 return list;
             }
@@ -314,7 +314,7 @@ public class RoadManager : Singleton<RoadManager>
     {
         for (int i = 0; i < CrossNodes.Count; i++)
         {
-            Instantiate(pfb, MapManager.Instance.GetTerrainPosition(CrossNodes[i].GridPos), Quaternion.identity, transform);
+            Instantiate(pfb, MapManager.GetTerrainPosition(CrossNodes[i].GridPos), Quaternion.identity, transform);
         }
     }
 

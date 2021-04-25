@@ -223,8 +223,8 @@ public class BuildManager : Singleton<BuildManager>
             {
                 GameObject newRoad = Instantiate(preRoadPfb, transform);
                 newRoad.name = i.ToString();
-                newRoad.transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
-                newRoad.transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
+                newRoad.transform.position = MapManager.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
+                newRoad.transform.LookAt(MapManager.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
                 newRoad.GetComponent<RoadPreview>().SetRoadPreviewMat(roadLevel);
                 preRoads.Add(newRoad);
             }
@@ -243,7 +243,7 @@ public class BuildManager : Singleton<BuildManager>
             }
         }
         roadCount = newCount;
-        roadEndPos = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * roadCount);
+        roadEndPos = MapManager.GetTerrainPosition(roadStartPos + extensionDir * roadCount);
     }
 
     /// <summary>
@@ -255,8 +255,8 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 extensionDir = CastTool.CastDirectionToVector(roadDirection);
         for (int i = 0; i < preRoads.Count; i++)
         {
-            preRoads[i].transform.position = MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
-            preRoads[i].transform.LookAt(MapManager.Instance.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
+            preRoads[i].transform.position = MapManager.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
+            preRoads[i].transform.LookAt(MapManager.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
         }
     }
 

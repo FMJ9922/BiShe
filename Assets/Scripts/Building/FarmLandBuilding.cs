@@ -26,7 +26,7 @@ public class FarmLandBuilding : BuildingBase
         {
             GameObject newGrid = Instantiate(wheatGridPfb, wheatTrans);
             grids[i] = newGrid;
-            newGrid.transform.position = MapManager.Instance.GetTerrainPosition(takenGrids[i]);
+            newGrid.transform.position = MapManager.GetTerrainPosition(takenGrids[i]);
             newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction-1), Space.Self);
         }
         wheatTrans.localPosition = new Vector3(0, -0.8f, 0);

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1485249751347630717}
   - component: {fileID: 2536495615662038488}
   - component: {fileID: 348894947670223122}
+  - component: {fileID: -6103189141577209006}
   m_Layer: 0
-  m_Name: Universal_Plant_Tree_09_Mod
+  m_Name: Universal_Plant_TreeLight_09_Preb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,3 +81,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-6103189141577209006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2294437135373060295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

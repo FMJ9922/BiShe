@@ -9,7 +9,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 {
     public Terrain terrain;
     public static float[][] height;
-    private Vector3[] verticles;
+    private static Vector3[] verticles;
     private Mesh mesh;
     public Texture2D tx;
     long width, lenth;
@@ -466,11 +466,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// 获得地形的顶点数据
     /// </summary>
     /// <returns></returns>
-    public Vector3[] GetTerrainMeshVertices()
+    public static Vector3[] GetTerrainMeshVertices()
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        verticles = mesh.vertices;
-        return verticles;
+        Mesh mesh = GameObject.Find("TerrainGenerator").GetComponent<MeshFilter>().sharedMesh;
+        TerrainGenerator.verticles = mesh.vertices;
+        return TerrainGenerator.verticles;
     }
     [ContextMenu("GenerateMeshes")]
     void GenerateMeshes()

@@ -7,10 +7,10 @@ public class MapManager : Singleton<MapManager>
     public Vector2Int MapSize { get; private set; }
     private Dictionary<Vector2Int, SingleGrid> _gridDic = new Dictionary<Vector2Int, SingleGrid>();
     private LevelData _leveldata;
-    private Vector3[] _vertices;//存储地形顶点数据
+    private static Vector3[] _vertices;//存储地形顶点数据
     public const int unit = 2;//地形一格的长度（单位米）
     public List<GameObject> _buildings = new List<GameObject>();
-    [SerializeField] private TerrainGenerator generator;
+    [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
 
 
@@ -26,7 +26,7 @@ public class MapManager : Singleton<MapManager>
     {
         _leveldata = DataManager.GetLevelData(levelId);
         MapSize = new Vector2Int(_leveldata.Length, _leveldata.Width);
-        _vertices = generator.GetTerrainMeshVertices();
+        _vertices = TerrainGenerator.GetTerrainMeshVertices();
     }
     private void InitGrid()
     {
@@ -173,19 +173,23 @@ public class MapManager : Singleton<MapManager>
     /// 获取地形在世界空间的位置
     /// </summary>
     /// <returns></returns>
-    public Vector3 GetTerrainWorldPosition()
+    public static Vector3 GetTerrainWorldPosition()
     {
-        return generator.transform.position;
+        return GameObject.Find("TerrainGenerator").transform.position;
     }
     /// <summary>
     /// 获取地面某处的坐标
     /// </summary>
     /// <returns></returns>
     /// 
-    public Vector3 GetTerrainPosition(Vector2Int gridPos)
+    public static Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
-        int p = gridPos.x * 4 + gridPos.y * _leveldata.Width * 4;
-        return _vertices[p];
+        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < 300 && gridPos.y < 300)
+        {
+            int p = gridPos.x * 4 + gridPos.y * 300 * 4;
+            return TerrainGenerator.GetTerrainMeshVertices()[p];
+        }
+        else return Vector3.zero;
     }
 
     public static Vector3 GetTerrainStaticPosition(Vector2Int gridPos)
@@ -201,13 +205,13 @@ public class MapManager : Singleton<MapManager>
         }
         return result;
     }
-    public Vector3 GetTerrainPosition(Vector3 mistakeHeightWorldPos)
+    public static Vector3 GetTerrainPosition(Vector3 mistakeHeightWorldPos)
     {
         Vector3 localPos = mistakeHeightWorldPos - GetTerrainWorldPosition();
         Vector2Int gridPos = GetCenterGrid(localPos);
         return GetTerrainPosition(gridPos);
     }
-    public Vector2Int GetCenterGrid(Vector3 centerPos)
+    public static Vector2Int GetCenterGrid(Vector3 centerPos)
     {
         Vector3 centerGrid = centerPos / 2;
         int x = Mathf.FloorToInt(centerGrid.x);
