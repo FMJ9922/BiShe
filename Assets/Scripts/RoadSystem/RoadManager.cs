@@ -171,7 +171,7 @@ public class RoadManager : Singleton<RoadManager>
         }
 
         
-        Invoke("Show",1f);
+        //Invoke("Show",1f);
     }
 
     private bool IsCrossNode(RoadNode roadNode)

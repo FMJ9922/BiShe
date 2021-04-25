@@ -97,7 +97,7 @@ public class EditCanvas : MonoBehaviour
         GUILayout.Label("范围");
         range = GUILayout.Toolbar(range, new string[4] { "1", "2", "3", "5" });
         GUILayout.Label("高度");
-        height = EditorGUILayout.IntSlider(height, 0, 20);
+        //height = EditorGUILayout.IntSlider(height, 0, 20);
         if (GUILayout.Button("平整地形"))
         {
             canSmooth = true;

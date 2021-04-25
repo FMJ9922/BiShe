@@ -81,7 +81,7 @@ public class TerrainWindow : EditorWindow
                                                           "8", "9", "10", "11",
                                                           "12", "13", "14", "15"});
         GUILayout.Label("选择方向");
-        dir = GUILayout.Toolbar(dir, new string[4] { "0", "1", "2", "3" });
+        dir = GUILayout.Toolbar(dir, new string[5] { "0", "1", "2", "3","99" });
         GUILayout.Label("选择笔刷大小");
         brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "3", "5" });
         if (GUILayout.Button("涂色"))

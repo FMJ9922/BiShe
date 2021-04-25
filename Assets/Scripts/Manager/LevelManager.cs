@@ -7,7 +7,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] MainInteractCanvas MainInteractCanvas;
 
     private float dayTime = 5f;
-    public static int LevelID = 30001;
+    public static int LevelID = 30003;
     private int year, month, week,day;
     public int Year
     {
