@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Universal_Building_Government_L1L2L3_Mat
   m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
-  m_ShaderKeywords: TCP2_MOBILE TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK
-    TCP2_UV_NORMALS_FULL
+  m_ShaderKeywords: TCP2_MOBILE TCP2_OUTLINE_MIN_SIZE TCP2_OUTLINE_TEXTURED_FRAGMENT
+    TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -110,10 +110,10 @@ Material:
     - _OutlineLightingType: 0
     - _OutlineLightingTypeURP: 0
     - _OutlineMinWidth: 1
-    - _OutlinePixelSizeType: 0
+    - _OutlinePixelSizeType: 2
     - _OutlineTextureLOD: 5
-    - _OutlineTextureType: 0
-    - _OutlineWidth: 1
+    - _OutlineTextureType: 2
+    - _OutlineWidth: 4.37
     - _Parallax: 0.02
     - _RampBands: 4
     - _RampBandsSmoothing: 0.1
