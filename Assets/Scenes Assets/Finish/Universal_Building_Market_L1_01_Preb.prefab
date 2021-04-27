@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 8
-  Height: 8
+  Height: 6
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}
@@ -81,7 +81,8 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 5874694680866942404}
-  parkingGrid: {x: 0, y: 0}
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
   direction: 0
 --- !u!1 &5874694680866942404
 GameObject:
@@ -107,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5874694680866942404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 7.22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7352129176716051139}

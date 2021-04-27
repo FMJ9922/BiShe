@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Width: 8
-  Height: 5
+  Height: 6
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}
@@ -84,8 +84,9 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 5463267784420166447}
-  parkingGrid: {x: 0, y: 0}
-  direction: 0
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
+  direction: 3
 --- !u!114 &6733904123791653078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,10 +141,35 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -8
       objectReference: {fileID: 0}
+    - target: {fileID: 6961338558012749058, guid: f1d2b7c55e6ab4241996db5f74713176,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961338558012749058, guid: f1d2b7c55e6ab4241996db5f74713176,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.89975303
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961338558012749058, guid: f1d2b7c55e6ab4241996db5f74713176,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.43639958
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961338558012749058, guid: f1d2b7c55e6ab4241996db5f74713176,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.991
+      objectReference: {fileID: 0}
+    - target: {fileID: 6961338558012749058, guid: f1d2b7c55e6ab4241996db5f74713176,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -128.251
+      objectReference: {fileID: 0}
     - target: {fileID: 8115641939038104755, guid: f1d2b7c55e6ab4241996db5f74713176,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8115641939038104755, guid: f1d2b7c55e6ab4241996db5f74713176,
         type: 3}

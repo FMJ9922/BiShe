@@ -18,6 +18,7 @@ public class InfoCanvas : CanvasBase
     [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
     [SerializeField] TMP_Dropdown _dropDown;
     [SerializeField] private GameObject mainCanvas;
+    [SerializeField] private GameObject BuildingHighlight;
     UnityAction populationChange;
     private RuntimeBuildData _buildData;
     public override void InitCanvas()
@@ -40,6 +41,11 @@ public class InfoCanvas : CanvasBase
         AddBtnsListener(buildbase);
         _dropDown.onValueChanged.AddListener(OnDropDownValueChanged);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
+        BuildingHighlight.transform.position = buildbase.transform.position;
+        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.x*2, 10, buildbase.Size.y*2);
+        BuildingHighlight.transform.rotation = buildbase.transform.rotation;
+        BuildingHighlight.SetActive(true);
+
     }
 
     private void SetBtnsActive(bool isActive)
@@ -74,6 +80,7 @@ public class InfoCanvas : CanvasBase
         RemoveBtnsListener();
         EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
         mainCanvas.SetActive(false);
+        BuildingHighlight.SetActive(false);
     }
     private void OnDestroy()
     {

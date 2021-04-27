@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 8
+  Width: 6
   Height: 8
   BundlePrimaryType: 0
   hasAnima: 1
@@ -69,7 +69,8 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parking: {fileID: 0}
-  parkingGrid: {x: 0, y: 0}
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
   direction: 0
 --- !u!114 &9023254816225749810
 MonoBehaviour:

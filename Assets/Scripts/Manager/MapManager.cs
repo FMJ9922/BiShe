@@ -27,6 +27,7 @@ public class MapManager : Singleton<MapManager>
         _leveldata = DataManager.GetLevelData(levelId);
         MapSize = new Vector2Int(_leveldata.Length, _leveldata.Width);
         _vertices = TerrainGenerator.GetTerrainMeshVertices();
+        generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
     }
     private void InitGrid()
     {

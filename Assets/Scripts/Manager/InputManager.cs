@@ -95,6 +95,7 @@ public partial class InputManager : Singleton<InputManager>
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
                 Debug.Log(buildingBase.transform.name);
+                EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
                 if (buildingBase.runtimeBuildData.Id == 20003)
                 {
                     MainInteractCanvas.Instance.OpenResourceCanvas();
@@ -102,10 +103,6 @@ public partial class InputManager : Singleton<InputManager>
                 else if(buildingBase.runtimeBuildData.Id == 20004)
                 {
                     MainInteractCanvas.Instance.OpenMarketCanvas();
-                }
-                else
-                {
-                    EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
                 }
             }
         }
