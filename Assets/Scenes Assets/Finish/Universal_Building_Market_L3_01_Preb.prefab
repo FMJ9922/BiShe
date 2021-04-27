@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1129882384034272064}
   - component: {fileID: 8530255321517076275}
   - component: {fileID: -561491405823537817}
+  - component: {fileID: 1487259063131633667}
   m_Layer: 0
   m_Name: Universal_Building_Market_L3_01_Preb
   m_TagString: Building
@@ -83,6 +84,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1487259063131633667
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618324913827664453}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7909972641903782754
 PrefabInstance:
   m_ObjectHideFlags: 0

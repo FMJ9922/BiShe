@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7585988237489383479}
   - component: {fileID: 5666143327595551997}
   - component: {fileID: 4564395093597573306}
+  - component: {fileID: 8180465367269472521}
   m_Layer: 0
   m_Name: Universal_Plant_TreeLight_03_Preb
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,3 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &8180465367269472521
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170726598697286952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 6.1454077
+  m_Direction: 1
+  m_Center: {x: 0.033188343, y: 3.027536, z: 0.0032020211}

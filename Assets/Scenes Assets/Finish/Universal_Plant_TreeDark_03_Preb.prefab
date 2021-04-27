@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4481567289273097551}
   - component: {fileID: 1861480871135209861}
   - component: {fileID: -7480041051674899909}
+  - component: {fileID: 3435820410906810348}
   m_Layer: 0
   m_Name: Universal_Plant_TreeDark_03_Preb
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,3 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &3435820410906810348
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204265678228506704}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 6.1454077
+  m_Direction: 1
+  m_Center: {x: 0.033188343, y: 3.027536, z: 0.0032020211}

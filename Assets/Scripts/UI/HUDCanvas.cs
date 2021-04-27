@@ -23,6 +23,7 @@ public class HUDCanvas : CanvasBase
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StartListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        EventManager.StartListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
         strMoney = Localization.ToSettingLanguage("Money");
         strLog = Localization.ToSettingLanguage("Log");
         strStone = Localization.ToSettingLanguage("Stone");
@@ -38,6 +39,10 @@ public class HUDCanvas : CanvasBase
     {
         Debug.Log("pause");
         GameManager.Instance.TogglePauseGame(out TimeScale scale);
+    }
+
+    public void OnTimeScaleChangeImage(TimeScale scale)
+    {
         ChangePauseBtnImage(scale);
         ChangeTimeScaleImage(scale);
     }
@@ -60,8 +65,6 @@ public class HUDCanvas : CanvasBase
     {
         //Debug.Log("add");
         GameManager.Instance.AddTimeScale(out TimeScale scale);
-        ChangeTimeScaleImage(scale);
-        ChangePauseBtnImage(scale);
     }
 
     private void ChangeTimeScaleImage(TimeScale scale)

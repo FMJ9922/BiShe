@@ -9,6 +9,7 @@ TagManager:
   - car
   - Building
   - Senser
+  - Tree
   layers:
   - Default
   - TransparentFX

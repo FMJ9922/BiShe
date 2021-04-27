@@ -43,7 +43,6 @@ public class GameManager : Singleton<GameManager>
         timeScale = (TimeScale)System.Enum.ToObject(typeof(TimeScale), scale);
         addedScale = timeScale;
         SetTimeScale(timeScale);
-        EventManager.TriggerEvent<TimeScale>(ConstEvent.OnTimeScaleChanged, timeScale);
     }
 
     /// <summary>
@@ -73,5 +72,6 @@ public class GameManager : Singleton<GameManager>
                 CameraMovement.Instance.AllowMovement();
                 break;
         }
+        EventManager.TriggerEvent<TimeScale>(ConstEvent.OnTimeScaleChanged, timeScale);
     }
 }
