@@ -229,14 +229,14 @@ public class RoadManager : Singleton<RoadManager>
                 node1.RemoveNearbyNode(node2);
                 node1.AddNearbyNode(node0);
                 node0.AddNearbyNode(node2);
-                Debug.Log(node1.GridPos + " => " + node0.GridPos + " =>  " + node2.GridPos);
+                //Debug.Log(node1.GridPos + " => " + node0.GridPos + " =>  " + node2.GridPos);
             }
             else
             {
                 node2.RemoveNearbyNode(node1);
                 node2.AddNearbyNode(node0);
                 node0.AddNearbyNode(node1);
-                Debug.Log(node2.GridPos + " => " + node0.GridPos + " =>  " + node1.GridPos);
+                //Debug.Log(node2.GridPos + " => " + node0.GridPos + " =>  " + node1.GridPos);
             }
             CrossNodes.Add(node0);
         }

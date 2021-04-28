@@ -332,7 +332,8 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
+            float targetHeight = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn).y;
+            terrainGenerator.FlatGround(currentBuilding.takenGrids,targetHeight);
             //for (int i = 0; i < targetGrids.Length; i++)
             //{
             //    Debug.Log(MapManager.Instance.GetTerrainPosition(targetGrids[i]));

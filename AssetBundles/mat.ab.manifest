@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3839062763
+CRC: 2110147093
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cb7ca916bd0ec1c11292293d0fa0e890
+    Hash: 959bf39f1dc52215357f705294c0e03c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -17,6 +17,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat 1.mat
+- Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
 - Assets/Scenes Assets/Material/Universal_Terrain_GrassLand_01_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
@@ -30,9 +31,11 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Farm_L1L2L3_Tex.tga
+- Assets/ArtAssets/Model/Building/Materials/WallStone.mat
 - Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
+- Assets/ArtAssets/Material/Field.mat
 - Assets/Scenes Assets/Material/Universal_Building_MarketWarehouse_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Terrain_BareGround_01_Mat.mat
 - Assets/JMO Assets/Toony Colors Pro/Textures/Ramps/TCP2_Ramp_UnityGradient.png
@@ -40,14 +43,22 @@ Assets:
 - Assets/Scenes Assets/Material/Plain_Building_Ground_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Plant_TreeTrunk_01_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Mine_L3_Mat.mat
+- Assets/ArtAssets/Model/Building/Materials/Door.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Plant_Wheat_01_Tex.tga
+- Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
+- Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/Scenes Assets/Material/Universal_Plant_Wheat_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
+- Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
 - Assets/Scenes Assets/Material/Universal_Transportation_Trunk_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Mine_L1L2_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Government_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat 1.mat
+- Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/JMO Assets/Toony Colors Pro/Textures/TCP2_NoTileNoise.png
 - Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Hui_Building_Residential_L1L2L3_Mat.mat
+- Assets/ArtAssets/Model/Building/Materials/Ridge.mat
 Dependencies: []

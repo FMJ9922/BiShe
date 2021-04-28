@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1947594527
+CRC: 3658886773
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 54f7e1b847dbafceeb14510e89453e2d
+    Hash: f5b6ec1993ccdcb2a07786bf27b63cf5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4908fa12115d35930b278507ea5b410b
@@ -58,6 +58,7 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/WareHouseL1.png
 - Assets/ArtAssets/UI/BuildUI/UnclickHousingIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL2.png
+- Assets/ArtAssets/UI/BuildUI/BuildingPreview.png
 - Assets/Scenes Assets/BuildingIcon/MarketL3.png
 - Assets/ArtAssets/UI/BuildUI/UnclickRoadIcon.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL2.png

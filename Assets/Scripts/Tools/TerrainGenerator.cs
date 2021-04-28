@@ -286,6 +286,53 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         FlatGround(index, range, targetHeight);
     }
 
+    public void FlatGround(Vector2Int[] grids,float targetHeight)
+    {
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        verticles = mesh.vertices;
+        int length = MapManager.Instance.MapSize.x;
+        int p;
+        for (int i = 0; i < grids.Length; i++)
+        {
+            p = grids[i].y * length + grids[i].x;
+            verticles[4 * p] = ChangeHeight(verticles[4 * p], targetHeight);
+            verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+            verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+            verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+        }
+        Vector2Int start = grids[0];
+        Vector2Int end = grids[grids.Length - 1];
+        for (int i = start.x; i <= end.x; i++)
+        {
+            p = (start.y - 1) * length + i;
+            verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+            verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+            p = (end.y + 1) * length + i;
+            verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+            verticles[4 * p + 0] = ChangeHeight(verticles[4 * p + 0], targetHeight);
+        }
+        for (int i = start.y; i <= end.y; i++)
+        {
+            p = i * length + end.x + 1;
+            verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+            verticles[4 * p + 0] = ChangeHeight(verticles[4 * p + 0], targetHeight);
+            p = i * length + start.x - 1;
+            verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+            verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+        }
+        p = (start.y - 1) * length + start.x - 1;
+        verticles[4 * p + 2] = ChangeHeight(verticles[4 * p + 2], targetHeight);
+        p = (start.y - 1) * length + end.x + 1;
+        verticles[4 * p + 3] = ChangeHeight(verticles[4 * p + 3], targetHeight);
+        p = (end.y + 1) * length + end.x + 1;
+        verticles[4 * p + 0] = ChangeHeight(verticles[4 * p + 0], targetHeight);
+        p = (end.y + 1) * length + start.x - 1;
+        verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
+
+        mesh.vertices = verticles;
+        mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
+    }
     void FlatGround(int index, int range, float targetHeight)
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
