@@ -369,6 +369,7 @@ public class BuildManager : Singleton<BuildManager>
     private bool CheckBuildResourcesEnoughAndUse()
     {
         List<CostResource> rescources = currentBuilding.runtimeBuildData.costResources;
+        rescources.Add(new CostResource(99999, currentBuilding.runtimeBuildData.Price));
         for (int i = 0; i < rescources.Count; i++)
         {
             if (!ResourceManager.Instance.TryUseResource(rescources[i]))

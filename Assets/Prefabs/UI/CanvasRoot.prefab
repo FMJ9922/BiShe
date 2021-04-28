@@ -13888,6 +13888,10 @@ MonoBehaviour:
   _stone: {fileID: 1708258516710672273}
   _food: {fileID: 1708258515256382162}
   _population: {fileID: 1708258515800944851}
+  _deltaMoney: {fileID: 1708258515102880909}
+  _deltaLog: {fileID: 1708258516130585957}
+  _deltaStone: {fileID: 1708258515895640538}
+  _deltaFood: {fileID: 1708258514995985492}
   _mainCanvas: {fileID: 1708258516633703821}
   progress: {fileID: 1708258515939814121}
   _pause: {fileID: 1708258516374025615}

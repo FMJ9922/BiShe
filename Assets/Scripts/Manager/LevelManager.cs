@@ -70,6 +70,7 @@ public class LevelManager : Singleton<LevelManager>
             {
                 Week++;
                 day = value -7;
+                ResourceManager.Instance.RecordLastWeekItem();
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
                 EventManager.TriggerEvent(ConstEvent.OnSettleAccount);

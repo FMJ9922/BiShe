@@ -7,11 +7,12 @@ using TMPro;
 public class HUDCanvas : CanvasBase
 {
     [SerializeField] TMP_Text _date, _money, _log, _stone, _food, _population;
+    [SerializeField] TMP_Text _deltaMoney, _deltaLog, _deltaStone, _deltaFood;
     [SerializeField] GameObject _mainCanvas;
     [SerializeField] private Slider progress;
     [SerializeField] Image _pause;
     [SerializeField] Image[] _scale;
-    private string strMoney, strLog, strStone, strFood, strPopulation;
+    private string strMoney, strLog, strStone, strFood, strPopulation,strWeek;
     private void OnDestroy()
     {
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
@@ -29,6 +30,7 @@ public class HUDCanvas : CanvasBase
         strStone = Localization.ToSettingLanguage("Stone");
         strFood = Localization.ToSettingLanguage("Food");
         strPopulation = Localization.ToSettingLanguage("Population");
+        strWeek = Localization.ToSettingLanguage("Week");
         RefreshResources();
         RefreshPopulation();
         ChangeTimeScaleImage(GameManager.Instance.GetTimeScale());
@@ -112,11 +114,19 @@ public class HUDCanvas : CanvasBase
         float money = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Money"));
         float log = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Log"));
         float stone = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Stone"));
-        float food = ResourceManager.Instance.TryGetResourceTotalNum(DataManager.GetFoodIDList());
+        float food = ResourceManager.Instance.GetAllFoodNum();
+        float deltaMoney = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Money"));
+        float deltaLog = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Log"));
+        float deltaStone = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Stone"));
+        float deltaFood = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Food"));
         _money.text = string.Format("{1}", strMoney, money);
         _log.text = string.Format("{1}", strLog, log);
         _stone.text = string.Format("{1}", strStone, stone);
         _food.text = string.Format("{1}", strFood, food);
+        _deltaMoney.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaMoney), strWeek,deltaMoney>=0?"+":"-");
+        _deltaLog.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaLog), strWeek, deltaLog >= 0 ? "+" : "-");
+        _deltaStone.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaStone), strWeek, deltaStone >= 0 ? "+" : "-");
+        _deltaFood.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaFood), strWeek, deltaFood >= 0 ? "+" : "-");
     }
 
     public void RefreshPopulation()

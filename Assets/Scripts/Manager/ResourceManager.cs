@@ -12,6 +12,11 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     private Dictionary<int, float> _storedItemDic = new Dictionary<int, float>();
 
+    /// <summary>
+    /// 上周结束时候的物品
+    /// </summary>
+    private Dictionary<int, float> _lastItemDic = new Dictionary<int, float>();
+
     private int curPopulation = 0;
     private int maxPopulation = 0;
     public int MaxPopulation { get { return maxPopulation; } }
@@ -27,6 +32,7 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
         AddResource(DataManager.GetItemIdByName("Money"), data.money);
         AddResource(DataManager.GetItemIdByName("Stone"), data.stone);
+        RecordLastWeekItem();
     }
 
     /// <summary>
@@ -55,6 +61,24 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
         }
+    }
+
+    public void RecordLastWeekItem()
+    {
+        _lastItemDic.Clear();
+        foreach (var pair in _storedItemDic)
+        {
+            _lastItemDic.Add(pair.Key, pair.Value);
+        }
+    }
+
+    public float GetWeekDeltaNum(int id)
+    {
+        if(id == 11000)
+        {
+            return GetAllFoodNum() - GetAllLastFoodNum();
+        }
+        else return TryGetResourceNum(id) - TryGetLastResourceNum(id);
     }
 
     /// <summary>
@@ -90,6 +114,20 @@ public class ResourceManager : Singleton<ResourceManager>
         float storedNum;
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
+            return storedNum;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public float TryGetLastResourceNum(int Id)
+    {
+        float storedNum;
+        if (_lastItemDic.TryGetValue(Id, out storedNum))
+        {
+            Debug.Log(Id + " " + storedNum);
             return storedNum;
         }
         else
@@ -135,6 +173,27 @@ public class ResourceManager : Singleton<ResourceManager>
             Debug.Log("不存在物品：" + Id);
             return false;//不存在该物品就返回失败
         }
+    }
+    public float GetAllFoodNum()
+    {
+        int[] foodIds = DataManager.GetFoodIDList();
+        float sum = 0;
+        for (int i = 0; i < foodIds.Length; i++)
+        {
+            sum += TryGetResourceNum(foodIds[i]);
+        }
+        return sum;
+    }
+
+    public float GetAllLastFoodNum()
+    {
+        int[] foodIds = DataManager.GetFoodIDList();
+        float sum = 0;
+        for (int i = 0; i < foodIds.Length; i++)
+        {
+            sum += TryGetLastResourceNum(foodIds[i]);
+        }
+        return sum;
     }
 
     public CostResource TryUseUpResource(CostResource costResource)
