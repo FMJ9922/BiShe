@@ -34,7 +34,6 @@ public class BuildingBase : MonoBehaviour
 
     protected FormulaData formula = new FormulaData();
 
-    public GameObject parking;//停车的位置
 
     public Vector2Int parkingGridIn;
     public Vector2Int parkingGridOut;
@@ -82,7 +81,7 @@ public class BuildingBase : MonoBehaviour
                 return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
 
         }*/
-        return MapManager.GetCenterGrid(parking.transform.position);
+        return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.x/2+0.5f));
     }
     /// <summary>
     /// 建造完后初始化建筑功能

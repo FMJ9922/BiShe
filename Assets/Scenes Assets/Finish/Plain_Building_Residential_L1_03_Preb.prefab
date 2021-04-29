@@ -34,7 +34,6 @@ Transform:
   - {fileID: 2868052703499083397}
   - {fileID: 7526864168822055028}
   - {fileID: 4333860941450148819}
-  - {fileID: 7398866885234047292}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -71,7 +70,6 @@ MonoBehaviour:
   body: {fileID: 3208407985656759359}
   buildFlag: 0
   takenGrids: []
-  parking: {fileID: 8978869022186822607}
   parkingGridIn: {x: 0, y: 0}
   parkingGridOut: {x: 0, y: 0}
   direction: 0
@@ -103,36 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &8978869022186822607
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7398866885234047292}
-  m_Layer: 0
-  m_Name: Parking
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7398866885234047292
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978869022186822607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: -3.22}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6958132340424998054}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3921900862721761442
 PrefabInstance:
   m_ObjectHideFlags: 0

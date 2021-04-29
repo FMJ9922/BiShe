@@ -55,6 +55,8 @@ MonoBehaviour:
   carType: 0
   isbraking: 0
   carSensor: {fileID: 1790807950924337522}
+  leftWheel: {fileID: 0}
+  rightWheel: {fileID: 0}
 --- !u!54 &1510299252163103628
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 864030834142851308, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 864030834142851308, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
@@ -104,11 +106,16 @@ PrefabInstance:
     - target: {fileID: 864030834142851308, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 864030834142851308, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 864030834142851308, guid: cf86062e948ffec46a6b518c6ebc0347,
+        type: 3}
+      propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3598093236258417659, guid: cf86062e948ffec46a6b518c6ebc0347,
@@ -174,7 +181,7 @@ PrefabInstance:
     - target: {fileID: 8112289859755663748, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8112289859755663748, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
@@ -184,11 +191,16 @@ PrefabInstance:
     - target: {fileID: 8112289859755663748, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8112289859755663748, guid: cf86062e948ffec46a6b518c6ebc0347,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112289859755663748, guid: cf86062e948ffec46a6b518c6ebc0347,
+        type: 3}
+      propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

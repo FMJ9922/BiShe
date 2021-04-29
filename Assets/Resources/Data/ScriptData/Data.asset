@@ -255,7 +255,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: L1_Farm001
+    PfbName: Universal_Building_Farm_L1_01_Preb
     tabType: 2
     Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
@@ -634,7 +634,7 @@ MonoBehaviour:
     ProductTime: 3
   - ID: 50008
     Describe: "\u751F\u8089\u9762\u7C89\u4EA7\u9999\u80A0"
-    InputItemID: f92a0000fd2a0000
+    InputItemID: e62e0000fd2a0000
     InputNum: 0a00000005000000
     OutputItemID: 022b0000
     ProductNum: 0d000000
@@ -832,3 +832,6 @@ MonoBehaviour:
     - code: Government
       chinese: "\u653F\u5E9C"
       english: Government
+    - code: 
+      chinese: 
+      english: 

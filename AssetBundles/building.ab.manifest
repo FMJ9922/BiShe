@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2443912416
+CRC: 1572998818
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9a846268afb0920903ad4a9e4eb06572
+    Hash: 29f4085baa1c5c15fdabbc328c052fd8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ac4fb85618277ab1a8314bbdbeb658c5
+    Hash: a23a13063b5fff3e72ae609954d46010
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -126,6 +126,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_04_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_03_Mod.fbx
 - Assets/ArtAssets/Particle/ParticleFactory.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_03_Mod.fbx

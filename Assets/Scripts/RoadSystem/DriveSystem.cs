@@ -19,6 +19,7 @@ public class DriveSystem : MonoBehaviour
     public CarSensor carSensor;
     public UnityAction action = null;
     private bool isForward = true;
+    [SerializeField] Transform leftWheel, rightWheel;
     private void Start()
     {
         carSensor.OnBrake += () => isbraking = true;

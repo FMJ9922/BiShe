@@ -127,7 +127,7 @@ public class ResourceManager : Singleton<ResourceManager>
         float storedNum;
         if (_lastItemDic.TryGetValue(Id, out storedNum))
         {
-            Debug.Log(Id + " " + storedNum);
+            //Debug.Log(Id + " " + storedNum);
             return storedNum;
         }
         else

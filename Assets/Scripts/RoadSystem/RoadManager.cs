@@ -242,7 +242,7 @@ public class RoadManager : Singleton<RoadManager>
         }
         else
         {
-            Debug.Log("路径字典里没有该节点");
+            Debug.Log("路径字典里没有该节点"+ grid);
         }
     }
 

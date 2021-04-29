@@ -55,7 +55,6 @@ MonoBehaviour:
   body: {fileID: 2523193626720690671}
   buildFlag: 0
   takenGrids: []
-  parking: {fileID: 0}
   parkingGridIn: {x: 0, y: 0}
   parkingGridOut: {x: 0, y: 0}
   direction: 0
