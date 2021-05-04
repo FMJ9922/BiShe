@@ -21,42 +21,42 @@ MonoBehaviour:
   - Id: 11001
     Name: Wheat
     ItemType: 1
-    Price: 12
+    Price: 2
     BuildingID: 0
   - Id: 11002
     Name: Rice
     ItemType: 1
-    Price: 12
+    Price: 2
     BuildingID: 0
   - Id: 12003
     Name: Log
     ItemType: 2
-    Price: 16
+    Price: 4
     BuildingID: 0
   - Id: 12004
     Name: Timber
     ItemType: 2
-    Price: 28
+    Price: 6
     BuildingID: 0
   - Id: 11005
     Name: RawMeat
     ItemType: 1
-    Price: 18
+    Price: 3
     BuildingID: 0
   - Id: 12006
     Name: Flour
     ItemType: 2
-    Price: 25
+    Price: 3
     BuildingID: 0
   - Id: 11008
     Name: ProcessedMeat
     ItemType: 1
-    Price: 30
+    Price: 4
     BuildingID: 0
   - Id: 12009
     Name: Stone
     ItemType: 2
-    Price: 2
+    Price: 3
     BuildingID: 0
   - Id: 10000
     Name: HumanResource
@@ -71,7 +71,7 @@ MonoBehaviour:
   - Id: 11010
     Name: Sausage
     ItemType: 1
-    Price: 32
+    Price: 4
     BuildingID: 0
   LevelArray:
   - Id: 30001
@@ -138,9 +138,9 @@ MonoBehaviour:
     Price: 60
     costResources:
     - ItemId: 12003
-      ItemNum: 5
+      ItemNum: 10
     - ItemId: 12009
-      ItemNum: 5
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_03_Preb
     tabType: 1
@@ -158,7 +158,7 @@ MonoBehaviour:
     RearBuildingId: 20018
     Length: 3
     Width: 3
-    Price: 5
+    Price: 2
     costResources:
     - ItemId: 12003
       ItemNum: 1
@@ -174,7 +174,7 @@ MonoBehaviour:
     Name: Warehouse
     CostPerWeek: 5
     Formulas: 
-    Population: 6
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 0
@@ -197,19 +197,19 @@ MonoBehaviour:
     Name: Bazaar
     CostPerWeek: 10
     Formulas: 
-    Population: 15
+    Population: 12
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
     RearBuildingId: 20012
     Length: 12
     Width: 14
-    Price: 300
+    Price: 210
     costResources:
     - ItemId: 12003
-      ItemNum: 50
+      ItemNum: 35
     - ItemId: 12009
-      ItemNum: 30
+      ItemNum: 35
     BundleName: building.ab
     PfbName: Universal_Building_Market_L1_01_Preb
     tabType: 4
@@ -230,7 +230,7 @@ MonoBehaviour:
     Price: 12
     costResources:
     - ItemId: 12003
-      ItemNum: 5
+      ItemNum: 3
     BundleName: building.ab
     PfbName: Universal_Building_Farmland_L1_01_Preb
     tabType: 2
@@ -241,7 +241,7 @@ MonoBehaviour:
     Name: LivestockFarm
     CostPerWeek: 3
     Formulas: 51c3000052c30000
-    Population: 8
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 30
     FrontBuildingId: 0
@@ -251,9 +251,9 @@ MonoBehaviour:
     Price: 150
     costResources:
     - ItemId: 12003
-      ItemNum: 40
+      ItemNum: 25
     - ItemId: 12009
-      ItemNum: 35
+      ItemNum: 25
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L1_01_Preb
     tabType: 2
@@ -264,14 +264,14 @@ MonoBehaviour:
     Name: Workshop
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
-    Population: 12
+    Population: 15
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 0
     RearBuildingId: 20010
     Length: 4
     Width: 6
-    Price: 240
+    Price: 300
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -287,7 +287,7 @@ MonoBehaviour:
     Name: LoggingCamps
     CostPerWeek: 4
     Formulas: 59c30000
-    Population: 9
+    Population: 8
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
     Price: 120
     costResources:
     - ItemId: 12003
-      ItemNum: 35
+      ItemNum: 20
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
@@ -310,7 +310,7 @@ MonoBehaviour:
     Name: Large residential
     CostPerWeek: 0
     Formulas: 5ac30000
-    Population: -10
+    Population: -15
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20001
@@ -320,9 +320,9 @@ MonoBehaviour:
     Price: 90
     costResources:
     - ItemId: 12003
-      ItemNum: 5
+      ItemNum: 12
     - ItemId: 12009
-      ItemNum: 5
+      ItemNum: 12
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_02_Preb
     tabType: 1
@@ -333,7 +333,7 @@ MonoBehaviour:
     Name: Factory
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
-    Population: 12
+    Population: 18
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 20007
@@ -356,7 +356,7 @@ MonoBehaviour:
     Name: Integrated mill
     CostPerWeek: 8
     Formulas: 53c3000054c3000055c3000058c30000
-    Population: 12
+    Population: 20
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 20010
@@ -379,7 +379,7 @@ MonoBehaviour:
     Name: Market
     CostPerWeek: 10
     Formulas: 
-    Population: 15
+    Population: 16
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 20004
@@ -402,7 +402,7 @@ MonoBehaviour:
     Name: Shopping Mall
     CostPerWeek: 10
     Formulas: 
-    Population: 15
+    Population: 23
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 20012
@@ -425,7 +425,7 @@ MonoBehaviour:
     Name: LoggingCamps
     CostPerWeek: 4
     Formulas: 59c30000
-    Population: 9
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 20008
@@ -448,7 +448,7 @@ MonoBehaviour:
     Name: LoggingCamps
     CostPerWeek: 4
     Formulas: 59c30000
-    Population: 9
+    Population: 11
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 20014
@@ -471,7 +471,7 @@ MonoBehaviour:
     Name: Warehouse Lv3
     CostPerWeek: 5
     Formulas: 
-    Population: 6
+    Population: 12
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 20003
@@ -494,7 +494,7 @@ MonoBehaviour:
     Name: Warehouse Lv3
     CostPerWeek: 5
     Formulas: 
-    Population: 6
+    Population: 15
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 20016
