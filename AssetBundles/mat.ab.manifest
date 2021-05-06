@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2110147093
+CRC: 13041704
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 959bf39f1dc52215357f705294c0e03c
+    Hash: 52e943aa3ce7861e7741d45344a56eea
   TypeTreeHash:
     serializedVersion: 2
     Hash: 21c99c86a43ad817b2cb7f65458ae090
@@ -49,6 +49,7 @@ Assets:
 - Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
 - Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/Scenes Assets/Material/Universal_Plant_Wheat_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_Bridge_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
 - Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
