@@ -42,7 +42,7 @@ public class InfoCanvas : CanvasBase
         _dropDown.onValueChanged.AddListener(OnDropDownValueChanged);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
         BuildingHighlight.transform.position = buildbase.transform.position;
-        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.x*2, 10, buildbase.Size.y*2);
+        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y*2, 10, buildbase.Size.x*2);
         BuildingHighlight.transform.rotation = buildbase.transform.rotation;
         BuildingHighlight.SetActive(true);
 

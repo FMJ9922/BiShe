@@ -352,7 +352,7 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 ground = MapManager.GetTerrainPosition(startPos);
         while (start.y-ground.y > 0)
         {
-            down += -Vector3.down * 20F * Time.deltaTime;
+            down += -Vector3.down * 30F * Time.deltaTime;
             start -= down * Time.deltaTime;
             currentBuilding.transform.position = start;
             yield return 0;
@@ -364,7 +364,8 @@ public class BuildManager : Singleton<BuildManager>
     {
         dustParticle.gameObject.SetActive(true);
         dustParticle.transform.position = currentBuilding.transform.position;
-        dustParticle.transform.localScale = new Vector3(currentBuilding.Size.x / 2, currentBuilding.Size.x / 4 + currentBuilding.Size.y / 4, currentBuilding.Size.y / 2);
+        dustParticle.transform.rotation = currentBuilding.transform.rotation;
+        dustParticle.transform.localScale = new Vector3(currentBuilding.Size.y / 2, currentBuilding.Size.x / 4 + currentBuilding.Size.y / 4, currentBuilding.Size.x / 2);
         dustParticle.Play();
     }
 
