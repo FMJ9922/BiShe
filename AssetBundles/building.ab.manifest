@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 942563440
+CRC: 2063351777
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4ece22d4cc8a6c9ef45d27498c1c8cc2
+    Hash: dceab6a7afe86bc9b7d7f0f8eb882e8f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a23a13063b5fff3e72ae609954d46010
+    Hash: d8249f18fdb823088d374fab6d6506c7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -33,14 +33,18 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
 - Class: 111
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
+  Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: c4ce140af63ea254ea5ac2f988335745, type: 3}
+  Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
 - Class: 114
@@ -58,6 +62,10 @@ ClassTypes:
 - Class: 198
   Script: {instanceID: 0}
 - Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
   Script: {instanceID: 0}
 Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
@@ -151,5 +159,4 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_01_Mod.fbx
 Dependencies:
-- D:/UnityProjects/BiShe/AssetBundles/plant.ab
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab

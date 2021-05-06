@@ -194,6 +194,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
         uv[4 * index + (3 + dir) % 4] = new Vector2((x / length) + adjust, ((length - h) / length) - adjust);
         mesh.uv = uv;
+    }
+
+    public void ReCalculateNormal()
+    {
+        mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         mesh.RecalculateNormals();
     }
     /// <summary>

@@ -9,6 +9,10 @@ public class LevelManager : Singleton<LevelManager>
     private float dayTime = 5f;
     public static int LevelID = 30003;
     private int year, month, week,day;
+    public float DayTime
+    {
+        get => dayTime;
+    }
     public int Year
     {
         get

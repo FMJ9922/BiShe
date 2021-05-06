@@ -60,12 +60,13 @@ public class MapManager : Singleton<MapManager>
     /// <summary>
     /// 刷地基
     /// </summary>
-    public void BuildFoundation(Vector2Int[] takenGirds, int tex)
+    public void BuildFoundation(Vector2Int[] takenGirds, int tex,int dir = 0 )
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
-            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x);
+            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x,dir);
         }
+        generator.ReCalculateNormal();
     }
     public void BuildOutCornerRoad(int level, int index, Direction direction)
     {
@@ -103,6 +104,7 @@ public class MapManager : Singleton<MapManager>
                     BuildOutCornerRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
             }
+            generator.ReCalculateNormal();
         }
 
     }

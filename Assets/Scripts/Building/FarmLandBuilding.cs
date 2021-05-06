@@ -28,8 +28,10 @@ public class FarmLandBuilding : BuildingBase
             grids[i] = newGrid;
             newGrid.transform.position = MapManager.GetTerrainPosition(takenGrids[i]);
             newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction-1), Space.Self);
+            //Animator animator = newGrid.GetComponentInChildren<Animator>();
+            //animator.Play("WheatGrow");
         }
-        wheatTrans.localPosition = new Vector3(0, -0.8f, 0);
+        wheatTrans.localPosition = Vector3.zero;
     }
     protected override void Output()
     {
@@ -38,7 +40,6 @@ public class FarmLandBuilding : BuildingBase
         {
             productTime--;
             float progress = (float)productTime / formula.ProductTime;
-            wheatTrans.localPosition = new Vector3(0, -0.7f * progress, 0);
             if (productTime <= 0)
             {
                 for (int i = 0; i < formula.OutputItemID.Count; i++)

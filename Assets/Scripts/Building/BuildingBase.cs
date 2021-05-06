@@ -53,7 +53,7 @@ public class BuildingBase : MonoBehaviour
         parkingGridIn = InitParkingGrid();
         if (runtimeBuildData.Id == 20005)
         {
-            MapManager.Instance.BuildFoundation(vector2Ints, 2);
+            MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
         }
         else
         {
@@ -67,8 +67,8 @@ public class BuildingBase : MonoBehaviour
         body.SetActive(false);
         animation.gameObject.SetActive(true);
         float time = animation.clip.length;
-        Invoke("ShowBody", time * 1.25f);
-        animation["Take 001"].speed = 0.8f;
+        Invoke("ShowBody", time);
+        animation["Take 001"].speed = 1f;
         animation.Play();
     }
     private Vector2Int InitParkingGrid()
