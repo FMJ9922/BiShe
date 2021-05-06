@@ -48,12 +48,7 @@ public class BuildingBase : MonoBehaviour
         takenGrids = vector2Ints;
         if (hasAnima)
         {
-            body.SetActive(false);
-            animation.gameObject.SetActive(true);
-            float time = animation.clip.length;
-            Invoke("ShowBody", time * 1.25f);
-            animation["Take 001"].speed = 0.8f;
-            animation.Play();
+            Invoke("PlayAnim",0.2f);
         }
         parkingGridIn = InitParkingGrid();
         if (runtimeBuildData.Id == 20005)
@@ -67,6 +62,15 @@ public class BuildingBase : MonoBehaviour
         InitBuildingFunction();
     }
 
+    private void PlayAnim()
+    {
+        body.SetActive(false);
+        animation.gameObject.SetActive(true);
+        float time = animation.clip.length;
+        Invoke("ShowBody", time * 1.25f);
+        animation["Take 001"].speed = 0.8f;
+        animation.Play();
+    }
     private Vector2Int InitParkingGrid()
     {
         /*switch (direction)

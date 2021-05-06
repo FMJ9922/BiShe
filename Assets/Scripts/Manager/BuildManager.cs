@@ -17,6 +17,8 @@ public class BuildManager : Singleton<BuildManager>
     private TerrainGenerator terrainGenerator;
     [SerializeField]
     private GameObject preRoadPfb;
+    [SerializeField]
+    private ParticleSystem dustParticle;
 
     //修建筑相关
     private BuildingBase currentBuilding;
@@ -25,6 +27,7 @@ public class BuildManager : Singleton<BuildManager>
     private Vector2Int[] targetGrids;
     private Vector2Int lastGrid;
     private Material[] mats;
+    private Vector3 hidePos = new Vector3(0, -100, 0);
 
     //修路相关
     private Vector3 roadStartPos;//道路建造起始点
@@ -332,16 +335,37 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            float targetHeight = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn).y;
+            Vector3 targetPos = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn);
+            float targetHeight = targetPos.y;
             terrainGenerator.FlatGround(currentBuilding.takenGrids,targetHeight);
-            //for (int i = 0; i < targetGrids.Length; i++)
-            //{
-            //    Debug.Log(MapManager.Instance.GetTerrainPosition(targetGrids[i]));
-            //}
-            //MapManager.Instance.ShowGrid(targetGrids);
+            currentBuilding.transform.position += Vector3.up * 10;
             RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
             WhenFinishBuild();
+            StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
         }
+    }
+
+    private IEnumerator PushDownBuilding(Vector3 startPos)
+    {
+        Vector3 start = startPos;
+        Vector3 down = Vector3.down;
+        Vector3 ground = MapManager.GetTerrainPosition(startPos);
+        while (start.y-ground.y > 0)
+        {
+            down += -Vector3.down * 20F * Time.deltaTime;
+            start -= down * Time.deltaTime;
+            currentBuilding.transform.position = start;
+            yield return 0;
+        }
+        currentBuilding.transform.position = ground;
+        PlayAnim();
+    }
+    private void PlayAnim()
+    {
+        dustParticle.gameObject.SetActive(true);
+        dustParticle.transform.position = currentBuilding.transform.position;
+        dustParticle.transform.localScale = new Vector3(currentBuilding.Size.x / 2, currentBuilding.Size.x / 4 + currentBuilding.Size.y / 4, currentBuilding.Size.y / 2);
+        dustParticle.Play();
     }
 
     public void UpgradeBuilding(BuildData buildData,Vector3 pos,Quaternion quaternion,out bool success)
@@ -411,7 +435,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             mats[i].color = Color.white;
         }
-        currentBuilding = null;
+        //currentBuilding = null;
         targetGrids = null;
         IsInBuildMode = false;
     }

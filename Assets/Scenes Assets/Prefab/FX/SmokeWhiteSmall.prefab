@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 19857662}
   - component: {fileID: 19955732}
   m_Layer: 0
-  m_Name: SmokeWhiteSoft
+  m_Name: SmokeWhiteSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -793,7 +793,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
