@@ -125,9 +125,13 @@ public enum TimeScale
 
 public enum TransportationType
 {
+    [Description("Van")]
     van = 0,
+    [Description("MiniTruck")]
     mini = 1,
+    [Description("MediumTruck")]
     medium = 2,
+    [Description("Harvester")]
     harvester = 3,
 }
 

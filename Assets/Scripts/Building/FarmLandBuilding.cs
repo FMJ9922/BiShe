@@ -83,7 +83,7 @@ public class FarmLandBuilding : BuildingBase
         productTime = formula.ProductTime;
         InitWheatGrids();
         CarMission carMission = MakeCarMission(rate);
-        TrafficManager.Instance.UseCar(TransportationType.mini, carMission,
+        TrafficManager.Instance.UseCar(carMission,
             () => carMission.EndBuilding.OnRecieveCar(carMission));
     }
     /// <summary>
@@ -96,11 +96,11 @@ public class FarmLandBuilding : BuildingBase
         //Debug.Log(rate);
         CarMission mission = new CarMission();
         mission.StartBuilding = this;
-        mission.transportationType = TransportationType.van;
         mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
         mission.missionType = CarMissionType.transportResources;
         mission.isAnd = true;
         mission.transportResources = new List<CostResource>();
+        mission.transportationType = TransportationType.mini;
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);

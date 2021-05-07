@@ -19,7 +19,13 @@ public class DriveSystem : MonoBehaviour
     public CarSensor carSensor;
     public UnityAction action = null;
     private bool isForward = true;
+
+    public delegate void ArriveDestination();
+    public ArriveDestination OnArriveDestination;
+
     [SerializeField] Transform leftWheel, rightWheel;
+
+    public CarMission CurMission { get; private set; }
     private void Start()
     {
         carSensor.OnBrake += () => isbraking = true;
@@ -32,7 +38,16 @@ public class DriveSystem : MonoBehaviour
             action.Invoke();
         }
     }
-    
+
+    public void SetCarMission(CarMission carMission)
+    {
+        CurMission = carMission;
+    }
+
+    public void ClearCarMission()
+    {
+        CurMission = null;
+    }
     public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction _callBack = null)
     {
         //Debug.Log("startDrive");
@@ -244,7 +259,13 @@ public class DriveSystem : MonoBehaviour
     }
     private void DriveStop(UnityAction callBack)
     {
+
+        ClearCarMission();
         //Debug.Log("停车"+(callBack!=null).ToString());
+        if (OnArriveDestination != null)
+        {
+            OnArriveDestination();
+        }
         action = null;
         callBack.Invoke();
         callBack = null;

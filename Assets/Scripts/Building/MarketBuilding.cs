@@ -22,7 +22,7 @@ public class MarketBuilding : BuildingBase
                 BuildRecievedCarMission(carMission);
                 CarMission car = carMission;
                 void ac() { car.EndBuilding.OnRecieveCar(car); }
-                TrafficManager.Instance.UseCar(car.transportationType, car, ac, DriveType.once);
+                TrafficManager.Instance.UseCar(car, ac, DriveType.once);
                 break;
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
@@ -42,6 +42,16 @@ public class MarketBuilding : BuildingBase
             case CarMissionType.requestResources:
                 carMission.missionType = CarMissionType.transportResources;
                 carMission.transportResources = new List<CostResource>();
+
+                if (carMission.requestResources[0].ItemId == 11000)
+                {
+                    int[] foodlist = DataManager.GetFoodIDList();
+                    for (int i = 0; i < foodlist.Length; i++)
+                    {
+                        carMission.requestResources.Add(new CostResource(foodlist[i], carMission.requestResources[i].ItemNum));
+                    }
+                    carMission.requestResources.RemoveAt(0);
+                }
                 foreach (var request in carMission.requestResources)
                 {
                     CostResource transport = ResourceManager.Instance.TryUseUpResource(request);

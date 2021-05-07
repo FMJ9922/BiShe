@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3820493860026773887}
   m_Layer: 0
   m_Name: Universal_Transportation_MediumTruck_01_Preb
-  m_TagString: Untagged
+  m_TagString: car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,8 @@ MonoBehaviour:
   carType: 2
   isbraking: 0
   carSensor: {fileID: 8437076106973260870}
+  leftWheel: {fileID: 0}
+  rightWheel: {fileID: 0}
 --- !u!65 &1821063540264867858
 BoxCollider:
   m_ObjectHideFlags: 0

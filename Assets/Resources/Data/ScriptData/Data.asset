@@ -648,8 +648,8 @@ MonoBehaviour:
     ProductTime: 1
   - ID: 50010
     Describe: "\u4F4F\u623F\u63D0\u4F9B\u4EBA\u53E3"
-    InputItemID: f92a0000fa2a0000
-    InputNum: 0100000001000000
+    InputItemID: f82a0000
+    InputNum: 01000000
     OutputItemID: 
     ProductNum: 
     ProductTime: 1
@@ -832,6 +832,21 @@ MonoBehaviour:
     - code: Government
       chinese: "\u653F\u5E9C"
       english: Government
-    - code: 
-      chinese: 
-      english: 
+    - code: Van
+      chinese: "\u9762\u5305\u8F66"
+      english: Van
+    - code: MiniTruck
+      chinese: "\u5C0F\u578B\u8D27\u8F66"
+      english: MiniTruck
+    - code: MediumTruck
+      chinese: "\u4E2D\u578B\u8D27\u8F66"
+      english: MediumTruck
+    - code: Goods
+      chinese: "\u8D27\u7269"
+      english: Goods
+    - code: Request
+      chinese: "\u8BF7\u6C42"
+      english: Request
+    - code: Transport
+      chinese: "\u8FD0\u8F93"
+      english: Transport

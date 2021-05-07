@@ -21,6 +21,7 @@ public class ConstEvent
 
     #region 交互事件
     public const string OnTriggerInfoPanel = "OnTriggerInfoPanel";//点击建筑显示详细面板
+    public const string OnTriggerCarMissionPanel = "OnTriggerCarMissionPanel";//点击车辆详情面板
     #endregion
 
     #region 时间倍速事件

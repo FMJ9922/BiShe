@@ -57,6 +57,12 @@ public class MainInteractCanvas : CanvasBase
         canvas[4].OnOpen();
     }
 
+    public void OpenCarMissionCanvas(GameObject car)
+    {
+        CarMissionCanvas carCanvas = (CarMissionCanvas)canvas[5];
+        carCanvas.OnOpen(car);
+    }
+
     private void CloseAllOpenedUI()
     {
         foreach (var item in canvas)

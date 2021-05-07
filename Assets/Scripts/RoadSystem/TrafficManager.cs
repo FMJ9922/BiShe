@@ -21,6 +21,7 @@ public class TrafficManager : Singleton<TrafficManager>
     public List<GameObject> FakeRoute2;
     public List<GameObject> FakeRoute3;
     public List<GameObject> FakeRoute4;
+
     enum FindRoadState
     {
         straight = 0,//在笔直的路上走
@@ -45,14 +46,15 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return lists;
     }
-    public void UseCar(TransportationType type, CarMission mission, UnityAction unityAction,DriveType driveType = DriveType.once)
+    public void UseCar(CarMission mission, UnityAction unityAction,DriveType driveType = DriveType.once)
     {
-        DriveSystem driveSystem = GetCarFromPool(type);
+        DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
         Vector2Int start = mission.StartBuilding.parkingGridIn;
         Vector2Int end = mission.EndBuilding.parkingGridIn;
         //Debug.Log(start+" "+end);
         List<Vector3> wayPoints = RoadManager.Instance.GetWayPoints(start, end);
         //Debug.Log(wayPoints.Count);
+        driveSystem.SetCarMission(mission);
         driveSystem.StartDriving(wayPoints, driveType, () => {  RecycleCar(driveSystem); unityAction.Invoke(); });
     }
 

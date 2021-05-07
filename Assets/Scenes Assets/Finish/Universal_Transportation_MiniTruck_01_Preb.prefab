@@ -55,6 +55,8 @@ MonoBehaviour:
   carType: 1
   isbraking: 0
   carSensor: {fileID: 2686114127624289780}
+  leftWheel: {fileID: 0}
+  rightWheel: {fileID: 0}
 --- !u!65 &8874560670781328658
 BoxCollider:
   m_ObjectHideFlags: 0

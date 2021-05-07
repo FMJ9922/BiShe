@@ -89,9 +89,9 @@ public partial class InputManager : Singleton<InputManager>
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
+        if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject() && !BuildManager.IsInBuildMode)
         {
-            if (hit.collider.CompareTag("Building") && !BuildManager.IsInBuildMode)
+            if (hit.collider.CompareTag("Building"))
             {
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
@@ -104,6 +104,14 @@ public partial class InputManager : Singleton<InputManager>
                 else if(buildingBase.runtimeBuildData.Id == 20004)
                 {
                     MainInteractCanvas.Instance.OpenMarketCanvas();
+                }
+            }
+            else if (hit.collider.CompareTag("car"))
+            {
+                CarMission carMission = hit.collider.gameObject.GetComponent<DriveSystem>().CurMission;
+                if (carMission != null)
+                {
+                    MainInteractCanvas.Instance.OpenCarMissionCanvas(hit.collider.gameObject);
                 }
             }
         }
