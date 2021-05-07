@@ -35,7 +35,10 @@ public class RoadManager : Singleton<RoadManager>
             RoadNode node = new RoadNode(mapData.roadGrids[i].Vector2Int);
             node.Clear();
             RoadNodes.Add(node);
-            RoadNodeDic.Add(mapData.roadGrids[i].Vector2Int, node);
+            if (!RoadNodeDic.TryGetValue(mapData.roadGrids[i].Vector2Int,out var value))
+            {
+                RoadNodeDic.Add(mapData.roadGrids[i].Vector2Int, node);
+            }
         }
         //连接所有的节点
         for (int i = 0; i < mapData.roadGrids.Count; i++)

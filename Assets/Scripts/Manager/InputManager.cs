@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public partial class InputManager : Singleton<InputManager>
 {
@@ -88,7 +89,7 @@ public partial class InputManager : Singleton<InputManager>
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject())
         {
             if (hit.collider.CompareTag("Building") && !BuildManager.IsInBuildMode)
             {

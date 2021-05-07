@@ -6240,8 +6240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd43369a891441a42bbdb4efb45a7e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainInteractCanvas: {fileID: 0}
-  WeekProgress: 0
+  MainInteractCanvas: {fileID: 1341735457}
 --- !u!4 &286110535
 Transform:
   m_ObjectHideFlags: 0
@@ -26520,6 +26519,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b34d3363f4e73774e8cc0e6f81bc5876, type: 3}
+--- !u!114 &1341735457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1708258516578917928, guid: b34d3363f4e73774e8cc0e6f81bc5876,
+    type: 3}
+  m_PrefabInstance: {fileID: 1341735456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 143f1557bd2390f47a9bf1b821029dc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1347173533
 GameObject:
   m_ObjectHideFlags: 0
@@ -36008,6 +36019,7 @@ MonoBehaviour:
   terrainGenerator: {fileID: 659015413}
   preRoadPfb: {fileID: 3342934139086659062, guid: 3cdb461cb1c13db468616a877c3225a1,
     type: 3}
+  dustParticle: {fileID: 0}
 --- !u!4 &1956273487
 Transform:
   m_ObjectHideFlags: 0
