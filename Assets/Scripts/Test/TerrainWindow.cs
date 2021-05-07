@@ -15,6 +15,7 @@ public class TerrainWindow : EditorWindow
     int range = 0;
     int height = 0;
     int triDir = 0;
+    int temp = 0;
     bool isShow = false;
     private int buildRoadState;//cancel = 0,waitEnterStartPos = 1,waitEnterEndPos =2,waitEnterConfirm = 3.
     public delegate void Paint();
@@ -72,7 +73,14 @@ public class TerrainWindow : EditorWindow
             {
                 if (canPaint)
                 {
-                    gen.OnPaint(index, hit.point, dir, brushSize);
+                    if(temp == 0)
+                    {
+                        gen.OnPaint(index, hit.point, 4, brushSize);
+                    }
+                    else
+                    {
+                        gen.OnPaint(index, hit.point, dir, brushSize);
+                    }
                 }
                 else if (canDir)
                 {
@@ -95,10 +103,12 @@ public class TerrainWindow : EditorWindow
                                                           "4", "5", "6", "7",
                                                           "8", "9", "10", "11",
                                                           "12", "13", "14", "15"});
-        //GUILayout.Label("选择方向");
-        //dir = GUILayout.Toolbar(dir, new string[5] { "下", "右", "上", "左", "99" });
+        GUILayout.Label("是否随机方向");
+        
+        temp = GUILayout.Toolbar(temp, new string[2] { "是", "否" });
         GUILayout.Label("选择笔刷大小");
         brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "3", "5" });
+
         if (GUILayout.Button("涂色"))
         {
             canPaint = true;

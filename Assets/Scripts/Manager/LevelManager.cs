@@ -87,7 +87,7 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     private float Timer = 0;
-    public float WeekProgress = 0;
+    private float WeekProgress = 0;
     private string yearstr, monthstr, weekstr, daystr;
     private string LogDate()
     {
@@ -96,7 +96,10 @@ public class LevelManager : Singleton<LevelManager>
         return date;
         
     }
-
+    public float GetWeekProgress()
+    {
+        return WeekProgress;
+    }
     private void AddDay(out string date)
     {
         Day++;

@@ -107,7 +107,7 @@ public class HUDCanvas : CanvasBase
 
     public void RefreshSliderValue()
     {
-        progress.value =LevelManager.Instance.WeekProgress;
+        progress.value =LevelManager.Instance.GetWeekProgress();
     }
     public void RefreshResources()
     {
