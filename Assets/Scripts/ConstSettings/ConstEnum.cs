@@ -135,4 +135,5 @@ public enum CarMissionType
 {
     requestResources = 0,//请求物资
     transportResources = 1,//运输物资
+
 }

@@ -376,6 +376,25 @@ public class MapManager : Singleton<MapManager>
         return p;
     }
 
+    public static GameObject GetNearestStorage(Vector2Int grid)
+    {
+        float dis = Mathf.Infinity;
+        GameObject p = null;
+        for (int i = 0; i < Instance._buildings.Count; i++)
+        {
+            if (Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id == 20003)
+            {
+                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGridIn, grid);
+                if (cur < dis)
+                {
+                    dis = cur;
+                    p = Instance._buildings[i];
+                }
+            }
+        }
+        return p;
+    }
+
     private static float GetDistance(Vector2Int cur, Vector2Int target)
     {
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);

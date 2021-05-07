@@ -16,11 +16,20 @@ public class MarketBuilding : BuildingBase
 
     public override void OnRecieveCar(CarMission carMission)
     {
-        //Debug.Log(this.PfbName + " recieve");
-        BuildRecievedCarMission(carMission);
-        CarMission car = carMission;
-        void ac() { car.EndBuilding.OnRecieveCar(car);}
-        TrafficManager.Instance.UseCar(car.transportationType, car, ac, DriveType.once);
+        switch (carMission.missionType)
+        {
+            case CarMissionType.requestResources:
+                BuildRecievedCarMission(carMission);
+                CarMission car = carMission;
+                void ac() { car.EndBuilding.OnRecieveCar(car); }
+                TrafficManager.Instance.UseCar(car.transportationType, car, ac, DriveType.once);
+                break;
+            case CarMissionType.transportResources:
+                ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
+                break;
+            default:
+                break;
+        }
     }
 
     private void BuildRecievedCarMission(CarMission carMission)

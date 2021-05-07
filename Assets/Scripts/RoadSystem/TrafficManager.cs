@@ -278,7 +278,7 @@ public class TrafficManager : Singleton<TrafficManager>
 public class CarMission
 {
     public List<Vector3> route;//路线
-    public bool isAnd;//请求的资源是否是并，而不是或
+    public bool isAnd;//资源是否是并，而不是或
     public List<CostResource> requestResources;//请求的资源
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类

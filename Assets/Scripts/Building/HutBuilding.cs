@@ -15,6 +15,7 @@ public class HutBuilding : BuildingBase
     {
         storage = transform.GetComponent<Storage>();
         storage.AddResource(11001, 2);
+        ProvidePopulation();
         base.InitBuildingFunction();
     }
 
@@ -33,7 +34,7 @@ public class HutBuilding : BuildingBase
     protected override void Input()
     {
         //食物少于指定数量就去取货
-        //if (storage.GetAllFoodNum() < 10)
+        if (storage.GetAllFoodNum() < 10)
         {
             CarMission mission = MakeCarMission();
             TrafficManager.Instance.UseCar(mission.transportationType, mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);

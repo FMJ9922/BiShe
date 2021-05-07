@@ -5,8 +5,8 @@ using UnityEngine;
 public class LookAtCamera : MonoBehaviour
 {
     
-    void FixedUpdate()
+    void Start()
     {
-        transform.LookAt(InputManager.Instance.transform);
+        //transform.LookAt(InputManager.Instance.transform);
     }
 }

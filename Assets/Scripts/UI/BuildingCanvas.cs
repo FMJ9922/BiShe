@@ -221,6 +221,7 @@ public class BuildingCanvas : CanvasBase
         money.transform.parent = _iconsParent;
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
+            if (buildData.costResources[i].ItemId == 99999) continue;
             GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum);
             resource.transform.parent = _iconsParent;
         }

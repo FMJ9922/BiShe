@@ -17,6 +17,7 @@ public class MarketCanvas : CanvasBase
     }
     public override void OnOpen()
     {
+        RefreshMarketItem();
         mainCanvas.SetActive(true);
         GameManager.Instance.PauseGame();
     }
@@ -48,5 +49,15 @@ public class MarketCanvas : CanvasBase
     public List<MarketItem> GetMarketItems()
     {
         return marketItems;
+    }
+
+    public void RefreshMarketItem()
+    {
+        foreach(var item in marketItems)
+        {
+            Destroy(item.gameObject);
+        }
+        marketItems.Clear();
+        InitMarketItems();
     }
 }

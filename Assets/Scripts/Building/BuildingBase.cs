@@ -51,18 +51,11 @@ public class BuildingBase : MonoBehaviour
             Invoke("PlayAnim",0.2f);
         }
         parkingGridIn = InitParkingGrid();
-        if (runtimeBuildData.Id == 20005)
-        {
-            MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
-        }
-        else
-        {
-            MapManager.Instance.BuildFoundation(vector2Ints, 15);
-        }
+        MapManager.Instance.BuildFoundation(vector2Ints, 15);
         InitBuildingFunction();
     }
 
-    private void PlayAnim()
+    protected void PlayAnim()
     {
         body.SetActive(false);
         animation.gameObject.SetActive(true);
@@ -71,7 +64,7 @@ public class BuildingBase : MonoBehaviour
         animation["Take 001"].speed = 1f;
         animation.Play();
     }
-    private Vector2Int InitParkingGrid()
+    protected Vector2Int InitParkingGrid()
     {
         /*switch (direction)
         {
@@ -85,7 +78,7 @@ public class BuildingBase : MonoBehaviour
                 return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
 
         }*/
-        return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.x/2+0.5f));
+        return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
     }
     /// <summary>
     /// 建造完后初始化建筑功能
@@ -150,6 +143,7 @@ public class BuildingBase : MonoBehaviour
     {
         EventManager.StopListening(ConstEvent.OnOutputResources, Output);
         EventManager.StopListening(ConstEvent.OnInputResources, Input);
+        EventManager.StopListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
     }
 
     public virtual void DestroyBuilding()
@@ -181,6 +175,7 @@ public class BuildingBase : MonoBehaviour
             {
                 ResourceManager.Instance.AddResource(formula.OutputItemID[i],formula.ProductNum[i]);
             }
+            runtimeBuildData.Rate = 0;
         }
     }
 
@@ -246,6 +241,11 @@ public class BuildingBase : MonoBehaviour
         }
     }
 
+    public virtual void UpdateRate(string date)
+    {
+        runtimeBuildData.Rate += (float)runtimeBuildData.CurPeople / (float)runtimeBuildData.Population / 7f / formula.ProductTime;
+        //Debug.Log(runtimeBuildData.Rate);
+    }
 }
 
 public class RuntimeBuildData : BuildData
@@ -255,6 +255,6 @@ public class RuntimeBuildData : BuildData
     public int CurFormula;//当前配方
     public FormulaData[] formulaDatas;//当前建筑可用的配方们
     public int CurPeople = 0;//当前建筑的工人或居民
-
+    public float Rate = 0;//当前生产进度0-1
     
 }

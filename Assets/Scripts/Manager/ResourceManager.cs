@@ -62,7 +62,21 @@ public class ResourceManager : Singleton<ResourceManager>
             _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
         }
     }
-
+    public void AddResources(CostResource[] costResources)
+    {
+        for (int i = 0; i < costResources.Length; i++)
+        {
+            if (_storedItemDic.ContainsKey(costResources[i].ItemId))
+            {
+                _storedItemDic[costResources[i].ItemId] += costResources[i].ItemNum;
+            }
+            else
+            {
+                _storedItemDic.Add(costResources[i].ItemId, costResources[i].ItemNum);
+            }
+        }
+        
+    }
     public void RecordLastWeekItem()
     {
         _lastItemDic.Clear();

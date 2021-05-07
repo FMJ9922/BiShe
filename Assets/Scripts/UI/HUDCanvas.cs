@@ -111,6 +111,7 @@ public class HUDCanvas : CanvasBase
     }
     public void RefreshResources()
     {
+        
         float money = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Money"));
         float log = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Log"));
         float stone = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Stone"));
@@ -119,14 +120,14 @@ public class HUDCanvas : CanvasBase
         float deltaLog = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Log"));
         float deltaStone = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Stone"));
         float deltaFood = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Food"));
-        _money.text = string.Format("{1}", strMoney, money);
-        _log.text = string.Format("{1}", strLog, log);
-        _stone.text = string.Format("{1}", strStone, stone);
-        _food.text = string.Format("{1}", strFood, food);
-        _deltaMoney.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaMoney), strWeek,deltaMoney>=0?"+":"-");
-        _deltaLog.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaLog), strWeek, deltaLog >= 0 ? "+" : "-");
-        _deltaStone.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaStone), strWeek, deltaStone >= 0 ? "+" : "-");
-        _deltaFood.text = string.Format("{2}{0}/{1}", Mathf.Abs(deltaFood), strWeek, deltaFood >= 0 ? "+" : "-");
+        _money.text = string.Format("{1}", strMoney, (int)money);
+        _log.text = string.Format("{1}", strLog, (int)log);
+        _stone.text = string.Format("{1}", strStone, (int)stone);
+        _food.text = string.Format("{1}", strFood, (int)food);
+        _deltaMoney.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaMoney), strWeek,deltaMoney>=0?"+":"-");
+        _deltaLog.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaLog), strWeek, deltaLog >= 0 ? "+" : "-");
+        _deltaStone.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaStone), strWeek, deltaStone >= 0 ? "+" : "-");
+        _deltaFood.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaFood), strWeek, deltaFood >= 0 ? "+" : "-");
     }
 
     public void RefreshPopulation()

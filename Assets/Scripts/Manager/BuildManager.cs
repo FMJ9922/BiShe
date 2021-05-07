@@ -338,10 +338,14 @@ public class BuildManager : Singleton<BuildManager>
             Vector3 targetPos = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn);
             float targetHeight = targetPos.y;
             terrainGenerator.FlatGround(currentBuilding.takenGrids,targetHeight);
-            currentBuilding.transform.position += Vector3.up * 10;
             RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
+
             WhenFinishBuild();
-            StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
+            if(currentBuilding.runtimeBuildData.Id != 20005)
+            {
+                currentBuilding.transform.position += Vector3.up * 10;
+                StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
+            }
         }
     }
 

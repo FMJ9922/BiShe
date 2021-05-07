@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2063351777
+CRC: 3249836967
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: dceab6a7afe86bc9b7d7f0f8eb882e8f
+    Hash: ded56fedb3d5664b26934e5600677fbf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d8249f18fdb823088d374fab6d6506c7
+    Hash: eb308cc8cf6f76305f73a88cfeaa3b24
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -106,7 +106,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
-- Assets/Prefabs/WheatsPfb.prefab
+- Assets/Scenes Assets/Finish/WheatPfb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Government_L3_01_Mod.prefab
@@ -132,6 +132,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_02_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_01_Mod.fbx
+- Assets/Scenes Assets/Finish/RicePfb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_04_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Farm_L1_01_Preb.prefab
