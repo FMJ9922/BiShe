@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5996934165298142902}
   - component: {fileID: -4560537015093700612}
   m_Layer: 0
-  m_Name: Plain_Building_Residential_L1_01_Preb
+  m_Name: Plain_Building_Residential_L1_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   Height: 6
   BundlePrimaryType: 0
   hasAnima: 1
-  animation: {fileID: 2053818129899836438}
+  animation: {fileID: 0}
   body: {fileID: 5634731112075550003}
   buildFlag: 0
   takenGrids: []
@@ -259,12 +259,6 @@ PrefabInstance:
 --- !u!4 &419377326657994968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6780643245179601110, guid: b659dfc471fc6e24eade46463decad00,
-    type: 3}
-  m_PrefabInstance: {fileID: 6613609100789448718}
-  m_PrefabAsset: {fileID: 0}
---- !u!111 &2053818129899836438 stripped
-Animation:
-  m_CorrespondingSourceObject: {fileID: 5136604804943402008, guid: b659dfc471fc6e24eade46463decad00,
     type: 3}
   m_PrefabInstance: {fileID: 6613609100789448718}
   m_PrefabAsset: {fileID: 0}

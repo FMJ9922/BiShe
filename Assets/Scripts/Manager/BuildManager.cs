@@ -78,6 +78,12 @@ public class BuildManager : Singleton<BuildManager>
     {
         string bundleName = buildData.BundleName;
         string pfbName = buildData.PfbName;
+        if(buildData.Id == 20001 || buildData.Id == 20009)
+        {
+            pfbName = pfbName.Substring(0, pfbName.Length - 1);
+            int index = UnityEngine.Random.Range(1,4);
+            pfbName += index.ToString();
+        }
         Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, transform);

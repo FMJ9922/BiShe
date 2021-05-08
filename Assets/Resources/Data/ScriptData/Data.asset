@@ -142,7 +142,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 10
     BundleName: building.ab
-    PfbName: Plain_Building_Residential_L1_03_Preb
+    PfbName: Plain_Building_Residential_L1_0X
     tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: Universal_Building_Warehouse_L1_01_Preb
+    PfbName: Universal_Building_Warehouse_L1_01
     tabType: 4
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u8D44\u6E90"
     Level: 1
@@ -211,7 +211,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: Universal_Building_Market_L1_01_Preb
+    PfbName: Universal_Building_Market_L1_01
     tabType: 4
     Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
     Level: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
     - ItemId: 12003
       ItemNum: 3
     BundleName: building.ab
-    PfbName: Universal_Building_Farmland_L1_01_Preb
+    PfbName: Universal_Building_Farmland_L1_01
     tabType: 2
     Introduce: "\u7CAE\u98DF\u4F5C\u7269\u6700\u4E3B\u8981\u7684\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 25
     BundleName: building.ab
-    PfbName: Universal_Building_Farm_L1_01_Preb
+    PfbName: Universal_Building_Farm_L1_01
     tabType: 2
     Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
     Level: 1
@@ -278,7 +278,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 50
     BundleName: building.ab
-    PfbName: Universal_Building_Factory_L1_01_Preb
+    PfbName: Universal_Building_Factory_L1_01
     tabType: 3
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
     Level: 1
@@ -301,7 +301,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
-    PfbName: Universal_Building_Sawmill_L1_01_Preb
+    PfbName: Universal_Building_Sawmill_L1_01
     tabType: 2
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
     Level: 1
@@ -324,7 +324,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 12
     BundleName: building.ab
-    PfbName: Plain_Building_Residential_L1_02_Preb
+    PfbName: Plain_Building_Residential_L1_0X
     tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
@@ -347,7 +347,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 50
     BundleName: building.ab
-    PfbName: Universal_Building_Factory_L2_01_Preb
+    PfbName: Universal_Building_Factory_L2_01
     tabType: 3
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
     Level: 2
@@ -370,7 +370,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 50
     BundleName: building.ab
-    PfbName: Universal_Building_Factory_L3_01_Preb
+    PfbName: Universal_Building_Factory_L3_01
     tabType: 3
     Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
     Level: 3
@@ -393,7 +393,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 30
     BundleName: building.ab
-    PfbName: Universal_Building_Market_L2_01_Preb
+    PfbName: Universal_Building_Market_L2_01
     tabType: 4
     Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
     Level: 2
@@ -416,7 +416,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 30
     BundleName: building.ab
-    PfbName: Universal_Building_Market_L3_01_Preb
+    PfbName: Universal_Building_Market_L3_01
     tabType: 4
     Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
     Level: 3
@@ -439,7 +439,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
-    PfbName: Universal_Building_Sawmill_L2_01_Preb
+    PfbName: Universal_Building_Sawmill_L2_01
     tabType: 2
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
     Level: 2
@@ -462,7 +462,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
-    PfbName: Universal_Building_Sawmill_L3_01_Preb
+    PfbName: Universal_Building_Sawmill_L3_01
     tabType: 2
     Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
     Level: 3
@@ -485,7 +485,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: Universal_Building_Warehouse_L2_01_Preb
+    PfbName: Universal_Building_Warehouse_L2_01
     tabType: 4
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
     Level: 2
@@ -508,7 +508,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 35
     BundleName: building.ab
-    PfbName: Universal_Building_Warehouse_L3_01_Preb
+    PfbName: Universal_Building_Warehouse_L3_01
     tabType: 4
     Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
     Level: 3
@@ -577,7 +577,7 @@ MonoBehaviour:
     - ItemId: 12010
       ItemNum: 2
     BundleName: building.ab
-    PfbName: Universal_Building_Government_L1_01_Perb
+    PfbName: Universal_Building_Government_L1_01
     tabType: 5
     Introduce: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
     Level: 1
