@@ -65,7 +65,7 @@ public class TerrainWindow : EditorWindow
             {
                 dir++;
                 dir %= 4;
-                Debug.Log(dir);
+                //Debug.Log(dir);
             }
             TerrainGenerator gen = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
             gen.ChangeShower(canPaint&&isShow, hit.point, dir,index);
@@ -99,10 +99,7 @@ public class TerrainWindow : EditorWindow
     private void OnGUI()
     {
         GUILayout.Label("选择贴图");
-        index = GUILayout.Toolbar(index, new string[16] { "0", "1", "2", "3",
-                                                          "4", "5", "6", "7",
-                                                          "8", "9", "10", "11",
-                                                          "12", "13", "14", "15"});
+        index = EditorGUILayout.IntSlider(index, 0, 63);
         GUILayout.Label("是否随机方向");
         
         temp = GUILayout.Toolbar(temp, new string[2] { "是", "否" });
