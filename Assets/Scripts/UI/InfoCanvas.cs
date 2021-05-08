@@ -57,6 +57,7 @@ public class InfoCanvas : CanvasBase
     }
     private void AddBtnsListener(BuildingBase buildingBase)
     {
+        RemoveBtnsListener();
         _populationBtns[0].onClick.AddListener(()=>buildingBase.DeleteCurPeople(10));
         _populationBtns[1].onClick.AddListener(()=>buildingBase.DeleteCurPeople(1));
         _populationBtns[2].onClick.AddListener(()=>buildingBase.AddCurPeople(1));

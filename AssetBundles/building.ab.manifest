@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2963862108
+CRC: 3580176750
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f297523ad938faf1cdb4314af9588809
+    Hash: 6cda4e536c8fb3552106c5961c26853d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 12202f9e05883633492b4a4977b21bed
+    Hash: c82333716859db7e560698d959a2f8f0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -59,6 +59,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 73eecc9f0eeee0044a06bb58885ec9fb, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 850726b275ceab3498f5634474ab05cb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a2b6607be4669b4390ff446c6594104, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 198
@@ -92,6 +94,7 @@ Assets:
 - Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_02.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L1_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Pier_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L2_01.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_01.prefab
@@ -152,6 +155,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_01_Mod.fbx
 - Assets/Scenes Assets/Finish/RicePfb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_04_Mod.fbx
+- Assets/Scenes Assets/Finish/Coach_Building_Pier_add.prefab
 - Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_04.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_03.prefab

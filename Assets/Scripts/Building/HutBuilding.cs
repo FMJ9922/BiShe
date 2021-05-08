@@ -21,14 +21,14 @@ public class HutBuilding : BuildingBase
 
     protected override void Output()
     {
-        if (hasFoodThisWeek && !hasProvidePopulation)
+        /*if (hasFoodThisWeek && !hasProvidePopulation)
         {
             ProvidePopulation();
         }
         else if(!hasFoodThisWeek && hasProvidePopulation)
         {
             RemovePopulation();
-        }
+        }*/
     }
 
     protected override void Input()

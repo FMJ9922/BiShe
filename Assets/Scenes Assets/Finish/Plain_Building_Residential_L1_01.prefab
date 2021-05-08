@@ -65,7 +65,7 @@ MonoBehaviour:
   Width: 6
   Height: 6
   BundlePrimaryType: 0
-  hasAnima: 1
+  hasAnima: 0
   animation: {fileID: 0}
   body: {fileID: 5634731112075550003}
   buildFlag: 0

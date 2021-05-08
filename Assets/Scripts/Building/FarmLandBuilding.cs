@@ -36,6 +36,9 @@ public class FarmLandBuilding : BuildingBase
         }
         parkingGridIn = InitParkingGrid();
         MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         InitBuildingFunction();
     }
     private IEnumerator Plant()

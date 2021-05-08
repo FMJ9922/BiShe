@@ -329,7 +329,7 @@ MonoBehaviour:
     - ItemId: 12009
       ItemNum: 12
     BundleName: building.ab
-    PfbName: Plain_Building_Residential_L1_0X
+    PfbName: Plain_Building_Residential_L2_0X
     tabType: 1
     Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
@@ -780,8 +780,8 @@ MonoBehaviour:
     InfluenceRange: 0
     FrontBuildingId: 0
     RearBuildingId: 20030
-    Length: 10
-    Width: 20
+    Length: 20
+    Width: 10
     Price: 300
     costResources:
     - ItemId: 12003
@@ -803,8 +803,8 @@ MonoBehaviour:
     InfluenceRange: 0
     FrontBuildingId: 20029
     RearBuildingId: 20031
-    Length: 10
-    Width: 20
+    Length: 20
+    Width: 10
     Price: 300
     costResources:
     - ItemId: 12003
@@ -826,8 +826,8 @@ MonoBehaviour:
     InfluenceRange: 0
     FrontBuildingId: 20030
     RearBuildingId: 0
-    Length: 10
-    Width: 20
+    Length: 20
+    Width: 10
     Price: 300
     costResources:
     - ItemId: 12003
@@ -840,6 +840,29 @@ MonoBehaviour:
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 3
     iconName: MineLv3
+  - Id: 20032
+    Name: Pier
+    CostPerWeek: 0
+    Formulas: 5cc30000
+    Population: 10
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 10
+    Width: 10
+    Price: 250
+    costResources:
+    - ItemId: 12003
+      ItemNum: 100
+    - ItemId: 12009
+      ItemNum: 100
+    BundleName: building.ab
+    PfbName: Coach_Building_Pier_01
+    tabType: 3
+    Introduce: "\u6355\u635E\u9C7C\u7C7B"
+    Level: 1
+    iconName: PierL1
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -957,7 +980,7 @@ MonoBehaviour:
     - code: Warehouse
       chinese: "\u4ED3\u5E93"
       english: Warehouse
-    - code: Cottage
+    - code: PlainResidentialLv1
       chinese: "\u4E61\u95F4\u5C0F\u5C4B"
       english: Cottage
     - code: CountryRoad
@@ -1074,7 +1097,7 @@ MonoBehaviour:
     - code: Sausage
       chinese: "\u9999\u80A0"
       english: Sausage
-    - code: Large residential
+    - code: PlainResidentialLv2
       chinese: "\u5927\u578B\u4F4F\u5B85"
       english: Large residential
     - code: Apartment
@@ -1122,3 +1145,39 @@ MonoBehaviour:
     - code: Transport
       chinese: "\u8FD0\u8F93"
       english: Transport
+    - code: Government
+      chinese: "\u5E02\u653F\u4E2D\u5FC3"
+      english: Government
+    - code: GovernmentLv2
+      chinese: "\u5E02\u653F\u4E2D\u5FC3"
+      english: Government
+    - code: GovernmentLv3
+      chinese: "\u5E02\u653F\u4E2D\u5FC3"
+      english: Government
+    - code: CoachResidential
+      chinese: "\u6D77\u5CB8\u516C\u5BD3"
+      english: CoachResidential
+    - code: CoachResidentialLv2
+      chinese: "\u6D77\u5CB8\u516C\u5BD3Lv2"
+      english: CoachResidentialLv2
+    - code: CoachResidentialLv3
+      chinese: "\u6D77\u5CB8\u516C\u5BD3Lv3"
+      english: CoachResidentialLv3
+    - code: HuiResidential
+      chinese: "\u5FBD\u5F0F\u6C11\u5B85"
+      english: HuiResidential
+    - code: HuiResidentialLv2
+      chinese: "\u5FBD\u5F0F\u6C11\u5B85Lv2"
+      english: HuiResidentialLv2
+    - code: HuiResidentialLv3
+      chinese: "\u5FBD\u5F0F\u6C11\u5B85Lv3"
+      english: HuiResidentialLv3
+    - code: Mine
+      chinese: "\u5C0F\u578B\u77FF\u4E95"
+      english: Mine
+    - code: MineLv2
+      chinese: "\u4E2D\u578B\u77FF\u4E95"
+      english: MineLv2
+    - code: MineLv3
+      chinese: "\u5927\u578B\u77FF\u4E95"
+      english: MineLv3

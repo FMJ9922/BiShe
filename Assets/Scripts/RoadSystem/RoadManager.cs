@@ -261,7 +261,7 @@ public class RoadManager : Singleton<RoadManager>
         openList.Add(startNode);
         path.Add(startNode);
         RoadNode temp = startNode;
-        int n = 20;
+        int n = 100;
         while (temp != endNode && n-- > 0)
         {
             if (openList.Count <= 0)

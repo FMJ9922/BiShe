@@ -22,6 +22,9 @@ public class StaticBuilding : MonoBehaviour
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
         //Debug.Log(currentBuilding.transform.name);
         currentBuilding.OnConfirmBuild(targetGrids);
+        Vector3 targetPos = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(currentBuilding.takenGrids, targetHeight);
         //Debug.Log("Add:" + currentBuilding.parkingGrid);
         RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
     }

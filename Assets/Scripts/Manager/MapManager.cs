@@ -60,11 +60,11 @@ public class MapManager : Singleton<MapManager>
     /// <summary>
     /// 刷地基
     /// </summary>
-    public void BuildFoundation(Vector2Int[] takenGirds, int tex,int dir = 0 )
+    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0)
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
-            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x,dir);
+            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
         }
         generator.ReCalculateNormal();
     }
@@ -95,13 +95,13 @@ public class MapManager : Singleton<MapManager>
             switch (roadOption)
             {
                 case RoadOption.straight:
-                    BuildStraightRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildStraightRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
                 case RoadOption.inner:
-                    BuildInCornerRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildInCornerRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
                 case RoadOption.outter:
-                    BuildOutCornerRoad(level-1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildOutCornerRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
             }
             generator.ReCalculateNormal();
@@ -151,7 +151,7 @@ public class MapManager : Singleton<MapManager>
                     direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
                     return;
                 }
-                if (!around[(i+4)] && count == 6)
+                if (!around[(i + 4)] && count == 6)
                 {
                     direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 3) % 4);
                     //Debug.Log((int)direction);
@@ -172,6 +172,8 @@ public class MapManager : Singleton<MapManager>
             }
         }
     }
+
+
     /// <summary>
     /// 获取地形在世界空间的位置
     /// </summary>
@@ -243,32 +245,51 @@ public class MapManager : Singleton<MapManager>
         }
         else
         {
-            Debug.LogError("不合法输入"+grid.ToString());
+            Debug.LogError("不合法输入" + grid.ToString());
             return null;
         }
     }
-    public static bool CheckCanBuild(Vector2Int[] grids,int width,int height,out Direction direction)
+    public static bool CheckCanBuild(Vector2Int[] grids, int width, int height, bool checkInSea, out Direction direction)
     {
         //检测安放地点占用
         bool hasOverlap = CheckOverlap(grids);
         //检测道路是否贴近
-        bool hasNearRoad = CheckNearRoad(grids, width, height,out direction);
-        return !hasOverlap && hasNearRoad; 
+        bool hasNearRoad = CheckNearRoad(grids, width, height, out direction);
+        bool isInSea = (!checkInSea || CheckIsInWater(grids));
+        if (!isInSea) Debug.Log("不在海里");
+        return !hasOverlap && hasNearRoad && isInSea;
     }
 
+    /// <summary>
+    /// 检测目标格子对于的地面高度是否有在海平面下的部分
+    /// </summary>
+    /// <param name="vector2Ints"></param>
+    /// <returns></returns>
+    public static bool CheckIsInWater(Vector2Int[] vector2Ints)
+    {
+        
+        return CheckIsInWater(vector2Ints[0])|| CheckIsInWater(vector2Ints[vector2Ints.Length-1]);
+    }
+
+    public static bool CheckIsInWater(Vector2Int vector2Int)
+    {
+        Vector3 groundPos = GetTerrainPosition(vector2Int);
+        return groundPos.y - 10 < -0.9f;
+    }
     public static bool CheckOverlap(Vector2Int[] grids)
     {
         for (int i = 0; i < grids.Length; i++)
         {
             if (Instance.GetGridType(grids[i]) != GridType.empty)
             {
+                Debug.Log("建筑重叠");
                 return true;
             }
         }
         return false;
     }
 
-    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height,out Direction direction)
+    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height, out Direction direction)
     {
         Vector2Int start = grids[0];
         for (int i = 0; i < width; i++)
@@ -278,7 +299,7 @@ public class MapManager : Singleton<MapManager>
                 direction = Direction.down;
                 return true;
             }
-            if(Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
+            if (Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
             {
                 direction = Direction.up;
                 return true;
@@ -291,13 +312,14 @@ public class MapManager : Singleton<MapManager>
                 direction = Direction.left;
                 return true;
             }
-            if(Instance.GetGridType(start + new Vector2Int(width, i)) == GridType.road)
+            if (Instance.GetGridType(start + new Vector2Int(width, i)) == GridType.road)
             {
                 direction = Direction.right;
                 return true;
             }
         }
         direction = Direction.right;
+        Debug.Log("不贴合道路");
         return false;
     }
 
@@ -413,7 +435,7 @@ public class SingleGrid
         this.GridPos = new Vector2Int(x, z);
         GridType = gridType;
     }
-    
+
     public void RefreshGridDirInfo()
     {
         AvailableDir = originDir;

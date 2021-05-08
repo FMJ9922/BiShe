@@ -51,7 +51,12 @@ public class BuildingBase : MonoBehaviour
             Invoke("PlayAnim",0.2f);
         }
         parkingGridIn = InitParkingGrid();
+        //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         InitBuildingFunction();
     }
 

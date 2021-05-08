@@ -329,8 +329,12 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 curPos = currentBuilding.transform.position;
         int width, height;
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos,out width,out height);
-        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, width, height, out Direction direction);
-        OnRotateBuilding(direction);
+        bool isCheckSea = currentBuilding.runtimeBuildData.Id == 20032;
+        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, width, height,isCheckSea, out Direction direction);
+        if (isCurCanBuild)
+        {
+            OnRotateBuilding(direction);
+        }
         for (int i = 0; i < mats.Length; i++)
         {
             mats[i].color = isCurCanBuild ? Color.green : Color.red;
@@ -349,9 +353,6 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            Vector3 targetPos = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn);
-            float targetHeight = targetPos.y;
-            terrainGenerator.FlatGround(currentBuilding.takenGrids,targetHeight);
             RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
 
             WhenFinishBuild();
@@ -362,7 +363,6 @@ public class BuildManager : Singleton<BuildManager>
             }
         }
     }
-
     private IEnumerator PushDownBuilding(Vector3 startPos)
     {
         Vector3 start = startPos;
