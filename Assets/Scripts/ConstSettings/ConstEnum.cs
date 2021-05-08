@@ -133,6 +133,8 @@ public enum TransportationType
     medium = 2,
     [Description("Harvester")]
     harvester = 3,
+    [Description("sandTruck")]
+    sandTruck = 4,
 }
 
 public enum CarMissionType

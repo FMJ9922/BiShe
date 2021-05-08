@@ -44,14 +44,23 @@ public class FarmLandBuilding : BuildingBase
         GameObject pfb = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula].ID == 50006?
             LoadAB.Load(runtimeBuildData.BundleName, "WheatPfb"):
              LoadAB.Load(runtimeBuildData.BundleName, "RicePfb");
-        for (int i = 0; i < Size.x * Size.y; i++)
+        for (int i = 0; i < Size.x * Size.y*2; i++)
         {
             GameObject newGrid = Instantiate(pfb, wheatTrans);
-            grids[i] = newGrid;
-            Vector3 random = Random.insideUnitSphere/10;
-            newGrid.transform.position = MapManager.GetTerrainPosition(takenGrids[i])+new Vector3(random.x,0,random.z);
+            grids[i / 2] = newGrid;
+            Vector3 random = Random.insideUnitSphere/5;
+            Vector3 pos;
+            if (i % 2 == 0)
+            {
+                pos = MapManager.GetTerrainPosition(takenGrids[i/2]);
+            }
+            else
+            {
+                pos = MapManager.GetTerrainPosition(takenGrids[i/2]) + transform.forward;
+            }
+            newGrid.transform.position = pos+new Vector3(random.x,0,random.z) - transform.forward/2;
             newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction - 1), Space.Self);
-            yield return new WaitForSeconds(0.1f);
+            yield return 0;
             //Animator animator = newGrid.GetComponentInChildren<Animator>();
             //animator.Play("WheatGrow");
         }

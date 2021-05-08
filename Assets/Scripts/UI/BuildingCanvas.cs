@@ -156,7 +156,8 @@ public class BuildingCanvas : CanvasBase
         for (int i = 0; i < currentTabDatas.Length; i++)
         {
             int level= currentTabDatas[i].Level;
-            if (level <= 1||tabType==0)
+            //if (level <= 1||tabType == 0)
+            if (level >= 1 || tabType == 0)
             {
                 GameObject newDivide = Instantiate(pfbDividingLine, _buildingIcons);
                 GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);

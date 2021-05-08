@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9023254816225749810}
   - component: {fileID: -2597777306280376452}
   m_Layer: 0
-  m_Name: Universal_Building_Sawmill_L1_01_Preb
+  m_Name: Universal_Building_Sawmill_L1_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
         type: 3}

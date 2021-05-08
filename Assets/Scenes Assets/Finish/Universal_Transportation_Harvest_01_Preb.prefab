@@ -102,8 +102,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3306274, y: 1.3040352, z: 1.4121838}
-  m_Center: {x: 0, y: 0.6520176, z: 0}
+  m_Size: {x: 1.8158722, y: 1.3040352, z: 1.4121838}
+  m_Center: {x: 0.005592346, y: 0.6520176, z: 0}
 --- !u!114 &4415986719039196438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +124,8 @@ MonoBehaviour:
   carType: 3
   isbraking: 0
   carSensor: {fileID: 1648271583973777770}
+  leftWheel: {fileID: 0}
+  rightWheel: {fileID: 0}
 --- !u!54 &8645424541273931783
 Rigidbody:
   m_ObjectHideFlags: 0

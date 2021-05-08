@@ -65,7 +65,7 @@ public class BuildManager : Singleton<BuildManager>
     public void CreateBuildingOnMouse(BuildData buildData)
     {
         GameObject building = InitBuilding(buildData);
-        building.transform.position = Input.mousePosition+Vector3.up*5;
+        building.transform.position = Input.mousePosition;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
         for (int i = 0; i < meshRenderers.Length; i++)
@@ -78,10 +78,18 @@ public class BuildManager : Singleton<BuildManager>
     {
         string bundleName = buildData.BundleName;
         string pfbName = buildData.PfbName;
-        if(buildData.Id == 20001 || buildData.Id == 20009)
+        if(buildData.Id == 20001 || buildData.Id == 20009
+            || buildData.Id == 20023 || buildData.Id == 20024 || buildData.Id == 20025
+            || buildData.Id == 20028)
         {
             pfbName = pfbName.Substring(0, pfbName.Length - 1);
             int index = UnityEngine.Random.Range(1,4);
+            pfbName += index.ToString();
+        }
+        if (buildData.Id == 20026 || buildData.Id == 20027)
+        {
+            pfbName = pfbName.Substring(0, pfbName.Length - 1);
+            int index = UnityEngine.Random.Range(1, 5);
             pfbName += index.ToString();
         }
         Debug.Log("load:" + bundleName + " " + pfbName);
@@ -295,7 +303,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
-        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn)+Vector3.up * 5;
+        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
         //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
@@ -312,7 +320,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             isTurn = true;
         }
-        currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn) + Vector3.up * 5;
+        currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
     }
 
