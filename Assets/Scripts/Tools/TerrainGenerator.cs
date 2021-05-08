@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class TerrainGenerator : Singleton<TerrainGenerator>
 {
@@ -510,7 +511,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     [ContextMenu("加载地形")]
     void LoadAsset()
     {
-        transform.GetComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(GetPath("meshData.asset"));
+        Mesh mesh = Resources.Load<Mesh>(SceneManager.GetActiveScene().name + "meshData.asset");
+
+        Debug.Log(mesh);
+        transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
 #endif
@@ -773,7 +777,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     private string GetPath(string fileName)
     {
-        string path = string.Format("{0}/{1}{2}", "Assets/StreamingAssets/MapData", LevelManager.LevelID, fileName);
+        string path = string.Format("{0}/{1}{2}", "Assets/Resources/MapData",SceneManager.GetActiveScene().name, fileName);
         return path;
     }
     #endregion
