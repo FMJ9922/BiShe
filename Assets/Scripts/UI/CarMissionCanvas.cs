@@ -51,6 +51,7 @@ public class CarMissionCanvas : CanvasBase
                     {
                         GameObject resource = CommonIcon.GetIcon(mission.requestResources[i].ItemId, mission.requestResources[i].ItemNum);
                         resource.transform.parent = _iconsParent;
+                        resource.transform.localScale = Vector3.one * 1.5f;
                     }
                 }
                 break;
@@ -62,6 +63,7 @@ public class CarMissionCanvas : CanvasBase
                     {
                         GameObject resource = CommonIcon.GetIcon(mission.transportResources[i].ItemId, mission.transportResources[i].ItemNum);
                         resource.transform.parent = _iconsParent;
+                        resource.transform.localScale = Vector3.one * 1.5f;
                     }
                 }
                 break;

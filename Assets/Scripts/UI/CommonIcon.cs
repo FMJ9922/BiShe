@@ -28,6 +28,8 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         string iconName = icon.data.Name;
         icon._image.sprite = LoadAB.LoadSprite(_iconBundle, iconName+"Icon");
         icon._image.SetNativeSize();
+        icon._numLabel.outlineWidth = 0.5f;
+        icon._numLabel.outlineColor = new Color32(255, 128, 0, 255);
         return newIcon;
     }
     #region 接口

@@ -256,7 +256,7 @@ public class MapManager : Singleton<MapManager>
         //检测道路是否贴近
         bool hasNearRoad = CheckNearRoad(grids, width, height, out direction);
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
-        if (!isInSea) Debug.Log("不在海里");
+        //if (!isInSea) Debug.Log("不在海里");
         return !hasOverlap && hasNearRoad && isInSea;
     }
 
@@ -282,7 +282,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (Instance.GetGridType(grids[i]) != GridType.empty)
             {
-                Debug.Log("建筑重叠");
+                //Debug.Log("建筑重叠");
                 return true;
             }
         }
@@ -319,7 +319,7 @@ public class MapManager : Singleton<MapManager>
             }
         }
         direction = Direction.right;
-        Debug.Log("不贴合道路");
+        //Debug.Log("不贴合道路");
         return false;
     }
 

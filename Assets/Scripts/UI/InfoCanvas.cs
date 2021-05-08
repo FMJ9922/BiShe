@@ -8,16 +8,17 @@ public class InfoCanvas : CanvasBase
 {
     [SerializeField] GameObject _inputsObj;//挂载输入资源说明的UI
     [SerializeField] GameObject _outputsObj;//输出
-    [SerializeField] GameObject _effectiveObj;//效率
-    [SerializeField] GameObject _introduceObj;//简介说明
-    [SerializeField] GameObject _populationObj;//人口
-    [SerializeField] GameObject _formulaObj;//配方
+    [SerializeField] GameObject _rateObj;//产量
+    [SerializeField] GameObject _workerObj;//工人人口
+    [SerializeField] GameObject _populationObj;//居民人口
     [SerializeField] Button _destroyBtn;//拆除建筑
     [SerializeField] Button _upgradeBtn;//升级
     [SerializeField] Button[] _populationBtns;//人口相关按钮
-    [SerializeField] TMP_Text _nameLabel, _inputsLabel, _outputsLabel, _effectiveLabel, _introduceLabel, _populationLabel;
-    [SerializeField] TMP_Dropdown _dropDown;
+    [SerializeField] TMP_Text _nameLabel, _introduceLabel, _rateLabel, _populationLabel,_workerLabel;
+    [SerializeField] Button[] _switchFormulaBtns;//切换产品按钮
     [SerializeField] private GameObject mainCanvas;
+    [SerializeField] private Transform inIcons;
+    [SerializeField] private Transform outIcons;
     [SerializeField] private GameObject BuildingHighlight;
     UnityAction populationChange;
     private RuntimeBuildData _buildData;
@@ -37,9 +38,7 @@ public class InfoCanvas : CanvasBase
         ChangeShowItems(_buildData);
         ChangeLabels(_buildData);
         mainCanvas.SetActive(true);
-        ChangeFormula(_buildData.formulaDatas);
         AddBtnsListener(buildbase);
-        _dropDown.onValueChanged.AddListener(OnDropDownValueChanged);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
         BuildingHighlight.transform.position = buildbase.transform.position;
         BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y*2, 10, buildbase.Size.x*2);
@@ -48,13 +47,13 @@ public class InfoCanvas : CanvasBase
 
     }
 
-    private void SetBtnsActive(bool isActive)
+    /*private void SetBtnsActive(bool isActive)
     {
         for (int i = 0; i < _populationBtns.Length; i++)
         {
             _populationBtns[i].gameObject.SetActive(isActive);
         }
-    }
+    }*/
     private void AddBtnsListener(BuildingBase buildingBase)
     {
         RemoveBtnsListener();
@@ -89,10 +88,13 @@ public class InfoCanvas : CanvasBase
         EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
 
-    void OnDropDownValueChanged(int n)
+    public void OnDropDownValueChanged(int n)
     {
-        _buildData.CurFormula = n;
-        ChangeLabels(_buildData);
+        //Debug.Log(n);
+        _buildData.CurFormula += n + _buildData.formulaDatas.Length;
+        _buildData.CurFormula %= _buildData.formulaDatas.Length;
+        ChangeOutputIcon(_buildData);
+        ChangeInputIcon(_buildData);
     }
     /// <summary>
     /// 修改显示的条目
@@ -100,49 +102,61 @@ public class InfoCanvas : CanvasBase
     /// <param name="buildData"></param>
     private void ChangeShowItems(RuntimeBuildData buildData)
     {
+
+        CleanUpAllAttachedChildren(inIcons);
+        CleanUpAllAttachedChildren(outIcons);
         switch (buildData.tabType)
         {
             case BuildTabType.produce:
-            case BuildTabType.road:
             case BuildTabType.manufacturing:
                 {
-                    _inputsObj.SetActive(true);
+                    if (buildData.formulaDatas[buildData.CurFormula].InputItemID.Count > 0)
+                    {
+                        _inputsObj.SetActive(true);
+                        ChangeInputIcon(buildData);
+                    }
                     _outputsObj.SetActive(true);
-                    _effectiveObj.SetActive(true);
-                    _introduceObj.SetActive(true);
-                    _populationObj.SetActive(true);
+                    ChangeOutputIcon(buildData);
+                    _rateObj.SetActive(true);
+                    _workerObj.SetActive(true);
+                    _populationObj.SetActive(false);
                     _destroyBtn.gameObject.SetActive(true);
-                    _formulaObj.SetActive(true);
-                    SetBtnsActive(true);
-                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
+                    _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
                     break;
 
                 }
             case BuildTabType.utility:
+                {
+                    _inputsObj.SetActive(false);
+                    _outputsObj.SetActive(false);
+                    _rateObj.SetActive(false);
+                    _workerObj.SetActive(false);
+                    _populationObj.SetActive(true);
+                    _destroyBtn.gameObject.SetActive(true);
+                    _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
+                    break;
+                }
             case BuildTabType.house:
                 {
                     _inputsObj.SetActive(true);
+                    ChangeInputIcon(buildData);
                     _outputsObj.SetActive(false);
-                    _effectiveObj.SetActive(false);
-                    _introduceObj.SetActive(true);
+                    _rateObj.SetActive(false);
+                    _workerObj.SetActive(false);
                     _populationObj.SetActive(true);
-                    SetBtnsActive(false);
                     _destroyBtn.gameObject.SetActive(true);
-                    _formulaObj.SetActive(false);
-                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
+                    _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
                     break;
                 }
             case BuildTabType.hide:
                 {
                     _inputsObj.SetActive(false);
                     _outputsObj.SetActive(false);
-                    _effectiveObj.SetActive(false);
-                    _introduceObj.SetActive(true);
+                    _rateObj.SetActive(false);
+                    _workerObj.SetActive(false);
                     _populationObj.SetActive(false);
-                    SetBtnsActive(false);
                     _destroyBtn.gameObject.SetActive(false);
-                    _formulaObj.SetActive(false);
-                    _upgradeBtn.gameObject.SetActive(buildData.CurLevel < 3);
+                    _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
                     break;
                 }
 
@@ -150,22 +164,33 @@ public class InfoCanvas : CanvasBase
     }
 
 
-    private void ChangeFormula(FormulaData[] formulaDatas)
+    private void ChangeOutputIcon(RuntimeBuildData data)
     {
-        if (formulaDatas.Length <= 0) return;
-        _dropDown.options.Clear();
-        _dropDown.captionText.text = formulaDatas[_buildData.CurFormula].Describe;
-        if (formulaDatas == null || formulaDatas.Length == 0)
+        List<int> list = data.formulaDatas[data.CurFormula].OutputItemID;
+        if (list.Count <= 0) return;
+        for (int i = 0; i < list.Count; i++)
         {
-            _formulaObj.SetActive(false);
-            return;
+            GameObject resource = CommonIcon.GetIcon(data.formulaDatas[data.CurFormula].OutputItemID[i],
+                                                     data.formulaDatas[data.CurFormula].ProductNum[i]);
+            resource.transform.parent = outIcons;
+            resource.transform.localScale = Vector3.one * 1.5f;
+            if (list[i] == 11000)
+            {
+                return;
+            }
         }
-        TMP_Dropdown.OptionData optionData;
-        for (int i = 0; i < formulaDatas.Length; i++)
+    }
+
+    private void ChangeInputIcon(RuntimeBuildData data)
+    {
+        List<int> list = data.formulaDatas[data.CurFormula].InputItemID;
+        if (list.Count <= 0) return;
+        for (int i = 0; i < list.Count; i++)
         {
-            optionData = new TMP_Dropdown.OptionData();
-            optionData.text = formulaDatas[i].Describe;
-            _dropDown.options.Add(optionData);
+            GameObject resource = CommonIcon.GetIcon(data.formulaDatas[data.CurFormula].InputItemID[i],
+                                                     data.formulaDatas[data.CurFormula].InputNum[i]);
+            resource.transform.parent = inIcons;
+            resource.transform.localScale = Vector3.one * 1.5f;
         }
     }
     /// <summary>
@@ -175,51 +200,17 @@ public class InfoCanvas : CanvasBase
     private void ChangeLabels(RuntimeBuildData buildData)
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
-        FormulaData formula;
-        if (buildData.formulaDatas.Length>0)
-        {
-            formula = buildData.formulaDatas[buildData.CurFormula];
-            string input = string.Empty;
-            int count = 0;
-            for (int i = 0; i < formula.InputItemID.Count; i++)
-            {
-                //如果是民房
-                if (formula.InputNum.Count - 1 < i)
-                {
-                    input += " 或 " +
-                    Localization.ToSettingLanguage(
-                        DataManager.GetItemNameById(formula.InputItemID[i]));
-                    count++;
-                }
-                else
-                if (formula.InputNum[i] != 0)
-                {
-                    input += formula.InputNum[i] + " " +
-                    Localization.ToSettingLanguage(
-                        DataManager.GetItemNameById(formula.InputItemID[i]));
-                    count++;
-                }
-            }
-            if (count == 0)
-            {
-                _inputsObj.SetActive(false);
-            }
-            _inputsLabel.text = input;
-            string output = string.Empty;
-            for (int i = 0; i < formula.OutputItemID.Count; i++)
-            {
-                if (formula.ProductNum[i] == 0)
-                {
-                    continue;
-                }
-                output += formula.ProductNum[i] + " " +
-                    Localization.ToSettingLanguage(
-                        DataManager.GetItemNameById(formula.OutputItemID[i]));
-            }
-            _outputsLabel.text = output;
-        }
-        _populationLabel.text = Localization.ToSettingLanguage(buildData.Population > 0 ? "Worker" : "Resident") + "：" +
-            buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
+        _populationLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
+        _workerLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
+    }
+
+    private void CleanUpAllAttachedChildren(Transform target)
+    {
+        for (int i = 0; i < target.childCount; i++)
+        {
+            Destroy(target.GetChild(i).gameObject);
+        }
+
     }
 }

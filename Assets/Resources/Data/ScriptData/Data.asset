@@ -888,7 +888,7 @@ MonoBehaviour:
   - ID: 50004
     Describe: "\u539F\u6728\u4EA7\u6728\u6599"
     InputItemID: e32e0000
-    InputNum: 0c000000
+    InputNum: 0b000000
     OutputItemID: e42e0000
     ProductNum: 09000000
     ProductTime: 4
@@ -897,7 +897,7 @@ MonoBehaviour:
     InputItemID: fd2a0000
     InputNum: 0c000000
     OutputItemID: 002b0000
-    ProductNum: 09000000
+    ProductNum: 0a000000
     ProductTime: 4
   - ID: 50006
     Describe: "\u7530\u5730\u4EA7\u5C0F\u9EA6"
@@ -1181,3 +1181,9 @@ MonoBehaviour:
     - code: MineLv3
       chinese: "\u5927\u578B\u77FF\u4E95"
       english: MineLv3
+    - code: Input
+      chinese: "\u6D88\u8017"
+      english: Input
+    - code: Output
+      chinese: "\u751F\u4EA7"
+      english: Output
