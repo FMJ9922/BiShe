@@ -33,12 +33,12 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     #region 接口
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+
     }
 
     #endregion

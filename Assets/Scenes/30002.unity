@@ -475,7 +475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainInteractCanvas: {fileID: 1540787166}
-  WeekProgress: 0
 --- !u!4 &286110535
 Transform:
   m_ObjectHideFlags: 0
@@ -1047,7 +1046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &659015413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,7 +1126,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659015412}
-  m_Mesh: {fileID: 4300000, guid: 435642e2342712246bd9c6f62d1e5855, type: 2}
+  m_Mesh: {fileID: 4300000, guid: ca4ed9cfb93a77b44906f32fdb15c88b, type: 2}
 --- !u!65 &659015417
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2343,7 +2342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1964327461
 TerrainCollider:
   m_ObjectHideFlags: 0

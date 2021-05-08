@@ -65,7 +65,7 @@ public class BuildManager : Singleton<BuildManager>
     public void CreateBuildingOnMouse(BuildData buildData)
     {
         GameObject building = InitBuilding(buildData);
-        building.transform.position = Input.mousePosition;
+        building.transform.position = Input.mousePosition+Vector3.up*5;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
         for (int i = 0; i < meshRenderers.Length; i++)
@@ -289,7 +289,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
-        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
+        currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn)+Vector3.up * 5;
         //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckOverlap();
     }
@@ -306,7 +306,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             isTurn = true;
         }
-        currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
+        currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn) + Vector3.up * 5;
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
     }
 
@@ -343,7 +343,7 @@ public class BuildManager : Singleton<BuildManager>
             WhenFinishBuild();
             if(currentBuilding.runtimeBuildData.Id != 20005)
             {
-                currentBuilding.transform.position += Vector3.up * 10;
+                currentBuilding.transform.position += Vector3.up * 5;
                 StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
             }
         }
