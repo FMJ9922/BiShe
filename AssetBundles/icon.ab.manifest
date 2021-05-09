@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3848650223
+CRC: 1300806302
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5b2c1ce869c5d79ca0844496f65fd84b
+    Hash: e4f066425f70fe358f5ea93c1aa00c52
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4908fa12115d35930b278507ea5b410b
@@ -34,20 +34,21 @@ ClassTypes:
 - Class: 224
   Script: {instanceID: 0}
 Assets:
+- Assets/Scenes Assets/BuildingIcon/HookerL1.png
 - Assets/ArtAssets/UI/BuildUI/ClickManufacturingIcon.png
 - Assets/ArtAssets/UI/BuildUI/ClickRoadIcon.png
 - Assets/Scenes Assets/BuildingIcon/Icon/WheatIcon.png
 - Assets/Scenes Assets/BuildingIcon/RoadL3.png
 - Assets/ArtAssets/UI/BuildUI/ClickUtilitiyIcon.png
+- Assets/Scenes Assets/BuildingIcon/HookerL3.png
 - Assets/ArtAssets/UI/BuildUI/UnclickManufacturingIcon.png
 - Assets/Scenes Assets/BuildingIcon/Icon/SausageIcon.png
 - Assets/Scenes Assets/BuildingIcon/Icon/FlourIcon.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL2.png
 - Assets/ArtAssets/UI/MainUI/PlayButton.png
 - Assets/ArtAssets/UI/BuildUI/UnclickUtilitiyIcon.png
-- Assets/Scenes Assets/BuildingIcon/PopulationsIcon.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL3.png
-- Assets/Scenes Assets/BuildingIcon/Icon/MeatIcon.png
+- Assets/Scenes Assets/BuildingIcon/Icon/RawMeatIcon.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL3.png
 - Assets/ArtAssets/UI/MainUI/PauseButton.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL1.png
@@ -59,25 +60,36 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/Icon/LogIcon.png
 - Assets/Scenes Assets/BuildingIcon/FarmL2.png
 - Assets/ArtAssets/UI/BuildUI/ClickProduceIcon.png
+- Assets/Scenes Assets/BuildingIcon/CoachL2.png
 - Assets/Scenes Assets/BuildingIcon/WareHouseL1.png
 - Assets/ArtAssets/UI/BuildUI/UnclickHousingIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL2.png
 - Assets/ArtAssets/UI/BuildUI/BuildingPreview.png
 - Assets/Scenes Assets/BuildingIcon/MarketL3.png
+- Assets/Scenes Assets/BuildingIcon/HuiL1.png
 - Assets/Scenes Assets/BuildingIcon/Icon/FoodIcon.png
 - Assets/Scenes Assets/BuildingIcon/Icon/RiceIcon.png
+- Assets/Scenes Assets/BuildingIcon/MineL2.png
+- Assets/Scenes Assets/BuildingIcon/HuiL3.png
 - Assets/ArtAssets/UI/BuildUI/UnclickRoadIcon.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL2.png
 - Assets/Scenes Assets/BuildingIcon/Icon/StoneIcon.png
+- Assets/Scenes Assets/BuildingIcon/HuiL2.png
 - Assets/Scenes Assets/BuildingIcon/IconPfb.prefab
+- Assets/Scenes Assets/BuildingIcon/CoachL3.png
 - Assets/Scenes Assets/BuildingIcon/Wheat.png
+- Assets/Scenes Assets/BuildingIcon/HookerL2.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL1.png
 - Assets/ArtAssets/UI/BuildUI/UnclickProduceIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL3.png
 - Assets/ArtAssets/UI/MainUI/HollowSpeed.png
+- Assets/Scenes Assets/BuildingIcon/MineL3.png
+- Assets/Scenes Assets/BuildingIcon/CoachL1.png
+- Assets/Scenes Assets/BuildingIcon/MineL1.png
 - Assets/ArtAssets/UI/MainUI/SolidSpeed.png
 - Assets/Scenes Assets/BuildingIcon/MarketL1.png
 - Assets/Scenes Assets/BuildingIcon/FarmL3.png
+- Assets/Scenes Assets/BuildingIcon/PreviewShadow.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL1.png
 - Assets/Scenes Assets/BuildingIcon/MarketL2.png
 - Assets/Scenes Assets/BuildingIcon/Icon/PopulationIcon.png

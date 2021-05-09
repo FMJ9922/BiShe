@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9158451708616012815}
   - component: {fileID: 6412470594179203269}
   m_Layer: 0
-  m_Name: Universal_Terrain_Square_Mod
+  m_Name: Universal_Terrain_Water_Preb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,9 +25,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4899160445641761040}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 359.66, y: 9.999596, z: 309.18}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 121.7, y: 265.0362, z: 265.0362}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 47e602c4ccec0c54a93338518bc7f525, type: 2}
+  - {fileID: 2100000, guid: 8f13297d830ef934eb5a8597a22aeadd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

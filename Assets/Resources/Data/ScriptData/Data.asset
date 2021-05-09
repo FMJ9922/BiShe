@@ -655,7 +655,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u6D77\u5CB8\u516C\u5BD3"
     Level: 1
-    iconName: CoachLv1
+    iconName: CoachL1
   - Id: 20024
     Name: CoachResidentialLv2
     CostPerWeek: 0
@@ -678,7 +678,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u6D77\u5CB8\u516C\u5BD3"
     Level: 2
-    iconName: CoachLv2
+    iconName: CoachL2
   - Id: 20025
     Name: CoachResidentialLv3
     CostPerWeek: 0
@@ -701,7 +701,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u6D77\u5CB8\u516C\u5BD3"
     Level: 3
-    iconName: CoachLv3
+    iconName: CoachL3
   - Id: 20026
     Name: HuiResidential
     CostPerWeek: 0
@@ -724,7 +724,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
     Level: 1
-    iconName: HuiLv1
+    iconName: HuiL1
   - Id: 20027
     Name: HuiResidentialLv2
     CostPerWeek: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
     Level: 2
-    iconName: HuiLv2
+    iconName: HuiL2
   - Id: 20028
     Name: HuiResidentialLv3
     CostPerWeek: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
     tabType: 1
     Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
     Level: 3
-    iconName: HuiLv3
+    iconName: HuiL3
   - Id: 20029
     Name: Mine
     CostPerWeek: 0
@@ -793,7 +793,7 @@ MonoBehaviour:
     tabType: 3
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 1
-    iconName: MineLv1
+    iconName: MineL1
   - Id: 20030
     Name: MineLv2
     CostPerWeek: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
     tabType: 3
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 2
-    iconName: MineLv2
+    iconName: MineL2
   - Id: 20031
     Name: MineLv3
     CostPerWeek: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
     tabType: 3
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 3
-    iconName: MineLv3
+    iconName: MineL3
   - Id: 20032
     Name: Pier
     CostPerWeek: 0
@@ -862,7 +862,7 @@ MonoBehaviour:
     tabType: 3
     Introduce: "\u6355\u635E\u9C7C\u7C7B"
     Level: 1
-    iconName: PierL1
+    iconName: HookerL1
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"

@@ -93,6 +93,8 @@ public class InfoCanvas : CanvasBase
         //Debug.Log(n);
         _buildData.CurFormula += n + _buildData.formulaDatas.Length;
         _buildData.CurFormula %= _buildData.formulaDatas.Length;
+        CleanUpAllAttachedChildren(inIcons);
+        CleanUpAllAttachedChildren(outIcons);
         ChangeOutputIcon(_buildData);
         ChangeInputIcon(_buildData);
     }
