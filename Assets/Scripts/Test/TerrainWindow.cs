@@ -20,6 +20,7 @@ public class TerrainWindow : EditorWindow
     private int buildRoadState;//cancel = 0,waitEnterStartPos = 1,waitEnterEndPos =2,waitEnterConfirm = 3.
     public delegate void Paint();
     public static event Paint OnPaint;
+    int[] sizelist = new int[4] { 1,2,4,8};
     [MenuItem("Window/TerrainWindow")]//在unity菜单Window下有MyWindow选项
 
     static void Init()
@@ -75,11 +76,11 @@ public class TerrainWindow : EditorWindow
                 {
                     if(temp == 0)
                     {
-                        gen.OnPaint(index, hit.point, 4, brushSize);
+                        gen.OnPaint(index, hit.point, 4, sizelist[brushSize]);
                     }
                     else
                     {
-                        gen.OnPaint(index, hit.point, dir, brushSize);
+                        gen.OnPaint(index, hit.point, dir, sizelist[brushSize]);
                     }
                 }
                 else if (canDir)
@@ -104,7 +105,7 @@ public class TerrainWindow : EditorWindow
         
         temp = GUILayout.Toolbar(temp, new string[2] { "是", "否" });
         GUILayout.Label("选择笔刷大小");
-        brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "3", "5" });
+        brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "4", "8" });
 
         if (GUILayout.Button("涂色"))
         {

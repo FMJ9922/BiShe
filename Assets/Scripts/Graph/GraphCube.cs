@@ -17,9 +17,9 @@ public class GraphCube : MonoBehaviour
         textTrans.position = position + new Vector3(0, height + staticHeight+3, -2.5f);
     }
 
-    public void SetLabel(int num)
+    public void SetLabel(string num)
     {
-        label.text = num.ToString();
+        label.text = num;
     }
 
 }

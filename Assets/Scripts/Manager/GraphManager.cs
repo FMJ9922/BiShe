@@ -7,7 +7,7 @@ public class GraphManager : Singleton<GraphManager>
     GameObject cubePfb;
     [SerializeField] GameObject subCamera;
     [SerializeField] GameObject handle;
-
+    private bool[] openState = new bool[4] { false, false, false, false };
     protected override void InstanceAwake()
     {
     }
@@ -18,34 +18,112 @@ public class GraphManager : Singleton<GraphManager>
         handle.SetActive(!handle.activeInHierarchy);
         if (!handle.activeInHierarchy)
         {
-            CloseGraph();
+            CloseAllGraph();
         }
     }
-    public void ShowPopulation()
+
+    public void ShowGraph(int type)
     {
         CleanUpAllAttachedChildren(transform);
-        OpenGraph();
+        if (openState[type])
+        {
+            CloseGraph();
+            openState[type] = false;
+        }
+        else
+        {
+            openState[type] = true;
+            OpenGraph();
+            switch (type)
+            {
+                case 0:
+                    ShowPopulation();
+                    break;
+                case 1:
+                    ShowHappiness();
+                    break;
+                case 2:
+                    ShowMaintenanceCosts();
+                    break;
+                case 3:
+                    ShowEffectiveness();
+                    break;
+            }
+        }
+    }
+    private void ShowPopulation()
+    {
         List<GameObject> buildings = MapManager.Instance._buildings;
         for (int i = 0; i < buildings.Count; i++)
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i].GetComponent<BuildingBase>();
             item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position);
-            item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CurPeople);
+            string showLabel = building.runtimeBuildData.tabType == BuildTabType.house ?
+                Localization.ToSettingLanguage("Resident") : Localization.ToSettingLanguage("Worker");
+            item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CurPeople.ToString() + " " + showLabel);
         }
     }
 
-    public void OpenGraph()
+    private void ShowHappiness()
+    {
+        List<GameObject> buildings = MapManager.Instance._buildings;
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            GameObject item = Instantiate(cubePfb, transform);
+            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
+            item.GetComponent<GraphCube>().SetHeight((int)(building.runtimeBuildData.Happiness * 20), buildings[i].transform.position);
+            string showLabel = Localization.ToSettingLanguage("%");
+            item.GetComponent<GraphCube>().SetLabel((int)(building.runtimeBuildData.Happiness * 100) + showLabel);
+        }
+    }
+    private void ShowMaintenanceCosts()
+    {
+        List<GameObject> buildings = MapManager.Instance._buildings;
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            GameObject item = Instantiate(cubePfb, transform);
+            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
+            item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CostPerWeek, buildings[i].transform.position);
+            string showLabel = "/" + Localization.ToSettingLanguage("Week");
+            item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CostPerWeek.ToString() + showLabel);
+        }
+    }
+
+    public void ShowEffectiveness()
+    {
+        List<GameObject> buildings = MapManager.Instance._buildings;
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            GameObject item = Instantiate(cubePfb, transform);
+            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
+            item.GetComponent<GraphCube>().SetHeight((int)(building.runtimeBuildData.Effectiveness*20), buildings[i].transform.position);
+            string showLabel = Localization.ToSettingLanguage("%");
+            item.GetComponent<GraphCube>().SetLabel((int)(building.runtimeBuildData.Effectiveness * 100) + showLabel);
+        }
+    }
+
+
+    private void OpenGraph()
     {
         cubePfb = LoadAB.Load("building.ab", "GraphPfb");
         Camera.main.GetComponent<PostEffect>().isStart = true;
         subCamera.SetActive(true);
     }
 
-    public void CloseGraph()
+    private void CloseGraph()
     {
         Camera.main.GetComponent<PostEffect>().isStart = false;
         subCamera.SetActive(false);
+    }
+
+    public void CloseAllGraph()
+    {
+        for (int i = 0; i < openState.Length; i++)
+        {
+            openState[i] = false;
+        }
+        CloseGraph();
     }
     private void CleanUpAllAttachedChildren(Transform target)
     {

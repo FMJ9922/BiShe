@@ -248,7 +248,8 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void UpdateRate(string date)
     {
-        runtimeBuildData.Rate += (float)runtimeBuildData.CurPeople / (float)runtimeBuildData.Population / 7f / formula.ProductTime;
+        runtimeBuildData.Effectiveness = (float)runtimeBuildData.CurPeople / (float)runtimeBuildData.Population;
+        runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
     }
 }
@@ -261,5 +262,7 @@ public class RuntimeBuildData : BuildData
     public FormulaData[] formulaDatas;//当前建筑可用的配方们
     public int CurPeople = 0;//当前建筑的工人或居民
     public float Rate = 0;//当前生产进度0-1
+    public float Effectiveness;//生产效率
+    public float Happiness = 0.6f;//当前幸福程度
     
 }
