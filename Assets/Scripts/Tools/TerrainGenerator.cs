@@ -155,23 +155,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
             {
                 indexes[(j + size - 1) * (2 * size - 1) + i + size - 1] = (z + j) * (height.Length - 1) + x + i;
 
-                RefreshUV(tex, 8, indexes, dir,0.001f);
-                /*if (tex == 4 || tex == 5 || tex == 6 || tex == 8 || tex == 9 || tex == 10 || tex == 12 || tex == 13 || tex == 14)
-                {
-                    mapData.roadGrids.Add(new Vector2IntSerializer(x + i, z + j));
-                }
-                else
-                {
-                    for (int k = 0; k < mapData.roadGrids.Count; k++)
-                    {
-                        if (mapData.roadGrids[k].Vector2Int == new Vector2Int(x + i, z + j))
-                        {
-                            mapData.roadGrids.RemoveAt(k);
-                        }
-                    }
-                }*/
             }
         }
+
+        RefreshUV(tex, 8, indexes, dir, 0.001f);
         //SaveMapData(mapData);
 
     }

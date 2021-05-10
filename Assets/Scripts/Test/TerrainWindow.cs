@@ -76,11 +76,11 @@ public class TerrainWindow : EditorWindow
                 {
                     if(temp == 0)
                     {
-                        gen.OnPaint(index, hit.point, 4, sizelist[brushSize]);
+                        gen.OnPaint(index, hit.point, 4, brushSize);
                     }
                     else
                     {
-                        gen.OnPaint(index, hit.point, dir, sizelist[brushSize]);
+                        gen.OnPaint(index, hit.point, dir, brushSize);
                     }
                 }
                 else if (canDir)
@@ -105,7 +105,7 @@ public class TerrainWindow : EditorWindow
         
         temp = GUILayout.Toolbar(temp, new string[2] { "是", "否" });
         GUILayout.Label("选择笔刷大小");
-        brushSize = GUILayout.Toolbar(brushSize, new string[4] { "1", "2", "4", "8" });
+        brushSize = EditorGUILayout.IntSlider(brushSize, 0, 100);
 
         if (GUILayout.Button("涂色"))
         {
