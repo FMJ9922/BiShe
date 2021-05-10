@@ -106,6 +106,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2022324933582318543}
     m_Modifications:
+    - target: {fileID: 708015794569143357, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753513945498544905, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353706543631263819, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -165,6 +180,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hui_Building_Residential_L1_01_Preb
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338138416320760394, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6046472180977761422, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6a0af00f481d6e4280bf7ad3c8600bf, type: 3}
