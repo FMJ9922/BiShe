@@ -26,6 +26,7 @@ public class DataManager : ScriptableObject
     public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
     public static string[] foodNames;
     public static int[] foodIds;
+    public static int[] itemIds;
 
 
     public void InitTabDic()
@@ -161,6 +162,23 @@ public class DataManager : ScriptableObject
             foodIds = list.ToArray();
         }
         return foodIds;
+    }
+
+    public static int[] GetAllItemList()
+    {
+        if (itemIds == null)
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i < Instance.ItemArray.Length; i++)
+            {
+                if (Instance.ItemArray[i].Id != 11000 && Instance.ItemArray[i].Id != 99999)
+                {
+                    list.Add(Instance.ItemArray[i].Id);
+                }
+            }
+            itemIds = list.ToArray();
+        }
+        return itemIds;
     }
     public static int GetItemIdByName(string name)
     {

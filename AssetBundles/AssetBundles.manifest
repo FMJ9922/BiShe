@@ -1,11 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1166771165
+CRC: 3736310945
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: building.ab
       Dependencies:
         Dependency_0: mat.ab
+        Dependency_1: icon.ab
     Info_1:
       Name: plant.ab
       Dependencies:

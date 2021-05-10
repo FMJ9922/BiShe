@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1072603876
+CRC: 1917447523
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2554f8934f814bc3cdeec6fbb594866e
+    Hash: bd664b9f62a0d18b49bb810423f5a3c6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 03d5218f755909c49d7aa2e38125d8c8
+    Hash: 78ff54aa2134fc635ee5cb2fac62c548
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,19 +40,43 @@ ClassTypes:
 - Class: 111
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 13a439e141656eb468c8c25c0a3ab07c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 850726b275ceab3498f5634474ab05cb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 2a2b6607be4669b4390ff446c6594104, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 114
@@ -65,6 +89,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: ed36183c39531034ab93806cf2034535, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: df27a4bc07c150c4d9eaef67a727a571, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb6927bc663d62145b5384a4899ae21e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ad6a99ec1dcf0694bb541a40fd1f4a81, type: 3}
 - Class: 114
@@ -92,6 +118,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_02.prefab
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_01_Preb.prefab
+- Assets/Prefabs/MarketItemPfb.prefab
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_02_Mod.fbx
@@ -276,3 +303,4 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_02_Mod.fbx
 Dependencies:
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab
+- D:/UnityProjects/BiShe/AssetBundles/icon.ab

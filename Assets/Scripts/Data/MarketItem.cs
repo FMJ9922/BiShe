@@ -1,117 +1,176 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 /// <summary>
 /// 市场物品信息
 /// </summary>
 public class MarketItem : MonoBehaviour
 {
-    public int itemID;
-    private string strName;
-    private float storageNum;//存储数量
-    private float delta = 0;
-    public float buy;//买入价格
-    public float sell;//卖出价格
-    public Button btn_banTrade;//禁止贸易按钮
-    public Button btn_maintain;//维持库存
-    public InputField input_num;//维持数量（多卖少买）
-    private float profit;//利润
-    [SerializeField] TMP_Text tmpName, tmpStorage, tmpBuy, tmpSell, tmpProfit;
+    [SerializeField] TMP_Dropdown itemDrop;
+    [SerializeField] Button subBtn,addBtn;
+    [SerializeField] TMP_Text numText;
+    [SerializeField] TMP_Text profitText;
+    [SerializeField] TMP_Dropdown modeDrop;
+    [SerializeField] Button confirmBtn;
+    [SerializeField] Button cancelBtn;
+    [SerializeField] CommonIcon icon;
+    public ItemData curItem;
+    private List<int> idList = new List<int>();
 
+    public bool isTrading = false;
+    public int needNum = 0;
+    public TradeMode curMode;
+    public float profit;
+    public enum TradeMode
+    {
+        [Description("Once")]
+        once = 0,
+        [Description("EveryWeek")]
+        everyWeek = 1,
+        [Description("Maintain")]
+        maintain = 2,
+    }
     private void OnDestroy()
     {
-        btn_banTrade.onClick.RemoveAllListeners();
-        btn_maintain.onClick.RemoveAllListeners();
+        itemDrop.onValueChanged.RemoveAllListeners();
+        modeDrop.onValueChanged.RemoveAllListeners();
     }
     public void InitItem(int id)
     {
-        itemID = id;
-        ItemData data = DataManager.GetItemDataById(id);
-        strName = Localization.ToSettingLanguage(data.Name);
-        storageNum = ResourceManager.Instance.TryGetResourceNum(id);
-        buy = 1.1f * data.Price;
-        sell = data.Price;
-        btn_banTrade.onClick.AddListener(OnBanTrade);
-        btn_maintain.onClick.AddListener(OnMaintain);
-        input_num.onValueChanged.AddListener(RefreshItem);
-        profit = 0;
-        tmpName.text = strName;
-        tmpStorage.text = CastTool.RoundOrFloat(storageNum);
-        tmpBuy.text = CastTool.RoundOrFloat(buy);
-        tmpSell.text = CastTool.RoundOrFloat(sell);
-        tmpProfit.text = CastTool.RoundOrFloat(profit);
+        
     }
 
-    public void RefreshItem(string text)
+    public void InitItemDropDown()
     {
-        storageNum = ResourceManager.Instance.TryGetResourceNum(itemID);
-        if(float.TryParse(text,out float target))
+        ItemData[] itemArray = DataManager.GetItemDatas();
+        idList.Clear();
+        TMP_Dropdown.OptionData tempData;
+        ClearItemDrop(true);
+        for (int i = 0; i < itemArray.Length; i++)
         {
-            delta = storageNum - target;
-            profit = btn_maintain.interactable ? 0 : (delta > 0 ? delta * sell : delta * buy);
+            //排除金钱和人力资源
+            if (itemArray[i].Id == 10000 || itemArray[i].Id == 99999 || itemArray[i].Id == 11000)
+            {
+                continue;
+            }
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(itemArray[i].Name);
+            itemDrop.options.Add(tempData);
+            idList.Add(itemArray[i].Id);
         }
-        else
+        ChangeItem(0);
+        itemDrop.onValueChanged.AddListener(ChangeItem);
+        numText.text = needNum.ToString();
+
+        modeDrop.ClearOptions();
+        for (int i = 0; i < 3; i++)
         {
-            input_num.text = string.Empty;
-            profit = 0;
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            modeDrop.options.Add(tempData);
         }
-        tmpProfit.text = CastTool.RoundOrFloat(profit);
-        tmpStorage.text = CastTool.RoundOrFloat(storageNum);
+        modeDrop.onValueChanged.AddListener(ChangeMode);
+
+        RefreshProfitLabel();
+
+        OnResetTrading();
     }
+
+    public void InitItemDropDown(int Id)
+    {
+        curItem = DataManager.GetItemDataById(Id);
+        ClearItemDrop(false);
+        itemDrop.captionText.text = Localization.ToSettingLanguage(curItem.Name);
+    }
+    private void ClearItemDrop(bool interactable)
+    {
+        itemDrop.ClearOptions();
+        itemDrop.interactable = interactable;
+    }
+
+    private void ChangeItem(int id)
+    {
+        curItem = DataManager.GetItemDataById(idList[id]);
+        icon.SetIcon(curItem.Id, 0);
+        RefreshProfitLabel();
+        OnResetTrading();
+    }
+
+    private void ChangeMode(int modeType)
+    {
+        curMode = (TradeMode)modeType;
+        modeDrop.captionText.text = Localization.ToSettingLanguage(((TradeMode)modeType).GetDescription());
+        RefreshProfitLabel();
+        OnResetTrading();
+    }
+    
+    public void RefreshProfitLabel()
+    {
+        switch (curMode)
+        {
+            case TradeMode.once:
+            case TradeMode.everyWeek:
+                profit = -curItem.Price * needNum;
+                break;
+            case TradeMode.maintain:
+                float num = needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id);
+                profit = num > 0 ? -curItem.Price * num : 0;
+                break;
+        }
+        profitText.text = profit.ToString();
+    }
+
     public void RefreshItem()
     {
-        storageNum = ResourceManager.Instance.TryGetResourceNum(itemID);
-        if (float.TryParse(input_num.text, out float target))
-        {
-            delta = storageNum - target;
-            profit = btn_maintain.interactable ? 0 : (delta > 0 ? delta * sell : delta * buy);
-        }
-        else
-        {
-            input_num.text = string.Empty;
-            profit = 0;
-        }
-        tmpProfit.text = CastTool.RoundOrFloat(profit);
-        tmpStorage.text = CastTool.RoundOrFloat(storageNum);
+        
     }
 
-    public void OnBanTrade()
+
+    public void OnAddNum()
     {
-        btn_banTrade.interactable = false;
-        btn_maintain.interactable = true;
-        input_num.text = string.Empty;
-        input_num.interactable = false;
+        needNum += 10;
+        if (needNum > 50) needNum = 50;
+        numText.text = needNum.ToString();
+        RefreshProfitLabel();
+        OnResetTrading();
     }
 
-    public void OnMaintain()
+    public void OnSubNum()
     {
-        btn_banTrade.interactable = true;
-        btn_maintain.interactable = false;
-        input_num.interactable = true;
+        needNum -= 10;
+        if (needNum < 0) needNum = 0;
+        numText.text = needNum.ToString();
+        RefreshProfitLabel();
+        OnResetTrading();
+    }
+
+    public void OnConfirmTrading()
+    {
+        //Debug.Log("true");
+        isTrading = true;
+        confirmBtn.gameObject.SetActive(false);
+        cancelBtn.gameObject.SetActive(true);
+    }
+
+    public void OnResetTrading()
+    {
+        //Debug.Log("false");
+        isTrading = false;
+        confirmBtn.gameObject.SetActive(true);
+        cancelBtn.gameObject.SetActive(false);
     }
 
     public float GetProfit()
     {
-        storageNum = ResourceManager.Instance.TryGetResourceNum(itemID);
-        if (float.TryParse(input_num.text, out float target))
-        {
-            delta = storageNum - target;
-            profit = btn_maintain.interactable ? 0 : (delta > 0 ? delta * sell : delta * buy);
-        }
-        else
-        {
-            input_num.text = string.Empty;
-            profit = 0;
-        }
         return profit;
     }
 
     public CostResource GetCostResource()
     {
-        CostResource costResource = new CostResource(itemID, delta);
-        return costResource;
+        return new CostResource(curItem.Id,needNum);
     }
 }
+    

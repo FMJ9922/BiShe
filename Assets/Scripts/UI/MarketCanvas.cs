@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MarketCanvas : CanvasBase
 {
@@ -8,56 +10,84 @@ public class MarketCanvas : CanvasBase
     List<MarketItem> marketItems = new List<MarketItem>();
     [SerializeField] GameObject marketContent;
     [SerializeField] GameObject marketItemPfb;
-
+    [SerializeField] Button buyBtn, sellBtn;
+    [SerializeField] TMP_Text buyText, sellText;
+    [SerializeField] GameObject buyContent, sellContent;
+    enum MarketOption
+    {
+        buy = 0,
+        sell = 1,
+    }
     #region 实现基类
     public override void InitCanvas()
     {
-        InitMarketItems();
         mainCanvas.SetActive(false);
     }
     public override void OnOpen()
     {
-        RefreshMarketItem();
+        OnClickBuyBtn();
         mainCanvas.SetActive(true);
         GameManager.Instance.PauseGame();
+        EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll,true);
     }
 
     public override void OnClose()
     {
         mainCanvas.SetActive(false);
         GameManager.Instance.ContinueGame();
+        EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
     }
     #endregion
 
-    private void InitMarketItems()
+    public void OnClickBuyBtn()
     {
-        ItemData[] itemArray = DataManager.GetItemDatas();
-        for (int i = 0; i < itemArray.Length; i++)
-        {
-            //排除金钱和人力资源
-            if (itemArray[i].Id == 10000 || itemArray[i].Id == 99999 || itemArray[i].Id == 11000)
-            {
-                continue;
-            }
-            GameObject obj = GameObject.Instantiate(marketItemPfb, marketContent.transform);
-            obj.SetActive(true);
-            MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.InitItem(itemArray[i].Id);
-            marketItems.Add(marketItem);
-        }
+        //Debug.Log("buy");
+        buyText.color = Color.white;
+        sellText.color = Color.gray;
+        InitMarketItems(true);
+    }
+
+    public void OnClickSellBtn()
+    {
+        //Debug.Log("sell");
+        buyText.color = Color.gray;
+        sellText.color = Color.white;
+        InitMarketItems(false);
+    }
+
+    private void InitMarketItems(bool isSell)
+    {
+
+
     }
     public List<MarketItem> GetMarketItems()
     {
         return marketItems;
     }
 
+    public void InitBuyItem()
+    {
+        GameObject obj = Instantiate(marketItemPfb, marketContent.transform);
+        obj.SetActive(true);
+        obj.transform.SetParent(marketContent.transform);
+        obj.transform.SetSiblingIndex(marketContent.transform.childCount - 2);
+        MarketItem marketItem = obj.GetComponent<MarketItem>();
+        marketItem.InitItemDropDown();
+        marketItems.Add(marketItem);
+    }
+
+    public void RemoveBuyItem(GameObject obj)
+    {
+        MarketItem item = obj.GetComponent<MarketItem>();
+        marketItems.Remove(item);
+        Destroy(obj);
+    }
     public void RefreshMarketItem()
     {
-        foreach(var item in marketItems)
+        foreach (var item in marketItems)
         {
             Destroy(item.gameObject);
         }
         marketItems.Clear();
-        InitMarketItems();
     }
 }

@@ -28,9 +28,27 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         string iconName = icon.data.Name;
         icon._image.sprite = LoadAB.LoadSprite(_iconBundle, iconName+"Icon");
         icon._image.SetNativeSize();
-        icon._numLabel.outlineWidth = 0.5f;
-        icon._numLabel.outlineColor = new Color32(255, 128, 0, 255);
+        icon._numLabel.outlineWidth = 0.3f;
+        icon._numLabel.outlineColor = Color.black;
         return newIcon;
+    }
+
+    public void SetIcon(int itemID, float itemNum)
+    {
+        if (itemNum != 0)
+        {
+            _numLabel.text = CastTool.RoundOrFloat(itemNum);
+            _numLabel.outlineWidth = 0.3f;
+            _numLabel.outlineColor = Color.black;
+        }
+        else
+        {
+            _numLabel.gameObject.SetActive(false);
+        }
+        data = DataManager.GetItemDataById(itemID);
+        string iconName = data.Name;
+        _image.sprite = LoadAB.LoadSprite(_iconBundle, iconName + "Icon");
+        _image.SetNativeSize();
     }
     #region 接口
     public void OnPointerEnter(PointerEventData eventData)

@@ -20,10 +20,16 @@ public class CameraMovement : Singleton<CameraMovement>
     private float _rightSpeed = 0;
     private float _scrollValue = 40;
     private bool canMove = true;
+    private bool canScroll = true;
 
     protected override void InstanceAwake()
     {
         _cameraTrans = transform.GetChild(0);
+        EventManager.StartListening<bool>(ConstEvent.OnLockScroll,LockScroll);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening<bool>(ConstEvent.OnLockScroll, LockScroll);
     }
     void Update()
     {
@@ -63,6 +69,12 @@ public class CameraMovement : Singleton<CameraMovement>
         {
             _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
         }
+        transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
+
+        if (!canScroll)
+        {
+            return;
+        }
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
             _scrollValue = Mathf.MoveTowards(_scrollValue, MaxScrollValue, ScrollWheelSpeed);
@@ -71,7 +83,6 @@ public class CameraMovement : Singleton<CameraMovement>
         {
             _scrollValue = Mathf.MoveTowards(_scrollValue, MinScrollValue, ScrollWheelSpeed);
         }
-        transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
         _cameraTrans.localPosition = new Vector3(-1f, -1.42f, 1f) * _scrollValue;
     }
 
@@ -84,6 +95,11 @@ public class CameraMovement : Singleton<CameraMovement>
     public void AllowMovement()
     {
         //canMove = true;
+    }
+
+    public void LockScroll(bool isLock)
+    {
+        canScroll = !isLock;
     }
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {

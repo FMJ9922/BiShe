@@ -54,7 +54,8 @@ public class MainInteractCanvas : CanvasBase
 
     public void OpenMarketCanvas()
     {
-        canvas[4].OnOpen();
+        MarketCanvas marketCanvas = (MarketCanvas)canvas[4];
+        marketCanvas.OnOpen();
     }
 
     public void OpenCarMissionCanvas(GameObject car)
@@ -63,6 +64,10 @@ public class MainInteractCanvas : CanvasBase
         carCanvas.OnOpen(car);
     }
 
+    public void OpenTechCanvas()
+    {
+
+    }
     private void CloseAllOpenedUI()
     {
         foreach (var item in canvas)

@@ -11,10 +11,12 @@ public class InfoCanvas : CanvasBase
     [SerializeField] GameObject _rateObj;//产量
     [SerializeField] GameObject _workerObj;//工人人口
     [SerializeField] GameObject _populationObj;//居民人口
+    [SerializeField] GameObject _openCanvas;//开启功能页签
     [SerializeField] Button _destroyBtn;//拆除建筑
     [SerializeField] Button _upgradeBtn;//升级
     [SerializeField] Button[] _populationBtns;//人口相关按钮
     [SerializeField] TMP_Text _nameLabel, _introduceLabel, _rateLabel, _populationLabel,_workerLabel;
+    [SerializeField] TMP_Text _openText;//功能
     [SerializeField] Button[] _switchFormulaBtns;//切换产品按钮
     [SerializeField] private GameObject mainCanvas;
     [SerializeField] private Transform inIcons;
@@ -37,9 +39,14 @@ public class InfoCanvas : CanvasBase
         _buildData = buildbase.runtimeBuildData;
         ChangeShowItems(_buildData);
         ChangeLabels(_buildData);
-        mainCanvas.SetActive(true);
         AddBtnsListener(buildbase);
+        ChangeOpenCanvas(buildbase.runtimeBuildData.Id);
+        mainCanvas.SetActive(true);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
+        if (!BuildingHighlight)
+        {
+            BuildingHighlight = GameObject.Find("SelectedLight");
+        }
         BuildingHighlight.transform.position = buildbase.transform.position;
         BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y*2, 10, buildbase.Size.x*2);
         BuildingHighlight.transform.rotation = buildbase.transform.rotation;
@@ -54,6 +61,37 @@ public class InfoCanvas : CanvasBase
             _populationBtns[i].gameObject.SetActive(isActive);
         }
     }*/
+    private void ChangeOpenCanvas(int id)
+    {
+        Button btn = _openCanvas.GetComponentInChildren<Button>();
+        switch (id)
+        {
+            //仓库
+            case 20003:
+            case 20016:
+            case 20017:
+                {
+                    btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
+                    _openText.text = Localization.ToSettingLanguage("Open")+ Localization.ToSettingLanguage("Warehouse");
+                }
+                break;
+            //集市
+            case 20004:
+            case 20012:
+            case 20013:
+                btn.onClick.AddListener(MainInteractCanvas.Instance.OpenMarketCanvas);
+                _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Market");
+                break;
+            //市政
+            case 20020:
+            case 20021:
+            case 20022:
+                btn.onClick.AddListener(MainInteractCanvas.Instance.OpenTechCanvas);
+                _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("TechCanvas");
+                break;
+        }
+    }
+
     private void AddBtnsListener(BuildingBase buildingBase)
     {
         RemoveBtnsListener();
@@ -73,6 +111,7 @@ public class InfoCanvas : CanvasBase
         _populationBtns[3].onClick.RemoveAllListeners();
         _destroyBtn.onClick.RemoveAllListeners();
         _upgradeBtn.onClick.RemoveAllListeners();
+        _openCanvas.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
     }
 
     public override void OnClose()
@@ -117,6 +156,7 @@ public class InfoCanvas : CanvasBase
                         _inputsObj.SetActive(true);
                         ChangeInputIcon(buildData);
                     }
+                    _openCanvas.SetActive(false);
                     _outputsObj.SetActive(true);
                     ChangeOutputIcon(buildData);
                     _rateObj.SetActive(true);
@@ -129,6 +169,7 @@ public class InfoCanvas : CanvasBase
                 }
             case BuildTabType.utility:
                 {
+                    _openCanvas.SetActive(true);
                     _inputsObj.SetActive(false);
                     _outputsObj.SetActive(false);
                     _rateObj.SetActive(false);
@@ -140,6 +181,7 @@ public class InfoCanvas : CanvasBase
                 }
             case BuildTabType.house:
                 {
+                    _openCanvas.SetActive(false);
                     _inputsObj.SetActive(true);
                     ChangeInputIcon(buildData);
                     _outputsObj.SetActive(false);
@@ -152,6 +194,7 @@ public class InfoCanvas : CanvasBase
                 }
             case BuildTabType.hide:
                 {
+                    _openCanvas.SetActive(true);
                     _inputsObj.SetActive(false);
                     _outputsObj.SetActive(false);
                     _rateObj.SetActive(false);

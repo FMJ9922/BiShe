@@ -4,8 +4,7 @@ using UnityEngine;
 using System;
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] MainInteractCanvas MainInteractCanvas;
-
+    public MainInteractCanvas MainInteractCanvas;
     private float dayTime = 5f;
     public static int LevelID;
     private int year, month, week,day;

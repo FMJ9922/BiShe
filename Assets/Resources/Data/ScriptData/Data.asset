@@ -78,6 +78,46 @@ MonoBehaviour:
     ItemType: 1
     Price: 6
     BuildingID: 0
+  - Id: 12012
+    Name: Iron
+    ItemType: 2
+    Price: 8
+    BuildingID: 0
+  - Id: 12013
+    Name: Fur
+    ItemType: 2
+    Price: 6
+    BuildingID: 0
+  - Id: 11014
+    Name: Vegitable
+    ItemType: 1
+    Price: 3
+    BuildingID: 0
+  - Id: 12015
+    Name: Building Material
+    ItemType: 2
+    Price: 10
+    BuildingID: 0
+  - Id: 11016
+    Name: Canned meat
+    ItemType: 1
+    Price: 12
+    BuildingID: 0
+  - Id: 11017
+    Name: Canned Fish
+    ItemType: 1
+    Price: 12
+    BuildingID: 0
+  - Id: 12018
+    Name: Cloth
+    ItemType: 2
+    Price: 15
+    BuildingID: 0
+  - Id: 11019
+    Name: Steamed buns
+    ItemType: 1
+    Price: 6
+    BuildingID: 0
   LevelArray:
   - Id: 30001
     Name: "\u519C\u4EA7\u54C1"
@@ -131,7 +171,7 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
-    CostPerWeek: 2
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -224,7 +264,7 @@ MonoBehaviour:
   - Id: 20005
     Name: Farmland
     CostPerWeek: 1
-    Formulas: 56c3000057c30000
+    Formulas: 56c3000057c3000062c30000
     Population: 1
     MaxStorage: 100
     InfluenceRange: 5
@@ -268,7 +308,7 @@ MonoBehaviour:
   - Id: 20007
     Name: Workshop
     CostPerWeek: 8
-    Formulas: 53c3000054c3000058c30000
+    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
     Population: 15
     MaxStorage: 100
     InfluenceRange: 45
@@ -313,7 +353,7 @@ MonoBehaviour:
     iconName: SawmillL1
   - Id: 20009
     Name: PlainResidentialLv2
-    CostPerWeek: 3
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -337,7 +377,7 @@ MonoBehaviour:
   - Id: 20010
     Name: Factory
     CostPerWeek: 10
-    Formulas: 53c3000054c3000058c30000
+    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
     Population: 18
     MaxStorage: 100
     InfluenceRange: 45
@@ -360,7 +400,7 @@ MonoBehaviour:
   - Id: 20011
     Name: Integrated mill
     CostPerWeek: 15
-    Formulas: 53c3000054c3000058c30000
+    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
     Population: 20
     MaxStorage: 100
     InfluenceRange: 45
@@ -566,7 +606,7 @@ MonoBehaviour:
     iconName: RoadL3
   - Id: 20020
     Name: Government
-    CostPerWeek: 0
+    CostPerWeek: -200
     Formulas: 
     Population: 0
     MaxStorage: 100
@@ -635,7 +675,7 @@ MonoBehaviour:
     iconName: 
   - Id: 20023
     Name: CoachResidential
-    CostPerWeek: 2
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -658,7 +698,7 @@ MonoBehaviour:
     iconName: CoachL1
   - Id: 20024
     Name: CoachResidentialLv2
-    CostPerWeek: 3
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -681,7 +721,7 @@ MonoBehaviour:
     iconName: CoachL2
   - Id: 20025
     Name: CoachResidentialLv3
-    CostPerWeek: 5
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -704,7 +744,7 @@ MonoBehaviour:
     iconName: CoachL3
   - Id: 20026
     Name: HuiResidential
-    CostPerWeek: 2
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -727,7 +767,7 @@ MonoBehaviour:
     iconName: HuiL1
   - Id: 20027
     Name: HuiResidentialLv2
-    CostPerWeek: 3
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -750,7 +790,7 @@ MonoBehaviour:
     iconName: HuiL2
   - Id: 20028
     Name: HuiResidentialLv3
-    CostPerWeek: 5
+    CostPerWeek: 0
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -774,7 +814,7 @@ MonoBehaviour:
   - Id: 20029
     Name: Mine
     CostPerWeek: 6
-    Formulas: 5bc30000
+    Formulas: 5bc3000061c30000
     Population: 20
     MaxStorage: 100
     InfluenceRange: 0
@@ -797,7 +837,7 @@ MonoBehaviour:
   - Id: 20030
     Name: MineLv2
     CostPerWeek: 8
-    Formulas: 5bc30000
+    Formulas: 5bc3000061c30000
     Population: 20
     MaxStorage: 100
     InfluenceRange: 0
@@ -820,7 +860,7 @@ MonoBehaviour:
   - Id: 20031
     Name: MineLv3
     CostPerWeek: 10
-    Formulas: 5bc30000
+    Formulas: 5bc3000061c30000
     Population: 20
     MaxStorage: 100
     InfluenceRange: 0
@@ -886,7 +926,7 @@ MonoBehaviour:
     ProductNum: 0f000000
     ProductTime: 3
   - ID: 50004
-    Describe: "\u539F\u6728\u4EA7\u6728\u6599"
+    Describe: "\u539F\u6728\u4EA7\u5BB6\u5177"
     InputItemID: e32e0000
     InputNum: 0f000000
     OutputItemID: e42e0000
@@ -948,6 +988,55 @@ MonoBehaviour:
     OutputItemID: 032b0000
     ProductNum: 0f000000
     ProductTime: 1
+  - ID: 50013
+    Describe: "\u6BDB\u76AE\u751F\u4EA7\u8863\u670D"
+    InputItemID: ed2e0000
+    InputNum: 0a000000
+    OutputItemID: f22e0000
+    ProductNum: 02000000
+    ProductTime: 2
+  - ID: 50014
+    Describe: "\u94C1\u548C\u8089\u751F\u4EA7\u8089\u7F50\u5934"
+    InputItemID: ec2e0000fd2a0000
+    InputNum: 0100000005000000
+    OutputItemID: 082b0000
+    ProductNum: 03000000
+    ProductTime: 2
+  - ID: 50015
+    Describe: "\u94C1\u548C\u9C7C\u751F\u4EA7\u9C7C\u7F50\u5934"
+    InputItemID: ec2e0000032b0000
+    InputNum: 0100000005000000
+    OutputItemID: 092b0000
+    ProductNum: 03000000
+    ProductTime: 2
+  - ID: 50016
+    Describe: "\u77F3\u5934\u751F\u4EA7\u5EFA\u6750"
+    InputItemID: e92e0000
+    InputNum: 0a000000
+    OutputItemID: ef2e0000
+    ProductNum: 01000000
+    ProductTime: 2
+  - ID: 50017
+    Describe: "\u77FF\u4E95\u751F\u4EA7\u94C1"
+    InputItemID: 
+    InputNum: 
+    OutputItemID: ec2e0000
+    ProductNum: 0f000000
+    ProductTime: 2
+  - ID: 50018
+    Describe: "\u519C\u7530\u751F\u4EA7\u852C\u83DC"
+    InputItemID: 
+    InputNum: 
+    OutputItemID: 062b0000
+    ProductNum: 14000000
+    ProductTime: 2
+  - ID: 50019
+    Describe: "\u9762\u7C89\u751F\u4EA7\u9992\u5934"
+    InputItemID: e62e0000
+    InputNum: 0a000000
+    OutputItemID: 0b2b0000
+    ProductNum: 05000000
+    ProductTime: 2
   LocalizationData:
     combines:
     - code: Log
@@ -1113,10 +1202,10 @@ MonoBehaviour:
       chinese: "\u96C6\u5E02"
       english: Bazaar
     - code: Market
-      chinese: "\u7EFC\u5408\u5E02\u573A"
+      chinese: "\u5E02\u573A"
       english: Market
     - code: Shopping Mall
-      chinese: "\u5927\u578B\u5546\u57CE"
+      chinese: "\u5546\u57CE"
       english: Shopping Mall
     - code: Workshop
       chinese: "\u5DE5\u574A"
@@ -1187,3 +1276,21 @@ MonoBehaviour:
     - code: Output
       chinese: "\u751F\u4EA7"
       english: Output
+    - code: Open
+      chinese: "\u6253\u5F00"
+      english: Open
+    - code: TechCanvas
+      chinese: "\u79D1\u6280\u9762\u677F"
+      english: TechCanvas
+    - code: Fish
+      chinese: "\u9C7C"
+      english: Fish
+    - code: Once
+      chinese: "\u4E00\u6B21"
+      english: Once
+    - code: EveryWeek
+      chinese: "\u6BCF\u5468"
+      english: EveryWeek
+    - code: Maintain
+      chinese: "\u7EF4\u6301"
+      english: Maintain
