@@ -46,7 +46,7 @@ MonoBehaviour:
   - Id: 12006
     Name: Flour
     ItemType: 2
-    Price: 3
+    Price: 4
     BuildingID: 0
   - Id: 11008
     Name: ProcessedMeat
@@ -71,7 +71,7 @@ MonoBehaviour:
   - Id: 11010
     Name: Sausage
     ItemType: 1
-    Price: 4
+    Price: 5
     BuildingID: 0
   - Id: 11011
     Name: Fish
@@ -131,7 +131,7 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
-    CostPerWeek: 0
+    CostPerWeek: 2
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -149,7 +149,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_0X
     tabType: 1
-    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+    Introduce: "\u57FA\u7840\u6C11\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: ResidentialL1
   - Id: 20002
@@ -200,7 +200,7 @@ MonoBehaviour:
     iconName: WareHouseL1
   - Id: 20004
     Name: Bazaar
-    CostPerWeek: 10
+    CostPerWeek: 9
     Formulas: 
     Population: 12
     MaxStorage: 100
@@ -268,7 +268,7 @@ MonoBehaviour:
   - Id: 20007
     Name: Workshop
     CostPerWeek: 8
-    Formulas: 53c3000054c3000055c3000058c30000
+    Formulas: 53c3000054c3000058c30000
     Population: 15
     MaxStorage: 100
     InfluenceRange: 45
@@ -313,7 +313,7 @@ MonoBehaviour:
     iconName: SawmillL1
   - Id: 20009
     Name: PlainResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: 3
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -336,8 +336,8 @@ MonoBehaviour:
     iconName: ResidentialL2
   - Id: 20010
     Name: Factory
-    CostPerWeek: 8
-    Formulas: 53c3000054c3000055c3000058c30000
+    CostPerWeek: 10
+    Formulas: 53c3000054c3000058c30000
     Population: 18
     MaxStorage: 100
     InfluenceRange: 45
@@ -359,8 +359,8 @@ MonoBehaviour:
     iconName: FactoryL2
   - Id: 20011
     Name: Integrated mill
-    CostPerWeek: 8
-    Formulas: 53c3000054c3000055c3000058c30000
+    CostPerWeek: 15
+    Formulas: 53c3000054c3000058c30000
     Population: 20
     MaxStorage: 100
     InfluenceRange: 45
@@ -382,7 +382,7 @@ MonoBehaviour:
     iconName: FactoryL3
   - Id: 20012
     Name: Market
-    CostPerWeek: 10
+    CostPerWeek: 12
     Formulas: 
     Population: 16
     MaxStorage: 100
@@ -405,7 +405,7 @@ MonoBehaviour:
     iconName: MarketL2
   - Id: 20013
     Name: Shopping Mall
-    CostPerWeek: 10
+    CostPerWeek: 16
     Formulas: 
     Population: 23
     MaxStorage: 100
@@ -428,7 +428,7 @@ MonoBehaviour:
     iconName: MarketL3
   - Id: 20014
     Name: LoggingCampsLv2
-    CostPerWeek: 4
+    CostPerWeek: 6
     Formulas: 59c30000
     Population: 10
     MaxStorage: 100
@@ -451,7 +451,7 @@ MonoBehaviour:
     iconName: SawmillL2
   - Id: 20015
     Name: LoggingCampsLv3
-    CostPerWeek: 4
+    CostPerWeek: 9
     Formulas: 59c30000
     Population: 11
     MaxStorage: 100
@@ -474,7 +474,7 @@ MonoBehaviour:
     iconName: SawmillL3
   - Id: 20016
     Name: Warehouse Lv2
-    CostPerWeek: 5
+    CostPerWeek: 8
     Formulas: 
     Population: 12
     MaxStorage: 100
@@ -497,7 +497,7 @@ MonoBehaviour:
     iconName: WareHouseL2
   - Id: 20017
     Name: Warehouse Lv3
-    CostPerWeek: 5
+    CostPerWeek: 11
     Formulas: 
     Population: 15
     MaxStorage: 100
@@ -635,7 +635,7 @@ MonoBehaviour:
     iconName: 
   - Id: 20023
     Name: CoachResidential
-    CostPerWeek: 0
+    CostPerWeek: 2
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -658,7 +658,7 @@ MonoBehaviour:
     iconName: CoachL1
   - Id: 20024
     Name: CoachResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: 3
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -681,7 +681,7 @@ MonoBehaviour:
     iconName: CoachL2
   - Id: 20025
     Name: CoachResidentialLv3
-    CostPerWeek: 0
+    CostPerWeek: 5
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -704,7 +704,7 @@ MonoBehaviour:
     iconName: CoachL3
   - Id: 20026
     Name: HuiResidential
-    CostPerWeek: 0
+    CostPerWeek: 2
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -727,7 +727,7 @@ MonoBehaviour:
     iconName: HuiL1
   - Id: 20027
     Name: HuiResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: 3
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -750,7 +750,7 @@ MonoBehaviour:
     iconName: HuiL2
   - Id: 20028
     Name: HuiResidentialLv3
-    CostPerWeek: 0
+    CostPerWeek: 5
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -773,7 +773,7 @@ MonoBehaviour:
     iconName: HuiL3
   - Id: 20029
     Name: Mine
-    CostPerWeek: 0
+    CostPerWeek: 6
     Formulas: 5bc30000
     Population: 20
     MaxStorage: 100
@@ -796,7 +796,7 @@ MonoBehaviour:
     iconName: MineL1
   - Id: 20030
     Name: MineLv2
-    CostPerWeek: 0
+    CostPerWeek: 8
     Formulas: 5bc30000
     Population: 20
     MaxStorage: 100
@@ -819,7 +819,7 @@ MonoBehaviour:
     iconName: MineL2
   - Id: 20031
     Name: MineLv3
-    CostPerWeek: 0
+    CostPerWeek: 10
     Formulas: 5bc30000
     Population: 20
     MaxStorage: 100
@@ -842,7 +842,7 @@ MonoBehaviour:
     iconName: MineL3
   - Id: 20032
     Name: Pier
-    CostPerWeek: 0
+    CostPerWeek: 8
     Formulas: 5cc30000
     Population: 10
     MaxStorage: 100
@@ -867,30 +867,30 @@ MonoBehaviour:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
     InputItemID: f92a0000
-    InputNum: 05000000
+    InputNum: 19000000
     OutputItemID: fd2a0000
     ProductNum: 14000000
     ProductTime: 3
   - ID: 50002
     Describe: "\u7A3B\u7C73\u4EA7\u751F\u8089"
     InputItemID: fa2a0000
-    InputNum: 03000000
+    InputNum: 19000000
     OutputItemID: fd2a0000
     ProductNum: 14000000
     ProductTime: 3
   - ID: 50003
     Describe: "\u5C0F\u9EA6\u4EA7\u9762\u7C89"
     InputItemID: f92a0000
-    InputNum: 0a000000
+    InputNum: 19000000
     OutputItemID: e62e0000
-    ProductNum: 08000000
+    ProductNum: 0f000000
     ProductTime: 3
   - ID: 50004
     Describe: "\u539F\u6728\u4EA7\u6728\u6599"
     InputItemID: e32e0000
-    InputNum: 0b000000
+    InputNum: 0f000000
     OutputItemID: e42e0000
-    ProductNum: 09000000
+    ProductNum: 0a000000
     ProductTime: 4
   - ID: 50005
     Describe: "\u751F\u8089\u4EA7\u52A0\u5DE5\u8089"
@@ -916,9 +916,9 @@ MonoBehaviour:
   - ID: 50008
     Describe: "\u751F\u8089\u9762\u7C89\u4EA7\u9999\u80A0"
     InputItemID: e62e0000fd2a0000
-    InputNum: 0a00000005000000
+    InputNum: 0f00000009000000
     OutputItemID: 022b0000
-    ProductNum: 0d000000
+    ProductNum: 0f000000
     ProductTime: 1
   - ID: 50009
     Describe: "\u4F10\u6728\u4EA7\u539F\u6728"
@@ -946,7 +946,7 @@ MonoBehaviour:
     InputItemID: 
     InputNum: 
     OutputItemID: 032b0000
-    ProductNum: 0a000000
+    ProductNum: 0f000000
     ProductTime: 1
   LocalizationData:
     combines:
