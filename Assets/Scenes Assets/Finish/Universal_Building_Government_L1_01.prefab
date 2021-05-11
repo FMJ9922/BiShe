@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6733904123791653078}
   - component: {fileID: 5647980346182910128}
   m_Layer: 0
-  m_Name: Universal_Building_Government_L1_01_Mod
+  m_Name: Universal_Building_Government_L1_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,8 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad6a99ec1dcf0694bb541a40fd1f4a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 8
-  Height: 6
+  Width: 6
+  Height: 8
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}

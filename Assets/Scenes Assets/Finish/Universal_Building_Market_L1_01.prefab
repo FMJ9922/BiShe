@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5508090792526046556}
   - component: {fileID: -1632058404701652984}
   m_Layer: 0
-  m_Name: Universal_Building_Market_L1_01_Preb
+  m_Name: Universal_Building_Market_L1_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed36183c39531034ab93806cf2034535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 8
-  Height: 6
+  Width: 6
+  Height: 8
   BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}

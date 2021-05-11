@@ -32,6 +32,7 @@ public class RoadManager : Singleton<RoadManager>
         //初始化格子
         for (int i = 0; i < mapData.roadGrids.Count; i++)
         {
+            Debug.Log(mapData.roadGrids[i].Vector2Int);
             RoadNode node = new RoadNode(mapData.roadGrids[i].Vector2Int);
             node.Clear();
             RoadNodes.Add(node);
@@ -222,7 +223,8 @@ public class RoadManager : Singleton<RoadManager>
 
     public void AddCrossNode(Vector2Int grid, Direction dir)
     {
-        //Debug.Log(grid);
+        Debug.Log(grid);
+
         if (RoadNodeDic.TryGetValue(grid, out RoadNode node0))
         {
             RoadNode node1 = GetNearestCross(grid, dir);
@@ -251,6 +253,7 @@ public class RoadManager : Singleton<RoadManager>
 
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
+        Debug.Log(start + " " + end);
         ClearRoadNodeH();
         List<RoadNode> path = new List<RoadNode>();
         List<RoadNode> openList = new List<RoadNode>();
@@ -380,13 +383,14 @@ public class RoadNode
     }
     public void AddNearbyNode(RoadNode roadNode)
     {
+        //如果不是就加入
         if (!IsNearbyRoad(roadNode))
         {
             NearbyNode.Add(roadNode);
         }
         else
         {
-            Debug.Log("没用正确添加" + roadNode.GridPos);
+            Debug.Log(GridPos + "没有正确添加" + roadNode.GridPos);
         }
     }
 

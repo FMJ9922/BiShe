@@ -83,7 +83,7 @@ public class BuildingBase : MonoBehaviour
                 return MapManager.Instance.GetCenterGrid(parking.transform.position + Vector3.left);
 
         }*/
-        return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
+        return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+1f));
     }
     /// <summary>
     /// 建造完后初始化建筑功能
