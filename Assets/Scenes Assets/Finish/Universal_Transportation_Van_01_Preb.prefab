@@ -50,7 +50,7 @@ MonoBehaviour:
   WayPoints: []
   wayObjects: []
   MaxSpeed: 7
-  StopDistance: 1
+  StopDistance: 1.5
   driveType: 0
   carType: 0
   isbraking: 0

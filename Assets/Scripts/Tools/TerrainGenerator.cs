@@ -686,7 +686,6 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
 
     #region 存储与读取数据
-    [ContextMenu("生成地图配置文件")]
     public void InitMapData()
     {
         MapData mapData = new MapData();
@@ -694,10 +693,15 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mapData.buildingGrids = new List<Vector2IntSerializer>();
         SaveMapData(mapData);
     }
-    [ContextMenu("更新地图配置文件")]
+    [ContextMenu("保存地图配置文件")]
     public void SaveRoadToMapData()
     {
-        SaveRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8);
+        InitMapData();
+        SaveMapData(SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8));
+    }
+    public MapData GetRuntimeMapData()
+    {
+        return SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8);
     }
     /// <summary>
     /// 保存地图信息
@@ -706,7 +710,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <param name="length">纹理图集的长度</param>
     /// <param name="mapSize">地图大小</param>
     /// <returns></returns>
-    private void SaveRoadToMapData(Mesh mesh, Vector2 mapSize,int length = 8)
+    public MapData SetRoadToMapData(Mesh mesh, Vector2 mapSize,int length = 8)
     {
         Vector2[] vec = mesh.uv;
         MapData mapData = GetMapData();
@@ -737,7 +741,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 }
             }
         }
-        SaveMapData(mapData);
+        return mapData;
     }
     private void SaveMapData(MapData mapData)
     {

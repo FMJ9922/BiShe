@@ -64,8 +64,8 @@ public class MarketCanvas : CanvasBase
     {
         int[] ids = DataManager.GetLevelData(LevelManager.LevelID).orderIds;
         int[] nums = DataManager.GetLevelData(LevelManager.LevelID).orderNums;
-        Debug.Log(ids[0]);
-        Debug.Log(nums[0]);
+        //Debug.Log(ids[0]);
+        //Debug.Log(nums[0]);
         for (int i = 0; i < ids.Length; i++)
         {
             GameObject obj = Instantiate(marketItemPfb, sellContent.transform);

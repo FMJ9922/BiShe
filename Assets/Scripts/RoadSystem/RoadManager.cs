@@ -11,43 +11,44 @@ public class RoadManager : Singleton<RoadManager>
     public List<RoadNode> CrossNodes { get; private set; }
 
     //从grid转化为图，再简化
-
+    public MapData mapData;
     public void InitRoadManager()
     {
-        InitRoadNodeDic();
+        mapData = TerrainGenerator.Instance.GetMapData();
+        InitRoadNodeDic(mapData);
     }
 
-    public void InitRoadNodeDic()
+    public void InitRoadNodeDic(MapData _mapData)
     {
+        CleanUpAllAttachedChildren(transform);
         //Debug.Log("开始初始化道路");
         RoadNodeDic = new Dictionary<Vector2Int, RoadNode>();
         RoadNodes = new List<RoadNode>();
         CrossNodes = new List<RoadNode>();
-        MapData mapData = TerrainGenerator.Instance.GetMapData();
-        if (mapData.roadGrids.Count <= 0)
+        if (_mapData.roadGrids.Count <= 0)
         {
             Debug.Log("道路节点数量为0");
             return;
         }
         //初始化格子
-        for (int i = 0; i < mapData.roadGrids.Count; i++)
+        for (int i = 0; i < _mapData.roadGrids.Count; i++)
         {
-            Debug.Log(mapData.roadGrids[i].Vector2Int);
-            RoadNode node = new RoadNode(mapData.roadGrids[i].Vector2Int);
+            //Debug.Log(mapData.roadGrids[i].Vector2Int);
+            RoadNode node = new RoadNode(_mapData.roadGrids[i].Vector2Int);
             node.Clear();
-            RoadNodes.Add(node);
-            if (!RoadNodeDic.TryGetValue(mapData.roadGrids[i].Vector2Int,out var value))
+            if (!RoadNodeDic.TryGetValue(_mapData.roadGrids[i].Vector2Int,out var value))
             {
-                RoadNodeDic.Add(mapData.roadGrids[i].Vector2Int, node);
+                RoadNodes.Add(node);
+                RoadNodeDic.Add(_mapData.roadGrids[i].Vector2Int, node);
             }
         }
         //连接所有的节点
-        for (int i = 0; i < mapData.roadGrids.Count; i++)
+        for (int i = 0; i < RoadNodes.Count; i++)
         {
             for (int j = 0; j < 4; j++)
             {
                 Vector2Int dirVec = CastTool.CastDirectionToVector2Int(j) / 2;
-                if (RoadNodeDic.TryGetValue(mapData.roadGrids[i].Vector2Int + dirVec, out RoadNode node))
+                if (RoadNodeDic.TryGetValue(_mapData.roadGrids[i].Vector2Int + dirVec, out RoadNode node))
                 {
                     RoadNodes[i].AddNearbyNode(node);
                 }
@@ -74,7 +75,7 @@ public class RoadManager : Singleton<RoadManager>
         }
         
         //连接在拐点被多删的节点
-        for (int i = 0; i < mapData.roadGrids.Count; i++)
+        for (int i = 0; i < RoadNodes.Count; i++)
         {
             for (int j = 0; j < RoadNodes[i].NearbyNode.Count; j++)
             {
@@ -175,14 +176,14 @@ public class RoadManager : Singleton<RoadManager>
         }
 
         
-        //Invoke("Show",1f);
+        Invoke("Show",1f);
     }
 
     private bool IsCrossNode(RoadNode roadNode)
     {
         for (int i = 0; i < CrossNodes.Count; i++)
         {
-            if(CrossNodes[i] == roadNode)
+            if(CrossNodes[i].GridPos == roadNode.GridPos)
             {
                 return true;
             }
@@ -211,20 +212,29 @@ public class RoadManager : Singleton<RoadManager>
 
     public void AddRoadNode(Vector2Int grid)
     {
-        if (RoadNodeDic.TryGetValue(grid, out RoadNode node))
+        if (!RoadNodeDic.TryGetValue(grid, out RoadNode node))
         {
-
-        }
-        else
-        {
-            Debug.Log("路径字典里没有该节点");
+            RoadNodeDic.Add(grid,new RoadNode(grid));
         }
     }
 
+    public void CheckAndAddCrossNode(RoadNode node)
+    {
+        bool p = true;
+        for (int i = 0; i < CrossNodes.Count; i++)
+        {
+            if (node.GridPos == CrossNodes[i].GridPos)
+            {
+                p = false;
+            }
+        }
+        if (p)
+        {
+            CrossNodes.Add(node);
+        }
+    }
     public void AddCrossNode(Vector2Int grid, Direction dir)
     {
-        Debug.Log(grid);
-
         if (RoadNodeDic.TryGetValue(grid, out RoadNode node0))
         {
             RoadNode node1 = GetNearestCross(grid, dir);
@@ -234,14 +244,14 @@ public class RoadManager : Singleton<RoadManager>
                 node1.RemoveNearbyNode(node2);
                 node1.AddNearbyNode(node0);
                 node0.AddNearbyNode(node2);
-                //Debug.Log(node1.GridPos + " => " + node0.GridPos + " =>  " + node2.GridPos);
+                Debug.Log(node1.GridPos + " => " + node0.GridPos + " =>  " + node2.GridPos);
             }
             else
             {
                 node2.RemoveNearbyNode(node1);
                 node2.AddNearbyNode(node0);
                 node0.AddNearbyNode(node1);
-                //Debug.Log(node2.GridPos + " => " + node0.GridPos + " =>  " + node1.GridPos);
+                Debug.Log(node2.GridPos + " => " + node0.GridPos + " =>  " + node1.GridPos);
             }
             CrossNodes.Add(node0);
         }
@@ -250,10 +260,17 @@ public class RoadManager : Singleton<RoadManager>
             Debug.Log("路径字典里没有该节点"+ grid);
         }
     }
+    private void CleanUpAllAttachedChildren(Transform target)
+    {
+        for (int i = 0; i < target.childCount; i++)
+        {
+            Destroy(target.GetChild(i).gameObject);
+        }
 
+    }
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
-        Debug.Log(start + " " + end);
+        //Debug.Log(start + " " + end);
         ClearRoadNodeH();
         List<RoadNode> path = new List<RoadNode>();
         List<RoadNode> openList = new List<RoadNode>();
@@ -333,6 +350,7 @@ public class RoadManager : Singleton<RoadManager>
     }
     private RoadNode GetNearestCross(Vector2Int grid, Direction dir)
     {
+        //Debug.Log(grid);
         RoadNode temp = RoadNodeDic[grid];
         //Debug.Log(temp.NearbyNode.Count);
         //foreach(var r in temp.NearbyNode)
@@ -390,7 +408,7 @@ public class RoadNode
         }
         else
         {
-            Debug.Log(GridPos + "没有正确添加" + roadNode.GridPos);
+            Debug.Log(GridPos + "已经添加过" + roadNode.GridPos);
         }
     }
 

@@ -104,9 +104,9 @@ public class MapManager : Singleton<MapManager>
                     BuildOutCornerRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
                     break;
             }
-            generator.ReCalculateNormal();
         }
-
+        generator.ReCalculateNormal();
+        //RoadManager.Instance.InitRoadNodeDic(generator.GetRuntimeMapData());
     }
 
     public void GetRoadTypeAndDir(Vector2Int roadGrid, out RoadOption roadOption, out Direction direction)

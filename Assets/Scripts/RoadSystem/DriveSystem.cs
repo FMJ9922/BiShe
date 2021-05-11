@@ -19,7 +19,8 @@ public class DriveSystem : MonoBehaviour
     public CarSensor carSensor;
     public UnityAction action = null;
     private bool isForward = true;
-
+    private float curTime;
+    private float turnTime;
     public delegate void ArriveDestination();
     public ArriveDestination OnArriveDestination;
 
@@ -114,9 +115,15 @@ public class DriveSystem : MonoBehaviour
                 if (angle > 5 && angle < 175)
                 {
                     UnityAction temp = action;
-                    RotateSpeed = 90 / (Mathf.PI / 2 * StopDistance / speed);
-                    //Debug.Log("转弯");
-                    action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
+                    float dis = (targets[wayCount - 1] - transform.position).magnitude;
+                    RotateSpeed = 90 / (dis * Mathf.PI / 2  / speed);
+                    turnTime = dis * Mathf.PI / 2 / speed;
+                    curTime = 0;
+                    action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp, targets[wayCount - 1], dis);
+                }
+                else
+                {
+                    transform.LookAt(targets[wayCount]);
                 }
             }
         }
@@ -127,7 +134,6 @@ public class DriveSystem : MonoBehaviour
         else if(wayCount>0&&Vector3.Distance(targets[wayCount-1], transform.position) >0.5f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targets[wayCount-1], speed * Time.fixedDeltaTime);
-            
         }
         else
         {
@@ -155,7 +161,7 @@ public class DriveSystem : MonoBehaviour
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
                 //Debug.Log("转弯");
-                action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
+                //action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp);
             }
 
         }
@@ -168,7 +174,7 @@ public class DriveSystem : MonoBehaviour
             UnityAction temp = action;
             RotateSpeed = Vector3.Angle(transform.position - targets[0], targets[targets.Count - 1] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
             //Debug.Log("转弯");
-            action = () => DriveTurn(targets[0] - targets[targets.Count - 1], temp);
+            //action = () => DriveTurn(targets[0] - targets[targets.Count - 1], temp);
             wayCount = 0;
         }
     }
@@ -191,7 +197,7 @@ public class DriveSystem : MonoBehaviour
                 UnityAction temp = action;
                 RotateSpeed = Vector3.Angle(transform.position - targets[wayCount], targets[old] - transform.position) / (Mathf.PI / 2 * StopDistance / speed);
                 //Debug.Log("转弯");
-                action = () => DriveTurn(targets[wayCount] - targets[old], temp);
+                //action = () => DriveTurn(targets[wayCount] - targets[old], temp);
             }
 
         }
@@ -221,8 +227,9 @@ public class DriveSystem : MonoBehaviour
 
         }
     }
-    private void DriveTurn(Vector3 to, UnityAction callback)
+    private void DriveTurn(Vector3 to, UnityAction callback,Vector3 turn,float dis)
     {
+        curTime += Time.fixedDeltaTime;
         var temp = Vector3.Cross(transform.forward, to).y;
         if (temp > 0)
         {
@@ -233,9 +240,12 @@ public class DriveSystem : MonoBehaviour
             transform.Rotate(new Vector3(0, -RotateSpeed * Time.fixedDeltaTime, 0), Space.Self);
         }
         transform.position += transform.forward.normalized * speed * Time.fixedDeltaTime;
-        if (Vector3.Angle(transform.forward, to) < 2f)
+        if (curTime>=turnTime)
         {
+            //Debug.Log(Vector3.Angle(transform.forward, to));
             //Debug.Log("前进");
+            transform.position = turn + to.normalized * dis;
+            transform.LookAt(turn+ to);
             action = callback;
         }
     }
