@@ -23,10 +23,10 @@ public class MarketManager : Singleton<MarketManager>
             marketCanvas = (MarketCanvas)MainInteractCanvas.Instance.canvas[4];
         }
         List<MarketItem> marketItems = marketCanvas.GetMarketItems();
-
+        List<MarketItem> orderItems = marketCanvas.GetOrderItems();
         for (int i = 0; i < marketItems.Count; i++)
         {
-            marketItems[i].RefreshProfitLabel();
+            marketItems[i].RefreshBuyProfitLabel();
             //Debug.Log("?");
             if (!marketItems[i].isTrading) continue;
             float profit = marketItems[i].GetProfit();
@@ -55,7 +55,32 @@ public class MarketManager : Singleton<MarketManager>
                     }
                     break;
             }
-            marketItems[i].RefreshProfitLabel();
+            marketItems[i].RefreshBuyProfitLabel();
+        }
+
+        for (int i = 0; i < orderItems.Count; i++)
+        {
+            orderItems[i].RefreshBuyProfitLabel();
+            if (!orderItems[i].isTrading) continue;
+            if (ResourceManager.Instance.TryUseResource(orderItems[i].curItem.Id, orderItems[i].needNum))
+            {
+                switch (orderItems[i].curMode)
+                {
+                    case MarketItem.TradeMode.once:
+                        orderItems[i].OnResetTrading();
+                        break;
+                    case MarketItem.TradeMode.everyWeek:
+                        BuyItem(orderItems[i].GetCostResource());
+                        break;
+                }
+                orderItems[i].RefreshBuyProfitLabel();
+            }
+            else
+            {
+                orderItems[i].OnResetTrading();
+                Debug.Log("交易失败：" + orderItems[i].curItem.Id + " " + orderItems[i].needNum);
+            }
+            
         }
     }
 
@@ -65,11 +90,6 @@ public class MarketManager : Singleton<MarketManager>
         ResourceManager.Instance.AddResource(costResource.ItemId, costResource.ItemNum);
     }
 
-    public void SellItem(CostResource costResource)
-    {
-        Debug.Log("sell");
-        ResourceManager.Instance.TryUseResource(costResource);
-    }
 }
 
 

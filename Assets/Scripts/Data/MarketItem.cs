@@ -24,6 +24,7 @@ public class MarketItem : MonoBehaviour
     public int needNum = 0;
     public TradeMode curMode;
     public float profit;
+    public bool isBuy = true;
     public enum TradeMode
     {
         [Description("Once")]
@@ -40,7 +41,25 @@ public class MarketItem : MonoBehaviour
     }
     public void InitItem(int id)
     {
-        
+        isBuy = false;
+        curItem = DataManager.GetItemDataById(id);
+        ClearItemDrop(false);
+        icon.SetIcon(id, 0);
+        subBtn.interactable = false;
+        addBtn.interactable = false;
+        modeDrop.ClearOptions();
+        TMP_Dropdown.OptionData tempData;
+        for (int i = 0; i < 2; i++)
+        {
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            modeDrop.options.Add(tempData);
+        }
+        modeDrop.onValueChanged.AddListener(ChangeMode);
+        numText.text = needNum.ToString();
+        RefreshBuyProfitLabel();
+
+        OnResetTrading();
     }
 
     public void InitItemDropDown()
@@ -74,17 +93,11 @@ public class MarketItem : MonoBehaviour
         }
         modeDrop.onValueChanged.AddListener(ChangeMode);
 
-        RefreshProfitLabel();
+        RefreshBuyProfitLabel();
 
         OnResetTrading();
     }
 
-    public void InitItemDropDown(int Id)
-    {
-        curItem = DataManager.GetItemDataById(Id);
-        ClearItemDrop(false);
-        itemDrop.captionText.text = Localization.ToSettingLanguage(curItem.Name);
-    }
     private void ClearItemDrop(bool interactable)
     {
         itemDrop.ClearOptions();
@@ -95,7 +108,7 @@ public class MarketItem : MonoBehaviour
     {
         curItem = DataManager.GetItemDataById(idList[id]);
         icon.SetIcon(curItem.Id, 0);
-        RefreshProfitLabel();
+        RefreshBuyProfitLabel();
         OnResetTrading();
     }
 
@@ -103,17 +116,17 @@ public class MarketItem : MonoBehaviour
     {
         curMode = (TradeMode)modeType;
         modeDrop.captionText.text = Localization.ToSettingLanguage(((TradeMode)modeType).GetDescription());
-        RefreshProfitLabel();
+        RefreshBuyProfitLabel();
         OnResetTrading();
     }
     
-    public void RefreshProfitLabel()
+    public void RefreshBuyProfitLabel()
     {
         switch (curMode)
         {
             case TradeMode.once:
             case TradeMode.everyWeek:
-                profit = -curItem.Price * needNum;
+                profit = isBuy?-curItem.Price * needNum: curItem.Price * needNum;
                 break;
             case TradeMode.maintain:
                 float num = needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id);
@@ -134,7 +147,7 @@ public class MarketItem : MonoBehaviour
         needNum += 10;
         if (needNum > 50) needNum = 50;
         numText.text = needNum.ToString();
-        RefreshProfitLabel();
+        RefreshBuyProfitLabel();
         OnResetTrading();
     }
 
@@ -143,7 +156,7 @@ public class MarketItem : MonoBehaviour
         needNum -= 10;
         if (needNum < 0) needNum = 0;
         numText.text = needNum.ToString();
-        RefreshProfitLabel();
+        RefreshBuyProfitLabel();
         OnResetTrading();
     }
 

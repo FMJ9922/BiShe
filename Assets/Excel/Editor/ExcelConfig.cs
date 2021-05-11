@@ -62,6 +62,8 @@ public class ExcelTool
             levelData.rice = int.Parse(collect[i][13].ToString());
             levelData.money = int.Parse(collect[i][14].ToString());
             levelData.stone = int.Parse(collect[i][15].ToString());
+            levelData.orderIds = StringToIntList(collect[i][16].ToString()).ToArray();
+            levelData.orderNums = StringToIntList(collect[i][17].ToString()).ToArray();
             array[i - 2] = levelData;
         }
         return array;

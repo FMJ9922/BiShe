@@ -135,6 +135,8 @@ MonoBehaviour:
     rice: 999
     money: 9999
     stone: 999
+    orderIds: fa2a0000e62e0000
+    orderNums: c800000064000000
   - Id: 30002
     Name: "\u5DE5\u4E1A\u4EA7\u54C1"
     FrontLevelId: 30001
@@ -151,6 +153,8 @@ MonoBehaviour:
     rice: 10
     money: 100
     stone: 20
+    orderIds: fa2a0000e62e0000
+    orderNums: c800000064000000
   - Id: 30003
     Name: "\u7ED3\u5408\u4EA7\u4E1A"
     FrontLevelId: 30002
@@ -167,6 +171,8 @@ MonoBehaviour:
     rice: 10
     money: 100
     stone: 20
+    orderIds: fa2a0000e62e0000
+    orderNums: c800000064000000
   TechArray: []
   BuildArray:
   - Id: 20001

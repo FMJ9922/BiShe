@@ -8,11 +8,12 @@ public class MarketCanvas : CanvasBase
 {
     [SerializeField] private GameObject mainCanvas;
     List<MarketItem> marketItems = new List<MarketItem>();
-    [SerializeField] GameObject marketContent;
+    List<MarketItem> orderItems = new List<MarketItem>();
+    [SerializeField] GameObject buyContent,sellContent;
     [SerializeField] GameObject marketItemPfb;
     [SerializeField] Button buyBtn, sellBtn;
     [SerializeField] TMP_Text buyText, sellText;
-    [SerializeField] GameObject buyContent, sellContent;
+    [SerializeField] GameObject buyItems, sellItems;
     enum MarketOption
     {
         buy = 0,
@@ -22,6 +23,7 @@ public class MarketCanvas : CanvasBase
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
+        InitMarketItems();
     }
     public override void OnOpen()
     {
@@ -44,7 +46,8 @@ public class MarketCanvas : CanvasBase
         //Debug.Log("buy");
         buyText.color = Color.white;
         sellText.color = Color.gray;
-        InitMarketItems(true);
+        buyItems.SetActive(true);
+        sellItems.SetActive(false);
     }
 
     public void OnClickSellBtn()
@@ -52,25 +55,44 @@ public class MarketCanvas : CanvasBase
         //Debug.Log("sell");
         buyText.color = Color.gray;
         sellText.color = Color.white;
-        InitMarketItems(false);
+        buyItems.SetActive(false);
+        sellItems.SetActive(true);
+        
     }
 
-    private void InitMarketItems(bool isSell)
+    private void InitMarketItems()
     {
-
-
+        int[] ids = DataManager.GetLevelData(LevelManager.LevelID).orderIds;
+        int[] nums = DataManager.GetLevelData(LevelManager.LevelID).orderNums;
+        Debug.Log(ids[0]);
+        Debug.Log(nums[0]);
+        for (int i = 0; i < ids.Length; i++)
+        {
+            GameObject obj = Instantiate(marketItemPfb, sellContent.transform);
+            obj.SetActive(true);
+            obj.transform.SetParent(sellContent.transform);
+            MarketItem marketItem = obj.GetComponent<MarketItem>();
+            marketItem.needNum = nums[i];
+            marketItem.InitItem(ids[i]);
+            orderItems.Add(marketItem);
+        }
     }
     public List<MarketItem> GetMarketItems()
     {
         return marketItems;
     }
 
+    public List<MarketItem> GetOrderItems()
+    {
+        return orderItems;
+    }
+
     public void InitBuyItem()
     {
-        GameObject obj = Instantiate(marketItemPfb, marketContent.transform);
+        GameObject obj = Instantiate(marketItemPfb, buyContent.transform);
         obj.SetActive(true);
-        obj.transform.SetParent(marketContent.transform);
-        obj.transform.SetSiblingIndex(marketContent.transform.childCount - 2);
+        obj.transform.SetParent(buyContent.transform);
+        obj.transform.SetSiblingIndex(buyContent.transform.childCount - 2);
         MarketItem marketItem = obj.GetComponent<MarketItem>();
         marketItem.InitItemDropDown();
         marketItems.Add(marketItem);

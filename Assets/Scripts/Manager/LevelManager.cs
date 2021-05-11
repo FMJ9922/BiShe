@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+
 public class LevelManager : Singleton<LevelManager>
 {
     public MainInteractCanvas MainInteractCanvas;
@@ -107,7 +109,9 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        InitLevelManager(30001);
+        Scene scene = SceneManager.GetActiveScene();
+        string name = scene.name;
+        InitLevelManager(int.Parse(name));
         year = 1;
         month = 1;
         week = 1;

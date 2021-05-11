@@ -17,4 +17,6 @@ public class LevelData
     public int rice;
     public int money;
     public int stone;
+    public int[] orderIds;
+    public int[] orderNums;
 }
