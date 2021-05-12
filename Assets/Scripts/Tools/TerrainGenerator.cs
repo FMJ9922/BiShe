@@ -501,7 +501,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         Mesh mesh = Resources.Load<Mesh>(SceneManager.GetActiveScene().name + "meshData.asset");
 
         Debug.Log(mesh);
-        transform.GetComponent<MeshFilter>().mesh = mesh;
+        transform.GetComponent<MeshFilter>().sharedMesh = mesh;
     }
 
 #endif
