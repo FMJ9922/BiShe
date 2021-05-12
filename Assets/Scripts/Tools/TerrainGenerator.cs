@@ -20,7 +20,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void InitMesh()
     {
-        LoadAsset();
+        Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + SceneManager.GetActiveScene().name + "meshData"));
+        mesh.name = SceneManager.GetActiveScene().name + "meshData Instance";
+        transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
     #region 顶点处理
@@ -107,14 +109,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     public void RecalculateUV()
     {
         CalculateHeights(); 
-        Mesh mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         long xSize = width - 1;
         long ySize = width - 1;
         long size = xSize * ySize * 4;
@@ -186,14 +184,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
     {
-        Mesh mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
@@ -207,14 +201,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void ReCalculateNormal()
     {
-        Mesh mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         mesh.RecalculateNormals();
     }
     /// <summary>
@@ -227,14 +217,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <param name="adjust">调整边缘</param>
     public void RefreshUV(int tex, int length, int[] indexs, int dir = 0, float adjust = 0.01f)
     {
-        Mesh mesh;
+
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
@@ -263,14 +250,12 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void OnReTriangle(Vector3 pos, int dir)
     {
-        CalculateHeights(); Mesh mesh;
+        CalculateHeights();
+
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         Vector3 delta = pos - terrain.transform.position;
         int x = Mathf.FloorToInt(delta.x / 2);
         int z = Mathf.FloorToInt(delta.z / 2);
@@ -322,14 +307,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void FlatGround(Vector2Int[] grids,float targetHeight)
     {
-        Mesh mesh;
+
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         verticles = mesh.vertices;
         int length = MapManager.Instance.MapSize.x;
         int p;
@@ -376,14 +358,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     void FlatGround(int index, int range, float targetHeight)
     {
-        Mesh mesh;
+
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
-    mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+        mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
 
 
         verticles = mesh.vertices;
@@ -463,14 +442,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     void FlatGround(int index, int range, int targetHeight)
     {
-        Mesh mesh;
+
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #endif
-        if (!mesh)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         verticles = mesh.vertices;
         int length = height.Length - 1;
         int z = index / (height.Length - 1);
@@ -553,14 +529,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
 #if UNITY_EDITOR
     [ContextMenu("存储地形")]
-    void SaveAsset()
+    void SaveTerrain()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         AssetDatabase.CreateAsset(mesh, GetPath("meshData.asset"));
     }
 
     [ContextMenu("加载地形")]
-    void LoadAsset()
+    void LoadTerrain()
     {
         Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/"+SceneManager.GetActiveScene().name + "meshData"));
         //Debug.Log(Resources.Load("MapData/" + SceneManager.GetActiveScene().name + "meshData"));

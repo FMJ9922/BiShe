@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1582671268
+CRC: 1338653560
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 45d6008b903ce71975f5bfe4e7a2bbd4
+    Hash: 0c0afcdec39ecf2a9ac8bc884fadd43a
   TypeTreeHash:
     serializedVersion: 2
     Hash: f336b9c479a7107a4eca9e19641105fb
@@ -182,6 +182,7 @@ Assets:
 - Assets/Scenes Assets/Finish/Universal_Building_Mine_L2.prefab
 - Assets/Scenes Assets/Animation/RicePfb.controller
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_02.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Preb.prefab
 - Assets/Scenes Assets/Animation/Universal_Building_Mine_L1_02_Ani.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01.prefab
@@ -203,6 +204,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_02_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L3_01.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_01.prefab
 - Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_03_Mod.fbx
@@ -295,6 +297,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_03.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_03.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L2_02_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
