@@ -149,10 +149,10 @@ MonoBehaviour:
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 50
-    rice: 10
-    money: 100
-    stone: 20
+    log: 999
+    rice: 999
+    money: 9999
+    stone: 999
     orderIds: fa2a0000e62e0000
     orderNums: c800000064000000
   - Id: 30003
@@ -167,10 +167,10 @@ MonoBehaviour:
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 50
-    rice: 10
-    money: 100
-    stone: 20
+    log: 999
+    rice: 999
+    money: 9999
+    stone: 999
     orderIds: fa2a0000e62e0000
     orderNums: c800000064000000
   TechArray: []

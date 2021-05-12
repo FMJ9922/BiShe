@@ -95,7 +95,7 @@ public partial class InputManager : Singleton<InputManager>
             {
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
-                Debug.Log(buildingBase.transform.name);
+                //Debug.Log(buildingBase.transform.name);
                 EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
             }
             else if (hit.collider.CompareTag("car"))
