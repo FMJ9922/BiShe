@@ -111,6 +111,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         Scene scene = SceneManager.GetActiveScene();
         string name = scene.name;
+        if(scene.name == "MainScene")name = "30001";
         InitLevelManager(int.Parse(name));
         year = 1;
         month = 1;
