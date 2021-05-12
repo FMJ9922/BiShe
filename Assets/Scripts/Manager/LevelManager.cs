@@ -148,6 +148,7 @@ public class LevelManager : Singleton<LevelManager>
         MapManager.Instance.InitMapMnager(LevelID);
         BuildManager.Instance.InitBuildManager();
         MarketManager.Instance.InitMarketManager();
+        TerrainGenerator.Instance.InitMesh();
         MainInteractCanvas.InitCanvas();
     }
 
