@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GraphManager : Singleton<GraphManager>
 {
     GameObject cubePfb;
     [SerializeField] GameObject subCamera;
     [SerializeField] GameObject handle;
+    [SerializeField] Image graphIcon;
     private bool[] openState = new bool[4] { false, false, false, false };
     protected override void InstanceAwake()
     {
@@ -16,6 +18,7 @@ public class GraphManager : Singleton<GraphManager>
     public void Toggle()
     {
         handle.SetActive(!handle.activeInHierarchy);
+        graphIcon.sprite = LoadAB.LoadSprite("icon.ab", handle.activeInHierarchy ?"enNumberButton":"NumberButton");
         if (!handle.activeInHierarchy)
         {
             CloseAllGraph();
@@ -32,6 +35,7 @@ public class GraphManager : Singleton<GraphManager>
         }
         else
         {
+            ResetState();
             openState[type] = true;
             OpenGraph();
             switch (type)
@@ -119,11 +123,16 @@ public class GraphManager : Singleton<GraphManager>
 
     public void CloseAllGraph()
     {
+        ResetState();
+        CloseGraph();
+    }
+
+    private void ResetState()
+    {
         for (int i = 0; i < openState.Length; i++)
         {
             openState[i] = false;
         }
-        CloseGraph();
     }
     private void CleanUpAllAttachedChildren(Transform target)
     {

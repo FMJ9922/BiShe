@@ -14,8 +14,6 @@ public class BuildManager : Singleton<BuildManager>
     [SerializeField]
     private Material mat_road_red;
     [SerializeField]
-    private TerrainGenerator terrainGenerator;
-    [SerializeField]
     private GameObject preRoadPfb;
     [SerializeField]
     private ParticleSystem dustParticle;

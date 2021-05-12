@@ -12,12 +12,14 @@ public class HUDCanvas : CanvasBase
     [SerializeField] private Slider progress;
     [SerializeField] Image _pause;
     [SerializeField] Image[] _scale;
+    [SerializeField] Button graphBtn;
     private string strMoney, strLog, strStone, strFood, strPopulation,strWeek;
     private void OnDestroy()
     {
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StopListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StopListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        graphBtn.onClick.RemoveAllListeners();
     }
     public override void InitCanvas()
     {
@@ -35,6 +37,7 @@ public class HUDCanvas : CanvasBase
         RefreshPopulation();
         ChangeTimeScaleImage(GameManager.Instance.GetTimeScale());
         ChangePauseBtnImage(GameManager.Instance.GetTimeScale());
+        graphBtn.onClick.AddListener(GraphManager.Instance.Toggle);
     }
 
     public void TogglePauseGame()

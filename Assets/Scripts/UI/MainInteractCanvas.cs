@@ -45,6 +45,7 @@ public class MainInteractCanvas : CanvasBase
     {
         BuildingCanvas build = (BuildingCanvas)canvas[0];
         bool open = build.ToggleBuildingCanvas();
+        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", open ? "BuildSelect" : "BuildUnselect");
     }
 
     public void OpenResourceCanvas()

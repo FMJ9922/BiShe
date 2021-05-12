@@ -24,6 +24,7 @@ public class BuildTabAnim : MonoBehaviour
     {
         string name = string.Format("Unclick{0}Icon", iconName);
         image.sprite = LoadAB.LoadSprite(_iconBundle, name);
+        image.SetNativeSize();
         //Debug.Log(name);
     }
     public void Hide()

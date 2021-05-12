@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 499683959
+CRC: 12695068
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d16cd0a0885053e7d7faf6c418898a37
+    Hash: d23f3238f4aedfbd99d7d4a770017a22
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4908fa12115d35930b278507ea5b410b
@@ -55,6 +55,7 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/RoadL2.png
 - Assets/ArtAssets/UI/BuildUI/ClickHousingIcon.png
 - Assets/Scenes Assets/BuildingIcon/FarmL1.png
+- Assets/ArtAssets/UI/BuildUI/BuildUnselect.png
 - Assets/Scenes Assets/BuildingIcon/RoadL1.png
 - Assets/Scenes Assets/BuildingIcon/Icon/MoneyIcon.png
 - Assets/Scenes Assets/BuildingIcon/Icon/LogIcon.png
@@ -68,20 +69,23 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/MarketL3.png
 - Assets/Scenes Assets/BuildingIcon/HuiL1.png
 - Assets/Scenes Assets/BuildingIcon/Icon/FoodIcon.png
+- Assets/ArtAssets/UI/MainUI/NumberButton.png
 - Assets/Scenes Assets/BuildingIcon/Icon/RiceIcon.png
 - Assets/Scenes Assets/BuildingIcon/MineL2.png
 - Assets/Scenes Assets/BuildingIcon/HuiL3.png
-- Assets/ArtAssets/UI/BuildUI/UnclickRoadIcon.png
+- Assets/ArtAssets/UI/BuildUI/UnClickRoadIcon.png
 - Assets/Scenes Assets/BuildingIcon/ResidentialL2.png
 - Assets/Scenes Assets/BuildingIcon/Icon/StoneIcon.png
 - Assets/Scenes Assets/BuildingIcon/HuiL2.png
 - Assets/Scenes Assets/BuildingIcon/IconPfb.prefab
 - Assets/Scenes Assets/BuildingIcon/CoachL3.png
 - Assets/Scenes Assets/BuildingIcon/Wheat.png
+- Assets/ArtAssets/UI/MainUI/enNumberButton.png
 - Assets/Scenes Assets/BuildingIcon/HookerL2.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL1.png
 - Assets/ArtAssets/UI/BuildUI/UnclickProduceIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL3.png
+- Assets/ArtAssets/UI/BuildUI/BuildSelect.png
 - Assets/ArtAssets/UI/MainUI/HollowSpeed.png
 - Assets/Scenes Assets/BuildingIcon/MineL3.png
 - Assets/Scenes Assets/BuildingIcon/CoachL1.png
