@@ -34,9 +34,9 @@ MonoBehaviour:
     Price: 4
     BuildingID: 0
   - Id: 12004
-    Name: Timber
+    Name: Furniture
     ItemType: 2
-    Price: 6
+    Price: 10
     BuildingID: 0
   - Id: 11005
     Name: RawMeat
@@ -94,29 +94,34 @@ MonoBehaviour:
     Price: 3
     BuildingID: 0
   - Id: 12015
-    Name: Building Material
+    Name: StoneMaterial
     ItemType: 2
     Price: 10
     BuildingID: 0
   - Id: 11016
-    Name: Canned meat
+    Name: MeatTin
     ItemType: 1
     Price: 12
     BuildingID: 0
   - Id: 11017
-    Name: Canned Fish
+    Name: FishTin
     ItemType: 1
     Price: 12
     BuildingID: 0
   - Id: 12018
-    Name: Cloth
+    Name: Clothes
     ItemType: 2
     Price: 15
     BuildingID: 0
   - Id: 11019
-    Name: Steamed buns
+    Name: Mantou
     ItemType: 1
     Price: 6
+    BuildingID: 0
+  - Id: 12020
+    Name: IronMaterial
+    ItemType: 2
+    Price: 20
     BuildingID: 0
   LevelArray:
   - Id: 30001
@@ -1129,9 +1134,9 @@ MonoBehaviour:
     - code: Log
       chinese: "\u539F\u6728"
       english: Log
-    - code: Timber
+    - code: Furniture
       chinese: "\u6728\u6599"
-      english: Timber
+      english: Furniture
     - code: RawMeat
       chinese: "\u751F\u8089"
       english: Raw Meat
@@ -1300,3 +1305,30 @@ MonoBehaviour:
     - code: Maintain
       chinese: "\u7EF4\u6301"
       english: Maintain
+    - code: Iron
+      chinese: "\u751F\u94C1"
+      english: Iron
+    - code: Fur
+      chinese: "\u6BDB\u76AE"
+      english: Fur
+    - code: Vegitable
+      chinese: "\u852C\u83DC"
+      english: Vegitable
+    - code: StoneMaterial
+      chinese: "\u77F3\u6750"
+      english: StoneMaterial
+    - code: MeatTin
+      chinese: "\u8089\u7F50\u5934"
+      english: MeatTin
+    - code: FishTin
+      chinese: "\u9C7C\u7F50\u5934"
+      english: FishTin
+    - code: Clothes
+      chinese: "\u8863\u670D"
+      english: Clothes
+    - code: Mantou
+      chinese: "\u9992\u5934"
+      english: SteamedBread
+    - code: IronMaterial
+      chinese: "\u94C1\u5757"
+      english: IronMaterial
