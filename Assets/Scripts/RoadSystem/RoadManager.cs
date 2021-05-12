@@ -11,35 +11,34 @@ public class RoadManager : Singleton<RoadManager>
     public List<RoadNode> CrossNodes { get; private set; }
 
     //从grid转化为图，再简化
-    public MapData mapData;
     public void InitRoadManager()
     {
-        mapData = TerrainGenerator.Instance.GetMapData();
-        InitRoadNodeDic(mapData);
+        InitRoadNodeDic();
     }
 
-    public void InitRoadNodeDic(MapData _mapData)
+    public void InitRoadNodeDic()
     {
         CleanUpAllAttachedChildren(transform);
         //Debug.Log("开始初始化道路");
+        List<Vector2Int> roadGrids = MapManager.Instance.GetAllRoadGrid();
         RoadNodeDic = new Dictionary<Vector2Int, RoadNode>();
         RoadNodes = new List<RoadNode>();
         CrossNodes = new List<RoadNode>();
-        if (_mapData.roadGrids.Count <= 0)
+        if (roadGrids.Count <= 0)
         {
             Debug.Log("道路节点数量为0");
             return;
         }
         //初始化格子
-        for (int i = 0; i < _mapData.roadGrids.Count; i++)
+        for (int i = 0; i < roadGrids.Count; i++)
         {
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
-            RoadNode node = new RoadNode(_mapData.roadGrids[i].Vector2Int);
+            RoadNode node = new RoadNode(roadGrids[i]);
             node.Clear();
-            if (!RoadNodeDic.TryGetValue(_mapData.roadGrids[i].Vector2Int,out var value))
+            if (!RoadNodeDic.TryGetValue(roadGrids[i],out var value))
             {
                 RoadNodes.Add(node);
-                RoadNodeDic.Add(_mapData.roadGrids[i].Vector2Int, node);
+                RoadNodeDic.Add(roadGrids[i], node);
             }
         }
         //连接所有的节点
@@ -48,7 +47,7 @@ public class RoadManager : Singleton<RoadManager>
             for (int j = 0; j < 4; j++)
             {
                 Vector2Int dirVec = CastTool.CastDirectionToVector2Int(j) / 2;
-                if (RoadNodeDic.TryGetValue(_mapData.roadGrids[i].Vector2Int + dirVec, out RoadNode node))
+                if (RoadNodeDic.TryGetValue(roadGrids[i]+ dirVec, out RoadNode node))
                 {
                     RoadNodes[i].AddNearbyNode(node);
                 }
@@ -176,7 +175,7 @@ public class RoadManager : Singleton<RoadManager>
         }
 
         
-        Invoke("Show",1f);
+        //Invoke("Show",1f);
     }
 
     private bool IsCrossNode(RoadNode roadNode)
@@ -270,7 +269,7 @@ public class RoadManager : Singleton<RoadManager>
     }
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
-        //Debug.Log(start + " " + end);
+        Debug.Log(start + " " + end);
         ClearRoadNodeH();
         List<RoadNode> path = new List<RoadNode>();
         List<RoadNode> openList = new List<RoadNode>();
@@ -289,11 +288,11 @@ public class RoadManager : Singleton<RoadManager>
                 Debug.LogError("路径被阻挡！");
                 return null;
             }
-            //Debug.Log("——");
+            Debug.Log("——");
             temp = openList[0];
             for (int i = 0; i < openList.Count; i++)
             {
-                //Debug.Log(openList[i].GridPos+" "+temp.H+" "+openList[i].H);
+                Debug.Log(openList[i].GridPos+" "+temp.H+" "+openList[i].H);
                 if (temp.H > openList[i].H)
                 {
                     temp = openList[i];
@@ -301,7 +300,7 @@ public class RoadManager : Singleton<RoadManager>
             }
             openList.Remove(temp);
             closeList.Add(temp);
-            //Debug.Log("选择:"+temp.GridPos);
+            Debug.Log("选择:"+temp.GridPos);
             if (temp == endNode)
             {
                 List<Vector3> list = new List<Vector3>();

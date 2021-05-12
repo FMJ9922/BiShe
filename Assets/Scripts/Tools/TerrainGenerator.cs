@@ -714,6 +714,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     {
         Vector2[] vec = mesh.uv;
         MapData mapData = GetMapData();
+
         for (int i = 0; i < vec.Length; i += 4)
         {
             int x = Mathf.FloorToInt(vec[i].x * length);

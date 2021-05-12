@@ -43,6 +43,8 @@ public class BuildManager : Singleton<BuildManager>
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
 
     public static bool IsInBuildMode { get; set; }
+
+    [SerializeField] GameObject bridgePfb;
     #endregion
 
 
@@ -178,58 +180,29 @@ public class BuildManager : Singleton<BuildManager>
         }
         Vector3 delta = CastTool.CastDirectionToVector(dir);
         //Debug.Log(delta.ToString());
-        int c = preRoads.Count;
-
-        var dic = RoadManager.Instance.RoadNodeDic;
+        List<GameObject> bridges = new List<GameObject>();
         for (int i = 0; i < preRoads.Count; i++)
         {
             grids.Add(GetCenterGrid(preRoads[i].transform.position + adjust));
             grids.Add(GetCenterGrid(preRoads[i].transform.position - delta + adjust));
-            if (!dic.TryGetValue(grids[i*2], out RoadNode node2))
+            if(preRoads[i].transform.position.y < 9.1f)
             {
-                dic.Add(grids[i * 2], new RoadNode(grids[i * 2]));
-            }
-            else if(i == c - 1)
-            {
-                RoadManager.Instance.AddCrossNode(grids[i * 2], (Direction)(dir + 1));
-            }
-            else if(dic.TryGetValue(GetCenterGrid(preRoads[i].transform.position + delta + adjust),out RoadNode whatever))
-            {
-                RoadManager.Instance.AddCrossNode(grids[i * 2], (Direction)(dir + 1));
-                
-            }
 
-            if (!dic.TryGetValue(grids[i*2+1], out RoadNode node3))
-            {
-                dic.Add(grids[i * 2 + 1], new RoadNode(grids[i * 2 + 1]));
+                GameObject bridge = Instantiate(bridgePfb, transform);
+                bridge.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i].transform.position + adjust));
+                bridge.transform.rotation = Quaternion.LookRotation(delta);
+                bridges.Add(bridge);
             }
-            else if (i == c - 1)
-            {
-                RoadManager.Instance.AddCrossNode(grids[i * 2+1], (Direction)(dir + 1));
-            }
-            else if (dic.TryGetValue(GetCenterGrid(preRoads[i].transform.position - 2 * delta + adjust), out RoadNode whatever))
-            {
-                RoadManager.Instance.AddCrossNode(grids[i * 2], (Direction)(dir + 1));
-
-            }
-
-            if (i == 0 || i == c - 1) continue;
-            dic[grids[i * 2+1]].AddNearbyNode(dic[grids[(i - 1) * 2+1]]);
-            dic[grids[(i - 1) * 2]].AddNearbyNode(dic[grids[i * 2]]);
         }
-        
-        RoadManager.Instance.AddCrossNode(grids[0], (Direction)(dir+1));
-        RoadManager.Instance.AddCrossNode(grids[1], (Direction)(dir + 1));
-        RoadManager.Instance.CheckAndAddCrossNode(new RoadNode(grids[c*2 - 1]));
-        RoadManager.Instance.CheckAndAddCrossNode(new RoadNode(grids[c * 2 - 2]));
-
-        dic[grids[0]].AddNearbyNode(dic[grids[c - 2]]);
-        dic[grids[c - 2]].AddNearbyNode(dic[grids[c - 1]]);
-        dic[grids[c - 1]].AddNearbyNode(dic[grids[1]]);
-        dic[grids[1]].AddNearbyNode(dic[grids[0]]);
-
-      
+        for (int i = 0; i < bridges.Count-1; i++)
+        {
+            if (i % 2 == 1)
+            {
+                Destroy(bridges[i]);
+            }
+        }
         MapManager.Instance.GenerateRoad(grids.ToArray(),roadLevel);
+        MapManager.Instance.SetBuildingsGrid();
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
     }

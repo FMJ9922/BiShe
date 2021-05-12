@@ -13,7 +13,7 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
 
-
+    
     public void InitMapMnager(int levelId)
     {
         InitLevelData(levelId);
@@ -50,6 +50,7 @@ public class MapManager : Singleton<MapManager>
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
         }
         List<StaticBuilding> lists = StaticBuilding.lists;
+        RoadManager.Instance.InitRoadManager();
         for (int i = 0; i < lists.Count; i++)
         {
             lists[i].SetGrids();
@@ -57,6 +58,30 @@ public class MapManager : Singleton<MapManager>
         Debug.Log("地图已初始化！");
     }
 
+    public List<Vector2Int> GetAllRoadGrid()
+    {
+        List<Vector2Int> res = new List<Vector2Int>();
+        foreach(var item in _gridDic)
+        {
+            if(item.Value.GridType == GridType.road)
+            {
+                res.Add(item.Key);
+            }
+        }
+        return res;
+    }
+
+    /// <summary>
+    /// 为建筑设置起点
+    /// </summary>
+    public void SetBuildingsGrid()
+    {
+        for (int i = 0; i < _buildings.Count; i++)
+        {
+            BuildingBase currentBuilding = _buildings[i].GetComponent<BuildingBase>();
+            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
+        }
+    }
     /// <summary>
     /// 刷地基
     /// </summary>
@@ -106,7 +131,7 @@ public class MapManager : Singleton<MapManager>
             }
         }
         generator.ReCalculateNormal();
-        //RoadManager.Instance.InitRoadNodeDic(generator.GetRuntimeMapData());
+        RoadManager.Instance.InitRoadNodeDic();
     }
 
     public void GetRoadTypeAndDir(Vector2Int roadGrid, out RoadOption roadOption, out Direction direction)
@@ -275,6 +300,22 @@ public class MapManager : Singleton<MapManager>
     {
         Vector3 groundPos = GetTerrainPosition(vector2Int);
         return groundPos.y - 10 < -0.9f;
+    }
+
+    /// <summary>
+    /// 获得平地位置
+    /// </summary>
+    /// <returns></returns>
+    public static Vector3 GetOnGroundPosition(Vector2Int gridPos)
+    {
+        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < 300 && gridPos.y < 300)
+        {
+            int p = gridPos.x * 4 + gridPos.y * 300 * 4;
+            Vector3 res = TerrainGenerator.GetTerrainMeshVertices()[p];
+
+            return new Vector3(res.x,10f,res.z);
+        }
+        else return Vector3.zero;
     }
     public static bool CheckOverlap(Vector2Int[] grids)
     {
