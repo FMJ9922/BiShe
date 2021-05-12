@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1338653560
+CRC: 1480395578
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0c0afcdec39ecf2a9ac8bc884fadd43a
+    Hash: 39f3d0b6067ebe5778c9abeea969f094
   TypeTreeHash:
     serializedVersion: 2
     Hash: f336b9c479a7107a4eca9e19641105fb
@@ -132,6 +132,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L3_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L1_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L3_01.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Market_L1_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L3_01_Mod.fbx
@@ -223,6 +224,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L3_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Hui_Building_Residential_L1_02.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L2_01.prefab
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L3_02_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_01_Mod.fbx
