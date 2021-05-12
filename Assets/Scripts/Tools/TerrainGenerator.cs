@@ -182,7 +182,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int tex = x + h * length;
         return tex;
     }
-    public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.01f)
+    public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.001F)
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
 #if UNITY_EDITOR
@@ -215,7 +215,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <param name="indexs">要修改的顶点索引</param>
     /// <param name="dir">方向</param>
     /// <param name="adjust">调整边缘</param>
-    public void RefreshUV(int tex, int length, int[] indexs, int dir = 0, float adjust = 0.01f)
+    public void RefreshUV(int tex, int length, int[] indexs, int dir = 0, float adjust = 0.001F)
     {
 
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;

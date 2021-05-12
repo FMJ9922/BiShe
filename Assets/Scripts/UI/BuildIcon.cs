@@ -16,6 +16,8 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
     public BuildData BuildData;
 
+    public Vector3 originPos;
+
 
 
     public void Init(BuildData buildData,BuildingCanvas buildingCanvas)
@@ -34,6 +36,8 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         _buildingCanvas.OnClickIconToBuild(BuildData);
+        _image.transform.localPosition = Vector3.zero;
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)

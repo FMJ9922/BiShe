@@ -269,7 +269,7 @@ public class RoadManager : Singleton<RoadManager>
     }
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
-        Debug.Log(start + " " + end);
+        //Debug.Log(start + " " + end);
         ClearRoadNodeH();
         List<RoadNode> path = new List<RoadNode>();
         List<RoadNode> openList = new List<RoadNode>();
@@ -288,7 +288,7 @@ public class RoadManager : Singleton<RoadManager>
                 Debug.LogError("路径被阻挡！");
                 return null;
             }
-            Debug.Log("——");
+            //Debug.Log("——");
             temp = openList[0];
             for (int i = 0; i < openList.Count; i++)
             {
@@ -300,7 +300,7 @@ public class RoadManager : Singleton<RoadManager>
             }
             openList.Remove(temp);
             closeList.Add(temp);
-            Debug.Log("选择:"+temp.GridPos);
+            //Debug.Log("选择:"+temp.GridPos);
             if (temp == endNode)
             {
                 List<Vector3> list = new List<Vector3>();
