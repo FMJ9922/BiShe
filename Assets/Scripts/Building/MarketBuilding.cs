@@ -61,6 +61,7 @@ public class MarketBuilding : BuildingBase
                         if (carMission.isAnd)continue;
                         else return;
                     }
+                    EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
                 }
                 break;
             default:

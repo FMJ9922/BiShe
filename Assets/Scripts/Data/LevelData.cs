@@ -19,4 +19,5 @@ public class LevelData
     public int stone;
     public int[] orderIds;
     public int[] orderNums;
+    public string specialIntroduce;
 }

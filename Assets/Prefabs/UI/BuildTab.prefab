@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 4494346692268015151}
   - component: {fileID: 3466214741622738634}
   - component: {fileID: 8063209346523913721}
+  - component: {fileID: 4997667028190382438}
   m_Layer: 5
   m_Name: BuildTab
   m_TagString: Untagged
@@ -211,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animation: {fileID: 8063209346523913721}
   image: {fileID: 6048262727331337929}
+  iconName: 
 --- !u!111 &8063209346523913721
 Animation:
   m_ObjectHideFlags: 0
@@ -227,6 +229,19 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &4997667028190382438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494346692268015137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b91f30e43cbf04881ade7af8ee24ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundResource: 2
 --- !u!1 &6544338429064399503
 GameObject:
   m_ObjectHideFlags: 0

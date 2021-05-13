@@ -8,6 +8,7 @@ public class MainInteractCanvas : CanvasBase
     [SerializeField] private Button[] buttons;
     [SerializeField] public CanvasBase[] canvas;
 
+    public Button returnBtn;
     private static MainInteractCanvas _instance;
 
     public static MainInteractCanvas Instance { get { return _instance; } }
@@ -28,6 +29,7 @@ public class MainInteractCanvas : CanvasBase
         {
             item.InitCanvas();
         }
+        returnBtn.onClick.AddListener(GameManager.Instance.LoadMenuScene);
     }
 
     public override void OnOpen()
@@ -53,10 +55,14 @@ public class MainInteractCanvas : CanvasBase
         canvas[1].OnOpen();
     }
 
+    public MarketCanvas GetMarketCanvas()
+    {
+        return (MarketCanvas)canvas[4];
+    }
+
     public void OpenMarketCanvas()
     {
-        MarketCanvas marketCanvas = (MarketCanvas)canvas[4];
-        marketCanvas.OnOpen();
+        GetMarketCanvas().OnOpen();
     }
 
     public void OpenCarMissionCanvas(GameObject car)

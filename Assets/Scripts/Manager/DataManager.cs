@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataManager : ScriptableObject
 {
-    static DataManager mInstance;
+    public static DataManager mInstance;
     public static DataManager Instance
     {
         get
@@ -23,7 +23,7 @@ public class DataManager : ScriptableObject
     public BuildData[] BuildArray;
     public FormulaData[] FormulaArray;
     public LocalizationData LocalizationData;
-    public Dictionary<BuildTabType, List<BuildData>> TabDic = new Dictionary<BuildTabType, List<BuildData>>();
+    public Dictionary<BuildTabType, List<BuildData>> TabDic;
     public static string[] foodNames;
     public static int[] foodIds;
     public static int[] itemIds;
@@ -31,6 +31,7 @@ public class DataManager : ScriptableObject
 
     public void InitTabDic()
     {
+        TabDic = new Dictionary<BuildTabType, List<BuildData>>();
         for (int i = 0; i < BuildArray.Length; i++)
         {
             BuildTabType tabType = BuildArray[i].tabType;
@@ -48,6 +49,10 @@ public class DataManager : ScriptableObject
             }
         }
         Debug.Log("创建TabDic成功！");
+    }
+    public static LevelData[] GetAllLevelDatas()
+    {
+        return Instance.LevelArray;
     }
 
     public static LevelData GetLevelData(int levelId)

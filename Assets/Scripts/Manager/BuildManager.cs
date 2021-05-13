@@ -50,7 +50,6 @@ public class BuildManager : Singleton<BuildManager>
 
     public void InitBuildManager()
     {
-        LoadAB.Init();
         //ShowGrid(false);
         IsInBuildMode = false;
     }
@@ -78,7 +77,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         string bundleName = buildData.BundleName;
         string pfbName = buildData.PfbName;
-        if(buildData.Id == 20001 || buildData.Id == 20009
+        if(buildData.Id == 20001 || buildData.Id == 20009 || buildData.Id == 20033
             || buildData.Id == 20023 || buildData.Id == 20024 || buildData.Id == 20025
             || buildData.Id == 20028)
         {
@@ -377,6 +376,7 @@ public class BuildManager : Singleton<BuildManager>
             {
                 currentBuilding.transform.position += Vector3.up * 5;
                 StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_constuction);
             }
         }
     }
@@ -404,14 +404,14 @@ public class BuildManager : Singleton<BuildManager>
         dustParticle.Play();
     }
 
-    public void UpgradeBuilding(BuildData buildData,Vector3 pos,Quaternion quaternion,out bool success)
+    public void UpgradeBuilding(BuildData buildData,Vector2Int[] grids,Vector3 pos,Quaternion quaternion,out bool success)
     {
         GameObject building = InitBuilding(buildData);
         building.transform.position = pos;
         building.transform.rotation = quaternion;
         if (CheckBuildResourcesEnoughAndUse())
         {
-            currentBuilding.OnConfirmBuild(targetGrids);
+            currentBuilding.OnConfirmBuild(grids);
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             success = true;

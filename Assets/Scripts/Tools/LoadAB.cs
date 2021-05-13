@@ -13,7 +13,7 @@ public class LoadAB : MonoBehaviour
     {
         AssetBundle assetBundle = AssetBundle.LoadFromFile("AssetBundles/AssetBundles");
         manifest = assetBundle.LoadAsset<AssetBundleManifest>("assetbundlemanifest");
-
+        Load("building.ab", "WheatPfb");
 
     }
     public static GameObject Load(string bundleName, string name)

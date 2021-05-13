@@ -191,11 +191,17 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
-        //Debug.Log(h + " " + x);
-        uv[4 * index + dir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
-        uv[4 * index + (1 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
-        uv[4 * index + (2 + dir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
-        uv[4 * index + (3 + dir) % 4] = new Vector2((x / length) + adjust, ((length - h) / length) - adjust);
+        //Debug.Log(h + " " + x);if (dir == 4)
+        int tempdir = dir;
+        if (dir == 4)
+        {
+            tempdir = Random.Range((int)0, (int)4);
+        }
+
+        uv[4 * index + tempdir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
+        uv[4 * index + (1 + tempdir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
+        uv[4 * index + (2 + tempdir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);
+        uv[4 * index + (3 + tempdir) % 4] = new Vector2((x / length) + adjust, ((length - h) / length) - adjust);
         mesh.uv = uv;
     }
 

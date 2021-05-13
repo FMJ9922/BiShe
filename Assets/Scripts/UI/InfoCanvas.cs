@@ -73,6 +73,7 @@ public class InfoCanvas : CanvasBase
                 {
                     btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
                     _openText.text = Localization.ToSettingLanguage("Open")+ Localization.ToSettingLanguage("Warehouse");
+                    SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_wareHouse);
                 }
                 break;
             //集市
@@ -81,6 +82,7 @@ public class InfoCanvas : CanvasBase
             case 20013:
                 btn.onClick.AddListener(MainInteractCanvas.Instance.OpenMarketCanvas);
                 _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Market");
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_market);
                 break;
             //市政
             case 20020:
@@ -89,6 +91,44 @@ public class InfoCanvas : CanvasBase
                 btn.onClick.AddListener(MainInteractCanvas.Instance.OpenTechCanvas);
                 _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("TechCanvas");
                 break;
+            case 20001:
+            case 20009:
+            case 20033:
+
+            case 20023:
+            case 20024:
+            case 20025:
+
+            case 20026:
+            case 20027:
+            case 20028:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_hut);
+                break;
+            case 20008:
+            case 20014:
+            case 20015:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_logCamp);
+                break;
+            case 20007:
+            case 20010:
+            case 20011:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_factory);
+                break;
+            case 20029:
+            case 20030:
+            case 20031:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_mine);
+                break;
+            case 20032:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_pier);
+                break;
+            case 20005:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_farmland);
+                break;
+            case 20006:
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_farm);
+                break;
+
         }
     }
 

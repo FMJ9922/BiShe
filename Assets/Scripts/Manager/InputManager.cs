@@ -96,7 +96,15 @@ public partial class InputManager : Singleton<InputManager>
                 BuildingBase buildingBase;
                 buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
                 //Debug.Log(buildingBase.transform.name);
-                EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
+                int id = buildingBase.runtimeBuildData.Id;
+                if (id == 20003||id == 20016||id == 20017)
+                {
+                    MainInteractCanvas.Instance.OpenResourceCanvas();
+                }
+                else
+                {
+                    EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
+                }
             }
             else if (hit.collider.CompareTag("car"))
             {

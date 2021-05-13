@@ -156,6 +156,7 @@ public class BuildingBase : MonoBehaviour
         ReturnBuildResources();
         MapManager.SetGridTypeToEmpty(takenGrids);
         MapManager.Instance._buildings.Remove(gameObject);
+        MapManager.Instance.BuildFoundation(takenGrids, 0,4);
         Destroy(this.gameObject);
     }
     public virtual bool ReturnBuildResources()
@@ -239,7 +240,7 @@ public class BuildingBase : MonoBehaviour
         buildData.CurLevel = runtimeBuildData.CurLevel;
         buildData.CurFormula = runtimeBuildData.CurFormula;
         buildData.CurPeople = runtimeBuildData.CurPeople;
-        BuildManager.Instance.UpgradeBuilding(data, transform.position,transform.rotation,out bool success);
+        BuildManager.Instance.UpgradeBuilding(data, takenGrids,transform.position,transform.rotation,out bool success);
         if (success)
         {
             DestroyBuilding();

@@ -20,7 +20,7 @@ public class MarketManager : Singleton<MarketManager>
         //Debug.Log("?");
         if (!marketCanvas)
         {
-            marketCanvas = (MarketCanvas)MainInteractCanvas.Instance.canvas[4];
+            marketCanvas = MainInteractCanvas.Instance.GetMarketCanvas();
         }
         List<MarketItem> marketItems = marketCanvas.GetMarketItems();
         List<MarketItem> orderItems = marketCanvas.GetOrderItems();

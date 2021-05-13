@@ -25,7 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
         else
         {
-            Debug.LogError("manager has already been created previously. " + gameObject.name + " is goning to be destroyed.");
+            Debug.Log("manager has already been created previously. " + gameObject.name + " is goning to be destroyed.");
             Destroy(this);
             return;
         }

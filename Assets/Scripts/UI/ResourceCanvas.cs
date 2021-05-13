@@ -7,7 +7,6 @@ using TMPro;
 public class ResourceCanvas : CanvasBase
 {
     [SerializeField] private Transform itemContent;//挂载物品的地方
-    [SerializeField] private GameObject itemPfb;//物体预制体
     [SerializeField] private Color oddColor;
     [SerializeField] private Color evenColor;
     [SerializeField] private GameObject mainCanvas;
@@ -23,6 +22,7 @@ public class ResourceCanvas : CanvasBase
     {
         CreateItemList();
         EventManager.StartListening(ConstEvent.OnInputResources, CreateItemList);
+        EventManager.StartListening(ConstEvent.OnRefreshResources, CreateItemList);
         mainCanvas.SetActive(true);
     }
 
@@ -30,6 +30,7 @@ public class ResourceCanvas : CanvasBase
     {
         DestroyList();
         EventManager.StopListening(ConstEvent.OnInputResources, CreateItemList);
+        EventManager.StopListening(ConstEvent.OnRefreshResources, CreateItemList);
         mainCanvas.SetActive(false);
     }
     #endregion
@@ -45,7 +46,6 @@ public class ResourceCanvas : CanvasBase
             InitItemPfb(count, keyValuePair.Key, keyValuePair.Value);
             count++;
         }
-        EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
     }
 
     private void DestroyList()
