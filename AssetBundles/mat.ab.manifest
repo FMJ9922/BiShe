@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3920800996
+CRC: 250366373
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5c6917140a4887ca3b1396ecf30f6333
+    Hash: 54f9d6fac34b480e7cb53afeae3ea81d
   TypeTreeHash:
     serializedVersion: 2
     Hash: bd7f1ea14498176061c89f8562337b85
@@ -36,6 +36,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat
 - Assets/ArtAssets/UI/StartUI/30003preview.png
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Sawmill_L1L2L3_Tex.tga
+- Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
 - Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Wheat Wind.shader
 - Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
@@ -51,6 +52,7 @@ Assets:
 - Assets/Scenes Assets/Material/Texture/Coach_Building_Residential_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
 - Assets/ArtAssets/Material/Field.mat
+- Assets/ArtAssets/UI/BuildingUI/MarketButton.png
 - Assets/Scenes Assets/Material/Universal_Building_MarketWarehouse_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Terrain_BareGround_01_Mat.mat
 - Assets/Scenes Assets/Material/Coach_Building_HookerPier_L1L2L3_Mat.mat

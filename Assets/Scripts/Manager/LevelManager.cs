@@ -144,6 +144,7 @@ public class LevelManager : Singleton<LevelManager>
     /// </summary>
     public void InitLevelManager(int levelID)
     {
+        Debug.Log("InitLevel:" + levelID);
         LevelManager.LevelID = levelID;
         ResourceManager.Instance.InitResourceManager(LevelID);
         MapManager.Instance.InitMapMnager(LevelID);

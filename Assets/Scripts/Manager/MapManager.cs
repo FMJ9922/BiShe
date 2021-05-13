@@ -49,8 +49,19 @@ public class MapManager : Singleton<MapManager>
             SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
         }
+        Debug.Log("初始化中");
+        Invoke("InitRoad",0.017f);
+    }
+
+    public void InitRoad()
+    {
         List<StaticBuilding> lists = StaticBuilding.lists;
         RoadManager.Instance.InitRoadManager();
+        SetGrid(lists);
+    }
+
+    void SetGrid(List<StaticBuilding> lists)
+    {
         for (int i = 0; i < lists.Count; i++)
         {
             lists[i].SetGrids();

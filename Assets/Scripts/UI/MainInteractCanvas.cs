@@ -52,6 +52,7 @@ public class MainInteractCanvas : CanvasBase
 
     public void OpenResourceCanvas()
     {
+        CloseAllOpenedUI();
         canvas[1].OnOpen();
     }
 
@@ -62,25 +63,49 @@ public class MainInteractCanvas : CanvasBase
 
     public void OpenMarketCanvas()
     {
+        CloseAllOpenedUI();
         GetMarketCanvas().OnOpen();
     }
 
     public void OpenCarMissionCanvas(GameObject car)
     {
+        CloseAllOpenedUI();
         CarMissionCanvas carCanvas = (CarMissionCanvas)canvas[5];
         carCanvas.OnOpen(car);
     }
 
     public void OpenTechCanvas()
     {
+        CloseAllOpenedUI();
+        TechTreeCanvas techCanvas = (TechTreeCanvas)canvas[6];
+        techCanvas.OnOpen();
+    }
 
+    public void CloseCarMissionCanvas()
+    {
+        canvas[5].OnClose();
+    }
+
+    public void CloseResourcesCanvas()
+    {
+        canvas[1].OnClose();
+    }
+
+    public void CloseMarketCanvas()
+    {
+        canvas[4].OnClose();
+    }
+
+    public void CloseInfoCanvas()
+    {
+        canvas[2].OnClose();
     }
     private void CloseAllOpenedUI()
     {
-        foreach (var item in canvas)
-        {
-            item.OnClose();
-        }
+        CloseInfoCanvas();
+        CloseMarketCanvas();
+        CloseResourcesCanvas();
+        CloseCarMissionCanvas();
     }
 
     

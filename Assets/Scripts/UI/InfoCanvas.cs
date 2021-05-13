@@ -80,16 +80,20 @@ public class InfoCanvas : CanvasBase
             case 20004:
             case 20012:
             case 20013:
+                _openCanvas.GetComponentInChildren<Button>().image.sprite = LoadAB.LoadSprite("mat.ab", "MarketButton");
                 btn.onClick.AddListener(MainInteractCanvas.Instance.OpenMarketCanvas);
-                _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Market");
+                _openCanvas.GetComponentInChildren<Button>().image.SetNativeSize();
+                //_openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Market");
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_market);
                 break;
             //市政
             case 20020:
             case 20021:
             case 20022:
+                _openCanvas.GetComponentInChildren<Button>().image.sprite = LoadAB.LoadSprite("mat.ab", "ScienceButton");
+                _openCanvas.GetComponentInChildren<Button>().image.SetNativeSize();
                 btn.onClick.AddListener(MainInteractCanvas.Instance.OpenTechCanvas);
-                _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("TechCanvas");
+                //_openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("TechCanvas");
                 break;
             case 20001:
             case 20009:

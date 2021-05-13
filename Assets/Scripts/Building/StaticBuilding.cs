@@ -9,12 +9,14 @@ public class StaticBuilding : MonoBehaviour
     public int BuildID;
     BuildingBase currentBuilding;
     public static List<StaticBuilding> lists = new List<StaticBuilding>();
-    private void Awake()
+    private void Start()
     {
+        //Debug.Log("add");
         lists.Add(this);
     }
     public void SetGrids()
     {
+        //Debug.Log("set");
         currentBuilding = transform.GetComponent<BuildingBase>();
         Vector2Int[] targetGrids = BuildManager.Instance.GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, 
             currentBuilding.transform.position, isFacingX);

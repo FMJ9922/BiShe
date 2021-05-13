@@ -53,6 +53,7 @@ public class BuildingBase : MonoBehaviour
         parkingGridIn = InitParkingGrid();
         //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        Debug.Log("paint");
         //整平地面
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;
@@ -177,10 +178,9 @@ public class BuildingBase : MonoBehaviour
         if (productTime <= 0)
         {
             productTime = formula.ProductTime;
-            for (int i = 0; i < formula.OutputItemID.Count; i++)
-            {
-                ResourceManager.Instance.AddResource(formula.OutputItemID[i],formula.ProductNum[i]);
-            }
+            float rate = runtimeBuildData.Rate;
+            CarMission carMission = MakeCarMission(rate);
+            TrafficManager.Instance.UseCar(carMission, () => carMission.EndBuilding.OnRecieveCar(carMission));
             runtimeBuildData.Rate = 0;
         }
     }
@@ -252,6 +252,25 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.Effectiveness = (float)runtimeBuildData.CurPeople / (float)runtimeBuildData.Population;
         runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
+    }
+
+    private CarMission MakeCarMission(float rate)
+    {
+        //Debug.Log(rate);
+        CarMission mission = new CarMission();
+        mission.StartBuilding = this;
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.missionType = CarMissionType.transportResources;
+        mission.isAnd = true;
+        mission.transportResources = new List<CostResource>();
+        mission.transportationType = TransportationType.mini;
+        for (int i = 0; i < formula.OutputItemID.Count; i++)
+        {
+            //Debug.Log(formula.OutputItemID[i]);
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]));
+
+        }
+        return mission;
     }
 }
 

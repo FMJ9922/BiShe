@@ -22,11 +22,9 @@ public class StartMenuItem : MonoBehaviour, IPointerEnterHandler,IPointerExitHan
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        transform.position -= new Vector3(20, 0, 0);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        transform.position = originLocalPos;
     }
 }

@@ -76,9 +76,10 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            item.GetComponent<GraphCube>().SetHeight((int)(building.runtimeBuildData.Happiness * 20), buildings[i].transform.position);
+            float rand = Random.Range(0.6f, 1.0f);
+            item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
             string showLabel = Localization.ToSettingLanguage("%");
-            item.GetComponent<GraphCube>().SetLabel((int)(building.runtimeBuildData.Happiness * 100) + showLabel);
+            item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);
         }
     }
     private void ShowMaintenanceCosts()
@@ -88,9 +89,10 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CostPerWeek, buildings[i].transform.position);
+            int rand = Random.Range(0, 20);
+            item.GetComponent<GraphCube>().SetHeight(rand, buildings[i].transform.position);
             string showLabel = "/" + Localization.ToSettingLanguage("Week");
-            item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CostPerWeek.ToString() + showLabel);
+            item.GetComponent<GraphCube>().SetLabel(rand.ToString() + showLabel);
         }
     }
 
@@ -101,9 +103,10 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            item.GetComponent<GraphCube>().SetHeight((int)(building.runtimeBuildData.Effectiveness*20), buildings[i].transform.position);
+            float rand = Random.Range(0.6f, 1.2f);
+            item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
             string showLabel = Localization.ToSettingLanguage("%");
-            item.GetComponent<GraphCube>().SetLabel((int)(building.runtimeBuildData.Effectiveness * 100) + showLabel);
+            item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);
         }
     }
 
