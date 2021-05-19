@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: -6684634057626713604}
   - component: {fileID: -5707234115467004254}
   m_Layer: 0
-  m_Name: Universal_Building_Warehouse_L3_01_Preb
+  m_Name: Universal_Building_Warehouse_L3_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,8 +79,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.977553, y: 6.648649, z: 11.853209}
-  m_Center: {x: -0.24294996, y: 3.1465921, z: -0.1105175}
+  m_Size: {x: 11.977553, y: 0.2, z: 11.853209}
+  m_Center: {x: -0.24294996, y: 0.1, z: -0.1105175}
 --- !u!114 &5637686859304087144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   body: {fileID: 8141834720336828995}
   buildFlag: 0
   takenGrids: []
-  parking: {fileID: 0}
   parkingGridIn: {x: 0, y: 0}
   parkingGridOut: {x: 0, y: 0}
   direction: 0

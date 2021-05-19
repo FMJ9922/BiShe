@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8347379121064515223}
   - component: {fileID: -7347359130341883536}
   m_Layer: 0
-  m_Name: Universal_Building_Factory_L3_01_Preb
+  m_Name: Universal_Building_Factory_L3_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,8 +69,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.871794, y: 6.379181, z: 16.66029}
-  m_Center: {x: 0.28014088, y: 3.2668228, z: -0.41769266}
+  m_Size: {x: 11.871794, y: 0.2, z: 16.66029}
+  m_Center: {x: 0.28014088, y: 0.1, z: -0.41769266}
 --- !u!114 &8347379121064515223
 MonoBehaviour:
   m_ObjectHideFlags: 0

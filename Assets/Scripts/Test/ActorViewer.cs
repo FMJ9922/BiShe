@@ -26,11 +26,11 @@ public class ActorViewer : MonoBehaviour
     }
     private void AddListener()
     {
-        EventManager.StartListening(ConstEvent.OnCameraMove, ChangeSprite);
+        //EventManager.StartListening(ConstEvent.OnCameraMove, ChangeSprite);
     }
     private void RemoveListener()
     {
-        EventManager.StartListening(ConstEvent.OnCameraMove, ChangeSprite);
+        //EventManager.StartListening(ConstEvent.OnCameraMove, ChangeSprite);
     }
 
     /// <summary>

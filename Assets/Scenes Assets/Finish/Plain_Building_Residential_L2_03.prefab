@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4338875293940072258}
   - component: {fileID: -4817728196468898054}
   m_Layer: 0
-  m_Name: Plain_Building_Residential_L2_03_Preb
+  m_Name: Plain_Building_Residential_L2_03
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.558853, y: 8.034332, z: 11.408379}
-  m_Center: {x: -0.1389246, y: 3.8974, z: 0.16608906}
+  m_Size: {x: 11.558853, y: 0.2, z: 11.408379}
+  m_Center: {x: -0.1389246, y: 0.1, z: 0.16608906}
 --- !u!114 &5012884434304938199
 MonoBehaviour:
   m_ObjectHideFlags: 0

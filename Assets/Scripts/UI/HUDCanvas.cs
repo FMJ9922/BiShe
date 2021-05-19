@@ -19,6 +19,7 @@ public class HUDCanvas : CanvasBase
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StopListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StopListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        EventManager.StopListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
         graphBtn.onClick.RemoveAllListeners();
     }
     public override void InitCanvas()

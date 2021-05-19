@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5734332373450342904}
   - component: {fileID: -4654804987325414172}
   m_Layer: 0
-  m_Name: Universal_Building_Sawmill_L3_01_Preb
+  m_Name: Universal_Building_Sawmill_L3_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.212163, y: 4.3960686, z: 15.061918}
-  m_Center: {x: -0.9710107, y: 2.0836258, z: 0.2832117}
+  m_Size: {x: 11.212163, y: 0.2, z: 15.061918}
+  m_Center: {x: -0.9710107, y: 0.1, z: 0.2832117}
 --- !u!114 &1300554081232875133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +68,6 @@ MonoBehaviour:
   body: {fileID: 3806656449220818129}
   buildFlag: 0
   takenGrids: []
-  parking: {fileID: 0}
   parkingGridIn: {x: 0, y: 0}
   parkingGridOut: {x: 0, y: 0}
   direction: 0

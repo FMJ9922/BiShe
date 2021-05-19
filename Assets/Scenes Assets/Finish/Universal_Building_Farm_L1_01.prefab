@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7635756241919994507}
   - component: {fileID: 6325556495357599334}
   m_Layer: 0
-  m_Name: Universal_Building_Farm_L1_01_Preb
+  m_Name: Universal_Building_Farm_L1_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,8 +69,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12, y: 3.3084412, z: 20}
-  m_Center: {x: 0, y: 1.7527027, z: 0}
+  m_Size: {x: 12, y: 0.2, z: 20}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &7635756241919994507
 Rigidbody:
   m_ObjectHideFlags: 0

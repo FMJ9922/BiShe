@@ -285,7 +285,7 @@ public class RoadManager : Singleton<RoadManager>
         {
             if (openList.Count <= 0)
             {
-                Debug.LogError("路径被阻挡！");
+                Debug.LogError("路径被阻挡！"+ start+"=>"+end);
                 return null;
             }
             //Debug.Log("——");

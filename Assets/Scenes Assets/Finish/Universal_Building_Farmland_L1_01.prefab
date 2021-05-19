@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7029138062204309740}
   - component: {fileID: -711504067360786487}
   m_Layer: 8
-  m_Name: Universal_Building_Farmland_L1_01_Preb
+  m_Name: Universal_Building_Farmland_L1_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,8 +65,6 @@ MonoBehaviour:
   direction: 0
   yellow: {r: 0.9245283, g: 0.8257092, b: 0.3270737, a: 1}
   green: {r: 0.50363296, g: 0.8962264, b: 0.26633143, a: 1}
-  wheatGridPfb: {fileID: 5882440083437044184, guid: 4f55e60634c10324c9cd2f1c7c3d0241,
-    type: 3}
   wheatTrans: {fileID: 3005787282694144635}
   previewObj: {fileID: 3691964960004374103}
   lists:
@@ -85,8 +83,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.248001, y: 1.6705847, z: 8.104813}
-  m_Center: {x: -0.11603546, y: 0.64754915, z: -0.03730011}
+  m_Size: {x: 12.248001, y: 0.2, z: 8.104813}
+  m_Center: {x: -0.11603546, y: 0.1, z: -0.03730011}
 --- !u!114 &-7029138062204309740
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,17 +26,15 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         _cameraTrans = transform.GetChild(0);
         EventManager.StartListening<bool>(ConstEvent.OnLockScroll,LockScroll);
+        InvokeRepeating("Timer", 0, 0.016666667f);
     }
     private void OnDestroy()
     {
         EventManager.StopListening<bool>(ConstEvent.OnLockScroll, LockScroll);
     }
-    void Update()
+
+    private void Timer()
     {
-        if (!canMove)
-        {
-            return;
-        }
         if (Input.GetKey(KeyCode.W))
         {
             _forwardSpeed = _forwardSpeed >= 0 ?
@@ -84,6 +82,17 @@ public class CameraMovement : Singleton<CameraMovement>
             _scrollValue = Mathf.MoveTowards(_scrollValue, MinScrollValue, ScrollWheelSpeed);
         }
         _cameraTrans.localPosition = new Vector3(-1f, -1.42f, 1f) * _scrollValue;
+        AdjustPosition();
+    }
+
+    private void AdjustPosition()
+    {
+        Vector3 pos = transform.position;
+        float x = transform.position.x;
+        float z = transform.position.z;
+        x = Mathf.Clamp(x, 100, 700);
+        z = Mathf.Clamp(z, -100, 500);
+        transform.position = new Vector3(x, 173.2f, z);
     }
 
     public void StopMovement()

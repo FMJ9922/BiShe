@@ -53,7 +53,7 @@ public class BuildingBase : MonoBehaviour
         parkingGridIn = InitParkingGrid();
         //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
-        Debug.Log("paint");
+        //Debug.Log("paint");
         //整平地面
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;

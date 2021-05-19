@@ -56,6 +56,22 @@ public partial class InputManager : Singleton<InputManager>
         {
             EventManager.TriggerEvent(ConstEvent.OnMouseLeftButtonHeld);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.Instance.TogglePauseGame(out TimeScale scale);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GameManager.Instance.SetOneTimeScale();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GameManager.Instance.SetTwoTimeScale();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GameManager.Instance.SetFourTimeScale();
+        }
         //if (Input.GetKey(KeyCode.W))
         //{
         //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * _CameraMoveSpeed;

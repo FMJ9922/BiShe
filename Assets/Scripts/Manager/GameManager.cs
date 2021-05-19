@@ -50,6 +50,20 @@ public class GameManager : Singleton<GameManager>
         addedScale = timeScale;
         SetTimeScale(timeScale);
     }
+    public void SetOneTimeScale()
+    {
+        SetTimeScale(TimeScale.one);
+    }
+
+    public void SetTwoTimeScale()
+    {
+        SetTimeScale(TimeScale.two);
+    }
+
+    public void SetFourTimeScale()
+    {
+        SetTimeScale(TimeScale.four);
+    }
 
     /// <summary>
     /// 设置游戏的播放速率
@@ -82,8 +96,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void QuitApplication()
     {
-
-            Application.Quit();
+         Application.Quit();
     }
 
     public void LoadLevelScene(int levelNum)

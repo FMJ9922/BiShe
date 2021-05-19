@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -818304042238836252}
   - component: {fileID: 8880107363484495123}
   m_Layer: 0
-  m_Name: Universal_Building_Government_L2_01_Mod
+  m_Name: Universal_Building_Government_L2_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,8 +69,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 11.461594, y: 4.7313156, z: 16.800955}
-  m_Center: {x: -0.7031479, y: 2.1280327, z: -0.061089516}
+  m_Size: {x: 11.461594, y: 0.2, z: 16.800955}
+  m_Center: {x: -0.7031479, y: 0.1, z: -0.061089516}
 --- !u!114 &-818304042238836252
 MonoBehaviour:
   m_ObjectHideFlags: 0

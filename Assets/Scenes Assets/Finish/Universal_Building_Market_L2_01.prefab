@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5077208565317437241}
   - component: {fileID: -1634849796654281676}
   m_Layer: 0
-  m_Name: Universal_Building_Market_L2_01_Preb
+  m_Name: Universal_Building_Market_L2_01
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 13.780727, y: 6.533087, z: 11.585461}
-  m_Center: {x: -0.8223705, y: 3.35, z: -0.062335014}
+  m_Size: {x: 13.780727, y: 0.2, z: 11.585461}
+  m_Center: {x: -0.8223705, y: 0.1, z: -0.062335014}
 --- !u!114 &5249366712368865032
 MonoBehaviour:
   m_ObjectHideFlags: 0
