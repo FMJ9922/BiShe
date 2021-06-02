@@ -12,6 +12,12 @@ public class MapManager : Singleton<MapManager>
     public List<GameObject> _buildings = new List<GameObject>();
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
+    public static string noticeContent;
+
+
+
+
+
 
     
     public void InitMapMnager(int levelId)
@@ -289,9 +295,21 @@ public class MapManager : Singleton<MapManager>
     {
         //检测安放地点占用
         bool hasOverlap = CheckOverlap(grids);
+        if (hasOverlap)
+        {
+            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
+        }
         //检测道路是否贴近
         bool hasNearRoad = CheckNearRoad(grids, width, height, out direction);
+        if (hasNearRoad)
+        {
+            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
+        }
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
+        if (!isInSea)
+        {
+            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
+        }
         //if (!isInSea) Debug.Log("不在海里");
         return !hasOverlap && hasNearRoad && isInSea;
     }

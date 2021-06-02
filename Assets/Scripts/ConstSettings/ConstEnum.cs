@@ -165,3 +165,23 @@ public enum SoundResource
     sfx_dropdown,//下拉菜单
     sfx_click_farm = 17,//农场
 }
+
+public enum IconDescription
+{
+    [Description("Build")]
+    Build = 0,
+    [Description("Destroy")]
+    Destroy = 1,
+    [Description("Upgrade")]
+    Upgrade = 2,
+    [Description("Money")]
+    Money = 3,
+    [Description("Log")]
+    Log = 4,
+    [Description("Stone")]
+    Stone = 5,
+    [Description("Food")]
+    Food = 6,
+    [Description("Population")]
+    Population = 7,
+}

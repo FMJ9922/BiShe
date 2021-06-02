@@ -164,6 +164,7 @@ public class InfoCanvas : CanvasBase
         EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
         mainCanvas.SetActive(false);
         BuildingHighlight.SetActive(false);
+        NoticeManager.Instance.CloseNotice();
     }
     private void OnDestroy()
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5509235301365296189}
   - component: {fileID: 288280130044600483}
   m_Layer: 0
-  m_Name: Universal_Plant_TreeLight_07_Preb
+  m_Name: Universal_Plant_TreeLight_07
   m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: -1
 --- !u!136 &288280130044600483
 CapsuleCollider:
   m_ObjectHideFlags: 0

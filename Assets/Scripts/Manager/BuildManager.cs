@@ -362,7 +362,8 @@ public class BuildManager : Singleton<BuildManager>
         CheckOverlap();
         if (!isCurCanBuild)
         {
-            Debug.Log("当前建筑重叠，无法建造！");
+            NoticeManager.Instance.InvokeShowNotice(MapManager.noticeContent);
+            //Debug.Log("当前建筑重叠，无法建造！");
             return;
         }
         if (CheckBuildResourcesEnoughAndUse())
@@ -378,6 +379,10 @@ public class BuildManager : Singleton<BuildManager>
                 StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_constuction);
             }
+        }
+        else
+        {
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoRes));
         }
     }
     private IEnumerator PushDownBuilding(Vector3 startPos)
@@ -406,11 +411,11 @@ public class BuildManager : Singleton<BuildManager>
 
     public void UpgradeBuilding(BuildData buildData,Vector2Int[] grids,Vector3 pos,Quaternion quaternion,out bool success)
     {
-        GameObject building = InitBuilding(buildData);
-        building.transform.position = pos;
-        building.transform.rotation = quaternion;
         if (CheckBuildResourcesEnoughAndUse())
         {
+            GameObject building = InitBuilding(buildData);
+            building.transform.position = pos;
+            building.transform.rotation = quaternion;
             currentBuilding.OnConfirmBuild(grids);
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
@@ -418,7 +423,7 @@ public class BuildManager : Singleton<BuildManager>
         }
         else
         {
-            Destroy(building);
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage(ConstString.NoticeUpgradeFail));
             success = false;
         }
     }

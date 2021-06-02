@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -893445862945377474}
   - component: {fileID: 4385203303791801983}
   m_Layer: 0
-  m_Name: Universal_Plant_TreeDark_01_Preb
+  m_Name: Universal_Plant_TreeDark_01
   m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76602f7a14b0b584c99fff7578190838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: -1
 --- !u!136 &4385203303791801983
 CapsuleCollider:
   m_ObjectHideFlags: 0

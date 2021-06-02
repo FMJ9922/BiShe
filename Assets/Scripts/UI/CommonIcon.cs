@@ -53,12 +53,12 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     #region 接口
     public void OnPointerEnter(PointerEventData eventData)
     {
-
+        NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(data.Name));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-
+        NoticeManager.Instance.CloseNotice();
     }
 
     #endregion

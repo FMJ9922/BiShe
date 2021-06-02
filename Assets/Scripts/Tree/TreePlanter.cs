@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreePlanter : MonoBehaviour
+public class TreePlanter : Singleton<MonoBehaviour>
 {
     public GameObject[] TreePfbs;
     private float minDis = 2f;
@@ -50,7 +50,7 @@ public class TreePlanter : MonoBehaviour
         }
         return true;
     }
-    private void PlantSingleTree(Vector3 centerPos)
+    public void PlantSingleTree(Vector3 centerPos, TreeSystem.TreeState state = TreeSystem.TreeState.mature)
     {
         Vector3 adjustedPos = MapManager.GetTerrainPosition(centerPos);
         if (adjustedPos == Vector3.zero) return;
@@ -60,5 +60,6 @@ public class TreePlanter : MonoBehaviour
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
         Transform parent = GameObject.Find("TerrainGenerator").transform.GetChild(0);
         GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), parent);
+        newTree.GetComponent<TreeSystem>().state = state;
     }
 }
