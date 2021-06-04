@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1201223590287623089}
-  - component: {fileID: 1129882384034272064}
   - component: {fileID: 8530255321517076275}
   - component: {fileID: -561491405823537817}
   - component: {fileID: 1487259063131633667}
+  - component: {fileID: 6437327961931810276}
   m_Layer: 0
   m_Name: Universal_Building_Market_L3_01
   m_TagString: Building
@@ -35,29 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1129882384034272064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618324913827664453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Width: 8
-  Height: 6
-  BundlePrimaryType: 0
-  hasAnima: 0
-  animation: {fileID: 0}
-  body: {fileID: 192753999221219544}
-  buildFlag: 0
-  takenGrids: []
-  parkingGridIn: {x: 0, y: 0}
-  parkingGridOut: {x: 0, y: 0}
-  direction: 0
 --- !u!65 &8530255321517076275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99,6 +76,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6437327961931810276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618324913827664453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed36183c39531034ab93806cf2034535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 6
+  Height: 8
+  BundlePrimaryType: 0
+  hasAnima: 0
+  animation: {fileID: 0}
+  body: {fileID: 192753999221219544}
+  buildFlag: 0
+  takenGrids: []
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
+  direction: 0
 --- !u!1001 &7909972641903782754
 PrefabInstance:
   m_ObjectHideFlags: 0

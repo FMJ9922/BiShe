@@ -45,11 +45,7 @@ public class MineBuilding : BuildingBase
 
     protected override void Input()
     {
-        if (formula == null || formula.InputItemID == null) return;
-        for (int i = 0; i < formula.InputItemID.Count; i++)
-        {
-            ResourceManager.Instance.TryUseResource(formula.InputItemID[i], formula.InputNum[i]);
-        }
+        base.Input();
         DigGround();
     }
 

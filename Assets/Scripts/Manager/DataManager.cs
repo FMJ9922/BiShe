@@ -68,6 +68,18 @@ public class DataManager : ScriptableObject
         return null;
     }
 
+    public static TechData GetTechData(int techId)
+    {
+        for (int i = 0; i < Instance.TechArray.Length; i++)
+        {
+            if (Instance.TechArray[i].Id == techId)
+            {
+                return Instance.TechArray[i];
+            }
+        }
+        Debug.Log("无效的科技ID");
+        return null;
+    }
     public static BuildData GetBuildData(int buildId)
     {
         for (int i = 0; i < Instance.BuildArray.Length; i++)

@@ -65,6 +65,26 @@ public class CastTool : MonoBehaviour
         }
     }
 
+    public static Direction CastVector3ToDirection(Vector3 vector3)
+    {
+        if (vector3.x > 0 && Mathf.Abs(vector3.x)> Mathf.Abs(vector3.z))
+        {
+            return Direction.right;
+        }
+        else if (vector3.x < 0 && Mathf.Abs(vector3.x) > Mathf.Abs(vector3.z))
+        {
+            return Direction.left;
+        }
+        else if (vector3.y > 0)
+        {
+            return Direction.up;
+        }
+        else
+        {
+            return Direction.down;
+        }
+    }
+
     public static Vector3 CastDirectionToVector(int direction)
     {
         direction %= 4;

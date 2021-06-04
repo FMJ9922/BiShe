@@ -291,7 +291,7 @@ public class InfoCanvas : CanvasBase
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
         _populationLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
-        _workerLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
+        _workerLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
     }
 

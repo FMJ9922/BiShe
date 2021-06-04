@@ -56,8 +56,9 @@ public class MarketCanvas : CanvasBase
         buyText.color = Color.gray;
         sellText.color = Color.white;
         buyItems.SetActive(false);
-        sellItems.SetActive(true);
-        
+        sellItems.SetActive(true); 
+        RefreshOrderItem();
+        InitMarketItems();
     }
 
     private void InitMarketItems()
@@ -72,7 +73,7 @@ public class MarketCanvas : CanvasBase
             obj.SetActive(true);
             obj.transform.SetParent(sellContent.transform);
             MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.needNum = nums[i];
+            marketItem.needNum = (int)(nums[i]*TechManager.Instance.SellNumBuff());
             marketItem.InitItem(ids[i]);
             orderItems.Add(marketItem);
         }
@@ -111,5 +112,14 @@ public class MarketCanvas : CanvasBase
             Destroy(item.gameObject);
         }
         marketItems.Clear();
+    }
+
+    public void RefreshOrderItem()
+    {
+        foreach (var item in orderItems)
+        {
+            Destroy(item.gameObject);
+        }
+        orderItems.Clear();
     }
 }

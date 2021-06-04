@@ -184,4 +184,6 @@ public enum IconDescription
     Food = 6,
     [Description("Population")]
     Population = 7,
+    [Description("TechUsing")]
+    TechUsing = 8,
 }

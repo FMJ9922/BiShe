@@ -181,7 +181,139 @@ MonoBehaviour:
     orderIds: fa2a0000e62e0000
     orderNums: c800000064000000
     specialIntroduce: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5546\u4E1A"
-  TechArray: []
+  TechArray:
+  - Id: 40001
+    Name: "\u4F18\u79C0\u8BBE\u8BA1\u2160"
+    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40002
+    Name: "\u4EA4\u901A\u4F18\u5316\u2160"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E5%"
+    Group: 0
+  - Id: 40003
+    Name: "\u7A33\u56FA\u5EFA\u9020\u2160"
+    Introduce: "\u6240\u6709\u4EA7\u751F\u7EF4\u62A4\u8D39\u7528\u7684\u5EFA\u7B51\u7EF4\u62A4\u8D39\u7528\u964D\u4F4E5%"
+    Group: 0
+  - Id: 40004
+    Name: "\u4F18\u5316\u5EFA\u7B51\u2160"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40005
+    Name: "\u4F18\u79C0\u8BBE\u8BA1\u2161"
+    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40006
+    Name: "\u4EA4\u901A\u4F18\u5316\u2161"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40007
+    Name: "\u4F18\u5316\u5EFA\u7B51\u2161"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E20%"
+    Group: 0
+  - Id: 40008
+    Name: "\u4F18\u79C0\u8BBE\u8BA1\u2162"
+    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E20%"
+    Group: 0
+  - Id: 40009
+    Name: "\u7A33\u56FA\u5EFA\u9020\u2161"
+    Introduce: "\u6240\u6709\u4EA7\u751F\u7EF4\u62A4\u8D39\u7528\u7684\u5EFA\u7B51\u7EF4\u62A4\u8D39\u7528\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40010
+    Name: "\u4F18\u5316\u5EFA\u7B51\u2162"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E20%"
+    Group: 0
+  - Id: 40011
+    Name: "\u4EA4\u901A\u4F18\u5316\u2162"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E10%"
+    Group: 0
+  - Id: 40012
+    Name: "\u9644\u52A0\u503C\u2160"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A03%"
+    Group: 1
+  - Id: 40013
+    Name: "\u6269\u5927\u5E02\u573A\u2160"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A05%"
+    Group: 1
+  - Id: 40014
+    Name: "\u9965\u997F\u8425\u9500\u2160"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1110%\uFF0C\u4EF7\u683C\u589E\u52A010%"
+    Group: 1
+  - Id: 40015
+    Name: "\u5DE5\u5382\u76F4\u9500\u2160"
+    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D5%\uFF0C\u6BCF\u6B21\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A030%"
+    Group: 1
+  - Id: 40016
+    Name: "\u9644\u52A0\u503C\u2161"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A06%"
+    Group: 1
+  - Id: 40017
+    Name: "\u9965\u997F\u8425\u9500\u2161"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1115%\uFF0C\u4EF7\u683C\u589E\u52A020%"
+    Group: 1
+  - Id: 40018
+    Name: "\u6269\u5927\u5E02\u573A\u2161"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A010%"
+    Group: 1
+  - Id: 40019
+    Name: "\u9644\u52A0\u503C\u2162"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A09%"
+    Group: 1
+  - Id: 40020
+    Name: "\u5DE5\u5382\u76F4\u9500\u2161"
+    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D10%\uFF0C\u6BCF\u6B21\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A050%"
+    Group: 1
+  - Id: 40021
+    Name: "\u9965\u997F\u8425\u9500\u2162"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1120%\uFF0C\u4EF7\u683C\u589E\u52A030%"
+    Group: 1
+  - Id: 40022
+    Name: "\u6269\u5927\u5E02\u573A\u2162"
+    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A015%"
+    Group: 1
+  - Id: 40023
+    Name: "\u4EBA\u624D\u7BA1\u7406\u2160"
+    Introduce: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D1\u5355\u4F4D"
+    Group: 2
+  - Id: 40024
+    Name: "\u79D1\u5B66\u751F\u4EA7\u2160"
+    Introduce: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C115%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A05%"
+    Group: 2
+  - Id: 40025
+    Name: "\u9AD8\u6548\u751F\u4EA7\u2160"
+    Introduce: "\u751F\u4EA7\u6548\u7387\u589E\u52A010%"
+    Group: 2
+  - Id: 40026
+    Name: "\u96C6\u4E2D\u751F\u4EA7\u2160"
+    Introduce: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1110%"
+    Group: 2
+  - Id: 40027
+    Name: "\u79D1\u5B66\u751F\u4EA7\u2161"
+    Introduce: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1110%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A010%"
+    Group: 2
+  - Id: 40028
+    Name: "\u4EBA\u624D\u7BA1\u7406\u2161"
+    Introduce: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D2\u5355\u4F4D"
+    Group: 2
+  - Id: 40029
+    Name: "\u9AD8\u6548\u751F\u4EA7\u2161"
+    Introduce: "\u751F\u4EA7\u6548\u7387\u589E\u52A020%"
+    Group: 2
+  - Id: 40030
+    Name: "\u96C6\u4E2D\u751F\u4EA7\u2161"
+    Introduce: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1120%"
+    Group: 2
+  - Id: 40031
+    Name: "\u4EBA\u624D\u7BA1\u7406\u2162"
+    Introduce: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D3\u5355\u4F4D"
+    Group: 2
+  - Id: 40032
+    Name: "\u79D1\u5B66\u751F\u4EA7\u2162"
+    Introduce: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1115%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A015%"
+    Group: 2
+  - Id: 40033
+    Name: "\u9AD8\u6548\u751F\u4EA7\u2162"
+    Introduce: "\u751F\u4EA7\u6548\u7387\u589E\u52A030%"
+    Group: 2
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
@@ -289,7 +421,7 @@ MonoBehaviour:
     Price: 12
     costResources:
     - ItemId: 12003
-      ItemNum: 3
+      ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Farmland_L1_01
     tabType: 2
@@ -586,9 +718,9 @@ MonoBehaviour:
     Price: 6
     costResources:
     - ItemId: 12003
-      ItemNum: 1
+      ItemNum: 2
     - ItemId: 12009
-      ItemNum: 1
+      ItemNum: 2
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
@@ -609,9 +741,9 @@ MonoBehaviour:
     Price: 8
     costResources:
     - ItemId: 12003
-      ItemNum: 1
+      ItemNum: 3
     - ItemId: 12009
-      ItemNum: 1
+      ItemNum: 3
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
@@ -633,7 +765,7 @@ MonoBehaviour:
     costResources:
     - ItemId: 12003
       ItemNum: 1
-    - ItemId: 12010
+    - ItemId: 12009
       ItemNum: 2
     BundleName: building.ab
     PfbName: Universal_Building_Government_L1_01
@@ -655,9 +787,9 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 1
-    - ItemId: 12010
-      ItemNum: 2
+      ItemNum: 100
+    - ItemId: 12009
+      ItemNum: 50
     BundleName: building.ab
     PfbName: Universal_Building_Government_L2_01
     tabType: 5
@@ -678,9 +810,9 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 1
-    - ItemId: 12010
-      ItemNum: 2
+      ItemNum: 200
+    - ItemId: 12009
+      ItemNum: 100
     BundleName: building.ab
     PfbName: Universal_Building_Government_L3_01
     tabType: 5
@@ -1425,3 +1557,6 @@ MonoBehaviour:
     - code: NoticeBuildFailNoNearSea
       chinese: "\u5EFA\u9020\u5931\u8D25\uFF1A\u9700\u8981\u653E\u7F6E\u5728\u6D77\u5CB8\u7EBF\u4E0A"
       english: 'Construction failed: Need to be close to the coastline'
+    - code: TechUsing
+      chinese: "\u6B63\u5728\u4F7F\u7528\u7684\u79D1\u6280"
+      english: Policy in use

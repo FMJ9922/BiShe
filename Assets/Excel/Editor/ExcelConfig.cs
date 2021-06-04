@@ -100,8 +100,8 @@ public class ExcelTool
             TechData techData = new TechData();
             techData.Id = int.Parse(collect[i][0].ToString());
             techData.Name = collect[i][1].ToString();
-            techData.Cost = int.Parse(collect[i][2].ToString());
-            techData.Introduce = collect[i][3].ToString();
+            techData.Introduce = collect[i][2].ToString();
+            techData.Group = int.Parse(collect[i][3].ToString());
             array[i - 2] = techData;
         }
         return array;

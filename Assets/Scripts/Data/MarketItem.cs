@@ -126,11 +126,11 @@ public class MarketItem : MonoBehaviour
         {
             case TradeMode.once:
             case TradeMode.everyWeek:
-                profit = isBuy?-curItem.Price * needNum: curItem.Price * needNum;
+                profit = isBuy?-curItem.Price * needNum * 1.5f : curItem.Price * needNum*TechManager.Instance.PriceBuff();
                 break;
             case TradeMode.maintain:
                 float num = needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id);
-                profit = num > 0 ? -curItem.Price * num : 0;
+                profit = num > 0 ? -curItem.Price * num *1.5f : 0;
                 break;
         }
         profitText.text = profit.ToString();

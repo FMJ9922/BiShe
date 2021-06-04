@@ -99,6 +99,32 @@ public class BuildManager : Singleton<BuildManager>
         return building;
     }
 
+    public GameObject InitBuilding(RuntimeBuildData buildData)
+    {
+        string bundleName = buildData.BundleName;
+        string pfbName = buildData.PfbName;
+        if (buildData.Id == 20001 || buildData.Id == 20009 || buildData.Id == 20033
+            || buildData.Id == 20023 || buildData.Id == 20024 || buildData.Id == 20025
+            || buildData.Id == 20028)
+        {
+            pfbName = pfbName.Substring(0, pfbName.Length - 1);
+            int index = UnityEngine.Random.Range(1, 4);
+            pfbName += index.ToString();
+        }
+        if (buildData.Id == 20026 || buildData.Id == 20027)
+        {
+            pfbName = pfbName.Substring(0, pfbName.Length - 1);
+            int index = UnityEngine.Random.Range(1, 5);
+            pfbName += index.ToString();
+        }
+        Debug.Log("load:" + bundleName + " " + pfbName);
+        GameObject pfb = LoadAB.Load(bundleName, pfbName);
+        GameObject building = Instantiate(pfb, transform);
+        currentBuilding = building.GetComponent<BuildingBase>();
+        currentBuilding.runtimeBuildData = buildData;
+        return building;
+    }
+
     /// <summary>
     /// 开始修路
     /// </summary>
@@ -366,7 +392,7 @@ public class BuildManager : Singleton<BuildManager>
             //Debug.Log("当前建筑重叠，无法建造！");
             return;
         }
-        if (CheckBuildResourcesEnoughAndUse())
+        if (CheckBuildResourcesEnoughAndUse(currentBuilding.runtimeBuildData))
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
@@ -409,14 +435,16 @@ public class BuildManager : Singleton<BuildManager>
         dustParticle.Play();
     }
 
-    public void UpgradeBuilding(BuildData buildData,Vector2Int[] grids,Vector3 pos,Quaternion quaternion,out bool success)
+    public void UpgradeBuilding(RuntimeBuildData buildData,Vector2Int[] grids,Vector3 pos,Quaternion quaternion,out bool success)
     {
-        if (CheckBuildResourcesEnoughAndUse())
+        if (CheckBuildResourcesEnoughAndUse(buildData))
         {
             GameObject building = InitBuilding(buildData);
             building.transform.position = pos;
             building.transform.rotation = quaternion;
+            currentBuilding = building.GetComponent<BuildingBase>();
             currentBuilding.OnConfirmBuild(grids);
+
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
             success = true;
@@ -431,13 +459,13 @@ public class BuildManager : Singleton<BuildManager>
     /// <summary>
     /// 检查建造所需的资源是否足够，如果足够就使用掉，不足够就返回false
     /// </summary>
-    private bool CheckBuildResourcesEnoughAndUse()
+    private bool CheckBuildResourcesEnoughAndUse(RuntimeBuildData runtimeBuildData)
     {
-        List<CostResource> rescources = currentBuilding.runtimeBuildData.costResources;
-        rescources.Add(new CostResource(99999, currentBuilding.runtimeBuildData.Price));
+        List<CostResource> rescources = runtimeBuildData.costResources;
+        rescources.Add(new CostResource(99999,runtimeBuildData.Price*TechManager.Instance.BuildPriceBuff()));
         for (int i = 0; i < rescources.Count; i++)
         {
-            if (!ResourceManager.Instance.TryUseResource(rescources[i]))
+            if (!ResourceManager.Instance.TryUseResource(rescources[i].ItemId, rescources[i].ItemNum* TechManager.Instance.BuildResourcesBuff()))
             {
                 return false;
             }

@@ -50,6 +50,11 @@ public class BuildingBase : MonoBehaviour
         {
             Invoke("PlayAnim",0.2f);
         }
+        //Debug.Log(direction);
+        //Debug.Log(transform.name);
+        //Debug.Log(transform.right);
+        direction = CastTool.CastVector3ToDirection(transform.right);
+        //Debug.Log(direction);
         parkingGridIn = InitParkingGrid();
         //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
@@ -91,6 +96,7 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void InitBuildingFunction()
     {
+        Debug.Log("add");
         MapManager.Instance._buildings.Add(this.gameObject);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
@@ -102,7 +108,7 @@ public class BuildingBase : MonoBehaviour
         productTime = formula.ProductTime;
         if (runtimeBuildData.Population > 0)
         {
-            runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population);
+            runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
         }
     }
     public void ShowBody()
@@ -190,7 +196,7 @@ public class BuildingBase : MonoBehaviour
         if (formula == null|| formula.InputItemID==null) return;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]);
+            ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
         }
     }
 
@@ -203,7 +209,7 @@ public class BuildingBase : MonoBehaviour
     {
         //Debug.Log("Add");
         int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population;
+        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         if (cur + num <= max)
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
@@ -218,7 +224,7 @@ public class BuildingBase : MonoBehaviour
     {
         //Debug.Log("Delete");
         int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population;
+        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         if (cur - num >= 0)
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
@@ -240,7 +246,7 @@ public class BuildingBase : MonoBehaviour
         buildData.CurLevel = runtimeBuildData.CurLevel;
         buildData.CurFormula = runtimeBuildData.CurFormula;
         buildData.CurPeople = runtimeBuildData.CurPeople;
-        BuildManager.Instance.UpgradeBuilding(data, takenGrids,transform.position,transform.rotation,out bool success);
+        BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
         if (success)
         {
             DestroyBuilding();
@@ -249,9 +255,20 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void UpdateRate(string date)
     {
-        runtimeBuildData.Effectiveness = (float)runtimeBuildData.CurPeople / (float)runtimeBuildData.Population;
+        int cur = runtimeBuildData.CurPeople;
+        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+        CheckCurPeopleMoreThanMax(cur,max);
+        runtimeBuildData.Effectiveness = (float)cur/(float)max * TechManager.Instance.EffectivenessBuff();
         runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
+    }
+
+    protected void CheckCurPeopleMoreThanMax(int cur,int max)
+    {
+        if (cur > max)
+        {
+            DeleteCurPeople(cur - max);
+        }
     }
 
     private CarMission MakeCarMission(float rate)
