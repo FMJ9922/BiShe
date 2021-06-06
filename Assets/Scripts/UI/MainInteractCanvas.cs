@@ -81,6 +81,13 @@ public class MainInteractCanvas : CanvasBase
         techCanvas.OnOpen();
     }
 
+    public void OpenSuccessCanvas()
+    {
+        CloseAllOpenedUI();
+        SuccessCanvas successCanvas = (SuccessCanvas)canvas[7];
+        successCanvas.OnOpen();
+    }
+
     public void CloseCarMissionCanvas()
     {
         canvas[5].OnClose();

@@ -65,6 +65,9 @@ public class ExcelTool
             levelData.orderIds = StringToIntList(collect[i][16].ToString()).ToArray();
             levelData.orderNums = StringToIntList(collect[i][17].ToString()).ToArray();
             levelData.specialIntroduce = collect[i][18].ToString();
+            levelData.AimMoney = int.Parse(collect[i][19].ToString());
+            levelData.AimHappiness = int.Parse(collect[i][20].ToString());
+            levelData.AimPopulation = int.Parse(collect[i][21].ToString());
             array[i - 2] = levelData;
         }
         return array;

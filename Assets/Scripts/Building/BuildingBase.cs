@@ -63,6 +63,7 @@ public class BuildingBase : MonoBehaviour
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;
         TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+        runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
         InitBuildingFunction();
     }
 
@@ -96,8 +97,8 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void InitBuildingFunction()
     {
-        Debug.Log("add");
-        MapManager.Instance._buildings.Add(this.gameObject);
+        //Debug.Log("add");
+        MapManager.Instance._buildings.Add(this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         if (runtimeBuildData.formulaDatas.Length>0)
@@ -140,6 +141,7 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.PfbName = buildData.PfbName;
         runtimeBuildData.tabType = buildData.tabType;
         runtimeBuildData.Population = buildData.Population;
+        runtimeBuildData.CostPerWeek = buildData.CostPerWeek;
         runtimeBuildData.formulaDatas = new FormulaData[buildData.Formulas.Count];
         for (int i = 0; i < buildData.Formulas.Count; i++)
         {
@@ -162,7 +164,7 @@ public class BuildingBase : MonoBehaviour
     {
         ReturnBuildResources();
         MapManager.SetGridTypeToEmpty(takenGrids);
-        MapManager.Instance._buildings.Remove(gameObject);
+        MapManager.Instance._buildings.Remove(this);
         MapManager.Instance.BuildFoundation(takenGrids, 0,4);
         Destroy(this.gameObject);
     }
@@ -193,10 +195,17 @@ public class BuildingBase : MonoBehaviour
 
     protected virtual void Input()
     {
+        ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek));
+        runtimeBuildData.Pause = false;
         if (formula == null|| formula.InputItemID==null) return;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
+            bool res = ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
+            if (!res)
+            {
+                runtimeBuildData.Pause = true;
+                return;
+            }
         }
     }
 
@@ -243,9 +252,10 @@ public class BuildingBase : MonoBehaviour
         BuildData data = DataManager.GetBuildData(nextId);
         RuntimeBuildData buildData = BuildingBase.CastBuildDataToRuntime(data);
         buildData.Pause = runtimeBuildData.Pause;
-        buildData.CurLevel = runtimeBuildData.CurLevel;
+        buildData.CurLevel = runtimeBuildData.CurLevel+1;
         buildData.CurFormula = runtimeBuildData.CurFormula;
         buildData.CurPeople = runtimeBuildData.CurPeople;
+        buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
         BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
         if (success)
         {
@@ -258,7 +268,7 @@ public class BuildingBase : MonoBehaviour
         int cur = runtimeBuildData.CurPeople;
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         CheckCurPeopleMoreThanMax(cur,max);
-        runtimeBuildData.Effectiveness = (float)cur/(float)max * TechManager.Instance.EffectivenessBuff();
+        runtimeBuildData.Effectiveness = runtimeBuildData.Pause?0:((float)cur)/(float)max * TechManager.Instance.EffectivenessBuff();
         runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
     }
@@ -293,7 +303,7 @@ public class BuildingBase : MonoBehaviour
 
 public class RuntimeBuildData : BuildData
 {
-    public bool Pause = true;//是否暂停生产
+    public bool Pause = false;//是否暂停生产(因为缺少原料)
     public int CurLevel = 0;//当前等级
     public int CurFormula;//当前配方
     public FormulaData[] formulaDatas;//当前建筑可用的配方们

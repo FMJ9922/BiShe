@@ -62,6 +62,7 @@ public class TechManager : Singleton<TechManager>
     {
         techs[techItem.data.Id - 40001] = true;
         treeCanvas.SetImage(techItem.data.Group, techItem.transform.name.TrimEnd(' '));
+        //Debug.Log("set:" + techItem.data.Id);
         int oldTech = techUsing[techItem.data.Group];
         if (oldTech != 0)
         {
@@ -72,6 +73,7 @@ public class TechManager : Singleton<TechManager>
 
     public bool GetTech(int techID)
     {
+        //Debug.Log("get:" + techID);
         return techs[techID - 40001];
     }
     public bool GetTechAvalible(int techID)

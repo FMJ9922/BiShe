@@ -39,7 +39,6 @@ public class MusicManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);//加载关卡时不销毁GameManager
-        PlayerPrefs.SetFloat("MusicVolumn", 0.1f);
         musicVolumn = PlayerPrefs.GetFloat("MusicVolumn", 0.1f);
         ValueChangeCheck(musicVolumn);
     }

@@ -12,6 +12,16 @@ public class LocalizeText : MonoBehaviour
     public string content; 
     void Start()
     {
+        ChangeLabelLanguage();
+        Localization.OnChangeLanguage += ChangeLabelLanguage;
+    }
+
+    private void OnDestroy()
+    {
+        Localization.OnChangeLanguage -= ChangeLabelLanguage;
+    }
+    public void ChangeLabelLanguage()
+    {
         if (string.IsNullOrEmpty(content))
         {
             return;

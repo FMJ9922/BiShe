@@ -6,6 +6,9 @@ public static class Localization
 {
     public static LanguageType language = LanguageType.chinese;
 
+    public delegate void ChangeLanguage();
+    public static event ChangeLanguage OnChangeLanguage;
+
     public static string ToSettingLanguage(string itemName)
     {
         switch (language)
@@ -45,6 +48,16 @@ public static class Localization
             }
         }
         return itemName;
+    }
+
+    public static void ChangeSettingLanguage(LanguageType languageType)
+    {
+        Debug.Log("change" + languageType);
+        language = languageType;
+        if (OnChangeLanguage != null)
+        {
+            OnChangeLanguage();
+        }
     }
 
 }

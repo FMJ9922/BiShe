@@ -18,7 +18,7 @@ public class GraphManager : Singleton<GraphManager>
     public void Toggle()
     {
         handle.SetActive(!handle.activeInHierarchy);
-        graphIcon.sprite = LoadAB.LoadSprite("icon.ab", handle.activeInHierarchy ?"enNumberButton":"NumberButton");
+        graphIcon.sprite = LoadAB.LoadSprite("icon.ab", handle.activeInHierarchy ? "enNumberButton" : "NumberButton");
         if (!handle.activeInHierarchy)
         {
             CloseAllGraph();
@@ -57,11 +57,11 @@ public class GraphManager : Singleton<GraphManager>
     }
     private void ShowPopulation()
     {
-        List<GameObject> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance._buildings;
         for (int i = 0; i < buildings.Count; i++)
         {
             GameObject item = Instantiate(cubePfb, transform);
-            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
+            BuildingBase building = buildings[i];
             item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position);
             string showLabel = building.runtimeBuildData.tabType == BuildTabType.house ?
                 Localization.ToSettingLanguage("Resident") : Localization.ToSettingLanguage("Worker");
@@ -71,12 +71,12 @@ public class GraphManager : Singleton<GraphManager>
 
     private void ShowHappiness()
     {
-        List<GameObject> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance._buildings;
         for (int i = 0; i < buildings.Count; i++)
         {
             GameObject item = Instantiate(cubePfb, transform);
-            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            float rand = Random.Range(0.6f, 1.0f);
+            BuildingBase building = buildings[i];
+            float rand = building.runtimeBuildData.Happiness;
             item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
             string showLabel = Localization.ToSettingLanguage("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);
@@ -84,26 +84,41 @@ public class GraphManager : Singleton<GraphManager>
     }
     private void ShowMaintenanceCosts()
     {
-        List<GameObject> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance._buildings;
         for (int i = 0; i < buildings.Count; i++)
         {
             GameObject item = Instantiate(cubePfb, transform);
-            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            int rand = Random.Range(0, 20);
-            item.GetComponent<GraphCube>().SetHeight(rand, buildings[i].transform.position);
+            BuildingBase building = buildings[i];
+            int rand = building.runtimeBuildData.CostPerWeek;
+            item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position);
             string showLabel = "/" + Localization.ToSettingLanguage("Week");
-            item.GetComponent<GraphCube>().SetLabel(rand.ToString() + showLabel);
+            item.GetComponent<GraphCube>().SetLabel((rand<0?"+":"-")+ Mathf.Abs(rand) + showLabel);
         }
+    }
+
+    /// <summary>
+    /// 高斯分布概率模型
+    /// </summary>
+    /// <param name="_x">随机变量</param>
+    /// <param name="_μ">位置参数</param>
+    /// <param name="_σ">尺度参数</param>
+    /// <returns></returns>
+    private static float NormalDistribution(float _x, float _μ, float _σ)
+    {
+        float _inverseSqrt2PI = 1 / Mathf.Sqrt(2 * Mathf.PI);
+        float _powOfE = -(Mathf.Pow((_x - _μ), 2) / (2 * _σ * _σ));
+        float _result = (_inverseSqrt2PI / _σ) * Mathf.Exp(_powOfE);
+        return _result;
     }
 
     public void ShowEffectiveness()
     {
-        List<GameObject> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance._buildings;
         for (int i = 0; i < buildings.Count; i++)
         {
             GameObject item = Instantiate(cubePfb, transform);
-            BuildingBase building = buildings[i].GetComponent<BuildingBase>();
-            float rand = Random.Range(0.6f, 1.2f);
+            BuildingBase building = buildings[i];
+            float rand = building.runtimeBuildData.Effectiveness;
             item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
             string showLabel = Localization.ToSettingLanguage("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);

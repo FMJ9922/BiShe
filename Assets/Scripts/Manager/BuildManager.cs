@@ -462,13 +462,19 @@ public class BuildManager : Singleton<BuildManager>
     private bool CheckBuildResourcesEnoughAndUse(RuntimeBuildData runtimeBuildData)
     {
         List<CostResource> rescources = runtimeBuildData.costResources;
-        rescources.Add(new CostResource(99999,runtimeBuildData.Price*TechManager.Instance.BuildPriceBuff()));
+        //Debug.Log(runtimeBuildData.Price * TechManager.Instance.BuildPriceBuff());
+        //Debug.Log(TechManager.Instance.BuildPriceBuff());
+
         for (int i = 0; i < rescources.Count; i++)
         {
             if (!ResourceManager.Instance.TryUseResource(rescources[i].ItemId, rescources[i].ItemNum* TechManager.Instance.BuildResourcesBuff()))
             {
                 return false;
             }
+        }
+        if (!ResourceManager.Instance.TryUseResource(new CostResource(99999, runtimeBuildData.Price * TechManager.Instance.BuildPriceBuff())))
+        {
+            return false;
         }
         return true;
 

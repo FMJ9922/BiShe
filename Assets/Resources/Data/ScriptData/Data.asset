@@ -125,66 +125,75 @@ MonoBehaviour:
     BuildingID: 0
   LevelArray:
   - Id: 30001
-    Name: "\u519C\u4EA7\u54C1"
+    Name: "\u5E73\u539F"
     FrontLevelId: 0
     RearLevelId: 30002
-    Aim1: "\u91D1\u94B1\u5927\u4E8E20000"
-    Aim2: "\u6728\u6750\u8D44\u6E90\u5927\u4E8E500"
-    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230200"
-    RewardBuildingId: 0
-    RewardTechId: 0
-    Length: 300
-    Width: 300
-    Introduce: "\u8BF4\u660E"
-    log: 999
-    rice: 999
-    money: 9999
-    stone: 999
-    orderIds: fa2a0000e62e0000
-    orderNums: c800000064000000
-    specialIntroduce: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
-  - Id: 30002
-    Name: "\u5DE5\u4E1A\u4EA7\u54C1"
-    FrontLevelId: 30001
-    RearLevelId: 30003
-    Aim1: "\u91D1\u94B1\u5927\u4E8E30000"
-    Aim2: "\u5DE5\u4E1A\u8D44\u6E90\u5927\u4E8E300"
+    Aim1: "\u8D44\u91D1\u8FBE\u523020000"
+    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523080"
     Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
     RewardBuildingId: 0
     RewardTechId: 0
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 999
-    rice: 999
-    money: 9999
-    stone: 999
+    log: 1000
+    rice: 1000
+    money: 10000
+    stone: 1000
     orderIds: fa2a0000e62e0000
     orderNums: c800000064000000
-    specialIntroduce: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
-  - Id: 30003
-    Name: "\u7ED3\u5408\u4EA7\u4E1A"
-    FrontLevelId: 30002
-    RearLevelId: 0
-    Aim1: Null
-    Aim2: Null
-    Aim3: Null
+    specialIntroduce: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
+    AimMoney: 20000
+    AimHappiness: 80
+    AimPopulation: 300
+  - Id: 30002
+    Name: "\u5C71\u5DDD"
+    FrontLevelId: 30001
+    RearLevelId: 30003
+    Aim1: "\u8D44\u91D1\u8FBE\u523030000"
+    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523085"
+    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230400"
     RewardBuildingId: 0
     RewardTechId: 0
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 999
-    rice: 999
-    money: 9999
-    stone: 999
+    log: 1000
+    rice: 1000
+    money: 10000
+    stone: 1000
+    orderIds: fa2a0000e62e0000
+    orderNums: c800000064000000
+    specialIntroduce: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
+    AimMoney: 30000
+    AimHappiness: 85
+    AimPopulation: 400
+  - Id: 30003
+    Name: "\u6D77\u5CB8"
+    FrontLevelId: 30002
+    RearLevelId: 0
+    Aim1: "\u8D44\u91D1\u8FBE\u523040000"
+    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523090"
+    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230500"
+    RewardBuildingId: 0
+    RewardTechId: 0
+    Length: 300
+    Width: 300
+    Introduce: "\u8BF4\u660E"
+    log: 1000
+    rice: 1000
+    money: 10000
+    stone: 1000
     orderIds: fa2a0000e62e0000
     orderNums: c800000064000000
     specialIntroduce: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5546\u4E1A"
+    AimMoney: 40000
+    AimHappiness: 90
+    AimPopulation: 500
   TechArray:
   - Id: 40001
     Name: "\u4F18\u79C0\u8BBE\u8BA1\u2160"
-    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
     Group: 0
   - Id: 40002
     Name: "\u4EA4\u901A\u4F18\u5316\u2160"
@@ -200,7 +209,7 @@ MonoBehaviour:
     Group: 0
   - Id: 40005
     Name: "\u4F18\u79C0\u8BBE\u8BA1\u2161"
-    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E15%"
     Group: 0
   - Id: 40006
     Name: "\u4EA4\u901A\u4F18\u5316\u2161"
@@ -208,11 +217,11 @@ MonoBehaviour:
     Group: 0
   - Id: 40007
     Name: "\u4F18\u5316\u5EFA\u7B51\u2161"
-    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E20%"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E15%"
     Group: 0
   - Id: 40008
     Name: "\u4F18\u79C0\u8BBE\u8BA1\u2162"
-    Introduce: "\u6240\u6709\u57FA\u7840\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E20%"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E20%"
     Group: 0
   - Id: 40009
     Name: "\u7A33\u56FA\u5EFA\u9020\u2161"
@@ -224,7 +233,7 @@ MonoBehaviour:
     Group: 0
   - Id: 40011
     Name: "\u4EA4\u901A\u4F18\u5316\u2162"
-    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E10%"
+    Introduce: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E15%"
     Group: 0
   - Id: 40012
     Name: "\u9644\u52A0\u503C\u2160"
@@ -236,11 +245,11 @@ MonoBehaviour:
     Group: 1
   - Id: 40014
     Name: "\u9965\u997F\u8425\u9500\u2160"
-    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1110%\uFF0C\u4EF7\u683C\u589E\u52A010%"
+    Introduce: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1110%\uFF0C\u4EF7\u683C\u589E\u52A010%"
     Group: 1
   - Id: 40015
     Name: "\u5DE5\u5382\u76F4\u9500\u2160"
-    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D5%\uFF0C\u6BCF\u6B21\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A030%"
+    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D5%\uFF0C\u6BCF\u6B21\u53EF\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A030%"
     Group: 1
   - Id: 40016
     Name: "\u9644\u52A0\u503C\u2161"
@@ -248,7 +257,7 @@ MonoBehaviour:
     Group: 1
   - Id: 40017
     Name: "\u9965\u997F\u8425\u9500\u2161"
-    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1115%\uFF0C\u4EF7\u683C\u589E\u52A020%"
+    Introduce: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1115%\uFF0C\u4EF7\u683C\u589E\u52A020%"
     Group: 1
   - Id: 40018
     Name: "\u6269\u5927\u5E02\u573A\u2161"
@@ -260,11 +269,11 @@ MonoBehaviour:
     Group: 1
   - Id: 40020
     Name: "\u5DE5\u5382\u76F4\u9500\u2161"
-    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D10%\uFF0C\u6BCF\u6B21\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A050%"
+    Introduce: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D10%\uFF0C\u6BCF\u6B21\u53EF\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A050%"
     Group: 1
   - Id: 40021
     Name: "\u9965\u997F\u8425\u9500\u2162"
-    Introduce: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1120%\uFF0C\u4EF7\u683C\u589E\u52A030%"
+    Introduce: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1120%\uFF0C\u4EF7\u683C\u589E\u52A030%"
     Group: 1
   - Id: 40022
     Name: "\u6269\u5927\u5E02\u573A\u2162"
@@ -317,7 +326,7 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
-    CostPerWeek: 0
+    CostPerWeek: -5
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -388,7 +397,7 @@ MonoBehaviour:
     Name: Bazaar
     CostPerWeek: 9
     Formulas: 
-    Population: 12
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 0
@@ -499,7 +508,7 @@ MonoBehaviour:
     iconName: SawmillL1
   - Id: 20009
     Name: PlainResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: -10
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -752,7 +761,7 @@ MonoBehaviour:
     iconName: RoadL3
   - Id: 20020
     Name: Government
-    CostPerWeek: -200
+    CostPerWeek: 0
     Formulas: 
     Population: 0
     MaxStorage: 100
@@ -1051,7 +1060,7 @@ MonoBehaviour:
     iconName: HookerL1
   - Id: 20033
     Name: PlainResidentialLv3
-    CostPerWeek: 0
+    CostPerWeek: -15
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -1560,3 +1569,15 @@ MonoBehaviour:
     - code: TechUsing
       chinese: "\u6B63\u5728\u4F7F\u7528\u7684\u79D1\u6280"
       english: Policy in use
+    - code: MusicVolumn
+      chinese: "\u97F3\u4E50\u97F3\u91CF"
+      english: Music Volumn
+    - code: SoundVolumn
+      chinese: "\u97F3\u6548\u97F3\u91CF"
+      english: Sound Volumn
+    - code: Language
+      chinese: "\u8BED\u8A00"
+      english: Language
+    - code: Settings
+      chinese: "\u8BBE\u7F6E"
+      english: Settings

@@ -9,7 +9,7 @@ public class MapManager : Singleton<MapManager>
     private LevelData _leveldata;
     private static Vector3[] _vertices;//存储地形顶点数据
     public const int unit = 2;//地形一格的长度（单位米）
-    public List<GameObject> _buildings = new List<GameObject>();
+    public List<BuildingBase> _buildings = new List<BuildingBase>();
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
     public static string noticeContent;
@@ -95,7 +95,7 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < _buildings.Count; i++)
         {
-            BuildingBase currentBuilding = _buildings[i].GetComponent<BuildingBase>();
+            BuildingBase currentBuilding = _buildings[i];
             RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
         }
     }
@@ -458,11 +458,11 @@ public class MapManager : Singleton<MapManager>
             int id = Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id;
             if (id == 20004 || id == 20012 || id == 20013)
             {
-                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGridIn, grid);
+                float cur = GetDistance(Instance._buildings[i].parkingGridIn, grid);
                 if (cur < dis)
                 {
                     dis = cur;
-                    p = Instance._buildings[i];
+                    p = Instance._buildings[i].gameObject;
                 }
             }
         }
@@ -481,11 +481,21 @@ public class MapManager : Singleton<MapManager>
                 if (cur < dis)
                 {
                     dis = cur;
-                    p = Instance._buildings[i];
+                    p = Instance._buildings[i].gameObject;
                 }
             }
         }
         return p;
+    }
+
+    public float GetHappiness()
+    {
+        float sum = 0; ;
+        for (int i = 0; i < _buildings.Count; i++)
+        {
+            sum += _buildings[i].runtimeBuildData.CurLevel;
+        }
+        return (sum / _buildings.Count) * 10 + 80;
     }
 
     private static float GetDistance(Vector2Int cur, Vector2Int target)

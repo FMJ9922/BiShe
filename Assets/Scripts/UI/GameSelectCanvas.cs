@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameSelectCanvas : Singleton<GameSelectCanvas>
 {
     public TMP_Text levelName;
-    public TMP_Text introduce;
+    public TMP_Text aim;
     public TMP_Text special;
     public Image preview;
     public Button enterBtn;
@@ -34,7 +34,7 @@ public class GameSelectCanvas : Singleton<GameSelectCanvas>
     public void ChangeShowLevel(LevelData data)
     {
         levelName.text = data.Name;
-        introduce.text = data.Introduce;
+        aim.text = data.Aim1 + '\n' + data.Aim2 + '\n' + data.Aim3;
         special.text = data.specialIntroduce;
         preview.sprite = LoadAB.LoadSprite("mat.ab", data.Id + "preview");
         enterBtn.onClick.RemoveAllListeners();

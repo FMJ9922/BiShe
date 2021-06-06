@@ -10,6 +10,7 @@ public class LevelManager : Singleton<LevelManager>
     private float dayTime = 5f;
     public static int LevelID;
     private int year, month, week,day;
+    private bool hasSuccess = false;
     public float DayTime
     {
         get => dayTime;
@@ -130,6 +131,7 @@ public class LevelManager : Singleton<LevelManager>
             Timer = 0;
             string date;
             AddDay(out date);
+            CheckSuccess();
             EventManager.TriggerEvent<string>(ConstEvent.OnDayWentBy, date);
             EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         }
@@ -154,6 +156,19 @@ public class LevelManager : Singleton<LevelManager>
         MainInteractCanvas.InitCanvas();
     }
 
+    public void CheckSuccess()
+    {
+        int aimMoney = DataManager.GetLevelData(LevelID).AimMoney;
+        int aimPopulation = DataManager.GetLevelData(LevelID).AimPopulation;
+        int aimHappiness = DataManager.GetLevelData(LevelID).AimHappiness;
+
+        if (ResourceManager.Instance.TryGetResourceNum(99999) >= aimMoney
+            && ResourceManager.Instance.MaxPopulation >= aimPopulation
+            && MapManager.Instance.GetHappiness() >= aimHappiness)
+        {
+            MainInteractCanvas.OpenSuccessCanvas();
+        }
+    }
     /// <summary>
     /// 退出关卡时
     /// </summary>

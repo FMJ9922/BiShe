@@ -20,4 +20,7 @@ public class LevelData
     public int[] orderIds;
     public int[] orderNums;
     public string specialIntroduce;
+    public int AimMoney;
+    public int AimHappiness;
+    public int AimPopulation;
 }

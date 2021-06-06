@@ -33,12 +33,14 @@ public class HutBuilding : BuildingBase
 
     protected override void Input()
     {
+        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
         //食物少于指定数量就去取货
         if (storage.GetAllFoodNum() < 10)
         {
             CarMission mission = MakeCarMission();
             TrafficManager.Instance.UseCar(mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
         }
+
         //遍历所有可吃的食物，数量够吃就返回
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {

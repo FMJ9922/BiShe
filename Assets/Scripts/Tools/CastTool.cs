@@ -75,7 +75,7 @@ public class CastTool : MonoBehaviour
         {
             return Direction.left;
         }
-        else if (vector3.y > 0)
+        else if (vector3.z > 0)
         {
             return Direction.up;
         }
