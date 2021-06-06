@@ -109,7 +109,12 @@ public class BuildingBase : MonoBehaviour
         productTime = formula.ProductTime;
         if (runtimeBuildData.Population > 0)
         {
-            runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
+            if(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
+            {
+                runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            }
+            CheckCurPeopleMoreThanMax();
         }
     }
     public void ShowBody()
@@ -267,14 +272,16 @@ public class BuildingBase : MonoBehaviour
     {
         int cur = runtimeBuildData.CurPeople;
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        CheckCurPeopleMoreThanMax(cur,max);
+        CheckCurPeopleMoreThanMax();
         runtimeBuildData.Effectiveness = runtimeBuildData.Pause?0:((float)cur)/(float)max * TechManager.Instance.EffectivenessBuff();
         runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
     }
 
-    protected void CheckCurPeopleMoreThanMax(int cur,int max)
+    protected void CheckCurPeopleMoreThanMax()
     {
+        int cur = runtimeBuildData.CurPeople;
+        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         if (cur > max)
         {
             DeleteCurPeople(cur - max);
