@@ -344,7 +344,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_0X
     tabType: 1
-    Introduce: "\u57FA\u7840\u6C11\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: ResidentialL1
   - Id: 20002
@@ -367,7 +367,7 @@ MonoBehaviour:
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
-    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
+    Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 1
     iconName: RoadL1
   - Id: 20003
@@ -390,7 +390,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L1_01
     tabType: 4
-    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 1
     iconName: WareHouseL1
   - Id: 20004
@@ -413,14 +413,14 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Market_L1_01
     tabType: 4
-    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+    Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 1
     iconName: MarketL1
   - Id: 20005
     Name: Farmland
     CostPerWeek: 1
     Formulas: 56c3000057c3000062c30000
-    Population: 1
+    Population: 8
     MaxStorage: 100
     InfluenceRange: 5
     FrontBuildingId: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Farmland_L1_01
     tabType: 2
-    Introduce: "\u7CAE\u98DF\u4F5C\u7269\u6700\u4E3B\u8981\u7684\u4EA7\u51FA\u5355\u4F4D"
+    Introduce: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
     Level: 1
     iconName: Wheat
   - Id: 20006
@@ -457,7 +457,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L1_01
     tabType: 2
-    Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
+    Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 1
     iconName: FarmL1
   - Id: 20007
@@ -480,7 +480,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L1_01
     tabType: 3
-    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
+    Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 1
     iconName: FactoryL1
   - Id: 20008
@@ -503,7 +503,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L1_01
     tabType: 2
-    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+    Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 1
     iconName: SawmillL1
   - Id: 20009
@@ -526,7 +526,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L2_0X
     tabType: 1
-    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: ResidentialL2
   - Id: 20010
@@ -549,7 +549,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L2_01
     tabType: 3
-    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
+    Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 2
     iconName: FactoryL2
   - Id: 20011
@@ -572,7 +572,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L3_01
     tabType: 3
-    Introduce: "\u80FD\u591F\u8FDB\u884C\u539F\u6599\u52A0\u5DE5\uFF0C\u63D0\u5347\u4EA7\u54C1\u9644\u52A0\u503C\u7684\u5173\u952E\u5EFA\u7B51"
+    Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 3
     iconName: FactoryL3
   - Id: 20012
@@ -595,7 +595,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Market_L2_01
     tabType: 4
-    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+    Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 2
     iconName: MarketL2
   - Id: 20013
@@ -618,7 +618,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Market_L3_01
     tabType: 4
-    Introduce: "\u73A9\u5BB6\u80FD\u591F\u901A\u8FC7\u5E02\u573A\u6765\u8FDB\u884C\u8D38\u6613"
+    Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 3
     iconName: MarketL3
   - Id: 20014
@@ -641,7 +641,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L2_01
     tabType: 2
-    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+    Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 2
     iconName: SawmillL2
   - Id: 20015
@@ -664,7 +664,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L3_01
     tabType: 2
-    Introduce: "\u83B7\u53D6\u6728\u6599\u7684\u6700\u4E3B\u8981\u7684\u5EFA\u7B51"
+    Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 3
     iconName: SawmillL3
   - Id: 20016
@@ -687,7 +687,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L2_01
     tabType: 4
-    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 2
     iconName: WareHouseL2
   - Id: 20017
@@ -710,7 +710,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L3_01
     tabType: 4
-    Introduce: "\u4ED3\u5E93\uFF0C\u80FD\u591F\u5B58\u50A8\u76EE\u524D\u5DF2\u77E5\u7684\u6240\u6709\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 3
     iconName: WareHouseL3
   - Id: 20018
@@ -733,7 +733,7 @@ MonoBehaviour:
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
-    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
+    Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 2
     iconName: RoadL2
   - Id: 20019
@@ -756,7 +756,7 @@ MonoBehaviour:
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
-    Introduce: "\u6700\u57FA\u7840\u7684\u516C\u8DEF\uFF0C\u80FD\u63D0\u4F9B\u57FA\u672C\u7684\u8FD0\u8F93\u6761\u4EF6"
+    Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 3
     iconName: RoadL3
   - Id: 20020
@@ -848,7 +848,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L1_0X
     tabType: 1
-    Introduce: "\u6D77\u5CB8\u516C\u5BD3"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: CoachL1
   - Id: 20024
@@ -871,7 +871,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L2_0X
     tabType: 1
-    Introduce: "\u6D77\u5CB8\u516C\u5BD3"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: CoachL2
   - Id: 20025
@@ -894,7 +894,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L3_0X
     tabType: 1
-    Introduce: "\u6D77\u5CB8\u516C\u5BD3"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: CoachL3
   - Id: 20026
@@ -917,7 +917,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L1_0X
     tabType: 1
-    Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: HuiL1
   - Id: 20027
@@ -940,7 +940,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L2_0X
     tabType: 1
-    Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: HuiL2
   - Id: 20028
@@ -963,7 +963,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L3_0X
     tabType: 1
-    Introduce: "\u5FBD\u5F0F\u6C11\u5B85"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: HuiL3
   - Id: 20029
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L3_0X
     tabType: 1
-    Introduce: "\u8FD9\u662F\u4E00\u4E2A\u571F\u623F\uFF0C\u53EF\u4EE5\u63D0\u4F9B\u52B3\u52A8\u529B"
+    Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: ResidentialL3
   - Id: 20034
@@ -1101,7 +1101,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L2_01
     tabType: 2
-    Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
+    Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 2
     iconName: FarmL2
   - Id: 20035
@@ -1124,7 +1124,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L3_01
     tabType: 2
-    Introduce: "\u8089\u7C7B\u98DF\u54C1\u539F\u6599\u7684\u57FA\u7840\u4EA7\u51FA\u5355\u4F4D"
+    Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 3
     iconName: FarmL3
   FormulaArray:
@@ -1468,22 +1468,22 @@ MonoBehaviour:
       chinese: "\u5E02\u653F\u4E2D\u5FC3"
       english: Government
     - code: CoachResidential
-      chinese: "\u6D77\u5CB8\u516C\u5BD3"
+      chinese: "\u6D77\u5CB8\u6C11\u5C45"
       english: CoachResidential
     - code: CoachResidentialLv2
-      chinese: "\u6D77\u5CB8\u516C\u5BD3Lv2"
+      chinese: "\u6D77\u5CB8\u6C11\u5C45Lv2"
       english: CoachResidentialLv2
     - code: CoachResidentialLv3
-      chinese: "\u6D77\u5CB8\u516C\u5BD3Lv3"
+      chinese: "\u6D77\u5CB8\u6C11\u5C45Lv3"
       english: CoachResidentialLv3
     - code: HuiResidential
-      chinese: "\u5FBD\u5F0F\u6C11\u5B85"
+      chinese: "\u7696\u5357\u6C11\u5C45"
       english: HuiResidential
     - code: HuiResidentialLv2
-      chinese: "\u5FBD\u5F0F\u6C11\u5B85Lv2"
+      chinese: "\u7696\u5357\u6C11\u5C45Lv2"
       english: HuiResidentialLv2
     - code: HuiResidentialLv3
-      chinese: "\u5FBD\u5F0F\u6C11\u5B85Lv3"
+      chinese: "\u7696\u5357\u6C11\u5C45Lv3"
       english: HuiResidentialLv3
     - code: Mine
       chinese: "\u5C0F\u578B\u77FF\u4E95"
@@ -1581,3 +1581,12 @@ MonoBehaviour:
     - code: Settings
       chinese: "\u8BBE\u7F6E"
       english: Settings
+    - code: PlainResidentialLv3
+      chinese: "\u8C6A\u534E\u4F4F\u5B85"
+      english: PlainResidentialLv3
+    - code: LivestockFarmLv2
+      chinese: "\u517B\u6B96\u573A\u4E8C\u7EA7"
+      english: LivestockFarmLv2
+    - code: LivestockFarmLv3
+      chinese: "\u517B\u6B96\u573A\u4E09\u7EA7"
+      english: LivestockFarmLv3

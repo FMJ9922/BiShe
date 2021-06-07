@@ -16,7 +16,6 @@ public class FarmLandBuilding : BuildingBase
     {
         InitWheatGrids();
         previewObj.SetActive(false);
-        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         base.InitBuildingFunction();
     }
      private void InitWheatGrids()

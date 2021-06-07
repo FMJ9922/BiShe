@@ -8,7 +8,6 @@ public class MineBuilding : BuildingBase
 
     public override void InitBuildingFunction()
     {
-        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         base.InitBuildingFunction();
     }
 

@@ -7,7 +7,6 @@ public class PierBuilding : BuildingBase
     public Transform boatPos;
     public override void InitBuildingFunction()
     {
-        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         base.InitBuildingFunction();
     }
 

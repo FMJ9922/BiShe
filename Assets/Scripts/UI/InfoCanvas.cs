@@ -15,43 +15,48 @@ public class InfoCanvas : CanvasBase
     [SerializeField] Button _destroyBtn;//拆除建筑
     [SerializeField] Button _upgradeBtn;//升级
     [SerializeField] Button[] _populationBtns;//人口相关按钮
-    [SerializeField] TMP_Text _nameLabel, _introduceLabel, _rateLabel, _populationLabel,_workerLabel;
+    [SerializeField] TMP_Text _nameLabel, _introduceLabel, _rateLabel, _populationLabel, _workerLabel;
     [SerializeField] TMP_Text _openText;//功能
+    [SerializeField] TMP_Text _outputLabel;//功能
     [SerializeField] Button[] _switchFormulaBtns;//切换产品按钮
     [SerializeField] private GameObject mainCanvas;
     [SerializeField] private Transform inIcons;
     [SerializeField] private Transform outIcons;
     [SerializeField] private GameObject BuildingHighlight;
+    [SerializeField] private Image rateImage;
     UnityAction populationChange;
+    UnityAction<string> effectivenessChange;
     private RuntimeBuildData _buildData;
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
-        populationChange = () => ChangeLabels(_buildData);
         EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
     public override void OnOpen()
     {
-        
+
     }
     public void OnOpen(BuildingBase buildbase)
     {
         _buildData = buildbase.runtimeBuildData;
+        populationChange = () => ChangeLabels(_buildData);
+        effectivenessChange = (string str) => ChangeRateLabel(buildbase);
         ChangeShowItems(_buildData);
         ChangeLabels(_buildData);
         AddBtnsListener(buildbase);
         ChangeOpenCanvas(buildbase.runtimeBuildData.Id);
         mainCanvas.SetActive(true);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
+        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, effectivenessChange);
         if (!BuildingHighlight)
         {
             BuildingHighlight = GameObject.Find("SelectedLight");
         }
         BuildingHighlight.transform.position = buildbase.transform.position;
-        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y*2, 10, buildbase.Size.x*2);
+        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y * 2, 10, buildbase.Size.x * 2);
         BuildingHighlight.transform.rotation = buildbase.transform.rotation;
         BuildingHighlight.SetActive(true);
-
+        ChangeRateLabel(buildbase);
     }
 
     /*private void SetBtnsActive(bool isActive)
@@ -72,7 +77,7 @@ public class InfoCanvas : CanvasBase
             case 20017:
                 {
                     btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
-                    _openText.text = Localization.ToSettingLanguage("Open")+ Localization.ToSettingLanguage("Warehouse");
+                    _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Warehouse");
                     SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_wareHouse);
                 }
                 break;
@@ -139,11 +144,23 @@ public class InfoCanvas : CanvasBase
     private void AddBtnsListener(BuildingBase buildingBase)
     {
         RemoveBtnsListener();
-        _populationBtns[0].onClick.AddListener(()=>buildingBase.DeleteCurPeople(10));
-        _populationBtns[1].onClick.AddListener(()=>buildingBase.DeleteCurPeople(1));
-        _populationBtns[2].onClick.AddListener(()=>buildingBase.AddCurPeople(1));
-        _populationBtns[3].onClick.AddListener(()=>buildingBase.AddCurPeople(10));
-        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding();OnClose(); });
+        _populationBtns[0].onClick.AddListener(() => 
+        { 
+            buildingBase.DeleteCurPeople(10); 
+        });
+        _populationBtns[1].onClick.AddListener(() =>
+        {
+            buildingBase.DeleteCurPeople(1);
+        });
+        _populationBtns[2].onClick.AddListener(() => 
+        { 
+            buildingBase.AddCurPeople(1); 
+        });
+        _populationBtns[3].onClick.AddListener(() => 
+        {
+            buildingBase.AddCurPeople(10); 
+        });
+        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(); OnClose(); });
         _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(); OnClose(); });
     }
 
@@ -161,7 +178,8 @@ public class InfoCanvas : CanvasBase
     public override void OnClose()
     {
         RemoveBtnsListener();
-        EventManager.StopListening<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, ChangeLabels);
+        EventManager.StopListening(ConstEvent.OnPopulaitionChange, populationChange);
+        EventManager.StopListening(ConstEvent.OnDayWentBy, effectivenessChange);
         mainCanvas.SetActive(false);
         BuildingHighlight.SetActive(false);
         NoticeManager.Instance.CloseNotice();
@@ -290,9 +308,20 @@ public class InfoCanvas : CanvasBase
     private void ChangeLabels(RuntimeBuildData buildData)
     {
         _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
-        _populationLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
-        _workerLabel.text =buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
+        _populationLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
+        _workerLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
+        _rateLabel.text = "效率:" + buildData.Effectiveness * 100 + "%";
+    }
+
+    private void ChangeRateLabel(BuildingBase buildData)
+    {
+        //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
+        RuntimeBuildData data = buildData.runtimeBuildData;
+        _rateLabel.text = "效率:" + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
+        rateImage.fillAmount = buildData.GetProcess();
+        
+        _outputLabel.text = "产出率:" + CastTool.RoundOrFloat(data.Rate * 100) + "%";
     }
 
     private void CleanUpAllAttachedChildren(Transform target)

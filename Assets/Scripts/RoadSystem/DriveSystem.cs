@@ -23,7 +23,7 @@ public class DriveSystem : MonoBehaviour
     private float turnTime;
     public delegate void ArriveDestination();
     public ArriveDestination OnArriveDestination;
-
+    private UnityAction callback;
     [SerializeField] Transform leftWheel, rightWheel;
 
     public CarMission CurMission { get; private set; }
@@ -52,6 +52,7 @@ public class DriveSystem : MonoBehaviour
     public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction _callBack = null)
     {
         //Debug.Log("startDrive");
+        callback = _callBack;
         action = null;
         wayCount = 0;
         speed = 0;
@@ -81,6 +82,12 @@ public class DriveSystem : MonoBehaviour
                     break;
                 }
         }
+        Invoke("OvertimeStop", 100f);
+    }
+
+    private void OvertimeStop()
+    {
+        DriveStop(callback);
     }
     private void ControlSpeed(List<Vector3> targets)
     {

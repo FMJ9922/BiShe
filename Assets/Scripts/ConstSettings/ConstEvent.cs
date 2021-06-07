@@ -35,6 +35,7 @@ public class ConstEvent
     public const string OnDayWentBy = "OnDayWentBy";//一天过去事件
     public const string OnRefreshResources = "OnRefreshResources";//资源更新显示事件
     public const string OnPopulaitionChange = "OnPopulaitioChange";//人口增减事件
+    public const string OnEffectivenessChange = "OnEffectivenessChange";//工作效率变化
     public const string OnSettleAccount = "OnSettleAccount";//市场结算事件
     public const string OnWeekProgress = "OnWeekProgree";//周进度
     #endregion

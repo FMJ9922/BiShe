@@ -254,12 +254,12 @@ public class ResourceManager : Singleton<ResourceManager>
     public bool AddMaxPopulation(int num)
     {
         maxPopulation += num;
-        if (maxPopulation >= 0 && maxPopulation <= 200)
+        if (maxPopulation >= 0 && maxPopulation <= 10000)
         {
             EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             return true;
         }
-        maxPopulation = Mathf.Clamp(maxPopulation, 0, 200);
+        maxPopulation = Mathf.Clamp(maxPopulation, 0, 10000);
         Debug.Log("人口操作可能有问题，请检查");
         return false;
     }

@@ -101,11 +101,8 @@ public class BuildingBase : MonoBehaviour
         MapManager.Instance._buildings.Add(this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
-        if (runtimeBuildData.formulaDatas.Length>0)
-        {
-            //Debug.Log(runtimeBuildData.CurFormula);
-            formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
-        }
+        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+        ChangeFormula();
         productTime = formula.ProductTime;
         if (runtimeBuildData.Population > 0)
         {
@@ -114,7 +111,19 @@ public class BuildingBase : MonoBehaviour
                 runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
                 EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             }
-            CheckCurPeopleMoreThanMax();
+            //CheckCurPeopleMoreThanMax();
+            runtimeBuildData.Pause = true;
+            UpdateEffectiveness();
+        }
+    }
+
+    public void ChangeFormula()
+    {
+
+        if (runtimeBuildData.formulaDatas.Length > 0)
+        {
+            //Debug.Log(runtimeBuildData.CurFormula);
+            formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         }
     }
     public void ShowBody()
@@ -165,12 +174,23 @@ public class BuildingBase : MonoBehaviour
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
     }
 
-    public virtual void DestroyBuilding()
+    public virtual void DestroyBuilding(bool repaint = true)
     {
         ReturnBuildResources();
-        MapManager.SetGridTypeToEmpty(takenGrids);
         MapManager.Instance._buildings.Remove(this);
-        MapManager.Instance.BuildFoundation(takenGrids, 0,4);
+        if (repaint)
+        {
+            MapManager.SetGridTypeToEmpty(takenGrids);
+            MapManager.Instance.BuildFoundation(takenGrids, 0, 4);
+        }
+        if (runtimeBuildData.Population < 0)
+        {
+            ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
+        }
+        else
+        {
+            ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.Population);
+        }
         Destroy(this.gameObject);
     }
     public virtual bool ReturnBuildResources()
@@ -198,14 +218,20 @@ public class BuildingBase : MonoBehaviour
         }
     }
 
+    public float GetProcess()
+    {
+        return 1 - (float)productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
+    }
     protected virtual void Input()
     {
         ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek));
         runtimeBuildData.Pause = false;
+        ChangeFormula();
         if (formula == null|| formula.InputItemID==null) return;
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             bool res = ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
+            Debug.Log("res" + res+" id"+ formula.InputItemID[i]);
             if (!res)
             {
                 runtimeBuildData.Pause = true;
@@ -222,16 +248,20 @@ public class BuildingBase : MonoBehaviour
     public virtual void AddCurPeople(int num)
     {
         //Debug.Log("Add");
+        //Debug.Log(num);
         int cur = runtimeBuildData.CurPeople;
+        //Debug.Log(cur);
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+        //Debug.Log(max);
         if (cur + num <= max)
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
         }
         else
         {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num+cur-max);
+            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(max-cur);
         }
+        UpdateEffectiveness();
         EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
     public virtual void DeleteCurPeople(int num)
@@ -247,6 +277,7 @@ public class BuildingBase : MonoBehaviour
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
         }
+        UpdateEffectiveness();
         EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
 
@@ -264,18 +295,24 @@ public class BuildingBase : MonoBehaviour
         BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
         if (success)
         {
-            DestroyBuilding();
+            DestroyBuilding(false);
         }
     }
 
     public virtual void UpdateRate(string date)
     {
-        int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        CheckCurPeopleMoreThanMax();
-        runtimeBuildData.Effectiveness = runtimeBuildData.Pause?0:((float)cur)/(float)max * TechManager.Instance.EffectivenessBuff();
+        //CheckCurPeopleMoreThanMax();
+        UpdateEffectiveness();
         runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
         //Debug.Log(runtimeBuildData.Rate);
+    }
+
+    public void UpdateEffectiveness()
+    {
+        //Debug.Log(runtimeBuildData.Pause);
+        int cur = runtimeBuildData.CurPeople;
+        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+        runtimeBuildData.Effectiveness = runtimeBuildData.Pause ? 0 : ((float)cur) / (float)max * TechManager.Instance.EffectivenessBuff();
     }
 
     protected void CheckCurPeopleMoreThanMax()
@@ -301,7 +338,7 @@ public class BuildingBase : MonoBehaviour
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]));
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]*runtimeBuildData.Rate));
 
         }
         return mission;
