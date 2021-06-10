@@ -33,7 +33,7 @@ public class FarmLandBuilding : BuildingBase
         {
             Invoke("PlayAnim", 0.2f);
         }
-        parkingGridIn = InitParkingGrid();
+        parkingGridIn = GetParkingGrid();
         MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;

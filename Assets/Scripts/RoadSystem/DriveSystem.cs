@@ -25,6 +25,10 @@ public class DriveSystem : MonoBehaviour
     public ArriveDestination OnArriveDestination;
     private UnityAction callback;
     [SerializeField] Transform leftWheel, rightWheel;
+    private float missionTimer = 0;
+    private float brakeTimer = 0;
+    private float BrakeMaxTime = 20f;//单次刹车最长时间
+    private float MissionMaxTime = 300f;//单次任务最长时间;
 
     public CarMission CurMission { get; private set; }
     private void Start()
@@ -56,6 +60,8 @@ public class DriveSystem : MonoBehaviour
         action = null;
         wayCount = 0;
         speed = 0;
+        brakeTimer = 0;
+        missionTimer = 0;
         //Debug.Log((callBack != null).ToString());
         WayPoints = wayPoints;
         transform.position = WayPoints[0];
@@ -82,7 +88,6 @@ public class DriveSystem : MonoBehaviour
                     break;
                 }
         }
-        Invoke("OvertimeStop", 100f);
     }
 
     private void OvertimeStop()
@@ -93,6 +98,12 @@ public class DriveSystem : MonoBehaviour
     {
         if (isbraking)
         {
+            brakeTimer += Time.fixedDeltaTime;
+            if (brakeTimer > BrakeMaxTime)
+            {
+                isbraking = false;
+                brakeTimer = 0;
+            }
             if (speed > 0 )
             {
                 speed -= a * Time.fixedDeltaTime;
@@ -113,6 +124,7 @@ public class DriveSystem : MonoBehaviour
     private void DriveOnce(List<Vector3> targets, UnityAction callBack)
     {
         ControlSpeed(targets);
+        CheckMissionOvertime();
         if (wayCount < targets.Count && Vector3.Distance(targets[wayCount], transform.position) < StopDistance )
         {
             wayCount++;
@@ -234,8 +246,18 @@ public class DriveSystem : MonoBehaviour
 
         }
     }
+
+    private void CheckMissionOvertime()
+    {
+        missionTimer += Time.fixedDeltaTime;
+        if (missionTimer > MissionMaxTime)
+        {
+            OvertimeStop();
+        }
+    }
     private void DriveTurn(Vector3 to, UnityAction callback,Vector3 turn,float dis)
     {
+        CheckMissionOvertime();
         curTime += Time.fixedDeltaTime;
         var temp = Vector3.Cross(transform.forward, to).y;
         if (temp > 0)

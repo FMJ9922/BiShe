@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 268208061
+CRC: 3332036289
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,4 +16,5 @@ AssetBundleManifest:
       Dependencies: {}
     Info_3:
       Name: icon.ab
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: mat.ab

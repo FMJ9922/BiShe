@@ -20,7 +20,7 @@ public class MineBuilding : BuildingBase
         {
             Invoke("PlayAnim", 0.2f);
         }
-        parkingGridIn = InitParkingGrid();
+        parkingGridIn = GetParkingGrid();
         MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;

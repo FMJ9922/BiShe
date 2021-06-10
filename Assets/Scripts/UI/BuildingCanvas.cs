@@ -220,11 +220,13 @@ public class BuildingCanvas : CanvasBase
         CleanUpAllAttachedChildren(_iconsParent);
         GameObject money = CommonIcon.GetIcon(99999, buildData.Price);
         money.transform.parent = _iconsParent;
+        money.transform.localScale = Vector3.one * 1;
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
             if (buildData.costResources[i].ItemId == 99999) continue;
             GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum);
             resource.transform.parent = _iconsParent;
+            resource.transform.localScale = Vector3.one * 1f;
         }
         _InfoCanvas.transform.position = adjustPosition + new Vector3(230,240,0);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);

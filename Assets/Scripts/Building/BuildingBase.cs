@@ -55,7 +55,7 @@ public class BuildingBase : MonoBehaviour
         //Debug.Log(transform.right);
         direction = CastTool.CastVector3ToDirection(transform.right);
         //Debug.Log(direction);
-        parkingGridIn = InitParkingGrid();
+        parkingGridIn = GetParkingGrid();
         //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
         //Debug.Log("paint");
@@ -76,7 +76,7 @@ public class BuildingBase : MonoBehaviour
         animation["Take 001"].speed = 1f;
         animation.Play();
     }
-    protected Vector2Int InitParkingGrid()
+    public Vector2Int GetParkingGrid()
     {
         /*switch (direction)
         {
@@ -231,7 +231,7 @@ public class BuildingBase : MonoBehaviour
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
             bool res = ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
-            Debug.Log("res" + res+" id"+ formula.InputItemID[i]);
+            //Debug.Log("res" + res+" id"+ formula.InputItemID[i]);
             if (!res)
             {
                 runtimeBuildData.Pause = true;
@@ -338,8 +338,7 @@ public class BuildingBase : MonoBehaviour
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]*runtimeBuildData.Rate));
-
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]*rate));
         }
         return mission;
     }

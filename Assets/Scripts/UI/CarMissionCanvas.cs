@@ -21,7 +21,7 @@ public class CarMissionCanvas : CanvasBase
     }
     public void OnOpen(GameObject car)
     {
-        Debug.Log("open");
+        //Debug.Log("open");
         targetCar = car;
         CarMission mission = car.GetComponent<DriveSystem>().CurMission;
 

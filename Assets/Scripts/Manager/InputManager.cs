@@ -88,10 +88,10 @@ public partial class InputManager : Singleton<InputManager>
         //{
         //    Camera.main.transform.parent.position += Camera.main.transform.parent.forward * Time.deltaTime * -_CameraMoveSpeed;
         //}
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, 90f);
-        //}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EventManager.TriggerEvent(ConstEvent.OnRotateBuilding);
+        }
         //if (Input.GetKeyDown(KeyCode.Q))
         //{
         //    EventManager.TriggerEvent(ConstEvent.OnRotateBuilding, -90f);

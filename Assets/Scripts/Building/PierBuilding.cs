@@ -19,7 +19,7 @@ public class PierBuilding : BuildingBase
         {
             Invoke("PlayAnim", 0.2f);
         }
-        parkingGridIn = InitParkingGrid();
+        parkingGridIn = GetParkingGrid();
         //MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
         InitBuildingFunction();
     }

@@ -37,8 +37,9 @@ public class BuildManager : Singleton<BuildManager>
 
     //事件相关
     private UnityAction<Vector3> moveAc = (Vector3 p) => Instance.OnMouseMoveSetBuildingPos(p);
-    private UnityAction confirmAc = () => Instance.OnConfirmBuild();
+    private UnityAction confirmAc = () => Instance.OnConfirmBuildingBuild();
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
+    private UnityAction rotateAc = () => Instance.OnRotateBuilding();
 
     public static bool IsInBuildMode { get; set; }
 
@@ -65,6 +66,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         GameObject building = InitBuilding(buildData);
         building.transform.position = Input.mousePosition;
+        currentBuilding.direction = Direction.right;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
         for (int i = 0; i < meshRenderers.Length; i++)
@@ -135,25 +137,60 @@ public class BuildManager : Singleton<BuildManager>
         roadLevel = _roadLevel;
     }
 
+    public void StartDestroyRoad()
+    {
+        EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnDestroyRoad);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelDestroyRoad);
+        EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowDestroyRoad);
+    }
+
     #endregion
 
     #region 私有函数
+
+    #region 拆除道路
+    private void OnDestroyRoad()
+    {
+        Vector3 pos = InputManager.Instance.LastGroundRayPos;
+    }
+
+    private void OnCancelDestroyRoad()
+    {
+
+        EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnDestroyRoad);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
+        EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowDestroyRoad);
+    }
+
+    private void OnPreShowDestroyRoad(Vector3 pos)
+    {
+        GameObject newRoad = Instantiate(preRoadPfb, transform);
+        newRoad.transform.position = pos + new Vector3(0, 0.01f, 0);
+        preRoads.Add(newRoad);
+        ChangeRoadPfbColor(false, newRoad);
+    }
+    #endregion
     private bool CheckRoadStartPosAvalible()
     {
         Vector2Int startGrid = GetCenterGrid(roadStartPos);
-        if (MapManager.Instance.GetGridType(startGrid)==GridType.road)
+        if (MapManager.Instance.GetGridType(startGrid)!=GridType.road)
         {
-            return true;
+            NoticeManager.Instance.InvokeShowNotice("道路起点应与已有道路相连");
+            return false;
         }
-        Debug.Log("应与已有道路相连");
-        return false;
+        if (MapManager.CheckIsInWater(startGrid))
+        {
+            NoticeManager.Instance.InvokeShowNotice("道路起点不能为桥上");
+            return false;
+        }
+        return true;
     }
     /// <summary>
     /// 点下起点
     /// </summary>
     private void OnConfirmRoadStartPos()
     {
-        roadStartPos = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.one);
+        roadStartPos = CalculateRoadCenterPos(InputManager.Instance.LastGroundRayPos);
         if (CheckRoadStartPosAvalible())
         {
             EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
@@ -168,6 +205,16 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     private void OnConfirmRoadEndPos()
     {
+        if (!CheckRoadPreShowAvalible())
+        {
+            NoticeManager.Instance.InvokeShowNotice("道路不能与建筑重叠");
+            return;
+        }
+        if (CheckRoadEndPosInWater())
+        {
+            NoticeManager.Instance.InvokeShowNotice("道路终点不能在水里");
+            return;
+        }
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
         EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
         Vector2 vec = RectTransformUtility.WorldToScreenPoint(Camera.main, InputManager.Instance.LastGroundRayPos);
@@ -204,13 +251,22 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 delta = CastTool.CastDirectionToVector(dir);
         //Debug.Log(delta.ToString());
         List<GameObject> bridges = new List<GameObject>();
+        bool bridgeStart = false;
         for (int i = 0; i < preRoads.Count; i++)
         {
             grids.Add(GetCenterGrid(preRoads[i].transform.position + adjust));
             grids.Add(GetCenterGrid(preRoads[i].transform.position - delta + adjust));
             if(preRoads[i].transform.position.y < 9.1f)
             {
-
+                //桥开始时应该往岸上延伸一格
+                if (!bridgeStart&&i>1)
+                {
+                    bridgeStart = true;
+                    GameObject bridge1 = Instantiate(bridgePfb, transform);
+                    bridge1.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i-1].transform.position + adjust));
+                    bridge1.transform.rotation = Quaternion.LookRotation(delta);
+                    bridges.Add(bridge1);
+                }
                 GameObject bridge = Instantiate(bridgePfb, transform);
                 bridge.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i].transform.position + adjust));
                 bridge.transform.rotation = Quaternion.LookRotation(delta);
@@ -287,6 +343,7 @@ public class BuildManager : Singleton<BuildManager>
                 newRoad.GetComponent<RoadPreview>().SetRoadPreviewMat(roadLevel);
                 preRoads.Add(newRoad);
             }
+            CheckRoadPreShowAvalible();
         }
         else if (newCount == roadCount)
         {
@@ -300,6 +357,7 @@ public class BuildManager : Singleton<BuildManager>
                 preRoads.RemoveAt(preRoads.Count - 1);
                 Destroy(deleteRoad);
             }
+            CheckRoadPreShowAvalible();
         }
         roadCount = newCount;
         roadEndPos = MapManager.GetTerrainPosition(roadStartPos + extensionDir * roadCount);
@@ -317,6 +375,7 @@ public class BuildManager : Singleton<BuildManager>
             preRoads[i].transform.position = MapManager.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
             preRoads[i].transform.LookAt(MapManager.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));
         }
+        CheckRoadPreShowAvalible();
     }
 
     /// <summary>
@@ -339,22 +398,45 @@ public class BuildManager : Singleton<BuildManager>
             dir = input.z >= 0 ? Direction.up : Direction.down;
             n = Mathf.CeilToInt(Mathf.Abs(input.z) / MapManager.unit);
         }
-        count = n > 1 ? n : 1;
+        n = n/2*2+1;
+        count = n;
+    }
+    private bool CheckRoadEndPosInWater()
+    {
+        return MapManager.CheckIsInWater(MapManager.GetCenterGrid(preRoads[preRoads.Count - 1].transform.position));
     }
 
+    private bool CheckRoadPreShowAvalible()
+    {
+        bool res = true;
+        for (int i = 0; i < preRoads.Count; i++)
+        {
+            bool canBuild = !MapManager.CheckRoadOverlap(MapManager.GetCenterGrid(preRoads[i].transform.position));
+            res &= canBuild;
+            ChangeRoadPfbColor(canBuild, preRoads[i]);
+        }
+        return res;
+    }
+
+    private void ChangeRoadPfbColor(bool green,GameObject road)
+    {
+        road.GetComponentInChildren<MeshRenderer>().material.color = (green ? Color.green : Color.red);
+    }
 
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
         currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
         //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
-        CheckOverlap();
+        CheckBuildingOverlap();
     }
 
-    private void OnRotateBuilding(Direction direction)
+    private void OnRotateBuilding()
     {
-        currentBuilding.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)direction+1), Vector3.up);
-        currentBuilding.direction = direction;
-        if(direction == Direction.down || direction == Direction.up)
+        Direction dir = currentBuilding.direction;
+        currentBuilding.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)dir + 2), Vector3.up);
+        currentBuilding.direction = (Direction)(((int)dir+1)%4);
+        //Debug.Log(currentBuilding.direction);
+        if(currentBuilding.direction == Direction.down || currentBuilding.direction == Direction.up)
         {
             isTurn = false;
         }
@@ -363,29 +445,27 @@ public class BuildManager : Singleton<BuildManager>
             isTurn = true;
         }
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
+        CheckBuildingOverlap();
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
     }
 
-    private void CheckOverlap()
+    private void CheckBuildingOverlap()
     {
         Vector3 curPos = currentBuilding.transform.position;
         int width, height;
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos,out width,out height);
         bool isCheckSea = currentBuilding.runtimeBuildData.Id == 20032;
-        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, width, height,isCheckSea, out Direction direction);
-        if (isCurCanBuild)
-        {
-            OnRotateBuilding(direction);
-        }
+        
+        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, currentBuilding.GetParkingGrid(),isCheckSea);
         for (int i = 0; i < mats.Length; i++)
         {
             mats[i].color = isCurCanBuild ? Color.green : Color.red;
         }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
-    private void OnConfirmBuild()
+    private void OnConfirmBuildingBuild()
     {
-        CheckOverlap();
+        CheckBuildingOverlap();
         if (!isCurCanBuild)
         {
             NoticeManager.Instance.InvokeShowNotice(MapManager.noticeContent);
@@ -494,7 +574,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
-        //EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
+        EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
         GameManager.Instance.PauseGame();
     }
     private void WhenFinishBuild()
@@ -502,7 +582,7 @@ public class BuildManager : Singleton<BuildManager>
         //ShowGrid(false);
         GameManager.Instance.ContinueGame();
         EventManager.StopListening(ConstEvent.OnGroundRayPosMove, moveAc);
-        //EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
+        EventManager.StopListening(ConstEvent.OnRotateBuilding, rotateAc);
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
@@ -518,6 +598,14 @@ public class BuildManager : Singleton<BuildManager>
     //{
     //    gridHightLight.SetActive(isShow);
     //}
+
+    private Vector3 CalculateRoadCenterPos(Vector3 pos)
+    {
+        Vector3 newPos = pos;
+        newPos.x = Mathf.Floor(pos.x / 4) * 4 + 2;
+        newPos.z = Mathf.Floor(pos.z / 4) * 4 + 2;
+        return newPos;
+    }
 
     /// <summary>
     /// 对齐网格

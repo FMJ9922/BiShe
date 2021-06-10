@@ -15,11 +15,6 @@ public class MapManager : Singleton<MapManager>
     public static string noticeContent;
 
 
-
-
-
-
-    
     public void InitMapMnager(int levelId)
     {
         InitLevelData(levelId);
@@ -278,6 +273,21 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    /// <summary>
+    /// 道路不能与已建造的建筑重合
+    /// </summary>
+    /// <param name="vector2Int"></param>
+    /// <returns></returns>
+    public static bool CheckRoadOverlap(Vector2Int vector2Int)
+    {
+        GridType type = Instance.GetGridType(vector2Int);
+        if (type == GridType.inherent||type == GridType.occupy)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public SingleGrid GetSingleGrid(Vector2Int grid)
     {
         SingleGrid result;
@@ -291,21 +301,22 @@ public class MapManager : Singleton<MapManager>
             return null;
         }
     }
-    public static bool CheckCanBuild(Vector2Int[] grids, int width, int height, bool checkInSea, out Direction direction)
+    public static bool CheckCanBuild(Vector2Int[] grids, Vector2Int parkingPos,bool checkInSea)
     {
         //检测安放地点占用
         bool hasOverlap = CheckOverlap(grids);
-        if (hasOverlap)
-        {
-            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
-        }
         //检测道路是否贴近
-        bool hasNearRoad = CheckNearRoad(grids, width, height, out direction);
+        bool hasNearRoad = CheckNearRoad(parkingPos);
+        //检测是否靠近海岸线
+        bool isInSea = (!checkInSea || CheckIsInWater(grids));
         if (hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
         }
-        bool isInSea = (!checkInSea || CheckIsInWater(grids));
+        if (hasOverlap)
+        {
+            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
+        }
         if (!isInSea)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
@@ -358,20 +369,23 @@ public class MapManager : Singleton<MapManager>
         }
         return false;
     }
-
-    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height, out Direction direction)
+    public static bool CheckNearRoad(Vector2Int parkingPos)
+    {
+        return Instance.GetGridType(parkingPos) == GridType.road;
+    }
+    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height)
     {
         Vector2Int start = grids[0];
         for (int i = 0; i < width; i++)
         {
             if (Instance.GetGridType(start + new Vector2Int(i, -1)) == GridType.road)
             {
-                direction = Direction.down;
+                //direction = Direction.down;
                 return true;
             }
             if (Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
             {
-                direction = Direction.up;
+                //direction = Direction.up;
                 return true;
             }
         }
@@ -379,16 +393,16 @@ public class MapManager : Singleton<MapManager>
         {
             if (Instance.GetGridType(start + new Vector2Int(-1, i)) == GridType.road)
             {
-                direction = Direction.left;
+                //direction = Direction.left;
                 return true;
             }
             if (Instance.GetGridType(start + new Vector2Int(width, i)) == GridType.road)
             {
-                direction = Direction.right;
+                //direction = Direction.right;
                 return true;
             }
         }
-        direction = Direction.right;
+        //direction = Direction.right;
         //Debug.Log("不贴合道路");
         return false;
     }

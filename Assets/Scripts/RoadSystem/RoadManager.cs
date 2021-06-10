@@ -10,6 +10,9 @@ public class RoadManager : Singleton<RoadManager>
 
     public List<RoadNode> CrossNodes { get; private set; }
 
+    //缓存已有的寻路信息
+    public Dictionary<string, List<Vector3>> WayPointDic { get; set; }
+
     //从grid转化为图，再简化
     public void InitRoadManager()
     {
@@ -22,6 +25,7 @@ public class RoadManager : Singleton<RoadManager>
         //Debug.Log("开始初始化道路");
         List<Vector2Int> roadGrids = MapManager.Instance.GetAllRoadGrid();
         RoadNodeDic = new Dictionary<Vector2Int, RoadNode>();
+        WayPointDic = new Dictionary<string, List<Vector3>>();
         RoadNodes = new List<RoadNode>();
         CrossNodes = new List<RoadNode>();
         if (roadGrids.Count <= 0)
@@ -270,6 +274,10 @@ public class RoadManager : Singleton<RoadManager>
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
         //Debug.Log(start + " " + end);
+        if(WayPointDic.TryGetValue(start.ToString()+end.ToString(),out List<Vector3> res))
+        {
+            return res;
+        }
         ClearRoadNodeH();
         List<RoadNode> path = new List<RoadNode>();
         List<RoadNode> openList = new List<RoadNode>();
@@ -314,6 +322,7 @@ public class RoadManager : Singleton<RoadManager>
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
                 list.Add(MapManager.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse();
+                WayPointDic.Add(start.ToString() + end.ToString(), list);
                 return list;
             }
             for (int i = 0; i < temp.NearbyNode.Count; i++)

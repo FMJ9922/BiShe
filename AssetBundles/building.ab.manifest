@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1464444025
+CRC: 2134617577
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3ae61a16479d4666bc0e028487d43f4c
+    Hash: 8fb895baf5db6d8e219710e0f1ac9f00
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6dd54452c04ad7fde36501a624d10482
@@ -124,6 +124,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_01_Preb.prefab
 - Assets/Prefabs/MarketItemPfb.prefab
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L2_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_02_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L3_01.prefab
@@ -141,6 +142,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L3_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Farm_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Pier_add_01_Mod.fbx
@@ -160,6 +162,8 @@ Assets:
 - Assets/Scenes Assets/Finish/Coach_Building_Pier_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_03_Preb.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_01.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_01.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L3_01_Mod.fbx
@@ -185,6 +189,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L2_02_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L1_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Mine_L2.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_02_Preb.prefab
 - Assets/Scenes Assets/Animation/RicePfb.controller
 - Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_02.prefab
@@ -195,6 +200,7 @@ Assets:
 - Assets/Scenes Assets/Finish/WheatPfb.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L3_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L1_01.prefab
@@ -232,6 +238,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L3_02_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L3_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Government_L2_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_01.prefab
@@ -263,6 +270,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L3_02_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L2_02_Preb.prefab
 - Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_03.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Farm_L1_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_03_Mod.fbx
 - Assets/ArtAssets/Particle/ParticleFactory.prefab
@@ -297,6 +305,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Coach_Building_Pier_01_Mod.fbx
 - Assets/Prefabs/LevelSelectPfb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Farm_L2_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_02_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_04_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Government_L1_01.prefab
@@ -310,6 +319,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L3_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_02_Mod.fbx
 Dependencies:
 - D:/UnityProjects/BiShe/AssetBundles/mat.ab
