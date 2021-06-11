@@ -267,6 +267,18 @@ public class InfoCanvas : CanvasBase
                     _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
                     break;
                 }
+            case BuildTabType.bridge:
+                {
+                    _openCanvas.SetActive(false);
+                    _inputsObj.SetActive(false);
+                    _outputsObj.SetActive(false);
+                    _rateObj.SetActive(false);
+                    _workerObj.SetActive(false);
+                    _populationObj.SetActive(false);
+                    _destroyBtn.gameObject.SetActive(true);
+                    _upgradeBtn.gameObject.SetActive(false);
+                    break;
+                }
 
         }
     }

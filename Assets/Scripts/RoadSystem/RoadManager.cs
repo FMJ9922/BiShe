@@ -204,7 +204,7 @@ public class RoadManager : Singleton<RoadManager>
                     MapManager.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos), Color.red, 100f);
                 Vector3 delta = MapManager.GetTerrainPosition(CrossNodes[i].NearbyNode[j].GridPos) -
                     MapManager.GetTerrainPosition(CrossNodes[i].GridPos);
-                Instantiate(pfb, MapManager.GetTerrainPosition(CrossNodes[i].GridPos) + delta / 2, Quaternion.LookRotation(delta), transform);
+                Instantiate(pfb, MapManager.GetTerrainPosition(CrossNodes[i].GridPos) + delta / 2+new Vector3(1,0,1), Quaternion.LookRotation(delta), transform);
             }
         }
     }
@@ -235,6 +235,13 @@ public class RoadManager : Singleton<RoadManager>
         {
             CrossNodes.Add(node);
         }
+    }
+    public void AddTurnNode(Vector2Int gridIn, Vector2Int gridOut)
+    {
+        RoadNode inNode = RoadNodeDic[gridIn];
+        RoadNode outNode = RoadNodeDic[gridOut];
+        inNode.AddNearbyNode(outNode);
+        outNode.AddNearbyNode(inNode);
     }
     public void AddCrossNode(Vector2Int grid, Direction dir)
     {
@@ -293,7 +300,7 @@ public class RoadManager : Singleton<RoadManager>
         {
             if (openList.Count <= 0)
             {
-                Debug.LogError("路径被阻挡！"+ start+"=>"+end);
+                //Debug.LogError("路径被阻挡！"+ start+"=>"+end);
                 return null;
             }
             //Debug.Log("——");

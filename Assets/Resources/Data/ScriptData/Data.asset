@@ -985,7 +985,7 @@ MonoBehaviour:
       ItemNum: 50
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L1
-    tabType: 3
+    tabType: 2
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 1
     iconName: MineL1
@@ -1008,7 +1008,7 @@ MonoBehaviour:
       ItemNum: 70
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L2
-    tabType: 3
+    tabType: 2
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 2
     iconName: MineL2
@@ -1031,7 +1031,7 @@ MonoBehaviour:
       ItemNum: 100
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L3
-    tabType: 3
+    tabType: 2
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 3
     iconName: MineL3
@@ -1054,7 +1054,7 @@ MonoBehaviour:
       ItemNum: 100
     BundleName: building.ab
     PfbName: Coach_Building_Pier_01
-    tabType: 3
+    tabType: 2
     Introduce: "\u6355\u635E\u9C7C\u7C7B"
     Level: 1
     iconName: HookerL1
@@ -1127,6 +1127,27 @@ MonoBehaviour:
     Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 3
     iconName: FarmL3
+  - Id: 20036
+    Name: Bridge
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 0
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 0
+    Width: 0
+    Price: 0
+    costResources:
+    - ItemId: 0
+      ItemNum: 0
+    BundleName: Null
+    PfbName: Null
+    tabType: 6
+    Introduce: "\u8FD9\u662F\u4E00\u5EA7\u6865\u6881"
+    Level: 1
+    iconName: Bridge
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -1590,3 +1611,6 @@ MonoBehaviour:
     - code: LivestockFarmLv3
       chinese: "\u517B\u6B96\u573A\u4E09\u7EA7"
       english: LivestockFarmLv3
+    - code: Bridge
+      chinese: "\u6865\u6881"
+      english: Bridge

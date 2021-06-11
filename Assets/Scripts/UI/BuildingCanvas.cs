@@ -30,6 +30,8 @@ public class BuildingCanvas : CanvasBase
     private Button _confirm;
     [SerializeField]
     private Button _cancel;
+    [SerializeField]
+    private GameObject _roadCost;
     [SerializeField] 
     private Transform _iconsParent;
     [SerializeField]
@@ -52,6 +54,7 @@ public class BuildingCanvas : CanvasBase
     //当前页签的数据
     private BuildData[] currentTabDatas;
     private BuildTabAnim curTab =null;
+    private BuildManager.RoadInfo roadInfo;
     #endregion
 
     #region 实现基类
@@ -157,7 +160,7 @@ public class BuildingCanvas : CanvasBase
         {
             int level= currentTabDatas[i].Level;
             //if (level <= 1||tabType == 0)
-            if (level <= 1 || tabType == 0)
+            if ((tabType != 1&&level <= 1) || tabType == 0 ||(tabType==1&&currentTabDatas[i].Id==GetAvalibleHutID()))
             {
                 GameObject newDivide = Instantiate(pfbDividingLine, _buildingIcons);
                 GameObject newIcon = Instantiate(pfbIcon, _buildingIcons);
@@ -167,12 +170,32 @@ public class BuildingCanvas : CanvasBase
         GameObject newDivide1 = Instantiate(pfbDividingLine, _buildingIcons);
         _tabLabel.text = Localization.ToSettingLanguage(((BuildTabType)tabType).GetDescription());
     }
-    public void ShowConfirmButtons(Vector2 vector2)
-    {
-        _confirmBtns.SetActive(true);
-        _confirmBtns.transform.position = vector2;
-    }
 
+    public int GetAvalibleHutID()
+    {
+        switch (LevelManager.LevelID)
+        {
+            case 30001:
+                return 20001;
+            case 30002:
+                return 20026;
+            case 30003:
+                return 20023;
+            default: return 20001;
+        }
+    }
+    public void ShowConfirmButtons(BuildManager.RoadInfo info)
+    {
+        CleanUpAllAttachedChildren(_roadCost.transform);
+        roadInfo = info;
+        _confirmBtns.SetActive(true);
+        _confirmBtns.transform.position = info.vec;
+        for (int i = 0; i < info.costResources.Count; i++)
+        {
+            GameObject cost = CommonIcon.GetIcon(info.costResources[i].ItemId, info.costResources[i].ItemNum);
+            cost.transform.parent = _roadCost.transform;
+        }
+    }
 
     public void OnClickIconToBuild(BuildData buildData)
     {
@@ -186,15 +209,15 @@ public class BuildingCanvas : CanvasBase
         }
         else
         {
-            EventManager.StartListening<Vector2>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+            EventManager.StartListening<BuildManager.RoadInfo>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
             BuildManager.Instance.StartCreateRoads(buildData.Level);
         }
         
     }
-    public void OnBuildToBeConfirmed(Vector2 vector2)
+    public void OnBuildToBeConfirmed(BuildManager.RoadInfo info)
     {
-        ShowConfirmButtons(vector2);
-        EventManager.StopListening<Vector2>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+        ShowConfirmButtons(info);
+        EventManager.StopListening<BuildManager.RoadInfo>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
     }
 
     public void OnCancel()
@@ -205,8 +228,15 @@ public class BuildingCanvas : CanvasBase
 
     public void OnConfirm()
     {
-        BuildManager.Instance.OnConfirmBuildRoad();
-        _confirmBtns.SetActive(false);
+        BuildManager.Instance.OnConfirmBuildRoad(roadInfo,out bool success);
+        if (success)
+        {
+            _confirmBtns.SetActive(false);
+        }
+        else
+        {
+            NoticeManager.Instance.InvokeShowNotice("建造资源不足");
+        }
     }
     public void OnFinishBuilding()
     {

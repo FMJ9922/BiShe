@@ -6,10 +6,19 @@ using UnityEngine.EventSystems;
 public class IconNotice : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public IconDescription description;
+    public string content;
     #region 接口
     public void OnPointerEnter(PointerEventData eventData)
     {
-        NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(description.GetDescription()));
+        if(description != IconDescription.Custom)
+        {
+            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(description.GetDescription()));
+        }
+        else
+        {
+            NoticeManager.Instance.ShowIconNotice(content);
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

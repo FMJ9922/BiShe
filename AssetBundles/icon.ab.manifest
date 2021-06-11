@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2473743729
+CRC: 103383793
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f6e057151c498c54eb960e6665f94980
+    Hash: f9284a25cfb17bb7389dfbc714cd74b1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9753dd794424f69fb6011ee06a0c141c
@@ -163,6 +163,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/Kuodashichang02.png
 - Assets/ArtAssets/UI/TechIcon/Jizhongshengchan03.png
 - Assets/Scenes Assets/BuildingIcon/Icon/ClothesIcon.png
+- Assets/ArtAssets/UI/BuildUI/BuildDestroyButton.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL1.png
 - Assets/ArtAssets/UI/TechIcon/Rencaiguanli02.png
 - Assets/ArtAssets/UI/TechIcon/JieyingXiao03.png

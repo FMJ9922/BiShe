@@ -92,6 +92,8 @@ public class MapManager : Singleton<MapManager>
         {
             BuildingBase currentBuilding = _buildings[i];
             RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
+            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
+            RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
         }
     }
     /// <summary>
@@ -364,6 +366,18 @@ public class MapManager : Singleton<MapManager>
             if (Instance.GetGridType(grids[i]) != GridType.empty)
             {
                 //Debug.Log("建筑重叠");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool CheckIsRoad(Vector2Int[] grids)
+    {
+        for (int i = 0; i < grids.Length; i++)
+        {
+            if (Instance.GetGridType(grids[i]) == GridType.road)
+            {
                 return true;
             }
         }

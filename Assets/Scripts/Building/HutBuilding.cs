@@ -64,7 +64,7 @@ public class HutBuilding : BuildingBase
         CarMission mission = new CarMission();
         mission.StartBuilding = this;
         mission.transportationType = TransportationType.van;
-        Debug.Log(MapManager.GetNearestMarket(parkingGridIn).name);
+        //Debug.Log(MapManager.GetNearestMarket(parkingGridIn).name);
         mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;

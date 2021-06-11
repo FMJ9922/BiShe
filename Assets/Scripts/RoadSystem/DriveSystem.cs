@@ -33,8 +33,11 @@ public class DriveSystem : MonoBehaviour
     public CarMission CurMission { get; private set; }
     private void Start()
     {
-        carSensor.OnBrake += () => isbraking = true;
-        carSensor.OnStopBrake += () => isbraking = false;
+        if (carType != TransportationType.harvester)
+        {
+            carSensor.OnBrake += () => isbraking = true;
+            carSensor.OnStopBrake += () => isbraking = false;
+        }
     }
     private void FixedUpdate()
     {
@@ -64,6 +67,10 @@ public class DriveSystem : MonoBehaviour
         missionTimer = 0;
         //Debug.Log((callBack != null).ToString());
         WayPoints = wayPoints;
+        if (wayPoints.Count == 0)
+        {
+            DriveStop(_callBack);
+        }
         transform.position = WayPoints[0];
         if (WayPoints[0] == WayPoints[1])
         {

@@ -55,7 +55,8 @@ public class BuildingBase : MonoBehaviour
         //Debug.Log(transform.right);
         direction = CastTool.CastVector3ToDirection(transform.right);
         //Debug.Log(direction);
-        parkingGridIn = GetParkingGrid();
+        parkingGridIn = GetInParkingGrid();
+        parkingGridOut = GetOutParkingGrid();
         //刷地基
         MapManager.Instance.BuildFoundation(vector2Ints, 15);
         //Debug.Log("paint");
@@ -76,7 +77,7 @@ public class BuildingBase : MonoBehaviour
         animation["Take 001"].speed = 1f;
         animation.Play();
     }
-    public Vector2Int GetParkingGrid()
+    public Vector2Int GetInParkingGrid()
     {
         /*switch (direction)
         {
@@ -91,6 +92,11 @@ public class BuildingBase : MonoBehaviour
 
         }*/
         return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
+    }
+
+    public Vector2Int GetOutParkingGrid()
+    {
+        return MapManager.GetCenterGrid(transform.position + CastTool.CastDirectionToVector(direction) * (Size.y / 2 + 1.5f));
     }
     /// <summary>
     /// 建造完后初始化建筑功能
@@ -228,15 +234,21 @@ public class BuildingBase : MonoBehaviour
         runtimeBuildData.Pause = false;
         ChangeFormula();
         if (formula == null|| formula.InputItemID==null) return;
+        List<CostResource> costResources = new List<CostResource>();
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            bool res = ResourceManager.Instance.TryUseResource(formula.InputItemID[i],formula.InputNum[i]*TechManager.Instance.ResourcesBuff());
-            //Debug.Log("res" + res+" id"+ formula.InputItemID[i]);
-            if (!res)
-            {
-                runtimeBuildData.Pause = true;
-                return;
-            }
+            costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]));
+        }
+
+        bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
+        if (!res)
+        {
+            runtimeBuildData.Pause = true;
+            return;
+        }
+        else
+        {
+            ResourceManager.Instance.TryUseResources(costResources);
         }
     }
 

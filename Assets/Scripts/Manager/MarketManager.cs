@@ -62,15 +62,19 @@ public class MarketManager : Singleton<MarketManager>
         {
             orderItems[i].RefreshBuyProfitLabel();
             if (!orderItems[i].isTrading) continue;
-            if (ResourceManager.Instance.TryUseResource(orderItems[i].curItem.Id, orderItems[i].needNum))
+            CostResource costResource = orderItems[i].GetCostResource();
+            if (ResourceManager.Instance.IsResourceEnough(costResource))
             {
                 switch (orderItems[i].curMode)
                 {
                     case MarketItem.TradeMode.once:
+                        SellItem(costResource);
+                        BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
                         orderItems[i].OnResetTrading();
                         break;
                     case MarketItem.TradeMode.everyWeek:
-                        BuyItem(orderItems[i].GetCostResource());
+                        SellItem(costResource);
+                        BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
                         break;
                 }
                 orderItems[i].RefreshBuyProfitLabel();
@@ -88,6 +92,12 @@ public class MarketManager : Singleton<MarketManager>
     {
         Debug.Log("buy" + costResource.ItemNum);
         ResourceManager.Instance.AddResource(costResource.ItemId, costResource.ItemNum);
+    }
+
+    public void SellItem(CostResource costResource)
+    {
+        Debug.Log("sell" + costResource.ItemNum);
+        ResourceManager.Instance.TryUseResource(costResource.ItemId, costResource.ItemNum);
     }
 
 }

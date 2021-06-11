@@ -83,6 +83,7 @@ public enum BuildTabType
     [Description("Utilitiy")]
     utility = 4,
     hide = 5,
+    bridge = 6,
 }
 
 public enum DriveType
@@ -169,7 +170,7 @@ public enum SoundResource
 public enum IconDescription
 {
     [Description("Build")]
-    Build = 0,
+    Build = 9,
     [Description("Destroy")]
     Destroy = 1,
     [Description("Upgrade")]
@@ -186,4 +187,5 @@ public enum IconDescription
     Population = 7,
     [Description("TechUsing")]
     TechUsing = 8,
+    Custom = 0,
 }

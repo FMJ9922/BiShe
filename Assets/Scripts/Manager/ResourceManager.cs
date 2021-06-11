@@ -163,31 +163,63 @@ public class ResourceManager : Singleton<ResourceManager>
         }
         return storedNum;
     }
-    public bool TryUseResource(CostResource costResource)
+    public void TryUseResource(CostResource costResource)
     {
         float storedNum;
         float num = costResource.ItemNum;
         int Id = costResource.ItemId;
-        if(Id == 99999)
-        {
-            //Debug.Log(costResource.ItemId + " " + costResource.ItemNum);
-        }
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
             if (num <= storedNum)//物品数量足够消耗
             {
                 _storedItemDic[Id] -= num;//消耗物品
-                return true;//返回成功
             }
             else
             {
                 Debug.Log("缺少数量：" + Id + " " + storedNum);
-                return false;//不够就返回失败且不消耗物品
             }
         }
         else
         {
             Debug.Log("不存在物品：" + Id);
+        }
+    }
+    public void TryUseResources(List<CostResource> costResources)
+    {
+        for (int i = 0; i < costResources.Count; i++)
+        {
+            TryUseResource(costResources[i]);
+        }
+    }
+    public bool IsResourcesEnough(List<CostResource> costResources,float times = 1)
+    {
+        bool res = true;
+        for (int i = 0; i < costResources.Count; i++)
+        {
+            res &= IsResourceEnough(costResources[i],times);
+        }
+        return res;
+    }
+    public bool IsResourceEnough(CostResource costResource, float times = 1)
+    {
+        float storedNum;
+        float num = costResource.ItemNum * times;
+        int Id = costResource.ItemId;
+        if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
+        {
+            if (num <= storedNum)//物品数量足够消耗
+            {
+                return true;//返回成功
+            }
+            else
+            {
+                //Debug.Log("缺少数量：" + Id + " " + storedNum);
+                return false;//不够就返回失败且不消耗物品
+            }
+        }
+        else
+        {
+            //Debug.Log("不存在物品：" + Id);
             return false;//不存在该物品就返回失败
         }
     }
