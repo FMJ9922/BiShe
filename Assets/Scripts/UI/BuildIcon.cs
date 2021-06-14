@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler,IPointerExitHandler
+public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
     [SerializeField]
     private Image _image;
@@ -20,7 +20,7 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 
 
 
-    public void Init(BuildData buildData,BuildingCanvas buildingCanvas)
+    public void Init(BuildData buildData, BuildingCanvas buildingCanvas)
     {
         BuildData = buildData;
         _buildingCanvas = buildingCanvas;
@@ -30,9 +30,13 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
             _image.sprite = LoadAB.LoadSprite("icon.ab", buildData.iconName);
         }
         int id = BuildData.Id;
-        if(id != 20005 && id != 20037 && id != 20038)
+        if (id != 20005 && id != 20037 && id != 20038 )
         {
             _image.SetNativeSize();
+        }
+        if (id == 20032||id == 20029)
+        {
+            _image.transform.localScale = Vector3.one * 1.5f;
         }
         _name.text = Localization.ToSettingLanguage(BuildData.Name);
     }
@@ -47,7 +51,7 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         _image.transform.position += Vector3.up * 10;
-        _buildingCanvas.OnEnterHoverIcon(BuildData,transform.position);
+        _buildingCanvas.OnEnterHoverIcon(BuildData, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)

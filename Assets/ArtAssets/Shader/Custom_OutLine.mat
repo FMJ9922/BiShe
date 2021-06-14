@@ -27,7 +27,7 @@ Material:
     - _AlphaRange: 0
     - _OutLineWidth: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.0549557, b: 0, a: 1}
     - _Color1: {r: 0.6, g: 0.6, b: 0.6, a: 1}
     - _RimColor: {r: 0.9771152, g: 1, b: 0.4198113, a: 1}
     - _RimColor1: {r: 1, g: 0.495283, b: 0.8218753, a: 1}

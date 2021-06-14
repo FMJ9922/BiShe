@@ -110,9 +110,14 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         ChangeFormula();
         productTime = formula.ProductTime;
-        if (runtimeBuildData.Population > 0&&runtimeBuildData.tabType!=BuildTabType.house)
+        Invoke("FillUpPopulation", 1f);
+    }
+
+    public void FillUpPopulation()
+    {
+        if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
         {
-            if(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
+            if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
                 runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
                 EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
@@ -121,8 +126,8 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.Pause = true;
             UpdateEffectiveness();
         }
-    }
 
+    }
     public void ChangeFormula()
     {
 
@@ -306,12 +311,8 @@ public class BuildingBase : MonoBehaviour
         buildData.Pause = runtimeBuildData.Pause;
         buildData.CurLevel = runtimeBuildData.CurLevel+1;
         buildData.CurFormula = runtimeBuildData.CurFormula;
-        buildData.CurPeople = runtimeBuildData.CurPeople;
+        buildData.CurPeople = 0;
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
-        if (runtimeBuildData.tabType == BuildTabType.manufacturing || runtimeBuildData.tabType == BuildTabType.produce)
-        {
-            DeleteCurPeople(buildData.CurPeople);
-        }
         BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
         issuccess = success;
         if (success)
@@ -322,10 +323,6 @@ public class BuildingBase : MonoBehaviour
         else
         {
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
-            if (runtimeBuildData.tabType == BuildTabType.manufacturing|| runtimeBuildData.tabType == BuildTabType.produce)
-            {
-                AddCurPeople(buildData.CurPeople);
-            }
         }
     }
 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
@@ -57,7 +58,8 @@ public class MarketItem : MonoBehaviour
         modeDrop.onValueChanged.AddListener(ChangeMode);
         numText.text = needNum.ToString();
         RefreshBuyProfitLabel();
-
+        cancelBtn.onClick.RemoveAllListeners();
+        cancelBtn.onClick.AddListener(OnResetTrading);
         OnResetTrading();
     }
 
@@ -80,6 +82,7 @@ public class MarketItem : MonoBehaviour
             idList.Add(itemArray[i].Id);
         }
         ChangeItem(0);
+        cancelBtn.onClick.AddListener(()=>MainInteractCanvas.Instance.GetMarketCanvas().RemoveBuyItem(gameObject));
         itemDrop.onValueChanged.AddListener(ChangeItem);
         numText.text = needNum.ToString();
 
@@ -144,7 +147,7 @@ public class MarketItem : MonoBehaviour
     public void OnAddNum()
     {
         needNum += 10;
-        if (needNum > maxNum) needNum = maxNum;
+        if (needNum > 200) needNum = 200;
         numText.text = needNum.ToString();
         RefreshBuyProfitLabel();
         OnResetTrading();

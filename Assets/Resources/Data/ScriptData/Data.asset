@@ -140,7 +140,7 @@ MonoBehaviour:
     rice: 100
     money: 1000
     stone: 20
-    orderIds: fa2a0000f92a0000f22e00000b2b0000082b0000
+    orderIds: fa2a0000e32e0000f22e0000ef2e0000082b0000
     orderNums: c8000000c8000000c8000000c8000000c8000000
     specialIntroduce: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
     AimMoney: 20000
@@ -497,8 +497,8 @@ MonoBehaviour:
     Width: 8
     Price: 60
     costResources:
-    - ItemId: 12003
-      ItemNum: 10
+    - ItemId: 12009
+      ItemNum: 5
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L1_01
     tabType: 2
@@ -519,7 +519,7 @@ MonoBehaviour:
     Width: 3
     Price: 60
     costResources:
-    - ItemId: 12003
+    - ItemId: 12009
       ItemNum: 10
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L2_0X
@@ -629,7 +629,7 @@ MonoBehaviour:
     Width: 8
     Price: 80
     costResources:
-    - ItemId: 12015
+    - ItemId: 12009
       ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L2_01
@@ -762,7 +762,7 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 0
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Government_L1_01
     tabType: 5
@@ -781,7 +781,7 @@ MonoBehaviour:
     RearBuildingId: 20022
     Length: 8
     Width: 8
-    Price: 0
+    Price: 100
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -807,7 +807,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 8
     Width: 8
-    Price: 0
+    Price: 200
     costResources:
     - ItemId: 12003
       ItemNum: 100
@@ -1250,7 +1250,7 @@ MonoBehaviour:
     InputItemID: 
     InputNum: 
     OutputItemID: e32e0000
-    ProductNum: 1e000000
+    ProductNum: 14000000
     ProductTime: 2
   - ID: 50010
     Describe: "\u4F4F\u623F\u63D0\u4F9B\u4EBA\u53E3"
@@ -1674,3 +1674,9 @@ MonoBehaviour:
     - code: FarmlandIII
       chinese: "\u5927\u578B\u519C\u7530"
       english: FarmlandIII
+    - code: LoggingCampsLv2
+      chinese: "\u4F10\u6728\u573A\u4E8C\u7EA7"
+      english: LoggingCampsLv2
+    - code: LoggingCampsLv3
+      chinese: "\u4F10\u6728\u573A\u4E09\u7EA7"
+      english: LoggingCampsLv3

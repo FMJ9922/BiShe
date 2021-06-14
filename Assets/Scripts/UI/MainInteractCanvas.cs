@@ -138,5 +138,14 @@ public class MainInteractCanvas : CanvasBase
         CloseCarMissionCanvas();
     }
 
+    public void HideBuildingButton()
+    {
+        buttons[0].gameObject.SetActive(false);
+    }
+
+    public void ShowBuildingButton()
+    {
+        buttons[0].gameObject.SetActive(true);
+    }
     
 }

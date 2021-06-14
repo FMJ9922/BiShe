@@ -244,8 +244,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3c85486da792e5d4eaf5bc5b13ea96d0, type: 2}
-  m_sharedMaterial: {fileID: 6684154323411051464, guid: 3c85486da792e5d4eaf5bc5b13ea96d0,
+  m_fontAsset: {fileID: 11400000, guid: 51ad3db41e1d32f4bb4529bba8dd3bb1, type: 2}
+  m_sharedMaterial: {fileID: 8857616098088600227, guid: 51ad3db41e1d32f4bb4529bba8dd3bb1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -270,13 +270,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3.4
-  m_fontSizeBase: 3.4
+  m_fontSize: 3.1
+  m_fontSizeBase: 3.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 1024
   m_textAlignment: 65535
@@ -360,3 +360,4 @@ MonoBehaviour:
   cube: {fileID: 3484393889101699428}
   textTrans: {fileID: 3484393887384232303}
   label: {fileID: 3484393889175087090}
+  _renderer: {fileID: 3484393889101699434}

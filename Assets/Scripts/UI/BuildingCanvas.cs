@@ -218,10 +218,12 @@ public class BuildingCanvas : CanvasBase
     {
         ShowConfirmButtons(info);
         EventManager.StopListening<BuildManager.RoadInfo>(ConstEvent.OnBuildToBeConfirmed, OnBuildToBeConfirmed);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancel);
     }
 
     public void OnCancel()
     {
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancel);
         BuildManager.Instance.OnCancelBuildRoad();
         _confirmBtns.SetActive(false);
     }
@@ -231,6 +233,7 @@ public class BuildingCanvas : CanvasBase
         BuildManager.Instance.OnConfirmBuildRoad(roadInfo,out bool success);
         if (success)
         {
+            EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancel);
             _confirmBtns.SetActive(false);
         }
         else
@@ -258,7 +261,7 @@ public class BuildingCanvas : CanvasBase
             resource.transform.parent = _iconsParent;
             resource.transform.localScale = Vector3.one * 1f;
         }
-        _InfoCanvas.transform.position = adjustPosition + new Vector3(230,240,0);
+        _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0);
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
         _InfoCanvas.SetActive(true);
     }

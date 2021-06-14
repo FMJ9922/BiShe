@@ -316,20 +316,26 @@ public class MapManager : Singleton<MapManager>
         bool hasNearRoad = CheckNearRoad(parkingPos);
         //检测是否靠近海岸线
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
-        if (hasNearRoad)
+        //检测是否是贴着桥造的
+        bool isInWater = CheckIsInWater(parkingPos);
+        if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
-        }
+        }else
         if (hasOverlap)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
-        }
+        }else
         if (!isInSea)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
         }
+        else if (isInWater)
+        {
+            noticeContent = "不能在水面下建造建筑";
+        }
         //if (!isInSea) Debug.Log("不在海里");
-        return !hasOverlap && hasNearRoad && isInSea;
+        return !hasOverlap && hasNearRoad && isInSea && !isInWater ;
     }
 
     /// <summary>

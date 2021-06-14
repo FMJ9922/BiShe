@@ -62,7 +62,8 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
-            item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position);
+            item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position,
+                Color.yellow);
             string showLabel = building.runtimeBuildData.tabType == BuildTabType.house ?
                 Localization.ToSettingLanguage("Resident") : Localization.ToSettingLanguage("Worker");
             item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CurPeople.ToString() + " " + showLabel);
@@ -78,7 +79,8 @@ public class GraphManager : Singleton<GraphManager>
             BuildingBase building = buildings[i];
             float rand = building.GetHappiness();
             //Debug.Log(rand);
-            item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
+            item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position,
+                Color.red);
             string showLabel = Localization.ToSettingLanguage("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);
         }
@@ -91,7 +93,8 @@ public class GraphManager : Singleton<GraphManager>
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
             int rand = building.runtimeBuildData.CostPerWeek;
-            item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position);
+            item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position,
+                rand > 0 ? Color.red:Color.green);
             string showLabel = "/" + Localization.ToSettingLanguage("Week");
             item.GetComponent<GraphCube>().SetLabel((rand<0?"+":"-")+ Mathf.Abs(rand) + showLabel);
         }
@@ -120,7 +123,8 @@ public class GraphManager : Singleton<GraphManager>
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
             float rand = building.runtimeBuildData.Effectiveness;
-            item.GetComponent<GraphCube>().SetHeight((int)(rand >= 0 ? rand * 20 : 0), buildings[i].transform.position);
+            item.GetComponent<GraphCube>().SetHeight((int)(rand >= 0 ? rand * 20 : 0), buildings[i].transform.position,
+                Color.blue);
             string showLabel = Localization.ToSettingLanguage("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand >= 0 ? rand * 100 : 0) + showLabel);
         }

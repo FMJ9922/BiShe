@@ -17,6 +17,10 @@ public class BuildManager : Singleton<BuildManager>
     private GameObject preRoadPfb;
     [SerializeField]
     private ParticleSystem dustParticle;
+    [SerializeField]
+    private GameObject arrowPfb;
+
+    private Transform arrows;
 
     //修建筑相关
     private BuildingBase currentBuilding;
@@ -69,10 +73,16 @@ public class BuildManager : Singleton<BuildManager>
         currentBuilding.direction = Direction.right;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
+        arrows = new GameObject().transform;
+        arrows.transform.SetParent(building.transform);
+        arrows.localPosition = Vector3.zero;
+        arrows.localRotation = Quaternion.identity;
         for (int i = 0; i < meshRenderers.Length; i++)
         {
             mats[i] = meshRenderers[i].material;
         }
+        GameObject newArrow = Instantiate(arrowPfb, arrows);
+        newArrow.transform.localPosition = (currentBuilding.Size.y+1F) * building.transform.right;
         WhenStartBuild();
     }
     public GameObject InitBuilding(BuildData buildData)
@@ -134,6 +144,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
+        MainInteractCanvas.Instance.HideBuildingButton();
         roadLevel = _roadLevel;
     }
 
@@ -267,7 +278,7 @@ public class BuildManager : Singleton<BuildManager>
 
     private GameObject GetBridgePfb(int level)
     {
-        return LoadAB.Load("building.ab", string.Format("Universal_Building_Bridge_L{0}_01_Preb",level));
+        return LoadAB.Load("building.ab", string.Format("Universal_Building_Bridge_L{0}_01_Preb", level));
     }
 
     /// <summary>
@@ -307,7 +318,7 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 delta = CastTool.CastDirectionToVector(dir);
         //Debug.Log(delta.ToString());
         List<GameObject> bridges = new List<GameObject>();
-        
+
         bool bridgeStart = false;
         for (int i = 0; i < preRoads.Count; i++)
         {
@@ -320,8 +331,8 @@ public class BuildManager : Singleton<BuildManager>
                 //桥开始时应该往岸上延伸一格
                 if (!bridgeStart && i > 1)
                 {
-                    bridgeGrids.Add(grids[(i-1) * 2]);
-                    bridgeGrids.Add(grids[(i-1) * 2 + 1]);
+                    bridgeGrids.Add(grids[(i - 1) * 2]);
+                    bridgeGrids.Add(grids[(i - 1) * 2 + 1]);
                     bridgeStart = true;
                     GameObject bridge1 = Instantiate(GetBridgePfb(roadLevel), transform);
                     bridge1.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i - 1].transform.position + adjust));
@@ -365,9 +376,10 @@ public class BuildManager : Singleton<BuildManager>
             bridges[bridges.Count - 1].transform.parent = bridgeBuilding.transform;
             building.OnConfirmBuild(bridgeGrids.ToArray());
         }
-        
+
         MapManager.Instance.GenerateRoad(grids.ToArray(), roadLevel);
         MapManager.Instance.SetBuildingsGrid();
+        MainInteractCanvas.Instance.ShowBuildingButton();
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
     }
@@ -382,6 +394,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
         EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
+        MainInteractCanvas.Instance.ShowBuildingButton();
         ChangeRoadCount(0);
     }
     /// <summary>
@@ -548,7 +561,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             MineBuilding mine = (MineBuilding)currentBuilding;
             float rich = mine.SetRichness(targetGrids);
-            NoticeManager.Instance.ShowIconNotice("矿脉丰度:"+CastTool.RoundOrFloat(rich*100)+"%");
+            NoticeManager.Instance.ShowIconNotice("矿脉丰度:" + CastTool.RoundOrFloat(rich * 100) + "%");
         }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
@@ -573,7 +586,7 @@ public class BuildManager : Singleton<BuildManager>
             WhenFinishBuild();
             if (currentBuilding.runtimeBuildData.Id != 20005 &&
                 currentBuilding.runtimeBuildData.Id != 20037 &&
-                currentBuilding.runtimeBuildData.Id != 20038 )
+                currentBuilding.runtimeBuildData.Id != 20038)
             {
                 currentBuilding.transform.position += Vector3.up * 5;
                 StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
@@ -642,7 +655,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             return false;
         }
-        if (!ResourceManager.Instance.IsResourceEnough(new CostResource(99999, runtimeBuildData.Price),TechManager.Instance.BuildPriceBuff()))
+        if (!ResourceManager.Instance.IsResourceEnough(new CostResource(99999, runtimeBuildData.Price), TechManager.Instance.BuildPriceBuff()))
         {
             return false;
         }
@@ -680,6 +693,10 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+        if (arrows != null)
+        {
+            Destroy(arrows.gameObject);
+        }
         for (int i = 0; i < mats.Length; i++)
         {
             mats[i].color = Color.white;

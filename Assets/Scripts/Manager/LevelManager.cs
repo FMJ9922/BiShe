@@ -91,7 +91,7 @@ public class LevelManager : Singleton<LevelManager>
     private float Timer = 0;
     private float WeekProgress = 0;
     private string yearstr, monthstr, weekstr, daystr;
-    private string LogDate()
+    public string LogDate()
     {
         string date = string.Format("{0}/{1}/{2}", Year+1999, Month, Day+(Week-1)*7);
         //Debug.Log(date);

@@ -22,6 +22,8 @@ public class CameraMovement : Singleton<CameraMovement>
     private bool canMove = true;
     private bool canScroll = true;
 
+    private Vector3 lastMousePos;
+
     protected override void InstanceAwake()
     {
         _cameraTrans = transform.GetChild(0);
@@ -69,6 +71,15 @@ public class CameraMovement : Singleton<CameraMovement>
         }
         transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
 
+        if (Input.GetMouseButton(2))
+        {
+            //Debug.Log(Input.mousePosition);
+            Vector3 delta = Input.mousePosition - lastMousePos;
+            float rate = (_scrollValue - MinScrollValue) / (MaxScrollValue - MinScrollValue);
+            //Debug.Log((1 - rate) * (1 - rate) + 0.1f);
+            AdjustPosition(new Vector3(delta.x - delta.y,0, delta.x + delta.y)*((1-rate)* (1-rate)+0.05f));
+        }
+        lastMousePos = Input.mousePosition;
         if (!canScroll)
         {
             return;
@@ -113,6 +124,10 @@ public class CameraMovement : Singleton<CameraMovement>
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {
         return new Vector3(rightSpeed - forwardSpeed, 0, rightSpeed + forwardSpeed);
+    }
+    public void AdjustPosition(Vector3 delta)
+    {
+        transform.position += delta;
     }
     private Vector3 PlantVector3(Vector3 vector3)
     {

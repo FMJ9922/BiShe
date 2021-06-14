@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1685996738
+CRC: 2840123542
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 78108e3e5bf4bedc2f9e66ffaf4cf916
+    Hash: 464b5565f822ed1b502bb62e10ad827b
   TypeTreeHash:
     serializedVersion: 2
     Hash: bd7f1ea14498176061c89f8562337b85
@@ -82,7 +82,6 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Bridge_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
-- Assets/TextMesh Pro/Resources/Fonts & Materials/HappyZcool SDF.asset
 - Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
 - Assets/Scenes Assets/Material/Universal_Transportation_Trunk_01_Mat.mat
 - Assets/ArtAssets/Shader/Custom_TransparentGpuInstance.mat

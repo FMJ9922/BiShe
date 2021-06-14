@@ -32,6 +32,16 @@ public class MarketBuilding : BuildingBase
         }
     }
 
+    public override void UpdateRate(string date)
+    {
+        //CheckCurPeopleMoreThanMax();
+        UpdateEffectiveness();
+        runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+        if(runtimeBuildData.CurPeople < runtimeBuildData.Population)
+        {
+            FillUpPopulation();
+        }
+    }
     private void BuildRecievedCarMission(CarMission carMission)
     {
         BuildingBase temp = carMission.StartBuilding;

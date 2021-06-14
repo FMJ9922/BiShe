@@ -28,6 +28,7 @@ public class MineBuilding : BuildingBase
         float targetHeight = targetPos.y;
         TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         InitBuildingFunction();
+        richness = SetRichness(takenGrids);
     }
 
     protected override void Output()

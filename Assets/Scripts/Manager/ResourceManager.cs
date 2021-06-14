@@ -62,6 +62,11 @@ public class ResourceManager : Singleton<ResourceManager>
             _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
         }
     }
+
+    public void AddMoney(float num)
+    {
+        AddResource(99999, num);
+    }
     public void AddResources(CostResource[] costResources)
     {
         for (int i = 0; i < costResources.Length; i++)

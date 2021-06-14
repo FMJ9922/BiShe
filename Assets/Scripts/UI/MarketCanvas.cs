@@ -12,8 +12,10 @@ public class MarketCanvas : CanvasBase
     [SerializeField] GameObject buyContent,sellContent;
     [SerializeField] GameObject marketItemPfb;
     [SerializeField] Button buyBtn, sellBtn;
-    [SerializeField] TMP_Text buyText, sellText;
+    [SerializeField] TMP_Text buyText, sellText,profitText;
     [SerializeField] GameObject buyItems, sellItems;
+    [SerializeField] TMP_Text profitInfoPfb;
+    [SerializeField] GameObject profitContent,profitItems;
     enum MarketOption
     {
         buy = 0,
@@ -47,19 +49,40 @@ public class MarketCanvas : CanvasBase
         //Debug.Log("buy");
         buyText.color = Color.white;
         sellText.color = Color.gray;
+        profitText.color = Color.gray;
         buyItems.SetActive(true);
         sellItems.SetActive(false);
+        profitItems.SetActive(false);
     }
 
     public void OnClickSellBtn()
     {
         //Debug.Log("sell");
         buyText.color = Color.gray;
+        profitText.color = Color.gray;
         sellText.color = Color.white;
         buyItems.SetActive(false);
-        sellItems.SetActive(true); 
+        sellItems.SetActive(true);
+        profitItems.SetActive(false);
+
     }
 
+    public void AddProfitInfo(string content)
+    {
+        GameObject newInfo = Instantiate(profitInfoPfb.gameObject, profitContent.transform);
+        newInfo.SetActive(true);
+        newInfo.transform.SetAsFirstSibling();
+        newInfo.GetComponent<TMP_Text>().text = content;
+    }
+    public void OnClickProfitInfoBtn()
+    {
+        buyText.color = Color.gray;
+        profitText.color = Color.white; 
+        sellText.color = Color.gray;
+        buyItems.SetActive(false);
+        sellItems.SetActive(false);
+        profitItems.SetActive(true);
+    }
     private void InitMarketItems()
     {
         int[] ids = DataManager.GetLevelData(LevelManager.LevelID).orderIds;
@@ -72,6 +95,7 @@ public class MarketCanvas : CanvasBase
             obj.SetActive(true);
             obj.transform.SetParent(sellContent.transform);
             MarketItem marketItem = obj.GetComponent<MarketItem>();
+            marketItem.needNum = 0;
             marketItem.maxNum = (int)(nums[i]*TechManager.Instance.SellNumBuff());
             marketItem.InitItem(ids[i]);
             orderItems.Add(marketItem);
