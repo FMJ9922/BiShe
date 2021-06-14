@@ -13,7 +13,7 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
     public static string noticeContent;
-
+    private MapData mapData;
 
     public void InitMapMnager(int levelId)
     {
@@ -44,7 +44,7 @@ public class MapManager : Singleton<MapManager>
                 _gridDic.Add(new Vector2Int(i, j), new SingleGrid(i, j, GridType.empty));
             }
         }
-        MapData mapData = TerrainGenerator.Instance.GetMapData();
+        mapData = TerrainGenerator.Instance.GetMapData();
         for (int i = 0; i < mapData.roadGrids.Count; i++)
         {
             SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
@@ -52,6 +52,11 @@ public class MapManager : Singleton<MapManager>
         }
         Debug.Log("初始化中");
         Invoke("InitRoad",0.017f);
+    }
+
+    public static float GetMineRichness(Vector2Int vector2Int)
+    {
+        return Instance.mapData.mine[vector2Int.x][vector2Int.y];
     }
 
     public void InitRoad()

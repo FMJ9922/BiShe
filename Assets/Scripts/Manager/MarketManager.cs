@@ -68,13 +68,31 @@ public class MarketManager : Singleton<MarketManager>
                 switch (orderItems[i].curMode)
                 {
                     case MarketItem.TradeMode.once:
-                        SellItem(costResource);
-                        BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
-                        orderItems[i].OnResetTrading();
+                        if (IsItemEnough(costResource))
+                        {
+                            SellItem(costResource);
+                            BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
+                            orderItems[i].OnResetTrading();
+                        }
                         break;
                     case MarketItem.TradeMode.everyWeek:
-                        SellItem(costResource);
-                        BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
+                        if (IsItemEnough(costResource))
+                        {
+                            SellItem(costResource);
+                            BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
+                        }
+                        else
+                        {
+                            orderItems[i].OnResetTrading();
+                        }
+                        break;
+                    case MarketItem.TradeMode.maintain:
+                        float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
+                        if (num > 0)
+                        {
+                            SellItem(new CostResource(costResource.ItemId, num));
+                            BuyItem(new CostResource(99999, orderItems[i].GetProfit()));
+                        }
                         break;
                 }
                 orderItems[i].RefreshBuyProfitLabel();
@@ -98,6 +116,11 @@ public class MarketManager : Singleton<MarketManager>
     {
         Debug.Log("sell" + costResource.ItemNum);
         ResourceManager.Instance.TryUseResource(costResource.ItemId, costResource.ItemNum);
+    }
+
+    public bool IsItemEnough(CostResource costResource)
+    {
+        return ResourceManager.Instance.IsResourceEnough(costResource);
     }
 
 }

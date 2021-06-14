@@ -14,11 +14,15 @@ public class HutBuilding : BuildingBase
     public override void InitBuildingFunction()
     {
         storage = transform.GetComponent<Storage>();
-        storage.AddResource(11001, 2);
+        storage.AddResource(11001, 5);
         ProvidePopulation();
         base.InitBuildingFunction();
     }
-
+    public override float GetHappiness()
+    {
+        //Debug.Log("hap" + runtimeBuildData.Happiness);
+        return this.runtimeBuildData.Happiness;
+    }
     protected override void Output()
     {
         /*if (hasFoodThisWeek && !hasProvidePopulation)
@@ -35,22 +39,24 @@ public class HutBuilding : BuildingBase
     {
         ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
         //食物少于指定数量就去取货
-        if (storage.GetAllFoodNum() < 10)
+        if (storage.GetAllFoodNum() < 3)
         {
             CarMission mission = MakeCarMission();
             TrafficManager.Instance.UseCar(mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
         }
 
-        //遍历所有可吃的食物，数量够吃就返回
-        for (int i = 0; i < formula.InputItemID.Count; i++)
+        ItemData[] foodIDs = DataManager.GetFoodItemList();
+        for (int i = 0; i < foodIDs.Length; i++)
         {
-            //ToDo:消耗食物数量会变化？
-            if(storage.TryUseResource(formula.InputItemID[i], formula.InputNum[0]))
+            if (storage.TryUseResource(new CostResource(foodIDs[i].Id, 0.1f*runtimeBuildData.CurPeople)))
             {
                 hasFoodThisWeek = true;
+                this.runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel+foodIDs[i].Happiness) / 100f;
+                //Debug.Log(runtimeBuildData.Happiness);
                 return;
             }
         }
+        this.runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100f;
         hasFoodThisWeek = false;
     }
 
@@ -59,7 +65,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     /// <param name="ratio">运送多少个周期的货</param>
     /// <returns></returns>
-    private CarMission MakeCarMission(float ratio = 10)
+    private CarMission MakeCarMission(float ratio = 5)
     {
         CarMission mission = new CarMission();
         mission.StartBuilding = this;
@@ -69,11 +75,7 @@ public class HutBuilding : BuildingBase
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;
         mission.requestResources = new List<CostResource>();
-        for (int i = 0; i < formula.InputItemID.Count; i++)
-        {
-            mission.requestResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[0]*ratio));
-            
-        }
+       mission.requestResources.Add(ResourceManager.Instance.GetFoodByHappiness(ratio));
         return mission;
     }
     /// <summary>
@@ -98,6 +100,8 @@ public class HutBuilding : BuildingBase
         runtimeBuildData.CurPeople = num;
         EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, runtimeBuildData);
     }
+
+    
 
     public override void OnRecieveCar(CarMission carMission)
     {

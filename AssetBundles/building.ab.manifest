@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 630066252
+CRC: 3348543039
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8fb895baf5db6d8e219710e0f1ac9f00
+    Hash: b57936a04700b2ea060e51762e52a2be
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 6dd54452c04ad7fde36501a624d10482
+    Hash: ea9d331110f4d751d47066865454214b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -123,6 +123,7 @@ Assets:
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_02.prefab
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_01_Preb.prefab
 - Assets/Prefabs/MarketItemPfb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_02.prefab
 - Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_03_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L2_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_01_Mod.fbx
@@ -151,6 +152,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L1_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L3_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_04_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L2_01_Preb.prefab
 - Assets/Scenes Assets/Animation/RiceGrow.anim
 - Assets/Scenes Assets/Finish/Universal_Building_Mine_L3.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L3_01_Mod.fbx
@@ -198,6 +200,7 @@ Assets:
 - Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
 - Assets/Scenes Assets/Finish/WheatPfb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L3_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_01_Mod.fbx
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_01_Preb.prefab
@@ -213,6 +216,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Animation/Universal_Building_Sawmill_L1_01_Ani_Preb.prefab
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_03_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L1_01_Preb.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_02_Mod.fbx
 - Assets/Scenes Assets/Finish/Universal_Building_Factory_L3_01.prefab
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_01.prefab
@@ -243,6 +247,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Universal_Building_Government_L2_01_Mod.fbx
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_01.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_03.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L3_03.prefab
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_03_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L3_01_Preb.prefab

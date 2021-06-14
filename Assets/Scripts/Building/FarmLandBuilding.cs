@@ -14,13 +14,13 @@ public class FarmLandBuilding : BuildingBase
     private GameObject[] grids;
     public override void InitBuildingFunction()
     {
-        InitWheatGrids();
+        Invoke("InitWheatGrids",0.5f);
         previewObj.SetActive(false);
         base.InitBuildingFunction();
     }
      private void InitWheatGrids()
     {
-        StartCoroutine("Plant");
+        StartCoroutine(Plant());
         //wheatTrans.localPosition = Vector3.zero;
     }
 
@@ -89,6 +89,16 @@ public class FarmLandBuilding : BuildingBase
             }
         }
     }
+    public override void UpdateRate(string date)
+    {
+        //CheckCurPeopleMoreThanMax();
+        UpdateEffectiveness();
+        if (!isharvesting)
+        {
+            runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+        }
+        //Debug.Log(runtimeBuildData.Rate);
+    }
     public void OnFinishHarvest(float rate)
     {
         isharvesting = false;
@@ -116,7 +126,7 @@ public class FarmLandBuilding : BuildingBase
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i]));
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i] * runtimeBuildData.Times));
 
         }
         return mission;

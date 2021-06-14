@@ -737,7 +737,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         MapData mapData = new MapData();
         mapData.roadGrids = new List<Vector2IntSerializer>();
         mapData.buildingGrids = new List<Vector2IntSerializer>();
-        SaveMapData(mapData);
+        //SaveMapData(mapData);
     }
     [ContextMenu("保存地图配置文件")]
     public void SaveRoadToMapData()
@@ -758,9 +758,21 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <returns></returns>
     public MapData SetRoadToMapData(Mesh mesh, Vector2 mapSize,int length = 8)
     {
+        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
         Vector2[] vec = mesh.uv;
         MapData mapData = GetMapData();
 
+        float[][] mine = new float[(int)mapSize.x][];
+        for (int i = 0; i < mine.Length; i++)
+        {
+            mine[i] = new float[(int)mapSize.y];
+            for (int j = 0; j < mine[i].Length; j++)
+            {
+                mine[i][j] = 0;
+            }
+        }
+        mapData.mine = mine;
         for (int i = 0; i < vec.Length; i += 4)
         {
             int x = Mathf.FloorToInt(vec[i].x * length);
@@ -777,6 +789,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 //Debug.DrawLine(new Vector3(gridX*2,11,gridZ*2), new Vector3(gridX * 2+1, 11, gridZ * 2+1),Color.red,100f);
                 mapData.roadGrids.Add(new Vector2IntSerializer(gridX,gridZ));
             }
+            else if (tex == 20)
+            {
+                mine[gridX][gridZ] = 1;
+            }
             else
             {
                 for (int k = 0; k < mapData.roadGrids.Count; k++)
@@ -788,6 +804,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 }
             }
         }
+        sw.Stop();
+        System.TimeSpan dt = sw.Elapsed;
+        Debug.Log("程序耗时:"+ dt+ "秒");
         return mapData;
     }
     private void SaveMapData(MapData mapData)
@@ -826,7 +845,7 @@ public class MapData
 {
     public List<Vector2IntSerializer> roadGrids;//已有道路的格子
     public List<Vector2IntSerializer> buildingGrids;//已有建筑的格子
-
+    public float[][] mine;//矿物丰度
 }
 
 [System.Serializable]

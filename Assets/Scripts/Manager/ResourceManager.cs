@@ -101,9 +101,10 @@ public class ResourceManager : Singleton<ResourceManager>
     /// <param name="Id">物品名称</param>
     /// <param name="num">物品数量</param>
     /// <returns>是否成功</returns>
-    public bool TryUseResource(int Id, float num)
+    public bool TryUseResource(int Id, float num, float times = 1)
     {
         float storedNum;
+        num *= times;
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
             if (num <= storedNum)//物品数量足够消耗
@@ -163,10 +164,10 @@ public class ResourceManager : Singleton<ResourceManager>
         }
         return storedNum;
     }
-    public void TryUseResource(CostResource costResource)
+    public void TryUseResource(CostResource costResource, float times = 1)
     {
         float storedNum;
-        float num = costResource.ItemNum;
+        float num = costResource.ItemNum*times;
         int Id = costResource.ItemId;
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
@@ -184,11 +185,11 @@ public class ResourceManager : Singleton<ResourceManager>
             Debug.Log("不存在物品：" + Id);
         }
     }
-    public void TryUseResources(List<CostResource> costResources)
+    public void TryUseResources(List<CostResource> costResources, float times = 1)
     {
         for (int i = 0; i < costResources.Count; i++)
         {
-            TryUseResource(costResources[i]);
+            TryUseResource(costResources[i],1);
         }
     }
     public bool IsResourcesEnough(List<CostResource> costResources,float times = 1)
@@ -234,6 +235,18 @@ public class ResourceManager : Singleton<ResourceManager>
         return sum;
     }
 
+    public CostResource GetFoodByHappiness(float requestNum)
+    {
+        ItemData[] foods = DataManager.GetFoodItemList();
+        for (int i = 0; i < foods.Length; i++)
+        {
+            if(IsResourceEnough(new CostResource(foods[i].Id, requestNum)))
+            {
+                return new CostResource(foods[i].Id, requestNum);
+            }
+        }
+        return null;
+    }
     public float GetAllLastFoodNum()
     {
         int[] foodIds = DataManager.GetFoodIDList();

@@ -18,23 +18,23 @@ public class InfoCanvas : CanvasBase
     [SerializeField] TMP_Text _nameLabel, _introduceLabel, _rateLabel, _populationLabel, _workerLabel;
     [SerializeField] TMP_Text _openText;//功能
     [SerializeField] TMP_Text _outputLabel;//功能
+    [SerializeField] TMP_Text _daysLabel;//生产周期
     [SerializeField] Button[] _switchFormulaBtns;//切换产品按钮
     [SerializeField] private GameObject mainCanvas;
     [SerializeField] private Transform inIcons;
     [SerializeField] private Transform outIcons;
     [SerializeField] private GameObject BuildingHighlight;
     [SerializeField] private Image rateImage;
+    [SerializeField] private Transform upgradeCost;
     UnityAction populationChange;
     UnityAction<string> effectivenessChange;
     private RuntimeBuildData _buildData;
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
-        EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
     public override void OnOpen()
     {
-
     }
     public void OnOpen(BuildingBase buildbase)
     {
@@ -144,26 +144,55 @@ public class InfoCanvas : CanvasBase
     private void AddBtnsListener(BuildingBase buildingBase)
     {
         RemoveBtnsListener();
-        _populationBtns[0].onClick.AddListener(() => 
-        { 
-            buildingBase.DeleteCurPeople(10); 
+        _populationBtns[0].onClick.AddListener(() =>
+        {
+            buildingBase.DeleteCurPeople(10);
         });
         _populationBtns[1].onClick.AddListener(() =>
         {
             buildingBase.DeleteCurPeople(1);
         });
-        _populationBtns[2].onClick.AddListener(() => 
-        { 
-            buildingBase.AddCurPeople(1); 
-        });
-        _populationBtns[3].onClick.AddListener(() => 
+        _populationBtns[2].onClick.AddListener(() =>
         {
-            buildingBase.AddCurPeople(10); 
+            buildingBase.AddCurPeople(1);
         });
-        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(); OnClose(); });
-        _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(); OnClose(); });
+        _populationBtns[3].onClick.AddListener(() =>
+        {
+            buildingBase.AddCurPeople(10);
+        });
+        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true); OnClose(); });
+        _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(out bool success); if(success)OnClose(); });
     }
 
+    public void ShowUpgradeInfo()
+    {
+        upgradeCost.gameObject.SetActive(true);
+        CleanUpAllAttachedChildren(upgradeCost);
+        List<CostResource> costResources = new List<CostResource>();
+        BuildData next = DataManager.GetBuildData(_buildData.RearBuildingId);
+        costResources.Add(new CostResource(99999, (next.Price - _buildData.Price) * TechManager.Instance.BuildPriceBuff()));
+        for (int i = 0; i < next.costResources.Count; i++)
+        {
+            CostResource res = next.costResources[i];
+            for (int j = 0; j < _buildData.costResources.Count; j++)
+            {
+                if (next.costResources[i].ItemId == _buildData.costResources[j].ItemId)
+                {
+                    res = (next.costResources[i] - _buildData.costResources[j]) * TechManager.Instance.BuildResourcesBuff();
+                }
+            }
+            costResources.Add(res);
+        }
+        for (int i = 0; i < costResources.Count; i++)
+        {
+            GameObject icon = CommonIcon.GetIcon(costResources[i]);
+            icon.transform.SetParent(upgradeCost);
+        }
+    }
+    public void CloseUpgradeInfo()
+    {
+        upgradeCost.gameObject.SetActive(false);
+    }
     private void RemoveBtnsListener()
     {
         _populationBtns[0].onClick.RemoveAllListeners();
@@ -178,16 +207,15 @@ public class InfoCanvas : CanvasBase
     public override void OnClose()
     {
         RemoveBtnsListener();
-        EventManager.StopListening(ConstEvent.OnPopulaitionChange, populationChange);
-        EventManager.StopListening(ConstEvent.OnDayWentBy, effectivenessChange);
         mainCanvas.SetActive(false);
+        CloseUpgradeInfo();
         BuildingHighlight.SetActive(false);
         NoticeManager.Instance.CloseNotice();
     }
     private void OnDestroy()
     {
+        EventManager.StopListening(ConstEvent.OnDayWentBy, effectivenessChange);
         EventManager.StopListening(ConstEvent.OnPopulaitionChange, populationChange);
-        EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
 
     public void OnDropDownValueChanged(int n)
@@ -199,6 +227,7 @@ public class InfoCanvas : CanvasBase
         CleanUpAllAttachedChildren(outIcons);
         ChangeOutputIcon(_buildData);
         ChangeInputIcon(_buildData);
+        _daysLabel.text = "生产周期:" + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + "天";
     }
     /// <summary>
     /// 修改显示的条目
@@ -206,7 +235,6 @@ public class InfoCanvas : CanvasBase
     /// <param name="buildData"></param>
     private void ChangeShowItems(RuntimeBuildData buildData)
     {
-
         CleanUpAllAttachedChildren(inIcons);
         CleanUpAllAttachedChildren(outIcons);
         switch (buildData.tabType)
@@ -219,6 +247,7 @@ public class InfoCanvas : CanvasBase
                         _inputsObj.SetActive(true);
                         ChangeInputIcon(buildData);
                     }
+                    _daysLabel.text = "生产周期:" + buildData.formulaDatas[buildData.CurFormula].ProductTime * 7 + "天";
                     _openCanvas.SetActive(false);
                     _outputsObj.SetActive(true);
                     ChangeOutputIcon(buildData);
@@ -291,7 +320,7 @@ public class InfoCanvas : CanvasBase
         for (int i = 0; i < list.Count; i++)
         {
             GameObject resource = CommonIcon.GetIcon(data.formulaDatas[data.CurFormula].OutputItemID[i],
-                                                     data.formulaDatas[data.CurFormula].ProductNum[i]);
+                                                     data.formulaDatas[data.CurFormula].ProductNum[i] * data.Times);
             resource.transform.parent = outIcons;
             resource.transform.localScale = Vector3.one * 1.5f;
             if (list[i] == 11000)
@@ -307,11 +336,12 @@ public class InfoCanvas : CanvasBase
         if (list.Count <= 0) return;
         for (int i = 0; i < list.Count; i++)
         {
-            GameObject resource = CommonIcon.GetIcon(data.formulaDatas[data.CurFormula].InputItemID[i],
-                                                     data.formulaDatas[data.CurFormula].InputNum[i]);
+            FormulaData cur = data.formulaDatas[data.CurFormula];
+            GameObject resource = CommonIcon.GetIcon(cur.InputItemID[i],cur.InputNum[i] * data.Times*cur.ProductTime);
             resource.transform.parent = inIcons;
             resource.transform.localScale = Vector3.one * 1.5f;
         }
+        _daysLabel.text = "生产周期:" + data.formulaDatas[data.CurFormula].ProductTime * 7 + "天";
     }
     /// <summary>
     /// 修改显示的文本
@@ -323,7 +353,7 @@ public class InfoCanvas : CanvasBase
         _populationLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
         _workerLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
-        _rateLabel.text = "效率:" + buildData.Effectiveness * 100 + "%";
+
     }
 
     private void ChangeRateLabel(BuildingBase buildData)
@@ -332,7 +362,7 @@ public class InfoCanvas : CanvasBase
         RuntimeBuildData data = buildData.runtimeBuildData;
         _rateLabel.text = "效率:" + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
         rateImage.fillAmount = buildData.GetProcess();
-        
+
         _outputLabel.text = "产出率:" + CastTool.RoundOrFloat(data.Rate * 100) + "%";
     }
 

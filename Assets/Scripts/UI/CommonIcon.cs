@@ -33,6 +33,11 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         return newIcon;
     }
 
+    public static GameObject GetIcon(CostResource costResource)
+    {
+        return GetIcon(costResource.ItemId, costResource.ItemNum);
+    }
+
     public void SetIcon(int itemID, float itemNum)
     {
         if (itemNum != 0)

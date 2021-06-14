@@ -5,6 +5,7 @@ using UnityEngine;
 public class NoticeManager : Singleton<NoticeManager>
 {
     [SerializeField] NoticeCanvas canvas;
+    private bool lockShow = false;
 
     private void ToggleVisable(bool vis)
     {
@@ -29,22 +30,27 @@ public class NoticeManager : Singleton<NoticeManager>
 
     public void ShowIconNotice(string content)
     {
-        TraceMouse(InputManager.Instance.LastGroundRayPos);
-        canvas.SetText(content);
-        ToggleVisable(true);
+        if (!lockShow)
+        {
+            TraceMouse(InputManager.Instance.LastGroundRayPos);
+            canvas.SetText(content);
+            ToggleVisable(true);
+        }
     }
 
     public void CloseNotice()
     {
+        lockShow = false;
         ToggleVisable(false);
     }
 
 
     public void InvokeShowNotice(string content,float time = 3f)
     {
-        //Debug.Log("invoke");
         ShowIconNotice(content);
+        lockShow = true;
         StartCoroutine(Close(time));
+        
     }
 
     IEnumerator Close(float time)

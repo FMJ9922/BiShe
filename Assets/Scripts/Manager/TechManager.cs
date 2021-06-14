@@ -188,7 +188,10 @@ public class TechManager : Singleton<TechManager>
                 Float(GetTech(40007)) * -0.15f +
                 Float(GetTech(40010)) * -0.2f;
     }
-
+    /// <summary>
+    /// 建造价格
+    /// </summary>
+    /// <returns></returns>
     public float BuildPriceBuff()
     {
         return 1 + Float(GetTech(40001)) * -0.1f +

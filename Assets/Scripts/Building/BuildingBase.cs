@@ -110,7 +110,7 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         ChangeFormula();
         productTime = formula.ProductTime;
-        if (runtimeBuildData.Population > 0)
+        if (runtimeBuildData.Population > 0&&runtimeBuildData.tabType!=BuildTabType.house)
         {
             if(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
@@ -168,6 +168,7 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.formulaDatas[i] = DataManager.GetFormulaById(buildData.Formulas[i]);
         }
         runtimeBuildData.CurFormula = 0;
+        runtimeBuildData.Times = buildData.Times;
         return runtimeBuildData;
     }
 
@@ -180,9 +181,12 @@ public class BuildingBase : MonoBehaviour
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
     }
 
-    public virtual void DestroyBuilding(bool repaint = true)
+    public virtual void DestroyBuilding(bool returnResources ,bool repaint = true)
     {
-        ReturnBuildResources();
+        if (returnResources)
+        {
+            ReturnBuildResources();
+        }
         MapManager.Instance._buildings.Remove(this);
         if (repaint)
         {
@@ -278,7 +282,7 @@ public class BuildingBase : MonoBehaviour
     }
     public virtual void DeleteCurPeople(int num)
     {
-        //Debug.Log("Delete");
+        Debug.Log("Delete");
         int cur = runtimeBuildData.CurPeople;
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         if (cur - num >= 0)
@@ -293,7 +297,7 @@ public class BuildingBase : MonoBehaviour
         EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
 
-    public virtual void Upgrade()
+    public virtual void Upgrade(out bool issuccess)
     {
         //todo：检查是否有足够的资源升级
         int nextId = runtimeBuildData.RearBuildingId;
@@ -304,10 +308,24 @@ public class BuildingBase : MonoBehaviour
         buildData.CurFormula = runtimeBuildData.CurFormula;
         buildData.CurPeople = runtimeBuildData.CurPeople;
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
+        if (runtimeBuildData.tabType == BuildTabType.manufacturing || runtimeBuildData.tabType == BuildTabType.produce)
+        {
+            DeleteCurPeople(buildData.CurPeople);
+        }
         BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
+        issuccess = success;
         if (success)
         {
-            DestroyBuilding(false);
+            SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
+            DestroyBuilding(false,false);
+        }
+        else
+        {
+            NoticeManager.Instance.InvokeShowNotice("升级资源不足");
+            if (runtimeBuildData.tabType == BuildTabType.manufacturing|| runtimeBuildData.tabType == BuildTabType.produce)
+            {
+                AddCurPeople(buildData.CurPeople);
+            }
         }
     }
 
@@ -337,6 +355,10 @@ public class BuildingBase : MonoBehaviour
         }
     }
 
+    public virtual float GetHappiness()
+    {
+        return runtimeBuildData.Happiness;
+    }
     private CarMission MakeCarMission(float rate)
     {
         //Debug.Log(rate);
@@ -350,7 +372,7 @@ public class BuildingBase : MonoBehaviour
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]*rate));
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i]*rate*runtimeBuildData.Times));
         }
         return mission;
     }

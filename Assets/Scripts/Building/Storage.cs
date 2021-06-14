@@ -102,6 +102,7 @@ public class Storage:MonoBehaviour
             if (num <= storedNum)//物品数量足够消耗
             {
                 _storedItemDic[Id] -= num;//消耗物品
+                //Debug.Log("消耗了" + Id + num + "个");
                 return true;//返回成功
             }
             else
@@ -112,7 +113,7 @@ public class Storage:MonoBehaviour
         }
         else
         {
-            Debug.Log("不存在物品：" + Id);
+            //Debug.Log("不存在物品：" + Id);
             return false;//不存在该物品就返回失败
         }
     }

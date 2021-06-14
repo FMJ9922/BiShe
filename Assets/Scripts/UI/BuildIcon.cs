@@ -29,7 +29,11 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         {
             _image.sprite = LoadAB.LoadSprite("icon.ab", buildData.iconName);
         }
-        _image.SetNativeSize();
+        int id = BuildData.Id;
+        if(id != 20005 && id != 20037 && id != 20038)
+        {
+            _image.SetNativeSize();
+        }
         _name.text = Localization.ToSettingLanguage(BuildData.Name);
     }
 

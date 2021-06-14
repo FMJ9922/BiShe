@@ -17,112 +17,112 @@ MonoBehaviour:
     Name: Food
     ItemType: 1
     Price: 0
-    BuildingID: 0
+    Happiness: 0
   - Id: 11001
     Name: Wheat
     ItemType: 1
-    Price: 2
-    BuildingID: 0
+    Price: 3
+    Happiness: 1
   - Id: 11002
     Name: Rice
     ItemType: 1
-    Price: 2
-    BuildingID: 0
+    Price: 5
+    Happiness: 3
   - Id: 12003
     Name: Log
     ItemType: 2
-    Price: 4
-    BuildingID: 0
+    Price: 2
+    Happiness: 0
   - Id: 12004
     Name: Furniture
     ItemType: 2
-    Price: 10
-    BuildingID: 0
+    Price: 12
+    Happiness: 0
   - Id: 11005
     Name: RawMeat
     ItemType: 1
-    Price: 3
-    BuildingID: 0
+    Price: 10
+    Happiness: 5
   - Id: 12006
     Name: Flour
     ItemType: 2
-    Price: 4
-    BuildingID: 0
+    Price: 8
+    Happiness: 0
   - Id: 11008
     Name: ProcessedMeat
     ItemType: 1
-    Price: 4
-    BuildingID: 0
+    Price: 13
+    Happiness: 6
   - Id: 12009
     Name: Stone
     ItemType: 2
     Price: 3
-    BuildingID: 0
+    Happiness: 0
   - Id: 10000
     Name: HumanResource
     ItemType: 0
     Price: 1000
-    BuildingID: 0
+    Happiness: 0
   - Id: 99999
     Name: Money
     ItemType: 2
     Price: 1
-    BuildingID: 0
+    Happiness: 0
   - Id: 11010
     Name: Sausage
     ItemType: 1
-    Price: 5
-    BuildingID: 0
+    Price: 15
+    Happiness: 8
   - Id: 11011
     Name: Fish
     ItemType: 1
-    Price: 6
-    BuildingID: 0
+    Price: 8
+    Happiness: 4
   - Id: 12012
     Name: Iron
     ItemType: 2
-    Price: 8
-    BuildingID: 0
+    Price: 6
+    Happiness: 0
   - Id: 12013
     Name: Fur
     ItemType: 2
-    Price: 6
-    BuildingID: 0
+    Price: 9
+    Happiness: 0
   - Id: 11014
-    Name: Vegitable
+    Name: Vegetable
     ItemType: 1
     Price: 3
-    BuildingID: 0
+    Happiness: 2
   - Id: 12015
     Name: StoneMaterial
     ItemType: 2
-    Price: 10
-    BuildingID: 0
+    Price: 5
+    Happiness: 0
   - Id: 11016
     Name: MeatTin
     ItemType: 1
-    Price: 12
-    BuildingID: 0
+    Price: 30
+    Happiness: 10
   - Id: 11017
     Name: FishTin
     ItemType: 1
-    Price: 12
-    BuildingID: 0
+    Price: 26
+    Happiness: 9
   - Id: 12018
     Name: Clothes
     ItemType: 2
     Price: 15
-    BuildingID: 0
+    Happiness: 0
   - Id: 11019
     Name: Mantou
     ItemType: 1
-    Price: 6
-    BuildingID: 0
+    Price: 12
+    Happiness: 7
   - Id: 12020
     Name: IronMaterial
     ItemType: 2
-    Price: 20
-    BuildingID: 0
+    Price: 9
+    Happiness: 0
   LevelArray:
   - Id: 30001
     Name: "\u5E73\u539F"
@@ -136,12 +136,12 @@ MonoBehaviour:
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 1000
-    rice: 1000
-    money: 10000
-    stone: 1000
-    orderIds: fa2a0000e62e0000
-    orderNums: c800000064000000
+    log: 100
+    rice: 100
+    money: 1000
+    stone: 20
+    orderIds: fa2a0000f92a0000f22e00000b2b0000082b0000
+    orderNums: c8000000c8000000c8000000c8000000c8000000
     specialIntroduce: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
     AimMoney: 20000
     AimHappiness: 80
@@ -158,12 +158,12 @@ MonoBehaviour:
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 1000
-    rice: 1000
-    money: 10000
-    stone: 1000
-    orderIds: fa2a0000e62e0000
-    orderNums: c800000064000000
+    log: 100
+    rice: 100
+    money: 1000
+    stone: 20
+    orderIds: e92e0000ec2e0000ef2e0000f42e0000082b0000
+    orderNums: c8000000c8000000c8000000c8000000c8000000
     specialIntroduce: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
     AimMoney: 30000
     AimHappiness: 85
@@ -180,13 +180,13 @@ MonoBehaviour:
     Length: 300
     Width: 300
     Introduce: "\u8BF4\u660E"
-    log: 1000
-    rice: 1000
-    money: 10000
-    stone: 1000
-    orderIds: fa2a0000e62e0000
-    orderNums: c800000064000000
-    specialIntroduce: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5546\u4E1A"
+    log: 100
+    rice: 100
+    money: 1000
+    stone: 20
+    orderIds: 032b0000e42e0000f22e0000092b0000082b0000
+    orderNums: 2c0100002c0100002c0100002c0100002c010000
+    specialIntroduce: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5236\u9020\u4E1A"
     AimMoney: 40000
     AimHappiness: 90
     AimPopulation: 500
@@ -326,7 +326,7 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
-    CostPerWeek: -5
+    CostPerWeek: -7
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -335,11 +335,9 @@ MonoBehaviour:
     RearBuildingId: 20009
     Length: 3
     Width: 3
-    Price: 60
+    Price: 30
     costResources:
     - ItemId: 12003
-      ItemNum: 10
-    - ItemId: 12009
       ItemNum: 10
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L1_0X
@@ -347,6 +345,7 @@ MonoBehaviour:
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: ResidentialL1
+    Times: 1
   - Id: 20002
     Name: CountryRoad
     CostPerWeek: 0
@@ -358,11 +357,9 @@ MonoBehaviour:
     RearBuildingId: 20018
     Length: 3
     Width: 3
-    Price: 2
+    Price: 1
     costResources:
     - ItemId: 12003
-      ItemNum: 1
-    - ItemId: 12009
       ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
@@ -370,6 +367,7 @@ MonoBehaviour:
     Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 1
     iconName: RoadL1
+    Times: 1
   - Id: 20003
     Name: Warehouse
     CostPerWeek: 5
@@ -381,18 +379,19 @@ MonoBehaviour:
     RearBuildingId: 20016
     Length: 5
     Width: 11
-    Price: 180
+    Price: 50
     costResources:
     - ItemId: 12003
-      ItemNum: 30
+      ItemNum: 10
     - ItemId: 12009
-      ItemNum: 35
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L1_01
     tabType: 4
     Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 1
     iconName: WareHouseL1
+    Times: 1
   - Id: 20004
     Name: Bazaar
     CostPerWeek: 9
@@ -404,30 +403,31 @@ MonoBehaviour:
     RearBuildingId: 20012
     Length: 12
     Width: 14
-    Price: 210
+    Price: 60
     costResources:
     - ItemId: 12003
-      ItemNum: 35
+      ItemNum: 20
     - ItemId: 12009
-      ItemNum: 35
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Market_L1_01
     tabType: 4
     Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 1
     iconName: MarketL1
+    Times: 1
   - Id: 20005
     Name: Farmland
-    CostPerWeek: 1
+    CostPerWeek: 2
     Formulas: 56c3000057c3000062c30000
-    Population: 8
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 5
     FrontBuildingId: 0
     RearBuildingId: 0
     Length: 6
     Width: 4
-    Price: 12
+    Price: 45
     costResources:
     - ItemId: 12003
       ItemNum: 20
@@ -437,6 +437,7 @@ MonoBehaviour:
     Introduce: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
     Level: 1
     iconName: Wheat
+    Times: 1
   - Id: 20006
     Name: LivestockFarm
     CostPerWeek: 3
@@ -448,22 +449,23 @@ MonoBehaviour:
     RearBuildingId: 20034
     Length: 14
     Width: 20
-    Price: 150
+    Price: 75
     costResources:
     - ItemId: 12003
       ItemNum: 25
     - ItemId: 12009
-      ItemNum: 25
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L1_01
     tabType: 2
     Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 1
     iconName: FarmL1
+    Times: 1
   - Id: 20007
     Name: Workshop
-    CostPerWeek: 8
-    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
+    CostPerWeek: 5
+    Formulas: 53c3000054c3000055c3000060c3000065c30000
     Population: 15
     MaxStorage: 100
     InfluenceRange: 45
@@ -471,21 +473,20 @@ MonoBehaviour:
     RearBuildingId: 20010
     Length: 4
     Width: 6
-    Price: 300
+    Price: 100
     costResources:
     - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
-      ItemNum: 50
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L1_01
     tabType: 3
     Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 1
     iconName: FactoryL1
+    Times: 1
   - Id: 20008
     Name: LoggingCamps
-    CostPerWeek: 4
+    CostPerWeek: 2
     Formulas: 59c30000
     Population: 8
     MaxStorage: 100
@@ -494,87 +495,83 @@ MonoBehaviour:
     RearBuildingId: 20014
     Length: 7
     Width: 8
-    Price: 120
+    Price: 60
     costResources:
     - ItemId: 12003
-      ItemNum: 20
-    - ItemId: 12009
-      ItemNum: 20
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L1_01
     tabType: 2
     Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 1
     iconName: SawmillL1
+    Times: 1
   - Id: 20009
     Name: PlainResidentialLv2
     CostPerWeek: -10
     Formulas: 5ac30000
-    Population: -15
+    Population: -12
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20001
     RearBuildingId: 20033
     Length: 5
     Width: 3
-    Price: 90
+    Price: 60
     costResources:
     - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L2_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: ResidentialL2
+    Times: 1
   - Id: 20010
     Name: Factory
     CostPerWeek: 10
-    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
-    Population: 18
+    Formulas: 53c3000054c3000055c3000060c3000065c3000058c3000063c300005dc30000
+    Population: 15
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 20007
     RearBuildingId: 20011
     Length: 4
     Width: 6
-    Price: 300
+    Price: 150
     costResources:
-    - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
-      ItemNum: 50
+    - ItemId: 12015
+      ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L2_01
     tabType: 3
     Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 2
     iconName: FactoryL2
+    Times: 1.5
   - Id: 20011
     Name: Integrated mill
     CostPerWeek: 15
-    Formulas: 53c3000054c3000058c300005dc300005ec300005fc3000060c3000063c30000
-    Population: 20
+    Formulas: 53c3000054c3000055c3000060c3000065c3000058c3000063c300005dc300005ec300005fc30000
+    Population: 15
     MaxStorage: 100
     InfluenceRange: 45
     FrontBuildingId: 20010
     RearBuildingId: 0
     Length: 4
     Width: 6
-    Price: 380
+    Price: 250
     costResources:
-    - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
-      ItemNum: 50
+    - ItemId: 12020
+      ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Factory_L3_01
     tabType: 3
     Introduce: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
     Level: 3
     iconName: FactoryL3
+    Times: 2
   - Id: 20012
     Name: Market
     CostPerWeek: 12
@@ -586,34 +583,31 @@ MonoBehaviour:
     RearBuildingId: 20013
     Length: 12
     Width: 14
-    Price: 360
+    Price: 120
     costResources:
-    - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
-      ItemNum: 30
+    - ItemId: 12015
+      ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Market_L2_01
     tabType: 4
     Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 2
     iconName: MarketL2
+    Times: 1
   - Id: 20013
     Name: Shopping Mall
     CostPerWeek: 16
     Formulas: 
-    Population: 23
+    Population: 20
     MaxStorage: 100
     InfluenceRange: 200
     FrontBuildingId: 20012
     RearBuildingId: 0
     Length: 12
     Width: 14
-    Price: 480
+    Price: 200
     costResources:
-    - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
+    - ItemId: 12020
       ItemNum: 30
     BundleName: building.ab
     PfbName: Universal_Building_Market_L3_01
@@ -621,6 +615,7 @@ MonoBehaviour:
     Introduce: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
     Level: 3
     iconName: MarketL3
+    Times: 1
   - Id: 20014
     Name: LoggingCampsLv2
     CostPerWeek: 6
@@ -632,11 +627,9 @@ MonoBehaviour:
     RearBuildingId: 20015
     Length: 7
     Width: 8
-    Price: 160
+    Price: 80
     costResources:
-    - ItemId: 12003
-      ItemNum: 35
-    - ItemId: 12009
+    - ItemId: 12015
       ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L2_01
@@ -644,75 +637,73 @@ MonoBehaviour:
     Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 2
     iconName: SawmillL2
+    Times: 1.5
   - Id: 20015
     Name: LoggingCampsLv3
     CostPerWeek: 9
     Formulas: 59c30000
-    Population: 11
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 60
     FrontBuildingId: 20014
     RearBuildingId: 0
     Length: 7
     Width: 8
-    Price: 190
+    Price: 100
     costResources:
-    - ItemId: 12003
-      ItemNum: 35
-    - ItemId: 12009
-      ItemNum: 20
+    - ItemId: 12020
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Universal_Building_Sawmill_L3_01
     tabType: 2
     Introduce: "\u4EA7\u51FA\u6728\u6599"
     Level: 3
     iconName: SawmillL3
+    Times: 2
   - Id: 20016
     Name: Warehouse Lv2
     CostPerWeek: 8
     Formulas: 
-    Population: 12
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 20003
     RearBuildingId: 20017
     Length: 5
     Width: 11
-    Price: 240
+    Price: 120
     costResources:
-    - ItemId: 12003
-      ItemNum: 30
-    - ItemId: 12009
-      ItemNum: 35
+    - ItemId: 12015
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L2_01
     tabType: 4
     Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 2
     iconName: WareHouseL2
+    Times: 1
   - Id: 20017
     Name: Warehouse Lv3
-    CostPerWeek: 11
+    CostPerWeek: 10
     Formulas: 
-    Population: 15
+    Population: 10
     MaxStorage: 100
     InfluenceRange: 50
     FrontBuildingId: 20016
     RearBuildingId: 0
     Length: 5
     Width: 11
-    Price: 290
+    Price: 180
     costResources:
-    - ItemId: 12003
-      ItemNum: 30
-    - ItemId: 12009
-      ItemNum: 35
+    - ItemId: 12020
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L3_01
     tabType: 4
     Introduce: "\u5B58\u50A8\u8D44\u6E90"
     Level: 3
     iconName: WareHouseL3
+    Times: 1
   - Id: 20018
     Name: "Cement\_road"
     CostPerWeek: 0
@@ -724,18 +715,17 @@ MonoBehaviour:
     RearBuildingId: 20019
     Length: 3
     Width: 3
-    Price: 6
+    Price: 2
     costResources:
-    - ItemId: 12003
-      ItemNum: 2
     - ItemId: 12009
-      ItemNum: 2
+      ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
     Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 2
     iconName: RoadL2
+    Times: 1
   - Id: 20019
     Name: "Asphalt\_road"
     CostPerWeek: 0
@@ -747,18 +737,17 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 3
     Width: 3
-    Price: 8
+    Price: 3
     costResources:
-    - ItemId: 12003
-      ItemNum: 3
-    - ItemId: 12009
-      ItemNum: 3
+    - ItemId: 12020
+      ItemNum: 1
     BundleName: road.ab
     PfbName: L1_Road001
     tabType: 0
     Introduce: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
     Level: 3
     iconName: RoadL3
+    Times: 1
   - Id: 20020
     Name: Government
     CostPerWeek: 0
@@ -773,15 +762,14 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 1
-    - ItemId: 12009
-      ItemNum: 2
+      ItemNum: 0
     BundleName: building.ab
     PfbName: Universal_Building_Government_L1_01
     tabType: 5
     Introduce: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
     Level: 1
     iconName: 
+    Times: 1
   - Id: 20021
     Name: GovernmentLv2
     CostPerWeek: 0
@@ -796,15 +784,18 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 100
-    - ItemId: 12009
       ItemNum: 50
+    - ItemId: 12015
+      ItemNum: 50
+    - ItemId: 12004
+      ItemNum: 20
     BundleName: building.ab
     PfbName: Universal_Building_Government_L2_01
     tabType: 5
     Introduce: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
     Level: 2
     iconName: 
+    Times: 1
   - Id: 20022
     Name: GovernmentLv3
     CostPerWeek: 0
@@ -819,18 +810,21 @@ MonoBehaviour:
     Price: 0
     costResources:
     - ItemId: 12003
-      ItemNum: 200
-    - ItemId: 12009
       ItemNum: 100
+    - ItemId: 12015
+      ItemNum: 100
+    - ItemId: 12004
+      ItemNum: 40
     BundleName: building.ab
     PfbName: Universal_Building_Government_L3_01
     tabType: 5
     Introduce: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
     Level: 3
     iconName: 
+    Times: 1
   - Id: 20023
     Name: CoachResidential
-    CostPerWeek: 0
+    CostPerWeek: -7
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -839,11 +833,9 @@ MonoBehaviour:
     RearBuildingId: 20024
     Length: 4
     Width: 4
-    Price: 60
+    Price: 30
     costResources:
     - ItemId: 12003
-      ItemNum: 10
-    - ItemId: 12009
       ItemNum: 10
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L1_0X
@@ -851,32 +843,34 @@ MonoBehaviour:
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: CoachL1
+    Times: 1
   - Id: 20024
     Name: CoachResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: -10
     Formulas: 5ac30000
-    Population: -15
+    Population: -12
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20023
     RearBuildingId: 20025
     Length: 4
     Width: 4
-    Price: 90
+    Price: 60
     costResources:
-    - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+    - ItemId: 12015
+      ItemNum: 10
+    - ItemId: 12004
+      ItemNum: 5
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L2_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: CoachL2
+    Times: 1
   - Id: 20025
     Name: CoachResidentialLv3
-    CostPerWeek: 0
+    CostPerWeek: -15
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -887,19 +881,20 @@ MonoBehaviour:
     Width: 4
     Price: 90
     costResources:
-    - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+    - ItemId: 12020
+      ItemNum: 10
+    - ItemId: 12004
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L3_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: CoachL3
+    Times: 1
   - Id: 20026
     Name: HuiResidential
-    CostPerWeek: 0
+    CostPerWeek: -7
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -908,11 +903,9 @@ MonoBehaviour:
     RearBuildingId: 20027
     Length: 4
     Width: 4
-    Price: 60
+    Price: 30
     costResources:
     - ItemId: 12003
-      ItemNum: 10
-    - ItemId: 12009
       ItemNum: 10
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L1_0X
@@ -920,34 +913,36 @@ MonoBehaviour:
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 1
     iconName: HuiL1
+    Times: 1
   - Id: 20027
     Name: HuiResidentialLv2
-    CostPerWeek: 0
+    CostPerWeek: -10
     Formulas: 5ac30000
-    Population: -10
+    Population: -12
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20026
     RearBuildingId: 20028
     Length: 4
     Width: 4
-    Price: 90
+    Price: 60
     costResources:
-    - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+    - ItemId: 12015
+      ItemNum: 10
+    - ItemId: 12004
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L2_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 2
     iconName: HuiL2
+    Times: 1
   - Id: 20028
     Name: HuiResidentialLv3
-    CostPerWeek: 0
+    CostPerWeek: -15
     Formulas: 5ac30000
-    Population: -10
+    Population: -15
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20027
@@ -956,16 +951,17 @@ MonoBehaviour:
     Width: 4
     Price: 90
     costResources:
-    - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+    - ItemId: 12020
+      ItemNum: 10
+    - ItemId: 12004
+      ItemNum: 10
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L3_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: HuiL3
+    Times: 1
   - Id: 20029
     Name: Mine
     CostPerWeek: 6
@@ -977,11 +973,9 @@ MonoBehaviour:
     RearBuildingId: 20030
     Length: 20
     Width: 10
-    Price: 300
+    Price: 150
     costResources:
     - ItemId: 12003
-      ItemNum: 50
-    - ItemId: 12009
       ItemNum: 50
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L1
@@ -989,6 +983,7 @@ MonoBehaviour:
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 1
     iconName: MineL1
+    Times: 1
   - Id: 20030
     Name: MineLv2
     CostPerWeek: 8
@@ -1000,18 +995,19 @@ MonoBehaviour:
     RearBuildingId: 20031
     Length: 20
     Width: 10
-    Price: 300
+    Price: 150
     costResources:
     - ItemId: 12003
-      ItemNum: 70
+      ItemNum: 100
     - ItemId: 12009
-      ItemNum: 70
+      ItemNum: 50
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L2
     tabType: 2
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 2
     iconName: MineL2
+    Times: 1.5
   - Id: 20031
     Name: MineLv3
     CostPerWeek: 10
@@ -1023,18 +1019,19 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 20
     Width: 10
-    Price: 300
+    Price: 150
     costResources:
-    - ItemId: 12003
-      ItemNum: 100
-    - ItemId: 12009
-      ItemNum: 100
+    - ItemId: 12015
+      ItemNum: 30
+    - ItemId: 12020
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Universal_Building_Mine_L3
     tabType: 2
     Introduce: "\u751F\u4EA7\u77FF\u7269"
     Level: 3
     iconName: MineL3
+    Times: 2
   - Id: 20032
     Name: Pier
     CostPerWeek: 8
@@ -1046,18 +1043,17 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 10
     Width: 10
-    Price: 250
+    Price: 125
     costResources:
-    - ItemId: 12003
-      ItemNum: 100
     - ItemId: 12009
-      ItemNum: 100
+      ItemNum: 50
     BundleName: building.ab
     PfbName: Coach_Building_Pier_01
     tabType: 2
     Introduce: "\u6355\u635E\u9C7C\u7C7B"
     Level: 1
     iconName: HookerL1
+    Times: 1
   - Id: 20033
     Name: PlainResidentialLv3
     CostPerWeek: -15
@@ -1071,20 +1067,21 @@ MonoBehaviour:
     Width: 3
     Price: 90
     costResources:
-    - ItemId: 12003
-      ItemNum: 12
-    - ItemId: 12009
-      ItemNum: 12
+    - ItemId: 12020
+      ItemNum: 10
+    - ItemId: 12004
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L3_0X
     tabType: 1
     Introduce: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
     Level: 3
     iconName: ResidentialL3
+    Times: 1
   - Id: 20034
     Name: LivestockFarmLv2
-    CostPerWeek: 3
-    Formulas: 51c3000052c30000
+    CostPerWeek: 5
+    Formulas: 51c3000052c3000064c30000
     Population: 10
     MaxStorage: 100
     InfluenceRange: 30
@@ -1094,20 +1091,19 @@ MonoBehaviour:
     Width: 20
     Price: 150
     costResources:
-    - ItemId: 12003
-      ItemNum: 25
-    - ItemId: 12009
-      ItemNum: 25
+    - ItemId: 12015
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L2_01
     tabType: 2
     Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 2
     iconName: FarmL2
+    Times: 1.5
   - Id: 20035
     Name: LivestockFarmLv3
-    CostPerWeek: 3
-    Formulas: 51c3000052c30000
+    CostPerWeek: 8
+    Formulas: 51c3000052c3000064c30000
     Population: 10
     MaxStorage: 100
     InfluenceRange: 30
@@ -1115,18 +1111,17 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 14
     Width: 20
-    Price: 150
+    Price: 225
     costResources:
-    - ItemId: 12003
-      ItemNum: 25
-    - ItemId: 12009
-      ItemNum: 25
+    - ItemId: 12020
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Universal_Building_Farm_L3_01
     tabType: 2
     Introduce: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
     Level: 3
     iconName: FarmL3
+    Times: 2
   - Id: 20036
     Name: Bridge
     CostPerWeek: 0
@@ -1148,70 +1143,115 @@ MonoBehaviour:
     Introduce: "\u8FD9\u662F\u4E00\u5EA7\u6865\u6881"
     Level: 1
     iconName: Bridge
+    Times: 1
+  - Id: 20037
+    Name: FarmlandII
+    CostPerWeek: 3
+    Formulas: 56c3000057c3000062c30000
+    Population: 8
+    MaxStorage: 100
+    InfluenceRange: 5
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 6
+    Width: 8
+    Price: 180
+    costResources:
+    - ItemId: 12003
+      ItemNum: 40
+    BundleName: building.ab
+    PfbName: Universal_Building_Farmland_L1_02
+    tabType: 2
+    Introduce: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
+    Level: 1
+    iconName: Wheat
+    Times: 2
+  - Id: 20038
+    Name: FarmlandIII
+    CostPerWeek: 5
+    Formulas: 56c3000057c3000062c30000
+    Population: 14
+    MaxStorage: 100
+    InfluenceRange: 5
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 6
+    Width: 16
+    Price: 360
+    costResources:
+    - ItemId: 12003
+      ItemNum: 80
+    BundleName: building.ab
+    PfbName: Universal_Building_Farmland_L1_03
+    tabType: 2
+    Introduce: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
+    Level: 1
+    iconName: Wheat
+    Times: 4
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
     InputItemID: f92a0000
-    InputNum: 19000000
+    InputNum: 0a000000
     OutputItemID: fd2a0000
-    ProductNum: 14000000
-    ProductTime: 3
+    ProductNum: 0a000000
+    ProductTime: 4
   - ID: 50002
     Describe: "\u7A3B\u7C73\u4EA7\u751F\u8089"
     InputItemID: fa2a0000
-    InputNum: 19000000
+    InputNum: 0a000000
     OutputItemID: fd2a0000
-    ProductNum: 14000000
-    ProductTime: 3
+    ProductNum: 0a000000
+    ProductTime: 4
   - ID: 50003
     Describe: "\u5C0F\u9EA6\u4EA7\u9762\u7C89"
     InputItemID: f92a0000
-    InputNum: 19000000
+    InputNum: 0a000000
     OutputItemID: e62e0000
     ProductNum: 0f000000
-    ProductTime: 3
+    ProductTime: 2
   - ID: 50004
     Describe: "\u539F\u6728\u4EA7\u5BB6\u5177"
     InputItemID: e32e0000
-    InputNum: 0f000000
+    InputNum: 05000000
     OutputItemID: e42e0000
-    ProductNum: 0a000000
+    ProductNum: 05000000
     ProductTime: 4
   - ID: 50005
-    Describe: "\u751F\u8089\u4EA7\u52A0\u5DE5\u8089"
+    Describe: "\u751F\u8089\u4EA7\u814A\u8089"
     InputItemID: fd2a0000
-    InputNum: 0c000000
+    InputNum: 05000000
     OutputItemID: 002b0000
-    ProductNum: 0a000000
-    ProductTime: 4
+    ProductNum: 19000000
+    ProductTime: 5
   - ID: 50006
     Describe: "\u7530\u5730\u4EA7\u5C0F\u9EA6"
     InputItemID: 
     InputNum: 
     OutputItemID: f92a0000
-    ProductNum: 32000000
-    ProductTime: 3
+    ProductNum: 0a000000
+    ProductTime: 4
   - ID: 50007
     Describe: "\u7530\u5730\u4EA7\u7A3B\u7C73"
     InputItemID: 
     InputNum: 
     OutputItemID: fa2a0000
-    ProductNum: 32000000
-    ProductTime: 3
+    ProductNum: 0a000000
+    ProductTime: 4
   - ID: 50008
     Describe: "\u751F\u8089\u9762\u7C89\u4EA7\u9999\u80A0"
     InputItemID: e62e0000fd2a0000
-    InputNum: 0f00000009000000
+    InputNum: 0300000002000000
     OutputItemID: 022b0000
-    ProductNum: 0f000000
-    ProductTime: 1
+    ProductNum: 14000000
+    ProductTime: 4
   - ID: 50009
     Describe: "\u4F10\u6728\u4EA7\u539F\u6728"
     InputItemID: 
     InputNum: 
     OutputItemID: e32e0000
-    ProductNum: 14000000
-    ProductTime: 1
+    ProductNum: 1e000000
+    ProductTime: 2
   - ID: 50010
     Describe: "\u4F4F\u623F\u63D0\u4F9B\u4EBA\u53E3"
     InputItemID: f82a0000
@@ -1225,56 +1265,56 @@ MonoBehaviour:
     InputNum: 
     OutputItemID: e92e0000
     ProductNum: 14000000
-    ProductTime: 3
+    ProductTime: 2
   - ID: 50012
     Describe: "\u6E14\u6E2F\u751F\u4EA7\u9C7C"
     InputItemID: 
     InputNum: 
     OutputItemID: 032b0000
     ProductNum: 0f000000
-    ProductTime: 1
+    ProductTime: 2
   - ID: 50013
     Describe: "\u6BDB\u76AE\u751F\u4EA7\u8863\u670D"
     InputItemID: ed2e0000
-    InputNum: 0a000000
+    InputNum: 04000000
     OutputItemID: f22e0000
     ProductNum: 02000000
-    ProductTime: 2
+    ProductTime: 3
   - ID: 50014
     Describe: "\u94C1\u548C\u8089\u751F\u4EA7\u8089\u7F50\u5934"
     InputItemID: ec2e0000fd2a0000
     InputNum: 0100000005000000
     OutputItemID: 082b0000
-    ProductNum: 03000000
+    ProductNum: 05000000
     ProductTime: 2
   - ID: 50015
     Describe: "\u94C1\u548C\u9C7C\u751F\u4EA7\u9C7C\u7F50\u5934"
     InputItemID: ec2e0000032b0000
     InputNum: 0100000005000000
     OutputItemID: 092b0000
-    ProductNum: 03000000
+    ProductNum: 05000000
     ProductTime: 2
   - ID: 50016
-    Describe: "\u77F3\u5934\u751F\u4EA7\u5EFA\u6750"
+    Describe: "\u77F3\u5934\u751F\u4EA7\u77F3\u6750"
     InputItemID: e92e0000
-    InputNum: 0a000000
+    InputNum: 05000000
     OutputItemID: ef2e0000
-    ProductNum: 01000000
-    ProductTime: 2
+    ProductNum: 14000000
+    ProductTime: 4
   - ID: 50017
-    Describe: "\u77FF\u4E95\u751F\u4EA7\u94C1"
+    Describe: "\u77FF\u4E95\u751F\u4EA7\u751F\u94C1"
     InputItemID: 
     InputNum: 
     OutputItemID: ec2e0000
-    ProductNum: 0f000000
-    ProductTime: 2
+    ProductNum: 14000000
+    ProductTime: 4
   - ID: 50018
     Describe: "\u519C\u7530\u751F\u4EA7\u852C\u83DC"
     InputItemID: 
     InputNum: 
     OutputItemID: 062b0000
     ProductNum: 14000000
-    ProductTime: 2
+    ProductTime: 5
   - ID: 50019
     Describe: "\u9762\u7C89\u751F\u4EA7\u9992\u5934"
     InputItemID: e62e0000
@@ -1282,6 +1322,20 @@ MonoBehaviour:
     OutputItemID: 0b2b0000
     ProductNum: 05000000
     ProductTime: 2
+  - ID: 50020
+    Describe: "\u5C0F\u9EA6\u751F\u4EA7\u6BDB\u76AE"
+    InputItemID: f92a0000
+    InputNum: 0a000000
+    OutputItemID: ed2e0000
+    ProductNum: 10000000
+    ProductTime: 3
+  - ID: 50021
+    Describe: "\u751F\u94C1\u751F\u4EA7\u94C1\u5757"
+    InputItemID: ec2e0000
+    InputNum: 05000000
+    OutputItemID: f42e0000
+    ProductNum: 28000000
+    ProductTime: 8
   LocalizationData:
     combines:
     - code: Log
@@ -1315,13 +1369,13 @@ MonoBehaviour:
       chinese: "\u4ED3\u5E93"
       english: Warehouse
     - code: PlainResidentialLv1
-      chinese: "\u4E61\u95F4\u5C0F\u5C4B"
+      chinese: "\u6C11\u623F"
       english: Cottage
     - code: CountryRoad
       chinese: "\u4E61\u95F4\u5C0F\u9053"
       english: Country road
     - code: Farmland
-      chinese: "\u519C\u7530"
+      chinese: "\u5C0F\u578B\u519C\u7530"
       english: Farmland
     - code: LivestockFarm
       chinese: "\u517B\u6B96\u573A"
@@ -1381,7 +1435,7 @@ MonoBehaviour:
       chinese: "\u52B3\u52A8\u529B"
       english: Labor Force
     - code: ProcessedMeat
-      chinese: "\u52A0\u5DE5\u8089"
+      chinese: "\u814A\u8089"
       english: Processed Meat
     - code: Stock
       chinese: "\u5E93\u5B58"
@@ -1432,7 +1486,7 @@ MonoBehaviour:
       chinese: "\u9999\u80A0"
       english: Sausage
     - code: PlainResidentialLv2
-      chinese: "\u5927\u578B\u4F4F\u5B85"
+      chinese: "\u4F4F\u5B85"
       english: Large residential
     - code: Apartment
       chinese: "\u57CE\u9547\u516C\u5BD3"
@@ -1545,9 +1599,9 @@ MonoBehaviour:
     - code: Fur
       chinese: "\u6BDB\u76AE"
       english: Fur
-    - code: Vegitable
+    - code: Vegetable
       chinese: "\u852C\u83DC"
-      english: Vegitable
+      english: Vegetable
     - code: StoneMaterial
       chinese: "\u77F3\u6750"
       english: StoneMaterial
@@ -1603,7 +1657,7 @@ MonoBehaviour:
       chinese: "\u8BBE\u7F6E"
       english: Settings
     - code: PlainResidentialLv3
-      chinese: "\u8C6A\u534E\u4F4F\u5B85"
+      chinese: "\u5C0F\u6D0B\u623F"
       english: PlainResidentialLv3
     - code: LivestockFarmLv2
       chinese: "\u517B\u6B96\u573A\u4E8C\u7EA7"
@@ -1614,3 +1668,9 @@ MonoBehaviour:
     - code: Bridge
       chinese: "\u6865\u6881"
       english: Bridge
+    - code: FarmlandII
+      chinese: "\u4E2D\u578B\u519C\u7530"
+      english: FarmlandII
+    - code: FarmlandIII
+      chinese: "\u5927\u578B\u519C\u7530"
+      english: FarmlandIII

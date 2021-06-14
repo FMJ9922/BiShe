@@ -30,6 +30,12 @@ public class MainInteractCanvas : CanvasBase
             item.InitCanvas();
         }
         returnBtn.onClick.AddListener(GameManager.Instance.LoadMenuScene);
+        EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
     }
 
     public override void OnOpen()
@@ -48,6 +54,16 @@ public class MainInteractCanvas : CanvasBase
         BuildingCanvas build = (BuildingCanvas)canvas[0];
         bool open = build.ToggleBuildingCanvas();
         buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", open ? "BuildSelect" : "BuildUnselect");
+        CloseInfoCanvas();
+        CloseMarketCanvas();
+        CloseResourcesCanvas();
+        CloseCarMissionCanvas();
+    }
+
+    public void CloseBuildingCanvas()
+    {
+        canvas[0].OnClose();
+        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
     }
 
     public void OpenResourceCanvas()
@@ -67,6 +83,12 @@ public class MainInteractCanvas : CanvasBase
         GetMarketCanvas().OnOpen();
     }
 
+    public void OpenInfoCanvas(BuildingBase data)
+    {
+        CloseAllOpenedUI();
+        InfoCanvas infocanvas = (InfoCanvas)canvas[2];
+        infocanvas.OnOpen(data);
+    }
     public void OpenCarMissionCanvas(GameObject car)
     {
         CloseAllOpenedUI();
@@ -107,8 +129,9 @@ public class MainInteractCanvas : CanvasBase
     {
         canvas[2].OnClose();
     }
-    private void CloseAllOpenedUI()
+    public void CloseAllOpenedUI()
     {
+        CloseBuildingCanvas();
         CloseInfoCanvas();
         CloseMarketCanvas();
         CloseResourcesCanvas();

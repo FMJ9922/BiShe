@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 103383793
+CRC: 2801470070
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f9284a25cfb17bb7389dfbc714cd74b1
+    Hash: 1285358becac2869c676389c85c93be0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9753dd794424f69fb6011ee06a0c141c
@@ -103,7 +103,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/unJieyingXiao02.png
 - Assets/Scenes Assets/BuildingIcon/WareHouseL1.png
 - Assets/ArtAssets/UI/MarketTradeUI/HaulButton.png
-- Assets/Scenes Assets/BuildingIcon/Icon/SteelMaterialIcon.png
+- Assets/Scenes Assets/BuildingIcon/Icon/IronMaterialIcon.png
 - Assets/ArtAssets/UI/BuildUI/UnclickHousingIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL2.png
 - Assets/Scenes Assets/BuildingIcon/Icon/MeatTinIcon.png

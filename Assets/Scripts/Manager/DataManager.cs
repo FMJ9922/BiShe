@@ -27,7 +27,7 @@ public class DataManager : ScriptableObject
     public static string[] foodNames;
     public static int[] foodIds;
     public static int[] itemIds;
-
+    public static ItemData[] foodItems;
 
     public void InitTabDic()
     {
@@ -48,8 +48,10 @@ public class DataManager : ScriptableObject
                 TabDic.Add(tabType, buildDatas);
             }
         }
+        TabDic[BuildTabType.produce].Sort((BuildData a, BuildData b) => { return a.Name.Length - b.Name.Length; });
         Debug.Log("创建TabDic成功！");
     }
+
     public static LevelData[] GetAllLevelDatas()
     {
         return Instance.LevelArray;
@@ -84,12 +86,12 @@ public class DataManager : ScriptableObject
     {
         for (int i = 0; i < Instance.BuildArray.Length; i++)
         {
-            if(Instance.BuildArray[i].Id == buildId)
+            if (Instance.BuildArray[i].Id == buildId)
             {
                 return Instance.BuildArray[i];
             }
         }
-        Debug.Log("无效的建筑id"+buildId);
+        Debug.Log("无效的建筑id" + buildId);
         return null;
     }
 
@@ -102,7 +104,7 @@ public class DataManager : ScriptableObject
                 return Instance.ItemArray[i].Name;
             }
         }
-        Debug.Log("无效的物品ID"+ ID);
+        Debug.Log("无效的物品ID" + ID);
         return string.Empty;
     }
     public static ItemData GetItemDataById(int ID)
@@ -179,6 +181,26 @@ public class DataManager : ScriptableObject
             foodIds = list.ToArray();
         }
         return foodIds;
+    }
+
+    public static ItemData[] GetFoodItemList()
+    {
+        if (foodItems == null)
+        {
+            List<ItemData> list = new List<ItemData>();
+            for (int i = 0; i < Instance.ItemArray.Length; i++)
+            {
+                if (Instance.ItemArray[i].Id == 11000) continue;
+                if (Instance.ItemArray[i].ItemType == (int)ItemType.food)
+                {
+                    list.Add(Instance.ItemArray[i]);
+                }
+            }
+            list.Sort((ItemData a, ItemData b) => { return b.Happiness - a.Happiness; });
+            foodItems = list.ToArray();
+        }
+
+        return foodItems;
     }
 
     public static int[] GetAllItemList()

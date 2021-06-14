@@ -23,6 +23,7 @@ public class MarketCanvas : CanvasBase
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
+        RefreshOrderItem();
         InitMarketItems();
     }
     public override void OnOpen()
@@ -57,8 +58,6 @@ public class MarketCanvas : CanvasBase
         sellText.color = Color.white;
         buyItems.SetActive(false);
         sellItems.SetActive(true); 
-        RefreshOrderItem();
-        InitMarketItems();
     }
 
     private void InitMarketItems()
@@ -73,7 +72,7 @@ public class MarketCanvas : CanvasBase
             obj.SetActive(true);
             obj.transform.SetParent(sellContent.transform);
             MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.needNum = (int)(nums[i]*TechManager.Instance.SellNumBuff());
+            marketItem.maxNum = (int)(nums[i]*TechManager.Instance.SellNumBuff());
             marketItem.InitItem(ids[i]);
             orderItems.Add(marketItem);
         }

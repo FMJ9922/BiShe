@@ -44,7 +44,6 @@ public class BuildManager : Singleton<BuildManager>
 
     public static bool IsInBuildMode { get; set; }
 
-    [SerializeField] GameObject bridgePfb;
     #endregion
 
 
@@ -266,6 +265,11 @@ public class BuildManager : Singleton<BuildManager>
         public List<CostResource> costResources;
     }
 
+    private GameObject GetBridgePfb(int level)
+    {
+        return LoadAB.Load("building.ab", string.Format("Universal_Building_Bridge_L{0}_01_Preb",level));
+    }
+
     /// <summary>
     /// 确认修建
     /// </summary>
@@ -319,12 +323,12 @@ public class BuildManager : Singleton<BuildManager>
                     bridgeGrids.Add(grids[(i-1) * 2]);
                     bridgeGrids.Add(grids[(i-1) * 2 + 1]);
                     bridgeStart = true;
-                    GameObject bridge1 = Instantiate(bridgePfb, transform);
+                    GameObject bridge1 = Instantiate(GetBridgePfb(roadLevel), transform);
                     bridge1.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i - 1].transform.position + adjust));
                     bridge1.transform.rotation = Quaternion.LookRotation(delta);
                     bridges.Add(bridge1);
                 }
-                GameObject bridge = Instantiate(bridgePfb, transform);
+                GameObject bridge = Instantiate(GetBridgePfb(roadLevel), transform);
                 bridge.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i].transform.position + adjust));
                 bridge.transform.rotation = Quaternion.LookRotation(delta);
                 bridges.Add(bridge);
@@ -537,11 +541,21 @@ public class BuildManager : Singleton<BuildManager>
         {
             mats[i].color = isCurCanBuild ? Color.green : Color.red;
         }
+
+        if (currentBuilding.runtimeBuildData.Id == 20029 ||
+            currentBuilding.runtimeBuildData.Id == 20030 ||
+            currentBuilding.runtimeBuildData.Id == 20030)
+        {
+            MineBuilding mine = (MineBuilding)currentBuilding;
+            float rich = mine.SetRichness(targetGrids);
+            NoticeManager.Instance.ShowIconNotice("矿脉丰度:"+CastTool.RoundOrFloat(rich*100)+"%");
+        }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
     private void OnConfirmBuildingBuild()
     {
         CheckBuildingOverlap();
+        NoticeManager.Instance.CloseNotice();
         if (!isCurCanBuild)
         {
             NoticeManager.Instance.InvokeShowNotice(MapManager.noticeContent);
@@ -557,7 +571,9 @@ public class BuildManager : Singleton<BuildManager>
             RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
 
             WhenFinishBuild();
-            if (currentBuilding.runtimeBuildData.Id != 20005)
+            if (currentBuilding.runtimeBuildData.Id != 20005 &&
+                currentBuilding.runtimeBuildData.Id != 20037 &&
+                currentBuilding.runtimeBuildData.Id != 20038 )
             {
                 currentBuilding.transform.position += Vector3.up * 5;
                 StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
@@ -609,7 +625,6 @@ public class BuildManager : Singleton<BuildManager>
         }
         else
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage(ConstString.NoticeUpgradeFail));
             success = false;
         }
     }
@@ -631,11 +646,14 @@ public class BuildManager : Singleton<BuildManager>
         {
             return false;
         }
+        ResourceManager.Instance.TryUseResources(rescources, TechManager.Instance.BuildResourcesBuff());
+        ResourceManager.Instance.TryUseResource(new CostResource(99999, runtimeBuildData.Price), TechManager.Instance.BuildPriceBuff());
         return true;
 
     }
     private void OnCancelBuild()
     {
+        NoticeManager.Instance.CloseNotice();
         Destroy(currentBuilding.gameObject);
         WhenFinishBuild();
     }
@@ -650,6 +668,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
+        OnRotateBuilding();
         GameManager.Instance.PauseGame();
     }
     private void WhenFinishBuild()

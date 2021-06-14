@@ -25,6 +25,7 @@ public class MarketItem : MonoBehaviour
     public TradeMode curMode;
     public float profit;
     public bool isBuy = true;
+    public int maxNum;
     public enum TradeMode
     {
         [Description("Once")]
@@ -45,11 +46,9 @@ public class MarketItem : MonoBehaviour
         curItem = DataManager.GetItemDataById(id);
         ClearItemDrop(false);
         icon.SetIcon(id, 0);
-        subBtn.interactable = false;
-        addBtn.interactable = false;
         modeDrop.ClearOptions();
         TMP_Dropdown.OptionData tempData;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             tempData = new TMP_Dropdown.OptionData();
             tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
@@ -129,8 +128,8 @@ public class MarketItem : MonoBehaviour
                 profit = isBuy?-curItem.Price * needNum * 1.5f : curItem.Price * needNum*TechManager.Instance.PriceBuff();
                 break;
             case TradeMode.maintain:
-                float num = needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id);
-                profit = num > 0 ? -curItem.Price * num *1.5f : 0;
+                float num = (isBuy?1f:-1f)*( needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id));
+                profit = num > 0 ? (isBuy ? -curItem.Price * num * 1.5f : curItem.Price * num * TechManager.Instance.PriceBuff()) : 0;
                 break;
         }
         profitText.text = profit.ToString();
@@ -145,7 +144,7 @@ public class MarketItem : MonoBehaviour
     public void OnAddNum()
     {
         needNum += 10;
-        if (needNum > 50) needNum = 50;
+        if (needNum > maxNum) needNum = maxNum;
         numText.text = needNum.ToString();
         RefreshBuyProfitLabel();
         OnResetTrading();

@@ -62,7 +62,7 @@ public class DriveSystem : MonoBehaviour
         callback = _callBack;
         action = null;
         wayCount = 0;
-        speed = 0;
+        speed = 3;
         brakeTimer = 0;
         missionTimer = 0;
         //Debug.Log((callBack != null).ToString());

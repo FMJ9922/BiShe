@@ -32,7 +32,7 @@ public class ExcelTool
             item.Name = collect[i][1].ToString();
             item.ItemType = int.Parse(collect[i][2].ToString());
             item.Price = int.Parse(collect[i][3].ToString());
-            item.BuildingID = int.Parse(collect[i][4].ToString());
+            item.Happiness = int.Parse(collect[i][4].ToString());
             array[i - 2] = item;
         }
         return array;
@@ -152,6 +152,7 @@ public class ExcelTool
             {
                 buildData.iconName = collect[i][20].ToString();
             }
+            buildData.Times = float.Parse(collect[i][21].ToString());
             array[i - 2] = buildData;
         }
         return array;

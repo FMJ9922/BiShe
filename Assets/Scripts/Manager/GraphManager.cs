@@ -76,7 +76,8 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
-            float rand = building.runtimeBuildData.Happiness;
+            float rand = building.GetHappiness();
+            //Debug.Log(rand);
             item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position);
             string showLabel = Localization.ToSettingLanguage("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);

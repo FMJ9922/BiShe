@@ -19,7 +19,7 @@ public class BridgeBuilding : BuildingBase
     {
         buildFlag = true;
     }
-    public override void DestroyBuilding(bool repaint = true)
+    public override void DestroyBuilding(bool returnResources,bool repaint = true)
     {
         MapManager.SetGridTypeToEmpty(takenGrids);
         MapManager.Instance.BuildFoundation(takenGrids, 1, 4);

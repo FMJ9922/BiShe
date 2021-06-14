@@ -5,6 +5,7 @@ using UnityEngine;
 public class MineBuilding : BuildingBase
 {
     public Transform digPos;
+    public float richness = 1;//资源丰度
 
     public override void InitBuildingFunction()
     {
@@ -43,6 +44,16 @@ public class MineBuilding : BuildingBase
         }
     }
 
+    public float SetRichness(Vector2Int[] takenGrids)
+    {
+        float sum = 0;
+        float total = takenGrids.Length;
+        for (int i = 0; i < takenGrids.Length; i++)
+        {
+            sum += MapManager.GetMineRichness(takenGrids[i]);
+        }
+        return Mathf.Clamp01(sum / total*3);
+    }
     protected override void Input()
     {
         base.Input();
@@ -62,7 +73,7 @@ public class MineBuilding : BuildingBase
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i]));
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i] * richness * runtimeBuildData.Times));
 
         }
         return mission;

@@ -22,6 +22,7 @@ public class BuildData
     public string Introduce;//简介
     public int Level;//等级
     public string iconName;//图标在包中的名称
+    public float Times;//资源倍率
 }
 
 [System.Serializable]
@@ -37,6 +38,23 @@ public class CostResource
     public override string ToString()
     {
         return DataManager.GetItemNameById(ItemId) + ItemNum;
+    }
+    public static CostResource operator+ (CostResource a, CostResource b)
+    {
+        CostResource res = new CostResource(a.ItemId,a.ItemNum+b.ItemNum);
+        return res;
+    }
+
+    public static CostResource operator- (CostResource a, CostResource b)
+    {
+        CostResource res = new CostResource(a.ItemId, a.ItemNum - b.ItemNum);
+        return res;
+    }
+
+    public static CostResource operator* (CostResource a, float b)
+    {
+        CostResource res = new CostResource(a.ItemId, a.ItemNum*b);
+        return res;
     }
 }
 
