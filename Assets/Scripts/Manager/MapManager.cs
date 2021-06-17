@@ -345,8 +345,7 @@ public class MapManager : Singleton<MapManager>
     /// <returns></returns>
     public static bool CheckIsInWater(Vector2Int[] vector2Ints)
     {
-        
-        return CheckIsInWater(vector2Ints[0])|| CheckIsInWater(vector2Ints[vector2Ints.Length-1]);
+        return CheckIsInWater(vector2Ints[vector2Ints.Length/2]) &&(CheckIsInWater(vector2Ints[0])|| CheckIsInWater(vector2Ints[vector2Ints.Length-1]));
     }
 
     public static bool CheckIsInWater(Vector2Int vector2Int)

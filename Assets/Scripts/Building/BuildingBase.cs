@@ -53,6 +53,8 @@ public class BuildingBase : MonoBehaviour
         //Debug.Log(direction);
         //Debug.Log(transform.name);
         //Debug.Log(transform.right);
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
         direction = CastTool.CastVector3ToDirection(transform.right);
         //Debug.Log(direction);
         parkingGridIn = GetInParkingGrid();
@@ -186,7 +188,7 @@ public class BuildingBase : MonoBehaviour
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
     }
 
-    public virtual void DestroyBuilding(bool returnResources ,bool repaint = true)
+    public virtual void DestroyBuilding(bool returnResources ,bool returnPopulation,bool repaint = true)
     {
         if (returnResources)
         {
@@ -198,14 +200,19 @@ public class BuildingBase : MonoBehaviour
             MapManager.SetGridTypeToEmpty(takenGrids);
             MapManager.Instance.BuildFoundation(takenGrids, 0, 4);
         }
-        if (runtimeBuildData.Population < 0)
+        if (returnPopulation)
         {
-            ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
+            if (runtimeBuildData.Population < 0)
+            {
+                ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
+            }
+            else
+            {
+                ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
+            }
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
         }
-        else
-        {
-            ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.Population);
-        }
+        
         Destroy(this.gameObject);
     }
     public virtual bool ReturnBuildResources()
@@ -268,12 +275,12 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void AddCurPeople(int num)
     {
-        //Debug.Log("Add");
-        //Debug.Log(num);
+        Debug.Log("Add");
+        Debug.Log(num);
         int cur = runtimeBuildData.CurPeople;
-        //Debug.Log(cur);
+        Debug.Log(cur);
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        //Debug.Log(max);
+        Debug.Log(max);
         if (cur + num <= max)
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
@@ -287,7 +294,7 @@ public class BuildingBase : MonoBehaviour
     }
     public virtual void DeleteCurPeople(int num)
     {
-        Debug.Log("Delete");
+        //Debug.Log("Delete"+num);
         int cur = runtimeBuildData.CurPeople;
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
         if (cur - num >= 0)
@@ -311,17 +318,19 @@ public class BuildingBase : MonoBehaviour
         buildData.Pause = runtimeBuildData.Pause;
         buildData.CurLevel = runtimeBuildData.CurLevel+1;
         buildData.CurFormula = runtimeBuildData.CurFormula;
-        buildData.CurPeople = 0;
+        int people = runtimeBuildData.CurPeople;
+        DeleteCurPeople(runtimeBuildData.CurPeople);
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
         BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
         issuccess = success;
         if (success)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
-            DestroyBuilding(false,false);
+            DestroyBuilding(false,false,false);
         }
         else
         {
+            AddCurPeople(people);
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }
     }
@@ -356,7 +365,7 @@ public class BuildingBase : MonoBehaviour
     {
         return runtimeBuildData.Happiness;
     }
-    private CarMission MakeCarMission(float rate)
+    protected virtual CarMission MakeCarMission(float rate)
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();

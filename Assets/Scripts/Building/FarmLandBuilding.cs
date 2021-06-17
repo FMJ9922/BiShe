@@ -35,6 +35,8 @@ public class FarmLandBuilding : BuildingBase
         }
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
         MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;

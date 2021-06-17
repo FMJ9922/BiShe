@@ -23,6 +23,8 @@ public class MineBuilding : BuildingBase
         }
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
         //MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;
@@ -33,7 +35,10 @@ public class MineBuilding : BuildingBase
 
     protected override void Output()
     {
-        if (formula == null || formula.OutputItemID == null) return;
+        if (formula == null || formula.OutputItemID == null)
+        {
+            Debug.LogError("矿井配方为空");
+        }
         productTime--;
         if (productTime <= 0)
         {
@@ -61,7 +66,7 @@ public class MineBuilding : BuildingBase
         DigGround();
     }
 
-    private CarMission MakeCarMission(float rate)
+    protected override CarMission MakeCarMission(float rate)
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();

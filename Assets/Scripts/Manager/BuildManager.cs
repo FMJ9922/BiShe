@@ -292,6 +292,7 @@ public class BuildManager : Singleton<BuildManager>
             return;
         }
         ResourceManager.Instance.TryUseResources(info.costResources);
+        EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         success = true;
         List<Vector2Int> grids = new List<Vector2Int>();
         List<Vector2Int> bridgeGrids = new List<Vector2Int>();
@@ -603,6 +604,10 @@ public class BuildManager : Singleton<BuildManager>
         Vector3 start = startPos;
         Vector3 down = Vector3.down;
         Vector3 ground = MapManager.GetTerrainPosition(startPos);
+        if (ground.y < 10)
+        {
+            ground = new Vector3(ground.x, 10, ground.z);
+        }
         while (start.y - ground.y > 0)
         {
             down += -Vector3.down * 30F * Time.deltaTime;
@@ -661,6 +666,7 @@ public class BuildManager : Singleton<BuildManager>
         }
         ResourceManager.Instance.TryUseResources(rescources, TechManager.Instance.BuildResourcesBuff());
         ResourceManager.Instance.TryUseResource(new CostResource(99999, runtimeBuildData.Price), TechManager.Instance.BuildPriceBuff());
+        EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         return true;
 
     }
@@ -681,6 +687,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.StartListening(ConstEvent.OnRotateBuilding, rotateAc);
+        MainInteractCanvas.Instance.HideBuildingButton();
         OnRotateBuilding();
         GameManager.Instance.PauseGame();
     }
@@ -693,6 +700,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+        MainInteractCanvas.Instance.ShowBuildingButton();
         if (arrows != null)
         {
             Destroy(arrows.gameObject);
@@ -748,6 +756,10 @@ public class BuildManager : Singleton<BuildManager>
         else
         {
             newPos.z = Mathf.Floor(pos.z / 2) * 2;
+        }
+        if (pos.y < 10f)
+        {
+            newPos.y = 10;
         }
         return newPos;
     }

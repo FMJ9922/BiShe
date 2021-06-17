@@ -27,9 +27,9 @@ public class DriveSystem : MonoBehaviour
     [SerializeField] Transform leftWheel, rightWheel;
     private float missionTimer = 0;
     private float brakeTimer = 0;
-    private float BrakeMaxTime = 20f;//单次刹车最长时间
-    private float MissionMaxTime = 300f;//单次任务最长时间;
-
+    private float BrakeMaxTime = 10f;//单次刹车最长时间
+    private float MissionMaxTime = 120f;//单次任务最长时间;
+    private bool pause =false;
     public CarMission CurMission { get; private set; }
     private void Start()
     {
@@ -56,45 +56,61 @@ public class DriveSystem : MonoBehaviour
     {
         CurMission = null;
     }
+
+    private void PauseGame()
+    {
+        pause = true;
+    }
+    private void ResumeGame()
+    {
+        pause = false;
+    }
     public void StartDriving(List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction _callBack = null)
     {
-        //Debug.Log("startDrive");
-        callback = _callBack;
-        action = null;
-        wayCount = 0;
-        speed = 3;
-        brakeTimer = 0;
-        missionTimer = 0;
-        //Debug.Log((callBack != null).ToString());
-        WayPoints = wayPoints;
-        if (wayPoints.Count == 0)
+        try
         {
-            DriveStop(_callBack);
+            //Debug.Log("startDrive");
+            callback = _callBack;
+            action = null;
+            wayCount = 0;
+            speed = 3;
+            brakeTimer = 0;
+            missionTimer = 0;
+            //Debug.Log((callBack != null).ToString());
+            WayPoints = wayPoints;
+            EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
+            EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
+            if (wayPoints.Count == 0)
+            {
+                DriveStop(_callBack);
+            }
+            transform.position = WayPoints[0];
+            if (WayPoints[0] == WayPoints[1])
+            {
+                WayPoints.RemoveAt(0);
+            }
+            transform.forward = WayPoints[1] - WayPoints[0];
+            switch (driveType)
+            {
+                case DriveType.once:
+                    {
+                        action = () => DriveOnce(WayPoints, _callBack);
+                        break;
+                    }
+                case DriveType.loop:
+                    {
+                        action = () => DriveLoop(WayPoints);
+                        break;
+                    }
+                case DriveType.yoyo:
+                    {
+                        action = () => DriveYoyo(WayPoints);
+                        break;
+                    }
+            }
         }
-        transform.position = WayPoints[0];
-        if (WayPoints[0] == WayPoints[1])
-        {
-            WayPoints.RemoveAt(0);
-        }
-        transform.forward = WayPoints[1] - WayPoints[0];
-        switch (driveType)
-        {
-            case DriveType.once:
-                {
-                    action = () => DriveOnce(WayPoints, _callBack);
-                    break;
-                }
-            case DriveType.loop:
-                {
-                    action = () => DriveLoop(WayPoints);
-                    break;
-                }
-            case DriveType.yoyo:
-                {
-                    action = () => DriveYoyo(WayPoints);
-                    break;
-                }
-        }
+        catch { Debug.LogError(""); }
+        
     }
 
     private void OvertimeStop()
@@ -130,6 +146,7 @@ public class DriveSystem : MonoBehaviour
     }
     private void DriveOnce(List<Vector3> targets, UnityAction callBack)
     {
+        if (pause) return;
         ControlSpeed(targets);
         CheckMissionOvertime();
         if (wayCount < targets.Count && Vector3.Distance(targets[wayCount], transform.position) < StopDistance )
@@ -264,6 +281,7 @@ public class DriveSystem : MonoBehaviour
     }
     private void DriveTurn(Vector3 to, UnityAction callback,Vector3 turn,float dis)
     {
+        if (pause) return;
         CheckMissionOvertime();
         curTime += Time.fixedDeltaTime;
         var temp = Vector3.Cross(transform.forward, to).y;
@@ -315,5 +333,7 @@ public class DriveSystem : MonoBehaviour
         action = null;
         callBack.Invoke();
         callBack = null;
+        EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
+        EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
     }
 }

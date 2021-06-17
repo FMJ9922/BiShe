@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 9048356163473343085}
   m_Layer: 0
   m_Name: Universal_Building_Mine_L3
-  m_TagString: Building
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,8 +78,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 0.2, z: 20}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 40, y: 2.2559042, z: 20}
+  m_Center: {x: 0, y: 1.1279521, z: 0}
 --- !u!114 &8432287361642154849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   parkingGridOut: {x: 0, y: 0}
   direction: 0
   digPos: {fileID: 1543125130451273440}
+  richness: 1
 --- !u!54 &664317420664245025
 Rigidbody:
   m_ObjectHideFlags: 0

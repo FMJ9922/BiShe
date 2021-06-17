@@ -475,9 +475,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDrop: {fileID: 2793947017557292450}
-  storeInput: {fileID: 1554818417753507825}
-  modeDrop: {fileID: 597340684493007051}
+  subBtn: {fileID: 0}
+  addBtn: {fileID: 0}
+  numText: {fileID: 0}
   profitText: {fileID: 9064206238363571760}
+  modeDrop: {fileID: 597340684493007051}
   confirmBtn: {fileID: 1951543501270010537}
   cancelBtn: {fileID: 4260390850294053827}
   icon: {fileID: 5322537900656648}
@@ -486,7 +488,13 @@ MonoBehaviour:
     Name: 
     ItemType: 0
     Price: 0
-    BuildingID: 0
+    Happiness: 0
+  isTrading: 0
+  needNum: 0
+  curMode: 0
+  profit: 0
+  isBuy: 1
+  maxNum: 0
 --- !u!1 &2299375206788172663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +1961,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Option A
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 51ad3db41e1d32f4bb4529bba8dd3bb1, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2017,7 +2025,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5345609624689267849

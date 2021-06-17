@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5647980346182910128}
   m_Layer: 0
   m_Name: Universal_Building_Government_L1_01
-  m_TagString: Building
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

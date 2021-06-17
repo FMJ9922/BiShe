@@ -37,7 +37,7 @@ public partial class InputManager : Singleton<InputManager>
             if (hit.collider.CompareTag("Ground") && LastGroundRayPos != hit.point && Cursor.lockState != CursorLockMode.Locked)
             {
                 LastGroundRayPos = hit.point;
-                Debug.Log(hit.point);
+                //Debug.Log(hit.point);
                 EventManager.TriggerEvent(ConstEvent.OnGroundRayPosMove, hit.point);
             }
         }
@@ -106,7 +106,7 @@ public partial class InputManager : Singleton<InputManager>
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject() && !BuildManager.IsInBuildMode)
+        if (Physics.Raycast(ray, out hit,10000, ~(1 << LayerMask.NameToLayer("Enviornment"))) && !EventSystem.current.IsPointerOverGameObject() && !BuildManager.IsInBuildMode)
         {
             if (hit.collider.CompareTag("Building"))
             {

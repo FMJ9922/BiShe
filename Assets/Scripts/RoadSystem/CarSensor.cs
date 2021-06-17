@@ -14,7 +14,10 @@ public class CarSensor : MonoBehaviour
         {
             if (OnBrake != null)
             {
-                OnBrake();
+                if (Vector3.Angle(other.transform.forward, transform.forward) > 70)
+                {
+                    OnBrake();
+                }
             }
         }
     }

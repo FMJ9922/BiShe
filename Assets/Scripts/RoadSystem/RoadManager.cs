@@ -194,6 +194,17 @@ public class RoadManager : Singleton<RoadManager>
         return false;
     }
 
+    private bool IsCrossNode(Vector2Int roadNode)
+    {
+        for (int i = 0; i < CrossNodes.Count; i++)
+        {
+            if (CrossNodes[i].GridPos == roadNode)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public void Show()
     {
         for (int i = 0; i < CrossNodes.Count; i++)
@@ -240,11 +251,12 @@ public class RoadManager : Singleton<RoadManager>
     {
         RoadNode inNode = RoadNodeDic[gridIn];
         RoadNode outNode = RoadNodeDic[gridOut];
-        inNode.AddNearbyNode(outNode);
         outNode.AddNearbyNode(inNode);
     }
     public void AddCrossNode(Vector2Int grid, Direction dir)
     {
+        if (IsCrossNode(grid))
+            return;
         if (RoadNodeDic.TryGetValue(grid, out RoadNode node0))
         {
             RoadNode node1 = GetNearestCross(grid, dir);

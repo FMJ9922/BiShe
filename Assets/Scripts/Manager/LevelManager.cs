@@ -11,6 +11,7 @@ public class LevelManager : Singleton<LevelManager>
     public static int LevelID;
     private int year, month, week,day;
     private bool hasSuccess = false;
+    private bool pause = false;
     public float DayTime
     {
         get => dayTime;
@@ -122,16 +123,28 @@ public class LevelManager : Singleton<LevelManager>
         monthstr = Localization.ToSettingLanguage("Month");
         weekstr = Localization.ToSettingLanguage("Week");
         daystr = Localization.ToSettingLanguage("Day");
+        EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
+        EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
+    }
+
+    private void PauseGame()
+    {
+        pause = true;
+    }
+
+    private void ResumeGame()
+    {
+        pause = false;
     }
 
     private void FixedUpdate()
     {
+        if (pause) return;
         if (Timer >= dayTime)
         {
             Timer = 0;
             string date;
             AddDay(out date);
-            CheckSuccess();
             EventManager.TriggerEvent<string>(ConstEvent.OnDayWentBy, date);
             EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         }
@@ -139,6 +152,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             Timer += Time.deltaTime;
             WeekProgress = (dayTime * (day - 1) + Timer) / (dayTime * 7);
+            if(!hasSuccess)CheckSuccess();
         }
     }
     /// <summary>
@@ -167,6 +181,7 @@ public class LevelManager : Singleton<LevelManager>
             && MapManager.Instance.GetHappiness() >= aimHappiness)
         {
             MainInteractCanvas.OpenSuccessCanvas();
+            hasSuccess = true;
         }
     }
     /// <summary>
@@ -175,5 +190,7 @@ public class LevelManager : Singleton<LevelManager>
     private void OnDestroy()
     {
         EventManager.ClearEvents();
+        EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
+        EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
     }
 }

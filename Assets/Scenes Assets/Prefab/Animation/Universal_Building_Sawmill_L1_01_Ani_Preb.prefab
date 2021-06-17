@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 3310467219726937053}
   - component: {fileID: 3792147040814006035}
   m_Layer: 0
-  m_Name: Universal_Building_Sawmill_L1_01_Ani
+  m_Name: Universal_Building_Sawmill_L1_01_Ani_Preb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -814,7 +814,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2790812063416873319}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -873,7 +873,7 @@ Animation:
   m_Animations:
   - {fileID: 1827226128182048838, guid: 0c5c26bca2d57264cbfde4a35aadf5b2, type: 3}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &3030534945742204430

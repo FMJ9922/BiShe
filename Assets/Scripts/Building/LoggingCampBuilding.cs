@@ -4,56 +4,44 @@ using UnityEngine;
 
 public class LoggingCampBuilding : BuildingBase
 {
+    [SerializeField]NearByTree sensor;
     public override void InitBuildingFunction()
     {
+        sensor.gameObject.SetActive(true);
         base.InitBuildingFunction();
     }
 
     protected override void Output()
     {
-        base.Output();
+        if (formula == null || formula.OutputItemID == null) return;
+        productTime--;
+        if (productTime <= 0)
+        {
+            productTime = formula.ProductTime;
+            float rate = runtimeBuildData.Rate;
+            CarMission carMission = MakeCarMission(rate);
+            TrafficManager.Instance.UseCar(carMission, () => carMission.EndBuilding.OnRecieveCar(carMission));
+            runtimeBuildData.Rate = 0;
+        }
     }
 
+    public override void UpdateRate(string date)
+    {
+        TreeSystem sys = sensor.GetNearestTree();
+        if (sys != null)
+        {
+            Vector3 treePos = sys.transform.position;
+            sys.TreeCutDown(new Vector3(0, Random.value * 360, 0));
+            EventManager.TriggerEvent(ConstEvent.OnPlantSingleTree, treePos);
+            base.UpdateRate(date);
+        }
+    }
     protected override void Input()
     {
         base.Input();
     }
 
-    List<TreeSystem> trees = new List<TreeSystem>();
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Tree"))
-        {
-            trees.Add(other.GetComponent<TreeSystem>());
-        }
-    }
+    
 
-    private TreeSystem GetNearestTree(out bool success)
-    {
-        TreeSystem res = null;
-        float dis = Mathf.Infinity;
-        for (int i = trees.Count - 1; i >= 0; i--)
-        {
-            if (trees[i] != null)
-            {
-                float curDis = GetManhattanDistance(trees[i].transform.position, transform.position);
-                if (curDis < dis)
-                {
-                    dis = curDis;
-                    res = trees[i];
-                }
-            }
-            else
-            {
-                trees.Remove(trees[i]);
-            }
-        }
-        success = res != null;
-        return res;
-    }
-
-    private float GetManhattanDistance(Vector3 pos1, Vector3 pos2)
-    {
-        return Mathf.Abs(pos1.x - pos2.x) + Mathf.Abs(pos1.y - pos2.y) + Mathf.Abs(pos1.z - pos2.z);
-    }
+    
 }

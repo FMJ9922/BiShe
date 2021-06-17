@@ -65,7 +65,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     /// <param name="ratio">运送多少个周期的货</param>
     /// <returns></returns>
-    private CarMission MakeCarMission(float ratio = 5)
+    private CarMission MakeCarMission(float ratio = 10)
     {
         CarMission mission = new CarMission();
         mission.StartBuilding = this;
@@ -75,7 +75,7 @@ public class HutBuilding : BuildingBase
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;
         mission.requestResources = new List<CostResource>();
-       mission.requestResources.Add(ResourceManager.Instance.GetFoodByHappiness(ratio));
+       mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(ratio));
         return mission;
     }
     /// <summary>

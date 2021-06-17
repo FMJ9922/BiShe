@@ -18,6 +18,7 @@ public class ConstEvent
     public const string OnRotateBuilding = "OnRotateBuilding";//旋转建筑
     public const string OnFinishBuilding = "OnFinishBuilding";//确认建造或者取消事件
     public const string OnBuildToBeConfirmed = "OnBuildToBeConfirmed";//等待建筑确认建造
+    public const string OnPlantSingleTree = "OnPlantSingleTree";//种树
     #endregion
 
     #region 交互事件
@@ -27,6 +28,8 @@ public class ConstEvent
 
     #region 时间倍速事件
     public const string OnTimeScaleChanged = "OnTimeScaleChanged";//时间倍速变化事件
+    public const string OnPauseGame = "OnPauseGame";//暂停游戏
+    public const string OnResumeGame = "OnResumeGame";//恢复游戏
     #endregion
 
     #region 资源事件

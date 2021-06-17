@@ -28,14 +28,13 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         _cameraTrans = transform.GetChild(0);
         EventManager.StartListening<bool>(ConstEvent.OnLockScroll,LockScroll);
-        InvokeRepeating("Timer", 0, 0.016666667f);
     }
     private void OnDestroy()
     {
         EventManager.StopListening<bool>(ConstEvent.OnLockScroll, LockScroll);
     }
 
-    private void Timer()
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -69,7 +68,7 @@ public class CameraMovement : Singleton<CameraMovement>
         {
             _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
         }
-        transform.position += MoveDirection(_forwardSpeed, _rightSpeed);
+        transform.position += MoveDirection(_forwardSpeed, _rightSpeed)/Mathf.Clamp((int)GameManager.Instance.GetTimeScale(),1,4);
 
         if (Input.GetMouseButton(2))
         {

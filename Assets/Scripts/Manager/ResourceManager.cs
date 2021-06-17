@@ -28,10 +28,12 @@ public class ResourceManager : Singleton<ResourceManager>
     public void InitResourceManager(int levelID)
     {
         LevelData data = DataManager.GetLevelData(levelID);
-        AddResource(DataManager.GetItemIdByName("Log"), data.log);
+        AddResource(DataManager.GetItemIdByName("Log"), 300);
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
         AddResource(DataManager.GetItemIdByName("Money"), data.money);
-        AddResource(DataManager.GetItemIdByName("Stone"), data.stone);
+        AddResource(DataManager.GetItemIdByName("Stone"), 100);
+        AddResource(12015,100);
+        AddResource(12020,100);
         RecordLastWeekItem();
     }
 
@@ -252,6 +254,27 @@ public class ResourceManager : Singleton<ResourceManager>
         }
         return null;
     }
+
+    public CostResource GetFoodByMax(float requestNum)
+    {
+        ItemData[] foods = DataManager.GetFoodItemList();
+        float maxNum = 0;
+        int p = 0;
+        for (int i = 0; i < foods.Length; i++)
+        {
+            float num = TryGetResourceNum(foods[i].Id);
+            if (num > maxNum)
+            {
+                p = i;
+                maxNum = num;
+            }
+        }
+        if (maxNum < requestNum)
+        {
+            requestNum = maxNum;
+        }
+        return new CostResource(foods[p].Id, requestNum);
+    }
     public float GetAllLastFoodNum()
     {
         int[] foodIds = DataManager.GetFoodIDList();
@@ -321,6 +344,7 @@ public class ResourceManager : Singleton<ResourceManager>
     /// <returns>实际提供下来的人口数量</returns>
     public int TryAddCurPopulation(int num)
     {
+        //Debug.Log(num);
         curPopulation += num;
         if (curPopulation <= 0)
         {
@@ -339,6 +363,7 @@ public class ResourceManager : Singleton<ResourceManager>
             curPopulation -= num;
             int maxProvide = maxPopulation - curPopulation;
             curPopulation += maxProvide;
+            //Debug.Log(maxProvide);
             return maxProvide;
         }
     }

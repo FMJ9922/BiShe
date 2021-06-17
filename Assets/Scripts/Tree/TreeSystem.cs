@@ -54,7 +54,7 @@ public class TreeSystem : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Tree") && !other.CompareTag("Ground"))
+        if (other.CompareTag("Building") || other.CompareTag("car")) 
         {
             Vector3 d = other.transform.position - transform.position;
             d = new Vector3(d.x, 0, d.z);

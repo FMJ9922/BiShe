@@ -46,16 +46,35 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return lists;
     }
-    public void UseCar(CarMission mission, UnityAction unityAction,DriveType driveType = DriveType.once)
+    public void UseCar(CarMission mission, UnityAction unityAction, DriveType driveType = DriveType.once)
     {
         DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
         Vector2Int start = mission.StartBuilding.parkingGridIn;
         Vector2Int end = mission.EndBuilding.parkingGridIn;
         //Debug.Log(start+" "+end);
-        List<Vector3> wayPoints = RoadManager.Instance.GetWayPoints(start, end);
-        //Debug.Log(wayPoints.Count);
-        driveSystem.SetCarMission(mission);
-        driveSystem.StartDriving(wayPoints, driveType, () => {  RecycleCar(driveSystem); unityAction.Invoke(); });
+        List<Vector3> wayPoints = new List<Vector3>();
+        try
+        {
+            wayPoints = RoadManager.Instance.GetWayPoints(start, end);
+        }
+        catch
+        {
+            Debug.LogError("寻路失败，起点是" + mission.StartBuilding.runtimeBuildData.Name
+               + "\n终点是" + mission.StartBuilding.runtimeBuildData.Name
+                + "不过不用担心，产品已经直接传送送达。请检查起点建筑是否被造在了路的拐点或终点，拆除并放置在其他位置上");
+
+        }
+        if (wayPoints.Count>0)
+        {
+            //Debug.Log(wayPoints.Count);
+            driveSystem.SetCarMission(mission);
+            driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem); unityAction.Invoke(); });
+        }
+        else
+        {
+            RecycleCar(driveSystem); 
+            unityAction.Invoke();
+        }
     }
 
 

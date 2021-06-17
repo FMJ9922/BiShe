@@ -7,6 +7,14 @@ public class TreePlanter : Singleton<MonoBehaviour>
     public GameObject[] TreePfbs;
     private float minDis = 2f;
 
+    private void Start()
+    {
+        EventManager.StartListening<Vector3>(ConstEvent.OnPlantSingleTree, PlantSingleUnInitTree);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening<Vector3>(ConstEvent.OnPlantSingleTree, PlantSingleUnInitTree);
+    }
     public void PlantTree(Vector3 centerPos, float range, float density)
     {
         List<Vector3> treePosList = new List<Vector3>();
@@ -32,7 +40,31 @@ public class TreePlanter : Singleton<MonoBehaviour>
             PlantSingleTree(treePosList[i]);
         }
     }
-
+    public void PlantSingleUnInitTree(Vector3 centerPos)
+    {
+        List<Vector3> treePosList = new List<Vector3>();
+        int plantNum = 1;
+        for (int i = 0; i < plantNum; i++)
+        {
+            Vector3 pos;
+            int counter = 0;
+            do
+            {
+                counter++;
+                pos = GetRandomPos(centerPos, 2f);
+            }
+            while (!IsDistanceOk(treePosList, pos) && counter < 10);
+            if (counter < 10)
+            {
+                treePosList.Add(pos);
+            }
+        }
+        //Debug.Log("种了" + treePosList.Count + "棵树");
+        for (int i = 0; i < treePosList.Count; i++)
+        {
+            PlantSingleTree(treePosList[i],TreeSystem.TreeState.unInit);
+        }
+    }
     private Vector3 GetRandomPos(Vector3 centerPos, float range)
     {
         float deltaX = Random.Range(-range, range);

@@ -29,7 +29,7 @@ public class MainInteractCanvas : CanvasBase
         {
             item.InitCanvas();
         }
-        returnBtn.onClick.AddListener(GameManager.Instance.LoadMenuScene);
+        returnBtn.onClick.AddListener(OpenReturnCanvas);
         EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
     }
 
@@ -108,6 +108,12 @@ public class MainInteractCanvas : CanvasBase
         CloseAllOpenedUI();
         SuccessCanvas successCanvas = (SuccessCanvas)canvas[7];
         successCanvas.OnOpen();
+    }
+    public void OpenReturnCanvas()
+    {
+        CloseAllOpenedUI();
+        ReturnCanvas returnCanvas = (ReturnCanvas)canvas[8];
+        returnCanvas.OnOpen();
     }
 
     public void CloseCarMissionCanvas()

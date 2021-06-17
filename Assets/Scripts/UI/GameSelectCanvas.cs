@@ -26,6 +26,7 @@ public class GameSelectCanvas : Singleton<GameSelectCanvas>
             levelItems.transform.SetParent(content);
             levelItems.transform.SetSiblingIndex(content.childCount - 2);
             levelItems.GetComponent<LevelSelectItem>().Init(data[i]);
+            levelItems.transform.localScale = Vector3.one;
         }
         LevelSelectItem.items[0].ShowOutline();
         ChangeShowLevel(data[0]);

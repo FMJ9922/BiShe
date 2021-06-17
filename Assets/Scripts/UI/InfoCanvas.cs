@@ -146,7 +146,7 @@ public class InfoCanvas : CanvasBase
         RemoveBtnsListener();
         _populationBtns[0].onClick.AddListener(() =>
         {
-            buildingBase.DeleteCurPeople(10);
+            buildingBase.DeleteCurPeople(100);
         });
         _populationBtns[1].onClick.AddListener(() =>
         {
@@ -158,9 +158,9 @@ public class InfoCanvas : CanvasBase
         });
         _populationBtns[3].onClick.AddListener(() =>
         {
-            buildingBase.AddCurPeople(10);
+            buildingBase.AddCurPeople(100);
         });
-        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true); OnClose(); });
+        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true,true,true); OnClose(); });
         _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(out bool success); if(success)OnClose(); });
     }
 

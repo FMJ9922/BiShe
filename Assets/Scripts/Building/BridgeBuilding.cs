@@ -9,6 +9,8 @@ public class BridgeBuilding : BuildingBase
         runtimeBuildData = new RuntimeBuildData();
         runtimeBuildData = CastBuildDataToRuntime(DataManager.GetBuildData(20036));
         runtimeBuildData.tabType = BuildTabType.bridge;
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
         runtimeBuildData.Id = 20036;
         gameObject.tag = "Building";
         takenGrids = vector2Ints;
@@ -19,7 +21,7 @@ public class BridgeBuilding : BuildingBase
     {
         buildFlag = true;
     }
-    public override void DestroyBuilding(bool returnResources,bool repaint = true)
+    public override void DestroyBuilding(bool returnResources,bool returnPopulation,bool repaint = true)
     {
         MapManager.SetGridTypeToEmpty(takenGrids);
         MapManager.Instance.BuildFoundation(takenGrids, 1, 4);
@@ -30,7 +32,10 @@ public class BridgeBuilding : BuildingBase
     {
         if (!buildFlag)
         {
-            Destroy(this.gameObject);
+            if (!other.CompareTag("Untagged"))
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

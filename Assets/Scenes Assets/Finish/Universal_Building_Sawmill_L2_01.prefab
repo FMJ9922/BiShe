@@ -1,5 +1,79 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1008311203985037111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022745758068894686}
+  - component: {fileID: 6472888066754662340}
+  - component: {fileID: 7159458318891938758}
+  - component: {fileID: 8570849456724777084}
+  m_Layer: 9
+  m_Name: TreeSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1022745758068894686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008311203985037111}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2151437240810148693}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6472888066754662340
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008311203985037111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7159458318891938758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008311203985037111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d909abf314d0eda418a4c337bc5d965b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &8570849456724777084
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008311203985037111}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5181180776102677635
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,13 +83,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2151437240810148693}
-  - component: {fileID: 8219093728121325095}
   - component: {fileID: 4524741797051577223}
   - component: {fileID: -7792054937391746929}
   - component: {fileID: 98133261654414338}
+  - component: {fileID: 3038256570106568768}
   m_Layer: 0
   m_Name: Universal_Building_Sawmill_L2_01
-  m_TagString: Building
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,32 +106,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 516563038758585425}
+  - {fileID: 1022745758068894686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8219093728121325095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181180776102677635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Width: 6
-  Height: 8
-  BundlePrimaryType: 0
-  hasAnima: 0
-  animation: {fileID: 0}
-  body: {fileID: 891963364807089899}
-  buildFlag: 0
-  takenGrids: []
-  parkingGridIn: {x: 0, y: 0}
-  parkingGridOut: {x: 0, y: 0}
-  direction: 0
 --- !u!65 &4524741797051577223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66,7 +118,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5181180776102677635}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 13.077263, y: 0.2, z: 15.737605}
@@ -99,6 +151,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3038256570106568768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5181180776102677635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6883a93cb9e9e9645853de0e726afc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 6
+  Height: 8
+  BundlePrimaryType: 0
+  hasAnima: 0
+  animation: {fileID: 0}
+  body: {fileID: 891963364807089899}
+  buildFlag: 0
+  takenGrids: []
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
+  direction: 0
+  sensor: {fileID: 7159458318891938758}
 --- !u!1001 &4119412554621548555
 PrefabInstance:
   m_ObjectHideFlags: 0

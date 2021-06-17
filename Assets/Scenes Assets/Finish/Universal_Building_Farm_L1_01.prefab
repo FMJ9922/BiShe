@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6325556495357599334}
   m_Layer: 0
   m_Name: Universal_Building_Farm_L1_01
-  m_TagString: Building
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

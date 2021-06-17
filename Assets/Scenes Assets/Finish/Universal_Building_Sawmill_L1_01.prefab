@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 2777044009752049682}
   - component: {fileID: 7029621906015999455}
-  - component: {fileID: 8307174466056556666}
   - component: {fileID: 9023254816225749810}
   - component: {fileID: -2597777306280376452}
+  - component: {fileID: 362941943476900421}
   m_Layer: 0
   m_Name: Universal_Building_Sawmill_L1_01
-  m_TagString: Building
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7220600028183571077}
   - {fileID: 6901299188479088634}
+  - {fileID: 5772424466217588235}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,29 +50,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.367195, y: 0.2, z: 14.881308}
   m_Center: {x: -0.9947376, y: 0.1, z: 0.17246246}
---- !u!114 &8307174466056556666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6732961294193183716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Width: 6
-  Height: 8
-  BundlePrimaryType: 0
-  hasAnima: 1
-  animation: {fileID: 5086563775639618356}
-  body: {fileID: 8034256622656090175}
-  buildFlag: 0
-  takenGrids: []
-  parkingGridIn: {x: 0, y: 0}
-  parkingGridOut: {x: 0, y: 0}
-  direction: 0
 --- !u!114 &9023254816225749810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +74,104 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &362941943476900421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6732961294193183716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6883a93cb9e9e9645853de0e726afc2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 6
+  Height: 8
+  BundlePrimaryType: 0
+  hasAnima: 1
+  animation: {fileID: 5086563775639618356}
+  body: {fileID: 8034256622656090175}
+  buildFlag: 0
+  takenGrids: []
+  parkingGridIn: {x: 0, y: 0}
+  parkingGridOut: {x: 0, y: 0}
+  direction: 0
+  sensor: {fileID: 4169398781723423611}
+--- !u!1 &6913928871226948752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5772424466217588235}
+  - component: {fileID: 8737733447544503032}
+  - component: {fileID: 4169398781723423611}
+  - component: {fileID: 5379580361714903857}
+  m_Layer: 9
+  m_Name: TreeSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5772424466217588235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6913928871226948752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2777044009752049682}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8737733447544503032
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6913928871226948752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4169398781723423611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6913928871226948752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d909abf314d0eda418a4c337bc5d965b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &5379580361714903857
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6913928871226948752}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -196,7 +272,7 @@ PrefabInstance:
     - target: {fileID: 2790812063416873319, guid: aff86817aadae06478653c8fcfb6dbb8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
         type: 3}

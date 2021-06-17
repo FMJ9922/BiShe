@@ -73,18 +73,19 @@ public class MarketManager : Singleton<MarketManager>
                     case MarketItem.TradeMode.once:
                         if (IsItemEnough(costResource))
                         {
-                            SellItem(costResource);
+                            SellItem(costResource, orderItems[i].curItem.Price);
                             orderItems[i].OnResetTrading();
                         }
                         break;
                     case MarketItem.TradeMode.everyWeek:
-                        SellItem(costResource);
+                        SellItem(costResource, orderItems[i].curItem.Price);
                         break;
                     case MarketItem.TradeMode.maintain:
                         float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
                         if (num > 0)
                         {
-                            SellItem(new CostResource(costResource.ItemId, num));
+                            num = Mathf.Clamp(num, 0, 200 * TechManager.Instance.SellNumBuff());
+                            SellItem(new CostResource(costResource.ItemId, num),orderItems[i].curItem.Price);
                         }
                         break;
                 }
@@ -118,10 +119,11 @@ public class MarketManager : Singleton<MarketManager>
         ResourceManager.Instance.AddResource(costResource.ItemId, costResource.ItemNum);
     }
 
-    public void SellItem(CostResource costResource)
+    public void SellItem(CostResource costResource,float price)
     {
         //Debug.Log("sell" + costResource.ItemNum);
-        float profit = ResourceManager.Instance.TryUseUpResource(new CostResource(costResource.ItemId, costResource.ItemNum)).ItemNum;
+        float profit = ResourceManager.Instance.TryUseUpResource(new CostResource(costResource.ItemId, costResource.ItemNum)).ItemNum
+            *price * TechManager.Instance.PriceBuff();
         marketCanvas.AddProfitInfo(GetSellProfitDescribe(costResource, profit));
         ResourceManager.Instance.AddMoney(profit);
     }

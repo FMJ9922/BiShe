@@ -21,6 +21,8 @@ public class PierBuilding : BuildingBase
         }
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
         //MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
         InitBuildingFunction();
     }

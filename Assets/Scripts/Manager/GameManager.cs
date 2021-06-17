@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
 
     private FadeScene fadeScene;
     private TimeScale timeScale = TimeScale.one;
+    private TimeScale lastTimeScale = TimeScale.one;
     protected override void InstanceAwake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -20,13 +21,13 @@ public class GameManager : Singleton<GameManager>
     {
         if(timeScale != TimeScale.stop)
         {
-            SetTimeScale(TimeScale.stop);
+            PauseGame();
             scale = TimeScale.stop;
         }
         else
         {
-            SetTimeScale(TimeScale.one);
-            scale = TimeScale.one;
+            ContinueGame();
+            scale = lastTimeScale;
         }
     }
 
@@ -37,7 +38,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ContinueGame()
     {
-        SetTimeScale(TimeScale.one);
+        SetTimeScale(lastTimeScale);
+        EventManager.TriggerEvent(ConstEvent.OnResumeGame);
     }
     public TimeScale GetTimeScale()
     {
@@ -76,22 +78,23 @@ public class GameManager : Singleton<GameManager>
         switch (scale)
         {
             case TimeScale.stop:
-                Time.timeScale = 0.0f;
+                EventManager.TriggerEvent(ConstEvent.OnPauseGame);
                 break;
             case TimeScale.one:
                 Time.timeScale = 1.0f;
+                lastTimeScale = timeScale;
+                EventManager.TriggerEvent(ConstEvent.OnResumeGame);
                 break;
             case TimeScale.two:
                 Time.timeScale = 2.0f;
+                lastTimeScale = timeScale;
                 break;
             case TimeScale.four:
                 Time.timeScale = 4.0f;
+                lastTimeScale = timeScale;
                 break;
         }
-        if (CameraMovement.Instance)
-        {
-            CameraMovement.Instance.AllowMovement();
-        }
+
         EventManager.TriggerEvent<TimeScale>(ConstEvent.OnTimeScaleChanged, timeScale);
     }
     public void QuitApplication()
