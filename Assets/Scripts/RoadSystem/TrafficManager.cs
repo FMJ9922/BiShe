@@ -55,13 +55,13 @@ public class TrafficManager : Singleton<TrafficManager>
         List<Vector3> wayPoints = new List<Vector3>();
         try
         {
-            wayPoints = RoadManager.Instance.GetWayPoints(start, end);
+            wayPoints = MapManager.Instance.GetWayPoints(start, end);
         }
         catch
         {
             Debug.LogError("寻路失败，起点是" + mission.StartBuilding.runtimeBuildData.Name
-               + "\n终点是" + mission.StartBuilding.runtimeBuildData.Name
-                + "不过不用担心，产品已经直接传送送达。请检查起点建筑是否被造在了路的拐点或终点，拆除并放置在其他位置上");
+               + "终点是" + mission.StartBuilding.runtimeBuildData.Name
+                + "\n不过不用担心，产品已经直接传送送达。请检查起点建筑是否被造在了路的拐点或终点，拆除并放置在其他位置上");
 
         }
         if (wayPoints.Count>0)

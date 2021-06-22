@@ -115,6 +115,7 @@ public class LevelManager : Singleton<LevelManager>
         if (GameManager.saveData == null)
         {
             Scene scene = SceneManager.GetActiveScene();
+            GameManager.saveData = GameSaver.ReadSaveData(scene.name, true);
             InitLevelManager(int.Parse(scene.name));
             year = 1;
             month = 1;
@@ -171,6 +172,20 @@ public class LevelManager : Singleton<LevelManager>
         MainInteractCanvas.InitCanvas();
     }
 
+    public void SaveLevelManager(ref SaveData saveData)
+    {
+        saveData.dayTime = dayTime;
+        saveData.levelID = LevelID;
+        saveData.year = year;
+        saveData.month = month;
+        saveData.week = week;
+        saveData.day = day;
+        saveData.hasSuccess = hasSuccess;
+        saveData.pause = pause;
+        saveData.timer = Timer;
+        saveData.weekProgress = WeekProgress;
+    }
+
     public void InitSavedLevelManager(SaveData saveData)
     {
         dayTime = saveData.dayTime;
@@ -189,7 +204,8 @@ public class LevelManager : Singleton<LevelManager>
         InitSaveWater(GameManager.saveData);
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(GameManager.saveData.buildingDatas);
-        TerrainGenerator.Instance.LoadTerrain(saveData.mapName.ToString(), true);
+        TerrainGenerator.Instance.LoadTerrain(saveData.mapName, true);
+        MainInteractCanvas.InitCanvas();
     }
 
     public void InitSaveWater(SaveData saveData)

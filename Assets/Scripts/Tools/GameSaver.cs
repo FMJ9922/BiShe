@@ -85,6 +85,7 @@ public class SaveData
     #endregion
     #region ResourceManager
     public CostResource[] saveResources;
+    public int curPopulation;
     #endregion
     #region MapManager
     public GridNode[][] gridNodes;

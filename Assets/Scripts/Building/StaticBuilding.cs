@@ -17,12 +17,13 @@ public class StaticBuilding : MonoBehaviour
     public void SetGrids()
     {
         //Debug.Log("set");
+        
         currentBuilding = transform.GetComponent<BuildingBase>();
         Vector2Int[] targetGrids = BuildManager.Instance.GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, 
             currentBuilding.transform.position, isFacingX);
         MapManager.SetGridTypeToOccupy(targetGrids);
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
-        //Debug.Log(currentBuilding.transform.name);
+        transform.tag = "Building";
         currentBuilding.OnConfirmBuild(targetGrids);
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
@@ -30,8 +31,8 @@ public class StaticBuilding : MonoBehaviour
         float targetHeight = targetPos.y;
         TerrainGenerator.Instance.FlatGround(currentBuilding.takenGrids, targetHeight);
         //Debug.Log("Add:" + currentBuilding.parkingGrid);
-        RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction); 
-        RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
-        RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
+        //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction); 
+        //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
+        //RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
     }
 }

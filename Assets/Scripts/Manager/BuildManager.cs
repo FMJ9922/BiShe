@@ -141,6 +141,7 @@ public class BuildManager : Singleton<BuildManager>
 
     public void InitSaveBuildings(RuntimeBuildData[] buildDatas)
     {
+        Debug.Log(buildDatas.Length);
         for (int i = 0; i < buildDatas.Length; i++)
         {
             InitSaveBuilding(buildDatas[i]);
@@ -158,6 +159,7 @@ public class BuildManager : Singleton<BuildManager>
             pfbName = pfbName.Substring(0, pfbName.Length - 1);
             pfbName += buildData.SaveOutLookType.ToString();
         }
+        Debug.Log(pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         building.name = pfbName;
@@ -210,8 +212,8 @@ public class BuildManager : Singleton<BuildManager>
         {
             MapManager.SetGridTypeToEmpty(grids);
             MapManager.Instance.BuildFoundation(grids, 0, 4);
-            RoadManager.Instance.InitRoadNodeDic();
-            MapManager.Instance.SetBuildingsGrid();
+            //RoadManager.Instance.InitRoadNodeDic();
+            //MapManager.Instance.SetBuildingsGrid();
         }
 
     }
@@ -613,9 +615,9 @@ public class BuildManager : Singleton<BuildManager>
         {
             currentBuilding.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
-            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
-            RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
+            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
+            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
+            //RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
 
             WhenFinishBuild();
             if (currentBuilding.runtimeBuildData.Id != 20005 &&

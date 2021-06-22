@@ -184,7 +184,7 @@ public class GameManager : Singleton<GameManager>
     public void SaveLevel()
     {
         Debug.Log("开始保存");
-        SaveData data = MakeSaveData();
+        SaveData data = MakeSaveData(true);
 
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         sw.Start();
@@ -196,7 +196,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("写入文件耗时:" + dt.TotalSeconds + "秒");
     }
 
-    public SaveData MakeSaveData()
+    public SaveData MakeSaveData(bool isOffcial)
     {
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         sw.Start();
@@ -205,6 +205,7 @@ public class GameManager : Singleton<GameManager>
 
         data.mapSize = new Vector2IntSerializer(MapManager.Instance.MapSize);
         data.levelID = 30001;
+        data.mapName = data.levelID.ToString();
         //mesh
         Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().mesh;
         //data.meshName = mesh.name;
@@ -264,7 +265,7 @@ public class GameManager : Singleton<GameManager>
             data.waterPos[i].Fill(p.position);
             data.waterScale[i].Fill(p.localScale);
         }
-        Debug.Log(waterChildCount);
+        //Debug.Log(waterChildCount);
 
         //buildings
         Transform buildingParent = TransformFinder.Instance.buildingParent;
@@ -281,13 +282,16 @@ public class GameManager : Singleton<GameManager>
                 Vector2IntSerializer.Box(building.takenGrids);
             data.buildingDatas[i].SaveDir = building.direction;
             data.buildingDatas[i].SaveOutLookType = CheckOutLook(data.buildingDatas[i].Id, p.name);
+            Debug.Log(building.runtimeBuildData.PfbName);
         }
 
         //LevelManager
         data.saveResources = ResourceManager.Instance.GetAllResources();
+        data.curPopulation = ResourceManager.Instance.CurPopulation;
+        LevelManager.Instance.SaveLevelManager(ref data);
 
         //MapManager
-        data.gridNodes = MapManager.Instance.GetGridNodes();
+        data.gridNodes = MapManager.Instance.GetGrids();
 
         sw.Stop();
         System.TimeSpan dt = sw.Elapsed;
@@ -313,22 +317,22 @@ public class GameManager : Singleton<GameManager>
         {
             if (deltaY > 0)
             {
-                return 1;
+                return 0;
             }
             else
             {
-                return 2;
+                return 3;
             }
         }
         else
         {
             if (deltaY > 0)
             {
-                return 0;
+                return 1;
             }
             else
             {
-                return 3;
+                return 2;
             }
         }
     }

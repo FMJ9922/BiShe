@@ -30,6 +30,7 @@ public class DriveSystem : MonoBehaviour
     private float BrakeMaxTime = 10f;//单次刹车最长时间
     private float MissionMaxTime = 120f;//单次任务最长时间;
     private bool pause =false;
+    private float speedBuff = 1;
     public CarMission CurMission { get; private set; }
     private void Start()
     {
@@ -134,7 +135,7 @@ public class DriveSystem : MonoBehaviour
         }
         else
         {
-            if (speed < MaxSpeed && wayCount < targets.Count)
+            if (speed < MaxSpeed * speedBuff&& wayCount < targets.Count)
             {
                 speed += a * Time.fixedDeltaTime;
             }
@@ -154,6 +155,7 @@ public class DriveSystem : MonoBehaviour
             wayCount++;
             if(wayCount < targets.Count)
             {
+                speedBuff = MapManager.GetGridNode(MapManager.GetCenterGrid(targets[wayCount])).passSpeed;
                 float angle = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position);
                 if (angle > 5 && angle < 175)
                 {

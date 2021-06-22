@@ -14,7 +14,7 @@ public class HutBuilding : BuildingBase
     public override void InitBuildingFunction()
     {
         storage = transform.GetComponent<Storage>();
-        storage.AddResource(11001, 5);
+        storage.AddResource(11001, 2);
         ProvidePopulation();
         base.InitBuildingFunction();
     }

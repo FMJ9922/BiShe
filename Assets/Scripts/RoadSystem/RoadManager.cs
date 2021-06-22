@@ -16,7 +16,7 @@ public class RoadManager : Singleton<RoadManager>
     //从grid转化为图，再简化
     public void InitRoadManager()
     {
-        InitRoadNodeDic();
+        //InitRoadNodeDic();
     }
 
     public void InitRoadNodeDic()
@@ -37,7 +37,8 @@ public class RoadManager : Singleton<RoadManager>
         for (int i = 0; i < roadGrids.Count; i++)
         {
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
-            GridNode node = new GridNode(roadGrids[i]);
+            GridNode node = new GridNode();
+            //node.GridPos.Fill(roadGrids[i]);
             node.Clear();
             if (!RoadNodeDic.TryGetValue(roadGrids[i],out var value))
             {
@@ -223,14 +224,14 @@ public class RoadManager : Singleton<RoadManager>
     {
         return (a.GridPos.x - b.GridPos.x) * 1000 + (a.GridPos.y - b.GridPos.y);
     }
-
+    /*
     public void AddRoadNode(Vector2Int grid)
     {
         if (!RoadNodeDic.TryGetValue(grid, out GridNode node))
         {
             RoadNodeDic.Add(grid,new GridNode(grid));
         }
-    }
+    }*/
 
     public void CheckAndAddCrossNode(GridNode node)
     {
@@ -303,7 +304,7 @@ public class RoadManager : Singleton<RoadManager>
         List<GridNode> closeList = new List<GridNode>();
         GridNode startNode = RoadNodeDic[start];
         GridNode endNode = RoadNodeDic[end];
-        startNode.H = GetDistance(startNode.GridPos, end);
+        startNode.G = GetDistance(startNode.GridPos, end);
         openList.Add(startNode);
         path.Add(startNode);
         GridNode temp = startNode;
@@ -320,7 +321,7 @@ public class RoadManager : Singleton<RoadManager>
             for (int i = 0; i < openList.Count; i++)
             {
                 //Debug.Log(openList[i].GridPos+" "+temp.H+" "+openList[i].H);
-                if (temp.H > openList[i].H)
+                if (temp.G > openList[i].G)
                 {
                     temp = openList[i];
                 }
@@ -347,7 +348,7 @@ public class RoadManager : Singleton<RoadManager>
             for (int i = 0; i < temp.NearbyNode.Count; i++)
             {
                 if (closeList.Contains(temp.NearbyNode[i])) continue;
-                temp.NearbyNode[i].H = GetDistance(temp.NearbyNode[i].GridPos, end);
+                temp.NearbyNode[i].G = GetDistance(temp.NearbyNode[i].GridPos, end);
                 temp.NearbyNode[i].Parent = temp;
                 openList.Add(temp.NearbyNode[i]);
             }
@@ -356,7 +357,7 @@ public class RoadManager : Singleton<RoadManager>
         return null;
     }
 
-    private float GetDistance(Vector2Int cur, Vector2Int target)
+    private int GetDistance(Vector2Int cur, Vector2Int target)
     {
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
     }
@@ -394,36 +395,43 @@ public class RoadManager : Singleton<RoadManager>
     }
 }
 
-
+[System.Serializable]
 public class GridNode
 {
-    public GridNode(Vector2Int pos)
+    public GridNode()
     {
         NearbyNode = new List<GridNode>();
-        GridPos = pos;
         Parent = null;
-        H = 0;
+        G = 0;
         NearNodeCount = 0;
     }
     public List<GridNode> NearbyNode { get; private set; }
 
     public int NearNodeCount = 0;//上面只存可通向的的节点，这个存储所有邻点的个数
-    public Vector2Int GridPos { get; set; }
+    public Vector2Int GridPos { get { return new Vector2Int(x, y); } }
+
+    public int x, y;
 
     public float passSpeed;
 
-    public float enterCost;
+    public float height;
+
+    public int enterCost;
 
     public float mineValue;
 
+    public Direction direction;
+
     public GridType gridType;
     public GridNode Parent { get; set; }
-    public float H { get; set; }
+    public int G { get; set; }
+
+    public int F { get; set; }
 
     public void Clear()
     {
         Parent = null;
-        H = 0;
+        G = 0;
         NearNodeCount = 0;
     }
     public void AddNearbyNode(GridNode roadNode)

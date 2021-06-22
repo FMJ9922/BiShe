@@ -567,8 +567,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void LoadTerrain(string fileName,bool isOffcial)
     {
-        string path = isOffcial ? "MapData/" : "Saves";
-        transform.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>(path + fileName + ".asset");
+        string path = isOffcial ? "MapData/" : "Saves/";
+        Debug.Log(path + fileName + "meshData");
+        transform.GetComponent<MeshFilter>().mesh = CopyMesh(Resources.Load<Mesh>(path + fileName + "meshData"));
     }
     /// <summary>
     /// 获得地形的顶点数据
@@ -892,6 +893,12 @@ public struct Vector2IntSerializer
     }
 
     public Vector2IntSerializer(Vector2Int vector2Int)
+    {
+        this.x = vector2Int.x;
+        this.y = vector2Int.y;
+    }
+
+    public void Fill(Vector2Int vector2Int)
     {
         this.x = vector2Int.x;
         this.y = vector2Int.y;

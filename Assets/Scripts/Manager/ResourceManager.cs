@@ -40,6 +40,7 @@ public class ResourceManager : Singleton<ResourceManager>
     public void InitSavedResourceManager(SaveData saveData)
     {
         AddResources(saveData.saveResources);
+        curPopulation = saveData.curPopulation;
         RecordLastWeekItem();
     }
 

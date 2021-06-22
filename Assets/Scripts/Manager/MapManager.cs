@@ -26,48 +26,93 @@ public class MapManager : Singleton<MapManager>
     /// </summary>
     private void InitLevelData(int levelId)
     {
-        MapSize = GameManager.saveData.mapSize.Vector2Int;
+        //MapSize = GameManager.saveData.mapSize.Vector2Int;
         generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
         mapData = TerrainGenerator.Instance.GetMapData();
     }
     private void InitGrid(SaveData saveData)
     {
-        if (MapSize == null || MapSize.x <= 0 || MapSize.y <= 0)
+        /*if (MapSize == null || MapSize.x <= 0 || MapSize.y <= 0)
         {
             Debug.LogError("地图尺寸没有初始化！");
             return;
+        }*/
+        if (saveData != null)
+        {
+            Debug.Log("InitGrids");
+            _grids = saveData.gridNodes;
         }
-        _grids = saveData.gridNodes;
-       
-        //Debug.Log("初始化中");
-        InitRoad();
+
+        Debug.Log("初始化中");
+        Invoke("InitRoad", 0.017f);
+    }
+    [ContextMenu("SetUp")]
+    public void SetUp()
+    {
+        _grids = SetUpGrid();
+    }
+
+    public GridNode[][] GetGrids()
+    {
+        return _grids;
     }
 
     public GridNode[][] SetUpGrid()
     {
-        MapSize = new Vector2Int(_leveldata.Width,_leveldata.Length);
+        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
         _leveldata = DataManager.GetLevelData(30001);
+        MapSize = new Vector2Int(_leveldata.Width, _leveldata.Length);
 
         Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().sharedMesh;
         Vector2[] uv = mesh.uv;
+        Vector3[] verticles = mesh.vertices;
+        int texLength = 8;
+        _grids = new GridNode[MapSize.x][];
         for (int i = 0; i < MapSize.x; i++)
         {
             _grids[i] = new GridNode[MapSize.y];
             for (int j = 0; j < MapSize.y; j++)
             {
-                
-                _grids[i][j] = new GridNode(new Vector2Int(i, j));
-                int p = i + j * MapSize.y;
-                int tex = texs[p];
+                int index = (i + j * MapSize.y) * 4;
+                int x = Mathf.FloorToInt(uv[index].x * texLength);
+                int y = Mathf.FloorToInt(uv[index].y * texLength);
+                int tex = 8 * (7 - y) + x;
+                float deltaX = -(x * 0.125f + 0.0625f - uv[index].x);
+                float deltaY = -(y * 0.125f + 0.0625f - uv[index].y);
+                int dir = GetDir(deltaX, deltaY);
+                _grids[i][j] = new GridNode();
+                _grids[i][j].x = i;
+                _grids[i][j].y = j;
                 _grids[i][j].passSpeed = GetPassSpeed(tex);
                 _grids[i][j].enterCost = GetEnterCost(tex);
+                _grids[i][j].direction = (Direction)dir;
+                _grids[i][j].height = verticles[index].y;
+                /*if(i == 152)
+                {
+                    Debug.Log(deltaX+" "+deltaY);
+                    Debug.Log(dir);
+                }*/
+                _grids[i][j].gridType = GetGridType(tex);
+                /*if (GetTerrainPosition(_grids[i][j].GridPos.Vector2Int).y<9.1F)
+                {
+                    _grids[i][j].gridType = GridType.water;
+                }*/
             }
         }
         for (int i = 0; i < MapSize.x; i++)
         {
             for (int j = 0; j < MapSize.y; j++)
             {
-                if (i % 2 == 0 && i < MapSize.x - 1)
+                if (i % 2 == 0 && j < MapSize.y - 1)
+                {
+                    _grids[i][j + 1].AddNearbyNode(_grids[i][j]);
+                }
+                else if (j > 0)
+                {
+                    _grids[i][j - 1].AddNearbyNode(_grids[i][j]);
+                }
+                if (j % 2 == 0 && i < MapSize.x - 1)
                 {
                     _grids[i][j].AddNearbyNode(_grids[i + 1][j]);
                 }
@@ -75,22 +120,55 @@ public class MapManager : Singleton<MapManager>
                 {
                     _grids[i][j].AddNearbyNode(_grids[i - 1][j]);
                 }
-                if (j % 2 == 0 && j < MapSize.y - 1)
-                {
-                    _grids[i][j].AddNearbyNode(_grids[i][j + 1]);
-                }
-                else if (j > 0)
-                {
-                    _grids[i][j].AddNearbyNode(_grids[i][j - 1]);
-                }
             }
         }
-
-
-    }
-    public GridNode[][] GetGridNodes()
-    {
+        System.TimeSpan dt = sw.Elapsed;
+        Debug.Log("记录地图耗时:" + dt.TotalSeconds + "秒");
         return _grids;
+    }
+
+    public int GetDir(float deltaX, float deltaY)
+    {
+        if (deltaX > 0)
+        {
+            if (deltaY > 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+        else
+        {
+            if (deltaY > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+    }
+
+    public GridType GetGridType(int tex)
+    {
+        if(tex == 4 || tex == 5 || tex == 6
+           ||tex == 9 || tex == 10 || tex == 8
+           || tex == 12 || tex == 13 || tex == 14)
+        {
+            return GridType.road;
+        }
+        else if(tex == 2||tex ==11||tex == 15)
+        {
+            return GridType.occupy;
+        }
+        else
+        {
+            return GridType.empty;
+        }
     }
 
     public float GetPassSpeed(int tex)
@@ -118,29 +196,29 @@ public class MapManager : Singleton<MapManager>
         return 0.1f;
     }
 
-    public float GetEnterCost(int tex)
+    public int GetEnterCost(int tex)
     {
         if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
         {
-            return 1.5f;
+            return 20;
         }
         else if (tex == 1 || tex == 2 || tex == 3 || tex == 11)
         {
-            return 2f;
+            return 30;
         }
         else if (tex == 12 || tex == 13 || tex == 14)
         {
-            return 1f;
+            return 3;
         }
         else if (tex == 9 || tex == 10 || tex == 8)
         {
-            return 0.8f;
+            return 2;
         }
         else if (tex == 4 || tex == 5 || tex == 6)
         {
-            return 0.6f;
+            return 1;
         }
-        return 5f;
+        return 100;
     }
 
     public static float GetMineRichness(Vector2Int vector2Int)
@@ -150,8 +228,9 @@ public class MapManager : Singleton<MapManager>
 
     public void InitRoad()
     {
+
         List<StaticBuilding> lists = StaticBuilding.lists;
-        RoadManager.Instance.InitRoadManager();
+        //RoadManager.Instance.InitRoadManager();
         SetGrid(lists);
     }
 
@@ -159,6 +238,7 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < lists.Count; i++)
         {
+            //Debug.Log("??");
             lists[i].SetGrids();
         }
         Debug.Log("地图已初始化！");
@@ -185,9 +265,9 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < _buildings.Count; i++)
         {
             BuildingBase currentBuilding = _buildings[i];
-            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
-            RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
-            RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
+            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
+            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
+            //RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
         }
     }
     /// <summary>
@@ -239,7 +319,7 @@ public class MapManager : Singleton<MapManager>
             }
         }
         generator.ReCalculateNormal();
-        RoadManager.Instance.InitRoadNodeDic();
+        //RoadManager.Instance.InitRoadNodeDic();
     }
 
     public void GetRoadTypeAndDir(Vector2Int roadGrid, out RoadOption roadOption, out Direction direction)
@@ -306,6 +386,11 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    public static GridNode GetGridNode(Vector2Int gridPos)
+    {
+        //Debug.Log(gridPos);
+        return MapManager.Instance._grids[gridPos.x][gridPos.y];
+    }
 
     /// <summary>
     /// 获取地形在世界空间的位置
@@ -313,7 +398,7 @@ public class MapManager : Singleton<MapManager>
     /// <returns></returns>
     public static Vector3 GetTerrainWorldPosition()
     {
-        return GameObject.Find("TerrainGenerator").transform.position;
+        return TerrainGenerator.Instance.transform.position;
     }
     /// <summary>
     /// 获取地面某处的坐标
@@ -322,12 +407,8 @@ public class MapManager : Singleton<MapManager>
     /// 
     public static Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
-        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < 300 && gridPos.y < 300)
-        {
-            int p = gridPos.x * 4 + gridPos.y * 300 * 4;
-            return TerrainGenerator.GetTerrainMeshVertices()[p];
-        }
-        else return Vector3.zero;
+
+        return new Vector3(gridPos.x * 2, GetGridNode(gridPos).height, gridPos.y * 2); 
     }
 
     public static Vector3 GetTerrainStaticPosition(Vector2Int gridPos)
@@ -358,6 +439,7 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
+        Debug.Log(grid);
         return _grids[grid.x][grid.y].gridType;
     }
 
@@ -517,7 +599,11 @@ public class MapManager : Singleton<MapManager>
 
     private void SetGridType(Vector2Int grid, GridType gridType)
     {
-        _grids[grid.x][grid.y].gridType = gridType;
+        if (_grids != null)
+        {
+            _grids[grid.x][grid.y].gridType = gridType;
+
+        }
     }
 
     public void ShowGrid(Vector2Int[] grids)
@@ -608,9 +694,89 @@ public class MapManager : Singleton<MapManager>
         return (sum / _buildings.Count) * 10 + 80;
     }
 
-    private static float GetDistance(Vector2Int cur, Vector2Int target)
+    private static int GetDistance(Vector2Int cur, Vector2Int target)
     {
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
+    }
+
+    public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
+    {
+        //Debug.Log(start + " " + end);
+        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        sw.Start();
+        //ClearRoadNodeH();
+        List<GridNode> path = new List<GridNode>();
+        List<GridNode> openList = new List<GridNode>();
+        List<GridNode> closeList = new List<GridNode>();
+        GridNode startNode = GetGridNode(start);
+        GridNode endNode = GetGridNode(end);
+        startNode.G = GetDistance(startNode.GridPos, end);
+        openList.Add(startNode);
+        path.Add(startNode);
+        GridNode temp = startNode;
+        temp.G = 0;
+        temp.F = 0;
+        int n = 600;
+        while (temp != endNode && n-- > 0)
+        {
+            if (openList.Count <= 0)
+            {
+                Debug.LogError("路径被阻挡！"+ start+"=>"+end);
+                return null;
+            }
+            //Debug.Log("——");
+            temp = openList[0];
+            for (int i = 0; i < openList.Count; i++)
+            {
+                //Debug.Log(openList[i].GridPos+" "+temp.F+" "+openList[i].F);
+                if (temp.F > openList[i].F)
+                {
+                    temp = openList[i];
+                }
+            }
+            openList.Remove(temp);
+            closeList.Add(temp);
+            //Debug.Log("选择:"+temp.GridPos);
+            if (temp == endNode)
+            {
+                sw.Stop();
+                System.TimeSpan dt = sw.Elapsed;
+                Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
+                sw.Restart();
+                List<Vector3> list = new List<Vector3>();
+                while (temp != startNode)
+                {
+                    //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
+                    list.Add(MapManager.GetTerrainPosition(temp.GridPos) + new Vector3(1, 0, 1));
+                    temp = temp.Parent;
+                    //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(temp.GridPos), Quaternion.identity, transform);
+                }
+                //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
+                list.Add(MapManager.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
+                list.Reverse(); 
+                sw.Stop();
+                System.TimeSpan dt1 = sw.Elapsed;
+                Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
+                //WayPointDic.Add(start.ToString() + end.ToString(), list);
+                return list;
+            }
+            //Debug.Log("当前结点："+temp.GridPos+ " "+temp.NearbyNode.Count);
+            for (int i = 0; i < temp.NearbyNode.Count; i++)
+            {
+                GridNode node = temp.NearbyNode[i];
+                //Debug.Log(temp.GridPos + "=>" + node.GridPos);
+                if (closeList.Contains(node)) continue;
+                if (openList.Contains(node)) continue;
+                node.G = temp.G + node.enterCost;
+                node.F = node.G + GetDistance(node.GridPos, end);
+                //Debug.Log(node.GridPos + " " + end);
+                //Debug.Log(node.GridPos+" "+ node.G+" "+node.F);
+                node.Parent = temp;
+                openList.Add(node);
+            }
+        }
+        Debug.LogError("寻路失败");
+        return null;
     }
 }
 

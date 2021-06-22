@@ -96,6 +96,7 @@ public enum DriveType
     [Description("往返")]
     yoyo,
 }
+[System.Serializable]
 public enum GridType
 {
     empty,//空
