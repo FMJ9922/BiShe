@@ -41,6 +41,7 @@ public class MapManager : Singleton<MapManager>
         {
             Debug.Log("InitGrids");
             _grids = saveData.gridNodes;
+            MapSize = saveData.mapSize.Vector2Int;
         }
 
         Debug.Log("初始化中");
@@ -171,7 +172,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    public float GetPassSpeed(int tex)
+    public static float GetPassSpeed(int tex)
     {
         if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
         {
@@ -196,15 +197,15 @@ public class MapManager : Singleton<MapManager>
         return 0.1f;
     }
 
-    public int GetEnterCost(int tex)
+    public static int GetEnterCost(int tex)
     {
         if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
         {
-            return 20;
+            return 7;
         }
         else if (tex == 1 || tex == 2 || tex == 3 || tex == 11)
         {
-            return 30;
+            return 10;
         }
         else if (tex == 12 || tex == 13 || tex == 14)
         {
@@ -278,20 +279,27 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < takenGirds.Length; i++)
         {
             generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
+            SetPassInfo(takenGirds[i], tex);
         }
         generator.ReCalculateNormal();
     }
-    public void BuildOutCornerRoad(int level, int index, Direction direction)
+    public void BuildOutCornerRoad(int level, Vector2Int roadGrid, Direction direction)
     {
+        int index = roadGrid.x + roadGrid.y * MapSize.x;
         generator.RefreshUV(12 - level * 4 + 2, 8, index, (int)direction);
+        SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
-    public void BuildInCornerRoad(int level, int index, Direction direction)
+    public void BuildInCornerRoad(int level, Vector2Int roadGrid, Direction direction)
     {
+        int index = roadGrid.x + roadGrid.y * MapSize.x;
         generator.RefreshUV(12 - level * 4 + 1, 8, index, (int)direction);
+        SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
-    public void BuildStraightRoad(int level, int index, Direction direction)
+    public void BuildStraightRoad(int level, Vector2Int roadGrid, Direction direction)
     {
+        int index = roadGrid.x + roadGrid.y * MapSize.x;
         generator.RefreshUV(12 - level * 4, 8, index, (int)direction);
+        SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
     public void GenerateRoad(Vector2Int[] roadGrid, int level = 1)
     {
@@ -308,16 +316,17 @@ public class MapManager : Singleton<MapManager>
             switch (roadOption)
             {
                 case RoadOption.straight:
-                    BuildStraightRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildStraightRoad(level - 1, roadGrid[i], direction);
                     break;
                 case RoadOption.inner:
-                    BuildInCornerRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildInCornerRoad(level - 1, roadGrid[i], direction);
                     break;
                 case RoadOption.outter:
-                    BuildOutCornerRoad(level - 1, roadGrid[i].x + roadGrid[i].y * MapSize.x, direction);
+                    BuildOutCornerRoad(level - 1, roadGrid[i], direction);
                     break;
             }
         }
+        Debug.Log("Build");
         generator.ReCalculateNormal();
         //RoadManager.Instance.InitRoadNodeDic();
     }
@@ -392,6 +401,14 @@ public class MapManager : Singleton<MapManager>
         return MapManager.Instance._grids[gridPos.x][gridPos.y];
     }
 
+    public static void SetPassInfo(Vector2Int gridPos,int tex)
+    {
+        GridNode node = GetGridNode(gridPos);
+        node.passSpeed = GetPassSpeed(tex);
+        node.enterCost = GetEnterCost(tex);
+
+    }
+
     /// <summary>
     /// 获取地形在世界空间的位置
     /// </summary>
@@ -409,6 +426,16 @@ public class MapManager : Singleton<MapManager>
     {
 
         return new Vector3(gridPos.x * 2, GetGridNode(gridPos).height, gridPos.y * 2); 
+    }
+
+    public static Vector3 GetNotInWaterPosition(Vector2Int gridPos)
+    {
+        Vector3 vec = GetTerrainPosition(gridPos);
+        if (vec.y < 10)
+        {
+            return new Vector3(vec.x, 10, vec.z);
+        }
+        return vec;
     }
 
     public static Vector3 GetTerrainStaticPosition(Vector2Int gridPos)
@@ -439,7 +466,7 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
-        Debug.Log(grid);
+        //Debug.Log(grid);
         return _grids[grid.x][grid.y].gridType;
     }
 
@@ -699,6 +726,14 @@ public class MapManager : Singleton<MapManager>
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
     }
 
+    public class compare: IComparer<GridNode>
+    {
+        public int Compare(GridNode x,GridNode y)
+        {
+            return x.F - y.F;
+        }
+    }
+
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
         //Debug.Log(start + " " + end);
@@ -710,7 +745,6 @@ public class MapManager : Singleton<MapManager>
         List<GridNode> closeList = new List<GridNode>();
         GridNode startNode = GetGridNode(start);
         GridNode endNode = GetGridNode(end);
-        startNode.G = GetDistance(startNode.GridPos, end);
         openList.Add(startNode);
         path.Add(startNode);
         GridNode temp = startNode;
@@ -726,14 +760,10 @@ public class MapManager : Singleton<MapManager>
             }
             //Debug.Log("——");
             temp = openList[0];
-            for (int i = 0; i < openList.Count; i++)
+            /*while (openList.Count > 10)
             {
-                //Debug.Log(openList[i].GridPos+" "+temp.F+" "+openList[i].F);
-                if (temp.F > openList[i].F)
-                {
-                    temp = openList[i];
-                }
-            }
+                openList.RemoveRange(10, openList.Count - 10);
+            }*/
             openList.Remove(temp);
             closeList.Add(temp);
             //Debug.Log("选择:"+temp.GridPos);
@@ -747,16 +777,16 @@ public class MapManager : Singleton<MapManager>
                 while (temp != startNode)
                 {
                     //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
-                    list.Add(MapManager.GetTerrainPosition(temp.GridPos) + new Vector3(1, 0, 1));
+                    list.Add(MapManager.GetNotInWaterPosition(temp.GridPos) + new Vector3(1, 0, 1));
                     temp = temp.Parent;
                     //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(temp.GridPos), Quaternion.identity, transform);
                 }
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
-                list.Add(MapManager.GetTerrainPosition(startNode.GridPos) + new Vector3(1, 0, 1));
+                list.Add(MapManager.GetNotInWaterPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse(); 
                 sw.Stop();
                 System.TimeSpan dt1 = sw.Elapsed;
-                Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
+                //Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
                 //WayPointDic.Add(start.ToString() + end.ToString(), list);
                 return list;
             }
@@ -768,14 +798,15 @@ public class MapManager : Singleton<MapManager>
                 if (closeList.Contains(node)) continue;
                 if (openList.Contains(node)) continue;
                 node.G = temp.G + node.enterCost;
-                node.F = node.G + GetDistance(node.GridPos, end);
+                node.F = node.G + 3*GetDistance(node.GridPos, end);
                 //Debug.Log(node.GridPos + " " + end);
                 //Debug.Log(node.GridPos+" "+ node.G+" "+node.F);
                 node.Parent = temp;
                 openList.Add(node);
             }
+            openList.Sort(new compare());
         }
-        Debug.LogError("寻路失败");
+        Debug.LogError("寻路失败"+start+" "+end);
         return null;
     }
 }

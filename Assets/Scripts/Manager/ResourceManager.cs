@@ -32,8 +32,8 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
         AddResource(DataManager.GetItemIdByName("Money"), data.money);
         AddResource(DataManager.GetItemIdByName("Stone"), 100);
-        //AddResource(12015,100);
-        //AddResource(12020,100);
+        AddResource(12015,100);
+        AddResource(12020,100);
         RecordLastWeekItem();
     }
 

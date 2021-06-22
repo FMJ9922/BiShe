@@ -203,8 +203,9 @@ public class GameManager : Singleton<GameManager>
 
         SaveData data = new SaveData();
 
-        data.mapSize = new Vector2IntSerializer(MapManager.Instance.MapSize);
         data.levelID = 30001;
+        data.mapSize = new Vector2IntSerializer(DataManager.GetLevelData(data.levelID).Width,
+            DataManager.GetLevelData(data.levelID).Length);
         data.mapName = data.levelID.ToString();
         //mesh
         Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().mesh;

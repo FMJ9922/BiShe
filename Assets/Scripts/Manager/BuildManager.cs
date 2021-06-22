@@ -412,7 +412,7 @@ public class BuildManager : Singleton<BuildManager>
             bridges[bridges.Count - 1].transform.parent = bridgeBuilding.transform;
             building.OnConfirmBuild(bridgeGrids.ToArray());
         }
-
+        Debug.Log("generate");
         MapManager.Instance.GenerateRoad(grids.ToArray(), roadLevel);
         MapManager.Instance.SetBuildingsGrid();
         MainInteractCanvas.Instance.ShowBuildingButton();

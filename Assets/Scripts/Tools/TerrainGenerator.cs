@@ -184,13 +184,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.001F)
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;/*
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-#endif
+#endif*/
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
+        //Debug.Log("refresh");
         //Debug.Log(h + " " + x);if (dir == 4)
         int tempdir = dir;
         if (dir == 4)
@@ -207,10 +208,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void ReCalculateNormal()
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;/*
 #if UNITY_EDITOR
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-#endif
+#endif*/
         mesh.RecalculateNormals();
     }
     /// <summary>

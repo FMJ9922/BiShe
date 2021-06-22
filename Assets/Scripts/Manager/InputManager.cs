@@ -47,8 +47,8 @@ public partial class InputManager : Singleton<InputManager>
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GridNode node = MapManager.GetGridNode(MapManager.GetCenterGrid(LastGroundRayPos));
-            Debug.Log(node.GridPos+" "+node.passSpeed+" "+node.enterCost+" "+node.direction+" "+node.gridType);
+            //GridNode node = MapManager.GetGridNode(MapManager.GetCenterGrid(LastGroundRayPos));
+            //Debug.Log(node.GridPos+" "+node.passSpeed+" "+node.enterCost+" "+node.direction+" "+node.gridType);
             EventManager.TriggerEvent(ConstEvent.OnMouseLeftButtonDown);
         }
         if (Input.GetMouseButtonDown(1))

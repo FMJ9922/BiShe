@@ -139,7 +139,7 @@ public class DriveSystem : MonoBehaviour
             {
                 speed += a * Time.fixedDeltaTime;
             }
-            if (speed > 0 && wayCount == targets.Count)
+            if (speed > MaxSpeed * speedBuff||speed > 0 && wayCount == targets.Count)
             {
                 speed -= a * Time.fixedDeltaTime;
             }
