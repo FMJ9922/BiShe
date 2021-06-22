@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1530960452
+CRC: 2775019809
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c63656cc5891e59aa1020bf9a4bacdbf
+    Hash: f0a2edff01898038b054be117eb3818e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 25aa43c9ddeae5671d73163d4c9265e6
+    Hash: 9d256c1f7d22b21a1ddb2e1cc4e414d0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -182,6 +182,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L3_01_Preb.prefab
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_02.prefab
 - Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L1_01.prefab
+- Assets/Prefabs/ww.prefab
 - Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_02.prefab
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_03_Preb.prefab
 - Assets/Scenes Assets/Animation/Universal_Building_Mine_L3_02_Ani.fbx

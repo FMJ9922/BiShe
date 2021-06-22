@@ -32,8 +32,14 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
         AddResource(DataManager.GetItemIdByName("Money"), data.money);
         AddResource(DataManager.GetItemIdByName("Stone"), 100);
-        AddResource(12015,100);
-        AddResource(12020,100);
+        //AddResource(12015,100);
+        //AddResource(12020,100);
+        RecordLastWeekItem();
+    }
+
+    public void InitSavedResourceManager(SaveData saveData)
+    {
+        AddResources(saveData.saveResources);
         RecordLastWeekItem();
     }
 
@@ -63,6 +69,16 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
         }
+    }
+
+    public CostResource[] GetAllResources()
+    {
+        List<CostResource> res = new List<CostResource>();
+        foreach(var keypairs in _storedItemDic)
+        {
+            res.Add(new CostResource(keypairs.Key, keypairs.Value));
+        }
+        return res.ToArray();
     }
 
     public void AddMoney(float num)

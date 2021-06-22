@@ -20,9 +20,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void InitMesh()
     {
-        Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + SceneManager.GetActiveScene().name + "meshData"));
-        mesh.name = SceneManager.GetActiveScene().name + "meshData Instance";
-        transform.GetComponent<MeshFilter>().mesh = mesh;
+        //Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + SceneManager.GetActiveScene().name + "meshData"));
+        //mesh.name = SceneManager.GetActiveScene().name + "meshData Instance";
+        //transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
     #region 顶点处理
@@ -538,11 +538,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     void SaveTerrain()
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        AssetDatabase.CreateAsset(mesh, GetPath("meshData.asset"));
+        AssetDatabase.CreateAsset(mesh, GetPath(true)+("30001.asset"));
     }
 
     [ContextMenu("加载地形")]
-    void LoadTerrain()
+    public void LoadTerrain()
     {
         Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/"+SceneManager.GetActiveScene().name + "meshData"));
         //Debug.Log(Resources.Load("MapData/" + SceneManager.GetActiveScene().name + "meshData"));
@@ -550,7 +550,26 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
+
 #endif
+
+    public string GetPath(bool isOffcial)
+    {
+        if (isOffcial)
+        {
+            return "Assets/Resources/MapData/";
+        }
+        else
+        {
+            return "Assets/Resources/Saves/";
+        }
+    }
+
+    public void LoadTerrain(string fileName,bool isOffcial)
+    {
+        string path = isOffcial ? "MapData/" : "Saves";
+        transform.GetComponent<MeshFilter>().mesh = Resources.Load<Mesh>(path + fileName + ".asset");
+    }
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>
@@ -612,7 +631,18 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mesh.RecalculateNormals();
         //DestroyChildren();
     }
-
+    public void GenerateBySave(string name, bool isOffcial = true)
+    {
+        SaveData data = GameSaver.ReadSaveData(name, isOffcial);
+        Mesh mesh = GameObject.Find("TerrainGenerator").GetComponent<MeshFilter>().mesh;
+        mesh.name = data.meshName;
+        mesh.vertices = Vector3Serializer.Unbox(data.meshVerticles);
+        mesh.uv = Vector2Serializer.Unbox(data.meshUV);
+        mesh.triangles = data.meshTriangles;
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        mesh.RecalculateNormals();
+        Debug.Log("加载地形成功！");
+    }
     //[ContextMenu("CombineMeshes")]
     void CombineMeshes()
     {
@@ -743,11 +773,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     public void SaveRoadToMapData()
     {
         InitMapData();
-        SaveMapData(SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8));
+        SaveMapData(SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, MapManager.Instance.MapSize, 8));
     }
     public MapData GetRuntimeMapData()
     {
-        return SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, new Vector2(300, 300), 8);
+        return SetRoadToMapData(transform.GetComponent<MeshFilter>().sharedMesh, MapManager.Instance.MapSize, 8);
     }
     /// <summary>
     /// 保存地图信息
@@ -758,8 +788,8 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     /// <returns></returns>
     public MapData SetRoadToMapData(Mesh mesh, Vector2 mapSize,int length = 8)
     {
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
+        //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        //sw.Start();
         Vector2[] vec = mesh.uv;
         MapData mapData = GetMapData();
 
@@ -804,9 +834,9 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
                 }
             }
         }
-        sw.Stop();
-        System.TimeSpan dt = sw.Elapsed;
-        Debug.Log("程序耗时:"+ dt+ "秒");
+        //sw.Stop();
+        //System.TimeSpan dt = sw.Elapsed;
+        //Debug.Log("程序耗时:"+ dt+ "秒");
         return mapData;
     }
     private void SaveMapData(MapData mapData)
@@ -834,7 +864,8 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     private string GetPath(string fileName)
     {
-        string path = string.Format("{0}/{1}{2}", "Assets/Resources/MapData",SceneManager.GetActiveScene().name, fileName);
+        string levelId = GameManager.saveData == null ? SceneManager.GetActiveScene().name : GameManager.saveData.levelID.ToString();
+        string path = string.Format("{0}/{1}{2}", "Assets/Resources/MapData", levelId, fileName);
         return path;
     }
 #endregion
@@ -860,6 +891,31 @@ public struct Vector2IntSerializer
         this.y = z;
     }
 
+    public Vector2IntSerializer(Vector2Int vector2Int)
+    {
+        this.x = vector2Int.x;
+        this.y = vector2Int.y;
+    }
+
+    public static Vector2Int[] Unbox(Vector2IntSerializer[] vector2Serializers)
+    {
+        Vector2Int[] vec2 = new Vector2Int[vector2Serializers.Length];
+        for (int i = 0; i < vector2Serializers.Length; i++)
+        {
+            vec2[i] = vector2Serializers[i].Vector2Int;
+        }
+        return vec2;
+    }
+
+    public static Vector2IntSerializer[] Box(Vector2Int[] vector2s)
+    {
+        Vector2IntSerializer[] vector2Serializers = new Vector2IntSerializer[vector2s.Length];
+        for (int i = 0; i < vector2s.Length; i++)
+        {
+            vector2Serializers[i] = new Vector2IntSerializer(vector2s[i]);
+        }
+        return vector2Serializers;
+    }
     public Vector2Int Vector2Int
     {
         get { return new Vector2Int(x, y); }

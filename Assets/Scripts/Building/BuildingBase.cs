@@ -10,13 +10,6 @@ public class BuildingBase : MonoBehaviour
     [SerializeField]
     private int Height;
 
-    [SerializeField]
-    private BundlePrimaryType BundlePrimaryType;
-
-    
-    public string BundleName => string.Format("{0}.ab", BundlePrimaryType.ToString());
-
-    public string PfbName => this.gameObject.name;
 
     public Vector2Int Size => new Vector2Int(Height, Width);
 
@@ -43,30 +36,29 @@ public class BuildingBase : MonoBehaviour
      
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
-        buildFlag = true;
-        gameObject.tag = "Building";
         takenGrids = vector2Ints;
-        if (hasAnima)
-        {
-            Invoke("PlayAnim",0.2f);
-        }
-        //Debug.Log(direction);
-        //Debug.Log(transform.name);
-        //Debug.Log(transform.right);
-        transform.GetComponent<BoxCollider>().enabled = false;
-        transform.GetComponent<BoxCollider>().enabled = true;
-        direction = CastTool.CastVector3ToDirection(transform.right);
-        //Debug.Log(direction);
+        gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
-        //刷地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 15);
-        //Debug.Log("paint");
-        //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
-        runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
+        if (!buildFlag)
+        {
+            buildFlag = true;
+            if (hasAnima)
+            {
+                Invoke("PlayAnim", 0.2f);
+            }
+            transform.GetComponent<BoxCollider>().enabled = false;
+            direction = CastTool.CastVector3ToDirection(transform.right);
+            //地基
+            MapManager.Instance.BuildFoundation(vector2Ints, 15);
+            //整平地面
+            Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+            float targetHeight = targetPos.y;
+            TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+            runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
+            Invoke("FillUpPopulation", 1f);
+        }
+        transform.GetComponent<BoxCollider>().enabled = true;
         InitBuildingFunction();
     }
 
@@ -111,8 +103,6 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         ChangeFormula();
-        productTime = formula.ProductTime;
-        Invoke("FillUpPopulation", 1f);
     }
 
     public void FillUpPopulation()
@@ -135,8 +125,8 @@ public class BuildingBase : MonoBehaviour
 
         if (runtimeBuildData.formulaDatas.Length > 0)
         {
-            //Debug.Log(runtimeBuildData.CurFormula);
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+            productTime = formula.ProductTime;
         }
     }
     public void ShowBody()
@@ -384,6 +374,7 @@ public class BuildingBase : MonoBehaviour
     }
 }
 
+[System.Serializable] 
 public class RuntimeBuildData : BuildData
 {
     public bool Pause = false;//是否暂停生产(因为缺少原料)
@@ -394,5 +385,9 @@ public class RuntimeBuildData : BuildData
     public float Rate = 0;//当前生产进度0-1
     public float Effectiveness;//生产效率
     public float Happiness = 0.6f;//当前幸福程度
-    
+
+    public Vector3Serializer SavePosition;
+    public Vector2IntSerializer[] SaveTakenGrids;
+    public Direction SaveDir;
+    public int SaveOutLookType;
 }

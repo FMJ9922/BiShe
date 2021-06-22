@@ -11,11 +11,11 @@ public class TrafficManager : Singleton<TrafficManager>
     private List<DriveSystem> carUnusedPool = new List<DriveSystem>();
 
     //寻路节点
-    public List<RoadNode> reachable = new List<RoadNode>();
-    public List<RoadNode> explored = new List<RoadNode>();
+    public List<GridNode> reachable = new List<GridNode>();
+    public List<GridNode> explored = new List<GridNode>();
 
     private List<Vector2Int> RoadNodes;
-    private readonly Vector3 hidePos = new Vector3(0, -100, 0);
+    private readonly Vector3 hidePos = new Vector3(-1000, -1000, -1000);
 
     public List<GameObject> FakeRoute1;
     public List<GameObject> FakeRoute2;

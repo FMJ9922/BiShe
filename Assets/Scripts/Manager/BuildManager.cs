@@ -105,7 +105,8 @@ public class BuildManager : Singleton<BuildManager>
         }
         Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
-        GameObject building = Instantiate(pfb, transform);
+        GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
+        building.name = pfbName;
         currentBuilding = building.GetComponent<BuildingBase>();
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
         return building;
@@ -131,10 +132,42 @@ public class BuildManager : Singleton<BuildManager>
         }
         Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
-        GameObject building = Instantiate(pfb, transform);
+        GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         currentBuilding = building.GetComponent<BuildingBase>();
+        building.name = pfbName;
         currentBuilding.runtimeBuildData = buildData;
         return building;
+    }
+
+    public void InitSaveBuildings(RuntimeBuildData[] buildDatas)
+    {
+        for (int i = 0; i < buildDatas.Length; i++)
+        {
+            InitSaveBuilding(buildDatas[i]);
+        }
+    }
+
+    private void InitSaveBuilding(RuntimeBuildData buildData)
+    {
+        string bundleName = buildData.BundleName;
+        string pfbName = buildData.PfbName;
+        if (buildData.Id == 20001 || buildData.Id == 20009 || buildData.Id == 20033
+            || buildData.Id == 20023 || buildData.Id == 20024 || buildData.Id == 20025
+            || buildData.Id == 20028 || buildData.Id == 20026 || buildData.Id == 20027)
+        {
+            pfbName = pfbName.Substring(0, pfbName.Length - 1);
+            pfbName += buildData.SaveOutLookType.ToString();
+        }
+        GameObject pfb = LoadAB.Load(bundleName, pfbName);
+        GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
+        building.name = pfbName;
+        building.transform.position = buildData.SavePosition.V3;
+        BuildingBase buildingBase = building.GetComponent<BuildingBase>();
+        buildingBase.runtimeBuildData = buildData;
+        buildingBase.direction = buildData.SaveDir;
+        buildingBase.buildFlag = true;
+        buildingBase.OnConfirmBuild(Vector2IntSerializer.Unbox(buildData.SaveTakenGrids));
+        buildingBase.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)buildingBase.direction+1));
     }
 
     /// <summary>
@@ -350,7 +383,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             GameObject bridgeBuilding = new GameObject();
             BridgeBuilding building = bridgeBuilding.AddComponent<BridgeBuilding>();
-            bridgeBuilding.transform.parent = transform;
+            bridgeBuilding.transform.parent = TransformFinder.Instance.bridgeParent;
             bridgeBuilding.name = "bridge";
             BoxCollider collider = bridgeBuilding.AddComponent<BoxCollider>();
             switch (roadDirection)

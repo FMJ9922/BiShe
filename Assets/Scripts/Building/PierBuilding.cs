@@ -12,18 +12,23 @@ public class PierBuilding : BuildingBase
 
     public override void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
-        buildFlag = true;
         gameObject.tag = "Building";
         takenGrids = vector2Ints;
-        if (hasAnima)
-        {
-            Invoke("PlayAnim", 0.2f);
-        }
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
-        transform.GetComponent<BoxCollider>().enabled = false;
+        if (!buildFlag)
+        {
+            buildFlag = true;
+            if (hasAnima)
+            {
+                Invoke("PlayAnim", 0.2f);
+            }
+            transform.GetComponent<BoxCollider>().enabled = false;
+            direction = CastTool.CastVector3ToDirection(transform.right);
+            runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
+            Invoke("FillUpPopulation", 1f);
+        }
         transform.GetComponent<BoxCollider>().enabled = true;
-        //MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
         InitBuildingFunction();
     }
 
@@ -46,7 +51,7 @@ public class PierBuilding : BuildingBase
         base.Input();
     }
 
-    private CarMission MakeCarMission(float rate)
+    protected override CarMission MakeCarMission(float rate)
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();

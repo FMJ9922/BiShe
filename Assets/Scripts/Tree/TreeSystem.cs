@@ -3,58 +3,95 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[System.Serializable]
+public class TreeData
+{
+    public TreeState state = TreeState.unInit;
+    public float curHeight = 0;
+    public float targetHeight;
+    public int indexType;
+    public int counter = 28;
+}
+
+[System.Serializable]
+public enum TreeState
+{
+    unInit = -1,
+    growing = 0,
+    mature = 1,
+    dead = 2,
+}
 public class TreeSystem : MonoBehaviour
 {
-    public enum TreeState
-    {
-        unInit = -1,
-        growing = 0,
-        mature = 1,
-        dead = 2,
-    }
-    public TreeState state = TreeState.unInit;
-    private float curHeight = 0;
-    private float targetHeight;
+    public static bool pause;
+    public TreeData treeData;
 
     private void Start()
     {
-        if(state == TreeState.unInit)
+        Init();
+    }
+
+    public void SetData(TreeData sys)
+    {
+        treeData = sys;
+        Init();
+    }
+
+    public void Init()
+    {
+        if (IsInvoking()) return;
+        if (treeData.state == TreeState.unInit)
         {
-            state = TreeState.growing;
-            curHeight = 0;
-            targetHeight = Random.Range(0.8f, 1.2f);
-            InvokeRepeating("TreeGrow", 0, 4f*LevelManager.Instance.DayTime*7);
+            treeData.state = TreeState.growing;
+            treeData.curHeight = 0;
+            treeData.targetHeight = Random.Range(0.8f, 1.2f);
+            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime);
+        }
+        else
+        if (treeData.curHeight < treeData.targetHeight)
+        {
+            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime);
+        }
+        else if (treeData.state == TreeState.dead)
+        {
+            Destroy(gameObject);
         }
     }
 
     public float GetGrowProgress()
     {
-        return curHeight / targetHeight;
+        return treeData.curHeight / treeData.targetHeight;
     }
     public void TreeGrow()
     {
-        if(curHeight < targetHeight)
+        if (pause) return;
+        if (treeData.curHeight < treeData.targetHeight)
         {
-            curHeight += 0.1f;
-            transform.localScale = Vector3.one * curHeight;
+            treeData.counter--;
+            if (treeData.counter < 0)
+            {
+                treeData.counter = 28;
+                treeData.curHeight += 0.1f;
+                transform.localScale = Vector3.one * treeData.curHeight;
+            }
         }
         else
         {
-            state = TreeState.mature;
+            treeData.state = TreeState.mature;
             CancelInvoke();
         }
     }
 
     public void TreeCutDown(Vector3 angle)
     {
-        state = TreeState.dead;
-        transform.DOLocalRotate(angle + new Vector3(90,0,0), 2f).OnComplete(()=> { Destroy(gameObject); });
+        treeData.state = TreeState.dead;
+        transform.DOLocalRotate(angle + new Vector3(90, 0, 0), 2f).OnComplete(() => { Destroy(gameObject); });
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Building") || other.CompareTag("car")) 
+        if (other.CompareTag("Building") || other.CompareTag("car"))
         {
             Vector3 d = other.transform.position - transform.position;
             d = new Vector3(d.x, 0, d.z);
@@ -62,6 +99,20 @@ public class TreeSystem : MonoBehaviour
             transform.forward = -d;
             Vector3 angle = transform.rotation.eulerAngles;
             TreeCutDown(angle);
+        }
+    }
+
+    [ContextMenu("Cast")]
+    public void CastNameToIntType()
+    {
+        string name = transform.name;
+        if (name.Substring(20, 5) == "Light")
+        {
+            treeData.indexType = int.Parse(name.Substring(27, 1)) + 8;
+        }
+        else
+        {
+            treeData.indexType = int.Parse(name.Substring(26, 1))-1;
         }
     }
 

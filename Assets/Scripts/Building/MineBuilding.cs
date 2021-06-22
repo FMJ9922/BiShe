@@ -14,21 +14,27 @@ public class MineBuilding : BuildingBase
 
     public override void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
-        buildFlag = true;
-        gameObject.tag = "Building";
         takenGrids = vector2Ints;
-        if (hasAnima)
-        {
-            Invoke("PlayAnim", 0.2f);
-        }
+        gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
         parkingGridOut = GetOutParkingGrid();
-        transform.GetComponent<BoxCollider>().enabled = false;
+        if (!buildFlag)
+        {
+            buildFlag = true;
+            if (hasAnima)
+            {
+                Invoke("PlayAnim", 0.2f);
+            }
+            transform.GetComponent<BoxCollider>().enabled = false;
+            direction = CastTool.CastVector3ToDirection(transform.right);
+            //整平地面
+            Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+            float targetHeight = targetPos.y;
+            TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+            runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
+            Invoke("FillUpPopulation", 1f);
+        }
         transform.GetComponent<BoxCollider>().enabled = true;
-        //MapManager.Instance.BuildFoundation(vector2Ints, 7, (int)direction);
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         InitBuildingFunction();
         richness = SetRichness(takenGrids);
     }

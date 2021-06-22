@@ -55,6 +55,7 @@ public enum BundlePrimaryType
     road,
 }
 
+[System.Serializable]
 public enum Direction
 {
     right = 1,
@@ -98,9 +99,10 @@ public enum DriveType
 public enum GridType
 {
     empty,//空
-    occupy,//占有
-    inherent,//固有
+    occupy,//占有,一般指建筑
     road,//路
+    water,
+    bridge,
 }
 
 public enum ItemType

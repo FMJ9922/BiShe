@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ public class LevelManager : Singleton<LevelManager>
     public MainInteractCanvas MainInteractCanvas;
     private float dayTime = 5f;
     public static int LevelID;
-    private int year, month, week,day;
+    private int year, month, week, day;
     private bool hasSuccess = false;
     private bool pause = false;
     public float DayTime
@@ -76,7 +77,7 @@ public class LevelManager : Singleton<LevelManager>
             if (value > 7)
             {
                 Week++;
-                day = value -7;
+                day = value - 7;
                 ResourceManager.Instance.RecordLastWeekItem();
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
@@ -94,10 +95,10 @@ public class LevelManager : Singleton<LevelManager>
     private string yearstr, monthstr, weekstr, daystr;
     public string LogDate()
     {
-        string date = string.Format("{0}/{1}/{2}", Year+1999, Month, Day+(Week-1)*7);
+        string date = string.Format("{0}/{1}/{2}", Year + 1999, Month, Day + (Week - 1) * 7);
         //Debug.Log(date);
         return date;
-        
+
     }
     public float GetWeekProgress()
     {
@@ -111,18 +112,19 @@ public class LevelManager : Singleton<LevelManager>
 
     private void Start()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        string name = scene.name;
-        if(scene.name == "MainScene")name = "30001";
-        InitLevelManager(int.Parse(name));
-        year = 1;
-        month = 1;
-        week = 1;
-        day = 1;
-        yearstr = Localization.ToSettingLanguage("Year");
-        monthstr = Localization.ToSettingLanguage("Month");
-        weekstr = Localization.ToSettingLanguage("Week");
-        daystr = Localization.ToSettingLanguage("Day");
+        if (GameManager.saveData == null)
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            InitLevelManager(int.Parse(scene.name));
+            year = 1;
+            month = 1;
+            week = 1;
+            day = 1;
+        }
+        else
+        {
+            InitSavedLevelManager(GameManager.saveData);
+        }
         EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
         EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
     }
@@ -152,7 +154,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             Timer += Time.deltaTime;
             WeekProgress = (dayTime * (day - 1) + Timer) / (dayTime * 7);
-            if(!hasSuccess)CheckSuccess();
+            if (!hasSuccess) CheckSuccess();
         }
     }
     /// <summary>
@@ -166,9 +168,43 @@ public class LevelManager : Singleton<LevelManager>
         MapManager.Instance.InitMapMnager(LevelID);
         BuildManager.Instance.InitBuildManager();
         MarketManager.Instance.InitMarketManager();
-        TerrainGenerator.Instance.InitMesh();
         MainInteractCanvas.InitCanvas();
     }
+
+    public void InitSavedLevelManager(SaveData saveData)
+    {
+        dayTime = saveData.dayTime;
+        LevelID = saveData.levelID;
+        year = saveData.year;
+        month = saveData.month;
+        week = saveData.week;
+        day = saveData.day;
+        hasSuccess = saveData.hasSuccess;
+        pause = saveData.pause;
+        Timer = saveData.timer;
+        WeekProgress = saveData.weekProgress;
+
+        ResourceManager.Instance.InitSavedResourceManager(saveData);
+        TreePlanter.Instance.PlantSaveTrees(GameManager.saveData);
+        InitSaveWater(GameManager.saveData);
+        BuildManager.Instance.InitBuildManager();
+        BuildManager.Instance.InitSaveBuildings(GameManager.saveData.buildingDatas);
+        TerrainGenerator.Instance.LoadTerrain(saveData.mapName.ToString(), true);
+    }
+
+    public void InitSaveWater(SaveData saveData)
+    {
+        GameObject ww = LoadAB.Load("building.ab", "ww");
+        for (int i = 0; i < saveData.waterPos.Length; i++)
+        {
+            GameObject newWater = Instantiate(ww, TransformFinder.Instance.riverParent);
+            newWater.SetActive(true);
+            newWater.transform.position = saveData.waterPos[i].V3;
+            newWater.transform.localScale = saveData.waterScale[i].V3;
+        }
+    }
+
+    
 
     public void CheckSuccess()
     {
@@ -193,4 +229,6 @@ public class LevelManager : Singleton<LevelManager>
         EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
         EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
     }
+
+    
 }

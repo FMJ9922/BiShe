@@ -5,10 +5,10 @@ using UnityEngine;
 public class RoadManager : Singleton<RoadManager>
 {
     public GameObject pfb;
-    public Dictionary<Vector2Int, RoadNode> RoadNodeDic { get; private set; }
-    public List<RoadNode> RoadNodes { get; private set; }
+    public Dictionary<Vector2Int, GridNode> RoadNodeDic { get; private set; }
+    public List<GridNode> RoadNodes { get; private set; }
 
-    public List<RoadNode> CrossNodes { get; private set; }
+    public List<GridNode> CrossNodes { get; private set; }
 
     //缓存已有的寻路信息
     public Dictionary<string, List<Vector3>> WayPointDic { get; set; }
@@ -24,10 +24,10 @@ public class RoadManager : Singleton<RoadManager>
         CleanUpAllAttachedChildren(transform);
         //Debug.Log("开始初始化道路");
         List<Vector2Int> roadGrids = MapManager.Instance.GetAllRoadGrid();
-        RoadNodeDic = new Dictionary<Vector2Int, RoadNode>();
+        RoadNodeDic = new Dictionary<Vector2Int, GridNode>();
         WayPointDic = new Dictionary<string, List<Vector3>>();
-        RoadNodes = new List<RoadNode>();
-        CrossNodes = new List<RoadNode>();
+        RoadNodes = new List<GridNode>();
+        CrossNodes = new List<GridNode>();
         if (roadGrids.Count <= 0)
         {
             Debug.Log("道路节点数量为0");
@@ -37,7 +37,7 @@ public class RoadManager : Singleton<RoadManager>
         for (int i = 0; i < roadGrids.Count; i++)
         {
             //Debug.Log(mapData.roadGrids[i].Vector2Int);
-            RoadNode node = new RoadNode(roadGrids[i]);
+            GridNode node = new GridNode(roadGrids[i]);
             node.Clear();
             if (!RoadNodeDic.TryGetValue(roadGrids[i],out var value))
             {
@@ -51,7 +51,7 @@ public class RoadManager : Singleton<RoadManager>
             for (int j = 0; j < 4; j++)
             {
                 Vector2Int dirVec = CastTool.CastDirectionToVector2Int(j) / 2;
-                if (RoadNodeDic.TryGetValue(roadGrids[i]+ dirVec, out RoadNode node))
+                if (RoadNodeDic.TryGetValue(roadGrids[i]+ dirVec, out GridNode node))
                 {
                     RoadNodes[i].AddNearbyNode(node);
                 }
@@ -66,7 +66,7 @@ public class RoadManager : Singleton<RoadManager>
                 Vector2Int dirVec = RoadNodes[i].NearbyNode[j].GridPos - RoadNodes[i].GridPos;
                 //若相邻为路，往外延伸两格也为路，则说明这确实是条路，而不是路的横向两个
                 Vector2Int trigger = 2 * dirVec + RoadNodes[i].GridPos;
-                if (!RoadNodeDic.TryGetValue(trigger, out RoadNode node))
+                if (!RoadNodeDic.TryGetValue(trigger, out GridNode node))
                 {
                     if (RoadNodes[i].NearbyNode.Count > 2)
                     {
@@ -85,7 +85,7 @@ public class RoadManager : Singleton<RoadManager>
                 if (!RoadNodes[i].NearbyNode[j].IsNearbyRoad(RoadNodes[i]))
                 {
                     RoadNodes[i].NearbyNode[j].AddNearbyNode(RoadNodes[i]);
-                    if (RoadNodeDic.TryGetValue(2 * RoadNodes[i].GridPos - RoadNodes[i].NearbyNode[j].GridPos, out RoadNode node))
+                    if (RoadNodeDic.TryGetValue(2 * RoadNodes[i].GridPos - RoadNodes[i].NearbyNode[j].GridPos, out GridNode node))
                     {
                         RoadNodes[i].AddNearbyNode(node);
                     }
@@ -146,7 +146,7 @@ public class RoadManager : Singleton<RoadManager>
                 //若某点->邻点的逆时针的相邻不为路，则说明这是逆向的路
                 Vector2Int triggerGrid = RoadNodes[i].GridPos + CastTool.CastDirectionToVector2Int((int)dir) / 2;
                 //Debug.Log(RoadNodes[i].GridPos + "=>" + RoadNodes[i].NearbyNode[j].GridPos + " " + triggerGrid);
-                if(RoadNodeDic.TryGetValue(triggerGrid,out RoadNode triggerNode))
+                if(RoadNodeDic.TryGetValue(triggerGrid,out GridNode triggerNode))
                 {
                     //Debug.Log(triggerNode.NearNodeCount);
                     if (RoadNodes[i].NearNodeCount == 4 && triggerNode.NearNodeCount<=2)
@@ -182,7 +182,7 @@ public class RoadManager : Singleton<RoadManager>
         //Invoke("Show",1f);
     }
 
-    private bool IsCrossNode(RoadNode roadNode)
+    private bool IsCrossNode(GridNode roadNode)
     {
         for (int i = 0; i < CrossNodes.Count; i++)
         {
@@ -219,20 +219,20 @@ public class RoadManager : Singleton<RoadManager>
             }
         }
     }
-    public int Compare(RoadNode a, RoadNode b)
+    public int Compare(GridNode a, GridNode b)
     {
         return (a.GridPos.x - b.GridPos.x) * 1000 + (a.GridPos.y - b.GridPos.y);
     }
 
     public void AddRoadNode(Vector2Int grid)
     {
-        if (!RoadNodeDic.TryGetValue(grid, out RoadNode node))
+        if (!RoadNodeDic.TryGetValue(grid, out GridNode node))
         {
-            RoadNodeDic.Add(grid,new RoadNode(grid));
+            RoadNodeDic.Add(grid,new GridNode(grid));
         }
     }
 
-    public void CheckAndAddCrossNode(RoadNode node)
+    public void CheckAndAddCrossNode(GridNode node)
     {
         bool p = true;
         for (int i = 0; i < CrossNodes.Count; i++)
@@ -249,18 +249,18 @@ public class RoadManager : Singleton<RoadManager>
     }
     public void AddTurnNode(Vector2Int gridIn, Vector2Int gridOut)
     {
-        RoadNode inNode = RoadNodeDic[gridIn];
-        RoadNode outNode = RoadNodeDic[gridOut];
+        GridNode inNode = RoadNodeDic[gridIn];
+        GridNode outNode = RoadNodeDic[gridOut];
         outNode.AddNearbyNode(inNode);
     }
     public void AddCrossNode(Vector2Int grid, Direction dir)
     {
         if (IsCrossNode(grid))
             return;
-        if (RoadNodeDic.TryGetValue(grid, out RoadNode node0))
+        if (RoadNodeDic.TryGetValue(grid, out GridNode node0))
         {
-            RoadNode node1 = GetNearestCross(grid, dir);
-            RoadNode node2 = GetNearestCross(grid, dir + 2);
+            GridNode node1 = GetNearestCross(grid, dir);
+            GridNode node2 = GetNearestCross(grid, dir + 2);
             if (node1.IsNearbyRoad(node2))
             {
                 node1.RemoveNearbyNode(node2);
@@ -298,15 +298,15 @@ public class RoadManager : Singleton<RoadManager>
             return res;
         }
         ClearRoadNodeH();
-        List<RoadNode> path = new List<RoadNode>();
-        List<RoadNode> openList = new List<RoadNode>();
-        List<RoadNode> closeList = new List<RoadNode>();
-        RoadNode startNode = RoadNodeDic[start];
-        RoadNode endNode = RoadNodeDic[end];
+        List<GridNode> path = new List<GridNode>();
+        List<GridNode> openList = new List<GridNode>();
+        List<GridNode> closeList = new List<GridNode>();
+        GridNode startNode = RoadNodeDic[start];
+        GridNode endNode = RoadNodeDic[end];
         startNode.H = GetDistance(startNode.GridPos, end);
         openList.Add(startNode);
         path.Add(startNode);
-        RoadNode temp = startNode;
+        GridNode temp = startNode;
         int n = 100;
         while (temp != endNode && n-- > 0)
         {
@@ -375,10 +375,10 @@ public class RoadManager : Singleton<RoadManager>
             RoadNodes[i].Clear();
         }
     }
-    private RoadNode GetNearestCross(Vector2Int grid, Direction dir)
+    private GridNode GetNearestCross(Vector2Int grid, Direction dir)
     {
         //Debug.Log(grid);
-        RoadNode temp = RoadNodeDic[grid];
+        GridNode temp = RoadNodeDic[grid];
         //Debug.Log(temp.NearbyNode.Count);
         //foreach(var r in temp.NearbyNode)
         //{
@@ -395,29 +395,29 @@ public class RoadManager : Singleton<RoadManager>
 }
 
 
-public class RoadNode
+public class GridNode
 {
-    public RoadNode(Vector2Int pos)
+    public GridNode(Vector2Int pos)
     {
-        NearbyNode = new List<RoadNode>();
+        NearbyNode = new List<GridNode>();
         GridPos = pos;
+        Parent = null;
+        H = 0;
+        NearNodeCount = 0;
     }
-    /*
-    public static bool operator ==(RoadNode A, RoadNode B)
-    {
-        return A.GridPos == B.GridPos;
-    }
-    public static bool operator !=(RoadNode A, RoadNode B)
-    {
-        return A.GridPos != B.GridPos;
-    }
-    */
-    public List<RoadNode> NearbyNode { get; private set; }
+    public List<GridNode> NearbyNode { get; private set; }
 
     public int NearNodeCount = 0;//上面只存可通向的的节点，这个存储所有邻点的个数
     public Vector2Int GridPos { get; set; }
 
-    public RoadNode Parent { get; set; }
+    public float passSpeed;
+
+    public float enterCost;
+
+    public float mineValue;
+
+    public GridType gridType;
+    public GridNode Parent { get; set; }
     public float H { get; set; }
 
     public void Clear()
@@ -426,7 +426,7 @@ public class RoadNode
         H = 0;
         NearNodeCount = 0;
     }
-    public void AddNearbyNode(RoadNode roadNode)
+    public void AddNearbyNode(GridNode roadNode)
     {
         //如果不是就加入
         if (!IsNearbyRoad(roadNode))
@@ -439,7 +439,7 @@ public class RoadNode
         }
     }
 
-    public void RemoveNearbyNode(RoadNode roadNode)
+    public void RemoveNearbyNode(GridNode roadNode)
     {
         if (IsNearbyRoad(roadNode))
         {
@@ -451,7 +451,7 @@ public class RoadNode
         }
     }
 
-    public bool IsNearbyRoad(RoadNode node)
+    public bool IsNearbyRoad(GridNode node)
     {
         if (NearbyNode.Count <= 0)
         {

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreePlanter : Singleton<MonoBehaviour>
+public class TreePlanter : Singleton<TreePlanter>
 {
     public GameObject[] TreePfbs;
     private float minDis = 2f;
 
+    Transform parent;
+
     private void Start()
     {
+        parent = TransformFinder.Instance.treeParent;
         EventManager.StartListening<Vector3>(ConstEvent.OnPlantSingleTree, PlantSingleUnInitTree);
+        
     }
     private void OnDestroy()
     {
@@ -62,7 +66,7 @@ public class TreePlanter : Singleton<MonoBehaviour>
         //Debug.Log("种了" + treePosList.Count + "棵树");
         for (int i = 0; i < treePosList.Count; i++)
         {
-            PlantSingleTree(treePosList[i],TreeSystem.TreeState.unInit);
+            PlantSingleTree(treePosList[i],TreeState.unInit);
         }
     }
     private Vector3 GetRandomPos(Vector3 centerPos, float range)
@@ -82,7 +86,7 @@ public class TreePlanter : Singleton<MonoBehaviour>
         }
         return true;
     }
-    public void PlantSingleTree(Vector3 centerPos, TreeSystem.TreeState state = TreeSystem.TreeState.mature)
+    public void PlantSingleTree(Vector3 centerPos,TreeState state = TreeState.mature)
     {
         Vector3 adjustedPos = MapManager.GetTerrainPosition(centerPos);
         if (adjustedPos == Vector3.zero) return;
@@ -90,8 +94,22 @@ public class TreePlanter : Singleton<MonoBehaviour>
         int index = Random.Range(0, max);
         Vector3 forward = Random.onUnitSphere;
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
-        Transform parent = GameObject.Find("TerrainGenerator").transform.GetChild(0);
         GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), parent);
-        newTree.GetComponent<TreeSystem>().state = state;
+        newTree.GetComponent<TreeSystem>().treeData.state = state;
+    }
+
+    public void PlantSingleTree(TreeData treeSystem,Vector3 pos,Vector3 rotation)
+    {
+        GameObject newTree = Instantiate(TreePfbs[treeSystem.indexType], pos, Quaternion.Euler(rotation), parent);
+        TreeSystem sys = newTree.GetComponent<TreeSystem>();
+        sys.SetData(treeSystem);
+    }
+
+    public void PlantSaveTrees(SaveData saveData)
+    {
+        for (int i = 0; i < saveData.treeData.Length; i++)
+        {
+            PlantSingleTree(saveData.treeData[i], saveData.treePosition[i].V3, saveData.treeRotation[i].V3);
+        }
     }
 }

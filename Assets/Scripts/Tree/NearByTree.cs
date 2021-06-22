@@ -25,7 +25,7 @@ public class NearByTree : MonoBehaviour
                 trees.Remove(trees[i]);
                 continue;
             }
-            if (trees[i].state == TreeSystem.TreeState.mature)
+            if (trees[i].treeData.state == TreeState.mature)
             {
                 float curDis = GetManhattanDistance(trees[i].transform.position, transform.position);
                 if (curDis < dis)

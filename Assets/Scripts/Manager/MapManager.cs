@@ -5,10 +5,11 @@ using UnityEngine;
 public class MapManager : Singleton<MapManager>
 {
     public Vector2Int MapSize { get; private set; }
-    private Dictionary<Vector2Int, SingleGrid> _gridDic = new Dictionary<Vector2Int, SingleGrid>();
+    private GridNode[][] _grids;
     private LevelData _leveldata;
     private static Vector3[] _vertices;//存储地形顶点数据
     public const int unit = 2;//地形一格的长度（单位米）
+    public const int TexLength = 8;//贴图长度为8
     public List<BuildingBase> _buildings = new List<BuildingBase>();
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
@@ -18,40 +19,128 @@ public class MapManager : Singleton<MapManager>
     public void InitMapMnager(int levelId)
     {
         InitLevelData(levelId);
-        InitGrid();
+        InitGrid(GameManager.saveData);
     }
     /// <summary>
     /// 加载关卡的时候调用
     /// </summary>
     private void InitLevelData(int levelId)
     {
-        _leveldata = DataManager.GetLevelData(levelId);
-        MapSize = new Vector2Int(_leveldata.Length, _leveldata.Width);
-        _vertices = TerrainGenerator.GetTerrainMeshVertices();
+        MapSize = GameManager.saveData.mapSize.Vector2Int;
         generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
+        mapData = TerrainGenerator.Instance.GetMapData();
     }
-    private void InitGrid()
+    private void InitGrid(SaveData saveData)
     {
         if (MapSize == null || MapSize.x <= 0 || MapSize.y <= 0)
         {
             Debug.LogError("地图尺寸没有初始化！");
             return;
         }
+        _grids = saveData.gridNodes;
+       
+        //Debug.Log("初始化中");
+        InitRoad();
+    }
+
+    public GridNode[][] SetUpGrid()
+    {
+        MapSize = new Vector2Int(_leveldata.Width,_leveldata.Length);
+        _leveldata = DataManager.GetLevelData(30001);
+
+        Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().sharedMesh;
+        Vector2[] uv = mesh.uv;
+        for (int i = 0; i < MapSize.x; i++)
+        {
+            _grids[i] = new GridNode[MapSize.y];
+            for (int j = 0; j < MapSize.y; j++)
+            {
+                
+                _grids[i][j] = new GridNode(new Vector2Int(i, j));
+                int p = i + j * MapSize.y;
+                int tex = texs[p];
+                _grids[i][j].passSpeed = GetPassSpeed(tex);
+                _grids[i][j].enterCost = GetEnterCost(tex);
+            }
+        }
         for (int i = 0; i < MapSize.x; i++)
         {
             for (int j = 0; j < MapSize.y; j++)
             {
-                _gridDic.Add(new Vector2Int(i, j), new SingleGrid(i, j, GridType.empty));
+                if (i % 2 == 0 && i < MapSize.x - 1)
+                {
+                    _grids[i][j].AddNearbyNode(_grids[i + 1][j]);
+                }
+                else if (i > 0)
+                {
+                    _grids[i][j].AddNearbyNode(_grids[i - 1][j]);
+                }
+                if (j % 2 == 0 && j < MapSize.y - 1)
+                {
+                    _grids[i][j].AddNearbyNode(_grids[i][j + 1]);
+                }
+                else if (j > 0)
+                {
+                    _grids[i][j].AddNearbyNode(_grids[i][j - 1]);
+                }
             }
         }
-        mapData = TerrainGenerator.Instance.GetMapData();
-        for (int i = 0; i < mapData.roadGrids.Count; i++)
+
+
+    }
+    public GridNode[][] GetGridNodes()
+    {
+        return _grids;
+    }
+
+    public float GetPassSpeed(int tex)
+    {
+        if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
         {
-            SetGridTypeToRoad(mapData.roadGrids[i].Vector2Int);
-            //Debug.Log(mapData.roadGrids[i].Vector2Int);
+            return 0.7f;
         }
-        Debug.Log("初始化中");
-        Invoke("InitRoad",0.017f);
+        else if (tex == 1 || tex == 2 || tex == 3 || tex == 11)
+        {
+            return 0.5f;
+        }
+        else if (tex == 12 || tex == 13 || tex == 14)
+        {
+            return 1f;
+        }
+        else if (tex == 9 || tex == 10 || tex == 8)
+        {
+            return 1.2f;
+        }
+        else if (tex == 4 || tex == 5 || tex == 6)
+        {
+            return 1.5f;
+        }
+        return 0.1f;
+    }
+
+    public float GetEnterCost(int tex)
+    {
+        if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
+        {
+            return 1.5f;
+        }
+        else if (tex == 1 || tex == 2 || tex == 3 || tex == 11)
+        {
+            return 2f;
+        }
+        else if (tex == 12 || tex == 13 || tex == 14)
+        {
+            return 1f;
+        }
+        else if (tex == 9 || tex == 10 || tex == 8)
+        {
+            return 0.8f;
+        }
+        else if (tex == 4 || tex == 5 || tex == 6)
+        {
+            return 0.6f;
+        }
+        return 5f;
     }
 
     public static float GetMineRichness(Vector2Int vector2Int)
@@ -78,13 +167,13 @@ public class MapManager : Singleton<MapManager>
     public List<Vector2Int> GetAllRoadGrid()
     {
         List<Vector2Int> res = new List<Vector2Int>();
-        foreach(var item in _gridDic)
+        /*foreach(var item in _gridDic)
         {
             if(item.Value.GridType == GridType.road)
             {
                 res.Add(item.Key);
             }
-        }
+        }*/
         return res;
     }
 
@@ -269,15 +358,7 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
-        SingleGrid result;
-        if (_gridDic.TryGetValue(grid, out result))
-        {
-            return result.GridType;
-        }
-        else
-        {
-            return GridType.empty;
-        }
+        return _grids[grid.x][grid.y].gridType;
     }
 
     /// <summary>
@@ -288,13 +369,13 @@ public class MapManager : Singleton<MapManager>
     public static bool CheckRoadOverlap(Vector2Int vector2Int)
     {
         GridType type = Instance.GetGridType(vector2Int);
-        if (type == GridType.inherent||type == GridType.occupy)
+        if (type == GridType.occupy)
         {
             return true;
         }
         return false;
     }
-
+    /*
     public SingleGrid GetSingleGrid(Vector2Int grid)
     {
         SingleGrid result;
@@ -308,7 +389,8 @@ public class MapManager : Singleton<MapManager>
             return null;
         }
     }
-    public static bool CheckCanBuild(Vector2Int[] grids, Vector2Int parkingPos,bool checkInSea)
+    */
+    public static bool CheckCanBuild(Vector2Int[] grids, Vector2Int parkingPos, bool checkInSea)
     {
         //检测安放地点占用
         bool hasOverlap = CheckOverlap(grids);
@@ -321,11 +403,13 @@ public class MapManager : Singleton<MapManager>
         if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
-        }else
+        }
+        else
         if (hasOverlap)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
-        }else
+        }
+        else
         if (!isInSea)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
@@ -335,7 +419,7 @@ public class MapManager : Singleton<MapManager>
             noticeContent = "不能在水面下建造建筑";
         }
         //if (!isInSea) Debug.Log("不在海里");
-        return !hasOverlap && hasNearRoad && isInSea && !isInWater ;
+        return !hasOverlap && hasNearRoad && isInSea && !isInWater;
     }
 
     /// <summary>
@@ -345,7 +429,7 @@ public class MapManager : Singleton<MapManager>
     /// <returns></returns>
     public static bool CheckIsInWater(Vector2Int[] vector2Ints)
     {
-        return CheckIsInWater(vector2Ints[vector2Ints.Length/2]) &&(CheckIsInWater(vector2Ints[0])|| CheckIsInWater(vector2Ints[vector2Ints.Length-1]));
+        return CheckIsInWater(vector2Ints[vector2Ints.Length / 2]) && (CheckIsInWater(vector2Ints[0]) || CheckIsInWater(vector2Ints[vector2Ints.Length - 1]));
     }
 
     public static bool CheckIsInWater(Vector2Int vector2Int)
@@ -365,7 +449,7 @@ public class MapManager : Singleton<MapManager>
             int p = gridPos.x * 4 + gridPos.y * 300 * 4;
             Vector3 res = TerrainGenerator.GetTerrainMeshVertices()[p];
 
-            return new Vector3(res.x,10f,res.z);
+            return new Vector3(res.x, 10f, res.z);
         }
         else return Vector3.zero;
     }
@@ -433,15 +517,7 @@ public class MapManager : Singleton<MapManager>
 
     private void SetGridType(Vector2Int grid, GridType gridType)
     {
-        SingleGrid target;
-        if (_gridDic.TryGetValue(grid, out target))
-        {
-            target.GridType = gridType;
-        }
-        else
-        {
-            _gridDic.Add(grid, new SingleGrid(grid.x, grid.y, gridType));
-        }
+        _grids[grid.x][grid.y].gridType = gridType;
     }
 
     public void ShowGrid(Vector2Int[] grids)
@@ -475,10 +551,6 @@ public class MapManager : Singleton<MapManager>
         {
             Instance.SetGridType(grids[i], GridType.occupy);
         }
-    }
-    public static void SetGridTypeToInherent(Vector2Int grid)
-    {
-        Instance.SetGridType(grid, GridType.inherent);
     }
 
     public static void SetGridTypeToRoad(Vector2Int grid)
@@ -542,21 +614,22 @@ public class MapManager : Singleton<MapManager>
     }
 }
 
+/*
+[System.Serializable]
 public class SingleGrid
 {
-    private List<Direction> originDir = new List<Direction> { Direction.down, Direction.left, Direction.right, Direction.up };
-    public Vector2Int GridPos { get; private set; }
+    public Vector2IntSerializer GridPos { get; private set; }
     public GridType GridType { get; set; }
 
-    public List<Direction> AvailableDir = new List<Direction> { Direction.down, Direction.left, Direction.right, Direction.up };
-    public SingleGrid(int x, int z, GridType gridType)
+    public int TexIndex;
+
+    public int Dir;
+
+    public int enterCost;//经过的代价
+    public SingleGrid(Vector2Int pos, GridType gridType)
     {
-        this.GridPos = new Vector2Int(x, z);
+        this.GridPos = new Vector2IntSerializer(pos.x, pos.y);
         GridType = gridType;
     }
 
-    public void RefreshGridDirInfo()
-    {
-        AvailableDir = originDir;
-    }
-}
+}*/
