@@ -192,3 +192,14 @@ public enum IconDescription
     TechUsing = 8,
     Custom = 0,
 }
+
+[System.Serializable]
+public enum TradeMode
+{
+    [Description("Once")]
+    once = 0,
+    [Description("EveryWeek")]
+    everyWeek = 1,
+    [Description("Maintain")]
+    maintain = 2,
+}

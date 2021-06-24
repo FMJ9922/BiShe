@@ -55,11 +55,11 @@ public class SaveData
     public bool isOffcial = true;
     #endregion
     #region Mesh
-    public string meshName;
-    public Vector3Serializer[] meshVerticles;
-    public Vector2Serializer[] meshUV;
-    public int[] meshTriangles;
-    public int[] meshDir;
+    //public string meshName;
+    //public Vector3Serializer[] meshVerticles;
+    //public Vector2Serializer[] meshUV;
+    //public int[] meshTriangles;
+    //public int[] meshDir;
     public int[] meshTex;
     #endregion
     #region Tree
@@ -90,8 +90,11 @@ public class SaveData
     #region MapManager
     public GridNode[][] gridNodes;
     #endregion
+    #region MarketManager
+    public MarketData[] buyDatas;
+    public MarketData[] sellDatas;
+    #endregion
 
-    
 }
 
 

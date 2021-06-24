@@ -7841,18 +7841,20 @@ MonoBehaviour:
   confirmBtn: {fileID: 4052210362674636515}
   cancelBtn: {fileID: 1744831789376133001}
   icon: {fileID: 2538897085631325250}
-  curItem:
-    Id: 0
-    Name: 
-    ItemType: 0
-    Price: 0
-    Happiness: 0
-  isTrading: 0
-  needNum: 0
-  curMode: 0
-  profit: 0
-  isBuy: 1
-  maxNum: 0
+  marketData:
+    curItem:
+      Id: 0
+      Name: 
+      ItemType: 0
+      Price: 0
+      Happiness: 0
+    idList: 
+    isTrading: 0
+    needNum: 0
+    curMode: 0
+    profit: 0
+    isBuy: 1
+    maxNum: 0
 --- !u!1 &4330355315895363809
 GameObject:
   m_ObjectHideFlags: 0
@@ -10990,6 +10992,8 @@ MonoBehaviour:
   - {fileID: 7549397630826964250, guid: f489f9cfe617f6345a255aee7f9d6094, type: 3}
   - {fileID: 4217576287346922041, guid: 17d7055dd04bac54eab4bbbe440bc7ec, type: 3}
   - {fileID: 1686853030541579436, guid: 4afd8ed1b60cb2846b346323fbcd88a7, type: 3}
+  reachable: []
+  explored: []
   FakeRoute1:
   - {fileID: 5009951482373074140}
   - {fileID: 5009951481840740182}
@@ -23958,6 +23962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 5922823148080922354}
+  buysItems: []
+  sellsItems: []
   buyContent: {fileID: 5922823147118281133}
   sellContent: {fileID: 567621301640200890}
   marketItemPfb: {fileID: 4268507512366707994}

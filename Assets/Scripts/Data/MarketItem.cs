@@ -18,35 +18,31 @@ public class MarketItem : MonoBehaviour
     [SerializeField] Button confirmBtn;
     [SerializeField] Button cancelBtn;
     [SerializeField] CommonIcon icon;
-    public ItemData curItem;
-    private List<int> idList = new List<int>();
 
-    public bool isTrading = false;
-    public int needNum = 0;
-    public TradeMode curMode;
-    public float profit;
-    public bool isBuy = true;
-    public int maxNum;
-    public enum TradeMode
-    {
-        [Description("Once")]
-        once = 0,
-        [Description("EveryWeek")]
-        everyWeek = 1,
-        [Description("Maintain")]
-        maintain = 2,
-    }
+    public MarketData marketData;
+
+    public ItemData curItem => marketData.curItem;
+    private List<int> idList => marketData.idList;
+    public bool isTrading => marketData.isTrading;
+    public int needNum =>marketData.needNum;
+    public TradeMode curMode => marketData.curMode;
+    public float profit => marketData.profit;
+    public bool isBuy =>marketData.isBuy;
+    public int maxNum =>marketData.maxNum;
+
+
     private void OnDestroy()
     {
         itemDrop.onValueChanged.RemoveAllListeners();
         modeDrop.onValueChanged.RemoveAllListeners();
     }
-    public void InitItem(int id)
+    public void InitSellItem(int id)
     {
-        isBuy = false;
-        curItem = DataManager.GetItemDataById(id);
+        marketData.isBuy = false;
+        marketData.curItem = DataManager.GetItemDataById(id);
         ClearItemDrop(false);
-        icon.SetIcon(id, 0);
+        marketData.needNum = 0;
+        icon.SetIcon(curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
         modeDrop.ClearOptions();
         TMP_Dropdown.OptionData tempData;
         for (int i = 0; i < 3; i++)
@@ -63,7 +59,85 @@ public class MarketItem : MonoBehaviour
         OnResetTrading();
     }
 
-    public void InitItemDropDown()
+    public void InitSavedSellItem(MarketData data)
+    {
+        marketData = data;
+        ClearItemDrop(false);
+        icon.SetIcon(data.curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
+        modeDrop.ClearOptions();
+        TMP_Dropdown.OptionData tempData;
+        for (int i = 0; i < 3; i++)
+        {
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            modeDrop.options.Add(tempData);
+        }
+        modeDrop.onValueChanged.AddListener(ChangeMode);
+        modeDrop.captionText.text = data.curMode.GetDescription();
+        modeDrop.value = (int)data.curMode;
+
+        numText.text = needNum.ToString();
+        RefreshBuyProfitLabel();
+        cancelBtn.onClick.RemoveAllListeners();
+        if (data.isTrading)
+        {
+            OnConfirmTrading();
+        }
+        else
+        {
+            OnResetTrading();
+        }
+    }
+
+    public void InitSavedBuyItem(MarketData data)
+    {
+        ItemData[] itemArray = DataManager.GetItemDatas();
+        idList.Clear();
+        marketData = data;
+        TMP_Dropdown.OptionData tempData;
+        ClearItemDrop(true);
+        for (int i = 0; i < itemArray.Length; i++)
+        {
+            //排除金钱和人力资源
+            if (itemArray[i].Id == 10000 || itemArray[i].Id == 99999 || itemArray[i].Id == 11000)
+            {
+                continue;
+            }
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(itemArray[i].Name);
+            itemDrop.options.Add(tempData);
+            idList.Add(itemArray[i].Id);
+        }
+        itemDrop.captionText.text = Localization.ToSettingLanguage(data.curItem.Name);
+        icon.SetIcon(curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
+        cancelBtn.onClick.AddListener(() => MainInteractCanvas.Instance.GetMarketCanvas().RemoveBuyItem(gameObject));
+        itemDrop.onValueChanged.AddListener(ChangeItem);
+        numText.text = needNum.ToString();
+
+        modeDrop.ClearOptions();
+        for (int i = 0; i < 3; i++)
+        {
+            tempData = new TMP_Dropdown.OptionData();
+            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            modeDrop.options.Add(tempData);
+        }
+        modeDrop.onValueChanged.AddListener(ChangeMode);
+        modeDrop.captionText.text = data.curMode.GetDescription();
+        modeDrop.value = (int)data.curMode;
+
+        RefreshBuyProfitLabel();
+
+        if (data.isTrading)
+        {
+            OnConfirmTrading();
+        }
+        else
+        {
+            OnResetTrading();
+        }
+    }
+
+    public void InitBuyItem()
     {
         ItemData[] itemArray = DataManager.GetItemDatas();
         idList.Clear();
@@ -108,15 +182,16 @@ public class MarketItem : MonoBehaviour
 
     private void ChangeItem(int id)
     {
-        curItem = DataManager.GetItemDataById(idList[id]);
-        icon.SetIcon(curItem.Id, 0);
+        marketData.curItem = DataManager.GetItemDataById(idList[id]);
+        icon.SetIcon(curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
         RefreshBuyProfitLabel();
         OnResetTrading();
     }
 
+
     private void ChangeMode(int modeType)
     {
-        curMode = (TradeMode)modeType;
+        marketData.curMode = (TradeMode)modeType;
         modeDrop.captionText.text = Localization.ToSettingLanguage(((TradeMode)modeType).GetDescription());
         RefreshBuyProfitLabel();
         OnResetTrading();
@@ -128,11 +203,11 @@ public class MarketItem : MonoBehaviour
         {
             case TradeMode.once:
             case TradeMode.everyWeek:
-                profit = isBuy?-curItem.Price * needNum * 1.5f : curItem.Price * needNum*TechManager.Instance.PriceBuff();
+                marketData.profit = isBuy?-curItem.Price * needNum * 1.5f : curItem.Price * needNum*TechManager.Instance.PriceBuff();
                 break;
             case TradeMode.maintain:
                 float num = (isBuy?1f:-1f)*( needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id));
-                profit = num > 0 ? (isBuy ? -curItem.Price * num * 1.5f : curItem.Price * num * TechManager.Instance.PriceBuff()) : 0;
+                marketData.profit = num > 0 ? (isBuy ? -curItem.Price * num * 1.5f : curItem.Price * num * TechManager.Instance.PriceBuff()) : 0;
                 break;
         }
         profitText.text = profit.ToString();
@@ -146,8 +221,8 @@ public class MarketItem : MonoBehaviour
 
     public void OnAddNum()
     {
-        needNum += 10;
-        if (needNum > 200) needNum = 200;
+        marketData.needNum += 10;
+        if (needNum > 200) marketData.needNum = 200;
         numText.text = needNum.ToString();
         RefreshBuyProfitLabel();
         OnResetTrading();
@@ -155,8 +230,8 @@ public class MarketItem : MonoBehaviour
 
     public void OnSubNum()
     {
-        needNum -= 10;
-        if (needNum < 0) needNum = 0;
+        marketData.needNum -= 10;
+        if (needNum < 0) marketData.needNum = 0;
         numText.text = needNum.ToString();
         RefreshBuyProfitLabel();
         OnResetTrading();
@@ -165,7 +240,7 @@ public class MarketItem : MonoBehaviour
     public void OnConfirmTrading()
     {
         //Debug.Log("true");
-        isTrading = true;
+        marketData.isTrading = true;
         confirmBtn.gameObject.SetActive(false);
         cancelBtn.gameObject.SetActive(true);
     }
@@ -173,7 +248,7 @@ public class MarketItem : MonoBehaviour
     public void OnResetTrading()
     {
         //Debug.Log("false");
-        isTrading = false;
+        marketData.isTrading = false;
         confirmBtn.gameObject.SetActive(true);
         cancelBtn.gameObject.SetActive(false);
     }
@@ -189,3 +264,15 @@ public class MarketItem : MonoBehaviour
     }
 }
     
+[System.Serializable]
+public class MarketData
+{
+    public ItemData curItem;
+    public List<int> idList = new List<int>();
+    public bool isTrading = false;
+    public int needNum = 0;
+    public TradeMode curMode;
+    public float profit;
+    public bool isBuy = true;
+    public int maxNum;
+}

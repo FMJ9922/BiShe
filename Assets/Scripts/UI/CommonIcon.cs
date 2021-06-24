@@ -43,8 +43,8 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
         if (itemNum != 0)
         {
             _numLabel.text = CastTool.RoundOrFloat(itemNum);
-            _numLabel.outlineWidth = 0.3f;
-            _numLabel.outlineColor = Color.black;
+            //_numLabel.outlineWidth = 0.3f;
+            //_numLabel.outlineColor = Color.black;
         }
         else
         {

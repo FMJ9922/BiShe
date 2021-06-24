@@ -97,4 +97,32 @@ public class MineBuilding : BuildingBase
         Vector2Int[] grids = BuildManager.Instance.GetAllGrids(5, 5, digPos.position, false);
         TerrainGenerator.Instance.FlatGround(grids,height-0.1f);
     }
+
+    public override void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
+    {
+        if (returnResources)
+        {
+            ReturnBuildResources();
+        }
+        MapManager.Instance._buildings.Remove(this);
+        if (repaint)
+        {
+            MapManager.SetGridTypeToEmpty(takenGrids);
+            //MapManager.Instance.BuildOriginFoundation(takenGrids);
+        }
+        if (returnPopulation)
+        {
+            if (runtimeBuildData.Population < 0)
+            {
+                ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
+            }
+            else
+            {
+                ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
+            }
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+        }
+
+        Destroy(this.gameObject);
+    }
 }

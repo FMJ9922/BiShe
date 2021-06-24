@@ -7,11 +7,11 @@ public class TreePlanter : Singleton<TreePlanter>
     public GameObject[] TreePfbs;
     private float minDis = 2f;
 
-    Transform parent;
+    Transform Treeparent;
 
     private void Start()
     {
-        parent = TransformFinder.Instance.treeParent;
+        Treeparent = TransformFinder.Instance.treeParent;
         EventManager.StartListening<Vector3>(ConstEvent.OnPlantSingleTree, PlantSingleUnInitTree);
         
     }
@@ -94,14 +94,15 @@ public class TreePlanter : Singleton<TreePlanter>
         int index = Random.Range(0, max);
         Vector3 forward = Random.onUnitSphere;
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
-        GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), parent);
+        GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
         newTree.GetComponent<TreeSystem>().treeData.state = state;
     }
 
     public void PlantSingleTree(TreeData treeSystem,Vector3 pos,Vector3 rotation)
     {
-        GameObject newTree = Instantiate(TreePfbs[treeSystem.indexType], pos, Quaternion.Euler(rotation), parent);
+        GameObject newTree = Instantiate(TreePfbs[treeSystem.indexType], pos, Quaternion.Euler(rotation), transform);
         TreeSystem sys = newTree.GetComponent<TreeSystem>();
+        newTree.transform.SetParent(transform);
         sys.SetData(treeSystem);
     }
 

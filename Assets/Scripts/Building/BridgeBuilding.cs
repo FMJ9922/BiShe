@@ -24,7 +24,7 @@ public class BridgeBuilding : BuildingBase
     public override void DestroyBuilding(bool returnResources,bool returnPopulation,bool repaint = true)
     {
         MapManager.SetGridTypeToEmpty(takenGrids);
-        MapManager.Instance.BuildFoundation(takenGrids, 1, 4);
+        MapManager.Instance.BuildOriginFoundation(takenGrids);
         Destroy(this.gameObject);
     }
 

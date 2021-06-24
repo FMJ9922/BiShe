@@ -7,8 +7,8 @@ using TMPro;
 public class MarketCanvas : CanvasBase
 {
     [SerializeField] private GameObject mainCanvas;
-    List<MarketItem> marketItems = new List<MarketItem>();
-    List<MarketItem> orderItems = new List<MarketItem>();
+    public List<MarketItem> buysItems = new List<MarketItem>();
+    public List<MarketItem> sellsItems = new List<MarketItem>();
     [SerializeField] GameObject buyContent,sellContent;
     [SerializeField] GameObject marketItemPfb;
     [SerializeField] Button buyBtn, sellBtn;
@@ -25,8 +25,6 @@ public class MarketCanvas : CanvasBase
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
-        RefreshOrderItem();
-        InitMarketItems();
     }
     public override void OnOpen()
     {
@@ -83,7 +81,7 @@ public class MarketCanvas : CanvasBase
         sellItems.SetActive(false);
         profitItems.SetActive(true);
     }
-    private void InitMarketItems()
+    public void InitSellItems()
     {
         int[] ids = DataManager.GetLevelData(LevelManager.LevelID).orderIds;
         int[] nums = DataManager.GetLevelData(LevelManager.LevelID).orderNums;
@@ -95,22 +93,48 @@ public class MarketCanvas : CanvasBase
             obj.SetActive(true);
             obj.transform.SetParent(sellContent.transform);
             MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.needNum = 0;
-            marketItem.maxNum = (int)(nums[i]*TechManager.Instance.SellNumBuff());
-            marketItem.InitItem(ids[i]);
-            orderItems.Add(marketItem);
+            marketItem.marketData.maxNum = (int)(nums[i] * TechManager.Instance.SellNumBuff());
+            marketItem.InitSellItem(ids[i]);
+            sellsItems.Add(marketItem);
         }
     }
-    public List<MarketItem> GetMarketItems()
+
+    public void InitSavedSellItems(MarketData[] selldatas)
     {
-        return marketItems;
+        for (int i = 0; i < selldatas.Length; i++)
+        {
+            GameObject obj = Instantiate(marketItemPfb, sellContent.transform);
+            obj.SetActive(true);
+            obj.transform.SetParent(sellContent.transform);
+            MarketItem marketItem = obj.GetComponent<MarketItem>();
+            marketItem.InitSavedSellItem(selldatas[i]);
+            sellsItems.Add(marketItem);
+        }
+    }
+    public List<MarketItem> GetBuyItems()
+    {
+        return buysItems;
     }
 
-    public List<MarketItem> GetOrderItems()
+    public List<MarketItem> GetSellItems()
     {
-        return orderItems;
+        return sellsItems;
     }
 
+    public void InitSavedBuyItems(MarketData[] buyDatas)
+    {
+        for (int i = 0; i < buyDatas.Length; i++)
+        {
+            GameObject obj = Instantiate(marketItemPfb, buyContent.transform);
+            obj.SetActive(true);
+            obj.transform.SetParent(buyContent.transform);
+            obj.transform.SetSiblingIndex(buyContent.transform.childCount - 2);
+            MarketItem marketItem = obj.GetComponent<MarketItem>();
+            marketItem.InitSavedBuyItem(buyDatas[i]);
+            buysItems.Add(marketItem);
+        }
+
+    }
     public void InitBuyItem()
     {
         GameObject obj = Instantiate(marketItemPfb, buyContent.transform);
@@ -118,31 +142,31 @@ public class MarketCanvas : CanvasBase
         obj.transform.SetParent(buyContent.transform);
         obj.transform.SetSiblingIndex(buyContent.transform.childCount - 2);
         MarketItem marketItem = obj.GetComponent<MarketItem>();
-        marketItem.InitItemDropDown();
-        marketItems.Add(marketItem);
+        marketItem.InitBuyItem();
+        buysItems.Add(marketItem);
     }
 
     public void RemoveBuyItem(GameObject obj)
     {
         MarketItem item = obj.GetComponent<MarketItem>();
-        marketItems.Remove(item);
+        buysItems.Remove(item);
         Destroy(obj);
     }
-    public void RefreshMarketItem()
+    public void RefreshBuyItems()
     {
-        foreach (var item in marketItems)
+        foreach (var item in buysItems)
         {
             Destroy(item.gameObject);
         }
-        marketItems.Clear();
+        buysItems.Clear();
     }
 
-    public void RefreshOrderItem()
+    public void RefreshSellItems()
     {
-        foreach (var item in orderItems)
+        foreach (var item in sellsItems)
         {
             Destroy(item.gameObject);
         }
-        orderItems.Clear();
+        sellsItems.Clear();
     }
 }

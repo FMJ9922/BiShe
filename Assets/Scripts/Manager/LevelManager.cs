@@ -166,7 +166,7 @@ public class LevelManager : Singleton<LevelManager>
         Debug.Log("InitLevel:" + levelID);
         LevelManager.LevelID = levelID;
         ResourceManager.Instance.InitResourceManager(LevelID);
-        MapManager.Instance.InitMapMnager(LevelID);
+        MapManager.Instance.InitMapMnager();
         BuildManager.Instance.InitBuildManager();
         MarketManager.Instance.InitMarketManager();
         MainInteractCanvas.InitCanvas();
@@ -188,6 +188,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void InitSavedLevelManager(SaveData saveData)
     {
+        Debug.Log("InitSave");
         dayTime = saveData.dayTime;
         LevelID = saveData.levelID;
         year = saveData.year;
@@ -200,11 +201,13 @@ public class LevelManager : Singleton<LevelManager>
         WeekProgress = saveData.weekProgress;
 
         ResourceManager.Instance.InitSavedResourceManager(saveData);
+        MapManager.Instance.InitMapMnager();
         TreePlanter.Instance.PlantSaveTrees(GameManager.saveData);
         InitSaveWater(GameManager.saveData);
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(GameManager.saveData.buildingDatas);
         TerrainGenerator.Instance.LoadTerrain(saveData.mapName, true);
+        MarketManager.Instance.InitSavedMarketManager();
         MainInteractCanvas.InitCanvas();
     }
 

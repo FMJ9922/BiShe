@@ -571,6 +571,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         string path = isOffcial ? "MapData/" : "Saves/";
         Debug.Log(path + fileName + "meshData");
         transform.GetComponent<MeshFilter>().mesh = CopyMesh(Resources.Load<Mesh>(path + fileName + "meshData"));
+        transform.GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
     /// <summary>
     /// 获得地形的顶点数据
@@ -633,6 +634,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mesh.RecalculateNormals();
         //DestroyChildren();
     }
+    /*
     public void GenerateBySave(string name, bool isOffcial = true)
     {
         SaveData data = GameSaver.ReadSaveData(name, isOffcial);
@@ -644,7 +646,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
         mesh.RecalculateNormals();
         Debug.Log("加载地形成功！");
-    }
+    }*/
     //[ContextMenu("CombineMeshes")]
     void CombineMeshes()
     {

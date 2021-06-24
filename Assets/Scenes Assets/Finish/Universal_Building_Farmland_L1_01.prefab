@@ -54,10 +54,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Width: 6
   Height: 4
-  BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}
   body: {fileID: 0}
+  runtimeBuildData:
+    Id: 0
+    Name: 
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 0
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 0
+    Width: 0
+    Price: 0
+    costResources: []
+    BundleName: 
+    PfbName: 
+    tabType: 0
+    Introduce: 
+    Level: 0
+    iconName: 
+    Times: 0
+    Pause: 0
+    CurLevel: 0
+    CurFormula: 0
+    formulaDatas: []
+    CurPeople: 0
+    Rate: 0
+    Effectiveness: 0
+    Happiness: 0.6
+    SavePosition:
+      x: 0
+      y: 0
+      z: 0
+    SaveTakenGrids: []
+    SaveDir: 0
+    SaveOutLookType: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
@@ -137,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2879422481910879409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 2}
+  m_LocalPosition: {x: -4, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1750822809274348193}
@@ -261,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4126745685592927460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 2}
+  m_LocalPosition: {x: 4, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1750822809274348193}
@@ -291,7 +326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5714206720758805538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: -2}
+  m_LocalPosition: {x: -4, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1750822809274348193}
@@ -321,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7137235212204023004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: -2}
+  m_LocalPosition: {x: 4, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1750822809274348193}

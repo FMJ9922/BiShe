@@ -14,7 +14,7 @@ public class FarmLandBuilding : BuildingBase
     private GameObject[] grids;
     public override void InitBuildingFunction()
     {
-        Invoke("InitWheatGrids",0.5f);
+        Invoke("InitWheatGrids",1f);
         previewObj.SetActive(false);
         base.InitBuildingFunction();
     }
@@ -40,7 +40,7 @@ public class FarmLandBuilding : BuildingBase
             transform.GetComponent<BoxCollider>().enabled = false;
             direction = CastTool.CastVector3ToDirection(transform.right);
             //地基
-            MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction);
+            MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction+1);
             //整平地面
             Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
             float targetHeight = targetPos.y;
@@ -65,11 +65,11 @@ public class FarmLandBuilding : BuildingBase
             Vector3 pos;
             if (i % 2 == 0)
             {
-                pos = MapManager.GetTerrainPosition(takenGrids[i/2]);
+                pos = MapManager.GetNotInWaterPosition(takenGrids[i/2]);
             }
             else
             {
-                pos = MapManager.GetTerrainPosition(takenGrids[i/2]) + transform.forward;
+                pos = MapManager.GetNotInWaterPosition(takenGrids[i/2]) + transform.forward;
             }
             newGrid.transform.position = pos+new Vector3(random.x,0,random.z) - transform.forward/2;
             newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction - 1), Space.Self);
@@ -80,10 +80,16 @@ public class FarmLandBuilding : BuildingBase
     }
     protected override void Output()
     {
-        if (formula == null) return;
+        if (formula == null)
+        {
+            Debug.Log("no");
+            return;
+        }
+
         if (!isharvesting)
         {
             productTime--;
+            Debug.Log(productTime);
             float progress = (float)productTime / formula.ProductTime;
             if (productTime <= 0)
             {
@@ -123,7 +129,7 @@ public class FarmLandBuilding : BuildingBase
     /// </summary>
     /// <param name="rate">生长比例</param>
     /// <returns></returns>
-    private CarMission MakeCarMission(float rate)
+    protected override CarMission MakeCarMission(float rate)
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();

@@ -122,7 +122,7 @@ public class BuildingBase : MonoBehaviour
     }
     public void ChangeFormula()
     {
-
+        //Debug.Log("change");
         if (runtimeBuildData.formulaDatas.Length > 0)
         {
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
@@ -188,7 +188,7 @@ public class BuildingBase : MonoBehaviour
         if (repaint)
         {
             MapManager.SetGridTypeToEmpty(takenGrids);
-            MapManager.Instance.BuildFoundation(takenGrids, 0, 4);
+            MapManager.Instance.BuildOriginFoundation(takenGrids);
         }
         if (returnPopulation)
         {
@@ -238,7 +238,7 @@ public class BuildingBase : MonoBehaviour
     {
         ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek));
         runtimeBuildData.Pause = false;
-        ChangeFormula();
+        //ChangeFormula();
         if (formula == null|| formula.InputItemID==null) return;
         List<CostResource> costResources = new List<CostResource>();
         for (int i = 0; i < formula.InputItemID.Count; i++)

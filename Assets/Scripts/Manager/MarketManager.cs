@@ -9,6 +9,15 @@ public class MarketManager : Singleton<MarketManager>
     public void InitMarketManager()
     {
         EventManager.StartListening(ConstEvent.OnSettleAccount, SettleAccount);
+
+        marketCanvas.RefreshSellItems();
+        marketCanvas.InitSellItems();
+    }
+    public void InitSavedMarketManager()
+    {
+        EventManager.StartListening(ConstEvent.OnSettleAccount, SettleAccount);
+        marketCanvas.InitSavedBuyItems(GameManager.saveData.buyDatas);
+        marketCanvas.InitSavedSellItems(GameManager.saveData.sellDatas);
     }
 
     private void OnDestroy()
@@ -22,8 +31,8 @@ public class MarketManager : Singleton<MarketManager>
         {
             marketCanvas = MainInteractCanvas.Instance.GetMarketCanvas();
         }
-        List<MarketItem> marketItems = marketCanvas.GetMarketItems();
-        List<MarketItem> orderItems = marketCanvas.GetOrderItems();
+        List<MarketItem> marketItems = marketCanvas.GetBuyItems();
+        List<MarketItem> orderItems = marketCanvas.GetSellItems();
         for (int i = 0; i < marketItems.Count; i++)
         {
             marketItems[i].RefreshBuyProfitLabel();
@@ -34,7 +43,7 @@ public class MarketManager : Singleton<MarketManager>
             //Debug.Log("profit" + profit);
             switch (marketItems[i].curMode)
             {
-                case MarketItem.TradeMode.once:
+                case TradeMode.once:
                     if (ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
                         BuyItem(marketItems[i].GetCostResource());
@@ -42,14 +51,14 @@ public class MarketManager : Singleton<MarketManager>
                         marketItems[i].OnResetTrading();
                     }
                     break;
-                case MarketItem.TradeMode.everyWeek:
+                case TradeMode.everyWeek:
                     if (ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
                         BuyItem(marketItems[i].GetCostResource());
                         marketCanvas.AddProfitInfo(GetBuyProfitDescribe(marketItems[i].GetCostResource(), profit));
                     }
                     break;
-                case MarketItem.TradeMode.maintain:
+                case TradeMode.maintain:
                     float num = marketItems[i].needNum - ResourceManager.Instance.TryGetResourceNum(marketItems[i].curItem.Id);
                     if (num > 0&& ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
@@ -70,17 +79,17 @@ public class MarketManager : Singleton<MarketManager>
             {
                 switch (orderItems[i].curMode)
                 {
-                    case MarketItem.TradeMode.once:
+                    case TradeMode.once:
                         if (IsItemEnough(costResource))
                         {
                             SellItem(costResource, orderItems[i].curItem.Price);
                             orderItems[i].OnResetTrading();
                         }
                         break;
-                    case MarketItem.TradeMode.everyWeek:
+                    case TradeMode.everyWeek:
                         SellItem(costResource, orderItems[i].curItem.Price);
                         break;
-                    case MarketItem.TradeMode.maintain:
+                    case TradeMode.maintain:
                         float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
                         if (num > 0)
                         {
@@ -133,6 +142,27 @@ public class MarketManager : Singleton<MarketManager>
         return ResourceManager.Instance.IsResourceEnough(costResource);
     }
 
+    public MarketData[] GetBuyDatas()
+    {
+        MarketItem[] items = marketCanvas.buysItems.ToArray();
+        MarketData[] buyDatas = new MarketData[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            buyDatas[i] = items[i].marketData;
+        }
+        return buyDatas;
+    }
+
+    public MarketData[] GetSellDatas()
+    {
+        MarketItem[] items = marketCanvas.sellsItems.ToArray();
+        MarketData[] sellDatas = new MarketData[items.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            sellDatas[i] = items[i].marketData;
+        }
+        return sellDatas;
+    }
 }
 
 

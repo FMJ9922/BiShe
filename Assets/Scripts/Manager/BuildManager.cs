@@ -159,7 +159,7 @@ public class BuildManager : Singleton<BuildManager>
             pfbName = pfbName.Substring(0, pfbName.Length - 1);
             pfbName += buildData.SaveOutLookType.ToString();
         }
-        Debug.Log(pfbName);
+        //Debug.Log(pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         building.name = pfbName;
@@ -211,7 +211,7 @@ public class BuildManager : Singleton<BuildManager>
         if (MapManager.CheckIsRoad(grids))
         {
             MapManager.SetGridTypeToEmpty(grids);
-            MapManager.Instance.BuildFoundation(grids, 0, 4);
+            MapManager.Instance.BuildOriginFoundation(grids);
             //RoadManager.Instance.InitRoadNodeDic();
             //MapManager.Instance.SetBuildingsGrid();
         }
@@ -574,6 +574,7 @@ public class BuildManager : Singleton<BuildManager>
             isTurn = true;
         }
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
+        Debug.Log(InputManager.Instance.LastGroundRayPos);
         CheckBuildingOverlap();
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
     }
@@ -582,6 +583,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         Vector3 curPos = currentBuilding.transform.position;
         int width, height;
+        Debug.Log(curPos);
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos, out width, out height);
         bool isCheckSea = currentBuilding.runtimeBuildData.Id == 20032;
 

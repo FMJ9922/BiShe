@@ -214,7 +214,7 @@ public class GameManager : Singleton<GameManager>
         //data.meshUV = Vector2Serializer.Box(mesh.uv);
         //data.meshTriangles = mesh.triangles;
         int[] meshTex = new int[data.mapSize.x * data.mapSize.y];
-        int[] meshDir = new int[data.mapSize.x * data.mapSize.y];
+        //int[] meshDir = new int[data.mapSize.x * data.mapSize.y];
         int sizeX = data.mapSize.x;
         int sizeY = data.mapSize.y;
         int texLength = MapManager.TexLength;
@@ -230,11 +230,11 @@ public class GameManager : Singleton<GameManager>
                 float deltaX = x * 0.125f + 0.125f - uv[index].x;
                 float deltaY = (7 - y) * 0.125f + 0.125f - uv[index].y;
                 int dir = GetDir(deltaX, deltaY);
-                meshDir[i + j * sizeY] = dir;
+                //meshDir[i + j * sizeY] = dir;
                 meshTex[i + j * sizeY] = tex;
             }
         }
-        data.meshDir = meshDir;
+        //data.meshDir = meshDir;
         data.meshTex = meshTex;
         
         //tree
@@ -293,6 +293,10 @@ public class GameManager : Singleton<GameManager>
 
         //MapManager
         data.gridNodes = MapManager.Instance.GetGrids();
+
+        //MarketManager
+        data.buyDatas = MarketManager.Instance.GetBuyDatas();
+        data.sellDatas = MarketManager.Instance.GetSellDatas();
 
         sw.Stop();
         System.TimeSpan dt = sw.Elapsed;
