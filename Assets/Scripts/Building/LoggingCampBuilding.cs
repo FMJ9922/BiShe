@@ -20,7 +20,7 @@ public class LoggingCampBuilding : BuildingBase
             productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, () => carMission.EndBuilding.OnRecieveCar(carMission));
+            TrafficManager.Instance.UseCar(carMission, null);
             runtimeBuildData.Rate = 0;
         }
     }

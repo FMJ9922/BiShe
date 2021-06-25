@@ -21,8 +21,7 @@ public class MarketBuilding : BuildingBase
             case CarMissionType.requestResources:
                 BuildRecievedCarMission(carMission);
                 CarMission car = carMission;
-                void ac() { car.EndBuilding.OnRecieveCar(car); }
-                TrafficManager.Instance.UseCar(car, ac, DriveType.once);
+                TrafficManager.Instance.UseCar(car, null, DriveType.once);
                 break;
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
@@ -44,9 +43,9 @@ public class MarketBuilding : BuildingBase
     }
     private void BuildRecievedCarMission(CarMission carMission)
     {
-        BuildingBase temp = carMission.StartBuilding;
+        BuildingBase temp = MapManager.Instance.GetBuilidngByEntry(carMission.StartBuilding);
         carMission.StartBuilding = carMission.EndBuilding;
-        carMission.EndBuilding = temp;
+        carMission.EndBuilding = temp.parkingGridIn;
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:

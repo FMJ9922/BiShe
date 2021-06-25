@@ -14,12 +14,14 @@ public class MapManager : Singleton<MapManager>
     [SerializeField] private static TerrainGenerator generator;
     //[SerializeField] GameObject gridPfb;
     public static string noticeContent;
+    private Dictionary<Vector2Int, BuildingBase> _buildingEntryDic;
     private MapData mapData;
 
     public void InitMapMnager()
     {
         InitLevelData();
         InitGrid(GameManager.saveData);
+        InitBuilidngEntryDic();
     }
     /// <summary>
     /// 加载关卡的时候调用
@@ -47,12 +49,59 @@ public class MapManager : Singleton<MapManager>
         Debug.Log("初始化中");
         Invoke("InitRoad", 0.017f);
     }
+
+
+    private void InitBuilidngEntryDic()
+    {
+        _buildingEntryDic = new Dictionary<Vector2Int, BuildingBase>();
+    }
     [ContextMenu("SetUp")]
     public void SetUp()
     {
         _grids = SetUpGrid();
     }
 
+    public void AddBuildingEntry(Vector2Int entry,BuildingBase building)
+    {
+        if (!_buildingEntryDic.ContainsKey(entry))
+        {
+            _buildingEntryDic.Add(entry, building);
+        }
+        else
+        {
+            Debug.LogError("这个入口已经被占用：" + entry);
+        }
+    }
+
+    public bool IsBuildingEntryAvalible(Vector2Int entry)
+    {
+        return !_buildingEntryDic.ContainsKey(entry);
+    }
+
+    public void RemoveBuildingEntry(Vector2Int entry)
+    {
+        if (_buildingEntryDic.ContainsKey(entry))
+        {
+            _buildingEntryDic.Remove(entry);
+        }
+        else
+        {
+            Debug.LogError("输入的建筑入口不合法");
+        }
+    }
+
+    public BuildingBase GetBuilidngByEntry(Vector2Int entry)
+    {
+        if (_buildingEntryDic.ContainsKey(entry))
+        {
+            return _buildingEntryDic[entry];
+        }
+        else
+        {
+            //当目标建筑被拆除了，会返回空
+            return null;
+        }
+    }
     public GridNode[][] GetGrids()
     {
         return _grids;

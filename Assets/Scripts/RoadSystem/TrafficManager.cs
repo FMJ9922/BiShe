@@ -46,11 +46,11 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return lists;
     }
-    public void UseCar(CarMission mission, UnityAction unityAction, DriveType driveType = DriveType.once)
+    public void UseCar(CarMission mission,UnityAction unityAction,DriveType driveType = DriveType.once)
     {
         DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
-        Vector2Int start = mission.StartBuilding.parkingGridIn;
-        Vector2Int end = mission.EndBuilding.parkingGridIn;
+        Vector2Int start = mission.StartBuilding;
+        Vector2Int end = mission.EndBuilding;
         //Debug.Log(start+" "+end);
         List<Vector3> wayPoints = new List<Vector3>();
         try
@@ -59,8 +59,8 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         catch
         {
-            Debug.LogError("寻路失败，起点是" + mission.StartBuilding.runtimeBuildData.Name
-               + "终点是" + mission.StartBuilding.runtimeBuildData.Name
+            Debug.LogError("寻路失败，起点是" + mission.StartBuilding
+               + "终点是" + mission.StartBuilding
                 + "\n不过不用担心，产品已经直接传送送达。请检查起点建筑是否被造在了路的拐点或终点，拆除并放置在其他位置上");
 
         }
@@ -68,12 +68,11 @@ public class TrafficManager : Singleton<TrafficManager>
         {
             //Debug.Log(wayPoints.Count);
             driveSystem.SetCarMission(mission);
-            driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem); unityAction.Invoke(); });
+            driveSystem.StartDriving(wayPoints, driveType, () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end)));
         }
         else
         {
-            RecycleCar(driveSystem); 
-            unityAction.Invoke();
+            RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end)); 
         }
     }
 
@@ -81,7 +80,7 @@ public class TrafficManager : Singleton<TrafficManager>
     public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction unityAction = null)
     {
         DriveSystem driveSystem = GetCarFromPool(type);
-        driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem, unityAction); });
+        driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem, null,unityAction); });
     }
 
     public bool CloseToTarget(Vector2 cur, Vector2 target)
@@ -281,13 +280,17 @@ public class TrafficManager : Singleton<TrafficManager>
         return system;
     }
 
-    private void RecycleCar(DriveSystem driveSystem, UnityAction unityAction = null)
+    private void RecycleCar(DriveSystem driveSystem, BuildingBase destination ,UnityAction unityAction = null)
     {
         //Debug.Log("recycle");
         carUsingPool.Remove(driveSystem);
         carUnusedPool.Add(driveSystem);
         driveSystem.transform.position = hidePos;
         driveSystem.action = null;
+        if (destination != null)
+        {
+            destination.OnRecieveCar(driveSystem.CurMission);
+        }
         if (unityAction != null)
         {
             unityAction.Invoke();
@@ -304,6 +307,6 @@ public class CarMission
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类
     public TransportationType transportationType;
-    public BuildingBase StartBuilding;
-    public BuildingBase EndBuilding;
+    public Vector2Int StartBuilding;
+    public Vector2Int EndBuilding;
 }

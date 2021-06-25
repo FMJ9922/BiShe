@@ -15,7 +15,7 @@ public class PierBuilding : BuildingBase
         gameObject.tag = "Building";
         takenGrids = vector2Ints;
         parkingGridIn = GetInParkingGrid();
-        parkingGridOut = GetOutParkingGrid();
+        //parkingGridOut = GetOutParkingGrid();
         if (!buildFlag)
         {
             buildFlag = true;
@@ -41,7 +41,7 @@ public class PierBuilding : BuildingBase
             productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, () => carMission.EndBuilding.OnRecieveCar(carMission));
+            TrafficManager.Instance.UseCar(carMission, null);
             runtimeBuildData.Rate = 0;
         }
     }
@@ -55,8 +55,8 @@ public class PierBuilding : BuildingBase
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();
-        mission.StartBuilding = this;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.StartBuilding = parkingGridIn;
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
         mission.isAnd = true;
         mission.transportResources = new List<CostResource>();

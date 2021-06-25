@@ -42,7 +42,7 @@ public class HutBuilding : BuildingBase
         if (storage.GetAllFoodNum() < 3)
         {
             CarMission mission = MakeCarMission();
-            TrafficManager.Instance.UseCar(mission, () => mission.EndBuilding.OnRecieveCar(mission), DriveType.once);
+            TrafficManager.Instance.UseCar(mission, null, DriveType.once);
         }
 
         ItemData[] foodIDs = DataManager.GetFoodItemList();
@@ -68,10 +68,10 @@ public class HutBuilding : BuildingBase
     private CarMission MakeCarMission(float ratio = 10)
     {
         CarMission mission = new CarMission();
-        mission.StartBuilding = this;
+        mission.StartBuilding = parkingGridIn;
         mission.transportationType = TransportationType.van;
         //Debug.Log(MapManager.GetNearestMarket(parkingGridIn).name);
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;
         mission.requestResources = new List<CostResource>();

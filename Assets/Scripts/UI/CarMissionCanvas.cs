@@ -36,8 +36,8 @@ public class CarMissionCanvas : CanvasBase
     private void InitLabels(CarMission mission)
     {
         nameLabel.text = Localization.ToSettingLanguage(mission.transportationType.GetDescription());
-        startLabel.text = Localization.ToSettingLanguage(mission.StartBuilding.runtimeBuildData.Name);
-        endLabel.text = Localization.ToSettingLanguage(mission.EndBuilding.runtimeBuildData.Name);
+        startLabel.text = Localization.ToSettingLanguage(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding).runtimeBuildData.Name);
+        endLabel.text = Localization.ToSettingLanguage(MapManager.Instance.GetBuilidngByEntry(mission.EndBuilding).runtimeBuildData.Name);
     }
     private void InitIcons(CarMission mission)
     {

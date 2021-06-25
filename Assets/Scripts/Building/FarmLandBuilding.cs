@@ -29,7 +29,7 @@ public class FarmLandBuilding : BuildingBase
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        parkingGridOut = GetOutParkingGrid();
+        //parkingGridOut = GetOutParkingGrid();
         if (!buildFlag)
         {
             buildFlag = true;
@@ -121,8 +121,7 @@ public class FarmLandBuilding : BuildingBase
         productTime = formula.ProductTime;
         InitWheatGrids();
         CarMission carMission = MakeCarMission(rate);
-        TrafficManager.Instance.UseCar(carMission,
-            () => carMission.EndBuilding.OnRecieveCar(carMission));
+        TrafficManager.Instance.UseCar(carMission,null);
     }
     /// <summary>
     /// 配置货物清单
@@ -133,8 +132,8 @@ public class FarmLandBuilding : BuildingBase
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();
-        mission.StartBuilding = this;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.StartBuilding = parkingGridIn;
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
         mission.isAnd = true;
         mission.transportResources = new List<CostResource>();

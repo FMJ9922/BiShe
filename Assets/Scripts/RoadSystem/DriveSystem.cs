@@ -11,7 +11,6 @@ public class DriveSystem : MonoBehaviour
     private float speed;
     public float StopDistance = 1f;
     private float a { get { return (MaxSpeed * MaxSpeed) / (2 * StopDistance); } }
-    public DriveType driveType;
     public TransportationType carType;
     public bool isbraking;//是否在刹车
     private float RotateSpeed = 10f;
@@ -338,4 +337,11 @@ public class DriveSystem : MonoBehaviour
         EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
         EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
     }
+}
+
+[System.Serializable]
+
+public class DriveData
+{
+
 }

@@ -29,7 +29,7 @@ public class BuildingBase : MonoBehaviour
 
 
     public Vector2Int parkingGridIn;
-    public Vector2Int parkingGridOut;
+    //public Vector2Int parkingGridOut;
 
 
     public Direction direction;
@@ -39,7 +39,7 @@ public class BuildingBase : MonoBehaviour
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        parkingGridOut = GetOutParkingGrid();
+        //parkingGridOut = GetOutParkingGrid();
         if (!buildFlag)
         {
             buildFlag = true;
@@ -87,11 +87,11 @@ public class BuildingBase : MonoBehaviour
         }*/
         return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
     }
-
+    /*
     public Vector2Int GetOutParkingGrid()
     {
         return MapManager.GetCenterGrid(transform.position + CastTool.CastDirectionToVector(direction) * (Size.y / 2 + 1.5f));
-    }
+    }*/
     /// <summary>
     /// 建造完后初始化建筑功能
     /// </summary>
@@ -99,6 +99,7 @@ public class BuildingBase : MonoBehaviour
     {
         //Debug.Log("add");
         MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
@@ -185,6 +186,8 @@ public class BuildingBase : MonoBehaviour
             ReturnBuildResources();
         }
         MapManager.Instance._buildings.Remove(this);
+        MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
+        
         if (repaint)
         {
             MapManager.SetGridTypeToEmpty(takenGrids);
@@ -225,7 +228,7 @@ public class BuildingBase : MonoBehaviour
             productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, () => carMission.EndBuilding.OnRecieveCar(carMission));
+            TrafficManager.Instance.UseCar(carMission, null);
             runtimeBuildData.Rate = 0;
         }
     }
@@ -359,8 +362,8 @@ public class BuildingBase : MonoBehaviour
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();
-        mission.StartBuilding = this;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>();
+        mission.StartBuilding = parkingGridIn;
+        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
         mission.isAnd = true;
         mission.transportResources = new List<CostResource>();

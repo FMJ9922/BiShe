@@ -94,6 +94,9 @@ public class SaveData
     public MarketData[] buyDatas;
     public MarketData[] sellDatas;
     #endregion
+    #region TrafficManager
+
+    #endregion
 
 }
 
