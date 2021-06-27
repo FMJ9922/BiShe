@@ -182,6 +182,7 @@ MonoBehaviour:
     Rate: 0
     Effectiveness: 0
     Happiness: 0.6
+    productTime: 0
     SavePosition:
       x: 0
       y: 0
@@ -192,7 +193,6 @@ MonoBehaviour:
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  parkingGridOut: {x: 0, y: 0}
   direction: 0
   yellow: {r: 0.9245283, g: 0.8257092, b: 0.3270737, a: 1}
   green: {r: 0.50363296, g: 0.8962264, b: 0.26633143, a: 1}
@@ -205,6 +205,8 @@ MonoBehaviour:
   - {fileID: 4126745685592927460}
   - {fileID: 6250234163305800815}
   - {fileID: 2422062572750242899}
+  wheat: {fileID: 2800000, guid: bfb5af536d717844e907b29e35798ed1, type: 3}
+  rice: {fileID: 2800000, guid: ce8d9d0cfcdf0bd488207bba070cd72e, type: 3}
 --- !u!65 &5314370595090824069
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -735,7 +737,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8990230469832560458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6, y: 0, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1750822809274348193}

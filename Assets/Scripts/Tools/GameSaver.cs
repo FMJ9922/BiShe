@@ -95,6 +95,8 @@ public class SaveData
     public MarketData[] sellDatas;
     #endregion
     #region TrafficManager
+    public CarMission[] driveDatas;
+
 
     #endregion
 

@@ -11,16 +11,22 @@ public class LoggingCampBuilding : BuildingBase
         base.InitBuildingFunction();
     }
 
+    public override void RestartBuildingFunction()
+    {
+        sensor.gameObject.SetActive(true);
+        base.RestartBuildingFunction();
+    }
+
     protected override void Output()
     {
         if (formula == null || formula.OutputItemID == null) return;
-        productTime--;
-        if (productTime <= 0)
+        runtimeBuildData.productTime--;
+        if (runtimeBuildData.productTime <= 0)
         {
-            productTime = formula.ProductTime;
+            runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, null);
+            TrafficManager.Instance.UseCar(carMission);
             runtimeBuildData.Rate = 0;
         }
     }

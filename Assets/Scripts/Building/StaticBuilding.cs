@@ -25,8 +25,6 @@ public class StaticBuilding : MonoBehaviour
         currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
         transform.tag = "Building";
         currentBuilding.OnConfirmBuild(targetGrids);
-        transform.GetComponent<BoxCollider>().enabled = false;
-        transform.GetComponent<BoxCollider>().enabled = true;
         Vector3 targetPos = MapManager.GetTerrainPosition(currentBuilding.parkingGridIn);
         float targetHeight = targetPos.y;
         TerrainGenerator.Instance.FlatGround(currentBuilding.takenGrids, targetHeight);

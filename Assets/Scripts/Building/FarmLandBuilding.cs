@@ -11,17 +11,25 @@ public class FarmLandBuilding : BuildingBase
     public List<GameObject> lists;
     bool isharvesting = false;
 
-    private GameObject[] grids;
+    private PlantController[] plants;
+
+    public Texture wheat;
+    public Texture rice;
+
+    private Material mat;
     public override void InitBuildingFunction()
     {
-        Invoke("InitWheatGrids",1f);
+        Invoke("InitPlant", 1f);
         previewObj.SetActive(false);
         base.InitBuildingFunction();
     }
-     private void InitWheatGrids()
+
+    public override void RestartBuildingFunction()
     {
-        StartCoroutine(Plant());
-        //wheatTrans.localPosition = Vector3.zero;
+        InitPlant();
+        previewObj.SetActive(false);
+        SetProgress(GetProcess());
+        base.RestartBuildingFunction();
     }
 
     public override void OnConfirmBuild(Vector2Int[] vector2Ints)
@@ -29,6 +37,17 @@ public class FarmLandBuilding : BuildingBase
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
+
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
+
+        direction = CastTool.CastVector3ToDirection(transform.right);
+        //地基
+        MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         //parkingGridOut = GetOutParkingGrid();
         if (!buildFlag)
         {
@@ -37,47 +56,68 @@ public class FarmLandBuilding : BuildingBase
             {
                 Invoke("PlayAnim", 0.2f);
             }
-            transform.GetComponent<BoxCollider>().enabled = false;
-            direction = CastTool.CastVector3ToDirection(transform.right);
-            //地基
-            MapManager.Instance.BuildFoundation(vector2Ints, 2, (int)direction+1);
-            //整平地面
-            Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-            float targetHeight = targetPos.y;
-            TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
+            InitBuildingFunction();
         }
-        transform.GetComponent<BoxCollider>().enabled = true;
-        InitBuildingFunction();
-    }
-    private IEnumerator Plant()
-    {
-        grids = new GameObject[Size.x * Size.y];
-        GameObject pfb = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula].ID == 50006?
-            LoadAB.Load(runtimeBuildData.BundleName, "WheatPfb"):
-             LoadAB.Load(runtimeBuildData.BundleName, "RicePfb");
-        for (int i = 0; i < Size.x * Size.y*2; i++)
+        else
         {
-            GameObject newGrid = Instantiate(pfb, wheatTrans);
-            grids[i / 2] = newGrid;
-            Vector3 random = Random.insideUnitSphere/5;
-            Vector3 pos;
-            if (i % 2 == 0)
-            {
-                pos = MapManager.GetNotInWaterPosition(takenGrids[i/2]);
-            }
-            else
-            {
-                pos = MapManager.GetNotInWaterPosition(takenGrids[i/2]) + transform.forward;
-            }
-            newGrid.transform.position = pos+new Vector3(random.x,0,random.z) - transform.forward/2;
-            newGrid.transform.Rotate(Vector3.up, 90 * (int)(direction - 1), Space.Self);
-            yield return 0;
-            //Animator animator = newGrid.GetComponentInChildren<Animator>();
-            //animator.Play("WheatGrow");
+            RestartBuildingFunction();
         }
     }
+
+    private void ShowPlant()
+    {
+        for (int i = 0; i < plants.Length; i++)
+        {
+            plants[i].Show();
+        }
+    }
+
+    private void InitPlant()
+    {
+        GameObject pfb = Instantiate(LoadAB.Load("mat.ab", "PlantPfb"), transform);
+        pfb.transform.position -= Vector3.up * 2000f;
+        plants = new PlantController[Size.x * Size.y];
+        mat = pfb.GetComponent<PlantController>().mesh.material;
+        Texture tex = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula].ID == 50006 ?
+            wheat : rice;
+        mat.SetTexture("_MainTex", tex);
+        SetProgress(GetProcess());
+        for (int i = 0; i < Size.x; i++)
+        {
+            for (int j = 0; j < Size.y; j++)
+            {
+                GameObject newGrid = Instantiate(pfb, wheatTrans);
+                plants[i * Size.y + j] = newGrid.GetComponent<PlantController>();
+                plants[i * Size.y + j].SetMat(mat);
+                Vector3 random = Random.insideUnitSphere / 5;
+                Vector3 pos;
+                if (j % 2 == 1)
+                {
+                    pos = new Vector3(j * 2 - 2, 0, i * 2 + 1);
+                }
+                else
+                {
+                    pos = new Vector3(j * 2, 0, i * 2);
+                }
+                newGrid.transform.localPosition = pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
+            }
+        }
+    }
+
+    public void SetProgress(float progress)
+    {
+        if (mat != null)
+        {
+            if (progress <= 0)
+            {
+                progress = 0.01f;
+            }
+            mat.SetFloat("_Progress", progress);
+        }
+    }
+
     protected override void Output()
     {
         if (formula == null)
@@ -88,21 +128,32 @@ public class FarmLandBuilding : BuildingBase
 
         if (!isharvesting)
         {
-            productTime--;
-            Debug.Log(productTime);
-            float progress = (float)productTime / formula.ProductTime;
-            if (productTime <= 0)
+            runtimeBuildData.productTime--;
+            if (runtimeBuildData.productTime <= 0)
             {
                 isharvesting = true;
-                List<Vector3> vecs = new List<Vector3>();
-                for (int i = 0; i < lists.Count; i++)
-                {
-                    vecs.Add(lists[i].transform.position);
-                }
-                float rate = runtimeBuildData.Rate;
-                TrafficManager.Instance.UseCar(TransportationType.harvester, vecs, DriveType.once, ()=>OnFinishHarvest(rate));
-                runtimeBuildData.Rate = 0;
+
+                CarMission mission = MakeHarvestCarMission();
+                TrafficManager.Instance.UseCar(mission);
             }
+        }
+    }
+
+    public override void OnRecieveCar(CarMission carMission)
+    {
+        switch (carMission.missionType)
+        {
+            case CarMissionType.transportResources:
+                ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
+                break;
+            case CarMissionType.harvest:
+                {
+                    //Debug.Log("harvest");
+                    OnFinishHarvest(runtimeBuildData.Rate);
+                    break;
+                }
+            default:
+                break;
         }
     }
     public override void UpdateRate(string date)
@@ -112,16 +163,26 @@ public class FarmLandBuilding : BuildingBase
         if (!isharvesting)
         {
             runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+            SetProgress(GetProcess());
         }
         //Debug.Log(runtimeBuildData.Rate);
     }
     public void OnFinishHarvest(float rate)
     {
+        //Debug.Log("finish");
         isharvesting = false;
-        productTime = formula.ProductTime;
-        InitWheatGrids();
+        runtimeBuildData.productTime = formula.ProductTime;
         CarMission carMission = MakeCarMission(rate);
-        TrafficManager.Instance.UseCar(carMission,null);
+        TrafficManager.Instance.UseCar(carMission);
+        //EventManager.StartListening(ConstEvent.OnDayWentBy, Replant);
+        Invoke("Replant", 5f);
+    }
+
+    private void Replant()
+    {
+        //EventManager.StopListening(ConstEvent.OnDayWentBy, Replant);
+        runtimeBuildData.Rate = 0;
+        ShowPlant();
     }
     /// <summary>
     /// 配置货物清单
@@ -144,6 +205,22 @@ public class FarmLandBuilding : BuildingBase
             mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i] * runtimeBuildData.Times));
 
         }
+        return mission;
+    }
+
+    private CarMission MakeHarvestCarMission()
+    {
+        CarMission mission = new CarMission();
+        mission.transportationType = TransportationType.harvester;
+        mission.missionType = CarMissionType.harvest;
+
+        Vector3[] vecs = new Vector3[lists.Count];
+        for (int i = 0; i < lists.Count; i++)
+        {
+            vecs[i] = (lists[i].transform.position);
+        }
+        mission.EndBuilding = parkingGridIn;
+        mission.wayPoints = Vector3Serializer.Box(vecs);
         return mission;
     }
     protected override void Input()

@@ -298,6 +298,9 @@ public class GameManager : Singleton<GameManager>
         data.buyDatas = MarketManager.Instance.GetBuyDatas();
         data.sellDatas = MarketManager.Instance.GetSellDatas();
 
+        //TrafficManager
+        data.driveDatas = TrafficManager.Instance.GetDriveDatas();
+
         sw.Stop();
         System.TimeSpan dt = sw.Elapsed;
         Debug.Log("打包数据耗时:" + dt.TotalSeconds + "秒");

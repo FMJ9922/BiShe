@@ -43,8 +43,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6640015, y: 1, z: 1.9533577}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.6640015, y: 1, z: 3.3752422}
+  m_Center: {x: 0, y: 0, z: -0.71094227}
 --- !u!114 &773135644661030384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,10 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WayPoints: []
-  wayObjects: []
   MaxSpeed: 4
   StopDistance: 2
-  driveType: 0
   carType: 4
   isbraking: 0
   carSensor: {fileID: 773135644661030384}
@@ -125,8 +123,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0516891, y: 3.135723, z: 6.418207}
-  m_Center: {x: 0.015922546, y: 1.4503937, z: 1.6573286}
+  m_Size: {x: 2.0516891, y: 3.135723, z: 4.595707}
+  m_Center: {x: 0.015922546, y: 1.4503937, z: 0.7460785}
 --- !u!54 &5379866610961072329
 Rigidbody:
   m_ObjectHideFlags: 0

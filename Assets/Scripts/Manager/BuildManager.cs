@@ -412,7 +412,7 @@ public class BuildManager : Singleton<BuildManager>
             bridges[bridges.Count - 1].transform.parent = bridgeBuilding.transform;
             building.OnConfirmBuild(bridgeGrids.ToArray());
         }
-        Debug.Log("generate");
+        //Debug.Log("generate");
         MapManager.Instance.GenerateRoad(grids.ToArray(), roadLevel);
         MapManager.Instance.SetBuildingsGrid();
         MainInteractCanvas.Instance.ShowBuildingButton();
@@ -574,7 +574,7 @@ public class BuildManager : Singleton<BuildManager>
             isTurn = true;
         }
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
-        Debug.Log(InputManager.Instance.LastGroundRayPos);
+        //Debug.Log(InputManager.Instance.LastGroundRayPos);
         CheckBuildingOverlap();
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
     }
@@ -583,7 +583,7 @@ public class BuildManager : Singleton<BuildManager>
     {
         Vector3 curPos = currentBuilding.transform.position;
         int width, height;
-        Debug.Log(curPos);
+        //Debug.Log(curPos);
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos, out width, out height);
         bool isCheckSea = currentBuilding.runtimeBuildData.Id == 20032;
 

@@ -7,17 +7,22 @@ public class MineBuilding : BuildingBase
     public Transform digPos;
     public float richness = 1;//资源丰度
 
-    public override void InitBuildingFunction()
-    {
-        base.InitBuildingFunction();
-    }
 
     public override void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        //parkingGridOut = GetOutParkingGrid();
+        direction = CastTool.CastVector3ToDirection(transform.right);
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
+        //地基
+        MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+        richness = SetRichness(takenGrids);
         if (!buildFlag)
         {
             buildFlag = true;
@@ -25,18 +30,15 @@ public class MineBuilding : BuildingBase
             {
                 Invoke("PlayAnim", 0.2f);
             }
-            transform.GetComponent<BoxCollider>().enabled = false;
-            direction = CastTool.CastVector3ToDirection(transform.right);
-            //整平地面
-            Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-            float targetHeight = targetPos.y;
-            TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
+            InitBuildingFunction();
         }
-        transform.GetComponent<BoxCollider>().enabled = true;
-        InitBuildingFunction();
-        richness = SetRichness(takenGrids);
+        else
+        {
+            RestartBuildingFunction();
+        }
     }
 
     protected override void Output()
@@ -45,13 +47,13 @@ public class MineBuilding : BuildingBase
         {
             Debug.LogError("矿井配方为空");
         }
-        productTime--;
-        if (productTime <= 0)
+        runtimeBuildData.productTime--;
+        if (runtimeBuildData.productTime <= 0)
         {
-            productTime = formula.ProductTime;
+            runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, null);
+            TrafficManager.Instance.UseCar(carMission);
             runtimeBuildData.Rate = 0;
         }
     }

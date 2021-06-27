@@ -29,10 +29,6 @@ public class GovernmentBuilding : BuildingBase
     {
         base.OnDestroy();
     }
-    public override void InitBuildingFunction()
-    {
-        base.InitBuildingFunction();
-    }
 
     public override void OnRecieveCar(CarMission carMission)
     {

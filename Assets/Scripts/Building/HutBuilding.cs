@@ -6,7 +6,6 @@ public class HutBuilding : BuildingBase
 {
     private bool hasFoodThisWeek = true;//这周是否获得了食物
     private bool hasProvidePopulation = false;//这周是否提供了人口
-    private Storage storage;
     protected override void OnDestroy()
     {
         base.OnDestroy();
@@ -14,9 +13,16 @@ public class HutBuilding : BuildingBase
     public override void InitBuildingFunction()
     {
         storage = transform.GetComponent<Storage>();
-        storage.AddResource(11001, 2);
+        storage.AddResource(11001, 5);
         ProvidePopulation();
         base.InitBuildingFunction();
+    }
+
+    public override void RestartBuildingFunction()
+    {
+        storage = transform.GetComponent<Storage>();
+        storage.AddResource(11001, Random.Range(3,13));
+        base.RestartBuildingFunction();
     }
     public override float GetHappiness()
     {
@@ -42,7 +48,7 @@ public class HutBuilding : BuildingBase
         if (storage.GetAllFoodNum() < 3)
         {
             CarMission mission = MakeCarMission();
-            TrafficManager.Instance.UseCar(mission, null, DriveType.once);
+            TrafficManager.Instance.UseCar(mission, DriveType.once);
         }
 
         ItemData[] foodIDs = DataManager.GetFoodItemList();
@@ -65,7 +71,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     /// <param name="ratio">运送多少个周期的货</param>
     /// <returns></returns>
-    private CarMission MakeCarMission(float ratio = 10)
+    protected override CarMission MakeCarMission(float ratio = 10)
     {
         CarMission mission = new CarMission();
         mission.StartBuilding = parkingGridIn;
@@ -75,7 +81,7 @@ public class HutBuilding : BuildingBase
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;
         mission.requestResources = new List<CostResource>();
-       mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(ratio));
+        mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(ratio));
         return mission;
     }
     /// <summary>

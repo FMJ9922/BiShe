@@ -127,6 +127,7 @@ public enum TimeScale
     four = 3,
 }
 
+[System.Serializable]
 public enum TransportationType
 {
     [Description("Van")]
@@ -141,11 +142,12 @@ public enum TransportationType
     sandTruck = 4,
 }
 
+[System.Serializable]
 public enum CarMissionType
 {
     requestResources = 0,//请求物资
     transportResources = 1,//运输物资
-
+    harvest = 2,//收割
 }
 
 public enum SoundResource

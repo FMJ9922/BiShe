@@ -388,7 +388,7 @@ public class MapManager : Singleton<MapManager>
                     break;
             }
         }
-        Debug.Log("Build");
+        //Debug.Log("Build");
         generator.ReCalculateNormal();
         //RoadManager.Instance.InitRoadNodeDic();
     }
@@ -528,7 +528,7 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
-        Debug.Log(grid);
+        //Debug.Log(grid);
         return _grids[grid.x][grid.y].gridType;
     }
 
@@ -831,10 +831,10 @@ public class MapManager : Singleton<MapManager>
             //Debug.Log("选择:"+temp.GridPos);
             if (temp == endNode)
             {
-                sw.Stop();
-                System.TimeSpan dt = sw.Elapsed;
-                Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
-                sw.Restart();
+                //sw.Stop();
+                //System.TimeSpan dt = sw.Elapsed;
+                //Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
+                //sw.Restart();
                 List<Vector3> list = new List<Vector3>();
                 while (temp != startNode)
                 {
@@ -846,8 +846,8 @@ public class MapManager : Singleton<MapManager>
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
                 list.Add(MapManager.GetNotInWaterPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse(); 
-                sw.Stop();
-                System.TimeSpan dt1 = sw.Elapsed;
+                //sw.Stop();
+                //System.TimeSpan dt1 = sw.Elapsed;
                 //Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
                 //WayPointDic.Add(start.ToString() + end.ToString(), list);
                 return list;

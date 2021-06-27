@@ -5,43 +5,19 @@ using UnityEngine;
 public class PierBuilding : BuildingBase
 {
     public Transform boatPos;
-    public override void InitBuildingFunction()
-    {
-        base.InitBuildingFunction();
-    }
+    
 
-    public override void OnConfirmBuild(Vector2Int[] vector2Ints)
-    {
-        gameObject.tag = "Building";
-        takenGrids = vector2Ints;
-        parkingGridIn = GetInParkingGrid();
-        //parkingGridOut = GetOutParkingGrid();
-        if (!buildFlag)
-        {
-            buildFlag = true;
-            if (hasAnima)
-            {
-                Invoke("PlayAnim", 0.2f);
-            }
-            transform.GetComponent<BoxCollider>().enabled = false;
-            direction = CastTool.CastVector3ToDirection(transform.right);
-            runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-            Invoke("FillUpPopulation", 1f);
-        }
-        transform.GetComponent<BoxCollider>().enabled = true;
-        InitBuildingFunction();
-    }
 
     protected override void Output()
     {
         if (formula == null || formula.OutputItemID == null) return;
-        productTime--;
-        if (productTime <= 0)
+        runtimeBuildData.productTime--;
+        if (runtimeBuildData.productTime <= 0)
         {
-            productTime = formula.ProductTime;
+            runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, null);
+            TrafficManager.Instance.UseCar(carMission);
             runtimeBuildData.Rate = 0;
         }
     }

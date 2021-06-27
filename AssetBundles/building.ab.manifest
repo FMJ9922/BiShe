@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 404691600
+CRC: 4183707337
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 66226b6ed3a9d2677aa39e5195eb3b4b
+    Hash: 956b9418ca3af0f050ade7ff43e6702a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 154e407a756285bc397ea6f6ca0235c5
+    Hash: b61cca1d55705cad94b136b5c08c5682
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -122,6 +122,8 @@ ClassTypes:
 - Class: 223
   Script: {instanceID: 0}
 - Class: 224
+  Script: {instanceID: 0}
+- Class: 1183024399
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/GraphPfb.prefab

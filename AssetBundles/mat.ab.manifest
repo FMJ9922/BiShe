@@ -1,22 +1,38 @@
 ManifestFileVersion: 0
-CRC: 2840123542
+CRC: 347723796
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 464b5565f822ed1b502bb62e10ad827b
+    Hash: b001e25645253dee34b1310342a42e4f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bd7f1ea14498176061c89f8562337b85
+    Hash: 8b4415a3176c1457748abe3552ad52e0
 HashAppended: 0
 ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 23
   Script: {instanceID: 0}
 - Class: 28
   Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
 - Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bcb640de7994de44d964d3aa0ac75be8, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -30,6 +46,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Flag Wind.shader
+- Assets/Scenes Assets/Finish/PlantPfb.prefab
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Government_Flag_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L1L2_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Factory_L1L2L3_Tex.tga
@@ -42,6 +59,8 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Farm_L1L2L3_Tex.tga
+- Assets/ArtAssets/Texture/Universal_Plant_Wheat.png
+- Assets/ArtAssets/Material/PlantUV.mat
 - Assets/ArtAssets/Model/Building/Materials/WallStone.mat
 - Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
 - Assets/ArtAssets/UI/StartUI/30002preview.png
@@ -74,6 +93,7 @@ Assets:
 - Assets/Scenes Assets/Material/Texture/Universal_Plant_Wheat_01_Tex.tga
 - Assets/Scenes Assets/Animation/Materials/Universal_Building_Mine_L3_Tex.mat
 - Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
+- Assets/ArtAssets/Texture/Universal_Plant_Rice.png
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
 - Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/Scenes Assets/Prefab/FX/Material/cloud_2x2_default_AB.mat

@@ -48,10 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WayPoints: []
-  wayObjects: []
   MaxSpeed: 7
   StopDistance: 1.5
-  driveType: 0
   carType: 0
   isbraking: 0
   carSensor: {fileID: 1790807950924337522}
@@ -84,8 +82,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.9131575, z: 3.9576569}
-  m_Center: {x: 0, y: 0.9131675, z: 1.2207718}
+  m_Size: {x: 1, y: 1.9131575, z: 2.727848}
+  m_Center: {x: 0, y: 0.9131675, z: 0.6058674}
 --- !u!1001 &3538949495990719014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +216,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4891848581335186981}
     m_Modifications:
+    - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.1051235
+      objectReference: {fileID: 0}
+    - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.5758829
+      objectReference: {fileID: 0}
     - target: {fileID: 4701571375195332852, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}
       propertyPath: m_LocalPosition.x

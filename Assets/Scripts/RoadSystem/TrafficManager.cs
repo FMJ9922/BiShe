@@ -46,42 +46,75 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return lists;
     }
-    public void UseCar(CarMission mission,UnityAction unityAction,DriveType driveType = DriveType.once)
+
+    public void InitSavedTrafficManager(CarMission[] carMissions)
+    {
+        for (int i = 0; i < carMissions.Length; i++)
+        {
+            UseCarBySave(carMissions[i]);
+        }
+    }
+    public void UseCar(CarMission mission,DriveType driveType = DriveType.once)
     {
         DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
         Vector2Int start = mission.StartBuilding;
         Vector2Int end = mission.EndBuilding;
-        //Debug.Log(start+" "+end);
-        List<Vector3> wayPoints = new List<Vector3>();
-        try
+        Vector3[] wayPoints;
+        UnityAction action = null;
+        if (mission.missionType == CarMissionType.harvest)
         {
-            wayPoints = MapManager.Instance.GetWayPoints(start, end);
-        }
-        catch
-        {
-            Debug.LogError("寻路失败，起点是" + mission.StartBuilding
-               + "终点是" + mission.StartBuilding
-                + "\n不过不用担心，产品已经直接传送送达。请检查起点建筑是否被造在了路的拐点或终点，拆除并放置在其他位置上");
-
-        }
-        if (wayPoints.Count>0)
-        {
-            //Debug.Log(wayPoints.Count);
-            driveSystem.SetCarMission(mission);
-            driveSystem.StartDriving(wayPoints, driveType, () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end)));
+            wayPoints = Vector3Serializer.Unbox(mission.wayPoints);
         }
         else
         {
-            RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end)); 
+            wayPoints = MapManager.Instance.GetWayPoints(start, end).ToArray();
+        }
+        action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
+        mission.wayPoints = Vector3Serializer.Box(wayPoints);
+        if (wayPoints.Length > 0)
+        {
+            driveSystem.StartDriving(mission, driveType, action);
+        }
+        else
+        {
+            if (action != null)
+            {
+                action.Invoke();
+            }
         }
     }
 
-
-    public void UseCar(TransportationType type, List<Vector3> wayPoints, DriveType driveType = DriveType.once, UnityAction unityAction = null)
+    public void UseCarBySave(CarMission mission, DriveType driveType = DriveType.once)
     {
-        DriveSystem driveSystem = GetCarFromPool(type);
-        driveSystem.StartDriving(wayPoints, driveType, () => { RecycleCar(driveSystem, null,unityAction); });
+        DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
+        Vector2Int start = MapManager.GetCenterGrid(mission.carPosition.V3);
+        Vector2Int end = mission.EndBuilding;
+        Vector3[] wayPoints;
+        UnityAction action = null;
+        if (mission.missionType == CarMissionType.harvest)
+        {
+            wayPoints = Vector3Serializer.Unbox(mission.wayPoints);
+        }
+        else
+        {
+            wayPoints = MapManager.Instance.GetWayPoints(start, end).ToArray();
+        }
+
+        action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
+        mission.wayPoints = Vector3Serializer.Box(wayPoints);
+        if (wayPoints.Length > 0)
+        {
+            driveSystem.StartDriving(mission, driveType, action);
+        }
+        else
+        {
+            if (action != null)
+            {
+                action.Invoke();
+            }
+        }
     }
+
 
     public bool CloseToTarget(Vector2 cur, Vector2 target)
     {
@@ -289,6 +322,7 @@ public class TrafficManager : Singleton<TrafficManager>
         driveSystem.action = null;
         if (destination != null)
         {
+            //Debug.Log("des");
             destination.OnRecieveCar(driveSystem.CurMission);
         }
         if (unityAction != null)
@@ -297,16 +331,39 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         //Debug.Log("hide");
     }
+
+    public CarMission[] GetDriveDatas()
+    {
+        CarMission[] driveDatas = new CarMission[carUsingPool.Count];
+        for (int i = 0; i < driveDatas.Length; i++)
+        {
+            driveDatas[i] = carUsingPool[i].CurMission;
+        }
+        return driveDatas;
+    }
 }
 
+[System.Serializable]
 public class CarMission
 {
-    public List<Vector3> route;//路线
+    public Vector3Serializer[] wayPoints;
+    public int wayCount;
+    public Vector3Serializer carPosition =  new Vector3Serializer();
     public bool isAnd;//资源是否是并，而不是或
     public List<CostResource> requestResources;//请求的资源
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类
     public TransportationType transportationType;
-    public Vector2Int StartBuilding;
-    public Vector2Int EndBuilding;
+    public Vector2IntSerializer startBuilding;
+    public Vector2IntSerializer endBuilding;
+    public Vector2Int StartBuilding 
+    { 
+        get => startBuilding.Vector2Int;
+        set => startBuilding = new Vector2IntSerializer(value);
+    }
+    public Vector2Int EndBuilding 
+    {
+        get => endBuilding.Vector2Int;
+        set => endBuilding = new Vector2IntSerializer(value);
+    }
 }

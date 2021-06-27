@@ -21,7 +21,7 @@ public class BuildingBase : MonoBehaviour
 
     public RuntimeBuildData runtimeBuildData;
 
-    public bool buildFlag = false;
+    public bool buildFlag = false;//用于判断是否是来自存档的建造
 
     public Vector2Int[] takenGrids;
 
@@ -33,13 +33,23 @@ public class BuildingBase : MonoBehaviour
 
 
     public Direction direction;
-     
+
+    protected Storage storage;
+
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        //parkingGridOut = GetOutParkingGrid();
+        direction = CastTool.CastVector3ToDirection(transform.right);
+        transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().enabled = true;
+        //地基
+        MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
         if (!buildFlag)
         {
             buildFlag = true;
@@ -47,19 +57,15 @@ public class BuildingBase : MonoBehaviour
             {
                 Invoke("PlayAnim", 0.2f);
             }
-            transform.GetComponent<BoxCollider>().enabled = false;
-            direction = CastTool.CastVector3ToDirection(transform.right);
-            //地基
-            MapManager.Instance.BuildFoundation(vector2Ints, 15);
-            //整平地面
-            Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-            float targetHeight = targetPos.y;
-            TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+            
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
+            InitBuildingFunction();
         }
-        transform.GetComponent<BoxCollider>().enabled = true;
-        InitBuildingFunction();
+        else
+        {
+            RestartBuildingFunction();
+        }
     }
 
     protected void PlayAnim()
@@ -106,6 +112,18 @@ public class BuildingBase : MonoBehaviour
         ChangeFormula();
     }
 
+    /// <summary>
+    /// 从存档中恢复已有建筑
+    /// </summary>
+    public virtual void RestartBuildingFunction()
+    {
+        MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+        EventManager.StartListening(ConstEvent.OnOutputResources, Output);
+        EventManager.StartListening(ConstEvent.OnInputResources, Input);
+        EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+    }
+
     public void FillUpPopulation()
     {
         if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
@@ -127,7 +145,7 @@ public class BuildingBase : MonoBehaviour
         if (runtimeBuildData.formulaDatas.Length > 0)
         {
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
-            productTime = formula.ProductTime;
+            runtimeBuildData.productTime = formula.ProductTime;
         }
     }
     public void ShowBody()
@@ -170,7 +188,6 @@ public class BuildingBase : MonoBehaviour
         return runtimeBuildData;
     }
 
-    protected int productTime;//生产周期（周）
 
     protected virtual void OnDestroy()
     {
@@ -222,20 +239,20 @@ public class BuildingBase : MonoBehaviour
     protected virtual void Output()
     {
         if (formula == null|| formula.OutputItemID ==null) return;
-        productTime--;
-        if (productTime <= 0)
+        runtimeBuildData.productTime--;
+        if (runtimeBuildData.productTime <= 0)
         {
-            productTime = formula.ProductTime;
+            runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, null);
+            TrafficManager.Instance.UseCar(carMission);
             runtimeBuildData.Rate = 0;
         }
     }
 
     public float GetProcess()
     {
-        return 1 - (float)productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
+        return 1 - (float)runtimeBuildData.productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
     }
     protected virtual void Input()
     {
@@ -388,6 +405,7 @@ public class RuntimeBuildData : BuildData
     public float Rate = 0;//当前生产进度0-1
     public float Effectiveness;//生产效率
     public float Happiness = 0.6f;//当前幸福程度
+    public int productTime;//生产周期（周）
 
     public Vector3Serializer SavePosition;
     public Vector2IntSerializer[] SaveTakenGrids;

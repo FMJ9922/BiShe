@@ -5,14 +5,6 @@ using UnityEngine.Events;
 
 public class MarketBuilding : BuildingBase
 {
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-    }
-    public override void InitBuildingFunction()
-    {
-        base.InitBuildingFunction();
-    }
 
     public override void OnRecieveCar(CarMission carMission)
     {
@@ -21,7 +13,7 @@ public class MarketBuilding : BuildingBase
             case CarMissionType.requestResources:
                 BuildRecievedCarMission(carMission);
                 CarMission car = carMission;
-                TrafficManager.Instance.UseCar(car, null, DriveType.once);
+                TrafficManager.Instance.UseCar(car, DriveType.once);
                 break;
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
