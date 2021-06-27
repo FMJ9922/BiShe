@@ -204,9 +204,9 @@ public class LevelManager : Singleton<LevelManager>
         MapManager.Instance.InitMapMnager();
         TreePlanter.Instance.PlantSaveTrees(GameManager.saveData);
         InitSaveWater(GameManager.saveData);
+        TerrainGenerator.Instance.LoadTerrain(saveData.mapName, true);
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(GameManager.saveData.buildingDatas);
-        TerrainGenerator.Instance.LoadTerrain(saveData.mapName, true);
         MarketManager.Instance.InitSavedMarketManager();
         TrafficManager.Instance.InitSavedTrafficManager(saveData.driveDatas);
         MainInteractCanvas.InitCanvas();
