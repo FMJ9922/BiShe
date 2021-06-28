@@ -184,7 +184,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(delaySeconds);
         action();
     }
-
+    /*
     [ContextMenu("保存")]
     public void SaveLevel()
     {
@@ -200,18 +200,35 @@ public class GameManager : Singleton<GameManager>
         System.TimeSpan dt = sw.Elapsed;
         Debug.Log("写入文件耗时:" + dt.TotalSeconds + "秒");
     }
+    */
+    public SaveData MakeCustomSaveData(string saveName)
+    {
+        SaveData saveData = MakeSaveData(false,LevelManager.LevelID);
+        saveData.saveName = saveName;
+        Debug.Log(saveName);
+        return saveData;
+    }
 
-    public SaveData MakeSaveData(bool isOffcial)
+    public SaveData MakeOffcialSaveData(int levelId)
+    {
+        SaveData saveData = MakeSaveData(true, levelId);
+        return saveData;
+    }
+    public SaveData MakeSaveData(bool isOffcial,int levelId)
     {
         System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         sw.Start();
 
         SaveData data = new SaveData();
         data.isOffcial = isOffcial;
-        data.levelID = 30001;
+        data.levelID = levelId;
         data.mapSize = new Vector2IntSerializer(DataManager.GetLevelData(data.levelID).Width,
             DataManager.GetLevelData(data.levelID).Length);
-        data.mapName = data.levelID.ToString();
+        if (isOffcial)
+        {
+            LevelManager.LevelID = levelId;
+            data.saveName = data.levelID.ToString();
+        }
         //mesh
         Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().mesh;
         //data.meshName = mesh.name;
@@ -287,9 +304,9 @@ public class GameManager : Singleton<GameManager>
             data.buildingDatas[i].SaveTakenGrids = 
                 Vector2IntSerializer.Box(building.takenGrids);
             data.buildingDatas[i].SaveDir = building.direction;
-            Debug.Log(building.direction);
+            //Debug.Log(building.direction);
             data.buildingDatas[i].SaveOutLookType = CheckOutLook(data.buildingDatas[i].Id, p.name);
-            Debug.Log(building.runtimeBuildData.PfbName);
+            //Debug.Log(building.runtimeBuildData.PfbName);
         }
 
         //LevelManager

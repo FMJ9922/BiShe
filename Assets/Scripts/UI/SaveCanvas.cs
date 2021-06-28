@@ -21,6 +21,21 @@ public class SaveCanvas : CanvasBase
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
+        InitSaveItems();
+    }
+
+    public void InitSaveItems()
+    {
+        //string[] dirs = Directory.GetDirectories(GetSaveParentPath(),".",SearchOption.TopDirectoryOnly);
+        DirectoryInfo root = new DirectoryInfo(GetSaveParentPath());
+        DirectoryInfo[] dics = root.GetDirectories();
+        for (int i = 0; i < dics.Length; i++)
+        {
+            GameObject newSave = Instantiate(saveItemPfb, saveHolder);
+            newSave.SetActive(true);
+            newSave.transform.SetSiblingIndex(saveHolder.transform.childCount - 2);
+            newSave.GetComponent<SaveItem>().InitSave(dics[i].Name);
+        }
     }
     public override void OnOpen()
     {
@@ -61,7 +76,9 @@ public class SaveCanvas : CanvasBase
             NoticeManager.Instance.InvokeShowNotice("存档名不能为空");
             return;
         }
-        bool hasSameFile = File.Exists(GetSavePath(saveName));
+        bool hasSameFile = Directory.Exists(GetSavePath(saveName));
+        //Debug.Log(GetSavePath(saveName));
+        //Debug.Log(hasSameFile);
         if (hasSameFile)
         {
             NoticeManager.Instance.InvokeShowNotice("已经存在同名的存档！");
@@ -70,7 +87,7 @@ public class SaveCanvas : CanvasBase
         CreateNewSave(saveName);
     }
 
-    public void CancelNewSave()
+    public void ShowSaveList()
     {
         nameCanvas.SetActive(false);
         saveContent.SetActive(true);
@@ -79,26 +96,37 @@ public class SaveCanvas : CanvasBase
 
     public void CreateNewSave(string saveName)
     {
+        ShowSavingLabel();
+        StartCoroutine("Generate",saveName);
+    }
+
+    public void ShowSavingLabel()
+    {
         nameCanvas.SetActive(false);
         saveContent.SetActive(false);
         savingContent.SetActive(true);
-        StartCoroutine("Generate",saveName);
-        
     }
     IEnumerator Generate(string saveName)
     {
 
         GameObject newSave = Instantiate(saveItemPfb, saveHolder);
+        newSave.SetActive(true);
+        newSave.transform.SetSiblingIndex(saveHolder.transform.childCount - 2);
         yield return 0;
         newSave.GetComponent<SaveItem>().GenerateSave(saveName);
         yield return 0;
-        CancelNewSave();
+        ShowSaveList();
 
 
     }
 
     public string GetSavePath(string saveName)
     {
-        return GameSaver.GetCustomPath(saveName);
+        return Application.dataPath + "/" + GameSaver.GetCustomPath(saveName);
+    }
+
+    public string GetSaveParentPath()
+    {
+        return Application.dataPath + "/Resources/Saves";
     }
 }

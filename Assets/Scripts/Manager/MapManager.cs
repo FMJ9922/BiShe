@@ -42,7 +42,7 @@ public class MapManager : Singleton<MapManager>
         if (saveData != null)
         {
             Debug.Log("InitGrids");
-            _grids = saveData.gridNodes;
+            SetUp();
             MapSize = saveData.mapSize.Vector2Int;
         }
 

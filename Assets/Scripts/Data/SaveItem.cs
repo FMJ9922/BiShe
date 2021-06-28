@@ -20,19 +20,27 @@ public class SaveItem : MonoBehaviour
     }
     public void GenerateSave(string saveName)
     {
-        SaveData data = GameManager.Instance.MakeSaveData(false);
+        SaveData data = GameManager.Instance.MakeCustomSaveData(saveName);
         GameSaver.WriteSaveData(saveName, data, data.isOffcial);
+        nameLabel.text = saveName;
         fileName = saveName;
+    }
+
+    public void InitSave(string saveName)
+    {
+        fileName = saveName;
+        nameLabel.text = saveName;
     }
 
     public void Start()
     {
-        menuPath = Application.dataPath + "/Assets/Resources/Saves";
+        menuPath = Application.dataPath + "/Resources/Saves";
         saveCanvas = MainInteractCanvas.Instance.GetSaveCanvas();
     }
 
     public void Delete() 
     {
+        Debug.Log(GetSavePath());
         GameSaver.DeleteAllFile(GetSavePath());
         GameSaver.DeleteSaveData(menuPath, fileName);
         Destroy(gameObject);
@@ -45,8 +53,18 @@ public class SaveItem : MonoBehaviour
 
     public void Overwrite()
     {
-        GameSaver.DeleteAllFile(GetSavePath());
-        GenerateSave(fileName);
+        StartCoroutine("Generate", fileName);
     }
-    
+
+    IEnumerator Generate(string saveName)
+    {
+        saveCanvas.ShowSavingLabel();
+        yield return 0;
+        GenerateSave(saveName);
+        yield return 0;
+        saveCanvas.ShowSaveList();
+        Debug.Log("Finish???????");
+
+    }
+
 }

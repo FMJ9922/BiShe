@@ -10,7 +10,7 @@ public class GameSaver
 
     public static string GetCustomPath(string fileName)
     {
-        string path = string.Format("{0}/{1}", "Assets/Resources/Saves", fileName);
+        string path = string.Format("{0}/{1}", "Resources/Saves", fileName);
         return path;
     }
 
@@ -55,11 +55,13 @@ public class GameSaver
             path = Application.dataPath + "/" + GetCustomPath(fileName);
             if (!File.Exists(path))
             {
+                Debug.Log(path);
                 Directory.CreateDirectory(path);
             }
             else
             {
                 DeleteAllFile(path);
+                Directory.CreateDirectory(path);
             }
             file = File.Open(path + "/" + fileName + ".save", FileMode.Create);
             TerrainGenerator.Instance.SaveTerrain(fileName, isOffcial);
@@ -81,29 +83,14 @@ public class GameSaver
     }
 
 
-    public static bool DeleteAllFile(string fullPath)
+    public static void DeleteAllFile(string fullPath)
     {
-        //获取指定路径下面的所有资源文件  然后进行删除
-        if (Directory.Exists(fullPath))
+        if (System.IO.Directory.Exists(fullPath))
         {
-            DirectoryInfo direction = new DirectoryInfo(fullPath);
-            FileInfo[] files = direction.GetFiles("*", SearchOption.AllDirectories);
-
-            Debug.Log(files.Length);
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                /*
-                if (files[i].Name.EndsWith(".meta"))
-                {
-                    continue;
-                }*/
-                string FilePath = fullPath + "/" + files[i].Name;
-                File.Delete(FilePath);
-            }
-            return true;
+            var dir = new System.IO.DirectoryInfo(fullPath);
+            dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
+            dir.Delete(true);
         }
-        return false;
     }
 }
 
@@ -112,7 +99,7 @@ public class GameSaver
 public class SaveData
 {
     #region
-    public string mapName;
+    public string saveName;
     public Vector2IntSerializer mapSize;
     public bool isOffcial = true;
     #endregion

@@ -522,6 +522,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     public void LoadTerrain(string fileName,bool isOffcial)
     {
         string path = GetTerrrainPath(fileName,isOffcial);
+        Debug.Log(path);
         transform.GetComponent<MeshFilter>().mesh = CopyMesh(Resources.Load<Mesh>(path));
         transform.GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
@@ -533,7 +534,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     public void SaveTerrain(string fileName, bool isOffcial)
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
-        AssetDatabase.CreateAsset(mesh, GetPath(isOffcial) + "/"+fileName +"/"+fileName+"meshData.asset");
+        AssetDatabase.CreateAsset(mesh, GetPath(isOffcial) + fileName +"/"+fileName+"meshData.asset");
     }
 
     /// <summary>
@@ -832,6 +833,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private string GetPath(string fileName)
     {
         string levelId = GameManager.saveData == null ? SceneManager.GetActiveScene().name : GameManager.saveData.levelID.ToString();
+        Debug.Log(GameManager.saveData.levelID);
         string path = string.Format("{0}/{1}{2}", "Assets/Resources/MapData", levelId, fileName);
         return path;
     }

@@ -115,7 +115,9 @@ public class LevelManager : Singleton<LevelManager>
         if (GameManager.saveData == null)
         {
             Scene scene = SceneManager.GetActiveScene();
-            GameManager.saveData = GameSaver.ReadSaveData(scene.name, true);
+
+            GameManager.saveData = GameManager.Instance.MakeSaveData(true, int.Parse(scene.name));
+            Debug.Log(GameManager.saveData.levelID);
             InitLevelManager(int.Parse(scene.name));
             year = 1;
             month = 1;
@@ -201,10 +203,10 @@ public class LevelManager : Singleton<LevelManager>
         WeekProgress = saveData.weekProgress;
 
         ResourceManager.Instance.InitSavedResourceManager(saveData);
+        TerrainGenerator.Instance.LoadTerrain(saveData.saveName, false);
         MapManager.Instance.InitMapMnager();
         TreePlanter.Instance.PlantSaveTrees(saveData);
         InitSaveWater(saveData);
-        TerrainGenerator.Instance.LoadTerrain(saveData.mapName, true);
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(saveData.buildingDatas);
         BuildManager.Instance.InitSaveBridges(saveData.bridgeDatas);
