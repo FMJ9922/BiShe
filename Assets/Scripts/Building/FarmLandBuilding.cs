@@ -26,10 +26,11 @@ public class FarmLandBuilding : BuildingBase
 
     public override void RestartBuildingFunction()
     {
+        base.RestartBuildingFunction();
         InitPlant();
         previewObj.SetActive(false);
+        //Debug.Log(GetProcess());
         SetProgress(GetProcess());
-        base.RestartBuildingFunction();
     }
 
     public override void OnConfirmBuild(Vector2Int[] vector2Ints)
@@ -41,7 +42,6 @@ public class FarmLandBuilding : BuildingBase
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
 
-        direction = CastTool.CastVector3ToDirection(transform.right);
         //地基
         MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
         //整平地面
@@ -56,6 +56,7 @@ public class FarmLandBuilding : BuildingBase
             {
                 Invoke("PlayAnim", 0.2f);
             }
+            direction = CastTool.CastVector3ToDirection(transform.right);
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
@@ -82,6 +83,7 @@ public class FarmLandBuilding : BuildingBase
         mat = pfb.GetComponent<PlantController>().mesh.material;
         Texture tex = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula].ID == 50006 ?
             wheat : rice;
+        //Debug.Log(mat == null);
         mat.SetTexture("_MainTex", tex);
         SetProgress(GetProcess());
         for (int i = 0; i < Size.x; i++)
@@ -102,6 +104,7 @@ public class FarmLandBuilding : BuildingBase
                     pos = new Vector3(j * 2, 0, i * 2);
                 }
                 newGrid.transform.localPosition = pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
+                plants[i * Size.y + j].SetPos(newGrid.transform.position);
             }
         }
     }
@@ -113,6 +116,10 @@ public class FarmLandBuilding : BuildingBase
             if (progress <= 0)
             {
                 progress = 0.01f;
+            }
+            if(progress >= 1)
+            {
+                progress = 0.99F;
             }
             mat.SetFloat("_Progress", progress);
         }

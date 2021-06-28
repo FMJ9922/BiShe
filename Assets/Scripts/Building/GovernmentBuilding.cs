@@ -25,10 +25,6 @@ public class GovernmentBuilding : BuildingBase
             return;
         }
     }
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-    }
 
     public override void OnRecieveCar(CarMission carMission)
     {

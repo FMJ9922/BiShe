@@ -140,12 +140,6 @@ public class GameManager : Singleton<GameManager>
     {
         FindFadeImage();
         fadeScene.Fade(1f, 0.5f);
-
-
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
-        sw.Stop();
-        System.TimeSpan dt = sw.Elapsed;
         StartCoroutine(DelayToInvokeDo(() => { SceneManager.LoadScene("level",LoadSceneMode.Single); }, 1f));
         SceneManager.sceneLoaded += CallBack;
     }
@@ -155,9 +149,20 @@ public class GameManager : Singleton<GameManager>
         Debug.Log(scene.name + "is load complete!");
     }
 
+    public void LoadLevelFromSaveData(string fileName)
+    {
+        FindFadeImage();
+        fadeScene.Fade(1f, 0.5f);
+        StartCoroutine(DelayToInvokeDo(() => { 
+            SceneManager.LoadScene("level", LoadSceneMode.Single);
+            LoadSaveData(fileName);
+            }, 1f));
+
+    }
+
     private void LoadSaveData(string levelNum)
     {
-        saveData = GameSaver.ReadSaveData(levelNum, true);
+        saveData = GameSaver.ReadSaveData(levelNum, false);
         StaticBuilding.lists = new List<StaticBuilding>();
 
     }
@@ -202,7 +207,7 @@ public class GameManager : Singleton<GameManager>
         sw.Start();
 
         SaveData data = new SaveData();
-
+        data.isOffcial = isOffcial;
         data.levelID = 30001;
         data.mapSize = new Vector2IntSerializer(DataManager.GetLevelData(data.levelID).Width,
             DataManager.GetLevelData(data.levelID).Length);
@@ -282,6 +287,7 @@ public class GameManager : Singleton<GameManager>
             data.buildingDatas[i].SaveTakenGrids = 
                 Vector2IntSerializer.Box(building.takenGrids);
             data.buildingDatas[i].SaveDir = building.direction;
+            Debug.Log(building.direction);
             data.buildingDatas[i].SaveOutLookType = CheckOutLook(data.buildingDatas[i].Id, p.name);
             Debug.Log(building.runtimeBuildData.PfbName);
         }
@@ -300,6 +306,9 @@ public class GameManager : Singleton<GameManager>
 
         //TrafficManager
         data.driveDatas = TrafficManager.Instance.GetDriveDatas();
+
+        //Bridge
+        data.bridgeDatas = BuildManager.Instance.GetBridgeDatas();
 
         sw.Stop();
         System.TimeSpan dt = sw.Elapsed;

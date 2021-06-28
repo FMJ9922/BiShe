@@ -5,10 +5,16 @@ using UnityEngine;
 public class PlantController : MonoBehaviour
 {
     public MeshRenderer mesh;
+    private Vector3 pos;
 
     public void SetMat(Material mat)
     {
         mesh.sharedMaterial = mat;
+    }
+
+    public void SetPos(Vector3 position)
+    {
+        pos = position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +32,6 @@ public class PlantController : MonoBehaviour
     
     public void Show()
     {
-        transform.position += Vector3.up * 1000;
+        transform.position = pos;
     }
 }

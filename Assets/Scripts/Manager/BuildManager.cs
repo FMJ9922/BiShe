@@ -141,10 +141,22 @@ public class BuildManager : Singleton<BuildManager>
 
     public void InitSaveBuildings(RuntimeBuildData[] buildDatas)
     {
-        Debug.Log(buildDatas.Length);
+        //Debug.Log(buildDatas.Length);
         for (int i = 0; i < buildDatas.Length; i++)
         {
             InitSaveBuilding(buildDatas[i]);
+        }
+    }
+
+    public void InitSaveBridges(BridgeData[] bridgeDatas)
+    {
+        for (int i = 0; i < bridgeDatas.Length; i++)
+        {
+            GameObject obj = new GameObject();
+            obj.transform.SetParent(TransformFinder.Instance.bridgeParent);
+            BridgeBuilding bridge = obj.AddComponent<BridgeBuilding>();
+            bridge.SetBridgeData(bridgeDatas[i]);
+            bridge.OnConfirmBuild(Vector2IntSerializer.Unbox(bridgeDatas[i].takenGrids));
         }
     }
 
@@ -167,6 +179,7 @@ public class BuildManager : Singleton<BuildManager>
         BuildingBase buildingBase = building.GetComponent<BuildingBase>();
         buildingBase.runtimeBuildData = buildData;
         buildingBase.direction = buildData.SaveDir;
+        //Debug.Log(buildData.SaveDir);
         buildingBase.buildFlag = true;
         buildingBase.OnConfirmBuild(Vector2IntSerializer.Unbox(buildData.SaveTakenGrids));
         buildingBase.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)buildingBase.direction+1));
@@ -311,10 +324,7 @@ public class BuildManager : Singleton<BuildManager>
         public List<CostResource> costResources;
     }
 
-    private GameObject GetBridgePfb(int level)
-    {
-        return LoadAB.Load("building.ab", string.Format("Universal_Building_Bridge_L{0}_01_Preb", level));
-    }
+    
 
     /// <summary>
     /// 确认修建
@@ -353,8 +363,11 @@ public class BuildManager : Singleton<BuildManager>
         }
         Vector3 delta = CastTool.CastDirectionToVector(dir);
         //Debug.Log(delta.ToString());
-        List<GameObject> bridges = new List<GameObject>();
-
+        List<Vector3> bridges = new List<Vector3>();
+        BridgeData bridgeData = new BridgeData();
+        bridgeData.lookRotation = new Vector3Serializer();
+        bridgeData.lookRotation.Fill(delta);
+        bridgeData.roadLevel = roadLevel;
         bool bridgeStart = false;
         for (int i = 0; i < preRoads.Count; i++)
         {
@@ -370,24 +383,18 @@ public class BuildManager : Singleton<BuildManager>
                     bridgeGrids.Add(grids[(i - 1) * 2]);
                     bridgeGrids.Add(grids[(i - 1) * 2 + 1]);
                     bridgeStart = true;
-                    GameObject bridge1 = Instantiate(GetBridgePfb(roadLevel), transform);
-                    bridge1.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i - 1].transform.position + adjust));
-                    bridge1.transform.rotation = Quaternion.LookRotation(delta);
-                    bridges.Add(bridge1);
-                }
-                GameObject bridge = Instantiate(GetBridgePfb(roadLevel), transform);
-                bridge.transform.position = MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i].transform.position + adjust));
-                bridge.transform.rotation = Quaternion.LookRotation(delta);
-                bridges.Add(bridge);
+                    bridges.Add(MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i - 1].transform.position + adjust)));
+                }                
+                bridges.Add(MapManager.GetOnGroundPosition(GetCenterGrid(preRoads[i].transform.position + adjust)));
             }
         }
+        bridgeData.takenGrids = Vector2IntSerializer.Box(bridgeGrids.ToArray());
         if (bridges.Count > 0)
         {
             GameObject bridgeBuilding = new GameObject();
             BridgeBuilding building = bridgeBuilding.AddComponent<BridgeBuilding>();
             bridgeBuilding.transform.parent = TransformFinder.Instance.bridgeParent;
-            bridgeBuilding.name = "bridge";
-            BoxCollider collider = bridgeBuilding.AddComponent<BoxCollider>();
+            bridgeBuilding.name = "bridge"+ TransformFinder.Instance.bridgeParent.childCount;
             switch (roadDirection)
             {
                 case Direction.down:
@@ -399,26 +406,40 @@ public class BuildManager : Singleton<BuildManager>
                     size += new Vector3(bridges.Count * 2, 1, 4);
                     break;
             }
-            bridgeBuilding.transform.position = bridges[bridges.Count / 2].transform.position;
-            collider.size = size;
-            for (int i = 0; i < bridges.Count - 1; i++)
+            bridgeData.bridgePos = new Vector3Serializer();
+            bridgeData.bridgePos.Fill(bridges[bridges.Count / 2]);
+            bridgeData.size = new Vector3Serializer();
+            bridgeData.size.Fill(size);
+            for (int i = bridges.Count - 2; i > 0; i--)
             {
-                bridges[i].transform.parent = bridgeBuilding.transform;
                 if (i % 2 == 1)
                 {
-                    Destroy(bridges[i]);
+                    bridges.RemoveAt(i);
                 }
             }
-            bridges[bridges.Count - 1].transform.parent = bridgeBuilding.transform;
+            bridgeData.gridsPos = Vector3Serializer.Box(bridges.ToArray());
+            building.SetBridgeData(bridgeData);
             building.OnConfirmBuild(bridgeGrids.ToArray());
         }
         //Debug.Log("generate");
         MapManager.Instance.GenerateRoad(grids.ToArray(), roadLevel);
-        MapManager.Instance.SetBuildingsGrid();
+        //MapManager.Instance.SetBuildingsGrid();
         MainInteractCanvas.Instance.ShowBuildingButton();
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
     }
+
+    public BridgeData[] GetBridgeDatas()
+    {
+        Transform bridgeParent = TransformFinder.Instance.bridgeParent;
+        int count = bridgeParent.childCount;
+        BridgeData[] res = new BridgeData[count];
+        for (int i = 0; i < count; i++)
+        {
+            res[i] = bridgeParent.GetChild(i).GetComponent<BridgeBuilding>().GetBridgeData();
+        }
+        return res;
+    } 
 
     /// <summary>
     /// 取消修建

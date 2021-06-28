@@ -6,10 +6,6 @@ public class HutBuilding : BuildingBase
 {
     private bool hasFoodThisWeek = true;//这周是否获得了食物
     private bool hasProvidePopulation = false;//这周是否提供了人口
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-    }
     public override void InitBuildingFunction()
     {
         storage = transform.GetComponent<Storage>();
@@ -22,6 +18,7 @@ public class HutBuilding : BuildingBase
     {
         storage = transform.GetComponent<Storage>();
         storage.AddResource(11001, Random.Range(3,13));
+        ProvidePopulation();
         base.RestartBuildingFunction();
     }
     public override float GetHappiness()

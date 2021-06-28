@@ -13,7 +13,6 @@ public class MineBuilding : BuildingBase
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        direction = CastTool.CastVector3ToDirection(transform.right);
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
         //地基
@@ -30,7 +29,7 @@ public class MineBuilding : BuildingBase
             {
                 Invoke("PlayAnim", 0.2f);
             }
-
+            direction = CastTool.CastVector3ToDirection(transform.right);
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();

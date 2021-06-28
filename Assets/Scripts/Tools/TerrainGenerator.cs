@@ -43,53 +43,6 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         //Debug.Log("处理完毕");
     }
 
-    //[ContextMenu("ReplaceTerrain")]
-    /*public void ReplaceTerrain()
-    {
-        for (int j = 0; j < height.Length - 1; j++)
-        {
-            for (int i = 0; i < height.Length - 1; i++)
-            {
-                GameObject new1;
-                GameObject new2;
-                if (j == 25)
-                {
-                    new1 = GameObject.Instantiate(tri3, transform);
-                    new2 = GameObject.Instantiate(tri4, transform);
-                }
-                else
-                {
-                    new1 = GameObject.Instantiate(tri1, transform);
-                    new2 = GameObject.Instantiate(tri2, transform);
-                }
-                Vector3 pos = terrain.transform.position;
-                float h = pos.y;
-                h = (((int)(h / 3)) * 3);
-                pos = new Vector3(pos.x, h, pos.z);
-                new1.transform.position = pos + new Vector3(i * 2, 0, (j + 1) * 2);
-                new2.transform.position = pos + new Vector3(i * 2, 0, (j + 1) * 2);
-                Mesh mesh1 = CopyMesh(new1.GetComponent<MeshFilter>().sharedMesh);
-                Mesh mesh2 = CopyMesh(new2.GetComponent<MeshFilter>().sharedMesh);
-                Vector3[] positionList1 = mesh1.vertices;
-                Vector3[] positionList2 = mesh2.vertices;
-                positionList1[2] += new Vector3(0, height[i][j + 1], 0);
-                positionList1[1] += new Vector3(0, height[i][j], 0);
-                positionList1[0] += new Vector3(0, height[i + 1][j], 0);
-                positionList2[2] += new Vector3(0, height[i][j + 1], 0);
-                positionList2[0] += new Vector3(0, height[i + 1][j + 1], 0);
-                positionList2[1] += new Vector3(0, height[i + 1][j], 0);
-                mesh1.vertices = positionList1;
-                mesh2.vertices = positionList2;
-                mesh1.RecalculateNormals();
-                mesh2.RecalculateNormals();
-                mesh1.name = string.Format("{0}{1}:{2}", i, j, 0);
-                mesh2.name = string.Format("{0}{1}:{2}", i, j, 1);
-                new1.GetComponent<MeshFilter>().mesh = mesh1;
-                new2.GetComponent<MeshFilter>().mesh = mesh2;
-            }
-        }
-        Debug.Log("生成完毕");
-    }*/
 
     public Mesh CopyMesh(Mesh originMesh)
     {
@@ -568,11 +521,21 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public void LoadTerrain(string fileName,bool isOffcial)
     {
-        string path = isOffcial ? "MapData/" : "Saves/";
-        Debug.Log(path + fileName + "meshData");
-        transform.GetComponent<MeshFilter>().mesh = CopyMesh(Resources.Load<Mesh>(path + fileName + "meshData"));
+        string path = GetTerrrainPath(fileName,isOffcial);
+        transform.GetComponent<MeshFilter>().mesh = CopyMesh(Resources.Load<Mesh>(path));
         transform.GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
+
+    public string GetTerrrainPath(string fileName, bool isOffcial)
+    {
+        return isOffcial ? "MapData/" + fileName + "meshData" : "Saves/" + fileName + "/" + fileName + "meshData";
+    }
+    public void SaveTerrain(string fileName, bool isOffcial)
+    {
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        AssetDatabase.CreateAsset(mesh, GetPath(isOffcial) + "/"+fileName +"/"+fileName+"meshData.asset");
+    }
+
     /// <summary>
     /// 获得地形的顶点数据
     /// </summary>

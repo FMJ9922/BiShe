@@ -5,11 +5,12 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 
-public class GameSaver 
+public class GameSaver
 {
-    private static string GetCustomPath(string fileName)
+
+    public static string GetCustomPath(string fileName)
     {
-        string path = string.Format("{0}/{1}", "Assets/Resources/Saves",fileName);
+        string path = string.Format("{0}/{1}", "Assets/Resources/Saves", fileName);
         return path;
     }
 
@@ -19,30 +20,91 @@ public class GameSaver
         return path;
     }
 
-    public static SaveData ReadSaveData(string fileName,bool isOffcial)
+    public static SaveData ReadSaveData(string fileName, bool isOffcial)
     {
-        string path = isOffcial? GetOffcialPath(fileName):GetCustomPath(fileName);
+        string path = isOffcial ? GetOffcialPath(fileName) : Application.dataPath + "/" + GetCustomPath(fileName);
         SaveData data;
         FileStream file;
         BinaryFormatter bf = new BinaryFormatter();
-        file = File.Open(path+".save", FileMode.Open);
+        if (isOffcial)
+        {
+            file = File.Open(path + ".save", FileMode.Open);
+        }
+        else
+        {
+            file = File.Open(path + "/" + fileName + ".save", FileMode.Open);
+        }
         data = (SaveData)bf.Deserialize(file);
         file.Close();
         return data;
-        
+
     }
 
-    public static void WriteSaveData(string fileName,SaveData data, bool isOffcial)
+    public static void WriteSaveData(string fileName, SaveData data, bool isOffcial)
     {
         FileStream file;
         BinaryFormatter bf = new BinaryFormatter();
-        string path = isOffcial ? GetOffcialPath(fileName) : GetCustomPath(fileName);
-        file = File.Open(path + ".save", FileMode.Create);
+        string path;
+        if (isOffcial)
+        {
+            path = GetOffcialPath(fileName);
+            file = File.Open(path + ".save", FileMode.Create);
+        }
+        else
+        {
+            path = Application.dataPath + "/" + GetCustomPath(fileName);
+            if (!File.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            else
+            {
+                DeleteAllFile(path);
+            }
+            file = File.Open(path + "/" + fileName + ".save", FileMode.Create);
+            TerrainGenerator.Instance.SaveTerrain(fileName, isOffcial);
+        }
         bf.Serialize(file, data);
         file.Close();
-        Debug.Log("存储成功！\n"+ path);
+        Debug.Log("存储成功！\n" + path);
     }
 
+    public static void DeleteSaveData(string path, string filesName)
+    {
+        if (Directory.Exists(path))
+        {
+            if (File.Exists(path + "/" + filesName))
+            {
+                File.Delete(path + "/" + filesName);
+            }
+        }
+    }
+
+
+    public static bool DeleteAllFile(string fullPath)
+    {
+        //获取指定路径下面的所有资源文件  然后进行删除
+        if (Directory.Exists(fullPath))
+        {
+            DirectoryInfo direction = new DirectoryInfo(fullPath);
+            FileInfo[] files = direction.GetFiles("*", SearchOption.AllDirectories);
+
+            Debug.Log(files.Length);
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                /*
+                if (files[i].Name.EndsWith(".meta"))
+                {
+                    continue;
+                }*/
+                string FilePath = fullPath + "/" + files[i].Name;
+                File.Delete(FilePath);
+            }
+            return true;
+        }
+        return false;
+    }
 }
 
 
@@ -96,8 +158,9 @@ public class SaveData
     #endregion
     #region TrafficManager
     public CarMission[] driveDatas;
-
-
+    #endregion
+    #region Bridges
+    public BridgeData[] bridgeDatas;
     #endregion
 
 }

@@ -69,7 +69,8 @@ public class MapManager : Singleton<MapManager>
         }
         else
         {
-            Debug.LogError("这个入口已经被占用：" + entry);
+            Debug.Log("这个入口已经被占用：" + entry);
+            Debug.Log(_buildingEntryDic.Keys.Count);
         }
     }
 

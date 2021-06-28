@@ -77,6 +77,11 @@ public class MainInteractCanvas : CanvasBase
         return (MarketCanvas)canvas[4];
     }
 
+    public SaveCanvas GetSaveCanvas()
+    {
+        return (SaveCanvas)canvas[9];
+    }
+
     public void OpenMarketCanvas()
     {
         CloseAllOpenedUI();
@@ -116,6 +121,12 @@ public class MainInteractCanvas : CanvasBase
         returnCanvas.OnOpen();
     }
 
+    public void OpenSaveCanvas()
+    {
+        CloseAllOpenedUI();
+        SaveCanvas saveCanvas = (SaveCanvas)canvas[9];
+        saveCanvas.OnOpen();
+    }
     public void CloseCarMissionCanvas()
     {
         canvas[5].OnClose();

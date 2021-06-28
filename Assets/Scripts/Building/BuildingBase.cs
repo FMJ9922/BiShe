@@ -41,7 +41,6 @@ public class BuildingBase : MonoBehaviour
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         parkingGridIn = GetInParkingGrid();
-        direction = CastTool.CastVector3ToDirection(transform.right);
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
         //地基
@@ -57,7 +56,8 @@ public class BuildingBase : MonoBehaviour
             {
                 Invoke("PlayAnim", 0.2f);
             }
-            
+            direction = CastTool.CastVector3ToDirection(transform.right);
+
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
@@ -117,6 +117,12 @@ public class BuildingBase : MonoBehaviour
     /// </summary>
     public virtual void RestartBuildingFunction()
     {
+        if (runtimeBuildData.formulaDatas.Length>0)
+        {
+            //Debug.Log(runtimeBuildData.CurFormula);
+            //Debug.Log(runtimeBuildData.formulaDatas.Length);
+            formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+        }
         MapManager.Instance._buildings.Add(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
@@ -285,12 +291,12 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void AddCurPeople(int num)
     {
-        Debug.Log("Add");
-        Debug.Log(num);
+        //Debug.Log("Add");
+        //Debug.Log(num);
         int cur = runtimeBuildData.CurPeople;
-        Debug.Log(cur);
+        //Debug.Log(cur);
         int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        Debug.Log(max);
+        //Debug.Log(max);
         if (cur + num <= max)
         {
             runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);

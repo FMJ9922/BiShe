@@ -23,4 +23,10 @@ public class ReturnCanvas : CanvasBase
     {
         GameManager.Instance.LoadMenuScene();
     }
+
+    public void OpenSaveCanvas()
+    {
+        OnClose();
+        MainInteractCanvas.Instance.OpenSaveCanvas();
+    }
 }
