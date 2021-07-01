@@ -119,6 +119,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void LoadMenuScene()
     {
+        saveData = null;
         StaticBuilding.lists = new List<StaticBuilding>();
         FindFadeImage();
         fadeScene.Fade(1f, 0.5f);
@@ -163,6 +164,8 @@ public class GameManager : Singleton<GameManager>
     private void LoadSaveData(string levelNum)
     {
         saveData = GameSaver.ReadSaveData(levelNum, false);
+        saveData.gridNodes = MapManager.Instance.GetGrids();
+        Debug.Log("load");
         StaticBuilding.lists = new List<StaticBuilding>();
 
     }
@@ -205,13 +208,15 @@ public class GameManager : Singleton<GameManager>
     {
         SaveData saveData = MakeSaveData(false,LevelManager.LevelID);
         saveData.saveName = saveName;
-        Debug.Log(saveName);
+        saveData.levelID = LevelManager.LevelID;
+        //Debug.Log(saveName);
         return saveData;
     }
 
     public SaveData MakeOffcialSaveData(int levelId)
     {
         SaveData saveData = MakeSaveData(true, levelId);
+        saveData.isOffcial = false;
         return saveData;
     }
     public SaveData MakeSaveData(bool isOffcial,int levelId)
@@ -228,15 +233,17 @@ public class GameManager : Singleton<GameManager>
         {
             LevelManager.LevelID = levelId;
             data.saveName = data.levelID.ToString();
+
+
         }
         //mesh
         Mesh mesh = TerrainGenerator.Instance.GetComponent<MeshFilter>().mesh;
-        //data.meshName = mesh.name;
-        //data.meshVerticles = Vector3Serializer.Box(mesh.vertices);
-        //data.meshUV = Vector2Serializer.Box(mesh.uv);
-        //data.meshTriangles = mesh.triangles;
+        data.meshName = mesh.name;
+        data.meshVerticles = Vector3Serializer.Box(mesh.vertices);
+        data.meshUV = Vector2Serializer.Box(mesh.uv);
+        data.meshTriangles = mesh.triangles;
         int[] meshTex = new int[data.mapSize.x * data.mapSize.y];
-        //int[] meshDir = new int[data.mapSize.x * data.mapSize.y];
+        int[] meshDir = new int[data.mapSize.x * data.mapSize.y];
         int sizeX = data.mapSize.x;
         int sizeY = data.mapSize.y;
         int texLength = MapManager.TexLength;
@@ -252,11 +259,11 @@ public class GameManager : Singleton<GameManager>
                 float deltaX = x * 0.125f + 0.125f - uv[index].x;
                 float deltaY = (7 - y) * 0.125f + 0.125f - uv[index].y;
                 int dir = GetDir(deltaX, deltaY);
-                //meshDir[i + j * sizeY] = dir;
+                meshDir[i + j * sizeY] = dir;
                 meshTex[i + j * sizeY] = tex;
             }
         }
-        //data.meshDir = meshDir;
+        data.meshDir = meshDir;
         data.meshTex = meshTex;
         
         //tree
@@ -315,7 +322,7 @@ public class GameManager : Singleton<GameManager>
         LevelManager.Instance.SaveLevelManager(ref data);
 
         //MapManager
-        data.gridNodes = MapManager.Instance.GetGrids();
+        //data.gridNodes = MapManager.Instance.GetGrids();
 
         //MarketManager
         data.buyDatas = MarketManager.Instance.GetBuyDatas();

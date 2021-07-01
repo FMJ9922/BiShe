@@ -51,7 +51,15 @@ public class TrafficManager : Singleton<TrafficManager>
     {
         for (int i = 0; i < carMissions.Length; i++)
         {
-            UseCarBySave(carMissions[i]);
+            if(carMissions[i] == null)
+            {
+                continue;
+            }
+
+            if (!MapManager.CheckOutOfMap(carMissions[i].carPosition.V3))
+            {
+                UseCarBySave(carMissions[i]);
+            }
         }
     }
     public void UseCar(CarMission mission,DriveType driveType = DriveType.once)
@@ -59,7 +67,7 @@ public class TrafficManager : Singleton<TrafficManager>
         DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
         Vector2Int start = mission.StartBuilding;
         Vector2Int end = mission.EndBuilding;
-        Vector3[] wayPoints;
+        Vector3[] wayPoints = null;
         UnityAction action = null;
         if (mission.missionType == CarMissionType.harvest)
         {
@@ -67,20 +75,25 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         else
         {
-            wayPoints = MapManager.Instance.GetWayPoints(start, end).ToArray();
+            List<Vector3> list = MapManager.Instance.GetWayPoints(start, end);
+            if (list != null)
+            {
+                wayPoints = list.ToArray();
+            }
         }
         action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
-        mission.wayPoints = Vector3Serializer.Box(wayPoints);
-        if (wayPoints.Length > 0)
+        if (wayPoints!=null && wayPoints.Length > 0)
         {
+            mission.wayPoints = Vector3Serializer.Box(wayPoints);
             driveSystem.StartDriving(mission, driveType, action);
         }
         else
         {
-            if (action != null)
+            NoticeManager.Instance.InvokeShowNotice("寻路失败！坐标："+start+"=>"+end+"请检查是否有建筑没有连接到道路！");
+            /*if (action != null)
             {
                 action.Invoke();
-            }
+            }*/
         }
     }
 
@@ -102,7 +115,7 @@ public class TrafficManager : Singleton<TrafficManager>
 
         action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
         mission.wayPoints = Vector3Serializer.Box(wayPoints);
-        if (wayPoints.Length > 0)
+        if (wayPoints != null && wayPoints.Length > 0)
         {
             driveSystem.StartDriving(mission, driveType, action);
         }
@@ -306,7 +319,6 @@ public class TrafficManager : Singleton<TrafficManager>
             }
         }
         GameObject newCar = Instantiate(carPfbs[(int)type], transform);
-        newCar.transform.position = hidePos;
         DriveSystem system = newCar.GetComponent<DriveSystem>();
         carUsingPool.Add(system);
         //Debug.Log("new");
@@ -334,12 +346,15 @@ public class TrafficManager : Singleton<TrafficManager>
 
     public CarMission[] GetDriveDatas()
     {
-        CarMission[] driveDatas = new CarMission[carUsingPool.Count];
-        for (int i = 0; i < driveDatas.Length; i++)
+        List<CarMission> driveDatas = new List<CarMission>();
+        for (int i = 0; i < carUsingPool.Count; i++)
         {
-            driveDatas[i] = carUsingPool[i].CurMission;
+            if (!MapManager.CheckOutOfMap(carUsingPool[i].transform.position))
+            {
+                driveDatas.Add(carUsingPool[i].CurMission);
+            }
         }
-        return driveDatas;
+        return driveDatas.ToArray();
     }
 }
 

@@ -64,7 +64,7 @@ public class GameSaver
                 Directory.CreateDirectory(path);
             }
             file = File.Open(path + "/" + fileName + ".save", FileMode.Create);
-            TerrainGenerator.Instance.SaveTerrain(fileName, isOffcial);
+            //TerrainGenerator.Instance.SaveTerrain(fileName, isOffcial);
         }
         bf.Serialize(file, data);
         file.Close();
@@ -104,11 +104,11 @@ public class SaveData
     public bool isOffcial = true;
     #endregion
     #region Mesh
-    //public string meshName;
-    //public Vector3Serializer[] meshVerticles;
-    //public Vector2Serializer[] meshUV;
-    //public int[] meshTriangles;
-    //public int[] meshDir;
+    public string meshName;
+    public Vector3Serializer[] meshVerticles;
+    public Vector2Serializer[] meshUV;
+    public int[] meshTriangles;
+    public int[] meshDir;
     public int[] meshTex;
     #endregion
     #region Tree

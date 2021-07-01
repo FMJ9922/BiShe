@@ -9,7 +9,7 @@ public class HutBuilding : BuildingBase
     public override void InitBuildingFunction()
     {
         storage = transform.GetComponent<Storage>();
-        storage.AddResource(11001, 5);
+        storage.AddResource(11001, 1);
         ProvidePopulation();
         base.InitBuildingFunction();
     }
@@ -93,7 +93,7 @@ public class HutBuilding : BuildingBase
     }
 
     /// <summary>
-    /// 食物不充足，移除住房提供的人口
+    /// 移除住房提供的人口
     /// </summary>
     public void RemovePopulation()
     {
@@ -127,8 +127,28 @@ public class HutBuilding : BuildingBase
                 break;
         }
     }
-    //public override string GetIntroduce()
-    //{
-    //    return string.Empty;
-    //}
+    public override void Upgrade(out bool issuccess)
+    {
+        //todo：检查是否有足够的资源升级
+        int nextId = runtimeBuildData.RearBuildingId;
+        BuildData data = DataManager.GetBuildData(nextId);
+        RuntimeBuildData buildData = BuildingBase.CastBuildDataToRuntime(data);
+        buildData.Pause = runtimeBuildData.Pause;
+        buildData.CurLevel = runtimeBuildData.CurLevel + 1;
+        buildData.CurFormula = runtimeBuildData.CurFormula;
+        RemovePopulation();
+        buildData.Happiness = (80f + 10 * buildData.CurLevel) / 100;
+        BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation, out bool success);
+        issuccess = success;
+        if (success)
+        {
+            SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
+            DestroyBuilding(false, false, false);
+        }
+        else
+        {
+            ProvidePopulation();
+            NoticeManager.Instance.InvokeShowNotice("升级资源不足");
+        }
+    }
 }

@@ -4,6 +4,7 @@ public class ConstEvent
     #region 摄像机
     public const string OnCameraMove = "OnCameraMove";//摄像机移动
     public const string OnLockScroll = "OnLockScroll";//锁定滚轮缩放地图
+    public const string OnLockMove = "OnLockMove";//锁定摄像机移动
     #endregion
 
     #region 点击事件

@@ -29,6 +29,7 @@ public class InfoCanvas : CanvasBase
     UnityAction populationChange;
     UnityAction<string> effectivenessChange;
     private RuntimeBuildData _buildData;
+    private BuildingBase _buildingBase;
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
@@ -46,6 +47,7 @@ public class InfoCanvas : CanvasBase
         AddBtnsListener(buildbase);
         ChangeOpenCanvas(buildbase.runtimeBuildData.Id);
         mainCanvas.SetActive(true);
+        _buildingBase = buildbase;
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, effectivenessChange);
         if (!BuildingHighlight)
@@ -223,10 +225,12 @@ public class InfoCanvas : CanvasBase
         //Debug.Log(n);
         _buildData.CurFormula += n + _buildData.formulaDatas.Length;
         _buildData.CurFormula %= _buildData.formulaDatas.Length;
+        Debug.Log(_buildData.CurFormula);
         CleanUpAllAttachedChildren(inIcons);
         CleanUpAllAttachedChildren(outIcons);
         ChangeOutputIcon(_buildData);
         ChangeInputIcon(_buildData);
+        _buildingBase.ChangeFormula();
         _daysLabel.text = "生产周期:" + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + "天";
     }
     /// <summary>

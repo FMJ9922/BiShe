@@ -41,7 +41,7 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         AddResources(saveData.saveResources);
         curPopulation = saveData.curPopulation;
-        Debug.Log(saveData.curPopulation);
+        //Debug.Log(saveData.curPopulation);
         RecordLastWeekItem();
     }
 

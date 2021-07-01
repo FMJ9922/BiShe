@@ -147,11 +147,12 @@ public class BuildingBase : MonoBehaviour
     }
     public void ChangeFormula()
     {
-        //Debug.Log("change");
         if (runtimeBuildData.formulaDatas.Length > 0)
         {
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+            //Debug.Log("change "+ formula.Describe);
             runtimeBuildData.productTime = formula.ProductTime;
+            runtimeBuildData.Rate = 0;
         }
     }
     public void ShowBody()

@@ -100,7 +100,7 @@ public enum DriveType
 public enum GridType
 {
     empty,//空
-    occupy,//占有,一般指建筑
+    occupy,//占有,一般指建筑或者地图外
     road,//路
     water,
     bridge,

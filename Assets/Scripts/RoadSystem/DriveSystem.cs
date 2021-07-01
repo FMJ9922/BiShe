@@ -23,11 +23,12 @@ public class DriveSystem : MonoBehaviour
     public ArriveDestination OnArriveDestination;
     private UnityAction _callback;
     [SerializeField] Transform leftWheel, rightWheel;
+    private Vector3 leftOrigin, rightOrigin;
     private float missionTimer = 0;
     private float brakeTimer = 0;
     private float BrakeMaxTime = 10f;//单次刹车最长时间
     private float MissionMaxTime = 120f;//单次任务最长时间;
-    private bool pause = false;
+    //private bool pause = false;
     private float speedBuff = 1;
     public CarMission CurMission { get; private set; }
     private void Start()
@@ -57,14 +58,14 @@ public class DriveSystem : MonoBehaviour
         CurMission = null;
     }
 
-    private void PauseGame()
+    /*private void PauseGame()
     {
         pause = true;
     }
     private void ResumeGame()
     {
         pause = false;
-    }
+    }*/
     public void StartDriving(CarMission carMission, DriveType driveType = DriveType.once, UnityAction callBack = null)
     {
         //Debug.Log("startDrive");
@@ -80,8 +81,8 @@ public class DriveSystem : MonoBehaviour
         
         CurMission = carMission;
         //Debug.Log(carMission.missionType);
-        EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
-        EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
+        //EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
+        //EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
         if (WayPoints.Length == 0)
         {
             DriveStop(_callback);
@@ -103,9 +104,9 @@ public class DriveSystem : MonoBehaviour
     {
         DriveStop(_callback);
     }
-    private void ControlSpeed(Vector3[] targets)
+    private void ControlSpeed(Vector3[] targets,bool isAtTuring)
     {
-        if (isbraking)
+        if (isbraking&& wayCount != targets.Length&&carSensor.otherCar.Count>0)
         {
             brakeTimer += Time.fixedDeltaTime;
             if (brakeTimer > BrakeMaxTime)
@@ -114,6 +115,13 @@ public class DriveSystem : MonoBehaviour
                 brakeTimer = 0;
             }
             if (speed > 0)
+            {
+                speed -= a * Time.fixedDeltaTime;
+            }
+        }
+        else if (isAtTuring)
+        {
+            if (speed > 5 )
             {
                 speed -= a * Time.fixedDeltaTime;
             }
@@ -132,32 +140,49 @@ public class DriveSystem : MonoBehaviour
     }
     private void DriveOnce(Vector3[] targets, UnityAction callBack)
     {
-        if (pause) return;
-        ControlSpeed(targets);
+        if (LevelManager.GetPause()) return;
         CheckMissionOvertime();
-        if (wayCount < targets.Length && Vector3.Distance(targets[wayCount], transform.position) < StopDistance)
+        bool isTurn = false;
+        if(wayCount < targets.Length - 1)
         {
-            wayCount++;
-            CurMission.wayCount = wayCount;
-            if (wayCount < targets.Length)
+            float dis = Vector3.Distance(targets[wayCount], transform.position);
+            if (dis < 3 * StopDistance)
             {
-                speedBuff = MapManager.GetGridNode(MapManager.GetCenterGrid(targets[wayCount])).passSpeed;
-                float angle = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position);
+                float angle = Vector3.Angle(transform.position - targets[wayCount + 1], targets[wayCount] - transform.position);
                 if (angle > 5 && angle < 175)
                 {
-                    UnityAction temp = action;
-                    float dis = (targets[wayCount - 1] - transform.position).magnitude;
-                    RotateSpeed = 90 / (dis * Mathf.PI / 2 / speed);
-                    turnTime = dis * Mathf.PI / 2 / speed;
-                    curTime = 0;
-                    action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp, targets[wayCount - 1], dis);
-                }
-                else
-                {
-                    transform.LookAt(targets[wayCount]);
+                    isTurn = true;
                 }
             }
         }
+        if (wayCount < targets.Length)
+        {
+            float dis = Vector3.Distance(targets[wayCount], transform.position);
+            if (dis < StopDistance)
+            {
+                wayCount++;
+                CurMission.wayCount = wayCount;
+                if (wayCount < targets.Length)
+                {
+                    speedBuff = MapManager.GetGridNode(MapManager.GetCenterGrid(targets[wayCount])).passSpeed;
+                    float angle = Vector3.Angle(transform.position - targets[wayCount], targets[wayCount - 1] - transform.position);
+                    if (angle > 5 && angle < 175)
+                    {
+                        UnityAction temp = action;
+                        RotateSpeed = 90 / (dis * Mathf.PI / 2 / speed);
+                        turnTime = dis * Mathf.PI / 2 / speed;
+                        curTime = 0;
+                        action = () => DriveTurn(targets[wayCount] - targets[wayCount - 1], temp, targets[wayCount - 1], dis);
+                    }
+                    else
+                    {
+                        transform.LookAt(targets[wayCount]);
+                    }
+                }
+            }
+        }
+
+        ControlSpeed(targets,isTurn);
         if (wayCount < targets.Length)
         {
             transform.position = Vector3.MoveTowards(transform.position, targets[wayCount], speed * Time.fixedDeltaTime);
@@ -172,8 +197,14 @@ public class DriveSystem : MonoBehaviour
             //Debug.Log("Stop");
             DriveStop(callBack);
         }
+        if (leftWheel != null && rightWheel != null)
+        {
+            leftWheel.LookAt(leftWheel.position*2 - leftOrigin, transform.up);
+            rightWheel.LookAt(rightWheel.position*2 - rightOrigin, transform.up);
+            leftOrigin = leftWheel.position;
+            rightOrigin = rightWheel.position;
+        }
         CurMission.carPosition.Fill(transform.position);
-
     }
 
 
@@ -273,7 +304,7 @@ public class DriveSystem : MonoBehaviour
     }
     private void DriveTurn(Vector3 to, UnityAction callback, Vector3 turn, float dis)
     {
-        if (pause) return;
+        if (LevelManager.GetPause()) return;
         CheckMissionOvertime();
         curTime += Time.fixedDeltaTime;
         var temp = Vector3.Cross(transform.forward, to).y;
@@ -286,6 +317,14 @@ public class DriveSystem : MonoBehaviour
             transform.Rotate(new Vector3(0, -RotateSpeed * Time.fixedDeltaTime, 0), Space.Self);
         }
         transform.position += transform.forward.normalized * speed * Time.fixedDeltaTime;
+        if (leftWheel != null && rightWheel != null)
+        {
+            leftWheel.LookAt(leftWheel.position * 2 - leftOrigin, transform.up);
+            rightWheel.LookAt(rightWheel.position * 2 - rightOrigin, transform.up);
+            leftOrigin = leftWheel.position;
+            rightOrigin = rightWheel.position;
+        }
+        CurMission.carPosition.Fill(transform.position);
         if (curTime >= turnTime)
         {
             //Debug.Log(Vector3.Angle(transform.forward, to));
@@ -325,8 +364,8 @@ public class DriveSystem : MonoBehaviour
         {
             callBack.Invoke();
         }
-        EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
-        EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
+        //EventManager.StopListening(ConstEvent.OnPauseGame, PauseGame);
+        //EventManager.StopListening(ConstEvent.OnResumeGame, ResumeGame);
         //ClearCarMission();
     }
 }

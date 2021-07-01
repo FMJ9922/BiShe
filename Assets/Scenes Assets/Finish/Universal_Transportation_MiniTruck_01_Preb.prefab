@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WayPoints: []
-  MaxSpeed: 6
-  StopDistance: 2
+  MaxSpeed: 6.94
+  StopDistance: 1.5
   carType: 1
   isbraking: 0
   carSensor: {fileID: 2686114127624289780}
-  leftWheel: {fileID: 0}
-  rightWheel: {fileID: 0}
+  leftWheel: {fileID: 5284939804153438988}
+  rightWheel: {fileID: 4146591829231385070}
 --- !u!65 &8874560670781328658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66,8 +66,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5724411, y: 2.2364235, z: 3.309166}
-  m_Center: {x: -0.011428833, y: 1.0990448, z: 0.67375183}
+  m_Size: {x: 1.5724411, y: 2.2364235, z: 4.438923}
+  m_Center: {x: -0.011428833, y: 1.0990448, z: -0.18512154}
 --- !u!54 &-785751081700768464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ PrefabInstance:
     - target: {fileID: 4673858179259040468, guid: 44925a779d1e3ac4f9812fdd35a5a8cb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4673858179259040468, guid: 44925a779d1e3ac4f9812fdd35a5a8cb,
         type: 3}
@@ -159,6 +159,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2557503271491618672}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5284939804153438988 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7649913089878074492, guid: 44925a779d1e3ac4f9812fdd35a5a8cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2557503271491618672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4146591829231385070 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1942657689670123166, guid: 44925a779d1e3ac4f9812fdd35a5a8cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 2557503271491618672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6720311085366042522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -169,12 +181,22 @@ PrefabInstance:
     - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}
       propertyPath: m_Size.z
-      value: 2.9699116
+      value: 6.628334
       objectReference: {fileID: 0}
     - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}
       propertyPath: m_Center.z
-      value: -0.50827694
+      value: -2.2991753
+      objectReference: {fileID: 0}
+    - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.9902458
+      objectReference: {fileID: 0}
+    - target: {fileID: 856125046605648252, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.4951229
       objectReference: {fileID: 0}
     - target: {fileID: 4701571375195332852, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}
@@ -189,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 4701571375195332852, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.66
+      value: 3.16
       objectReference: {fileID: 0}
     - target: {fileID: 4701571375195332852, guid: b89b78c6ef11e7f4dace56da73dbf2b7,
         type: 3}

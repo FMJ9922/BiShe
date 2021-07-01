@@ -103,8 +103,8 @@ public class FarmLandBuilding : BuildingBase
                 {
                     pos = new Vector3(j * 2, 0, i * 2);
                 }
-                newGrid.transform.localPosition = pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
-                plants[i * Size.y + j].SetPos(newGrid.transform.position);
+                newGrid.transform.localPosition =pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
+                plants[i * Size.y + j].SetPos(newGrid.transform.localPosition);
             }
         }
     }

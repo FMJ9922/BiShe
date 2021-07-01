@@ -15,9 +15,9 @@ public class MapManager : Singleton<MapManager>
     //[SerializeField] GameObject gridPfb;
     public static string noticeContent;
     private Dictionary<Vector2Int, BuildingBase> _buildingEntryDic;
-    private MapData mapData;
+    //private MapData mapData;
 
-    public void InitMapMnager()
+    public void InitMapManager()
     {
         InitLevelData();
         InitGrid(GameManager.saveData);
@@ -30,7 +30,7 @@ public class MapManager : Singleton<MapManager>
     {
         //MapSize = GameManager.saveData.mapSize.Vector2Int;
         generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
-        mapData = TerrainGenerator.Instance.GetMapData();
+        //mapData = TerrainGenerator.Instance.GetMapData();
     }
     private void InitGrid(SaveData saveData)
     {
@@ -39,12 +39,18 @@ public class MapManager : Singleton<MapManager>
             Debug.LogError("地图尺寸没有初始化！");
             return;
         }*/
-        if (saveData != null)
-        {
-            Debug.Log("InitGrids");
+        //Debug.Log(saveData.isOffcial);
+        //if (saveData.isOffcial)
+        //{
+            //Debug.Log("InitGrids");
             SetUp();
-            MapSize = saveData.mapSize.Vector2Int;
-        }
+        //}
+        //else
+        //{
+        //    _grids = saveData.gridNodes;
+            //Debug.Log(_grids == GameManager.saveData.gridNodes);
+        //}
+        MapSize = saveData.mapSize.Vector2Int;
 
         Debug.Log("初始化中");
         Invoke("InitRoad", 0.017f);
@@ -70,7 +76,7 @@ public class MapManager : Singleton<MapManager>
         else
         {
             Debug.Log("这个入口已经被占用：" + entry);
-            Debug.Log(_buildingEntryDic.Keys.Count);
+            //Debug.Log(_buildingEntryDic.Keys.Count);
         }
     }
 
@@ -105,6 +111,10 @@ public class MapManager : Singleton<MapManager>
     }
     public GridNode[][] GetGrids()
     {
+        /*if (_grids == null)*/
+        {
+            //_grids = SetUpGrid();
+        }
         return _grids;
     }
 
@@ -120,6 +130,7 @@ public class MapManager : Singleton<MapManager>
         Vector3[] verticles = mesh.vertices;
         int texLength = 8;
         _grids = new GridNode[MapSize.x][];
+        float[][] mines = TerrainGenerator.Instance.GetMapData().mine;
         for (int i = 0; i < MapSize.x; i++)
         {
             _grids[i] = new GridNode[MapSize.y];
@@ -139,16 +150,17 @@ public class MapManager : Singleton<MapManager>
                 _grids[i][j].enterCost = GetEnterCost(tex);
                 _grids[i][j].direction = (Direction)dir;
                 _grids[i][j].height = verticles[index].y;
+                _grids[i][j].mineValue = mines[i][j];
                 /*if(i == 152)
                 {
                     Debug.Log(deltaX+" "+deltaY);
                     Debug.Log(dir);
                 }*/
                 _grids[i][j].gridType = GetGridType(tex);
-                /*if (GetTerrainPosition(_grids[i][j].GridPos.Vector2Int).y<9.1F)
+                if (_grids[i][j].height < 9.1F)
                 {
                     _grids[i][j].gridType = GridType.water;
-                }*/
+                }
             }
         }
         for (int i = 0; i < MapSize.x; i++)
@@ -274,7 +286,7 @@ public class MapManager : Singleton<MapManager>
 
     public static float GetMineRichness(Vector2Int vector2Int)
     {
-        return Instance.mapData.mine[vector2Int.x][vector2Int.y];
+        return MapManager.GetGridNode(vector2Int).mineValue;
     }
 
     public void InitRoad()
@@ -529,7 +541,6 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
-        //Debug.Log(grid);
         return _grids[grid.x][grid.y].gridType;
     }
 
@@ -564,19 +575,26 @@ public class MapManager : Singleton<MapManager>
     */
     public static bool CheckCanBuild(Vector2Int[] grids, Vector2Int parkingPos, bool checkInSea)
     {
+        bool hasOutOfMap = CheckOutOfMap(grids);
+        if (hasOutOfMap)
+        {
+            noticeContent = "不能在地图外建造";
+            return false;
+        }
         //检测安放地点占用
-        bool hasOverlap = CheckOverlap(grids);
+        bool hasOverlap = checkInSea? CheckOverlapSea(grids): CheckOverlap(grids);
         //检测道路是否贴近
-        bool hasNearRoad = CheckNearRoad(parkingPos);
+        //bool hasNearRoad = CheckNearRoad(parkingPos);
         //检测是否靠近海岸线
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
+        //Debug.Log(isInSea);
         //检测是否是贴着桥造的
         bool isInWater = CheckIsInWater(parkingPos);
-        if (!hasNearRoad)
+        /*if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
         }
-        else
+        else*/
         if (hasOverlap)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
@@ -591,7 +609,10 @@ public class MapManager : Singleton<MapManager>
             noticeContent = "不能在水面下建造建筑";
         }
         //if (!isInSea) Debug.Log("不在海里");
-        return !hasOverlap && hasNearRoad && isInSea && !isInWater;
+        //Debug.Log(!hasOverlap);
+        //Debug.Log(isInSea);
+        //Debug.Log(!isInWater);
+        return !hasOverlap  && isInSea && !isInWater;
     }
 
     /// <summary>
@@ -601,13 +622,18 @@ public class MapManager : Singleton<MapManager>
     /// <returns></returns>
     public static bool CheckIsInWater(Vector2Int[] vector2Ints)
     {
-        return CheckIsInWater(vector2Ints[vector2Ints.Length / 2]) && (CheckIsInWater(vector2Ints[0]) || CheckIsInWater(vector2Ints[vector2Ints.Length - 1]));
+        Vector2Int start = vector2Ints[0];
+        Vector2Int end = vector2Ints[vector2Ints.Length - 1];
+        Vector2Int checkPos1 = new Vector2Int((start.x + end.x) / 2, (start.y + end.y) / 2);
+        //Vector2Int checkPos2 = new Vector2Int((start.x + end.x * 2) / 3, (start.y + end.y) / 2);
+        //Debug.Log(checkPos1+" "+CheckIsInWater(checkPos1));
+        //Debug.Log(checkPos2 + " " + CheckIsInWater(checkPos2));
+        return CheckIsInWater(checkPos1);
     }
 
     public static bool CheckIsInWater(Vector2Int vector2Int)
     {
-        Vector3 groundPos = GetTerrainPosition(vector2Int);
-        return groundPos.y - 10 < -0.9f;
+        return MapManager.GetGridNode(vector2Int).gridType == GridType.water;
     }
 
     /// <summary>
@@ -636,6 +662,56 @@ public class MapManager : Singleton<MapManager>
             }
         }
         return false;
+    }
+    /// <summary>
+    /// 允许造在海里
+    /// </summary>
+    /// <param name="grids"></param>
+    /// <returns></returns>
+    public static bool CheckOverlapSea(Vector2Int[] grids)
+    {
+        for (int i = 0; i < grids.Length; i++)
+        {
+            GridType gridType = Instance.GetGridType(grids[i]);
+            if (gridType != GridType.empty&&gridType!=GridType.water)
+            {
+                //Debug.Log("建筑重叠");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool CheckOutOfMap(Vector2Int[] grids)
+    {
+        Vector2Int temp;
+        int mapWidth = Instance.MapSize.x;
+        int mapLength = Instance.MapSize.y;
+        //只用检查一头一尾
+        for (int i = 0; i < grids.Length; i+= grids.Length-1)
+        {
+            temp = grids[i];
+            if (temp.x < 0 || temp.x >= mapWidth || temp.y < 0 || temp.y >= mapLength)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool CheckOutOfMap(Vector3 vector3)
+    {
+        int mapWidth = Instance.MapSize.x;
+        int mapLength = Instance.MapSize.y;
+        Vector2Int temp = GetCenterGrid(vector3);
+        if (temp.x < 0 || temp.x >= mapWidth || temp.y < 0 || temp.y >= mapLength)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static bool CheckIsRoad(Vector2Int[] grids)
@@ -691,8 +767,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (_grids != null)
         {
-            GridNode gridNode = _grids[grid.x][grid.y];
-            gridNode.gridType = gridType;
+            _grids[grid.x][grid.y].gridType = gridType;
         }
     }
 
@@ -800,12 +875,13 @@ public class MapManager : Singleton<MapManager>
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
         //Debug.Log(start + " " + end);
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
+        //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+        //sw.Start();
         //ClearRoadNodeH();
         List<GridNode> path = new List<GridNode>();
         List<GridNode> openList = new List<GridNode>();
         List<GridNode> closeList = new List<GridNode>();
+        //Debug.Log(start);
         GridNode startNode = GetGridNode(start);
         GridNode endNode = GetGridNode(end);
         openList.Add(startNode);
@@ -818,7 +894,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (openList.Count <= 0)
             {
-                Debug.LogError("路径被阻挡！"+ start+"=>"+end);
+                Debug.Log("路径被阻挡！"+ start+"=>"+end);
                 return null;
             }
             //Debug.Log("——");
@@ -879,7 +955,7 @@ public class MapManager : Singleton<MapManager>
             }
             openList.Sort(new compare());
         }
-        Debug.LogError("寻路失败"+start+" "+end);
+        Debug.Log("寻路失败"+start+" "+end);
         return null;
     }
 }

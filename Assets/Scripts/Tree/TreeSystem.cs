@@ -50,6 +50,8 @@ public class TreeSystem : MonoBehaviour
         else
         if (treeData.curHeight < treeData.targetHeight)
         {
+
+            transform.localScale = Vector3.one * (treeData.curHeight / treeData.targetHeight);
             InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime);
         }
         else if (treeData.state == TreeState.dead)

@@ -16,7 +16,7 @@ public class MineBuilding : BuildingBase
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
         //地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        //MapManager.Instance.BuildFoundation(vector2Ints, 15);
         //整平地面
         Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
         float targetHeight = targetPos.y;

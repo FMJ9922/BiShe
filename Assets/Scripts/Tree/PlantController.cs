@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlantController : MonoBehaviour
 {
     public MeshRenderer mesh;
-    private Vector3 pos;
+    private Vector3 localpos;
 
     public void SetMat(Material mat)
     {
@@ -14,7 +14,7 @@ public class PlantController : MonoBehaviour
 
     public void SetPos(Vector3 position)
     {
-        pos = position;
+        localpos = position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +32,6 @@ public class PlantController : MonoBehaviour
     
     public void Show()
     {
-        transform.position = pos;
+        transform.localPosition = localpos;
     }
 }

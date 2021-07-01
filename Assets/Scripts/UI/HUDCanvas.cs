@@ -39,6 +39,7 @@ public class HUDCanvas : CanvasBase
         ChangeTimeScaleImage(GameManager.Instance.GetTimeScale());
         ChangePauseBtnImage(GameManager.Instance.GetTimeScale());
         graphBtn.onClick.AddListener(GraphManager.Instance.Toggle);
+        RefreshDate(LevelManager.Instance.LogDate());
     }
 
     public void TogglePauseGame()

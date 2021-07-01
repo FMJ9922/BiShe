@@ -45,6 +45,7 @@ public class SaveCanvas : CanvasBase
         savingContent.SetActive(false);
         GameManager.Instance.PauseGame();
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, true);
+        EventManager.TriggerEvent<bool>(ConstEvent.OnLockMove, true);
     }
 
     public override void OnClose()
@@ -52,6 +53,7 @@ public class SaveCanvas : CanvasBase
         mainCanvas.SetActive(false);
         GameManager.Instance.ContinueGame();
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
+        EventManager.TriggerEvent<bool>(ConstEvent.OnLockMove, false);
         MainInteractCanvas.Instance.OpenReturnCanvas();
     }
     #endregion
@@ -61,6 +63,7 @@ public class SaveCanvas : CanvasBase
         nameCanvas.SetActive(true);
         saveContent.SetActive(false);
         savingContent.SetActive(false);
+
     }
 
     public void CloseCanvas()

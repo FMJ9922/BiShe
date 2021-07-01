@@ -10,9 +10,10 @@ public class LevelManager : Singleton<LevelManager>
     public MainInteractCanvas MainInteractCanvas;
     private float dayTime = 5f;
     public static int LevelID;
-    private int year, month, week, day;
+    private int year = 1, month = 1, week = 1, day = 1;
     private bool hasSuccess = false;
     private bool pause = false;
+    [SerializeField]private Material waterMat;
     public float DayTime
     {
         get => dayTime;
@@ -110,6 +111,11 @@ public class LevelManager : Singleton<LevelManager>
         date = LogDate();
     }
 
+    public static bool GetPause()
+    {
+        return Instance.pause;
+    }
+
     private void Start()
     {
         if (GameManager.saveData == null)
@@ -117,33 +123,33 @@ public class LevelManager : Singleton<LevelManager>
             Scene scene = SceneManager.GetActiveScene();
 
             GameManager.saveData = GameManager.Instance.MakeSaveData(true, int.Parse(scene.name));
-            Debug.Log(GameManager.saveData.levelID);
+            //Debug.Log(GameManager.saveData.levelID);
             InitLevelManager(int.Parse(scene.name));
-            year = 1;
-            month = 1;
-            week = 1;
-            day = 1;
         }
         else
         {
             InitSavedLevelManager(GameManager.saveData);
         }
+        //Debug.Log("START");
         EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
         EventManager.StartListening(ConstEvent.OnResumeGame, ResumeGame);
     }
 
     private void PauseGame()
     {
+        StopWater();
         pause = true;
     }
 
     private void ResumeGame()
     {
+        PlayWater();
         pause = false;
     }
 
     private void FixedUpdate()
     {
+        //Debug.Log(pause);
         if (pause) return;
         if (Timer >= dayTime)
         {
@@ -168,10 +174,18 @@ public class LevelManager : Singleton<LevelManager>
         Debug.Log("InitLevel:" + levelID);
         LevelManager.LevelID = levelID;
         ResourceManager.Instance.InitResourceManager(LevelID);
-        MapManager.Instance.InitMapMnager();
+        MapManager.Instance.InitMapManager();
         BuildManager.Instance.InitBuildManager();
         MarketManager.Instance.InitMarketManager();
         MainInteractCanvas.InitCanvas();
+        InitWaterMat();
+    }
+    public void InitWaterMat()
+    {
+        for (int i = 0; i < TransformFinder.Instance.riverParent.childCount; i++)
+        {
+            TransformFinder.Instance.riverParent.GetChild(i).GetComponent<MeshRenderer>().material = waterMat;
+        }
     }
 
     public void SaveLevelManager(ref SaveData saveData)
@@ -203,16 +217,20 @@ public class LevelManager : Singleton<LevelManager>
         WeekProgress = saveData.weekProgress;
 
         ResourceManager.Instance.InitSavedResourceManager(saveData);
-        TerrainGenerator.Instance.LoadTerrain(saveData.saveName, false);
-        MapManager.Instance.InitMapMnager();
+        TerrainGenerator.Instance.LoadTerrainFromSaveData(saveData);
+        MapManager.Instance.InitMapManager();
         TreePlanter.Instance.PlantSaveTrees(saveData);
         InitSaveWater(saveData);
+        InitWaterMat();
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(saveData.buildingDatas);
         BuildManager.Instance.InitSaveBridges(saveData.bridgeDatas);
         MarketManager.Instance.InitSavedMarketManager();
         TrafficManager.Instance.InitSavedTrafficManager(saveData.driveDatas);
         MainInteractCanvas.InitCanvas();
+
+        //Debug.Log("Continue");
+        GameManager.Instance.ContinueGame();
     }
 
     public void InitSaveWater(SaveData saveData)
@@ -227,6 +245,19 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public void StopWater()
+    {
+        //Debug.Log(waterMat.GetVector("_FoamSpeed"));
+        waterMat.SetVector("_FoamSpeed", new Vector4(0,0,0,0));
+        //Debug.Log(waterMat.GetVector("_FoamSpeed"));
+    }
+
+    public void PlayWater()
+    {
+        //Debug.Log(waterMat.GetVector("_FoamSpeed"));
+        waterMat.SetVector("_FoamSpeed", new Vector4(1, 1, -1, -1));
+        //Debug.Log(waterMat.GetVector("_FoamSpeed"));
+    }
     
 
     public void CheckSuccess()

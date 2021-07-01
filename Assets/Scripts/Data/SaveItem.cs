@@ -53,17 +53,19 @@ public class SaveItem : MonoBehaviour
 
     public void Overwrite()
     {
-        StartCoroutine("Generate", fileName);
+        StartCoroutine("Generate1", fileName);
     }
 
-    IEnumerator Generate(string saveName)
+    IEnumerator Generate1(string saveName)
     {
+        Debug.Log("1");
         saveCanvas.ShowSavingLabel();
-        yield return 0;
+        Debug.Log("2");
         GenerateSave(saveName);
-        yield return 0;
         saveCanvas.ShowSaveList();
         Debug.Log("Finish???????");
+        yield return 0;
+        Debug.Log("Finish?");
 
     }
 

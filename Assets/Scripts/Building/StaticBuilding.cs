@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BuildingBase))]
 public class StaticBuilding : MonoBehaviour
 {
-    public bool isFacingX = true;
+    public bool isFacingX;
     public int BuildID;
     BuildingBase currentBuilding;
     public static List<StaticBuilding> lists = new List<StaticBuilding>();

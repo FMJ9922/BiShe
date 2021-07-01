@@ -20,8 +20,8 @@ public class GovernmentBuilding : BuildingBase
         }
         else
         {
-            Debug.LogError("manager has already been created previously. " + gameObject.name + " is goning to be destroyed.");
-            Destroy(this);
+            Destroy(_instance);
+            _instance = this;
             return;
         }
     }

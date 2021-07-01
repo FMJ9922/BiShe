@@ -527,15 +527,29 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         transform.GetComponent<MeshCollider>().sharedMesh = transform.GetComponent<MeshFilter>().sharedMesh;
     }
 
+    public void LoadTerrainFromSaveData(SaveData data)
+    {
+        Mesh mesh = new Mesh();
+        mesh.name = data.meshName;
+        mesh.vertices = Vector3Serializer.Unbox(data.meshVerticles);
+        mesh.uv = Vector2Serializer.Unbox(data.meshUV);
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        mesh.triangles = data.meshTriangles;
+        mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
+        transform.GetComponent<MeshCollider>().sharedMesh = mesh;
+    }
+
     public string GetTerrrainPath(string fileName, bool isOffcial)
     {
         return isOffcial ? "MapData/" + fileName + "meshData" : "Saves/" + fileName + "/" + fileName + "meshData";
     }
+    /*
     public void SaveTerrain(string fileName, bool isOffcial)
     {
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
-        AssetDatabase.CreateAsset(mesh, GetPath(isOffcial) + fileName +"/"+fileName+"meshData.asset");
-    }
+        UnityEditor.AssetDatabase.CreateAsset(mesh, GetPath(isOffcial) + fileName +"/"+fileName+"meshData.asset");
+    }*/
 
     /// <summary>
     /// 获得地形的顶点数据
@@ -833,7 +847,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     private string GetPath(string fileName)
     {
         string levelId = GameManager.saveData == null ? SceneManager.GetActiveScene().name : GameManager.saveData.levelID.ToString();
-        Debug.Log(GameManager.saveData.levelID);
+        //Debug.Log(GameManager.saveData.levelID);
         string path = string.Format("{0}/{1}{2}", "Assets/Resources/MapData", levelId, fileName);
         return path;
     }

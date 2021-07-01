@@ -28,48 +28,52 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         _cameraTrans = transform.GetChild(0);
         EventManager.StartListening<bool>(ConstEvent.OnLockScroll,LockScroll);
+        EventManager.StartListening<bool>(ConstEvent.OnLockMove, LockMove);
     }
     private void OnDestroy()
     {
         EventManager.StopListening<bool>(ConstEvent.OnLockScroll, LockScroll);
+        EventManager.StopListening<bool>(ConstEvent.OnLockMove, LockMove);
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (canMove)
         {
-            _forwardSpeed = _forwardSpeed >= 0 ?
-                Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
-                Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
+            if (Input.GetKey(KeyCode.W))
+            {
+                _forwardSpeed = _forwardSpeed >= 0 ?
+                    Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
+                    Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                _forwardSpeed = _forwardSpeed <= 0 ?
+                    Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
+                    Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                _rightSpeed = _rightSpeed <= 0 ?
+                    Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
+                    Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _rightSpeed = _rightSpeed >= 0 ?
+                    Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
+                    Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
+            {
+                _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+            {
+                _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
+            }
+            transform.position += MoveDirection(_forwardSpeed, _rightSpeed) / Mathf.Clamp((int)GameManager.Instance.GetTimeScale(), 1, 4);
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _forwardSpeed = _forwardSpeed <= 0 ?
-                Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
-                Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _rightSpeed = _rightSpeed <= 0 ?
-                Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
-                Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _rightSpeed = _rightSpeed >= 0 ?
-                Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
-                Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
-        }
-        if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
-        {
-            _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
-        }
-        if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
-        {
-            _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
-        }
-        transform.position += MoveDirection(_forwardSpeed, _rightSpeed)/Mathf.Clamp((int)GameManager.Instance.GetTimeScale(),1,4);
-
         if (Input.GetMouseButton(2))
         {
             //Debug.Log(Input.mousePosition);
@@ -100,8 +104,8 @@ public class CameraMovement : Singleton<CameraMovement>
         Vector3 pos = transform.position;
         float x = transform.position.x;
         float z = transform.position.z;
-        x = Mathf.Clamp(x, 100, 700);
-        z = Mathf.Clamp(z, -100, 500);
+        x = Mathf.Clamp(x, 100, MapManager.Instance.MapSize.x * 2 + 100);
+        z = Mathf.Clamp(z, -100, MapManager.Instance.MapSize.y * 2 - 100);
         transform.position = new Vector3(x, 173.2f, z);
     }
 
@@ -119,6 +123,11 @@ public class CameraMovement : Singleton<CameraMovement>
     public void LockScroll(bool isLock)
     {
         canScroll = !isLock;
+    }
+
+    public void LockMove(bool isLock)
+    {
+        canMove = !isLock;
     }
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {

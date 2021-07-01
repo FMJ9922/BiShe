@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WayPoints: []
-  MaxSpeed: 6
-  StopDistance: 1
+  MaxSpeed: 10
+  StopDistance: 1.5
   carType: 3
   isbraking: 0
   carSensor: {fileID: 1648271583973777770}

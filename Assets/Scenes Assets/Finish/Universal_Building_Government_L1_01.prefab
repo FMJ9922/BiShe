@@ -77,14 +77,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Width: 6
   Height: 8
-  BundlePrimaryType: 0
   hasAnima: 0
   animation: {fileID: 0}
   body: {fileID: 0}
+  runtimeBuildData:
+    Id: 0
+    Name: 
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 0
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 0
+    Width: 0
+    Price: 0
+    costResources: []
+    BundleName: 
+    PfbName: 
+    tabType: 0
+    Introduce: 
+    Level: 0
+    iconName: 
+    Times: 0
+    Pause: 0
+    CurLevel: 0
+    CurFormula: 0
+    formulaDatas: []
+    CurPeople: 0
+    Rate: 0
+    Effectiveness: 0
+    Happiness: 0.6
+    productTime: 0
+    SavePosition:
+      x: 0
+      y: 0
+      z: 0
+    SaveTakenGrids: []
+    SaveDir: 0
+    SaveOutLookType: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  parkingGridOut: {x: 0, y: 0}
   direction: 3
 --- !u!114 &6733904123791653078
 MonoBehaviour:

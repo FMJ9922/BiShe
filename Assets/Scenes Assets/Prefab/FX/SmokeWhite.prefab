@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 434340}
   - component: {fileID: 19819218}
   - component: {fileID: 19979436}
+  - component: {fileID: 6602474909042803282}
   m_Layer: 0
   m_Name: SmokeWhite
   m_TagString: Untagged
@@ -4673,3 +4674,15 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6602474909042803282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa73b900a65e9ba46bc6e19a5558ed5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

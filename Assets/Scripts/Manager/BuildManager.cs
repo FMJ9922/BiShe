@@ -250,14 +250,36 @@ public class BuildManager : Singleton<BuildManager>
     private bool CheckRoadStartPosAvalible()
     {
         Vector2Int startGrid = GetCenterGrid(roadStartPos);
-        if (MapManager.Instance.GetGridType(startGrid) != GridType.road)
+        //Debug.Log(MapManager.Instance.GetGridType(startGrid));
+        //Debug.Log(MapManager.GetMineRichness(startGrid));
+        //Debug.Log(MapManager.GetGridNode(startGrid).enterCost);
+        //Debug.Log(MapManager.GetGridNode(startGrid).mineValue);
+        //Debug.Log(startGrid);
+        //float sum = 0;
+        /*Debug.Log(MapManager.Instance.GetGrids() != null);
+        for (int i = 0; i < MapManager.Instance.GetGrids().Length; i++)
         {
-            NoticeManager.Instance.InvokeShowNotice("道路起点应与已有道路相连");
+            for (int j = 0; j < MapManager.Instance.GetGrids().LongLength; j++)
+            {
+                GridNode node = MapManager.Instance.GetGrids()[i][j];
+                sum += node.mineValue;
+                if (node.mineValue > 0)
+                {
+                    Debug.Log(i + " " + j);
+                    Debug.Log(node.enterCost);
+                    Debug.Log(node.gridType);
+                }
+            }
+        }
+        Debug.Log(sum);*/
+        if (MapManager.Instance.GetGridType(startGrid) == GridType.occupy)
+        {
+            NoticeManager.Instance.InvokeShowNotice("道路起点不能设在已被占用的位置");
             return false;
         }
         if (MapManager.CheckIsInWater(startGrid))
         {
-            NoticeManager.Instance.InvokeShowNotice("道路起点不能为桥上");
+            NoticeManager.Instance.InvokeShowNotice("道路起点不能设在水里");
             return false;
         }
         return true;
