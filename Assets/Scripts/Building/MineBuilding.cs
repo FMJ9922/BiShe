@@ -12,15 +12,12 @@ public class MineBuilding : BuildingBase
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
-        parkingGridIn = GetInParkingGrid();
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
         //地基
         //MapManager.Instance.BuildFoundation(vector2Ints, 15);
         //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+        
         richness = SetRichness(takenGrids);
         if (!buildFlag)
         {
@@ -38,6 +35,9 @@ public class MineBuilding : BuildingBase
         {
             RestartBuildingFunction();
         }
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
     }
 
     protected override void Output()

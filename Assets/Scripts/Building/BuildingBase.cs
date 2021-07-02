@@ -40,15 +40,9 @@ public class BuildingBase : MonoBehaviour
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
-        parkingGridIn = GetInParkingGrid();
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
-        //地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 15);
-        //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+        
         if (!buildFlag)
         {
             buildFlag = true;
@@ -57,7 +51,6 @@ public class BuildingBase : MonoBehaviour
                 Invoke("PlayAnim", 0.2f);
             }
             direction = CastTool.CastVector3ToDirection(transform.right);
-
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
@@ -66,6 +59,13 @@ public class BuildingBase : MonoBehaviour
         {
             RestartBuildingFunction();
         }
+
+        //地基
+        MapManager.Instance.BuildFoundation(vector2Ints, 15);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
     }
 
     protected void PlayAnim()
@@ -104,6 +104,7 @@ public class BuildingBase : MonoBehaviour
     public virtual void InitBuildingFunction()
     {
         //Debug.Log("add");
+        parkingGridIn = GetInParkingGrid();
         MapManager.Instance._buildings.Add(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
@@ -123,11 +124,17 @@ public class BuildingBase : MonoBehaviour
             //Debug.Log(runtimeBuildData.formulaDatas.Length);
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         }
+        parkingGridIn = GetInParkingGrid();
         MapManager.Instance._buildings.Add(this);
-        MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+        RegisterBuildingEntry();
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+    }
+
+    public void RegisterBuildingEntry()
+    {
+        MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
     }
 
     public void FillUpPopulation()
@@ -338,15 +345,17 @@ public class BuildingBase : MonoBehaviour
         int people = runtimeBuildData.CurPeople;
         DeleteCurPeople(runtimeBuildData.CurPeople);
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
-        BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation,out bool success);
-        issuccess = success;
-        if (success)
+        BuildingBase rear = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation);
+        if (rear!=null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
             DestroyBuilding(false,false,false);
+            rear.RegisterBuildingEntry();
+            issuccess = true;
         }
         else
         {
+            issuccess = false;
             AddCurPeople(people);
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }

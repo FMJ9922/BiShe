@@ -707,7 +707,7 @@ public class BuildManager : Singleton<BuildManager>
         dustParticle.Play();
     }
 
-    public void UpgradeBuilding(RuntimeBuildData buildData, Vector2Int[] grids, Vector3 pos, Quaternion quaternion, out bool success)
+    public BuildingBase UpgradeBuilding(RuntimeBuildData buildData, Vector2Int[] grids, Vector3 pos, Quaternion quaternion)
     {
         if (CheckBuildResourcesEnoughAndUse(buildData))
         {
@@ -719,11 +719,11 @@ public class BuildManager : Singleton<BuildManager>
 
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
-            success = true;
+            return currentBuilding;
         }
         else
         {
-            success = false;
+            return null;
         }
     }
 

@@ -10,7 +10,6 @@ public class PierBuilding : BuildingBase
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
-        parkingGridIn = GetInParkingGrid();
 
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;

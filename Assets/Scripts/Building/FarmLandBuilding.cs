@@ -37,18 +37,11 @@ public class FarmLandBuilding : BuildingBase
     {
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
-        parkingGridIn = GetInParkingGrid();
 
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
 
-        //地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
-        //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
-        //parkingGridOut = GetOutParkingGrid();
+        
         if (!buildFlag)
         {
             buildFlag = true;
@@ -65,6 +58,13 @@ public class FarmLandBuilding : BuildingBase
         {
             RestartBuildingFunction();
         }
+
+        //地基
+        MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
+        //整平地面
+        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
+        float targetHeight = targetPos.y;
+        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
     }
 
     private void ShowPlant()

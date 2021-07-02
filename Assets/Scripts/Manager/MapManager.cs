@@ -71,6 +71,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (!_buildingEntryDic.ContainsKey(entry))
         {
+            Debug.Log("增加入口：" + entry);
             _buildingEntryDic.Add(entry, building);
         }
         else
@@ -89,6 +90,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (_buildingEntryDic.ContainsKey(entry))
         {
+            Debug.Log("删除入口：" + entry);
             _buildingEntryDic.Remove(entry);
         }
         else
@@ -587,9 +589,11 @@ public class MapManager : Singleton<MapManager>
         //bool hasNearRoad = CheckNearRoad(parkingPos);
         //检测是否靠近海岸线
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
-        //Debug.Log(isInSea);
-        //检测是否是贴着桥造的
+        //检测入口是否在海里
         bool isInWater = CheckIsInWater(parkingPos);
+        //检测入口是否已经被占用
+        bool isEntryAvailable = CheckEntryAvailble(parkingPos);
+
         /*if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
@@ -608,11 +612,15 @@ public class MapManager : Singleton<MapManager>
         {
             noticeContent = "不能在水面下建造建筑";
         }
+        else if (!isEntryAvailable)
+        {
+            noticeContent = "建筑入口已被占用！无法建造";
+        }
         //if (!isInSea) Debug.Log("不在海里");
         //Debug.Log(!hasOverlap);
         //Debug.Log(isInSea);
         //Debug.Log(!isInWater);
-        return !hasOverlap  && isInSea && !isInWater;
+        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable;
     }
 
     /// <summary>
@@ -634,6 +642,11 @@ public class MapManager : Singleton<MapManager>
     public static bool CheckIsInWater(Vector2Int vector2Int)
     {
         return MapManager.GetGridNode(vector2Int).gridType == GridType.water;
+    }
+
+    public static bool CheckEntryAvailble(Vector2Int vector2Int)
+    {
+        return Instance.IsBuildingEntryAvalible(vector2Int)&& GetGridNode(vector2Int).gridType != GridType.occupy;
     }
 
     /// <summary>

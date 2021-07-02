@@ -38,6 +38,8 @@ public class MarketBuilding : BuildingBase
         BuildingBase temp = MapManager.Instance.GetBuilidngByEntry(carMission.StartBuilding);
         carMission.StartBuilding = carMission.EndBuilding;
         carMission.EndBuilding = temp.parkingGridIn;
+        Debug.Log(carMission.StartBuilding);
+        Debug.Log(carMission.EndBuilding);
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:

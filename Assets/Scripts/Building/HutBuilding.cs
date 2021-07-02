@@ -138,15 +138,17 @@ public class HutBuilding : BuildingBase
         buildData.CurFormula = runtimeBuildData.CurFormula;
         RemovePopulation();
         buildData.Happiness = (80f + 10 * buildData.CurLevel) / 100;
-        BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation, out bool success);
-        issuccess = success;
-        if (success)
+        BuildingBase rear = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
+        if (rear != null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
             DestroyBuilding(false, false, false);
+            rear.RegisterBuildingEntry();
+            issuccess = true;
         }
         else
         {
+            issuccess = false;
             ProvidePopulation();
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }
