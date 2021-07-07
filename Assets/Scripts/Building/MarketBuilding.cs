@@ -8,6 +8,10 @@ public class MarketBuilding : BuildingBase
 
     public override void OnRecieveCar(CarMission carMission)
     {
+        if (carMission == null)
+        {
+            return;
+        }
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:
@@ -36,10 +40,14 @@ public class MarketBuilding : BuildingBase
     private void BuildRecievedCarMission(CarMission carMission)
     {
         BuildingBase temp = MapManager.Instance.GetBuilidngByEntry(carMission.StartBuilding);
+        if (temp == null)
+        {
+            return;
+        }
         carMission.StartBuilding = carMission.EndBuilding;
         carMission.EndBuilding = temp.parkingGridIn;
-        Debug.Log(carMission.StartBuilding);
-        Debug.Log(carMission.EndBuilding);
+        //Debug.Log(carMission.StartBuilding);
+        //Debug.Log(carMission.EndBuilding);W
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:

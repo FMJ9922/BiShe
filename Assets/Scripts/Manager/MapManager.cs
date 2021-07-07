@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapManager : Singleton<MapManager>
 {
-    public Vector2Int MapSize { get; private set; }
+    public static Vector2Int MapSize = new Vector2Int(300, 300);
     private GridNode[][] _grids;
     private LevelData _leveldata;
     private static Vector3[] _vertices;//存储地形顶点数据
@@ -71,7 +71,7 @@ public class MapManager : Singleton<MapManager>
     {
         if (!_buildingEntryDic.ContainsKey(entry))
         {
-            Debug.Log("增加入口：" + entry);
+            //Debug.Log("增加入口：" + entry);
             _buildingEntryDic.Add(entry, building);
         }
         else
@@ -288,7 +288,14 @@ public class MapManager : Singleton<MapManager>
 
     public static float GetMineRichness(Vector2Int vector2Int)
     {
-        return MapManager.GetGridNode(vector2Int).mineValue;
+        if (CheckInMap(vector2Int))
+        {
+            return MapManager.GetGridNode(vector2Int).mineValue;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public void InitRoad()
@@ -353,9 +360,8 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < takenGirds.Length; i++)
         {
             int index = takenGirds[i].x + takenGirds[i].y * MapSize.x;
-            int tex = GameManager.saveData.meshTex[index];
             //int dir = GameManager.saveData.meshDir[index];
-            generator.RefreshUV(tex, 8, index,4);
+            generator.RefreshToOriginUV(index,out int tex);
             SetPassInfo(takenGirds[i], tex);
         }
         generator.ReCalculateNormal();
@@ -543,7 +549,14 @@ public class MapManager : Singleton<MapManager>
     }
     public GridType GetGridType(Vector2Int grid)
     {
-        return _grids[grid.x][grid.y].gridType;
+        if (CheckInMap(grid))
+        {
+            return _grids[grid.x][grid.y].gridType;
+        }
+        else
+        {
+            return GridType.occupy;
+        }
     }
 
     /// <summary>
@@ -593,7 +606,8 @@ public class MapManager : Singleton<MapManager>
         bool isInWater = CheckIsInWater(parkingPos);
         //检测入口是否已经被占用
         bool isEntryAvailable = CheckEntryAvailble(parkingPos);
-
+        //检测坡度是否平缓
+        bool isFlat = CheckFlat(grids,parkingPos);
         /*if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
@@ -603,24 +617,27 @@ public class MapManager : Singleton<MapManager>
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
         }
-        else
         if (!isInSea)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
         }
-        else if (isInWater)
+        if (isInWater)
         {
             noticeContent = "不能在水面下建造建筑";
         }
-        else if (!isEntryAvailable)
+        if (!isEntryAvailable)
         {
             noticeContent = "建筑入口已被占用！无法建造";
+        }
+        if (!isFlat)
+        {
+            noticeContent = "建筑不能建在过于陡峭的位置";
         }
         //if (!isInSea) Debug.Log("不在海里");
         //Debug.Log(!hasOverlap);
         //Debug.Log(isInSea);
         //Debug.Log(!isInWater);
-        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable;
+        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable && isFlat;
     }
 
     /// <summary>
@@ -649,13 +666,25 @@ public class MapManager : Singleton<MapManager>
         return Instance.IsBuildingEntryAvalible(vector2Int)&& GetGridNode(vector2Int).gridType != GridType.occupy;
     }
 
+    public static bool CheckFlat(Vector2Int[] vector2Ints,Vector2Int entrance)
+    {
+        float height = GetGridNode(entrance).height;
+        for (int i = 0; i < vector2Ints.Length; i+=4)
+        {
+            if (Mathf.Abs(height - GetGridNode(vector2Ints[i]).height) > 2)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     /// <summary>
     /// 获得平地位置
     /// </summary>
     /// <returns></returns>
     public static Vector3 GetOnGroundPosition(Vector2Int gridPos)
     {
-        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < 300 && gridPos.y < 300)
+        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < MapSize.x && gridPos.y < MapSize.y)
         {
             int p = gridPos.x * 4 + gridPos.y * 300 * 4;
             Vector3 res = TerrainGenerator.GetTerrainMeshVertices()[p];
@@ -698,13 +727,11 @@ public class MapManager : Singleton<MapManager>
     public static bool CheckOutOfMap(Vector2Int[] grids)
     {
         Vector2Int temp;
-        int mapWidth = Instance.MapSize.x;
-        int mapLength = Instance.MapSize.y;
         //只用检查一头一尾
         for (int i = 0; i < grids.Length; i+= grids.Length-1)
         {
             temp = grids[i];
-            if (temp.x < 0 || temp.x >= mapWidth || temp.y < 0 || temp.y >= mapLength)
+            if (!CheckInMap(temp))
             {
                 return true;
             }
@@ -714,10 +741,13 @@ public class MapManager : Singleton<MapManager>
 
     public static bool CheckOutOfMap(Vector3 vector3)
     {
-        int mapWidth = Instance.MapSize.x;
-        int mapLength = Instance.MapSize.y;
         Vector2Int temp = GetCenterGrid(vector3);
-        if (temp.x < 0 || temp.x >= mapWidth || temp.y < 0 || temp.y >= mapLength)
+        return !CheckInMap(temp);
+    }
+
+    public static bool CheckInMap(Vector2Int gridPos)
+    {
+        if (gridPos.x > 0 && gridPos.y > 0 && gridPos.x < MapSize.x && gridPos.y < MapSize.y)
         {
             return true;
         }

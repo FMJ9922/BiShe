@@ -108,6 +108,11 @@ public class TrafficManager : Singleton<TrafficManager>
         {
             wayPoints = Vector3Serializer.Unbox(mission.wayPoints);
         }
+        else if (start == end)
+        {
+            RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
+            return;
+        }
         else
         {
             wayPoints = MapManager.Instance.GetWayPoints(start, end).ToArray();

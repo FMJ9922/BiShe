@@ -104,8 +104,8 @@ public class CameraMovement : Singleton<CameraMovement>
         Vector3 pos = transform.position;
         float x = transform.position.x;
         float z = transform.position.z;
-        x = Mathf.Clamp(x, 100, MapManager.Instance.MapSize.x * 2 + 100);
-        z = Mathf.Clamp(z, -100, MapManager.Instance.MapSize.y * 2 - 100);
+        x = Mathf.Clamp(x, 100, MapManager.MapSize.x * 2 + 100);
+        z = Mathf.Clamp(z, -100, MapManager.MapSize.y * 2 - 100);
         transform.position = new Vector3(x, 173.2f, z);
     }
 

@@ -114,7 +114,7 @@ public class DriveSystem : MonoBehaviour
                 isbraking = false;
                 brakeTimer = 0;
             }
-            if (speed > 0)
+            if (speed > 2)
             {
                 speed -= a * Time.fixedDeltaTime;
             }
