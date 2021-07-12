@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2801470070
+CRC: 2633429484
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1285358becac2869c676389c85c93be0
+    Hash: 10feecceb7a5a836fe136e3263a9c64a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9753dd794424f69fb6011ee06a0c141c
@@ -157,6 +157,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/unYouhuajianzhu03.png
 - Assets/ArtAssets/UI/TechIcon/Rencaiguanli01.png
 - Assets/Scenes Assets/BuildingIcon/Icon/VegetableIcon.png
+- Assets/Scenes Assets/BuildingIcon/Icon/ProcessedMeatIcon.png
 - Assets/ArtAssets/UI/TechIcon/Rencaiguanli03.png
 - Assets/ArtAssets/UI/TechIcon/unYouhuajianzhu01.png
 - Assets/Scenes Assets/BuildingIcon/HookerL2.png

@@ -89,11 +89,11 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         else
         {
-            NoticeManager.Instance.InvokeShowNotice("寻路失败！坐标："+start+"=>"+end+"请检查是否有建筑没有连接到道路！");
-            /*if (action != null)
+            //NoticeManager.Instance.InvokeShowNotice("寻路失败！坐标："+start+"=>"+end+"请检查是否有建筑没有连接到道路！");
+            if (action != null)
             {
                 action.Invoke();
-            }*/
+            }
         }
     }
 

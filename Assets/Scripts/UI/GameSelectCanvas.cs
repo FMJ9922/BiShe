@@ -34,12 +34,18 @@ public class GameSelectCanvas : Singleton<GameSelectCanvas>
 
     public void ChangeShowLevel(LevelData data)
     {
-        levelName.text = data.Name;
-        aim.text = data.Aim1 + '\n' + data.Aim2 + '\n' + data.Aim3;
-        special.text = data.specialIntroduce;
+        levelName.text = Localization.ToSettingLanguage(data.Name);
+        aim.text = Localization.ToSettingLanguage(data.Aim1) + '\n' + Localization.ToSettingLanguage(data.Aim2) + '\n' + Localization.ToSettingLanguage(data.Aim3);
+        special.text = Localization.ToSettingLanguage(data.specialIntroduce);
         preview.sprite = LoadAB.LoadSprite("mat.ab", data.Id + "preview");
         enterBtn.onClick.RemoveAllListeners();
         int id = data.Id;
         enterBtn.onClick.AddListener(() => GameManager.Instance.LoadLevelScene(id));
+    }
+
+    public void ShowDefault()
+    {
+        LevelData[] data = DataManager.GetAllLevelDatas();
+        ChangeShowLevel(data[0]);
     }
 }

@@ -998,7 +998,7 @@ public class MapManager : Singleton<MapManager>
             }
             openList.Sort(new compare());
         }
-        Debug.Log("寻路失败"+start+" "+end);
+        //Debug.Log("寻路失败"+start+" "+end);
         return null;
     }
 }

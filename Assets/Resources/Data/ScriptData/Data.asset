@@ -128,9 +128,9 @@ MonoBehaviour:
     Name: "\u5E73\u539F"
     FrontLevelId: 0
     RearLevelId: 30002
-    Aim1: "\u8D44\u91D1\u8FBE\u523020000"
-    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523080"
-    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
+    Aim1: 30001Aim1
+    Aim2: 30001Aim2
+    Aim3: 30001Aim3
     RewardBuildingId: 0
     RewardTechId: 0
     Length: 300
@@ -142,7 +142,7 @@ MonoBehaviour:
     stone: 20
     orderIds: fa2a0000e32e0000f22e0000ef2e0000082b0000
     orderNums: c8000000c8000000c8000000c8000000c8000000
-    specialIntroduce: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
+    specialIntroduce: 30001SpcielIntroduce
     AimMoney: 20000
     AimHappiness: 80
     AimPopulation: 300
@@ -150,9 +150,9 @@ MonoBehaviour:
     Name: "\u5C71\u5DDD"
     FrontLevelId: 30001
     RearLevelId: 30003
-    Aim1: "\u8D44\u91D1\u8FBE\u523030000"
-    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523085"
-    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230400"
+    Aim1: 30002Aim1
+    Aim2: 30002Aim2
+    Aim3: 30002Aim3
     RewardBuildingId: 0
     RewardTechId: 0
     Length: 300
@@ -164,7 +164,7 @@ MonoBehaviour:
     stone: 20
     orderIds: e92e0000ec2e0000ef2e0000f42e0000082b0000
     orderNums: c8000000c8000000c8000000c8000000c8000000
-    specialIntroduce: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
+    specialIntroduce: 30002SpcielIntroduce
     AimMoney: 30000
     AimHappiness: 85
     AimPopulation: 400
@@ -172,9 +172,9 @@ MonoBehaviour:
     Name: "\u6D77\u5CB8"
     FrontLevelId: 30002
     RearLevelId: 0
-    Aim1: "\u8D44\u91D1\u8FBE\u523040000"
-    Aim2: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523090"
-    Aim3: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230500"
+    Aim1: 30003Aim1
+    Aim2: 30003Aim2
+    Aim3: 30003Aim3
     RewardBuildingId: 0
     RewardTechId: 0
     Length: 300
@@ -186,7 +186,7 @@ MonoBehaviour:
     stone: 20
     orderIds: 032b0000e42e0000f22e0000092b0000082b0000
     orderNums: 2c0100002c0100002c0100002c0100002c010000
-    specialIntroduce: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5236\u9020\u4E1A"
+    specialIntroduce: 30003SpcielIntroduce
     AimMoney: 40000
     AimHappiness: 90
     AimPopulation: 500
@@ -1685,3 +1685,138 @@ MonoBehaviour:
     - code: Buy
       chinese: "\u4E70\u5165"
       english: Buy
+    - code: SelectLevel
+      chinese: "\u9009\u62E9\u5173\u5361"
+      english: Select Level
+    - code: Load
+      chinese: "\u52A0\u8F7D\u5B58\u6863"
+      english: Load
+    - code: Settings
+      chinese: "\u6E38\u620F\u8BBE\u7F6E"
+      english: Settings
+    - code: About
+      chinese: "\u5173\u4E8E"
+      english: About
+    - code: Quit
+      chinese: "\u9000\u51FA"
+      english: Quit
+    - code: 30001Aim1
+      chinese: "\u8D44\u91D1\u8FBE\u523020000"
+      english: Money reach 20,000
+    - code: 30001Aim2
+      chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523080"
+      english: Averrage happiness reach 80
+    - code: 30001Aim3
+      chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
+      english: Population reach 300
+    - code: 30002Aim1
+      chinese: "\u8D44\u91D1\u8FBE\u523030000"
+      english: Money reach 30,000
+    - code: 30002Aim2
+      chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523085"
+      english: Averrage happiness reach 85
+    - code: 30002Aim3
+      chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230400"
+      english: Population reach 400
+    - code: 30003Aim1
+      chinese: "\u8D44\u91D1\u8FBE\u523040000"
+      english: Money reach 40,000
+    - code: 30003Aim2
+      chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523090"
+      english: Averrage happiness reach 90
+    - code: 30003Aim3
+      chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230500"
+      english: Population reach 500
+    - code: 30001SpcielIntroduce
+      chinese: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
+      english: suitable for the development of agriculture
+    - code: 30002SpcielIntroduce
+      chinese: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
+      english: suitable for the development of mining
+    - code: 30003SpcielIntroduce
+      chinese: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5236\u9020\u4E1A"
+      english: suitable for the development of manufacturing industry
+    - code: "\u5E73\u539F"
+      chinese: "\u5E73\u539F"
+      english: Plain
+    - code: "\u5C71\u5DDD"
+      chinese: "\u5C71\u5DDD"
+      english: Mountain
+    - code: "\u6D77\u5CB8"
+      chinese: "\u6D77\u5CB8"
+      english: Coast
+    - code: LevelAim
+      chinese: "\u5173\u5361\u76EE\u6807"
+      english: Goal
+    - code: Feature
+      chinese: "\u7279\u8272"
+      english: Feature
+    - code: KeyMap
+      chinese: "\u952E\u4F4D"
+      english: KeyMap
+    - code: KeyMapIntroduce
+      chinese: "WASD/\u6309\u4F4F\u6EDA\u8F6E   \u79FB\u52A8\u6444\u50CF\u673A\n\u9F20\u6807\u5DE6\u952E           
+        \u4EA4\u4E92\n\u9F20\u6807\u6EDA\u8F6E            \u7F29\u653E\u6444\u50CF\u673A\n\u9F20\u6807\u53F3\u952E           
+        \u9000\u51FA\u5EFA\u9020\u72B6\u6001\uFF0C\u9000\u51FA\u62C6\u9664\u9053\u8DEF\u72B6\u6001\nR                       
+        \u5EFA\u9020\u65F6\u65CB\u8F6C\u5EFA\u7B51\n\u6570\u5B57\u952E1            
+        \u4E00\u500D\u901F\n\u6570\u5B57\u952E2             \u4E8C\u500D\u901F\n\u6570\u5B57\u952E3            
+        \u56DB\u500D\u901F\n\u7A7A\u683C                  \u5207\u6362\u6682\u505C\u548C\u64AD\u653E"
+      english: 'WASD               Move the camera
+
+        LMB                 Interaction
+
+        RMB                
+        Exit construction and road demolition
+
+        Mouse wheel     Zoom camera
+
+        R                   
+        Rotating the building while building
+
+        Number key 1   Timescale x1
+
+        Number
+        key 2   Timescale x2
+
+        Number key 3   Timescale x3
+
+        Space             
+        Switch between pause and play'
+    - code: AboutLog
+      chinese: "\u8FD9\u662F\u4E00\u6B3E\u4EE5\u519C\u6751\u4E3A\u80CC\u666F\u7684\u6A21\u62DF\u7ECF\u8425\u6E38\u620F\u3002\u5EFA\u9020\u519C\u7530\u3001\u4F10\u6728\u573A\u3001\u91C7\u77F3\u573A\u7B49\u5EFA\u7B51\u6765\u751F\u4EA7\u57FA\u7840\u8D44\u6E90\uFF0C\u5EFA\u9020\u52A0\u5DE5\u5382\u6765\u751F\u4EA7\u5229\u6DA6\u66F4\u9AD8\u7684\u4EA7\u54C1\uFF0C\u5728\u5E02\u573A\u552E\u5356\u4EA7\u54C1\u83B7\u5F97\u5229\u6DA6\uFF0C\u4E3A\u6751\u6C11\u5347\u7EA7\u623F\u5C4B\u548C\u5DE5\u4F5C\u573A\u6240\u589E\u52A0\u5E78\u798F\u5EA6\uFF0C\u5728\u4E61\u653F\u5E9C\u89E3\u9501\u653F\u7B56\u8C03\u63A7\u751F\u4EA7\u3002\u6700\u7EC8\u76EE\u6807\u662F\u5EFA\u7ACB\u7F8E\u4E3D\u65B0\u519C\u6751\u3002\n\n\u5185\u6D4B\u73A9\u5BB6\u4EA4\u6D41QQ\u7FA4\u53F7\uFF1A714451531"
+      english: This is a simulated business game with a rural background. Build farmland,
+        logging yards, quarries and other buildings to produce basic resources, build
+        processing plants to produce more profitable products, sell products in the
+        market for profit, upgrade houses and workplaces for villagers to increase
+        happiness, and unlock policies in the township government Regulate production.
+        The ultimate goal is to build a beautiful new countryside.
+    - code: About
+      chinese: "\u5173\u4E8E"
+      english: About
+    - code: Save
+      chinese: "\u5B58\u6863"
+      english: Save
+    - code: Saving
+      chinese: "\u6B63\u5728\u4FDD\u5B58\u2026\u2026"
+      english: "Saving\u2026"
+    - code: NameSave
+      chinese: "\u8BF7\u4E3A\u65B0\u5EFA\u7684\u5B58\u6863\u547D\u540D"
+      english: Please give a name for the save file
+    - code: NameSave1
+      chinese: "\u8F93\u5165\u5B58\u6863\u540D\u79F0\u2026\u2026"
+      english: "Enter file name\u2026\u2026"
+    - code: Overwrite
+      chinese: "\u8986\u76D6"
+      english: Overwrite
+    - code: LoadFile
+      chinese: "\u8BFB\u6863"
+      english: Load
+    - code: Delete
+      chinese: "\u5220\u6863"
+      english: Delete
+    - code: GameSave
+      chinese: "\u6E38\u620F\u5B58\u6863"
+      english: Save game
+    - code: ExitToMenu
+      chinese: "\u9000\u51FA\u81F3\u83DC\u5355"
+      english: Exit to menu

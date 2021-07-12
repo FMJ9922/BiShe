@@ -16,11 +16,14 @@ public class SaveCanvas : CanvasBase
     [SerializeField] GameObject saveItemPfb;
     [SerializeField] TMP_InputField inputField;
 
+    public bool isInMenu;
+    public GameObject addBtn;
 
     #region 实现基类
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
+        addBtn.SetActive(!isInMenu);
         InitSaveItems();
     }
 
@@ -34,7 +37,7 @@ public class SaveCanvas : CanvasBase
             GameObject newSave = Instantiate(saveItemPfb, saveHolder);
             newSave.SetActive(true);
             newSave.transform.SetSiblingIndex(saveHolder.transform.childCount - 2);
-            newSave.GetComponent<SaveItem>().InitSave(dics[i].Name);
+            newSave.GetComponent<SaveItem>().InitSave(dics[i].Name,isInMenu);
         }
     }
     public override void OnOpen()
@@ -54,7 +57,10 @@ public class SaveCanvas : CanvasBase
         GameManager.Instance.ContinueGame();
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockMove, false);
-        MainInteractCanvas.Instance.OpenReturnCanvas();
+        if (!isInMenu)
+        {
+            MainInteractCanvas.Instance.OpenReturnCanvas();
+        }
     }
     #endregion
     public void InitNewSave()
@@ -132,4 +138,5 @@ public class SaveCanvas : CanvasBase
     {
         return Application.dataPath + "/Resources/Saves";
     }
+
 }

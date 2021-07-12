@@ -13,6 +13,7 @@ public class SaveItem : MonoBehaviour
     private SaveCanvas saveCanvas;
     private string menuPath;
     private string fileName;
+    private bool lockbtn =false;
 
     public string GetSavePath()
     {
@@ -26,21 +27,25 @@ public class SaveItem : MonoBehaviour
         fileName = saveName;
     }
 
-    public void InitSave(string saveName)
+    public void InitSave(string saveName,bool isInMenu = false)
     {
+        menuPath = Application.dataPath + "/Resources/Saves";
+        if (!isInMenu)
+        {
+            saveCanvas = MainInteractCanvas.Instance.GetSaveCanvas();
+        }
+        else
+        {
+            overwrite.gameObject.SetActive(false);
+        }
         fileName = saveName;
         nameLabel.text = saveName;
     }
 
-    public void Start()
-    {
-        menuPath = Application.dataPath + "/Resources/Saves";
-        saveCanvas = MainInteractCanvas.Instance.GetSaveCanvas();
-    }
 
     public void Delete() 
     {
-        Debug.Log(GetSavePath());
+        //Debug.Log(GetSavePath());
         GameSaver.DeleteAllFile(GetSavePath());
         GameSaver.DeleteSaveData(menuPath, fileName);
         Destroy(gameObject);
@@ -53,19 +58,30 @@ public class SaveItem : MonoBehaviour
 
     public void Overwrite()
     {
-        StartCoroutine("Generate1", fileName);
+        if (!lockbtn)
+        {
+            StartCoroutine("Generate1", fileName);
+        }
     }
 
     IEnumerator Generate1(string saveName)
     {
-        Debug.Log("1");
-        saveCanvas.ShowSavingLabel();
-        Debug.Log("2");
-        GenerateSave(saveName);
-        saveCanvas.ShowSaveList();
-        Debug.Log("Finish???????");
+        lockbtn = true;
+        //Debug.Log("1");
+        if (null == saveCanvas)
+        {
+            saveCanvas = MainInteractCanvas.Instance.GetSaveCanvas();
+        }
+        //saveCanvas.ShowSavingLabel();
         yield return 0;
-        Debug.Log("Finish?");
+        //Debug.Log("2");
+        lockbtn = false;
+        GenerateSave(saveName);
+        yield return 0;
+        saveCanvas.ShowSaveList();
+        //Debug.Log("Finish???????");
+        //Debug.Log("Finish?");
+        yield return 0;
 
     }
 

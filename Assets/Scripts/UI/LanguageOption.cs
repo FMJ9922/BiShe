@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LanguageOption : MonoBehaviour
 {
-    [SerializeField]Dropdown dropdown;
+    [SerializeField] TMP_Dropdown dropdown;
 
 
     private void Start()
