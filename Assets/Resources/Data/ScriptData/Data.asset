@@ -1820,3 +1820,9 @@ MonoBehaviour:
     - code: ExitToMenu
       chinese: "\u9000\u51FA\u81F3\u83DC\u5355"
       english: Exit to menu
+    - code: ReturnGame
+      chinese: "\u8FD4\u56DE\u6E38\u620F"
+      english: Return
+    - code: QuitGame
+      chinese: "\u9000\u51FA\u6E38\u620F"
+      english: Quit game

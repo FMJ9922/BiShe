@@ -15,9 +15,15 @@ public class SaveCanvas : CanvasBase
     [SerializeField] Transform saveHolder;
     [SerializeField] GameObject saveItemPfb;
     [SerializeField] TMP_InputField inputField;
+    [SerializeField] Button saveBtn;
+    [SerializeField] Button overwriteBtn;
+    [SerializeField] Button deleteBtn;
+    [SerializeField] Transform bar;
+    [SerializeField] Scrollbar scrollbar;
 
     public bool isInMenu;
     public GameObject addBtn;
+    private SaveItem curSaveItem;
 
     #region 实现基类
     public override void InitCanvas()
@@ -25,8 +31,13 @@ public class SaveCanvas : CanvasBase
         mainCanvas.SetActive(false);
         addBtn.SetActive(!isInMenu);
         InitSaveItems();
+        scrollbar.onValueChanged.AddListener(AdjustBarPos);
     }
 
+    public void AdjustBarPos(float value)
+    {
+        bar.localPosition = new Vector3(0, 340*scrollbar.size*(value-0.5f), 0);
+    }
     public void InitSaveItems()
     {
         //string[] dirs = Directory.GetDirectories(GetSaveParentPath(),".",SearchOption.TopDirectoryOnly);
@@ -38,6 +49,8 @@ public class SaveCanvas : CanvasBase
             newSave.SetActive(true);
             newSave.transform.SetSiblingIndex(saveHolder.transform.childCount - 2);
             newSave.GetComponent<SaveItem>().InitSave(dics[i].Name,isInMenu);
+            saveItems.Add(newSave.GetComponent<SaveItem>());
+            newSave.GetComponent<Button>().onClick.AddListener(()=> { ClickSelect(newSave); });
         }
     }
     public override void OnOpen()
@@ -123,10 +136,24 @@ public class SaveCanvas : CanvasBase
         newSave.transform.SetSiblingIndex(saveHolder.transform.childCount - 2);
         yield return 0;
         newSave.GetComponent<SaveItem>().GenerateSave(saveName);
+        newSave.GetComponent<Button>().onClick.AddListener(() => { ClickSelect(newSave); });
+        newSave.GetComponent<SaveItem>().SetUnclick();
+        saveItems.Add(newSave.GetComponent<SaveItem>());
         yield return 0;
         ShowSaveList();
 
 
+    }
+
+    public void ClickSelect(GameObject btnObj)
+    {
+        for (int i = 0; i < saveItems.Count; i++)
+        {
+            saveItems[i].SetUnclick();
+        }
+        curSaveItem = btnObj.GetComponent<SaveItem>();
+        curSaveItem.SetSprite();
+        
     }
 
     public string GetSavePath(string saveName)
@@ -137,6 +164,31 @@ public class SaveCanvas : CanvasBase
     public string GetSaveParentPath()
     {
         return Application.dataPath + "/Resources/Saves";
+    }
+
+    public void Load()
+    {
+        if (curSaveItem != null)
+        {
+            curSaveItem.Load();
+        }
+    }
+
+    public void OverWrite()
+    {
+        if (curSaveItem != null)
+        {
+            curSaveItem.Overwrite();
+        }
+    }
+
+    public void Delete()
+    {
+        if (curSaveItem != null)
+        {
+            curSaveItem.Delete();
+            saveItems.Remove(curSaveItem);
+        }
     }
 
 }

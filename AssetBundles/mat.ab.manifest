@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4128684575
+CRC: 2070762092
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4fe9f4b530b86065b7592a815bf5d571
+    Hash: fc3b0c824f3e515dccc134885afa64de
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2b170735527de831d5cd81528048abfd
@@ -51,7 +51,6 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat
 - Assets/ArtAssets/UI/StartUI/30003preview.png
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Sawmill_L1L2L3_Tex.tga
-- Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
 - Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Wheat Wind.shader
 - Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
@@ -108,6 +107,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat 1.mat
 - Assets/TextMesh Pro/Resources/Shaders/TMP_SDF.shader
 - Assets/Scenes Assets/Material/Texture/Hui_Building_Residential_L1L2L3_Tex.tga
+- Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
 - Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader
 - Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L3_Tex.tga

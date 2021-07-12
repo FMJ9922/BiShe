@@ -14,6 +14,9 @@ public class SaveItem : MonoBehaviour
     private string menuPath;
     private string fileName;
     private bool lockbtn =false;
+    [SerializeField] private Sprite unClick;
+    [SerializeField] private Sprite clicked;
+    [SerializeField] private Image image;
 
     public string GetSavePath()
     {
@@ -62,6 +65,16 @@ public class SaveItem : MonoBehaviour
         {
             StartCoroutine("Generate1", fileName);
         }
+    }
+
+    public void SetSprite()
+    {
+        image.sprite = clicked;
+    }
+
+    public void SetUnclick()
+    {
+        image.sprite = unClick;
     }
 
     IEnumerator Generate1(string saveName)

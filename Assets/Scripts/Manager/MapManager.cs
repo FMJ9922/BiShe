@@ -702,6 +702,10 @@ public class MapManager : Singleton<MapManager>
                 //Debug.Log("建筑重叠");
                 return true;
             }
+            if (!Instance.IsBuildingEntryAvalible(grids[i]))
+            {
+                return true;
+            }
         }
         return false;
     }
