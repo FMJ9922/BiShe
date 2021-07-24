@@ -147,7 +147,7 @@ public class BuildingBase : MonoBehaviour
         {
             if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
-                runtimeBuildData.CurPeople = ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
                 EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             }
             //CheckCurPeopleMoreThanMax();
