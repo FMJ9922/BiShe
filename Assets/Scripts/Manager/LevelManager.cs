@@ -173,6 +173,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         Debug.Log("InitLevel:" + levelID);
         LevelManager.LevelID = levelID;
+        TechManager.Instance.Init();
         ResourceManager.Instance.InitResourceManager(LevelID);
         MapManager.Instance.InitMapManager();
         BuildManager.Instance.InitBuildManager();
@@ -215,7 +216,7 @@ public class LevelManager : Singleton<LevelManager>
         pause = saveData.pause;
         Timer = saveData.timer;
         WeekProgress = saveData.weekProgress;
-
+        TechManager.Instance.InitTechBySave(saveData);
         ResourceManager.Instance.InitSavedResourceManager(saveData);
         TerrainGenerator.Instance.LoadTerrainFromSaveData(saveData);
         MapManager.Instance.InitMapManager();

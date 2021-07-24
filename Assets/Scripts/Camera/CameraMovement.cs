@@ -22,7 +22,7 @@ public class CameraMovement : Singleton<CameraMovement>
     private float _edgeRange = 10;
     private bool canMove = true;
     private bool canScroll = true;
-    private bool canEdge = true;
+    private bool canEdge = false;
 
 
     private Vector3 lastMousePos;
@@ -43,35 +43,35 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         if (canMove)
         {
-            if (Input.GetKey(KeyCode.W)|| Input.mousePosition.y >= Screen.height - _edgeRange)
+            if (Input.GetKey(KeyCode.W)|| (Input.mousePosition.y >= Screen.height - _edgeRange&& canEdge))
             {
                 _forwardSpeed = _forwardSpeed >= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.S)|| Input.mousePosition.y <= _edgeRange)
+            if (Input.GetKey(KeyCode.S)|| (Input.mousePosition.y <= _edgeRange && canEdge))
             {
                 _forwardSpeed = _forwardSpeed <= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.A)||Input.mousePosition.x <= _edgeRange)
+            if (Input.GetKey(KeyCode.A)||(Input.mousePosition.x <= _edgeRange && canEdge))
             {
                 _rightSpeed = _rightSpeed <= 0 ?
                     Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - _edgeRange)
+            if (Input.GetKey(KeyCode.D) || (Input.mousePosition.x >= Screen.width - _edgeRange && canEdge))
             {
                 _rightSpeed = _rightSpeed >= 0 ?
                     Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.mousePosition.y >= Screen.height - _edgeRange || Input.mousePosition.y <= _edgeRange))
+            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || (Input.mousePosition.y >= Screen.height - _edgeRange || Input.mousePosition.y <= _edgeRange) && canEdge))
             {
                 _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.mousePosition.x <= _edgeRange || Input.mousePosition.x >= Screen.width - _edgeRange))
+            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || (Input.mousePosition.x <= _edgeRange || Input.mousePosition.x >= Screen.width - _edgeRange) && canEdge))
             {
                 _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }

@@ -149,6 +149,11 @@ public class SaveData
     #region Bridges
     public BridgeData[] bridgeDatas;
     #endregion
+    #region Tech
+    public int[] techs;
+    public int[] techAvalible;
+    public int[] techUsing;
+    #endregion
 
 }
 

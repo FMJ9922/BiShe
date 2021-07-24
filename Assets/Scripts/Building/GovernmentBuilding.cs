@@ -28,11 +28,19 @@ public class GovernmentBuilding : BuildingBase
 
     public override void OnRecieveCar(CarMission carMission)
     {
+        if (carMission == null)
+        {
+            return;
+        }
         base.OnRecieveCar(carMission);
     }
     protected override void Input()
     {
         runtimeBuildData.Pause = false;
+        if (runtimeBuildData.CurPeople < runtimeBuildData.Population)
+        {
+            FillUpPopulation();
+        }
     }
 
     protected override void Output()

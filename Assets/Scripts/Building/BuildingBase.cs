@@ -130,6 +130,10 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+        if (runtimeBuildData.tabType!=BuildTabType.house)
+        {
+            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople);
+        }
     }
 
     public void RegisterBuildingEntry()
@@ -347,8 +351,8 @@ public class BuildingBase : MonoBehaviour
         buildData.Pause = runtimeBuildData.Pause;
         buildData.CurLevel = runtimeBuildData.CurLevel+1;
         buildData.CurFormula = runtimeBuildData.CurFormula;
-        int people = runtimeBuildData.CurPeople;
-        DeleteCurPeople(runtimeBuildData.CurPeople);
+        buildData.CurPeople = runtimeBuildData.CurPeople;
+        //DeleteCurPeople(runtimeBuildData.CurPeople);
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
         BuildingBase rear = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation);
         if (rear!=null)
@@ -361,7 +365,7 @@ public class BuildingBase : MonoBehaviour
         else
         {
             issuccess = false;
-            AddCurPeople(people);
+            //AddCurPeople(people);
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }
     }

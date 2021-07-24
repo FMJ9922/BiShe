@@ -7,12 +7,84 @@ public class TechManager : Singleton<TechManager>
 {
     [SerializeField] TechInfoCanvas infoCanvas;
     [SerializeField] TechTreeCanvas treeCanvas;
-    bool[] techs = new bool[33];
-    bool[] techAvalible = new bool[33];
-    int[] techUsing = new int[3];
+    private bool[] techs = new bool[33];//科技是否正在被使用
+    private bool[] techAvalible = new bool[33];//科技是否解锁了
+    private int[] techUsing = new int[3];//正在使用的科技
     private int point = 1;
     private int techLighted = 0;
 
+    public void Init()
+    {
+        techs = new bool[33];
+        techAvalible = new bool[33];
+        techUsing = new int[3];
+    }
+    public void InitTechBySave(SaveData data)
+    {
+        if (data.techs == null || data.techAvalible == null || data.techUsing == null)
+        {
+            return;
+        }
+        techs = SetBoolList(data.techs);
+        techAvalible = SetBoolList(data.techAvalible);
+        techUsing = data.techUsing;
+        techLighted = 0;
+        for (int i = 0; i < techAvalible.Length; i++)
+        {
+            if (techAvalible[i])
+            {
+                techLighted++;
+            }
+        }
+        treeCanvas.InitCanvas();
+        treeCanvas.InitBySave(techAvalible);
+        for (int i = 0; i < techUsing.Length; i++)
+        {
+            SetTech(treeCanvas.GetTechItem(techUsing[i]));
+        }
+        RefreshTechPoint();
+    }
+
+
+    public int[] GetTechs()
+    {
+        int[] res = new int[techs.Length];
+        for (int i = 0; i < techs.Length; i++)
+        {
+            res[i] = Int(techs[i]);
+        }
+        return res;
+    }
+
+    public bool[] SetBoolList(int[] targets)
+    {
+        if (targets == null)
+        {
+            return null;
+        }
+        bool[] res = new bool[targets.Length];
+        for (int i = 0; i < targets.Length; i++)
+        {
+            res[i] = Bool(targets[i]);
+        }
+        return res;
+    }
+
+    public int[] GetTechAvaliable()
+    {
+        int[] res = new int[techAvalible.Length];
+        for (int i = 0; i < techAvalible.Length; i++)
+        {
+            res[i] = Int(techAvalible[i]);
+        }
+        return res;
+    }
+
+
+    public int[] GetTechUsing()
+    {
+        return techUsing;
+    }
     public void OpenInfoCanvas(TechItem tech)
     {
         infoCanvas.ShowTechInfo(tech);
@@ -60,20 +132,23 @@ public class TechManager : Singleton<TechManager>
     }
     public void SetTech(TechItem techItem)
     {
-        techs[techItem.data.Id - 40001] = true;
-        treeCanvas.SetImage(techItem.data.Group, techItem.transform.name.TrimEnd(' '));
-        //Debug.Log("set:" + techItem.data.Id);
-        int oldTech = techUsing[techItem.data.Group];
-        if (oldTech != 0)
+        if (techItem)
         {
-            techs[oldTech-40001] = false;
+            Debug.Log("set:" + techItem.data.Id);
+            techs[techItem.data.Id - 40001] = true;
+            treeCanvas.SetImage(techItem.data.Group, techItem.transform.name.TrimEnd(' '));
+            int oldTech = techUsing[techItem.data.Group];
+            if (oldTech != 0&&oldTech!= techItem.data.Id)
+            {
+                techs[oldTech - 40001] = false;
+            }
+            techUsing[techItem.data.Group] = techItem.data.Id;
         }
-        techUsing[techItem.data.Group] = techItem.data.Id;
     }
 
     public bool GetTech(int techID)
     {
-        //Debug.Log("get:" + techID);
+        //Debug.Log("get:" + techID + techs[techID - 40001]);
         return techs[techID - 40001];
     }
     public bool GetTechAvalible(int techID)
@@ -88,6 +163,11 @@ public class TechManager : Singleton<TechManager>
     private int Float(bool value)
     {
         return value ? 1 : 0;
+    }
+
+    private bool Bool(int n)
+    {
+        return n > 0 ? true : false;
     }
     /// <summary>
     /// 工人数量

@@ -148,6 +148,10 @@ public class FarmLandBuilding : BuildingBase
 
     public override void OnRecieveCar(CarMission carMission)
     {
+        if (carMission == null)
+        {
+            return;
+        }
         switch (carMission.missionType)
         {
             case CarMissionType.transportResources:

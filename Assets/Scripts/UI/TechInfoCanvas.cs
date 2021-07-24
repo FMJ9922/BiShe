@@ -38,7 +38,7 @@ public class TechInfoCanvas : MonoBehaviour
     public void OnClickUnlock(TechItem tech)
     {
         TechManager.Instance.OpenTech(tech,()=> {
-            tech.Upgrade(); 
+            tech.SetUnlockSprite(); 
             WhenTechAvalible(tech);
         });
     }

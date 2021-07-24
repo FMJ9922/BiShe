@@ -41,6 +41,7 @@ public class InfoCanvas : CanvasBase
     }
     public void OnOpen(BuildingBase buildbase)
     {
+        _buildingBase = buildbase;
         _buildData = buildbase.runtimeBuildData;
         populationChange = () => ChangeLabels(_buildData);
         effectivenessChange = (string str) => ChangeRateLabel(buildbase);
@@ -49,7 +50,6 @@ public class InfoCanvas : CanvasBase
         AddBtnsListener(buildbase);
         ChangeOpenCanvas(buildbase.runtimeBuildData.Id);
         mainCanvas.SetActive(true);
-        _buildingBase = buildbase;
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, effectivenessChange);
         if (!BuildingHighlight)
@@ -61,7 +61,6 @@ public class InfoCanvas : CanvasBase
         BuildingHighlight.transform.rotation = buildbase.transform.rotation;
         BuildingHighlight.SetActive(true);
         ChangeRateLabel(buildbase);
-        ChangeWarning();
     }
 
     /*private void SetBtnsActive(bool isActive)
@@ -126,6 +125,7 @@ public class InfoCanvas : CanvasBase
             case 20007:
             case 20010:
             case 20011:
+                ChangeWarning();
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_factory);
                 break;
             case 20029:
@@ -263,6 +263,7 @@ public class InfoCanvas : CanvasBase
                     _populationObj.SetActive(false);
                     _destroyBtn.gameObject.SetActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
+                    ChangeWarning();
                     break;
 
                 }
@@ -289,6 +290,7 @@ public class InfoCanvas : CanvasBase
                     _populationObj.SetActive(true);
                     _destroyBtn.gameObject.SetActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
+                    ChangeWarning();
                     break;
                 }
             case BuildTabType.hide:
@@ -381,7 +383,10 @@ public class InfoCanvas : CanvasBase
 
     private void ChangeRateLabel(BuildingBase buildData)
     {
-        ChangeWarning();
+        if (_rateLabel.gameObject.activeInHierarchy)
+        {
+            ChangeWarning();
+        }
         //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
         RuntimeBuildData data = buildData.runtimeBuildData;
         _rateLabel.text = "效率:" + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";

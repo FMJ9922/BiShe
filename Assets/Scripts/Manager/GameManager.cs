@@ -334,6 +334,11 @@ public class GameManager : Singleton<GameManager>
         //Bridge
         data.bridgeDatas = BuildManager.Instance.GetBridgeDatas();
 
+        //Tech
+        data.techs = TechManager.Instance.GetTechs();
+        data.techAvalible = TechManager.Instance.GetTechAvaliable();
+        data.techUsing = TechManager.Instance.GetTechUsing();
+
         sw.Stop();
         System.TimeSpan dt = sw.Elapsed;
         Debug.Log("打包数据耗时:" + dt.TotalSeconds + "秒");

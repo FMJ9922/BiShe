@@ -11,16 +11,18 @@ public class TechItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public TechData data;
     private Button button;
     public TechItem[] FrontItems;
+    public bool hasInit = false;
 
     public void Init()
     {
+        hasInit = true;
         button = transform.GetComponent<Button>();
         data = DataManager.GetTechData(TechId);
         button.onClick.AddListener(() => TechManager.Instance.OpenInfoCanvas(this));
         transform.GetComponent<Image>().sprite = LoadAB.LoadSprite("icon.ab", "un" + transform.name.TrimEnd(' '));
     }
 
-    public void Upgrade()
+    public void SetUnlockSprite()
     {
         transform.GetComponent<Image>().sprite = LoadAB.LoadSprite("icon.ab", transform.name.TrimEnd(' '));
     }

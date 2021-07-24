@@ -110,6 +110,10 @@ public class HutBuilding : BuildingBase
     {
         //Debug.Log(this.PfbName + " recieve");
         //Debug.Log("recieveGoods");
+        if (carMission == null)
+        {
+            return;
+        }
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:
