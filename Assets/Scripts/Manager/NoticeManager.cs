@@ -24,7 +24,7 @@ public class NoticeManager : Singleton<NoticeManager>
     private void TraceMouse(Vector3 pos)
     {
         Vector2 vec = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
-        canvas.transform.position = vec + new Vector2(20, 0);
+        canvas.transform.position = vec + new Vector2(20, 0) * GameManager.Instance.GetScreenRelativeRate();
 
     }
 

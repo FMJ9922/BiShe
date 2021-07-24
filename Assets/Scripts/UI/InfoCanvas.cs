@@ -26,10 +26,12 @@ public class InfoCanvas : CanvasBase
     [SerializeField] private GameObject BuildingHighlight;
     [SerializeField] private Image rateImage;
     [SerializeField] private Transform upgradeCost;
+    [SerializeField] private Image[] warnings;
     UnityAction populationChange;
     UnityAction<string> effectivenessChange;
     private RuntimeBuildData _buildData;
     private BuildingBase _buildingBase;
+
     public override void InitCanvas()
     {
         mainCanvas.SetActive(false);
@@ -59,6 +61,7 @@ public class InfoCanvas : CanvasBase
         BuildingHighlight.transform.rotation = buildbase.transform.rotation;
         BuildingHighlight.SetActive(true);
         ChangeRateLabel(buildbase);
+        ChangeWarning();
     }
 
     /*private void SetBtnsActive(bool isActive)
@@ -225,7 +228,7 @@ public class InfoCanvas : CanvasBase
         //Debug.Log(n);
         _buildData.CurFormula += n + _buildData.formulaDatas.Length;
         _buildData.CurFormula %= _buildData.formulaDatas.Length;
-        Debug.Log(_buildData.CurFormula);
+        //Debug.Log(_buildData.CurFormula);
         CleanUpAllAttachedChildren(inIcons);
         CleanUpAllAttachedChildren(outIcons);
         ChangeOutputIcon(_buildData);
@@ -316,7 +319,23 @@ public class InfoCanvas : CanvasBase
         }
     }
 
-
+    public void ChangeWarning()
+    {
+        List<WarningType> warns = _buildingBase.GetWarnings();
+        for (int i = 0; i < warnings.Length; i++)
+        {
+            bool open = false;
+            for (int j = 0; j < warns.Count; j++)
+            {
+                if((int)warns[j] == i)
+                {
+                    open = true;
+                }
+            }
+            warnings[i].gameObject.SetActive(open);
+        }
+        
+    }
     private void ChangeOutputIcon(RuntimeBuildData data)
     {
         List<int> list = data.formulaDatas[data.CurFormula].OutputItemID;
@@ -362,6 +381,7 @@ public class InfoCanvas : CanvasBase
 
     private void ChangeRateLabel(BuildingBase buildData)
     {
+        ChangeWarning();
         //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
         RuntimeBuildData data = buildData.runtimeBuildData;
         _rateLabel.text = "效率:" + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";

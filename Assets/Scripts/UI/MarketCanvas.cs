@@ -36,9 +36,12 @@ public class MarketCanvas : CanvasBase
 
     public override void OnClose()
     {
-        mainCanvas.SetActive(false);
-        GameManager.Instance.ContinueGame();
-        EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
+        if (mainCanvas.activeInHierarchy)
+        {
+            mainCanvas.SetActive(false);
+            GameManager.Instance.ContinueGame();
+            EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
+        }
     }
     #endregion
 

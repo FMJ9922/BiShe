@@ -16,7 +16,7 @@ public class IconNotice : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         else
         {
-            NoticeManager.Instance.ShowIconNotice(content);
+            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(content));
         }
         
     }
@@ -26,5 +26,12 @@ public class IconNotice : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         NoticeManager.Instance.CloseNotice();
     }
 
+    public void OnDisable()
+    {
+        if (NoticeManager.Instance)
+        {
+            NoticeManager.Instance.CloseNotice();
+        }
+    }
     #endregion
 }

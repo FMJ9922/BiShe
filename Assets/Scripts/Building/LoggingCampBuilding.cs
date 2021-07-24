@@ -5,6 +5,8 @@ using UnityEngine;
 public class LoggingCampBuilding : BuildingBase
 {
     [SerializeField]NearByTree sensor;
+    private float cutProgress = 0;
+    private float curTargetNum = 2;
     public override void InitBuildingFunction()
     {
         sensor.gameObject.SetActive(true);
@@ -26,21 +28,26 @@ public class LoggingCampBuilding : BuildingBase
             runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission);
+            TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
             runtimeBuildData.Rate = 0;
         }
     }
 
     public override void UpdateRate(string date)
     {
-        TreeSystem sys = sensor.GetNearestTree();
-        if (sys != null)
+        cutProgress += WorkEffect();
+        if(cutProgress> curTargetNum)
         {
-            Vector3 treePos = sys.transform.position;
-            sys.TreeCutDown(new Vector3(0, Random.value * 360, 0));
-            EventManager.TriggerEvent(ConstEvent.OnPlantSingleTree, treePos);
-            base.UpdateRate(date);
+            cutProgress -= curTargetNum;
+            TreeSystem sys = sensor.GetNearestTree();
+            if (sys != null)
+            {
+                Vector3 treePos = sys.transform.position;
+                sys.TreeCutDown(new Vector3(0, Random.value * 360, 0));
+                EventManager.TriggerEvent(ConstEvent.OnPlantSingleTree, treePos);
+            }
         }
+        base.UpdateRate(date);
     }
     protected override void Input()
     {

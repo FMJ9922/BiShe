@@ -257,11 +257,11 @@ public class BuildingCanvas : CanvasBase
         for (int i = 0; i < buildData.costResources.Count; i++)
         {
             if (buildData.costResources[i].ItemId == 99999) continue;
-            GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum);
+            GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum*TechManager.Instance.BuildResourcesBuff());
             resource.transform.parent = _iconsParent;
             resource.transform.localScale = Vector3.one * 1f;
         }
-        _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0);
+        _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0)*GameManager.Instance.GetScreenRelativeRate();
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
         _InfoCanvas.SetActive(true);
     }

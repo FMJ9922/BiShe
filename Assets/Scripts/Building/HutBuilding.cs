@@ -45,7 +45,7 @@ public class HutBuilding : BuildingBase
         if (storage.GetAllFoodNum() < 3)
         {
             CarMission mission = MakeCarMission();
-            TrafficManager.Instance.UseCar(mission, DriveType.once);
+            TrafficManager.Instance.UseCar(mission, out runtimeBuildData.AvaliableToMarket);
         }
 
         ItemData[] foodIDs = DataManager.GetFoodItemList();

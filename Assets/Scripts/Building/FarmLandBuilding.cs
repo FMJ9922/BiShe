@@ -141,7 +141,7 @@ public class FarmLandBuilding : BuildingBase
                 isharvesting = true;
 
                 CarMission mission = MakeHarvestCarMission();
-                TrafficManager.Instance.UseCar(mission);
+                TrafficManager.Instance.UseCar(mission, out runtimeBuildData.AvaliableToMarket);
             }
         }
     }
@@ -180,7 +180,7 @@ public class FarmLandBuilding : BuildingBase
         isharvesting = false;
         runtimeBuildData.productTime = formula.ProductTime;
         CarMission carMission = MakeCarMission(rate);
-        TrafficManager.Instance.UseCar(carMission);
+        TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
         //EventManager.StartListening(ConstEvent.OnDayWentBy, Replant);
         Invoke("Replant", 5f);
     }

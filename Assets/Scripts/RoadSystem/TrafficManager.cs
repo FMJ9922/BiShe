@@ -62,7 +62,7 @@ public class TrafficManager : Singleton<TrafficManager>
             }
         }
     }
-    public void UseCar(CarMission mission,DriveType driveType = DriveType.once)
+    public void UseCar(CarMission mission, out bool success, DriveType driveType = DriveType.once)
     {
         DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
         Vector2Int start = mission.StartBuilding;
@@ -86,9 +86,11 @@ public class TrafficManager : Singleton<TrafficManager>
         {
             mission.wayPoints = Vector3Serializer.Box(wayPoints);
             driveSystem.StartDriving(mission, driveType, action);
+            success = true;
         }
         else
         {
+            success = false;
             //NoticeManager.Instance.InvokeShowNotice("寻路失败！坐标："+start+"=>"+end+"请检查是否有建筑没有连接到道路！");
             if (action != null)
             {

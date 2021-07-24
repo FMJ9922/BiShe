@@ -48,7 +48,7 @@ public class PierBuilding : BuildingBase
             runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission);
+            TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
             runtimeBuildData.Rate = 0;
         }
     }

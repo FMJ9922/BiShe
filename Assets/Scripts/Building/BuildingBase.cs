@@ -259,7 +259,7 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission);
+            TrafficManager.Instance.UseCar(carMission,out runtimeBuildData.AvaliableToMarket);
             runtimeBuildData.Rate = 0;
         }
     }
@@ -267,6 +267,11 @@ public class BuildingBase : MonoBehaviour
     public float GetProcess()
     {
         return 1 - (float)runtimeBuildData.productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
+    }
+
+    public float WorkEffect()
+    {
+        return runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
     }
     protected virtual void Input()
     {
@@ -277,7 +282,7 @@ public class BuildingBase : MonoBehaviour
         List<CostResource> costResources = new List<CostResource>();
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]));
+            costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]* WorkEffect()));
         }
 
         bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
@@ -386,7 +391,23 @@ public class BuildingBase : MonoBehaviour
             DeleteCurPeople(cur - max);
         }
     }
-
+    public List<WarningType> GetWarnings()
+    {
+        List<WarningType> res = new List<WarningType>();
+        if (runtimeBuildData.CurPeople == 0)
+        {
+            res.Add(WarningType.noPeople);
+        }
+        if (runtimeBuildData.Pause)
+        {
+            res.Add(WarningType.noResources);
+        }
+        if (!runtimeBuildData.AvaliableToMarket)
+        {
+            res.Add(WarningType.noRoad);
+        }
+        return res;
+    }
     public virtual float GetHappiness()
     {
         return runtimeBuildData.Happiness;
@@ -422,6 +443,7 @@ public class RuntimeBuildData : BuildData
     public float Effectiveness;//生产效率
     public float Happiness = 0.6f;//当前幸福程度
     public int productTime;//生产周期（周）
+    public bool AvaliableToMarket = true;//可以到达市场
 
     public Vector3Serializer SavePosition;
     public Vector2IntSerializer[] SaveTakenGrids;

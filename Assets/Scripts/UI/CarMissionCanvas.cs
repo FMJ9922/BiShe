@@ -89,7 +89,7 @@ public class CarMissionCanvas : CanvasBase
     private void TraceCarPosition()
     {
         Vector3 screenPos = Camera.main.WorldToScreenPoint(targetCar.transform.position);
-        mainCanvas.transform.position = screenPos+new Vector3(0,440,0);
+        mainCanvas.transform.position = screenPos+new Vector3(0,440,0) * GameManager.Instance.GetScreenRelativeRate(); ;
     }
 
     private void StartTracing()

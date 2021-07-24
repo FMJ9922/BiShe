@@ -59,6 +59,7 @@ public class ResourceCanvas : CanvasBase
     {
         GameObject item = CommonIcon.GetIcon(itemId, itemNum);
         item.transform.SetParent(itemContent);
+        item.transform.localScale = ((GameManager.Instance.GetScreenRelativeRate()-1F)*0F+1F) * Vector3.one;
         itemList.Add(item);
     }
 }

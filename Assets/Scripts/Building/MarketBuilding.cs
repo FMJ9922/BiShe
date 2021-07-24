@@ -17,7 +17,7 @@ public class MarketBuilding : BuildingBase
             case CarMissionType.requestResources:
                 BuildRecievedCarMission(carMission);
                 CarMission car = carMission;
-                TrafficManager.Instance.UseCar(car, DriveType.once);
+                TrafficManager.Instance.UseCar(car, out bool success,DriveType.once);
                 break;
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
@@ -36,6 +36,16 @@ public class MarketBuilding : BuildingBase
         {
             FillUpPopulation();
         }
+    }
+
+    protected override void Input()
+    {
+        runtimeBuildData.Pause = false;
+    }
+
+    protected override void Output()
+    {
+
     }
     private void BuildRecievedCarMission(CarMission carMission)
     {

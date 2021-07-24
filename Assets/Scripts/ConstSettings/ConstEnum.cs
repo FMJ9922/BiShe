@@ -205,3 +205,11 @@ public enum TradeMode
     [Description("Maintain")]
     maintain = 2,
 }
+
+
+public enum WarningType
+{
+    noPeople = 0,
+    noResources = 1,
+    noRoad = 2,
+}

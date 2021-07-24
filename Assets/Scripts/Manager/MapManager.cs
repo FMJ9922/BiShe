@@ -936,7 +936,7 @@ public class MapManager : Singleton<MapManager>
         GridNode temp = startNode;
         temp.G = 0;
         temp.F = 0;
-        int n = 600;
+        int n = 1000;
         while (temp != endNode && n-- > 0)
         {
             if (openList.Count <= 0)

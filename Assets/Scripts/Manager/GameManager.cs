@@ -77,7 +77,7 @@ public class GameManager : Singleton<GameManager>
     /// <param name="timeScale"></param>
     private void SetTimeScale(TimeScale scale)
     {
-        //Debug.Log("时间倍速:" + scale.ToString());
+        Debug.Log("时间倍速:" + scale.ToString());
         timeScale = scale;
         switch (scale)
         {
@@ -377,5 +377,9 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-
+    
+    public float GetScreenRelativeRate()
+    {
+        return Screen.height / 1080f;
+    }
 }

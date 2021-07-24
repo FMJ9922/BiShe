@@ -754,7 +754,7 @@ MonoBehaviour:
     Name: Government
     CostPerWeek: 0
     Formulas: 
-    Population: 0
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
     Name: GovernmentLv2
     CostPerWeek: 0
     Formulas: 
-    Population: 0
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20020
@@ -802,7 +802,7 @@ MonoBehaviour:
     Name: GovernmentLv3
     CostPerWeek: 0
     Formulas: 
-    Population: 0
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 0
     FrontBuildingId: 20021
@@ -1826,3 +1826,12 @@ MonoBehaviour:
     - code: QuitGame
       chinese: "\u9000\u51FA\u6E38\u620F"
       english: Quit game
+    - code: WarnNoPeople
+      chinese: "\u8B66\u544A\uFF1A\u6CA1\u6709\u5DE5\u4EBA"
+      english: Warning:No worker
+    - code: WarnNoMaterials
+      chinese: "\u8B66\u544A\uFF1A\u6CA1\u6709\u539F\u6599"
+      english: Warning:No raw materials
+    - code: WarnNoRoad
+      chinese: "\u8B66\u544A\uFF1A\u4E0D\u80FD\u62B5\u8FBE\u5E02\u573A"
+      english: Warning:Unable to reach market

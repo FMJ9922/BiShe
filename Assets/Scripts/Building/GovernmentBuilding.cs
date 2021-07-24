@@ -30,4 +30,13 @@ public class GovernmentBuilding : BuildingBase
     {
         base.OnRecieveCar(carMission);
     }
+    protected override void Input()
+    {
+        runtimeBuildData.Pause = false;
+    }
+
+    protected override void Output()
+    {
+
+    }
 }
