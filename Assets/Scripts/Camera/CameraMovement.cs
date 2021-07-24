@@ -19,8 +19,11 @@ public class CameraMovement : Singleton<CameraMovement>
     private float _forwardSpeed = 0;
     private float _rightSpeed = 0;
     private float _scrollValue = 40;
+    private float _edgeRange = 10;
     private bool canMove = true;
     private bool canScroll = true;
+    private bool canEdge = true;
+
 
     private Vector3 lastMousePos;
 
@@ -40,40 +43,40 @@ public class CameraMovement : Singleton<CameraMovement>
     {
         if (canMove)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W)|| Input.mousePosition.y >= Screen.height - _edgeRange)
             {
                 _forwardSpeed = _forwardSpeed >= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S)|| Input.mousePosition.y <= _edgeRange)
             {
                 _forwardSpeed = _forwardSpeed <= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A)||Input.mousePosition.x <= _edgeRange)
             {
                 _rightSpeed = _rightSpeed <= 0 ?
                     Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.mousePosition.x >= Screen.width - _edgeRange)
             {
                 _rightSpeed = _rightSpeed >= 0 ?
                     Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * Time.deltaTime) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
+            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.mousePosition.y >= Screen.height - _edgeRange || Input.mousePosition.y <= _edgeRange))
             {
                 _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)))
+            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.mousePosition.x <= _edgeRange || Input.mousePosition.x >= Screen.width - _edgeRange))
             {
                 _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
-            transform.position += MoveDirection(_forwardSpeed, _rightSpeed) / Mathf.Clamp((int)GameManager.Instance.GetTimeScale(), 1, 4);
         }
+        transform.position += MoveDirection(_forwardSpeed, _rightSpeed) / Mathf.Clamp((int)GameManager.Instance.GetTimeScale(), 1, 4);
         if (Input.GetMouseButton(2))
         {
             //Debug.Log(Input.mousePosition);
@@ -128,6 +131,11 @@ public class CameraMovement : Singleton<CameraMovement>
     public void LockMove(bool isLock)
     {
         canMove = !isLock;
+    }
+
+    public void LockEdge(bool isLock)
+    {
+        canEdge = !isLock;
     }
     private Vector3 MoveDirection(float forwardSpeed, float rightSpeed)
     {
