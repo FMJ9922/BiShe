@@ -88,13 +88,19 @@ public class TreePlanter : Singleton<TreePlanter>
     }
     public void PlantSingleTree(Vector3 centerPos,TreeState state = TreeState.mature)
     {
-        Vector3 adjustedPos = MapManager.GetTerrainPosition(centerPos);
-        if (adjustedPos == Vector3.zero) return;
+#if UNITY_STANDALONE_WIN
+        //Vector3 adjustedPos = MapManager.GetTerrainPosition(centerPos);
+        //if (adjustedPos == Vector3.zero) return;
+#endif
+        if(Treeparent == null)
+        {
+            Treeparent = GameObject.Find("TreeGenerator").transform;
+        }
         int max = TreePfbs.Length;
         int index = Random.Range(0, max);
         Vector3 forward = Random.onUnitSphere;
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
-        GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
+        GameObject newTree = Instantiate(TreePfbs[index], centerPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
         newTree.GetComponent<TreeSystem>().treeData.state = state;
     }
 

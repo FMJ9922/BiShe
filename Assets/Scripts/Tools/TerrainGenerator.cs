@@ -231,6 +231,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
+    [ContextMenu("刷新地面高度")]
     public void RefreshHeight()
     {
         CalculateHeights();
