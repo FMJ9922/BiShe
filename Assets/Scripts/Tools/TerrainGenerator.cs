@@ -32,6 +32,18 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         //transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
+    public Vector3 GetStaticPoition(Vector2Int gridPos,TerrainGenerator generator)
+    {
+        if(height == null)
+        {
+            generator.CalculateHeights();
+        }
+        if(gridPos.x<0|| gridPos.x>299|| gridPos.y < 0 || gridPos.y > 299)
+        {
+            return Vector3.zero;
+        }
+        return new Vector3(gridPos.x * 2, height[gridPos.x][gridPos.y], gridPos.y * 2);
+    }
     #region 顶点处理
     [ContextMenu("CalculateHeights")]
     public void CalculateHeights()
@@ -320,7 +332,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         RefreshMeshCollider();
     }
 
-    public void FlatGround(Vector2Int[] grids,float targetHeight)
+    public void FlatGround(Vector2Int[] grids,float targetHeight,bool recalculate = true)
     {
 
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
@@ -368,11 +380,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         verticles[4 * p + 1] = ChangeHeight(verticles[4 * p + 1], targetHeight);
 
         mesh.vertices = verticles;
-        mesh.RecalculateNormals();
+        if (recalculate)
+        {
+            mesh.RecalculateNormals();
+            RefreshMeshCollider();
+        }
         transform.GetComponent<MeshFilter>().mesh = mesh;
-        RefreshMeshCollider();
     }
-    void FlatGround(int index, int range, float targetHeight)
+    void FlatGround(int index, int range, float targetHeight,bool recalculate = true)
     {
 
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
@@ -453,11 +468,14 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
 
         mesh.vertices = verticles;
-        mesh.RecalculateNormals();
+        if (recalculate)
+        {
+            mesh.RecalculateNormals();
+            RefreshMeshCollider();
+        }
         transform.GetComponent<MeshFilter>().mesh = mesh;
-        RefreshMeshCollider();
     }
-    void FlatGround(int index, int range, int targetHeight)
+    void FlatGround(int index, int range, int targetHeight, bool recalculate = true)
     {
 
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
@@ -536,8 +554,17 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
 
         mesh.vertices = verticles;
-        mesh.RecalculateNormals();
+        if (recalculate)
+        {
+            mesh.RecalculateNormals();
+            RefreshMeshCollider();
+        }
         transform.GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    public void ReCalculateMesh()
+    {
+        transform.GetComponent<MeshFilter>().mesh.RecalculateNormals();
         RefreshMeshCollider();
     }
 
@@ -567,7 +594,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public Mesh LoadOriginMesh()
     {
-        Debug.Log(GameManager.saveData.levelID);
+        //Debug.Log(GameManager.saveData.levelID);
         Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + LevelManager.LevelID + "meshData"));
         return mesh;
     }

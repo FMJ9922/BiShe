@@ -137,7 +137,6 @@ public class SaveData
     public int curPopulation;
     #endregion
     #region MapManager
-    public GridNode[][] gridNodes;
     #endregion
     #region MarketManager
     public MarketData[] buyDatas;

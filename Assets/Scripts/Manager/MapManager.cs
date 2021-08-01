@@ -346,14 +346,17 @@ public class MapManager : Singleton<MapManager>
     /// <summary>
     /// 刷地基
     /// </summary>
-    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0)
+    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0,bool recalculate = true)
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
             generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
             SetPassInfo(takenGirds[i], tex);
         }
-        generator.ReCalculateNormal();
+        if (recalculate)
+        {
+            generator.ReCalculateNormal();
+        }
     }
 
     public void BuildOriginFoundation(Vector2Int[] takenGirds)
@@ -506,6 +509,7 @@ public class MapManager : Singleton<MapManager>
     /// <returns></returns>
     public static Vector3 GetTerrainWorldPosition()
     {
+        return new Vector3(0, 10, 0);
         return TerrainGenerator.Instance.transform.position;
     }
     /// <summary>
@@ -516,6 +520,15 @@ public class MapManager : Singleton<MapManager>
     public static Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
         return new Vector3(gridPos.x * 2, GetGridNode(gridPos)?.height??10, gridPos.y * 2); 
+    }
+
+    public static Vector3 GetStaticTerrainPosition(Vector2Int gridPos)
+    {
+        if(generator == null)
+        {
+            generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
+        }
+        return generator.GetStaticPoition(gridPos, generator);
     }
 
     public static Vector3 GetNotInWaterPosition(Vector2Int gridPos)
@@ -547,6 +560,13 @@ public class MapManager : Singleton<MapManager>
         Vector2Int gridPos = GetCenterGrid(localPos);
         return GetTerrainPosition(gridPos);
     }
+    public static Vector3 GetStaticTerrainPosition(Vector3 mistakeHeightWorldPos)
+    {
+        Vector3 localPos = mistakeHeightWorldPos - GetTerrainWorldPosition();
+        Vector2Int gridPos = GetCenterGrid(localPos);
+        return GetStaticTerrainPosition(gridPos);
+    }
+
     public static Vector2Int GetCenterGrid(Vector3 centerPos)
     {
         Vector3 centerGrid = centerPos / 2;

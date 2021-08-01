@@ -11,11 +11,13 @@ public class BridgeBuilding : BuildingBase
         runtimeBuildData = CastBuildDataToRuntime(DataManager.GetBuildData(20036));
         runtimeBuildData.tabType = BuildTabType.bridge;
         runtimeBuildData.Id = 20036;
-        gameObject.tag = "Building";
+        gameObject.tag = "Bridge";
         takenGrids = vector2Ints;
         Initbridge();
         transform.GetComponent<BoxCollider>().enabled = false;
+        transform.GetComponent<BoxCollider>().isTrigger = true;
         transform.GetComponent<BoxCollider>().enabled = true;
+        buildFlag = false;
         Invoke("SetBuildFlag", 1f);
     }
 
@@ -23,6 +25,8 @@ public class BridgeBuilding : BuildingBase
     {
         transform.position = _bridgeData.bridgePos.V3;
         BoxCollider collider = gameObject.AddComponent<BoxCollider>();
+        Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.isKinematic = true;
         collider.size = _bridgeData.size.V3;
         for (int i = 0; i < _bridgeData.gridsPos.Length; i++)
         {
@@ -48,9 +52,9 @@ public class BridgeBuilding : BuildingBase
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!buildFlag)
+        if (buildFlag)
         {
-            if (!other.CompareTag("Untagged"))
+            if (other.CompareTag("Bridge"))
             {
                 Destroy(this.gameObject);
             }

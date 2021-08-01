@@ -19,6 +19,8 @@ public class BuildManager : Singleton<BuildManager>
     private ParticleSystem dustParticle;
     [SerializeField]
     private GameObject arrowPfb;
+    [SerializeField]
+    private Transform roadParent;
 
     private Transform arrows;
 
@@ -63,11 +65,20 @@ public class BuildManager : Singleton<BuildManager>
 
     }
 
+    private void CleanUpAllAttachedChildren(Transform target)
+    {
+        for (int i = 0; i < target.childCount; i++)
+        {
+            Destroy(target.GetChild(i).gameObject);
+        }
+
+    }
     /// <summary>
     /// 盖建筑
     /// </summary>
     public void CreateBuildingOnMouse(BuildData buildData)
     {
+        CleanUpAllAttachedChildren(roadParent);
         GameObject building = InitBuilding(buildData);
         building.transform.position = Input.mousePosition;
         currentBuilding.direction = Direction.right;
@@ -103,7 +114,7 @@ public class BuildManager : Singleton<BuildManager>
             int index = UnityEngine.Random.Range(1, 5);
             pfbName += index.ToString();
         }
-        Debug.Log("load:" + bundleName + " " + pfbName);
+        //Debug.Log("load:" + bundleName + " " + pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         building.name = pfbName;
@@ -146,6 +157,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             InitSaveBuilding(buildDatas[i]);
         }
+        TerrainGenerator.Instance.ReCalculateMesh();
     }
 
     public void InitSaveBridges(BridgeData[] bridgeDatas)
@@ -190,6 +202,7 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     public void StartCreateRoads(int _roadLevel = 1)
     {
+        CleanUpAllAttachedChildren(roadParent);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
         MainInteractCanvas.Instance.HideBuildingButton();
@@ -198,6 +211,7 @@ public class BuildManager : Singleton<BuildManager>
 
     public void StartDestroyRoad()
     {
+        CleanUpAllAttachedChildren(roadParent);
         desRoadShow = Instantiate(preRoadPfb, transform);
         GameObject reverse = Instantiate(preRoadPfb, desRoadShow.transform);
         reverse.transform.localPosition = Vector3.zero;
@@ -507,7 +521,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             for (int i = roadCount; i < newCount; i++)
             {
-                GameObject newRoad = Instantiate(preRoadPfb, transform);
+                GameObject newRoad = Instantiate(preRoadPfb, roadParent);
                 newRoad.name = i.ToString();
                 newRoad.transform.position = MapManager.GetTerrainPosition(roadStartPos + extensionDir * i) + new Vector3(0, 0.01f, 0);
                 newRoad.transform.LookAt(MapManager.GetTerrainPosition(roadStartPos + extensionDir * (i + 1)) + new Vector3(0, 0.01f, 0));

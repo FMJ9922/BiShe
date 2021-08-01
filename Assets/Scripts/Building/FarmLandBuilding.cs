@@ -53,18 +53,18 @@ public class FarmLandBuilding : BuildingBase
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
+            //地基
+            MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
+            TerrainGenerator.Instance.FlatGround
+            (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
         }
         else
         {
             RestartBuildingFunction();
+            MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4, false);
+            TerrainGenerator.Instance.FlatGround
+             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
-
-        //地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
-        //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
     }
 
     private void ShowPlant()

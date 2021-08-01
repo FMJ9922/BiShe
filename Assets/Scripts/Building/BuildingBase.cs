@@ -54,18 +54,20 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
+            //地基
+            MapManager.Instance.BuildFoundation(vector2Ints, 15);
+            TerrainGenerator.Instance.FlatGround
+            (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
         }
         else
         {
             RestartBuildingFunction();
+            MapManager.Instance.BuildFoundation(vector2Ints, 15, 0, false); 
+            TerrainGenerator.Instance.FlatGround
+             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
 
-        //地基
-        MapManager.Instance.BuildFoundation(vector2Ints, 15);
-        //整平地面
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
+        
     }
 
     protected void PlayAnim()

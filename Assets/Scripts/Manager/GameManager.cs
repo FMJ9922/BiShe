@@ -179,11 +179,11 @@ public class GameManager : Singleton<GameManager>
     private void LoadSaveData(string levelNum)
     {
         saveData = GameSaver.ReadSaveData(levelNum, false);
-        saveData.gridNodes = MapManager.Instance.GetGrids();
         Debug.Log("load");
         StaticBuilding.lists = new List<StaticBuilding>();
 
     }
+
     private void FindFadeImage()
     {
         if (GameObject.Find("FadeImage"))

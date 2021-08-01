@@ -88,10 +88,8 @@ public class TreePlanter : Singleton<TreePlanter>
     }
     public void PlantSingleTree(Vector3 centerPos,TreeState state = TreeState.mature)
     {
-#if UNITY_STANDALONE_WIN
-        //Vector3 adjustedPos = MapManager.GetTerrainPosition(centerPos);
-        //if (adjustedPos == Vector3.zero) return;
-#endif
+        Vector3 adjustedPos = MapManager.GetStaticTerrainPosition(centerPos);
+        if (adjustedPos == Vector3.zero) return;
         if(Treeparent == null)
         {
             Treeparent = GameObject.Find("TreeGenerator").transform;
@@ -100,7 +98,7 @@ public class TreePlanter : Singleton<TreePlanter>
         int index = Random.Range(0, max);
         Vector3 forward = Random.onUnitSphere;
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
-        GameObject newTree = Instantiate(TreePfbs[index], centerPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
+        GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
         newTree.GetComponent<TreeSystem>().treeData.state = state;
     }
 
@@ -116,7 +114,7 @@ public class TreePlanter : Singleton<TreePlanter>
     {
         for (int i = 0; i < saveData.treeData.Length; i++)
         {
-            PlantSingleTree(saveData.treeData[i], saveData.treePosition[i].V3, saveData.treeRotation[i].V3);
+            PlantSingleTree(saveData.treeData[i], MapManager.GetTerrainPosition(saveData.treePosition[i].V3), saveData.treeRotation[i].V3);
         }
     }
 }

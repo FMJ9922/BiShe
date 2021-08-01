@@ -134,6 +134,12 @@ public partial class InputManager : Singleton<InputManager>
                     MainInteractCanvas.Instance.OpenCarMissionCanvas(hit.collider.gameObject);
                 }
             }
+            else if (hit.collider.CompareTag("Bridge"))
+            {
+                BuildingBase buildingBase;
+                buildingBase = hit.collider.gameObject.GetComponent<BuildingBase>();
+                EventManager.TriggerEvent<BuildingBase>(ConstEvent.OnTriggerInfoPanel, buildingBase);
+            }
         }
     }
 }

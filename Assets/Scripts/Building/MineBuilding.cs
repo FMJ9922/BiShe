@@ -30,14 +30,15 @@ public class MineBuilding : BuildingBase
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
             Invoke("FillUpPopulation", 1f);
             InitBuildingFunction();
+            TerrainGenerator.Instance.FlatGround
+            (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
         }
         else
         {
             RestartBuildingFunction();
+            TerrainGenerator.Instance.FlatGround
+             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
-        Vector3 targetPos = MapManager.GetTerrainPosition(parkingGridIn);
-        float targetHeight = targetPos.y;
-        TerrainGenerator.Instance.FlatGround(takenGrids, targetHeight);
     }
 
     protected override void Output()
