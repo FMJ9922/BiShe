@@ -6,14 +6,29 @@ using UnityEngine.EventSystems;
 public class UpgradeBtn : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     public InfoCanvas InfoCanvas;
+    public ResourceCanvas resourceCanvas;
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        InfoCanvas.ShowUpgradeInfo();
+        if (InfoCanvas)
+        {
+            InfoCanvas.ShowUpgradeInfo();
+        }
+        else if(resourceCanvas)
+        {
+            resourceCanvas.ShowUpgradeInfo();
+        }
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
-        InfoCanvas.CloseUpgradeInfo();
+        if (InfoCanvas)
+        {
+            InfoCanvas.CloseUpgradeInfo();
+        }
+        else if (resourceCanvas)
+        {
+            resourceCanvas.CloseUpgradeInfo();
+        }
     }
 
     

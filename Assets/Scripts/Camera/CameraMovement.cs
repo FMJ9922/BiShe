@@ -76,7 +76,7 @@ public class CameraMovement : Singleton<CameraMovement>
                 _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * Time.deltaTime);
             }
         }
-        transform.position += MoveDirection(_forwardSpeed, _rightSpeed) / Mathf.Clamp((int)GameManager.Instance.GetTimeScale(), 1, 4);
+        transform.position += MoveDirection(_forwardSpeed, _rightSpeed) / Mathf.Clamp((int)GameManager.Instance.GetRealTimeScale(), 1, 4);
         if (Input.GetMouseButton(2))
         {
             //Debug.Log(Input.mousePosition);

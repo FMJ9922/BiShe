@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2070762092
+CRC: 31537478
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fc3b0c824f3e515dccc134885afa64de
+    Hash: 0e157b80c089a78da9360cb8bd670ea4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2b170735527de831d5cd81528048abfd
@@ -63,7 +63,6 @@ Assets:
 - Assets/ArtAssets/UI/StartUI/30002preview.png
 - Assets/TextMesh Pro/Fonts/LiberationSans.ttf
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Bridge_L1L2L3_Tex.tga
-- Assets/TextMesh Pro/Fonts/songKai SDF.asset
 - Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Coach_Building_HookerPier_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Coach_Building_Residential_L1L2L3_Tex.tga

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2633429484
+CRC: 619443969
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 10feecceb7a5a836fe136e3263a9c64a
+    Hash: 3414ca6be1526eb8307748c8cdfc3320
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9753dd794424f69fb6011ee06a0c141c
+    Hash: 4908fa12115d35930b278507ea5b410b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -14,6 +14,8 @@ ClassTypes:
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -69,6 +71,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/Youxiusheji01.png
 - Assets/ArtAssets/UI/TechIcon/unKexueshengchan02.png
 - Assets/Scenes Assets/BuildingIcon/Icon/RawMeatIcon.png
+- Assets/ArtAssets/UI/BuildingUI/NoPeople.png
 - Assets/ArtAssets/UI/TechIcon/unGaoxiaoshengchan03.png
 - Assets/Scenes Assets/BuildingIcon/SawmillL3.png
 - Assets/ArtAssets/UI/MainUI/PauseButton.png
@@ -118,6 +121,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/Jizhongshengchan01.png
 - Assets/ArtAssets/UI/TechIcon/Youxiusheji02.png
 - Assets/ArtAssets/UI/TechIcon/Gongchangzhixiao03.png
+- Assets/ArtAssets/UI/BuildingUI/NoResource.png
 - Assets/ArtAssets/UI/BuildUI/BuildingPreview.png
 - Assets/Scenes Assets/BuildingIcon/MarketL3.png
 - Assets/ArtAssets/UI/TechIcon/unGongchangzhixiao01.png
@@ -135,6 +139,7 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/HuiL3.png
 - Assets/ArtAssets/UI/BuildUI/UnClickRoadIcon.png
 - Assets/ArtAssets/UI/TechIcon/Kuodashichang03.png
+- Assets/ArtAssets/UI/BuildingUI/NoRoad.png
 - Assets/ArtAssets/UI/TechIcon/unXuanchuan02.png
 - Assets/ArtAssets/UI/TechIcon/Youhuajianzhu02.png
 - Assets/ArtAssets/UI/TechIcon/unFujiazhi03.png

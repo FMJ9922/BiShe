@@ -66,10 +66,10 @@ public class MainInteractCanvas : CanvasBase
         buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
     }
 
-    public void OpenResourceCanvas()
+    public void OpenResourceCanvas(BuildingBase data)
     {
         CloseAllOpenedUI();
-        canvas[1].OnOpen();
+        ((ResourceCanvas)canvas[1]).OnOpen((StorageBuilding)data);
     }
 
     public MarketCanvas GetMarketCanvas()

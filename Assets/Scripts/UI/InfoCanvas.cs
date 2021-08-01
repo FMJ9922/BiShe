@@ -80,7 +80,7 @@ public class InfoCanvas : CanvasBase
             case 20016:
             case 20017:
                 {
-                    btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
+                    //btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
                     _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Warehouse");
                     SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_wareHouse);
                 }
@@ -192,6 +192,7 @@ public class InfoCanvas : CanvasBase
         {
             GameObject icon = CommonIcon.GetIcon(costResources[i]);
             icon.transform.SetParent(upgradeCost);
+            icon.transform.localScale = ((GameManager.Instance.GetScreenRelativeRate() - 1F) * 0F + 1F) * Vector3.one;
         }
     }
     public void CloseUpgradeInfo()
@@ -277,6 +278,7 @@ public class InfoCanvas : CanvasBase
                     _populationObj.SetActive(true);
                     _destroyBtn.gameObject.SetActive(true);
                     _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
+                    CloseAllWarning();
                     break;
                 }
             case BuildTabType.house:
@@ -303,6 +305,7 @@ public class InfoCanvas : CanvasBase
                     _populationObj.SetActive(false);
                     _destroyBtn.gameObject.SetActive(false);
                     _upgradeBtn.gameObject.SetActive(buildData.RearBuildingId != 0);
+                    CloseAllWarning();
                     break;
                 }
             case BuildTabType.bridge:
@@ -315,6 +318,7 @@ public class InfoCanvas : CanvasBase
                     _populationObj.SetActive(false);
                     _destroyBtn.gameObject.SetActive(true);
                     _upgradeBtn.gameObject.SetActive(false);
+                    CloseAllWarning();
                     break;
                 }
 
@@ -337,6 +341,15 @@ public class InfoCanvas : CanvasBase
             warnings[i].gameObject.SetActive(open);
         }
         
+    }
+
+    public void CloseAllWarning()
+    {
+        for(int i = 0; i < warnings.Length; i++)
+        {
+            bool open = false;
+            warnings[i].gameObject.SetActive(open);
+        }
     }
     private void ChangeOutputIcon(RuntimeBuildData data)
     {

@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
-
+    public TMP_FontAsset font;
     private FadeScene fadeScene;
     private TimeScale timeScale = TimeScale.one;
     private TimeScale lastTimeScale = TimeScale.one;
@@ -48,6 +51,18 @@ public class GameManager : Singleton<GameManager>
     public TimeScale GetTimeScale()
     {
         return timeScale;
+    }
+
+    public TimeScale GetRealTimeScale()
+    {
+        if(timeScale == TimeScale.stop)
+        {
+            return lastTimeScale;
+        }
+        else
+        {
+            return timeScale;
+        }
     }
     public void AddTimeScale(out TimeScale addedScale)
     {
@@ -387,4 +402,35 @@ public class GameManager : Singleton<GameManager>
     {
         return Screen.height / 1080f;
     }
+
+    /*
+    [ContextMenu("change")]
+    public void ChangeFont()
+    {
+        List<GameObject> obj = GetAllSceneObjectsWithInactive();
+        for (int i = 0; i < obj.Count; i++)
+        {
+            if(obj[i].TryGetComponent<TMP_Text>(out TMP_Text text))
+            {
+                Debug.Log("change" + obj[i].name);
+                text.font = font;
+            }
+        }
+    }
+    private List<GameObject> GetAllSceneObjectsWithInactive()
+    {
+        var allTransforms = Resources.FindObjectsOfTypeAll(typeof(Transform));
+        var previousSelection = Selection.objects;
+        Selection.objects = allTransforms.Cast<Transform>()
+            .Where(x => x != null)
+            .Select(x => x.gameObject)
+            //如果你只想获取所有在Hierarchy中被禁用的物体，反注释下面代码
+            //.Where(x => x != null && !x.activeInHierarchy)
+            .Cast<UnityEngine.Object>().ToArray();
+
+        var selectedTransforms = Selection.GetTransforms(SelectionMode.Editable | SelectionMode.ExcludePrefab);
+        Selection.objects = previousSelection;
+
+        return selectedTransforms.Select(tr => tr.gameObject).ToList();
+    }*/
 }

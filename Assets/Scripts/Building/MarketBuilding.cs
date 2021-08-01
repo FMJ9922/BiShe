@@ -40,6 +40,7 @@ public class MarketBuilding : BuildingBase
 
     protected override void Input()
     {
+        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
         runtimeBuildData.Pause = false;
     }
 

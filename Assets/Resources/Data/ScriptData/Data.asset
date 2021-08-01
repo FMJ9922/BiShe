@@ -326,7 +326,7 @@ MonoBehaviour:
   BuildArray:
   - Id: 20001
     Name: PlainResidentialLv1
-    CostPerWeek: -10
+    CostPerWeek: -3
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -373,7 +373,7 @@ MonoBehaviour:
     CostPerWeek: 5
     Formulas: 
     Population: 10
-    MaxStorage: 100
+    MaxStorage: 1000
     InfluenceRange: 50
     FrontBuildingId: 0
     RearBuildingId: 20016
@@ -388,13 +388,13 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L1_01
     tabType: 4
-    Introduce: "\u5B58\u50A8\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90+1000"
     Level: 1
     iconName: WareHouseL1
     Times: 1
   - Id: 20004
     Name: Bazaar
-    CostPerWeek: 9
+    CostPerWeek: 5
     Formulas: 
     Population: 10
     MaxStorage: 100
@@ -508,7 +508,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20009
     Name: PlainResidentialLv2
-    CostPerWeek: -20
+    CostPerWeek: -6
     Formulas: 5ac30000
     Population: -12
     MaxStorage: 100
@@ -520,9 +520,9 @@ MonoBehaviour:
     Price: 60
     costResources:
     - ItemId: 12015
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
-      ItemNum: 5
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L2_0X
     tabType: 1
@@ -667,7 +667,7 @@ MonoBehaviour:
     CostPerWeek: 8
     Formulas: 
     Population: 10
-    MaxStorage: 100
+    MaxStorage: 4000
     InfluenceRange: 50
     FrontBuildingId: 20003
     RearBuildingId: 20017
@@ -680,7 +680,7 @@ MonoBehaviour:
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L2_01
     tabType: 4
-    Introduce: "\u5B58\u50A8\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90+4000"
     Level: 2
     iconName: WareHouseL2
     Times: 1
@@ -689,20 +689,20 @@ MonoBehaviour:
     CostPerWeek: 10
     Formulas: 
     Population: 10
-    MaxStorage: 100
+    MaxStorage: 10000
     InfluenceRange: 50
     FrontBuildingId: 20016
     RearBuildingId: 0
     Length: 5
     Width: 11
-    Price: 100
+    Price: 150
     costResources:
     - ItemId: 12020
       ItemNum: 10
     BundleName: building.ab
     PfbName: Universal_Building_Warehouse_L3_01
     tabType: 4
-    Introduce: "\u5B58\u50A8\u8D44\u6E90"
+    Introduce: "\u5B58\u50A8\u8D44\u6E90+10000"
     Level: 3
     iconName: WareHouseL3
     Times: 1
@@ -826,7 +826,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20023
     Name: CoachResidential
-    CostPerWeek: -10
+    CostPerWeek: -3
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -848,7 +848,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20024
     Name: CoachResidentialLv2
-    CostPerWeek: -20
+    CostPerWeek: -6
     Formulas: 5ac30000
     Population: -12
     MaxStorage: 100
@@ -860,9 +860,9 @@ MonoBehaviour:
     Price: 60
     costResources:
     - ItemId: 12015
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
-      ItemNum: 5
+      ItemNum: 15
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L2_0X
     tabType: 1
@@ -872,7 +872,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20025
     Name: CoachResidentialLv3
-    CostPerWeek: -40
+    CostPerWeek: -12
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -884,9 +884,9 @@ MonoBehaviour:
     Price: 90
     costResources:
     - ItemId: 12020
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
-      ItemNum: 15
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Coach_Building_Residential_L3_0X
     tabType: 1
@@ -896,7 +896,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20026
     Name: HuiResidential
-    CostPerWeek: -10
+    CostPerWeek: -3
     Formulas: 5ac30000
     Population: -10
     MaxStorage: 100
@@ -918,7 +918,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20027
     Name: HuiResidentialLv2
-    CostPerWeek: -20
+    CostPerWeek: -6
     Formulas: 5ac30000
     Population: -12
     MaxStorage: 100
@@ -930,7 +930,7 @@ MonoBehaviour:
     Price: 60
     costResources:
     - ItemId: 12015
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
       ItemNum: 15
     BundleName: building.ab
@@ -942,7 +942,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20028
     Name: HuiResidentialLv3
-    CostPerWeek: -40
+    CostPerWeek: -12
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -954,9 +954,9 @@ MonoBehaviour:
     Price: 90
     costResources:
     - ItemId: 12020
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
-      ItemNum: 10
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Hui_Building_Residential_L3_0X
     tabType: 1
@@ -1058,7 +1058,7 @@ MonoBehaviour:
     Times: 1
   - Id: 20033
     Name: PlainResidentialLv3
-    CostPerWeek: -40
+    CostPerWeek: -12
     Formulas: 5ac30000
     Population: -15
     MaxStorage: 100
@@ -1070,9 +1070,9 @@ MonoBehaviour:
     Price: 90
     costResources:
     - ItemId: 12020
-      ItemNum: 10
+      ItemNum: 20
     - ItemId: 12004
-      ItemNum: 15
+      ItemNum: 30
     BundleName: building.ab
     PfbName: Plain_Building_Residential_L3_0X
     tabType: 1

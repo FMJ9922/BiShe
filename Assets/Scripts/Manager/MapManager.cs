@@ -290,7 +290,8 @@ public class MapManager : Singleton<MapManager>
     {
         if (CheckInMap(vector2Int))
         {
-            return MapManager.GetGridNode(vector2Int).mineValue;
+            float res = MapManager.GetGridNode(vector2Int)?.mineValue ?? 0;
+            return res;
         }
         else
         {
@@ -480,6 +481,10 @@ public class MapManager : Singleton<MapManager>
 
     public static GridNode GetGridNode(Vector2Int gridPos)
     {
+        if(gridPos.x < 0 || gridPos.x > MapSize.x - 1 || gridPos.y < 0 || gridPos.y > MapSize.y)
+        {
+            return null;
+        }
         //Debug.Log(gridPos);
         return MapManager.Instance._grids[gridPos.x][gridPos.y];
     }
@@ -487,8 +492,11 @@ public class MapManager : Singleton<MapManager>
     public static void SetPassInfo(Vector2Int gridPos,int tex)
     {
         GridNode node = GetGridNode(gridPos);
-        node.passSpeed = GetPassSpeed(tex);
-        node.enterCost = GetEnterCost(tex);
+        if (node!=null)
+        {
+            node.passSpeed = GetPassSpeed(tex);
+            node.enterCost = GetEnterCost(tex);
+        }
 
     }
 
@@ -507,8 +515,7 @@ public class MapManager : Singleton<MapManager>
     /// 
     public static Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
-
-        return new Vector3(gridPos.x * 2, GetGridNode(gridPos).height, gridPos.y * 2); 
+        return new Vector3(gridPos.x * 2, GetGridNode(gridPos)?.height??10, gridPos.y * 2); 
     }
 
     public static Vector3 GetNotInWaterPosition(Vector2Int gridPos)
@@ -599,7 +606,7 @@ public class MapManager : Singleton<MapManager>
         //检测安放地点占用
         bool hasOverlap = checkInSea? CheckOverlapSea(grids): CheckOverlap(grids);
         //检测道路是否贴近
-        //bool hasNearRoad = CheckNearRoad(parkingPos);
+        bool hasNearRoad = CheckNearRoad(parkingPos);
         //检测是否靠近海岸线
         bool isInSea = (!checkInSea || CheckIsInWater(grids));
         //检测入口是否在海里
@@ -608,11 +615,11 @@ public class MapManager : Singleton<MapManager>
         bool isEntryAvailable = CheckEntryAvailble(parkingPos);
         //检测坡度是否平缓
         bool isFlat = CheckFlat(grids,parkingPos);
-        /*if (!hasNearRoad)
+        if (!hasNearRoad)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
         }
-        else*/
+        else
         if (hasOverlap)
         {
             noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
@@ -637,7 +644,7 @@ public class MapManager : Singleton<MapManager>
         //Debug.Log(!hasOverlap);
         //Debug.Log(isInSea);
         //Debug.Log(!isInWater);
-        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable && isFlat;
+        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable && isFlat && hasNearRoad;
     }
 
     /// <summary>
@@ -658,20 +665,20 @@ public class MapManager : Singleton<MapManager>
 
     public static bool CheckIsInWater(Vector2Int vector2Int)
     {
-        return MapManager.GetGridNode(vector2Int).gridType == GridType.water;
+        return MapManager.GetGridNode(vector2Int)?.gridType == GridType.water;
     }
 
     public static bool CheckEntryAvailble(Vector2Int vector2Int)
     {
-        return Instance.IsBuildingEntryAvalible(vector2Int)&& GetGridNode(vector2Int).gridType != GridType.occupy;
+        return Instance.IsBuildingEntryAvalible(vector2Int)&& (GetGridNode(vector2Int)?.gridType?? GridType.occupy) != GridType.occupy;
     }
 
     public static bool CheckFlat(Vector2Int[] vector2Ints,Vector2Int entrance)
     {
-        float height = GetGridNode(entrance).height;
+        float height = GetGridNode(entrance)?.height??10;
         for (int i = 0; i < vector2Ints.Length; i+=4)
         {
-            if (Mathf.Abs(height - GetGridNode(vector2Ints[i]).height) > 2)
+            if (Mathf.Abs(height - GetGridNode(vector2Ints[i])?.height??10) > 2)
             {
                 return false;
             }
@@ -774,6 +781,7 @@ public class MapManager : Singleton<MapManager>
     }
     public static bool CheckNearRoad(Vector2Int parkingPos)
     {
+        //Debug.Log(Instance.GetGridType(parkingPos));
         return Instance.GetGridType(parkingPos) == GridType.road;
     }
     public static bool CheckNearRoad(Vector2Int[] grids, int width, int height)
@@ -896,6 +904,7 @@ public class MapManager : Singleton<MapManager>
         return p;
     }
 
+
     public float GetHappiness()
     {
         float sum = 0; ;
@@ -931,6 +940,10 @@ public class MapManager : Singleton<MapManager>
         //Debug.Log(start);
         GridNode startNode = GetGridNode(start);
         GridNode endNode = GetGridNode(end);
+        if (startNode == null || endNode == null)
+        {
+            return null;
+        }
         openList.Add(startNode);
         path.Add(startNode);
         GridNode temp = startNode;

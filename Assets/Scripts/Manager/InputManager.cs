@@ -118,7 +118,8 @@ public partial class InputManager : Singleton<InputManager>
                 int id = buildingBase.runtimeBuildData.Id;
                 if (id == 20003||id == 20016||id == 20017)
                 {
-                    MainInteractCanvas.Instance.OpenResourceCanvas();
+                    SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_wareHouse);
+                    MainInteractCanvas.Instance.OpenResourceCanvas(buildingBase);
                 }
                 else
                 {

@@ -71,7 +71,7 @@ public class PierBuilding : BuildingBase
         for (int i = 0; i < formula.OutputItemID.Count; i++)
         {
             //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i] * runtimeBuildData.Times));
+            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], formula.ProductNum[i] * runtimeBuildData.Times * rate));
 
         }
         return mission;

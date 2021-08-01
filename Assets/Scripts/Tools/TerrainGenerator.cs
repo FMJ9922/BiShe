@@ -231,6 +231,34 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         transform.GetComponent<MeshFilter>().mesh = mesh;
     }
 
+    public void RefreshHeight()
+    {
+        CalculateHeights();
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+#if UNITY_EDITOR
+        mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+#endif
+        long xSize = width - 1;
+        long ySize = width - 1;
+        Vector3 origin = terrain.transform.position;
+        long size = xSize * ySize * 4;
+        verticles = new Vector3[size];
+        for (int i = 0, y = 0; y < height.Length - 1; y++)
+        {
+            for (int x = 0; x < height.Length - 1; x++, i++)
+            {
+                verticles[4 * i] = origin + new Vector3(x * 2, height[x][y], y * 2);
+                verticles[4 * i + 1] = origin + new Vector3((x + 1) * 2, height[x + 1][y], y * 2);
+                verticles[4 * i + 2] = origin + new Vector3((x + 1) * 2, height[x + 1][y + 1], (y + 1) * 2);
+                verticles[4 * i + 3] = origin + new Vector3(x * 2, height[x][y + 1], (y + 1) * 2);
+            }
+        }
+        mesh.vertices = verticles;
+        mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        mesh.RecalculateNormals();
+        transform.GetComponent<MeshFilter>().mesh = mesh;
+    }
+
 
     public void OnReTriangle(Vector3 pos, int dir)
     {

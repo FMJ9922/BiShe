@@ -22,24 +22,27 @@ public class ResourceManager : Singleton<ResourceManager>
     public int MaxPopulation { get { return maxPopulation; } }
     public int CurPopulation { get { return curPopulation; } }
 
+    public float maxStorage = 1000;
+
     /// <summary>
     /// 初始化关卡资源
     /// </summary>
     public void InitResourceManager(int levelID)
     {
         LevelData data = DataManager.GetLevelData(levelID);
-        AddResource(DataManager.GetItemIdByName("Log"), 300);
-        AddResource(DataManager.GetItemIdByName("Rice"), data.rice);
-        AddResource(DataManager.GetItemIdByName("Money"), data.money);
-        AddResource(DataManager.GetItemIdByName("Stone"), 100);
-        AddResource(12015,100);
-        AddResource(12020,100);
+        AddResource(DataManager.GetItemIdByName("Log"), 200,false);
+        AddResource(DataManager.GetItemIdByName("Rice"), data.rice, false);
+        AddResource(DataManager.GetItemIdByName("Money"), data.money, false);
+        AddResource(DataManager.GetItemIdByName("Stone"), 100, false);
+        AddResource(12015, 100);
+        AddResource(12020, 100);
+        AddResource(12009, 100);
         RecordLastWeekItem();
     }
 
     public void InitSavedResourceManager(SaveData saveData)
     {
-        AddResources(saveData.saveResources);
+        AddResources(saveData.saveResources, false);
         curPopulation = 0;
         //Debug.Log(saveData.curPopulation);
         RecordLastWeekItem();
@@ -50,27 +53,43 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     /// <param name="Id">物品名称</param>
     /// <param name="num">物品数量</param>
-    public void AddResource(int Id, float num)
+    public void AddResource(int Id, float num,bool isLimited = true)
     {
-        if (_storedItemDic.ContainsKey(Id))
+        if (Id == DataManager.GetItemIdByName("Money"))
         {
-            _storedItemDic[Id] += num;
+            AddMoney(num);
+            return;
+        }
+        if (isLimited)
+        {
+            float cur = GetRemainStorage();
+            float canAddNum = cur > num ? num : cur;
+            //Debug.Log(canAddNum);
+            if (_storedItemDic.ContainsKey(Id))
+            {
+                
+                _storedItemDic[Id] += canAddNum;
+            }
+            else
+            {
+                _storedItemDic.Add(Id, canAddNum);
+            }
         }
         else
         {
-            _storedItemDic.Add(Id, num);
+            if (_storedItemDic.ContainsKey(Id))
+            {
+                _storedItemDic[Id] += num;
+            }
+            else
+            {
+                _storedItemDic.Add(Id, num);
+            }
         }
     }
-    public void AddResource(CostResource costResource)
+    public void AddResource(CostResource costResource, bool isLimited = true)
     {
-        if (_storedItemDic.ContainsKey(costResource.ItemId))
-        {
-            _storedItemDic[costResource.ItemId] += costResource.ItemNum;
-        }
-        else
-        {
-            _storedItemDic.Add(costResource.ItemId, costResource.ItemNum);
-        }
+        AddResource(costResource.ItemId, costResource.ItemNum, isLimited);
     }
 
     public CostResource[] GetAllResources()
@@ -85,20 +104,20 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public void AddMoney(float num)
     {
-        AddResource(99999, num);
+        if (_storedItemDic.ContainsKey(DataManager.GetItemIdByName("Money")))
+        {
+            _storedItemDic[DataManager.GetItemIdByName("Money")] += num;
+        }
+        else
+        {
+            _storedItemDic.Add(DataManager.GetItemIdByName("Money"), num);
+        }
     }
-    public void AddResources(CostResource[] costResources)
+    public void AddResources(CostResource[] costResources,bool isLimited = true)
     {
         for (int i = 0; i < costResources.Length; i++)
         {
-            if (_storedItemDic.ContainsKey(costResources[i].ItemId))
-            {
-                _storedItemDic[costResources[i].ItemId] += costResources[i].ItemNum;
-            }
-            else
-            {
-                _storedItemDic.Add(costResources[i].ItemId, costResources[i].ItemNum);
-            }
+            AddResource(costResources[i],isLimited);
         }
         
     }
@@ -384,6 +403,32 @@ public class ResourceManager : Singleton<ResourceManager>
             //Debug.Log(maxProvide);
             return maxProvide;
         }
+    }
+
+    public void AddMaxStorage(float max)
+    {
+        maxStorage += max;
+    }
+
+    public float GetCurStorage()
+    {
+        float num = 0;
+        foreach (var item in _storedItemDic)
+        {
+            if(item.Key!= DataManager.GetItemIdByName("Money"))
+            {
+                num += item.Value;
+            }
+        }
+        return num;
+    }
+    /// <summary>
+    /// 获取剩余的容量
+    /// </summary>
+    /// <returns></returns>
+    public float GetRemainStorage()
+    {
+        return maxStorage - GetCurStorage();
     }
 }
 
