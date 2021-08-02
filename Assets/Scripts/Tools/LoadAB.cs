@@ -9,6 +9,7 @@ public class LoadAB : MonoBehaviour
 
     static Dictionary<string, AssetBundle> _abDic = new Dictionary<string, AssetBundle>();
     static AssetBundleManifest manifest;
+    static Dictionary<string, GameObject> _objDic = new Dictionary<string, GameObject>();
     public static void Init()
     {
         AssetBundle assetBundle = AssetBundle.LoadFromFile("AssetBundles/AssetBundles");
@@ -38,8 +39,16 @@ public class LoadAB : MonoBehaviour
                 }
             }
         }
-        
-        return ab.LoadAsset<GameObject>(name);
+        if (_objDic.ContainsKey(name))
+        {
+            return _objDic[name];
+        }
+        else
+        {
+            GameObject obj = ab.LoadAsset<GameObject>(name);
+            _objDic.Add(name, obj);
+            return obj;
+        }
     }
 
     public static T Load<T>(string bundleName, string name) where T : Object

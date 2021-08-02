@@ -34,9 +34,9 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice, false);
         AddResource(DataManager.GetItemIdByName("Money"), data.money, false);
         AddResource(DataManager.GetItemIdByName("Stone"), 100, false);
-        AddResource(12015, 100);
-        AddResource(12020, 100);
-        AddResource(12009, 100);
+        //AddResource(12015, 100);
+        //AddResource(12020, 100);
+        //AddResource(12009, 100);
         RecordLastWeekItem();
     }
 
@@ -64,6 +64,10 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             float cur = GetRemainStorage();
             float canAddNum = cur > num ? num : cur;
+            if (canAddNum <= 0)
+            {
+                return;
+            }
             //Debug.Log(canAddNum);
             if (_storedItemDic.ContainsKey(Id))
             {

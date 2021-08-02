@@ -117,7 +117,7 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         else
         {
-            wayPoints = MapManager.Instance.GetWayPoints(start, end).ToArray();
+            wayPoints = MapManager.Instance?.GetWayPoints(start, end)?.ToArray();
         }
 
         action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));

@@ -32,6 +32,7 @@ public class BuildManager : Singleton<BuildManager>
     private Vector2Int lastGrid;
     private Material[] mats;
     private Vector3 hidePos = new Vector3(0, -100, 0);
+    private Direction lastDir = Direction.right;
 
     //修路相关
     private Vector3 roadStartPos;//道路建造起始点
@@ -81,7 +82,7 @@ public class BuildManager : Singleton<BuildManager>
         CleanUpAllAttachedChildren(roadParent);
         GameObject building = InitBuilding(buildData);
         building.transform.position = Input.mousePosition;
-        currentBuilding.direction = Direction.right;
+        currentBuilding.direction = lastDir;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
         arrows = new GameObject().transform;
@@ -153,9 +154,14 @@ public class BuildManager : Singleton<BuildManager>
     public void InitSaveBuildings(RuntimeBuildData[] buildDatas)
     {
         //Debug.Log(buildDatas.Length);
+        
         for (int i = 0; i < buildDatas.Length; i++)
         {
+            //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            //sw.Start();
             InitSaveBuilding(buildDatas[i]);
+            //System.TimeSpan dt = sw.Elapsed;
+            //Debug.Log(buildDatas[i].Name+" 耗时:" + dt.TotalSeconds + "秒");
         }
         TerrainGenerator.Instance.ReCalculateMesh();
     }
@@ -206,11 +212,15 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
         MainInteractCanvas.Instance.HideBuildingButton();
+        MainInteractCanvas.Instance.CloseAllOpenedUI();
         roadLevel = _roadLevel;
     }
 
     public void StartDestroyRoad()
     {
+        IsInBuildMode = true;
+        MainInteractCanvas.Instance.CloseAllOpenedUI();
+        MainInteractCanvas.Instance.HideBuildingButton();
         CleanUpAllAttachedChildren(roadParent);
         desRoadShow = Instantiate(preRoadPfb, transform);
         GameObject reverse = Instantiate(preRoadPfb, desRoadShow.transform);
@@ -247,8 +257,11 @@ public class BuildManager : Singleton<BuildManager>
 
     private void OnCancelDestroyRoad()
     {
+        IsInBuildMode = false;
+        MainInteractCanvas.Instance.OpenBuildingCanvas();
         Destroy(desRoadShow);
         preRoads.Remove(desRoadShow);
+        MainInteractCanvas.Instance.ShowBuildingButton();
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnDestroyRoad);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
         EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowDestroyRoad);
@@ -463,6 +476,7 @@ public class BuildManager : Singleton<BuildManager>
         MainInteractCanvas.Instance.ShowBuildingButton();
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
+        //StartCreateRoads(roadLevel);
     }
 
     public BridgeData[] GetBridgeDatas()
@@ -684,20 +698,22 @@ public class BuildManager : Singleton<BuildManager>
                 currentBuilding.runtimeBuildData.Id != 20038)
             {
                 currentBuilding.transform.position += Vector3.up * 5;
-                StartCoroutine("PushDownBuilding", currentBuilding.transform.position);
+                StartCoroutine("PushDownBuilding", currentBuilding.gameObject);
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_constuction);
             }
+            lastDir = currentBuilding.direction-1;
+            EventManager.TriggerEvent(ConstEvent.OnContinueBuild);
         }
         else
         {
             NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoRes));
         }
     }
-    private IEnumerator PushDownBuilding(Vector3 startPos)
+    private IEnumerator PushDownBuilding(GameObject obj)
     {
-        Vector3 start = startPos;
+        Vector3 start = obj.transform.position;
         Vector3 down = Vector3.down;
-        Vector3 ground = MapManager.GetTerrainPosition(startPos);
+        Vector3 ground = MapManager.GetTerrainPosition(obj.transform.position);
         if (ground.y < 10)
         {
             ground = new Vector3(ground.x, 10, ground.z);
@@ -706,18 +722,19 @@ public class BuildManager : Singleton<BuildManager>
         {
             down += -Vector3.down * 30F * Time.deltaTime;
             start -= down * Time.deltaTime;
-            currentBuilding.transform.position = start;
+            obj.transform.position = start;
             yield return 0;
         }
-        currentBuilding.transform.position = ground;
-        PlayAnim();
+        obj.transform.position = ground;
+        PlayAnim(obj);
     }
-    private void PlayAnim()
+    private void PlayAnim(GameObject obj)
     {
         dustParticle.gameObject.SetActive(true);
-        dustParticle.transform.position = currentBuilding.transform.position;
-        dustParticle.transform.rotation = currentBuilding.transform.rotation;
-        dustParticle.transform.localScale = new Vector3(currentBuilding.Size.y / 2, currentBuilding.Size.x / 4 + currentBuilding.Size.y / 4, currentBuilding.Size.x / 2);
+        dustParticle.transform.position = obj.transform.position;
+        dustParticle.transform.rotation = obj.transform.rotation;
+        BuildingBase b = obj.GetComponent<BuildingBase>();
+        dustParticle.transform.localScale = new Vector3(b.Size.y / 2, b.Size.x / 4 + b.Size.y / 4, b.Size.x / 2);
         dustParticle.Play();
     }
 

@@ -123,7 +123,7 @@ Material:
     - _Rotation_G: 0
     - _Rotation_L: 0
     - _Rotation_R: 0
-    - _Rotation_T: 135.12024
+    - _Rotation_T: 0
     - _Saturation: 1
     - _Shading_B: 0
     - _Shading_D: 0
@@ -135,18 +135,18 @@ Material:
     - _ShadowInfluence: 0.35
     - _ShowAO: 1
     - _ShowAmbientSettings: 0
-    - _ShowBack: 0
-    - _ShowBottom: 0
+    - _ShowBack: 1
+    - _ShowBottom: 1
     - _ShowColorCorrection: 1
     - _ShowCustomShading: 1
     - _ShowFog: 0
     - _ShowFront: 1
     - _ShowGlobalGradientSettings: 1
     - _ShowLMap: 1
-    - _ShowLeft: 0
+    - _ShowLeft: 1
     - _ShowRight: 1
     - _ShowTexture: 1
-    - _ShowTop: 0
+    - _ShowTop: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

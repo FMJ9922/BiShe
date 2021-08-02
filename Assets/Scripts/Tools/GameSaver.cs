@@ -186,6 +186,10 @@ public struct Vector3Serializer
 
     public static Vector3Serializer[] Box(Vector3[] vector3s)
     {
+        if(vector3s == null)
+        {
+            return null;
+        }
         Vector3Serializer[] vector3Serializers = new Vector3Serializer[vector3s.Length];
         for (int i = 0; i < vector3s.Length; i++)
         {

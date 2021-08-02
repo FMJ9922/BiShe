@@ -366,6 +366,10 @@ public class MapManager : Singleton<MapManager>
             int index = takenGirds[i].x + takenGirds[i].y * MapSize.x;
             //int dir = GameManager.saveData.meshDir[index];
             generator.RefreshToOriginUV(index,out int tex);
+            if(tex == 12||tex ==13||tex == 14)
+            {
+                generator.RefreshUV(0,8,index,4);
+            }
             SetPassInfo(takenGirds[i], tex);
         }
         generator.ReCalculateNormal();
@@ -792,12 +796,12 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < grids.Length; i++)
         {
-            if (Instance.GetGridType(grids[i]) != GridType.road)
+            if (Instance.GetGridType(grids[i]) == GridType.road)
             {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
     public static bool CheckNearRoad(Vector2Int parkingPos)
     {
@@ -862,7 +866,10 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < grids.Length; i++)
         {
-            Instance.SetGridType(grids[i], GridType.empty);
+            if(GetGridNode(grids[i]).gridType == GridType.road)
+            {
+                Instance.SetGridType(grids[i], GridType.empty);
+            }
         }
     }
 

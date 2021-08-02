@@ -22,7 +22,7 @@ public class CameraMovement : Singleton<CameraMovement>
     private float _edgeRange = 10;
     private bool canMove = true;
     private bool canScroll = true;
-    private bool canEdge = false;
+    private bool canEdge = true;
 
 
     private Vector3 lastMousePos;

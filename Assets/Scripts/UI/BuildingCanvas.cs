@@ -55,6 +55,7 @@ public class BuildingCanvas : CanvasBase
     private BuildData[] currentTabDatas;
     private BuildTabAnim curTab =null;
     private BuildManager.RoadInfo roadInfo;
+    private BuildData lastData;
     #endregion
 
     #region 实现基类
@@ -68,11 +69,13 @@ public class BuildingCanvas : CanvasBase
 
     public override void OnOpen()
     {
+        EventManager.StartListening(ConstEvent.OnContinueBuild, ContinueBuild);
         _mainCanvas.SetActive(true);
     }
 
     public override void OnClose()
     {
+        EventManager.StopListening(ConstEvent.OnContinueBuild, ContinueBuild);
         _mainCanvas.SetActive(false);
     }
     #endregion
@@ -82,7 +85,7 @@ public class BuildingCanvas : CanvasBase
     /// <summary>
     /// 控制建造面板显隐
     /// </summary>
-    private void HideOrShowCanvasToggle(bool isShow)
+    public void HideOrShowCanvasToggle(bool isShow)
     {
         _mainCanvas.SetActive(isShow);
         //_activeBtns.SetActive(isShow);
@@ -196,9 +199,13 @@ public class BuildingCanvas : CanvasBase
             cost.transform.parent = _roadCost.transform;
         }
     }
-
+    public void ContinueBuild()
+    {
+        OnClickIconToBuild(lastData);
+    }
     public void OnClickIconToBuild(BuildData buildData)
     {
+        lastData = buildData;
         HideOrShowCanvasToggle(false);
         _InfoCanvas.SetActive(false);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnClose);

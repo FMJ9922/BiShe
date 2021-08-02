@@ -60,10 +60,16 @@ public class MainInteractCanvas : CanvasBase
         CloseCarMissionCanvas();
     }
 
+    public void OpenBuildingCanvas()
+    {
+        canvas[0].OnOpen();
+        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
+    }
+
     public void CloseBuildingCanvas()
     {
         canvas[0].OnClose();
-        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
+        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildSelect");
     }
 
     public void OpenResourceCanvas(BuildingBase data)
