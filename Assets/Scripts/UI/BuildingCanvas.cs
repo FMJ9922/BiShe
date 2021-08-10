@@ -37,6 +37,8 @@ public class BuildingCanvas : CanvasBase
     [SerializeField]
     private TMP_Text _tabLabel;
     private BuildTabType tabType;
+    [SerializeField]
+    private GameObject buildModeTip;
 
     
     #endregion
@@ -62,21 +64,25 @@ public class BuildingCanvas : CanvasBase
 
     public override void InitCanvas()
     {
+        buildModeTip.SetActive(false);
         InitTabs();
         ChangeTab(0);
         _InfoCanvas.SetActive(false);
+        EventManager.StartListening(ConstEvent.OnContinueBuild, ContinueBuild);
     }
 
     public override void OnOpen()
     {
-        EventManager.StartListening(ConstEvent.OnContinueBuild, ContinueBuild);
         _mainCanvas.SetActive(true);
     }
 
     public override void OnClose()
     {
-        EventManager.StopListening(ConstEvent.OnContinueBuild, ContinueBuild);
         _mainCanvas.SetActive(false);
+    }
+    private void OnDestroy()
+    {
+        EventManager.StopListening(ConstEvent.OnContinueBuild, ContinueBuild);
     }
     #endregion
 
@@ -88,6 +94,8 @@ public class BuildingCanvas : CanvasBase
     public void HideOrShowCanvasToggle(bool isShow)
     {
         _mainCanvas.SetActive(isShow);
+
+        buildModeTip.SetActive(!isShow);
         //_activeBtns.SetActive(isShow);
     }
 
@@ -230,6 +238,7 @@ public class BuildingCanvas : CanvasBase
 
     public void OnCancel()
     {
+        HideOrShowCanvasToggle(true);
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancel);
         BuildManager.Instance.OnCancelBuildRoad();
         _confirmBtns.SetActive(false);
@@ -242,6 +251,7 @@ public class BuildingCanvas : CanvasBase
         {
             EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, OnCancel);
             _confirmBtns.SetActive(false);
+            HideOrShowCanvasToggle(true);
         }
         else
         {
@@ -266,7 +276,7 @@ public class BuildingCanvas : CanvasBase
             if (buildData.costResources[i].ItemId == 99999) continue;
             GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum*TechManager.Instance.BuildResourcesBuff());
             resource.transform.parent = _iconsParent;
-            resource.transform.localScale = Vector3.one * 1f;
+            resource.transform.localScale = Vector3.one * GameManager.Instance.GetScreenRelativeRate();
         }
         _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0)*GameManager.Instance.GetScreenRelativeRate();
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);

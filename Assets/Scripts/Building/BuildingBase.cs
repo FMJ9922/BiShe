@@ -63,8 +63,8 @@ public class BuildingBase : MonoBehaviour
         {
             RestartBuildingFunction();
             MapManager.Instance.BuildFoundation(vector2Ints, 15, 0, false); 
-            TerrainGenerator.Instance.FlatGround
-             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
+            //TerrainGenerator.Instance.FlatGround
+            // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
 
         
@@ -134,7 +134,8 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         if (runtimeBuildData.tabType!=BuildTabType.house)
         {
-            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople);
+            //Debug.Log(gameObject.name + " ADD " + runtimeBuildData.CurPeople);
+            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
         }
     }
 
@@ -156,7 +157,6 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.Pause = true;
             UpdateEffectiveness();
         }
-
     }
     public void ChangeFormula()
     {

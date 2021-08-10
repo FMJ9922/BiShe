@@ -35,9 +35,10 @@ public class MineBuilding : BuildingBase
         }
         else
         {
+            MapManager.SetGridTypeToOccupy(takenGrids);
             RestartBuildingFunction();
-            TerrainGenerator.Instance.FlatGround
-             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
+            //TerrainGenerator.Instance.FlatGround
+            // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
     }
 

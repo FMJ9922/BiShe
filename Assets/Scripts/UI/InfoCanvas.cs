@@ -175,17 +175,10 @@ public class InfoCanvas : CanvasBase
         CleanUpAllAttachedChildren(upgradeCost);
         List<CostResource> costResources = new List<CostResource>();
         BuildData next = DataManager.GetBuildData(_buildData.RearBuildingId);
-        costResources.Add(new CostResource(99999, (next.Price - _buildData.Price) * TechManager.Instance.BuildPriceBuff()));
+        costResources.Add(new CostResource(99999, (next.Price) * TechManager.Instance.BuildPriceBuff()));
         for (int i = 0; i < next.costResources.Count; i++)
         {
-            CostResource res = next.costResources[i];
-            for (int j = 0; j < _buildData.costResources.Count; j++)
-            {
-                if (next.costResources[i].ItemId == _buildData.costResources[j].ItemId)
-                {
-                    res = (next.costResources[i] - _buildData.costResources[j]) * TechManager.Instance.BuildResourcesBuff();
-                }
-            }
+            CostResource res = next.costResources[i] * TechManager.Instance.BuildResourcesBuff();
             costResources.Add(res);
         }
         for (int i = 0; i < costResources.Count; i++)

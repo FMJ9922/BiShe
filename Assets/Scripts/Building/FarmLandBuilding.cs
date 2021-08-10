@@ -62,8 +62,8 @@ public class FarmLandBuilding : BuildingBase
         {
             RestartBuildingFunction();
             MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4, false);
-            TerrainGenerator.Instance.FlatGround
-             (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
+            //TerrainGenerator.Instance.FlatGround
+            // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
     }
 

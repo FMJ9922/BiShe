@@ -383,10 +383,14 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     /// <param name="num">申请的人口数量</param>
     /// <returns>实际提供下来的人口数量</returns>
-    public int TryAddCurPopulation(int num)
+    public int TryAddCurPopulation(int num,bool ignore = false)
     {
         //Debug.Log(num);
         curPopulation += num;
+        if (ignore)
+        {
+            return num;
+        }
         if (curPopulation <= 0)
         {
             curPopulation -= num;

@@ -37,6 +37,15 @@ public class ResourceCanvas : CanvasBase
         EventManager.StartListening(ConstEvent.OnInputResources, CreateItemList);
         EventManager.StartListening(ConstEvent.OnRefreshResources, CreateItemList);
         mainCanvas.SetActive(true);
+        CloseUpgradeInfo();
+        if (building.runtimeBuildData.RearBuildingId == 0)
+        {
+            upgrade.gameObject.SetActive(false);
+        }
+        else
+        {
+            upgrade.gameObject.SetActive(true);
+        }
     }
 
     public void ShowUpgradeInfo()

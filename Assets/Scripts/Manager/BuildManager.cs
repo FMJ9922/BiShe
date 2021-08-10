@@ -49,7 +49,7 @@ public class BuildManager : Singleton<BuildManager>
     private UnityAction cancelAc = () => Instance.OnCancelBuild();
     private UnityAction rotateAc = () => Instance.OnRotateBuilding();
 
-    public static bool IsInBuildMode { get; set; }
+    public bool IsInBuildMode { get; set; }
 
     #endregion
 
@@ -208,6 +208,7 @@ public class BuildManager : Singleton<BuildManager>
     /// </summary>
     public void StartCreateRoads(int _roadLevel = 1)
     {
+        IsInBuildMode = true;
         CleanUpAllAttachedChildren(roadParent);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadStartPos);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, OnCancelBuildRoad);
@@ -477,6 +478,7 @@ public class BuildManager : Singleton<BuildManager>
         ChangeRoadCount(0);
         EventManager.TriggerEvent(ConstEvent.OnFinishBuilding);
         //StartCreateRoads(roadLevel);
+        IsInBuildMode = false;
     }
 
     public BridgeData[] GetBridgeDatas()
@@ -503,6 +505,7 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, OnPreShowRoad);
         MainInteractCanvas.Instance.ShowBuildingButton();
         ChangeRoadCount(0);
+        IsInBuildMode = false;
     }
     /// <summary>
     /// 修路时显示预计建造的路

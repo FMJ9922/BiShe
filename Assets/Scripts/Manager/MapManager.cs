@@ -866,7 +866,8 @@ public class MapManager : Singleton<MapManager>
     {
         for (int i = 0; i < grids.Length; i++)
         {
-            if(GetGridNode(grids[i]).gridType == GridType.road)
+            GridType type = GetGridNode(grids[i]).gridType;
+            if (type == GridType.road|| type== GridType.occupy)
             {
                 Instance.SetGridType(grids[i], GridType.empty);
             }

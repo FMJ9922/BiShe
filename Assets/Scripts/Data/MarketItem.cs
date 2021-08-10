@@ -42,7 +42,7 @@ public class MarketItem : MonoBehaviour
         marketData.curItem = DataManager.GetItemDataById(id);
         ClearItemDrop(false);
         marketData.needNum = 0;
-        icon.SetIcon(curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
+        icon.SetIcon(curItem.Id, 0);
         modeDrop.ClearOptions();
         TMP_Dropdown.OptionData tempData;
         for (int i = 0; i < 3; i++)

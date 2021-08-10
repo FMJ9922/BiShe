@@ -137,6 +137,17 @@ public class MainInteractCanvas : CanvasBase
     {
         canvas[5].OnClose();
     }
+    public void OpenIntroduceCanvas()
+    {
+        IntroduceCanvas intro = canvas[10] as IntroduceCanvas;
+        intro.OnOpen();
+    }
+
+    public void CloseIntroduceCanvas()
+    {
+        IntroduceCanvas intro = canvas[10] as IntroduceCanvas;
+        intro.OnClose();
+    }
 
     public void CloseResourcesCanvas()
     {

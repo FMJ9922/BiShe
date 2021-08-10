@@ -35,6 +35,7 @@ public class PierBuilding : BuildingBase
         }
         else
         {
+            MapManager.SetGridTypeToOccupy(takenGrids);
             RestartBuildingFunction();
         }
     }

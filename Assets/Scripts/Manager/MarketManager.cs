@@ -60,7 +60,7 @@ public class MarketManager : Singleton<MarketManager>
                     break;
                 case TradeMode.maintain:
                     float num = marketItems[i].needNum - ResourceManager.Instance.TryGetResourceNum(marketItems[i].curItem.Id);
-                    if (num > 0&& ResourceManager.Instance.TryUseResource(99999, -profit))
+                    if (num > 0 && ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
                         BuyItem(new CostResource(marketItems[i].curItem.Id, num));
                         marketCanvas.AddProfitInfo(GetBuyProfitDescribe(marketItems[i].GetCostResource(), profit));
@@ -75,43 +75,37 @@ public class MarketManager : Singleton<MarketManager>
             orderItems[i].RefreshBuyProfitLabel();
             if (!orderItems[i].isTrading) continue;
             CostResource costResource = orderItems[i].GetCostResource();
-            if (ResourceManager.Instance.IsResourceEnough(costResource))
+            switch (orderItems[i].curMode)
             {
-                switch (orderItems[i].curMode)
-                {
-                    case TradeMode.once:
-                        if (IsItemEnough(costResource))
-                        {
-                            SellItem(costResource, orderItems[i].curItem.Price);
-                            orderItems[i].OnResetTrading();
-                        }
-                        break;
-                    case TradeMode.everyWeek:
+                case TradeMode.once:
+                    if (ResourceManager.Instance.IsResourceEnough(costResource))
+                    {
                         SellItem(costResource, orderItems[i].curItem.Price);
-                        break;
-                    case TradeMode.maintain:
-                        float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
-                        if (num > 0)
-                        {
-                            num = Mathf.Clamp(num, 0, 200 * TechManager.Instance.SellNumBuff());
-                            SellItem(new CostResource(costResource.ItemId, num),orderItems[i].curItem.Price);
-                        }
-                        break;
-                }
-                orderItems[i].RefreshBuyProfitLabel();
+                        orderItems[i].OnResetTrading();
+                    }
+                    break;
+                case TradeMode.everyWeek:
+                    if (ResourceManager.Instance.IsResourceEnough(costResource))
+                    {
+                        SellItem(costResource, orderItems[i].curItem.Price);
+                    }
+                    break;
+                case TradeMode.maintain:
+                    float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
+                    if (num > 0)
+                    {
+                        num = Mathf.Clamp(num, 0, 200 * TechManager.Instance.SellNumBuff());
+                        SellItem(new CostResource(costResource.ItemId, num), orderItems[i].curItem.Price);
+                    }
+                    break;
             }
-            else
-            {
-                orderItems[i].OnResetTrading();
-                Debug.Log("交易失败：" + orderItems[i].curItem.Id + " " + orderItems[i].needNum);
-            }
-            
+            orderItems[i].RefreshBuyProfitLabel();
         }
     }
 
-    public string GetSellProfitDescribe(CostResource costResource,float profit)
+    public string GetSellProfitDescribe(CostResource costResource, float profit)
     {
-        return string.Format("{0} 出售{1},数量{2},获利{3}",LevelManager.Instance.LogDate(),
+        return string.Format("{0} 出售{1},数量{2},获利{3}", LevelManager.Instance.LogDate(),
             Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
             CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(profit));
     }
@@ -119,7 +113,7 @@ public class MarketManager : Singleton<MarketManager>
     public string GetBuyProfitDescribe(CostResource costResource, float profit)
     {
         return string.Format("{0} 购买{1},数量{2},花费{3}", LevelManager.Instance.LogDate(),
-             Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)), 
+             Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
             CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(-profit));
     }
     public void BuyItem(CostResource costResource)
@@ -128,11 +122,11 @@ public class MarketManager : Singleton<MarketManager>
         ResourceManager.Instance.AddResource(costResource.ItemId, costResource.ItemNum);
     }
 
-    public void SellItem(CostResource costResource,float price)
+    public void SellItem(CostResource costResource, float price)
     {
         //Debug.Log("sell" + costResource.ItemNum);
         float profit = ResourceManager.Instance.TryUseUpResource(new CostResource(costResource.ItemId, costResource.ItemNum)).ItemNum
-            *price * TechManager.Instance.PriceBuff();
+            * price * TechManager.Instance.PriceBuff();
         marketCanvas.AddProfitInfo(GetSellProfitDescribe(costResource, profit));
         ResourceManager.Instance.AddMoney(profit);
     }

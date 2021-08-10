@@ -28,6 +28,7 @@ public class StorageBuilding : BuildingBase
         else
         {
             RestartBuildingFunction();
+            MapManager.Instance.BuildFoundation(vector2Ints, 15, 0, false);
         }
 
         //地基
@@ -49,7 +50,6 @@ public class StorageBuilding : BuildingBase
             ResourceManager.Instance.AddMaxStorage(-Max);
         }
     }
-
 
     protected override void Input()
     {
