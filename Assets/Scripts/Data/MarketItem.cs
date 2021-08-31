@@ -18,6 +18,7 @@ public class MarketItem : MonoBehaviour
     [SerializeField] Button confirmBtn;
     [SerializeField] Button cancelBtn;
     [SerializeField] CommonIcon icon;
+    [SerializeField] GameObject chooseBtn;
 
     public MarketData marketData;
 
@@ -38,6 +39,7 @@ public class MarketItem : MonoBehaviour
     }
     public void InitSellItem(int id)
     {
+        chooseBtn.SetActive(false);
         marketData.isBuy = false;
         marketData.curItem = DataManager.GetItemDataById(id);
         ClearItemDrop(false);
@@ -61,6 +63,7 @@ public class MarketItem : MonoBehaviour
 
     public void InitSavedSellItem(MarketData data)
     {
+        chooseBtn.SetActive(false);
         marketData = data;
         ClearItemDrop(false);
         icon.SetIcon(data.curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
@@ -113,7 +116,7 @@ public class MarketItem : MonoBehaviour
         cancelBtn.onClick.AddListener(() => MainInteractCanvas.Instance.GetMarketCanvas().RemoveBuyItem(gameObject));
         itemDrop.onValueChanged.AddListener(ChangeItem);
         numText.text = needNum.ToString();
-
+        chooseBtn.SetActive(true);
         modeDrop.ClearOptions();
         for (int i = 0; i < 3; i++)
         {
@@ -139,6 +142,7 @@ public class MarketItem : MonoBehaviour
 
     public void InitBuyItem()
     {
+        chooseBtn.SetActive(true);
         ItemData[] itemArray = DataManager.GetItemDatas();
         idList.Clear();
         TMP_Dropdown.OptionData tempData;

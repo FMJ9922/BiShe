@@ -265,11 +265,11 @@ public class MapManager : Singleton<MapManager>
     {
         if (tex == 0 || tex == 19 || tex == 18 || tex == 16 || tex == 17)
         {
-            return 7;
+            return 30;
         }
         else if (tex == 1 || tex == 2 || tex == 3 || tex == 11)
         {
-            return 10;
+            return 50;
         }
         else if (tex == 12 || tex == 13 || tex == 14)
         {
@@ -398,6 +398,7 @@ public class MapManager : Singleton<MapManager>
         {
             SetGridTypeToRoad(roadGrid[i]);
         }
+        TerrainGenerator.Instance.CheckMesh();
         for (int i = 0; i < roadGrid.Length; i++)
         {
             RoadOption roadOption;
@@ -624,7 +625,7 @@ public class MapManager : Singleton<MapManager>
         bool hasOutOfMap = CheckOutOfMap(grids);
         if (hasOutOfMap)
         {
-            noticeContent = "不能在地图外建造";
+            noticeContent = Localization.ToSettingLanguage("不能在地图外建造");
             return false;
         }
         //检测安放地点占用
@@ -654,15 +655,15 @@ public class MapManager : Singleton<MapManager>
         }
         if (isInWater)
         {
-            noticeContent = "不能在水面下建造建筑";
+            noticeContent = Localization.ToSettingLanguage("不能在水面下建造建筑");
         }
         if (!isEntryAvailable)
         {
-            noticeContent = "建筑入口已被占用！无法建造";
+            noticeContent = Localization.ToSettingLanguage("建筑入口已被占用！无法建造");
         }
         if (!isFlat)
         {
-            noticeContent = "建筑不能建在过于陡峭的位置";
+            noticeContent = Localization.ToSettingLanguage("建筑不能建在过于陡峭的位置");
         }
         //if (!isInSea) Debug.Log("不在海里");
         //Debug.Log(!hasOverlap);
@@ -899,6 +900,10 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < Instance._buildings.Count; i++)
         {
             //Debug.Log(Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id);
+            if(Instance._buildings[i] == null)
+            {
+                continue;
+            }
             int id = Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id;
             if (id == 20004 || id == 20012 || id == 20013)
             {
@@ -977,7 +982,7 @@ public class MapManager : Singleton<MapManager>
         GridNode temp = startNode;
         temp.G = 0;
         temp.F = 0;
-        int n = 1000;
+        int n = 2000;
         while (temp != endNode && n-- > 0)
         {
             if (openList.Count <= 0)
@@ -1010,11 +1015,12 @@ public class MapManager : Singleton<MapManager>
                 }
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
                 list.Add(MapManager.GetNotInWaterPosition(startNode.GridPos) + new Vector3(1, 0, 1));
-                list.Reverse(); 
+                list.Reverse();
                 //sw.Stop();
                 //System.TimeSpan dt1 = sw.Elapsed;
                 //Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
                 //WayPointDic.Add(start.ToString() + end.ToString(), list);
+                //Debug.Log(n);
                 return list;
             }
             //Debug.Log("当前结点："+temp.GridPos+ " "+temp.NearbyNode.Count);
@@ -1043,6 +1049,7 @@ public class MapManager : Singleton<MapManager>
             }
             openList.Sort(new compare());
         }
+        //Debug.Log(n);
         //Debug.Log("寻路失败"+start+" "+end);
         return null;
     }

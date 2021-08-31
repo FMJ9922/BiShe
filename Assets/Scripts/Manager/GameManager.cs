@@ -14,11 +14,12 @@ public class GameManager : Singleton<GameManager>
     private TimeScale timeScale = TimeScale.one;
     private TimeScale lastTimeScale = TimeScale.one;
     public static SaveData saveData;
-
+    public System.Diagnostics.Stopwatch sw =new System.Diagnostics.Stopwatch();
     protected override void InstanceAwake()
     {
         DontDestroyOnLoad(this.gameObject);
         LoadAB.Init();
+        Localization.ChangeSettingLanguage(PlayerPrefs.GetInt("Language", 0));
     }
 
 
@@ -92,7 +93,7 @@ public class GameManager : Singleton<GameManager>
     /// <param name="timeScale"></param>
     private void SetTimeScale(TimeScale scale)
     {
-        Debug.Log("时间倍速:" + scale.ToString());
+        //Debug.Log("时间倍速:" + scale.ToString());
         timeScale = scale;
         switch (scale)
         {
@@ -169,7 +170,9 @@ public class GameManager : Singleton<GameManager>
     {
         FindFadeImage();
         fadeScene.Fade(1f, 0.5f);
-        StartCoroutine(DelayToInvokeDo(() => { 
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在读取存档并序列化");
+        StartCoroutine(DelayToInvokeDo(() => {
+            sw.Start();
             SceneManager.LoadScene("level", LoadSceneMode.Single);
             LoadSaveData(fileName);
             }, 1f));

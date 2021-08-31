@@ -4,20 +4,26 @@ using UnityEngine;
 
 public static class Localization
 {
-    public static LanguageType language = LanguageType.chinese;
+    public static LanguageType language = LanguageType.Chinese;
 
     public delegate void ChangeLanguage();
     public static event ChangeLanguage OnChangeLanguage;
+
+    public static List<string> SupportLanguageList = new List<string>
+    {
+        "简体中文",
+        "English"
+    };
 
     public static string ToSettingLanguage(string itemName)
     {
         switch (language)
         {
-            case LanguageType.chinese:
+            case LanguageType.Chinese:
                 {
                     return ItemNameToChinese(itemName);
                 }
-            case LanguageType.english:
+            case LanguageType.English:
                 {
                     return ItemNameToEnglish(itemName);
                 }
@@ -52,8 +58,20 @@ public static class Localization
 
     public static void ChangeSettingLanguage(LanguageType languageType)
     {
-        Debug.Log("change" + languageType);
+        //Debug.Log("change" + languageType);
         language = languageType;
+        PlayerPrefs.SetInt("Language", (int)languageType);
+        if (OnChangeLanguage != null)
+        {
+            OnChangeLanguage();
+        }
+    }
+
+    public static void ChangeSettingLanguage(int languageType)
+    {
+        //Debug.Log("change" + languageType);
+        language = (LanguageType)languageType;
+        PlayerPrefs.SetInt("Language", (int)languageType);
         if (OnChangeLanguage != null)
         {
             OnChangeLanguage();

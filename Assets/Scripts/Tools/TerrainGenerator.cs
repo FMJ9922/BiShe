@@ -154,12 +154,12 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         int tex = x + h * length;
         return tex;
     }
+    public void CheckMesh()
+    {
+        mesh = transform.GetComponent<MeshFilter>().mesh;
+    }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.001F)
     {
-        if (mesh == null)
-        {
-            mesh = transform.GetComponent<MeshFilter>().mesh;
-        }
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
@@ -184,6 +184,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         {
             originMesh = LoadOriginMesh();
         }
+        mesh = transform.GetComponent<MeshFilter>().mesh;
         Vector2[] uv = mesh.uv;
         Vector2[] originUV = originMesh.uv;
         uv[4 * index] = originUV[4 * index];
@@ -594,7 +595,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
 
     public Mesh LoadOriginMesh()
     {
-        //Debug.Log(GameManager.saveData.levelID);
+        Debug.Log(GameManager.saveData.levelID);
         Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + LevelManager.LevelID + "meshData"));
         return mesh;
     }

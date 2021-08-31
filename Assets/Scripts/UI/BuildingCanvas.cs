@@ -205,6 +205,7 @@ public class BuildingCanvas : CanvasBase
         {
             GameObject cost = CommonIcon.GetIcon(info.costResources[i].ItemId, info.costResources[i].ItemNum);
             cost.transform.parent = _roadCost.transform;
+            cost.transform.localScale = Vector3.one;
         }
     }
     public void ContinueBuild()
@@ -276,7 +277,7 @@ public class BuildingCanvas : CanvasBase
             if (buildData.costResources[i].ItemId == 99999) continue;
             GameObject resource = CommonIcon.GetIcon(buildData.costResources[i].ItemId, buildData.costResources[i].ItemNum*TechManager.Instance.BuildResourcesBuff());
             resource.transform.parent = _iconsParent;
-            resource.transform.localScale = Vector3.one * GameManager.Instance.GetScreenRelativeRate();
+            resource.transform.localScale = Vector3.one;
         }
         _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0)*GameManager.Instance.GetScreenRelativeRate();
         _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);

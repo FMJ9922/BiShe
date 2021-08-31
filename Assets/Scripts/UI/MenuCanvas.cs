@@ -13,6 +13,11 @@ public class MenuCanvas : MonoBehaviour
     private void Start()
     {
         saveCanvas.InitCanvas();
+        Localization.OnChangeLanguage += OpenSelectCanvas;
+    }
+    private void OnDestroy()
+    {
+        Localization.OnChangeLanguage -= OpenSelectCanvas;
     }
     public void OpenSelectCanvas()
     {

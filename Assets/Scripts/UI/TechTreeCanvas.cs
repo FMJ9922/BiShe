@@ -76,6 +76,6 @@ public class TechTreeCanvas : CanvasBase
 
     public void ChangePoint(int point)
     {
-        pointText.text = "剩余科技点数：" + point;
+        pointText.text = Localization.ToSettingLanguage("RemainPoints") + point;
     }
 }

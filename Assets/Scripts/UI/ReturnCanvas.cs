@@ -11,11 +11,13 @@ public class ReturnCanvas : CanvasBase
 
     public override void OnOpen()
     {
+        GameManager.Instance.PauseGame();
         gameObject.SetActive(true);
     }
 
     public override void OnClose()
     {
+        GameManager.Instance.ContinueGame();
         gameObject.SetActive(false);
     }
 

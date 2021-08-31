@@ -228,7 +228,8 @@ public class InfoCanvas : CanvasBase
         ChangeOutputIcon(_buildData);
         ChangeInputIcon(_buildData);
         _buildingBase.ChangeFormula();
-        _daysLabel.text = "生产周期:" + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + "天";
+        _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + Localization.ToSettingLanguage("Day1");
+
     }
     /// <summary>
     /// 修改显示的条目
@@ -248,7 +249,7 @@ public class InfoCanvas : CanvasBase
                         _inputsObj.SetActive(true);
                         ChangeInputIcon(buildData);
                     }
-                    _daysLabel.text = "生产周期:" + buildData.formulaDatas[buildData.CurFormula].ProductTime * 7 + "天";
+                    _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + buildData.formulaDatas[buildData.CurFormula].ProductTime * 7 + Localization.ToSettingLanguage("Day1"); ;
                     _openCanvas.SetActive(false);
                     _outputsObj.SetActive(true);
                     ChangeOutputIcon(buildData);
@@ -372,7 +373,7 @@ public class InfoCanvas : CanvasBase
             resource.transform.parent = inIcons;
             resource.transform.localScale = Vector3.one * 1.5f;
         }
-        _daysLabel.text = "生产周期:" + data.formulaDatas[data.CurFormula].ProductTime * 7 + "天";
+        _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + data.formulaDatas[data.CurFormula].ProductTime * 7 + "天";
     }
     /// <summary>
     /// 修改显示的文本
@@ -395,10 +396,10 @@ public class InfoCanvas : CanvasBase
         }
         //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
         RuntimeBuildData data = buildData.runtimeBuildData;
-        _rateLabel.text = "效率:" + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
+        _rateLabel.text = Localization.ToSettingLanguage("效率:") + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
         rateImage.fillAmount = buildData.GetProcess();
 
-        _outputLabel.text = "产出率:" + CastTool.RoundOrFloat(data.Rate * 100) + "%";
+        _outputLabel.text = Localization.ToSettingLanguage("产出率:") + CastTool.RoundOrFloat(data.Rate * 100) + "%";
     }
 
     private void CleanUpAllAttachedChildren(Transform target)

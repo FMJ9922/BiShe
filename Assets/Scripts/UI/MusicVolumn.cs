@@ -7,9 +7,13 @@ public class MusicVolumn : MonoBehaviour
 {
     [SerializeField]Slider slider;
 
-    private void Start()
+    private void Awake()
     {
         slider.onValueChanged.AddListener(SetVolumn);
+        if (PlayerPrefs.HasKey("MusicVolumn"))
+        {
+            slider.value = PlayerPrefs.GetFloat("MusicVolumn")*5;
+        }
     }
 
     private void SetVolumn(float volumn)

@@ -31,7 +31,7 @@ public class LoadAB : MonoBehaviour
             string[] dependencies = manifest.GetAllDependencies(bundleName);
             foreach (string dependency in dependencies)
             {
-                Debug.Log("依赖项：" + dependency);
+                //Debug.Log("依赖项：" + dependency);
                 if (!_abDic.ContainsKey(dependency))
                 {
                     AssetBundle dep = AssetBundle.LoadFromFile("AssetBundles/" + dependency);

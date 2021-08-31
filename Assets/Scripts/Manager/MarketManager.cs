@@ -105,16 +105,24 @@ public class MarketManager : Singleton<MarketManager>
 
     public string GetSellProfitDescribe(CostResource costResource, float profit)
     {
-        return string.Format("{0} 出售{1},数量{2},获利{3}", LevelManager.Instance.LogDate(),
+        return string.Format("{0} {4} {1},{5} {2},{6} {3}", LevelManager.Instance.LogDate(),
             Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
-            CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(profit));
+            CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(profit),
+            Localization.ToSettingLanguage("Sell1"),
+            Localization.ToSettingLanguage("Amount"),
+            Localization.ToSettingLanguage("GetProfit")
+            );
     }
 
     public string GetBuyProfitDescribe(CostResource costResource, float profit)
     {
-        return string.Format("{0} 购买{1},数量{2},花费{3}", LevelManager.Instance.LogDate(),
+        return string.Format("{0} {4} {1},{5} {2},{6} {3}", LevelManager.Instance.LogDate(),
              Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
-            CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(-profit));
+            CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(-profit),
+            Localization.ToSettingLanguage("Buy1"),
+            Localization.ToSettingLanguage("Amount"),
+            Localization.ToSettingLanguage("Cost")
+            );
     }
     public void BuyItem(CostResource costResource)
     {

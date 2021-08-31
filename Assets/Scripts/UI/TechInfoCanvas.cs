@@ -19,8 +19,8 @@ public class TechInfoCanvas : MonoBehaviour
         gameObject.SetActive(true);
         int index = tech.TechId - 40001;
         TechData data = DataManager.GetTechData(tech.TechId);
-        introduce.text = data.Introduce;
-        title.text = data.Name;
+        introduce.text = Localization.ToSettingLanguage(data.Id+"Intro");
+        title.text = Localization.ToSettingLanguage(data.Name);
         transform.position = tech.transform.position + new Vector3(170,125,0);
         //如果没有启动过
         if (!TechManager.Instance.GetTechAvalible(tech.TechId))
@@ -48,14 +48,14 @@ public class TechInfoCanvas : MonoBehaviour
         use.gameObject.SetActive(true);
         if (TechManager.Instance.GetTech(tech.TechId))
         {
-            useText.text = "已采用";
+            useText.text = Localization.ToSettingLanguage("Using");
             use.interactable = false;
         }
         else
         {
-            use.onClick.AddListener(() => { TechManager.Instance.SetTech(tech); useText.text = "已采用"; use.interactable = false; });
+            use.onClick.AddListener(() => { TechManager.Instance.SetTech(tech); useText.text = Localization.ToSettingLanguage("Using"); use.interactable = false; });
             use.interactable = true;
-            useText.text = "采用";
+            useText.text = Localization.ToSettingLanguage("Use");
         }
     }
 

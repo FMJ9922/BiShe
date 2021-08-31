@@ -121,14 +121,14 @@ public class LevelManager : Singleton<LevelManager>
         if (GameManager.saveData == null)
         {
             Scene scene = SceneManager.GetActiveScene();
-
             GameManager.saveData = GameManager.Instance.MakeSaveData(true, int.Parse(scene.name));
             //Debug.Log(GameManager.saveData.levelID);
             InitLevelManager(int.Parse(scene.name));
+            EventManager.TriggerEvent(ConstEvent.OnLoadingOver);
         }
         else
         {
-            InitSavedLevelManager(GameManager.saveData);
+            StartCoroutine(InitSavedLevelManager(GameManager.saveData));
         }
         //Debug.Log("START");
         EventManager.StartListening(ConstEvent.OnPauseGame, PauseGame);
@@ -203,11 +203,8 @@ public class LevelManager : Singleton<LevelManager>
         saveData.weekProgress = WeekProgress;
     }
 
-    public void InitSavedLevelManager(SaveData saveData)
+    public IEnumerator InitSavedLevelManager(SaveData saveData)
     {
-        Debug.Log("InitSave");
-        System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        sw.Start();
         dayTime = saveData.dayTime;
         LevelID = saveData.levelID;
         year = saveData.year;
@@ -218,27 +215,49 @@ public class LevelManager : Singleton<LevelManager>
         pause = saveData.pause;
         Timer = saveData.timer;
         WeekProgress = saveData.weekProgress;
-        sw.Stop();
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载科技树");
+        yield return 0;
         TechManager.Instance.InitTechBySave(saveData);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载库存资源");
+        yield return 0;
         ResourceManager.Instance.InitSavedResourceManager(saveData);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载地形模型");
+        yield return 0;
         TerrainGenerator.Instance.LoadTerrainFromSaveData(saveData);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载地图配置");
+        yield return 0;
         MapManager.Instance.InitMapManager();
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在种树");
+        yield return 0;
         TreePlanter.Instance.PlantSaveTrees(saveData);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载水面");
+        yield return 0;
         InitSaveWater(saveData);
         InitWaterMat();
-        System.TimeSpan dt = sw.Elapsed;
-        sw.Start();
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载已有建筑");
+        yield return 0;
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(saveData.buildingDatas);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载桥梁");
+        yield return 0;
         BuildManager.Instance.InitSaveBridges(saveData.bridgeDatas);
-        sw.Stop();
-        dt = sw.Elapsed;
-        Debug.Log("BuildManager:" + dt.TotalSeconds + "秒");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载市场");
+        yield return 0;
         MarketManager.Instance.InitSavedMarketManager();
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载小车车");
+        yield return 0;
         TrafficManager.Instance.InitSavedTrafficManager(saveData.driveDatas);
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载UI");
+        yield return 0;
         //sw.Restart();
         MainInteractCanvas.InitCanvas();
-
+        GameManager.Instance.sw.Stop();
+        System.TimeSpan dt = GameManager.Instance.sw.Elapsed;
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "加载完毕！用时"+ dt.TotalSeconds + "秒");
+        yield return 0;
+        GameManager.Instance.sw.Reset();
+        EventManager.TriggerEvent(ConstEvent.OnLoadingOver);
+        Debug.Log("AllInit:" + dt.TotalSeconds + "秒");
         //Debug.Log("Continue");
         GameManager.Instance.ContinueGame();
     }

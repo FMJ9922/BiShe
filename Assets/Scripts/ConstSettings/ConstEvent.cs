@@ -44,4 +44,10 @@ public class ConstEvent
     public const string OnSettleAccount = "OnSettleAccount";//市场结算事件
     public const string OnWeekProgress = "OnWeekProgree";//周进度
     #endregion
+
+    #region 加载事件
+
+    public const string OnLoadingTips = "OnLoadingTips";//加载提示
+    public const string OnLoadingOver = "OnLoadingOver";//加载完毕
+    #endregion
 }

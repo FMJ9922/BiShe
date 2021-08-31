@@ -115,8 +115,8 @@ public enum ItemType
 }
 public enum LanguageType
 {
-    chinese = 0,
-    english = 1,
+    Chinese = 0,
+    English = 1,
 }
 
 public enum TimeScale
@@ -213,3 +213,4 @@ public enum WarningType
     noResources = 1,
     noRoad = 2,
 }
+

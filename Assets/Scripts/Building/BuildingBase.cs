@@ -38,11 +38,12 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
+        
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<BoxCollider>().enabled = true;
-        
+
         if (!buildFlag)
         {
             buildFlag = true;
@@ -62,7 +63,7 @@ public class BuildingBase : MonoBehaviour
         else
         {
             RestartBuildingFunction();
-            MapManager.Instance.BuildFoundation(vector2Ints, 15, 0, false); 
+            //MapManager.Instance.BuildFoundation(vector2Ints, 15, 0, false);
             //TerrainGenerator.Instance.FlatGround
             // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
@@ -122,8 +123,6 @@ public class BuildingBase : MonoBehaviour
     {
         if (runtimeBuildData.formulaDatas.Length>0)
         {
-            //Debug.Log(runtimeBuildData.CurFormula);
-            //Debug.Log(runtimeBuildData.formulaDatas.Length);
             formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         }
         parkingGridIn = GetInParkingGrid();
@@ -134,7 +133,6 @@ public class BuildingBase : MonoBehaviour
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         if (runtimeBuildData.tabType!=BuildTabType.house)
         {
-            //Debug.Log(gameObject.name + " ADD " + runtimeBuildData.CurPeople);
             ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
         }
     }

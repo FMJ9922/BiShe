@@ -199,8 +199,12 @@ public class BuildManager : Singleton<BuildManager>
         buildingBase.direction = buildData.SaveDir;
         //Debug.Log(buildData.SaveDir);
         buildingBase.buildFlag = true;
-        buildingBase.OnConfirmBuild(Vector2IntSerializer.Unbox(buildData.SaveTakenGrids));
+        
+        Vector2Int[] vector2Ints = Vector2IntSerializer.Unbox(buildData.SaveTakenGrids);
+        
+        buildingBase.OnConfirmBuild(vector2Ints);
         buildingBase.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)buildingBase.direction+1));
+        
     }
 
     /// <summary>
@@ -302,12 +306,12 @@ public class BuildManager : Singleton<BuildManager>
         Debug.Log(sum);*/
         if (MapManager.Instance.GetGridType(startGrid) == GridType.occupy)
         {
-            NoticeManager.Instance.InvokeShowNotice("道路起点不能设在已被占用的位置");
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路起点不能设在已被占用的位置"));
             return false;
         }
         if (MapManager.CheckIsInWater(startGrid))
         {
-            NoticeManager.Instance.InvokeShowNotice("道路起点不能设在水里");
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路终点不能在水里"));
             return false;
         }
         return true;
@@ -335,12 +339,12 @@ public class BuildManager : Singleton<BuildManager>
     {
         if (!CheckRoadPreShowAvalible())
         {
-            NoticeManager.Instance.InvokeShowNotice("道路不能与建筑重叠");
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路不能与建筑重叠"));
             return;
         }
         if (CheckRoadEndPosInWater())
         {
-            NoticeManager.Instance.InvokeShowNotice("道路终点不能在水里");
+            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路终点不能在水里"));
             return;
         }
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
@@ -612,14 +616,37 @@ public class BuildManager : Singleton<BuildManager>
     private bool CheckRoadPreShowAvalible()
     {
         bool res = true;
+        int dir = 0;
+        Vector3 adjust = Vector3.zero;
+        Vector3 size = Vector3.zero;
+        switch (roadDirection)
+        {
+            case Direction.down:
+                dir = 1;
+                adjust += new Vector3(0, 0, -2);
+                break;
+            case Direction.up:
+                dir = 1;
+                break;
+            case Direction.right:
+                dir = 2;
+                break;
+            case Direction.left:
+                adjust += new Vector3(-2, 0, 0);
+                dir = 2;
+                break;
+        }
+        Vector3 delta = CastTool.CastDirectionToVector(dir);
         for (int i = 0; i < preRoads.Count; i++)
         {
-            bool canBuild = !MapManager.CheckRoadOverlap(MapManager.GetCenterGrid(preRoads[i].transform.position));
+            bool canBuild = !MapManager.CheckRoadOverlap(MapManager.GetCenterGrid(preRoads[i].transform.position + adjust))
+                && !MapManager.CheckRoadOverlap(MapManager.GetCenterGrid(preRoads[i].transform.position - delta + adjust));
             res &= canBuild;
             ChangeRoadPfbColor(canBuild, preRoads[i]);
         }
         return res;
     }
+    private Vector3 va = new Vector3(-1, 0, -1);
 
     private void ChangeRoadPfbColor(bool green, GameObject road)
     {
@@ -673,7 +700,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             MineBuilding mine = (MineBuilding)currentBuilding;
             float rich = mine.SetRichness(targetGrids);
-            NoticeManager.Instance.ShowIconNotice("矿脉丰度:" + CastTool.RoundOrFloat(rich * 100) + "%");
+            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage("矿脉丰度:") + CastTool.RoundOrFloat(rich * 100) + "%");
         }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
