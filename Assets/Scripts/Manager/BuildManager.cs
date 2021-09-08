@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class SelectLightInfo
+{
+    public Vector3 pos;
+    public Quaternion quaternion;
+    public Vector3 scale;
+    public Color color = Color.white;
+}
 public class BuildManager : Singleton<BuildManager>
 {
     #region
@@ -21,6 +28,10 @@ public class BuildManager : Singleton<BuildManager>
     private GameObject arrowPfb;
     [SerializeField]
     private Transform roadParent;
+    [SerializeField]
+    private GameObject selectLight;
+    [SerializeField]
+    private GameObject rangeLight;
 
     private Transform arrows;
 
@@ -33,6 +44,7 @@ public class BuildManager : Singleton<BuildManager>
     private Material[] mats;
     private Vector3 hidePos = new Vector3(0, -100, 0);
     private Direction lastDir = Direction.right;
+    private SelectLightInfo lightInfo;
 
     //修路相关
     private Vector3 roadStartPos;//道路建造起始点
@@ -60,10 +72,43 @@ public class BuildManager : Singleton<BuildManager>
     {
         //ShowGrid(false);
         IsInBuildMode = false;
+        EventManager.StartListening<SelectLightInfo>(ConstEvent.OnSelectLightOpen, OpenSelectLight);
+        EventManager.StartListening(ConstEvent.OnSelectLightClose, CloseSelectLight);
+        EventManager.StartListening<SelectLightInfo>(ConstEvent.OnRangeLightOpen, OpenRangeLight);
+        EventManager.StartListening(ConstEvent.OnRangeLightClose, CloseRangeLight);
     }
-    public void BuildTest()
-    {
 
+    private void OnDestroy()
+    {
+        EventManager.StopListening<SelectLightInfo>(ConstEvent.OnSelectLightOpen, OpenSelectLight);
+        EventManager.StopListening(ConstEvent.OnSelectLightClose, CloseSelectLight);
+        EventManager.StopListening<SelectLightInfo>(ConstEvent.OnRangeLightOpen, OpenRangeLight);
+        EventManager.StopListening(ConstEvent.OnRangeLightClose, CloseRangeLight);
+    }
+    public void OpenSelectLight(SelectLightInfo info)
+    {
+        selectLight.transform.position = info.pos;
+        selectLight.transform.localScale = info.scale;
+        selectLight.transform.rotation = info.quaternion;
+        selectLight.SetActive(true);
+    }
+
+    public void CloseSelectLight()
+    {
+        selectLight.SetActive(false);
+    }
+
+    public void OpenRangeLight(SelectLightInfo info)
+    {
+        rangeLight.transform.position = info.pos;
+        rangeLight.transform.localScale = info.scale;
+        rangeLight.transform.rotation = info.quaternion;
+        rangeLight.SetActive(true);
+    }
+
+    public void CloseRangeLight()
+    {
+        rangeLight.SetActive(false);
     }
 
     private void CleanUpAllAttachedChildren(Transform target)
@@ -656,6 +701,8 @@ public class BuildManager : Singleton<BuildManager>
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
         currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
+        lightInfo.pos = currentBuilding.transform.position;
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, lightInfo);
         //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckBuildingOverlap();
     }
@@ -675,6 +722,9 @@ public class BuildManager : Singleton<BuildManager>
             isTurn = true;
         }
         currentBuilding.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, currentBuilding.Size, isTurn);
+        lightInfo.pos = currentBuilding.transform.position;
+        lightInfo.quaternion = currentBuilding.transform.rotation;
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, lightInfo);
         //Debug.Log(InputManager.Instance.LastGroundRayPos);
         CheckBuildingOverlap();
         //gridHightLight.transform.position = CalculateCenterPos(InputManager.Instance.LastGroundRayPos, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
@@ -824,6 +874,13 @@ public class BuildManager : Singleton<BuildManager>
         isTurn = false;
         isCurCanBuild = false;
         IsInBuildMode = true;
+        lightInfo = new SelectLightInfo
+        {
+            pos = currentBuilding.transform.position,
+            quaternion = currentBuilding.transform.rotation,
+            scale = new Vector3(currentBuilding.Size.y * 2, 10, currentBuilding.Size.x * 2),
+        };
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, lightInfo);
         EventManager.StartListening(ConstEvent.OnGroundRayPosMove, moveAc);
         EventManager.StartListening(ConstEvent.OnMouseLeftButtonDown, confirmAc);
         EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, cancelAc);
@@ -853,6 +910,7 @@ public class BuildManager : Singleton<BuildManager>
         //currentBuilding = null;
         targetGrids = null;
         IsInBuildMode = false;
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightClose);
     }
     //private void ShowGrid(bool isShow)
     //{

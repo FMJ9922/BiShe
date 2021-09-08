@@ -398,7 +398,7 @@ MonoBehaviour:
     Formulas: 
     Population: 10
     MaxStorage: 100
-    InfluenceRange: 200
+    InfluenceRange: 100
     FrontBuildingId: 0
     RearBuildingId: 20012
     Length: 12
@@ -580,7 +580,7 @@ MonoBehaviour:
     Formulas: 
     Population: 16
     MaxStorage: 100
-    InfluenceRange: 200
+    InfluenceRange: 110
     FrontBuildingId: 20004
     RearBuildingId: 20013
     Length: 12
@@ -602,7 +602,7 @@ MonoBehaviour:
     Formulas: 
     Population: 20
     MaxStorage: 100
-    InfluenceRange: 200
+    InfluenceRange: 120
     FrontBuildingId: 20012
     RearBuildingId: 0
     Length: 12
@@ -624,7 +624,7 @@ MonoBehaviour:
     Formulas: 59c30000
     Population: 10
     MaxStorage: 100
-    InfluenceRange: 60
+    InfluenceRange: 80
     FrontBuildingId: 20008
     RearBuildingId: 20015
     Length: 7
@@ -646,7 +646,7 @@ MonoBehaviour:
     Formulas: 59c30000
     Population: 10
     MaxStorage: 100
-    InfluenceRange: 60
+    InfluenceRange: 100
     FrontBuildingId: 20014
     RearBuildingId: 0
     Length: 7
@@ -1844,118 +1844,157 @@ MonoBehaviour:
       chinese: "    \u79FB\u52A8\uFF08\u4EE5\u4E0B\u5747\u53EF\uFF09\uFF1A\n-\u952E\u76D8\u6309\u952EWASD\n-\u9F20\u6807\u632A\u5230\u5C4F\u5E55\u8FB9\u7F18\n-\u6309\u4F4F\u9F20\u6807\u6EDA\u8F6E\u7684\u540C\u65F6\u79FB\u52A8\u9F20\u6807\n\n   
         \u7F29\u653E\uFF1A\n-\u9F20\u6807\u6EDA\u8F6E\u63A7\u5236\u7F29\u653E\n\n   
         \u65CB\u8F6C\uFF1A\n-\uFF08\u6682\u4E0D\u652F\u6301\u65CB\u8F6C\u955C\u5934\uFF0C\u4EE5\u540E\u4F1A\u652F\u6301\uFF09\n\n\n\n"
-      english: "     Move:\n-Keyboard WASD\n-Mouse move to the edge of the screen\n-Move
-        the mouse while holding down the mouse wheel\n\n     Zoom:\n-Scroll mouse
-        wheel to zoom\n\n     Rotate:\n-(It will be supported in the future)"
+      english: 'Pan camera (each of the following ways will work):
+
+        -Press
+        W/A/S/D on the keyboard;
+
+        -Move the mouse to the edge of screen;
+
+        -
+        Hold the mouse wheel and move the mouse.
+
+        Zoom camera:
+
+        -Use
+        mouse wheel to zoom in and out.
+
+        Rotate camera:
+
+        - (We will
+        support this function in the future.)
+
+'
     - code: IntroBuildRoad
       chinese: "    \u4FEE\u8DEF\u6D41\u7A0B\uFF1A\n-\u70B9\u51FB\u5EFA\u9020\u6309\u94AE\u91CC\u7684\u9053\u8DEF\u9875\u7B7E\uFF0C\u70B9\u51FB\u4E00\u79CD\u9053\u8DEF\u8FDB\u5165\u4FEE\u8DEF\u6A21\u5F0F\n-\u70B9\u51FB\u7B2C\u4E00\u4E0B\u786E\u5B9A\u9053\u8DEF\u7684\u8D77\u70B9\n-\u79FB\u52A8\u9F20\u6807\uFF08\u4E0D\u7528\u6309\u4F4F\u9F20\u6807\u5DE6\u952E\uFF09\n-\u70B9\u51FB\u7B2C\u4E8C\u4E0B\u786E\u5B9A\u9053\u8DEF\u7684\u7EC8\u70B9\n-\u7EC8\u70B9\u786E\u5B9A\u540E\uFF0C\u4F1A\u5F39\u51FA\u786E\u8BA4\u5F39\u7A97\uFF0C\u70B9\u52FE\u786E\u8BA4\u5EFA\u9020\uFF0C\u70B9\u53C9\u53D6\u6D88\u5EFA\u9020\u3002\n-\u8D44\u6E90\u5145\u8DB3\u7684\u60C5\u51B5\u4E0B\uFF0C\u5C06\u5B8C\u6210\u5EFA\u9020\u3002\n\n   
         \u63D0\u793A\uFF1A\n-\u9053\u8DEF\u7684\u8D77\u70B9\u5FC5\u987B\u653E\u7F6E\u5728\u5DF2\u6709\u7684\u9053\u8DEF\u4E0A\uFF0C\u4E14\u7EC8\u70B9\u4E0D\u80FD\u653E\u7F6E\u5728\u6C34\u4E2D\uFF0C\u4E2D\u95F4\u4E0D\u80FD\u7A7F\u8FC7\u5176\u5B83\u5EFA\u7B51\u7269\uFF0C\u53EF\u4EE5\u7A7F\u8FC7\u9053\u8DEF\u3002\n-\u6A2A\u7A7F\u8FC7\u6C34\u9762\u7684\u9053\u8DEF\u4F1A\u81EA\u52A8\u53D8\u6210\u6865\u6881\uFF08\u5E76\u4E14\u4E0D\u989D\u5916\u4EA7\u751F\u8D39\u7528\uFF09\u3002\n-\u53EF\u4EE5\u8986\u76D6\u5DF2\u6709\u9053\u8DEF\u6765\u5B9E\u73B0\u5347\u7EA7\u9053\u8DEF\u3002\n"
-      english: "    Road construction:\n-Click the road tab in the build button,
-        click a road icon to enter the road construction mode\n-Click the first time
-        to determine the starting point of the road\n-Move the mouse (no need to
-        hold down the left mouse button)\n-Click the second time to confirm the end
-        of the road\n-After the end point is confirmed, a confirmation pop-up window
-        will pop up, click to confirm the construction, and click the cross to cancel
-        the construction.\n-If resources are sufficient, construction will be completed.\n\n    
-        Hint:\n-The starting point of the road must be placed on an existing road,
-        and the ending point cannot be placed in the water, and other buildings cannot
-        be crossed in the middle, but the road can be crossed.\n-The road that crosses
-        the water surface will automatically become a bridge (and no additional cost
-        will be incurred).\n-Can cover existing roads to achieve upgrade roads."
+      english: "How to build a road:\n-Click the Build button and select a road type
+        from the Road menu\n-Click to select a start point for the road;\n-Move the
+        mouse (don\u2019t have to hold LMB);\n-Click again to select an end point;\n-
+        Once the end point is selected, a window will pop up to confirm if you want
+        to build the road in this way. Select \u201C\u221A\u201D to confirm the construction
+        or \u201C\xD7\u201D to cancel it.\n\nTips:\n-New roads should start from
+        the roads that have already existed and could not end in water. Roads should
+        not cross any structure, except for another road;\n-The overwater part of
+        roads will automatically turn into bridges;\n-You can upgrade your roads
+        by covering it with an advanced road type.\n"
     - code: IntroConstruction
       chinese: "    \u5EFA\u9020\u63D0\u793A\uFF1A\n-\u70B9\u51FB\u53F3\u4E0B\u89D2\u5EFA\u9020\u6309\u94AE\u5F00\u542F\u5EFA\u7B51\u7269\u5EFA\u9020\u83DC\u5355\u3002\n-\u70B9\u51FB\u9875\u7B7E\u53EF\u4EE5\u5207\u6362\u5EFA\u7B51\u7C7B\u578B\u3002\n-\u70B9\u51FB\u76F8\u5E94\u5EFA\u7B51\u7684\u56FE\u6807\u4F1A\u5728\u9F20\u6807\u5904\u751F\u6210\u5EFA\u7B51\u9884\u89C8\u3002\n-\u5F53\u5EFA\u7B51\u9884\u89C8\u662F\u7EA2\u8272\u7684\u65F6\u5019\u4E0D\u80FD\u5EFA\u9020\uFF0C\u7EFF\u8272\u7684\u65F6\u5019\u624D\u53EF\u4EE5\u5EFA\u9020\u3002\n-\u5EFA\u7B51\u5FC5\u987B\u7D27\u8D34\u653E\u5728\u8DEF\u7684\u65C1\u8FB9\uFF0C\u5C06\u7EFF\u8272\u7BAD\u5934\u4E00\u4FA7\u8D34\u4F4F\u9053\u8DEF\u3002\u4E0D\u80FD\u4E0E\u5176\u4ED6\u5EFA\u7B51\u91CD\u5408\uFF0C\u4E5F\u4E0D\u80FD\u9020\u5728\u6C34\u91CC\u3002\n-\u6309R\u53EF\u4EE5\u65CB\u8F6C\u5EFA\u7B51\u3002\n-\u9F20\u6807\u53F3\u952E\u53EF\u4EE5\u9000\u51FA\u5EFA\u9020\u72B6\u6001\u3002\n-\u53EF\u4EE5\u8FDE\u7EED\u5EFA\u9020\n\n   
         \u7279\u6B8A\u8BF4\u660E\uFF1A\n-\u6E14\u6E2F\u6709\u8239\u7684\u4E00\u8FB9\u9700\u8981\u9020\u5728\u6C34\u91CC\uFF0C\u7BAD\u5934\u7684\u4E00\u904D\u8981\u8D34\u4F4F\u9053\u8DEF\u3002\n-\u77FF\u573A\u5728\u7070\u8272\u5730\u76AE\u4E0A\u624D\u4F1A\u6709\u4EA7\u51FA\u3002\n-\u5F53\u4F10\u6728\u573A\u5468\u56F4\u6CA1\u6709\u6210\u719F\u7684\u6811\u6728\u65F6\u4E0D\u4F1A\u6709\u4EA7\u51FA\u3002\n\n"
-      english: "    Construction tips:\n-Click the build button in the lower right
-        corner to open the building construction menu.\n-Click the tab to switch
-        the building type.\n-Clicking on the icon of the corresponding building will
-        generate a preview of the building at the mouse.\n-You cannot build when
-        the building preview is red, and can only be built when it is green.\n-The
-        building must be placed close to the road, and the green arrow side should
-        be close to the road. It cannot be overlapped with other buildings, nor can
-        it be built in water.\n-Press R to rotate the building.\n-The right mouse
-        button can exit the construction state.\n-Same Building can be built continuously\n\n    
-        Special Instructions:\n-The side of the fishing port with boats needs to
-        be built in the water, and the arrow should stick to the road.\n-The mine
-        will only produce output on the gray land.\n-There will be no output when
-        there are no mature trees around the logging camps."
+      english: 'How to build a structure:
+
+        -Click the Build button at the
+        bottom right corner to open the Build menu;
+
+        -You can choose the
+        type of structures you want to build by clicking the submenus;
+
+        -A
+        building preview will generate at your cursor after you select the structure
+        that you wish to build from Build menu.
+
+        -The building preview is
+        green, which means this structure can be placed here. Otherwise, you should
+        locate it at somewhere else;
+
+        -Structures must be built next to roads.
+        Green arrows are their entrance points which must be attached to roads. Structures
+        cannot be built on another structure or in the water.
+
+        -Press R to
+        rotate the structure;
+
+        -Click RMB to exit the Build mode.
+
+
+        Tips:
+
+        -
+        Fishing dock should be placed at water bank with its entrance (green arrows)
+        attached to road.
+
+        -Mine should be placed only at grey-colored land
+        to produce iron ores and stone.
+
+        - Logging camps will stop outputting
+        logs when there is no fully grown tree nearby.'
     - code: IntroBuildingInfo
       chinese: "    \u751F\u4EA7\u9762\u677F\uFF1A\n-\u5728\u975E\u5EFA\u9020\u72B6\u6001\u4E0B\u70B9\u51FB\u5EFA\u7B51\u4F1A\u6253\u5F00\u751F\u4EA7\u9762\u677F\u3002\n-\u751F\u4EA7\u9762\u677F\u53EF\u4EE5\u8FDB\u884C\u5207\u6362\u751F\u4EA7\u7269\u54C1\uFF0C\u589E\u51CF\u5DE5\u4EBA\uFF0C\u5347\u7EA7\u548C\u62C6\u9664\u7684\u64CD\u4F5C\u3002\n-\u6548\u7387\u4E0E\u5DE5\u4EBA\u6570\u91CF\u6210\u6B63\u6BD4\u3002\u653F\u7B56\uFF08\u79D1\u6280\uFF09\u53EF\u4EE5\u5F71\u54CD\u6548\u7387\u3002\n-\u751F\u4EA7\u5468\u671F\u7ED3\u675F\u65F6\uFF0C\u4EA7\u51FA\u7269\u54C1\u6570\u91CF=\u751F\u4EA7\u7387*\u6807\u51C6\u4EA7\u51FA\u91CF\u3002\n-\u5347\u7EA7\u9700\u8981\u82B1\u8D39\u6750\u6599\u3002\u5347\u7EA7\u540E\u5EFA\u7B51\u7684\u6807\u51C6\u4EA7\u51FA\u91CF\u66F4\u9AD8\uFF0C\u90E8\u5206\u5EFA\u7B51\u4F1A\u89E3\u9501\u65B0\u914D\u65B9\u3002\n\n   
         \u6CA1\u6709\u4EA7\u51FA\uFF1F\u53EF\u80FD\u7684\u539F\u56E0\n-\u6CA1\u6709\u5DE5\u4EBA\u3002\u6709\u7A7A\u95F2\u5C45\u6C11\u65F6\uFF0C\u65B0\u9020\u751F\u4EA7\u5EFA\u7B51\u4F1A\u81EA\u52A8\u586B\u6EE1\u5DE5\u4EBA\u3002\u4F46\u662F\u9020\u6C11\u623F\u5E76\u4E0D\u4F1A\u81EA\u52A8\u7ED9\u6709\u7A7A\u4F4D\u7684\u751F\u4EA7\u5EFA\u7B51\u589E\u52A0\u5DE5\u4EBA\u3002\n-\u6CA1\u6709\u539F\u6599\u3002\u68C0\u67E5\u5E93\u5B58\uFF08\u901A\u8FC7\u4ED3\u5E93\uFF09\uFF0C\u770B\u770B\u539F\u6599\u662F\u5426\u6709\u5269\u4F59\u3002\u7279\u522B\u5730\uFF0C\u5982\u679C\u4F10\u6728\u573A\u5468\u56F4\u6CA1\u6709\u6210\u5E74\u7684\u6811\u6728\uFF0C\u4E5F\u4E0D\u4F1A\u6709\u4EA7\u51FA\u3002\n-\u6CA1\u80FD\u8FD0\u53BB\u5E02\u573A\u3002\u5F53\u7269\u54C1\u88AB\u751F\u4EA7\u51FA\u6765\u65F6\uFF0C\u5E76\u4E0D\u4F1A\u7B2C\u4E00\u65F6\u95F4\u5C31\u88AB\u7EB3\u5165\u5E93\u5B58\uFF0C\u5FC5\u987B\u901A\u8FC7\u8F66\u8F86\u8FD0\u5F80\u5E02\u573A\u624D\u4F1A\u88AB\u7EDF\u8BA1\u4E3A\u5E93\u5B58\u3002\u5E02\u573A\u6709\u8303\u56F4\u9650\u5236\uFF0C\u79BB\u7684\u592A\u8FDC\u4E0D\u4F1A\u8FD0\u3002\n-\u5E93\u5B58\u6EE1\u4E86\u3002\u70B9\u51FB\u4E00\u4E2A\u4ED3\u5E93\uFF0C\u67E5\u770B\u4ED3\u5E93\u5E93\u5B58\u8FDB\u5EA6\u6761\uFF0C\u662F\u5426\u5DF2\u6EE1\u3002\u6EE1\u4E86\u7684\u8BDD\u65B0\u8FD0\u8FDB\u6765\u7684\u7269\u54C1\u4F1A\u88AB\u76F4\u63A5\u820D\u5F03\u3002\n-Bug\u3002\u5982\u679C\u4EE5\u4E0A\u90FD\u6CA1\u6709\u95EE\u9898\uFF0C\u90A3\u6781\u6709\u53EF\u80FD\u662FBug\u4E86\uFF0C\u5EFA\u8BAE\u7ACB\u5373\u5B58\u6863\u5E76\u8BFB\u6863\uFF0C\u770B\u662F\u5426\u80FD\u89E3\u51B3\u95EE\u9898\u3002"
-      english: "    Production panel:\n-Clicking on the building in the non-built
-        state will open the production panel.\n-The production panel can switch production
-        items, increase or decrease workers, upgrade and dismantle operations.\n-Efficiency
-        is proportional to the number of workers. Policy (technology) can affect
-        efficiency.\n-At the end of the production cycle, the number of output items
-        = productivity * standard output.\n-Upgrading requires materials. The standard
-        output of the upgraded buildings is higher, and some buildings will unlock
-        new formulas.\n\n    No output? Possible reasons\n-No workers. When there
-        are idle residents, new production buildings will automatically fill up with
-        workers. However, building houses will not automatically add workers to production
-        buildings with vacancies.\n-No ingredients. Check the inventory (through
-        the warehouse) to see if there are any remaining raw materials. In particular,
-        if there are no adult trees around the logging farm, there will be no output.\n-Failed
-        to ship to the market. When an item is produced, it will not be included
-        in the inventory at the first time. It must be transported to the market
-        by vehicle to be counted as inventory. The market is limited in scope, and
-        it will not be shipped if it is too far away.\n-The inventory is full. Click
-        on a warehouse to check the warehouse inventory progress bar and see if it
-        is full. If it is full, the newly shipped items will be discarded directly.\n-Bug.
-        If there is no problem with the above, it is most likely a bug. It is recommended
-        to archive and read the file immediately to see if the problem can be solved."
+      english: "Production Control:\n-Click a structure to open its production control
+        window when you are not in the Build mode.\n-You can shift the product type,
+        increase or reduce the number of workers and upgrade or remove the structure
+        through this window.\n-Production Efficiency is proportionate to the number
+        of workers working in the structure and can be influenced by the policies
+        in use.\n-At the end of a production cycle, the real product output = production
+        efficiency * standard output.\n-You have to prepare construction materials
+        to upgrade your structures. Upgraded structures have a greater standard output,
+        and new product lines can be unlocked in some of them. \n\nNo products output?
+        This may be caused by the following reasons:\n-Lack of workers. Jobless residents
+        will be directly assigned to newly-built productive structures. But new residents
+        from newly-built folk house will not be automatically assigned to productive
+        structures with vacancies.\n-Lack of raw materials. Check your inventory
+        at your warehouse to see if there is any raw material left. It should be
+        noted that logging camps will stop outputting logs when there is no fully
+        grown tree nearby.\n-Too far to reach the market. Products produced in productive
+        structures will not be immediately listed in the inventory, but after being
+        transported into market. If a structure is too far away from the market,
+        its products may not get into the market.\n-Not enough storage. Click your
+        warehouses to check if they are full. Newly-produced products may be discarded
+        if warehouses are full.\n-Bug. If you check all the items above and find
+        no problems with them, you may meet a bug. We recommend you to save the game
+        and reload to see if the problem is solved.\n"
     - code: IntroDestroy
       chinese: "    \u62C6\u9664\uFF1A\n-\u5EFA\u7B51\uFF1A\u70B9\u5EFA\u7B51\u540E\u5F39\u51FA\u751F\u4EA7\u9762\u677F\uFF0C\u70B9\u51FB\u62C6\u9664\u6309\u94AE\u62C6\u9664\u3002\n-\u9053\u8DEF\uFF1A\u70B9\u51FB\u5EFA\u9020\u680F\u5DE6\u4FA7\u7684\u62C6\u9664\u9053\u8DEF\u6309\u94AE\uFF0C\u70B9\u4E00\u6B21\u62C6\u4E00\u6B21\uFF0C\u6682\u65F6\u4E0D\u652F\u6301\u6309\u4F4F\u8FDE\u7EED\u62C6\u9664\u3002\n-\u8FD4\u8FD8\uFF1A\u5EFA\u7B51\u62C6\u9664\u8FD4\u8FD875%\uFF0C\u9053\u8DEF\u62C6\u9664\u4E0D\u8FD4\u8FD8\u8D44\u6E90\u3002\n   
         \n    \u8B66\u544A\uFF1A\n-\u62C6\u9664\u6700\u540E\u4E00\u4E2A\u5E02\u573A\u53EF\u80FD\u5BFC\u81F4\u6E38\u620F\u5D29\u6E83\u3002"
-      english: "    Destroy:\n-Building: Click on the building to pop up the production
-        panel, click the demolish button to demolish.\n-Road: Click the button to
-        remove the road on the left side of the construction panel, click once to
-        remove once, for the time being, continuous removal by pressing and holding
-        is not supported.\n-Return: 75% will be returned for demolition of buildings,
-        and no resources will be returned for demolition of roads.\n    \n     Warning:\n-Demolition
-        of the last market may cause the game to crash."
+      english: "How to remove:\n-Structure: Click a structure to open its production
+        control window, and select \u201CRemove\u201D to remove it.\n-Road: Click
+        \u201CRoad Removal\u201D button from Build menu.\n-Resource Recovery: 75%
+        of the resources you use in construction will be retrieved when you remove
+        a structure, and no resource will be retrieved when you remove a road.\n\nWarning:
+        The game will crash when you remove the last market in your town.\n"
     - code: IntroMarket
       chinese: "    \u529F\u80FD\uFF1A\n-\u4E3A\u9644\u8FD1\u7684\u751F\u4EA7\u5EFA\u7B51\u63D0\u4F9B\u670D\u52A1\u3002\n-\u4E3A\u5C0F\u9547\u63D0\u4F9B\u4ECE\u5916\u754C\u8D2D\u4E70\u6216\u5356\u51FA\u7269\u54C1\u7684\u529F\u80FD\u3002\n\n   
         \u4E70\u5356\u89C4\u5219\uFF1A\n-\u6BCF\u5468\u7ED3\u675F\u8FDB\u884C\u4E00\u6B21\u7ED3\u7B97\u3002\n-\u4E70\u5165\u4E0D\u9650\u5236\u7269\u54C1\u79CD\u7C7B\uFF0C\u5356\u51FA\u6BCF\u5173\u9650\u5236\u4E86\u4E0D\u540C\u7684\u7269\u54C1\u79CD\u7C7B\uFF08\u6839\u636E\u73A9\u5BB6\u53CD\u9988\uFF0C\u6B64\u6761\u4EE5\u540E\u4F1A\u6539\uFF09\u3002\n-\u4E0D\u7BA1\u4E70\u5165\u8FD8\u662F\u5356\u51FA\uFF0C\u6BCF\u69FD\u4F4D\u6BCF\u5468\u9650\u5236\u4EA4\u6613\u6570\u91CF\u9ED8\u8BA4\u4E0A\u9650\u4E3A200
         \u3002\u6570\u91CF\u53D7\u653F\u7B56\u5F71\u54CD\u3002\n-\u70B9\u52FE\u4EE3\u8868\u786E\u8BA4\u4EA4\u6613\uFF0C\u70B9\u53C9\u4EE3\u8868\u53D6\u6D88\u4EA4\u6613\u3002\u5373\u663E\u793A\u52FE\u7684\u65F6\u5019\u6CA1\u6709\u5728\u4EA4\u6613\uFF0C\u663E\u793A\u53C9\u7684\u65F6\u5019\u662F\u6B63\u5728\u7B49\u5F85\u5230\u5468\u672B\u4EA4\u6613\u3002\n\n   
         \u4EA4\u6613\u65B9\u5F0F\uFF1A\n-\u4E00\u6B21\u3002\u4EA4\u6613\u4E00\u6B21\u540E\u81EA\u52A8\u53D6\u6D88\u4EA4\u6613\u3002\n-\u6BCF\u5468\u3002\u6BCF\u5468\u90FD\u4F1A\u6301\u7EED\u4EA4\u6613\u3002\n-\u7EF4\u6301\u3002\u5F53\u5904\u4E8E\u4E70\u5165\u65F6\uFF0C\u5F53\u5E93\u5B58\u6570\u91CF\u4F4E\u4E8E\u8BBE\u5B9A\u7684\u7EF4\u6301\u6570\u91CF\u65F6\uFF0C\u4F1A\u81EA\u52A8\u4E70\u5165\u76F4\u5230\u5E93\u5B58\u7B49\u4E8E\u7EF4\u6301\u6570\u91CF\u3002\u5F53\u5904\u4E8E\u5356\u51FA\u65F6\uFF0C\u5F53\u5E93\u5B58\u6570\u91CF\u591A\u4F59\u8BBE\u5B9A\u7684\u7EF4\u6301\u6570\u91CF\u65F6\uFF0C\u4F1A\u81EA\u52A8\u5356\u51FA\uFF0C\u4F46\u4E0D\u8D85\u8FC7\u6BCF\u5468\u4EA4\u6613\u7684\u6570\u91CF\u4E0A\u9650\uFF0C\u76F4\u5230\u5E93\u5B58\u6570\u91CF\u7B49\u4E8E\u7EF4\u6301\u6570\u91CF\u3002"
-      english: "    Function:\n-Provide services for nearby production buildings.\n-Provide
-        the town with the function of buying or selling items from the outside world.\n\n    
-        Trading rules:\n-Settlement once a week at the end of the week.\n-There are
-        no restrictions on the types of items purchased, and different types of items
-        are restricted for each level sold (according to player feedback, this item
-        will be changed in the future).\n-Regardless of buying or selling, the default
-        limit of the number of transactions per slot per week is 200. The quantity
-        is affected by policy.\n-Tick the tick to confirm the transaction, and the
-        cross to cancel the transaction. That is, it is not trading when it is displayed,
-        and when it is displayed, it is waiting to trade on the weekend.\n\n    
-        Means of transaction:\n-Once. The transaction is automatically cancelled
-        after one transaction.\n-Weekly. Continue trading every week.\n-Maintain.
-        When buying, when the inventory quantity is lower than the set maintenance
-        quantity, it will automatically buy until the inventory is equal to the maintenance
-        quantity. When selling, when the inventory quantity exceeds the set maintenance
-        quantity, it will be automatically sold, but does not exceed the upper limit
-        of the weekly transaction quantity, until the inventory quantity is equal
-        to the maintenance quantity."
+      english: " Function:\n- Provides a trade place for productive structures nearby.\n-
+        Allows for trade with outside merchants.\n\nTrade rules:\n-Trades can only
+        be done at weekends. But you can decide whether to sell or buy some products
+        at the market beforehand.\n-There is no restriction on what kind of products
+        you can buy from the market, but you can only sell fixed kinds of products
+        there. (In consideration of players\u2019 feedback, we decide to change this
+        rule in the future.)\n-You can only sell (or buy) at most 200 units of a
+        same kind of goods in one week.\n- Select \u201C\u221A\u201D to confirm a
+        trade or \u201C\xD7\u201D to cancel it. When you see a \u201C\u221A\u201D
+        on the right, that means this trade is waiting to be confirmed; when you
+        see a \u201C\xD7\u201D, that means this trade has been confirmed and you
+        can cancel it before the weekend if you like.\n\nTrade mode:\n-Once. This
+        trade will be done only once.\n-Every week. This trade is to be done every
+        week.\n-Maintain. You can choose this when you want maintain the quantity
+        of goods at a certain level in your warehouses.\n"
     - code: IntroTech
       chinese: "    \u89E3\u9501\u65B9\u5F0F\uFF1A\n-\u6BCF20\u4EBA\u53E3\u89E3\u9501\u4E00\u4E2A\u653F\u7B56\u70B9\u3002\uFF08\u6682\u5B9A\uFF09\n-\u70B9\u4E61\u653F\u5E9C\u754C\u9762\u91CC\u7684\u653F\u7B56\u6811\u6309\u94AE\u6253\u5F00\u653F\u7B56\u6811\u3002\n-\u70B9\u653F\u7B56\u56FE\u6807\u53EF\u4EE5\u9605\u8BFB\u5176\u6548\u679C\uFF0C\u70B9\u89E3\u9501\u540E\u70B9\u5E94\u7528\u624D\u662F\u4F7F\u7528\u4E86\u79D1\u6280\u3002\n\n   
         \u89C4\u5219\uFF1A\n-\u76EE\u524D\u6709\u4E09\u6761\u653F\u7B56\u7EBF\uFF0C\u6BCF\u6761\u653F\u7B56\u7EBF\u53EA\u80FD\u751F\u6548\u4E00\u79CD\u653F\u7B56\u3002\uFF08\u6682\u5B9A\uFF09\n-\u6BCF\u4E2A\u653F\u7B56\u53EA\u9700\u8981\u4E00\u4E2A\u70B9\u6570\u89E3\u9501\u3002\uFF08\u6682\u5B9A\uFF09\n-\u76EE\u524D\u51CF\u5C11\u8FD0\u8F93\u8D39\u7528\u76F8\u5173\u7684\u79D1\u6280\u662F\u4E0D\u751F\u6548\u7684\uFF0C\u540E\u7EED\u7248\u672C\u5F00\u53D1\u540E\u624D\u4F1A\u751F\u6548\u3002\n"
-      english: "    Unlock:\n-One policy point is unlocked for every 20 people. (Tentative)\n-Click
-        the policy tree button in the township government interface to open the policy
-        tree.\n-Click on the policy icon to read the effect, and click on the application
-        after unlocking to use the technology.\n\n     Tips:\n-There are currently
-        three policy lines, and each policy line can only take effect of one policy.
-        (Tentative)\n-Each policy only requires one point to unlock. (Tentative)\n-The
-        technology related to the current reduction of transportation costs is not
-        effective, and will only take effect after subsequent versions are developed."
+      english: "How to unlock policies:\n-You\u2019ll be given one Policy Point every
+        20 towners. (Provisionally)\n-Click Town Hall and open the Policy menu.\n-Click
+        policies to read about their effects. Policies will be in used after you
+        unlock and then \n\nTips: \n-Now you are offered three kinds of policy. And
+        for each kind, you can choose only one policy and put it in use. (Provisionally)\n-Each
+        policy requires one Policy Point to unlock. (Provisionally)\n- At present,
+        the policies related to transportation costs reduction are not effective,
+        and will be made effective in the future version of game.\n"
     - code: IntroSave
       chinese: "    \u5B58\u6863\n-\u5B58\u6863\u8DEF\u5F84\uFF1A\u6E38\u620F\u6839\u76EE\u5F55\u4E0BCountryside_Data\\Resources\\Saves\n-\u590D\u5236\u5B58\u6863\u65F6\uFF0C\u8BF7\u5728Saves\u6587\u4EF6\u5939\u91CC\u521B\u5EFA\u540C\u540D\u6587\u4EF6\u5939\uFF0C\u518D\u628A\u5B58\u6863\u6587\u4EF6\u653E\u8FDB\u53BB\uFF08.save\uFF09\uFF0C\u624D\u80FD\u6B63\u5E38\u8BFB\u53D6\u3002"
-      english: '     Archive
+      english: 'Save
 
-        -Save path: Countryside_Data\Resources\Saves
-        under the game root directory
+        -Save path: Countryside_Data\Resources\Saves under
+        the game root directory.
 
-        -When copying the archive, please
-        create a folder with the same name in the ''Saves'' folder, and then put
-        the archive file (.save) in it.'
+        - When copying a save file, please create
+        a new folder with the same name of this file and paste the file into it (.save).
+
+'
     - code: ScreenRatio
       chinese: "\u5206\u8FA8\u7387\uFF1A"
       english: Screen Ratio
@@ -2084,7 +2123,7 @@ MonoBehaviour:
       english: Maintenance
     - code: ProductionEfficiency
       chinese: "\u751F\u4EA7\u6548\u7387"
-      english: Production Rate
+      english: Efficiency
     - code: Congratulation
       chinese: "\u606D\u559C\u8FC7\u5173\uFF01"
       english: Congratulations!
@@ -2312,3 +2351,51 @@ MonoBehaviour:
     - code: Using
       chinese: "\u5DF2\u91C7\u7528"
       english: Using
+    - code: "\u62C6\u9664\u9053\u8DEF"
+      chinese: "\u62C6\u9664\u9053\u8DEF"
+      english: Road Removal
+    - code: FrameRate
+      chinese: "\u5E27\u7387"
+      english: Frame Rate
+    - code: LoadTech
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u653F\u7B56"
+      english: Loading policies
+    - code: LoadResources
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5E93\u5B58\u8D44\u6E90"
+      english: Loading storage resources
+    - code: LoadTerrain
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5730\u5F62\u6A21\u578B"
+      english: Loading terrain
+    - code: LoadMap
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5730\u56FE\u914D\u7F6E"
+      english: Loading map
+    - code: "\u6B63\u5728\u79CD\u6811"
+      chinese: "\u6B63\u5728\u79CD\u6811"
+      english: Generating trees
+    - code: "\u6B63\u5728\u52A0\u8F7D\u6C34\u9762"
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u6C34\u9762"
+      english: Generating water
+    - code: "\u6B63\u5728\u52A0\u8F7D\u5DF2\u6709\u5EFA\u7B51"
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5DF2\u6709\u5EFA\u7B51"
+      english: Generating buildings
+    - code: "\u6B63\u5728\u52A0\u8F7D\u6865\u6881"
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u6865\u6881"
+      english: Generating bridges
+    - code: "\u6B63\u5728\u52A0\u8F7D\u5E02\u573A"
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5E02\u573A"
+      english: Generating trades
+    - code: "\u6B63\u5728\u52A0\u8F7D\u5C0F\u8F66\u8F66"
+      chinese: "\u6B63\u5728\u52A0\u8F7D\u5C0F\u8F66\u8F66"
+      english: Generating vehicles
+    - code: "\u6B63\u5728\u52A0\u8F7DUI"
+      chinese: "\u6B63\u5728\u52A0\u8F7DUI"
+      english: Initializing UI
+    - code: "\u52A0\u8F7D\u5B8C\u6BD5\uFF01\u7528\u65F6"
+      chinese: "\u52A0\u8F7D\u5B8C\u6BD5\uFF01\u7528\u65F6"
+      english: 'Loading complete in '
+    - code: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
+      chinese: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
+      english: Serializing datas
+    - code: 
+      chinese: 
+      english: 

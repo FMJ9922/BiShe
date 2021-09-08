@@ -19,7 +19,7 @@ public class CastTool : MonoBehaviour
     {
         return Mathf.Approximately(num, Mathf.Round(num)) ?
             string.Format("{0}", Mathf.Round(num)) :
-            string.Format("{0:F}", num);
+            string.Format("{0:N1}", num);
     }
 
     /// <summary>

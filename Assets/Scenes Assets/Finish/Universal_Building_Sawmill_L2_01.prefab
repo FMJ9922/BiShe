@@ -44,7 +44,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 80
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7159458318891938758
 MonoBehaviour:
@@ -198,6 +198,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0

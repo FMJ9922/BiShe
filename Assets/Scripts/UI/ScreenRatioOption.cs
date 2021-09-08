@@ -29,6 +29,7 @@ public class ScreenRatioOption : MonoBehaviour
         new ScreenRatio(2048,1536),
         new ScreenRatio(2048,1080),
         new ScreenRatio(4096,2160),
+        new ScreenRatio(3440,1440),
         new ScreenRatio(3840,2160),
         new ScreenRatio(3656,2664),
         new ScreenRatio(4096,3112),
@@ -61,7 +62,6 @@ public class ScreenRatioOption : MonoBehaviour
             ScreenRatio ratio = sreeenRatios[PlayerPrefs.GetInt("ScreenRatio")];
             Screen.SetResolution(ratio.width, ratio.height, toggle.isOn);
             dropdown.value = PlayerPrefs.GetInt("ScreenRatio");
-            Debug.Log("get");
         }
         dropdown.RefreshShownValue();
         Invoke("ResetText",0.1f) ;

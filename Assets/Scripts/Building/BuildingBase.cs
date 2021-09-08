@@ -263,7 +263,14 @@ public class BuildingBase : MonoBehaviour
             runtimeBuildData.productTime = formula.ProductTime;
             float rate = runtimeBuildData.Rate;
             CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission,out runtimeBuildData.AvaliableToMarket);
+            if (carMission != null)
+            {
+                TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+            }
+            else
+            {
+                runtimeBuildData.AvaliableToMarket = false;
+            }
             runtimeBuildData.Rate = 0;
         }
     }
@@ -420,8 +427,13 @@ public class BuildingBase : MonoBehaviour
     {
         //Debug.Log(rate);
         CarMission mission = new CarMission();
+        BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+        if (target == null)
+        {
+            return null;
+        }
         mission.StartBuilding = parkingGridIn;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
+        mission.EndBuilding = target.parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
         mission.isAnd = true;
         mission.transportResources = new List<CostResource>();

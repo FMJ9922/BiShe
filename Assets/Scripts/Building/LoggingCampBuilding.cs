@@ -19,23 +19,6 @@ public class LoggingCampBuilding : BuildingBase
         base.RestartBuildingFunction();
     }
 
-    protected override void Output()
-    {
-        if (formula == null || formula.OutputItemID == null) return;
-        runtimeBuildData.productTime--;
-        if (runtimeBuildData.productTime <= 0)
-        {
-            runtimeBuildData.productTime = formula.ProductTime;
-            float rate = runtimeBuildData.Rate;
-            if (rate >= 0)
-            {
-                CarMission carMission = MakeCarMission(rate);
-                TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
-            }
-            runtimeBuildData.Rate = 0;
-        }
-    }
-
     public override void UpdateRate(string date)
     {
         cutProgress += WorkEffect();

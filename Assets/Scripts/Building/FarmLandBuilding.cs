@@ -127,11 +127,7 @@ public class FarmLandBuilding : BuildingBase
 
     protected override void Output()
     {
-        if (formula == null)
-        {
-            Debug.Log("no");
-            return;
-        }
+        if (formula == null || formula.OutputItemID == null) return;
 
         if (!isharvesting)
         {
@@ -139,9 +135,9 @@ public class FarmLandBuilding : BuildingBase
             if (runtimeBuildData.productTime <= 0)
             {
                 isharvesting = true;
-
                 CarMission mission = MakeHarvestCarMission();
-                TrafficManager.Instance.UseCar(mission, out runtimeBuildData.AvaliableToMarket);
+                TrafficManager.Instance.UseCar(mission, out bool tofiled);
+                runtimeBuildData.Rate = 0;
             }
         }
     }
@@ -184,7 +180,14 @@ public class FarmLandBuilding : BuildingBase
         isharvesting = false;
         runtimeBuildData.productTime = formula.ProductTime;
         CarMission carMission = MakeCarMission(rate);
-        TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+        if (carMission != null)
+        {
+            TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+        }
+        else
+        {
+            runtimeBuildData.AvaliableToMarket = true;
+        }
         //EventManager.StartListening(ConstEvent.OnDayWentBy, Replant);
         Invoke("Replant", 5f);
     }
@@ -193,30 +196,8 @@ public class FarmLandBuilding : BuildingBase
     {
         //EventManager.StopListening(ConstEvent.OnDayWentBy, Replant);
         runtimeBuildData.Rate = 0;
+        runtimeBuildData.productTime = formula.ProductTime;
         ShowPlant();
-    }
-    /// <summary>
-    /// 配置货物清单
-    /// </summary>
-    /// <param name="rate">生长比例</param>
-    /// <returns></returns>
-    protected override CarMission MakeCarMission(float rate)
-    {
-        //Debug.Log(rate);
-        CarMission mission = new CarMission();
-        mission.StartBuilding = parkingGridIn;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
-        mission.missionType = CarMissionType.transportResources;
-        mission.isAnd = true;
-        mission.transportResources = new List<CostResource>();
-        mission.transportationType = TransportationType.mini;
-        for (int i = 0; i < formula.OutputItemID.Count; i++)
-        {
-            //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i] * runtimeBuildData.Times));
-
-        }
-        return mission;
     }
 
     private CarMission MakeHarvestCarMission()

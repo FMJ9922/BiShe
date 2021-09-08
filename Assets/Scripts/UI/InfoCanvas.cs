@@ -23,7 +23,6 @@ public class InfoCanvas : CanvasBase
     [SerializeField] private GameObject mainCanvas;
     [SerializeField] private Transform inIcons;
     [SerializeField] private Transform outIcons;
-    [SerializeField] private GameObject BuildingHighlight;
     [SerializeField] private Image rateImage;
     [SerializeField] private Transform upgradeCost;
     [SerializeField] private Image[] warnings;
@@ -52,14 +51,12 @@ public class InfoCanvas : CanvasBase
         mainCanvas.SetActive(true);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, effectivenessChange);
-        if (!BuildingHighlight)
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, new SelectLightInfo
         {
-            BuildingHighlight = GameObject.Find("SelectedLight");
-        }
-        BuildingHighlight.transform.position = buildbase.transform.position;
-        BuildingHighlight.transform.localScale = new Vector3(buildbase.Size.y * 2, 10, buildbase.Size.x * 2);
-        BuildingHighlight.transform.rotation = buildbase.transform.rotation;
-        BuildingHighlight.SetActive(true);
+            pos = buildbase.transform.position,
+            quaternion = buildbase.transform.rotation,
+            scale = new Vector3(buildbase.Size.y * 2, 10, buildbase.Size.x * 2),
+        });
         ChangeRateLabel(buildbase);
     }
 
@@ -94,6 +91,12 @@ public class InfoCanvas : CanvasBase
                 _openCanvas.GetComponentInChildren<Button>().image.SetNativeSize();
                 //_openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Market");
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_market);
+                EventManager.TriggerEvent(ConstEvent.OnRangeLightOpen, new SelectLightInfo
+                {
+                    pos = _buildingBase.transform.position,
+                    quaternion = _buildingBase.transform.rotation,
+                    scale = new Vector3(_buildData.InfluenceRange, 10, _buildData.InfluenceRange),
+                });
                 break;
             //市政
             case 20020:
@@ -121,6 +124,12 @@ public class InfoCanvas : CanvasBase
             case 20014:
             case 20015:
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_logCamp);
+                EventManager.TriggerEvent(ConstEvent.OnRangeLightOpen, new SelectLightInfo
+                {
+                    pos = _buildingBase.transform.position,
+                    quaternion = _buildingBase.transform.rotation,
+                    scale = new Vector3(_buildData.InfluenceRange, 10, _buildData.InfluenceRange),
+                });
                 break;
             case 20007:
             case 20010:
@@ -208,7 +217,8 @@ public class InfoCanvas : CanvasBase
         RemoveBtnsListener();
         mainCanvas.SetActive(false);
         CloseUpgradeInfo();
-        BuildingHighlight.SetActive(false);
+        EventManager.TriggerEvent(ConstEvent.OnSelectLightClose);
+        EventManager.TriggerEvent(ConstEvent.OnRangeLightClose);
         NoticeManager.Instance.CloseNotice();
     }
     private void OnDestroy()

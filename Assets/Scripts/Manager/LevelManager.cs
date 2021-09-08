@@ -215,16 +215,16 @@ public class LevelManager : Singleton<LevelManager>
         pause = saveData.pause;
         Timer = saveData.timer;
         WeekProgress = saveData.weekProgress;
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载科技树");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadTech");
         yield return 0;
         TechManager.Instance.InitTechBySave(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载库存资源");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadResources");
         yield return 0;
         ResourceManager.Instance.InitSavedResourceManager(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载地形模型");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadTerrain");
         yield return 0;
         TerrainGenerator.Instance.LoadTerrainFromSaveData(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载地图配置");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadMap");
         yield return 0;
         MapManager.Instance.InitMapManager();
         EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在种树");
@@ -253,11 +253,11 @@ public class LevelManager : Singleton<LevelManager>
         MainInteractCanvas.InitCanvas();
         GameManager.Instance.sw.Stop();
         System.TimeSpan dt = GameManager.Instance.sw.Elapsed;
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "加载完毕！用时"+ dt.TotalSeconds + "秒");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "加载完毕！用时"+ CastTool.RoundOrFloat((float)dt.TotalSeconds) + "s");
         yield return 0;
         GameManager.Instance.sw.Reset();
         EventManager.TriggerEvent(ConstEvent.OnLoadingOver);
-        Debug.Log("AllInit:" + dt.TotalSeconds + "秒");
+        //Debug.Log("AllInit:" + dt.TotalSeconds + "秒");
         //Debug.Log("Continue");
         GameManager.Instance.ContinueGame();
     }

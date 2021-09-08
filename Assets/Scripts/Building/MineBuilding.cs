@@ -42,22 +42,6 @@ public class MineBuilding : BuildingBase
         }
     }
 
-    protected override void Output()
-    {
-        if (formula == null || formula.OutputItemID == null)
-        {
-            Debug.LogError("矿井配方为空");
-        }
-        runtimeBuildData.productTime--;
-        if (runtimeBuildData.productTime <= 0)
-        {
-            runtimeBuildData.productTime = formula.ProductTime;
-            float rate = runtimeBuildData.Rate;
-            CarMission carMission = MakeCarMission(rate);
-            TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
-            runtimeBuildData.Rate = 0;
-        }
-    }
 
     public float SetRichness(Vector2Int[] takenGrids)
     {
@@ -73,25 +57,6 @@ public class MineBuilding : BuildingBase
     {
         base.Input();
         DigGround();
-    }
-
-    protected override CarMission MakeCarMission(float rate)
-    {
-        //Debug.Log(rate);
-        CarMission mission = new CarMission();
-        mission.StartBuilding = parkingGridIn;
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
-        mission.missionType = CarMissionType.transportResources;
-        mission.isAnd = true;
-        mission.transportResources = new List<CostResource>();
-        mission.transportationType = TransportationType.sandTruck;
-        for (int i = 0; i < formula.OutputItemID.Count; i++)
-        {
-            //Debug.Log(formula.OutputItemID[i]);
-            mission.transportResources.Add(new CostResource(formula.OutputItemID[i], rate * formula.ProductNum[i] * richness * runtimeBuildData.Times));
-
-        }
-        return mission;
     }
 
     private void DigGround()

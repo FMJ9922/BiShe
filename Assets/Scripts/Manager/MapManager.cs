@@ -908,7 +908,7 @@ public class MapManager : Singleton<MapManager>
             if (id == 20004 || id == 20012 || id == 20013)
             {
                 float cur = GetDistance(Instance._buildings[i].parkingGridIn, grid);
-                if (cur < dis)
+                if (cur < dis && Vector3.Distance(Instance._buildings[i].transform.position, GetTerrainStaticPosition(grid))<= Instance._buildings[i].runtimeBuildData.InfluenceRange)
                 {
                     dis = cur;
                     p = Instance._buildings[i].gameObject;

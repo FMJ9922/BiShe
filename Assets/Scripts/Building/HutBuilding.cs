@@ -44,8 +44,15 @@ public class HutBuilding : BuildingBase
         //食物少于指定数量就去取货
         if (storage.GetAllFoodNum() < 3)
         {
-            CarMission mission = MakeCarMission();
-            TrafficManager.Instance.UseCar(mission, out runtimeBuildData.AvaliableToMarket);
+            CarMission carMission = MakeCarMission();
+            if (carMission != null)
+            {
+                TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+            }
+            else
+            {
+                runtimeBuildData.AvaliableToMarket = true;
+            }
         }
 
         ItemData[] foodIDs = DataManager.GetFoodItemList();
@@ -71,10 +78,15 @@ public class HutBuilding : BuildingBase
     protected override CarMission MakeCarMission(float ratio = 10)
     {
         CarMission mission = new CarMission();
+        BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+        if (target == null)
+        {
+            return null;
+        }
         mission.StartBuilding = parkingGridIn;
         mission.transportationType = TransportationType.van;
         //Debug.Log(MapManager.GetNearestMarket(parkingGridIn).name);
-        mission.EndBuilding = MapManager.GetNearestMarket(parkingGridIn).GetComponent<BuildingBase>().parkingGridIn;
+        mission.EndBuilding = target.parkingGridIn;
         mission.missionType = CarMissionType.requestResources;
         mission.isAnd = false;
         mission.requestResources = new List<CostResource>();

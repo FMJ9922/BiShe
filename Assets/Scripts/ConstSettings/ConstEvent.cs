@@ -50,4 +50,11 @@ public class ConstEvent
     public const string OnLoadingTips = "OnLoadingTips";//加载提示
     public const string OnLoadingOver = "OnLoadingOver";//加载完毕
     #endregion
+
+    #region 显示
+    public const string OnSelectLightOpen = "OnSelectLightOpen";
+    public const string OnSelectLightClose = "OnSelectLightClose";
+    public const string OnRangeLightOpen = "OnRangeLightOpen";
+    public const string OnRangeLightClose = "OnRangeLightClose";
+    #endregion
 }
