@@ -33,7 +33,15 @@ public class ResourceCanvas : CanvasBase
         CreateItemList();
         SetProgress();
         destroy.onClick.AddListener(() => { building.DestroyBuilding(true, true, true); OnClose(); });
-        upgrade.onClick.AddListener(() => { building.Upgrade(out bool success); if (success) OnClose(); });
+        upgrade.onClick.AddListener(() => 
+        { 
+            building.Upgrade(out bool success,out BuildingBase buildingData);
+            if (success)
+            {
+                OnClose();
+                OnOpen((StorageBuilding)buildingData);
+            } 
+        });
         EventManager.StartListening(ConstEvent.OnInputResources, CreateItemList);
         EventManager.StartListening(ConstEvent.OnRefreshResources, CreateItemList);
         mainCanvas.SetActive(true);
@@ -74,14 +82,6 @@ public class ResourceCanvas : CanvasBase
             icon.transform.SetParent(upgradeCost);
             icon.transform.localScale = ((GameManager.Instance.GetScreenRelativeRate() - 1F) * 0F + 1F) * Vector3.one;
         }
-    }
-    private void CleanUpAllAttachedChildren(Transform target)
-    {
-        for (int i = 0; i < target.childCount; i++)
-        {
-            Destroy(target.GetChild(i).gameObject);
-        }
-
     }
     public void CloseUpgradeInfo()
     {

@@ -172,6 +172,43 @@ public class BuildingBase : MonoBehaviour
         animation.gameObject.SetActive(false);
     }
 
+    private List<CostResource> _statistics = new List<CostResource>();
+
+    /// <summary>
+    /// 获取这个建筑每周的消耗和产出（有符号）
+    /// </summary>
+    /// <returns></returns>
+    public List<CostResource> GetPerWeekDeltaResources()
+    {
+        _statistics.Clear();
+        _statistics.Add(new CostResource(99999, -runtimeBuildData.CostPerWeek));
+
+        if (formula != null&& !runtimeBuildData.Pause)
+        {
+            for (int i = 0; formula.InputItemID!=null&&i < formula.InputItemID.Count; i++)
+            {
+                float num = -formula.InputNum[i] * WorkEffect() * runtimeBuildData.Times;
+                _statistics.Add(new CostResource(formula.InputItemID[i], num));
+                if (ResourceManager.IsFood(formula.InputItemID[i])&& formula.InputItemID[i]!=11000)
+                {
+                    //Debug.Log(formula.InputItemID[i]+" "+ formula.InputNum[i] + " " + WorkEffect() + " " + runtimeBuildData.Times);
+                    _statistics.Add(new CostResource(11000, num));
+                }
+            }
+
+            for (int i = 0; formula.OutputItemID != null && i < formula.OutputItemID.Count; i++)
+            {
+                float num = formula.ProductNum[i] * WorkEffect() * runtimeBuildData.Times / formula.ProductTime;
+                _statistics.Add(new CostResource(formula.OutputItemID[i], num));
+                if (ResourceManager.IsFood(formula.OutputItemID[i]))
+                {
+                    _statistics.Add(new CostResource(11000, num));
+                }
+            }
+        }
+        return _statistics;
+    }
+
     //public virtual string GetIntroduce()
     //{
     //    return string.Empty;
@@ -282,7 +319,11 @@ public class BuildingBase : MonoBehaviour
 
     public float WorkEffect()
     {
-        return runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
+        if(runtimeBuildData.tabType == BuildTabType.house)
+        {
+            return 1;
+        }
+        return (float)runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
     }
     protected virtual void Input()
     {
@@ -293,7 +334,7 @@ public class BuildingBase : MonoBehaviour
         List<CostResource> costResources = new List<CostResource>();
         for (int i = 0; i < formula.InputItemID.Count; i++)
         {
-            costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]* WorkEffect()));
+            costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]* WorkEffect()* runtimeBuildData.Times));
         }
 
         bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
@@ -349,7 +390,7 @@ public class BuildingBase : MonoBehaviour
         EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
     }
 
-    public virtual void Upgrade(out bool issuccess)
+    public virtual void Upgrade(out bool issuccess, out BuildingBase newBuilding)
     {
         //todo：检查是否有足够的资源升级
         int nextId = runtimeBuildData.RearBuildingId;
@@ -361,19 +402,19 @@ public class BuildingBase : MonoBehaviour
         buildData.CurPeople = runtimeBuildData.CurPeople;
         //DeleteCurPeople(runtimeBuildData.CurPeople);
         buildData.Happiness = (80f+ 10 * buildData.CurLevel) /100;
-        BuildingBase rear = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation);
-        if (rear!=null)
+        newBuilding = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids,transform.position,transform.rotation);
+        if (newBuilding != null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
             DestroyBuilding(false,false,false);
-            rear.RegisterBuildingEntry();
+            newBuilding.RegisterBuildingEntry();
             issuccess = true;
         }
         else
         {
             issuccess = false;
             //AddCurPeople(people);
-            NoticeManager.Instance.InvokeShowNotice("升级资源不足");
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get("升级资源不足"));
         }
     }
 

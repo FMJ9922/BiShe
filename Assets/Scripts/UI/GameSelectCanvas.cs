@@ -34,9 +34,9 @@ public class GameSelectCanvas : Singleton<GameSelectCanvas>
 
     public void ChangeShowLevel(LevelData data)
     {
-        levelName.text = Localization.ToSettingLanguage(data.Name);
-        aim.text = Localization.ToSettingLanguage(data.Aim1) + '\n' + Localization.ToSettingLanguage(data.Aim2) + '\n' + Localization.ToSettingLanguage(data.Aim3);
-        special.text = Localization.ToSettingLanguage(data.specialIntroduce);
+        levelName.text = Localization.Get(data.Name);
+        aim.text = Localization.Get(data.Aim1) + '\n' + Localization.Get(data.Aim2) + '\n' + Localization.Get(data.Aim3);
+        special.text = Localization.Get(data.specialIntroduce);
         preview.sprite = LoadAB.LoadSprite("mat.ab", data.Id + "preview");
         enterBtn.onClick.RemoveAllListeners();
         int id = data.Id;

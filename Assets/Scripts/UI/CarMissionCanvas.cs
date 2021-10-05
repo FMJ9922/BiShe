@@ -35,9 +35,9 @@ public class CarMissionCanvas : CanvasBase
     }
     private void InitLabels(CarMission mission)
     {
-        nameLabel.text = Localization.ToSettingLanguage(mission.transportationType.GetDescription());
-        startLabel.text = Localization.ToSettingLanguage(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding).runtimeBuildData.Name);
-        endLabel.text = Localization.ToSettingLanguage(MapManager.Instance.GetBuilidngByEntry(mission.EndBuilding).runtimeBuildData.Name);
+        nameLabel.text = Localization.Get(mission.transportationType.GetDescription());
+        startLabel.text = Localization.Get(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding).runtimeBuildData.Name);
+        endLabel.text = Localization.Get(MapManager.Instance.GetBuilidngByEntry(mission.EndBuilding).runtimeBuildData.Name);
     }
     private void InitIcons(CarMission mission)
     {
@@ -45,7 +45,7 @@ public class CarMissionCanvas : CanvasBase
         {
             case CarMissionType.requestResources:
                 {
-                    carryLabel.text = Localization.ToSettingLanguage("Request") + Localization.ToSettingLanguage("Goods") + ":";
+                    carryLabel.text = Localization.Get("Request") + Localization.Get("Goods") + ":";
                     CleanUpAllAttachedChildren(_iconsParent);
                     for (int i = 0; i < mission.requestResources.Count; i++)
                     {
@@ -57,7 +57,7 @@ public class CarMissionCanvas : CanvasBase
                 break;
             case CarMissionType.transportResources:
                 {
-                    carryLabel.text = Localization.ToSettingLanguage("Transport") + Localization.ToSettingLanguage("Goods") + ":";
+                    carryLabel.text = Localization.Get("Transport") + Localization.Get("Goods") + ":";
                     CleanUpAllAttachedChildren(_iconsParent);
                     for (int i = 0; i < mission.transportResources.Count; i++)
                     {
@@ -112,16 +112,4 @@ public class CarMissionCanvas : CanvasBase
         }
     }
 
-    /// <summary>
-    /// 清除一个物体下的所有子物体
-    /// </summary>
-    /// <param name="target"></param>
-    private void CleanUpAllAttachedChildren(Transform target)
-    {
-        for (int i = 0; i < target.childCount; i++)
-        {
-            Destroy(target.GetChild(i).gameObject);
-        }
-
-    }
 }

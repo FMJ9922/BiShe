@@ -81,7 +81,7 @@ public class FarmLandBuilding : BuildingBase
         pfb.transform.position -= Vector3.up * 2000f;
         plants = new PlantController[Size.x * Size.y];
         mat = pfb.GetComponent<PlantController>().mesh.material;
-        Texture tex = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula].ID == 50006 ?
+        Texture tex = formula.ID == 50006 ?
             wheat : rice;
         //Debug.Log(mat == null);
         mat.SetTexture("_MainTex", tex);
@@ -137,7 +137,6 @@ public class FarmLandBuilding : BuildingBase
                 isharvesting = true;
                 CarMission mission = MakeHarvestCarMission();
                 TrafficManager.Instance.UseCar(mission, out bool tofiled);
-                runtimeBuildData.Rate = 0;
             }
         }
     }

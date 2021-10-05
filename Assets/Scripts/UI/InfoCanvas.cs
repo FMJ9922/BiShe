@@ -78,7 +78,7 @@ public class InfoCanvas : CanvasBase
             case 20017:
                 {
                     //btn.onClick.AddListener(MainInteractCanvas.Instance.OpenResourceCanvas);
-                    _openText.text = Localization.ToSettingLanguage("Open") + Localization.ToSettingLanguage("Warehouse");
+                    _openText.text = Localization.Get("Open") + Localization.Get("Warehouse");
                     SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_click_wareHouse);
                 }
                 break;
@@ -174,8 +174,23 @@ public class InfoCanvas : CanvasBase
         {
             buildingBase.AddCurPeople(100);
         });
-        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true,true,true); OnClose(); });
-        _upgradeBtn.onClick.AddListener(() => { buildingBase.Upgrade(out bool success); if(success)OnClose(); });
+        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true, true, true); OnClose(); });
+        _upgradeBtn.onClick.AddListener(() =>
+        {
+            buildingBase.Upgrade(out bool success, out BuildingBase NewBase);
+            if (success)
+            {
+                OnClose();
+                buildingBase = NewBase;
+                OnOpen(buildingBase);
+            }
+        });
+    }
+
+    IEnumerator DelayOpen(BuildingBase buildingBase)
+    {
+        yield return new WaitForFixedUpdate();
+        OnOpen(buildingBase);
     }
 
     public void ShowUpgradeInfo()
@@ -238,7 +253,7 @@ public class InfoCanvas : CanvasBase
         ChangeOutputIcon(_buildData);
         ChangeInputIcon(_buildData);
         _buildingBase.ChangeFormula();
-        _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + Localization.ToSettingLanguage("Day1");
+        _daysLabel.text = Localization.Get("生产周期:") + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + Localization.Get("Day1");
 
     }
     /// <summary>
@@ -259,7 +274,7 @@ public class InfoCanvas : CanvasBase
                         _inputsObj.SetActive(true);
                         ChangeInputIcon(buildData);
                     }
-                    _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + buildData.formulaDatas[buildData.CurFormula].ProductTime * 7 + Localization.ToSettingLanguage("Day1"); ;
+                    _daysLabel.text = Localization.Get("生产周期:") + buildData.formulaDatas[buildData.CurFormula].ProductTime * 7 + Localization.Get("Day1"); ;
                     _openCanvas.SetActive(false);
                     _outputsObj.SetActive(true);
                     ChangeOutputIcon(buildData);
@@ -337,19 +352,19 @@ public class InfoCanvas : CanvasBase
             bool open = false;
             for (int j = 0; j < warns.Count; j++)
             {
-                if((int)warns[j] == i)
+                if ((int)warns[j] == i)
                 {
                     open = true;
                 }
             }
             warnings[i].gameObject.SetActive(open);
         }
-        
+
     }
 
     public void CloseAllWarning()
     {
-        for(int i = 0; i < warnings.Length; i++)
+        for (int i = 0; i < warnings.Length; i++)
         {
             bool open = false;
             warnings[i].gameObject.SetActive(open);
@@ -379,11 +394,11 @@ public class InfoCanvas : CanvasBase
         for (int i = 0; i < list.Count; i++)
         {
             FormulaData cur = data.formulaDatas[data.CurFormula];
-            GameObject resource = CommonIcon.GetIcon(cur.InputItemID[i],cur.InputNum[i] * data.Times*cur.ProductTime);
+            GameObject resource = CommonIcon.GetIcon(cur.InputItemID[i], cur.InputNum[i] * data.Times * cur.ProductTime);
             resource.transform.parent = inIcons;
             resource.transform.localScale = Vector3.one * 1.5f;
         }
-        _daysLabel.text = Localization.ToSettingLanguage("生产周期:") + data.formulaDatas[data.CurFormula].ProductTime * 7 + "天";
+        _daysLabel.text = Localization.Get("生产周期:") + data.formulaDatas[data.CurFormula].ProductTime * 7 + "天";
     }
     /// <summary>
     /// 修改显示的文本
@@ -391,10 +406,10 @@ public class InfoCanvas : CanvasBase
     /// <param name="buildData"></param>
     private void ChangeLabels(RuntimeBuildData buildData)
     {
-        _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
+        _nameLabel.text = Localization.Get(buildData.Name);
         _populationLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
         _workerLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
-        _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
+        _introduceLabel.text = Localization.Get(buildData.Introduce);
 
     }
 
@@ -406,18 +421,9 @@ public class InfoCanvas : CanvasBase
         }
         //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
         RuntimeBuildData data = buildData.runtimeBuildData;
-        _rateLabel.text = Localization.ToSettingLanguage("效率:") + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
+        _rateLabel.text = Localization.Get("效率:") + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
         rateImage.fillAmount = buildData.GetProcess();
 
-        _outputLabel.text = Localization.ToSettingLanguage("产出率:") + CastTool.RoundOrFloat(data.Rate * 100) + "%";
-    }
-
-    private void CleanUpAllAttachedChildren(Transform target)
-    {
-        for (int i = 0; i < target.childCount; i++)
-        {
-            Destroy(target.GetChild(i).gameObject);
-        }
-
+        _outputLabel.text = Localization.Get("产出率:") + CastTool.RoundOrFloat(data.Rate * 100) + "%";
     }
 }

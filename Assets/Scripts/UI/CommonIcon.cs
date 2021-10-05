@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     #region 组件
     [SerializeField] private TMP_Text _numLabel;
@@ -16,6 +16,7 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     public ItemData data { get; private set; }
     private const string _iconBundle = "icon.ab";
 
+    public static bool IsShowingOption = false;
 
     #endregion
 
@@ -58,13 +59,26 @@ public class CommonIcon : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
     #region 接口
     public void OnPointerEnter(PointerEventData eventData)
     {
-        NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(data.Name));
+        if (!IsShowingOption)
+        {
+            NoticeManager.Instance.ShowIconNotice(Localization.Get(data.Name));
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        NoticeManager.Instance.CloseNotice();
+        if (!IsShowingOption)
+        {
+            NoticeManager.Instance.CloseNotice();
+        }
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        IsShowingOption = true;
+        NoticeManager.Instance.ShowIconOption(data);
+    }
+
 
     #endregion
 }

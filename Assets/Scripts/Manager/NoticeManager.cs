@@ -5,14 +5,24 @@ using UnityEngine;
 public class NoticeManager : Singleton<NoticeManager>
 {
     [SerializeField] NoticeCanvas canvas;
+
     private bool lockShow = false;
 
-    private void ToggleVisable(bool vis)
+    private void ToggleVisable(bool vis,bool tracing = true)
     {
         if (vis)
         {
             canvas.gameObject.SetActive(true);
-            EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, TraceMouse);
+            if (tracing)
+            {
+                EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, TraceMouse);
+            }
+            else
+            {
+                EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, TraceMouse);
+                Vector2 vec = RectTransformUtility.WorldToScreenPoint(Camera.main, InputManager.Instance.LastGroundRayPos);
+                canvas.transform.position = vec + new Vector2(-120, 0) * GameManager.Instance.GetScreenRelativeRate();
+            }
         }
         else
         {
@@ -30,7 +40,7 @@ public class NoticeManager : Singleton<NoticeManager>
 
     public void ShowIconNotice(string content)
     {
-        if (!lockShow)
+        if (!lockShow&&!CommonIcon.IsShowingOption)
         {
             TraceMouse(InputManager.Instance.LastGroundRayPos);
             canvas.SetText(content);
@@ -38,10 +48,27 @@ public class NoticeManager : Singleton<NoticeManager>
         }
     }
 
+    public void ShowItemDetailInfo(int itemId)
+    {
+        CloseNotice();
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseNotice);
+        canvas.SetDetailInfo(itemId);
+        ToggleVisable(true, false);
+    }
+
+    //显示图标操作
+    public void ShowIconOption(ItemData data)
+    {
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseNotice);
+        canvas.SetIconOption(data);
+        ToggleVisable(true,false);
+    }
+
     public void CloseNotice()
     {
         lockShow = false;
         ToggleVisable(false);
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, CloseNotice);
     }
 
 

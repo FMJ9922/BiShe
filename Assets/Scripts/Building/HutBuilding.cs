@@ -143,7 +143,7 @@ public class HutBuilding : BuildingBase
                 break;
         }
     }
-    public override void Upgrade(out bool issuccess)
+    public override void Upgrade(out bool issuccess,out BuildingBase buildingData)
     {
         //todo：检查是否有足够的资源升级
         int nextId = runtimeBuildData.RearBuildingId;
@@ -154,12 +154,12 @@ public class HutBuilding : BuildingBase
         buildData.CurFormula = runtimeBuildData.CurFormula;
         RemovePopulation();
         buildData.Happiness = (80f + 10 * buildData.CurLevel) / 100;
-        BuildingBase rear = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
-        if (rear != null)
+        buildingData = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
+        if (buildingData != null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
             DestroyBuilding(false, false, false);
-            rear.RegisterBuildingEntry();
+            buildingData.RegisterBuildingEntry();
             issuccess = true;
         }
         else

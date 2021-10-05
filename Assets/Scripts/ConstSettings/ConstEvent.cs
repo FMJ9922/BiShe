@@ -56,5 +56,6 @@ public class ConstEvent
     public const string OnSelectLightClose = "OnSelectLightClose";
     public const string OnRangeLightOpen = "OnRangeLightOpen";
     public const string OnRangeLightClose = "OnRangeLightClose";
+    public const string OnHudItemChange = "OnHudItemChange";
     #endregion
 }

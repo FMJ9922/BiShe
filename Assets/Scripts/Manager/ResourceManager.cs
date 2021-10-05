@@ -17,6 +17,11 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     private Dictionary<int, float> _lastItemDic = new Dictionary<int, float>();
 
+    private Dictionary<int, float> _deltaItemBuildingDic = new Dictionary<int, float>();
+    private Dictionary<int, float> _deltaItemTradingDic = new Dictionary<int, float>();
+
+    public Dictionary<int, int[]> _itemHistoryNumDic = new Dictionary<int, int[]>();
+
     private int curPopulation = 0;
     private int maxPopulation = 0;
     public int MaxPopulation { get { return maxPopulation; } }
@@ -24,19 +29,29 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public float maxStorage = 1000;
 
+    public List<int> _hudList;//玩家设置资源监视窗口名单
+
+    public List<int> _forbiddenFoodList;//玩家设置的不可食用名单
+
     /// <summary>
     /// 初始化关卡资源
     /// </summary>
     public void InitResourceManager(int levelID)
     {
         LevelData data = DataManager.GetLevelData(levelID);
-        AddResource(DataManager.GetItemIdByName("Log"), 200,false);
+        AddResource(DataManager.GetItemIdByName("Log"), data.log,false);
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice, false);
         AddResource(DataManager.GetItemIdByName("Money"), data.money, false);
-        AddResource(DataManager.GetItemIdByName("Stone"), 100, false);
-        //AddResource(12015, 100);
-        //AddResource(12020, 100);
-        //AddResource(12009, 100);
+        AddResource(DataManager.GetItemIdByName("Stone"), data.stone, false);
+#if UNITY_EDITOR
+        AddResource(12015, 100);
+        AddResource(12020, 100);
+        AddResource(12009, 100);
+        AddResource(12004, 100);
+#endif
+        InitHUDList(null);
+        InitForbiddenFoodList(null);
+        InitAllTimeResourcesList(null);
         RecordLastWeekItem();
     }
 
@@ -45,7 +60,128 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResources(saveData.saveResources, false);
         curPopulation = 0;
         //Debug.Log(saveData.curPopulation);
+        InitHUDList(saveData.hudList);
+        InitForbiddenFoodList(saveData.forbiddenFoodList);
+        InitAllTimeResourcesList(saveData.allTimeResources);
         RecordLastWeekItem();
+    }
+
+    private void InitForbiddenFoodList(int[] list)
+    {
+        if (list != null)
+        {
+            _forbiddenFoodList = new List<int>(list);
+        }
+        else
+        {
+            _forbiddenFoodList = new List<int>();
+        }
+    }
+    private void InitHUDList(int[] list)
+    {
+        if (list != null)
+        {
+            _hudList = new List<int>(list);
+        }
+        else
+        {
+            _hudList = new List<int> { 99999, 12003, 12009, DataManager.GetItemIdByName("Rice")};
+        }
+    }
+
+    private void InitAllTimeResourcesList(Dictionary<int,int[]> dic)
+    {
+        if (dic != null)
+        {
+            _itemHistoryNumDic = dic;
+        }
+        else
+        {
+            _itemHistoryNumDic = new Dictionary<int, int[]>();
+        }
+
+    }
+
+    private int[] GetItemHistoryNumArray(int id)
+    {
+        if (_itemHistoryNumDic.ContainsKey(id))
+        {
+            return _itemHistoryNumDic[id];
+        }
+        else
+        {
+            int[] array = new int[48000];
+            array[LevelManager.Instance.WeekIndex] = (int)TryGetResourceNum(id);
+            _itemHistoryNumDic.Add(id, array);
+            return array;
+        }
+    }
+
+    public void UpdateItemHistroyNumDic()
+    {
+        int index = LevelManager.Instance.WeekIndex;
+        foreach(var curItem in _storedItemDic)
+        {
+            if (_itemHistoryNumDic.ContainsKey(curItem.Key))
+            {
+                _itemHistoryNumDic[curItem.Key][index] = (int)curItem.Value;
+            }
+            else
+            {
+                int[] array = new int[48000];
+                array[index] = (int)curItem.Value;
+                _itemHistoryNumDic.Add(curItem.Key, array);
+            }
+        }
+    }
+
+    public void UpdateItemDeltaNumDic()
+    {
+        _deltaItemBuildingDic.Clear();
+        _deltaItemTradingDic.Clear();
+        List<BuildingBase> buildings = MapManager.Instance._buildings;
+        List<CostResource> p;
+        for (int i = 0; i < buildings.Count; i++)
+        {
+            p = buildings[i].GetPerWeekDeltaResources();
+            for (int j = 0; j < p.Count; j++)
+            {
+                if (_deltaItemBuildingDic.ContainsKey(p[j].ItemId))
+                {
+                    _deltaItemBuildingDic[p[j].ItemId] += p[j].ItemNum;
+                }
+                else
+                {
+                    _deltaItemBuildingDic.Add(p[j].ItemId, p[j].ItemNum);
+                }
+            }
+        }
+        p = MarketManager.Instance.GetDeltaNum();
+        for (int j = 0; j < p.Count; j++)
+        {
+            if (_deltaItemTradingDic.ContainsKey(p[j].ItemId))
+            {
+                _deltaItemTradingDic[p[j].ItemId] += p[j].ItemNum;
+            }
+            else
+            {
+                _deltaItemTradingDic.Add(p[j].ItemId, p[j].ItemNum);
+            }
+        }
+    }
+
+    public float GetWeekDeltaNum(int id)
+    {
+        float ret = 0;
+        if (_deltaItemBuildingDic.ContainsKey(id))
+        {
+            ret += _deltaItemBuildingDic[id];
+        }
+        if (_deltaItemTradingDic.ContainsKey(id))
+        {
+            ret += _deltaItemTradingDic[id];
+        }
+        return ret;
     }
 
     /// <summary>
@@ -133,7 +269,7 @@ public class ResourceManager : Singleton<ResourceManager>
             _lastItemDic.Add(pair.Key, pair.Value);
         }
     }
-
+    /*
     public float GetWeekDeltaNum(int id)
     {
         if(id == 11000)
@@ -141,7 +277,7 @@ public class ResourceManager : Singleton<ResourceManager>
             return GetAllFoodNum() - GetAllLastFoodNum();
         }
         else return TryGetResourceNum(id) - TryGetLastResourceNum(id);
-    }
+    }*/
 
     /// <summary>
     /// 从全局仓库取物品
@@ -174,6 +310,10 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public float TryGetResourceNum(int Id)
     {
+        if(Id == 11000)
+        {
+            return GetAllFoodNum();
+        }
         float storedNum;
         if (_storedItemDic.TryGetValue(Id, out storedNum))//字典里已存该物品
         {
@@ -278,7 +418,10 @@ public class ResourceManager : Singleton<ResourceManager>
         float sum = 0;
         for (int i = 0; i < foodIds.Length; i++)
         {
-            sum += TryGetResourceNum(foodIds[i]);
+            if (foodIds[i] != 11000)
+            {
+                sum += TryGetResourceNum(foodIds[i]);
+            }
         }
         return sum;
     }
@@ -296,13 +439,18 @@ public class ResourceManager : Singleton<ResourceManager>
         return null;
     }
 
-    public CostResource GetFoodByMax(float requestNum)
+    public CostResource GetFoodByMax(float requestNum,bool ignoreStorage = false)
     {
         ItemData[] foods = DataManager.GetFoodItemList();
         float maxNum = 0;
         int p = 0;
         for (int i = 0; i < foods.Length; i++)
         {
+            //在玩家设置的禁吃名单里则跳过
+            if (IsInForbiddenFoodList(foods[i].Id))
+            {
+                continue;
+            }
             float num = TryGetResourceNum(foods[i].Id);
             if (num > maxNum)
             {
@@ -310,7 +458,7 @@ public class ResourceManager : Singleton<ResourceManager>
                 maxNum = num;
             }
         }
-        if (maxNum < requestNum)
+        if (!ignoreStorage && maxNum < requestNum)
         {
             requestNum = maxNum;
         }
@@ -325,6 +473,23 @@ public class ResourceManager : Singleton<ResourceManager>
             sum += TryGetLastResourceNum(foodIds[i]);
         }
         return sum;
+    }
+
+    public static bool IsFood(int id)
+    {
+        if (id == 11000)
+        {
+            return true;
+        }
+        int[] foodIds = DataManager.GetFoodIDList();
+        for (int i = 0; i < foodIds.Length; i++)
+        {
+            if(id == foodIds[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public CostResource TryUseUpResource(CostResource costResource)
@@ -437,6 +602,43 @@ public class ResourceManager : Singleton<ResourceManager>
     public float GetRemainStorage()
     {
         return maxStorage - GetCurStorage();
+    }
+
+    public bool IsInHudList(int Id)
+    {
+        return _hudList.Contains(Id);
+    }
+
+    public void ToggleHudItem(ItemData data)
+    {
+        //如果在监视器窗口里则移出
+        if (_hudList.Contains(data.Id))
+        {
+            _hudList.Remove(data.Id);
+        }
+        else
+        {
+            //不在则添加
+            _hudList.Add(data.Id);
+        }
+        EventManager.TriggerEvent(ConstEvent.OnHudItemChange);
+    }
+
+    public bool IsInForbiddenFoodList(int Id)
+    {
+        return _forbiddenFoodList.Contains(Id);
+    }
+
+    public void ToggleForbiddenFood(int Id)
+    {
+        if (_forbiddenFoodList.Contains(Id))
+        {
+            _forbiddenFoodList.Remove(Id);
+        }
+        else
+        {
+            _forbiddenFoodList.Add(Id);
+        }
     }
 }
 

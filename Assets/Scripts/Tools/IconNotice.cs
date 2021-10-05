@@ -12,11 +12,11 @@ public class IconNotice : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if(description != IconDescription.Custom)
         {
-            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(description.GetDescription()));
+            NoticeManager.Instance.ShowIconNotice(Localization.Get(description.GetDescription()));
         }
         else
         {
-            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(content));
+            NoticeManager.Instance.ShowIconNotice(Localization.Get(content));
         }
         
     }

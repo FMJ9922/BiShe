@@ -125,24 +125,11 @@ public class BuildingCanvas : CanvasBase
             {
                 newTab.GetComponent<BuildTabAnim>().Rise();
                 curTab = newTab.GetComponent<BuildTabAnim>();
-                _tabLabel.text = Localization.ToSettingLanguage(((BuildTabType)i).GetDescription());
+                _tabLabel.text = Localization.Get(((BuildTabType)i).GetDescription());
             }
         }
     }
 
-
-    /// <summary>
-    /// 清除一个物体下的所有子物体
-    /// </summary>
-    /// <param name="target"></param>
-    private void CleanUpAllAttachedChildren(Transform target)
-    {
-        for (int i = 0; i < target.childCount; i++)
-        {
-            Destroy(target.GetChild(i).gameObject);
-        }
-
-    }
 
     #endregion
 
@@ -179,7 +166,7 @@ public class BuildingCanvas : CanvasBase
             }
         }
         GameObject newDivide1 = Instantiate(pfbDividingLine, _buildingIcons);
-        _tabLabel.text = Localization.ToSettingLanguage(((BuildTabType)tabType).GetDescription());
+        _tabLabel.text = Localization.Get(((BuildTabType)tabType).GetDescription());
     }
 
     public int GetAvalibleHutID()
@@ -267,7 +254,7 @@ public class BuildingCanvas : CanvasBase
     }
     public void OnEnterHoverIcon(BuildData buildData,Vector3 adjustPosition)
     {
-        _nameLabel.text = Localization.ToSettingLanguage(buildData.Name);
+        _nameLabel.text = Localization.Get(buildData.Name);
         CleanUpAllAttachedChildren(_iconsParent);
         GameObject money = CommonIcon.GetIcon(99999, buildData.Price);
         money.transform.parent = _iconsParent;
@@ -280,7 +267,7 @@ public class BuildingCanvas : CanvasBase
             resource.transform.localScale = Vector3.one;
         }
         _InfoCanvas.transform.position = adjustPosition + new Vector3(230, 240, 0)*GameManager.Instance.GetScreenRelativeRate();
-        _introduceLabel.text = Localization.ToSettingLanguage(buildData.Introduce);
+        _introduceLabel.text = Localization.Get(buildData.Introduce);
         _InfoCanvas.SetActive(true);
     }
 

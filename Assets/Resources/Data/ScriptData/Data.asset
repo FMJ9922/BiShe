@@ -585,7 +585,7 @@ MonoBehaviour:
     RearBuildingId: 20013
     Length: 12
     Width: 14
-    Price: 100
+    Price: 120
     costResources:
     - ItemId: 12015
       ItemNum: 20
@@ -607,7 +607,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 12
     Width: 14
-    Price: 100
+    Price: 200
     costResources:
     - ItemId: 12020
       ItemNum: 30
@@ -651,7 +651,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 7
     Width: 8
-    Price: 100
+    Price: 200
     costResources:
     - ItemId: 12020
       ItemNum: 30
@@ -695,7 +695,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 5
     Width: 11
-    Price: 100
+    Price: 200
     costResources:
     - ItemId: 12020
       ItemNum: 10
@@ -975,7 +975,7 @@ MonoBehaviour:
     RearBuildingId: 20030
     Length: 20
     Width: 10
-    Price: 150
+    Price: 100
     costResources:
     - ItemId: 12003
       ItemNum: 30
@@ -997,7 +997,7 @@ MonoBehaviour:
     RearBuildingId: 20031
     Length: 20
     Width: 10
-    Price: 150
+    Price: 220
     costResources:
     - ItemId: 12003
       ItemNum: 50
@@ -1021,7 +1021,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 20
     Width: 10
-    Price: 150
+    Price: 400
     costResources:
     - ItemId: 12015
       ItemNum: 30
@@ -1091,7 +1091,7 @@ MonoBehaviour:
     RearBuildingId: 20035
     Length: 14
     Width: 20
-    Price: 100
+    Price: 120
     costResources:
     - ItemId: 12015
       ItemNum: 15
@@ -1113,7 +1113,7 @@ MonoBehaviour:
     RearBuildingId: 0
     Length: 14
     Width: 20
-    Price: 125
+    Price: 200
     costResources:
     - ItemId: 12020
       ItemNum: 15
@@ -2396,6 +2396,48 @@ MonoBehaviour:
     - code: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
       chinese: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
       english: Serializing datas
+    - code: "\u5347\u7EA7\u8D44\u6E90\u4E0D\u8DB3"
+      chinese: "\u5347\u7EA7\u8D44\u6E90\u4E0D\u8DB3"
+      english: No enough resources
+    - code: MonitorResource
+      chinese: "\u7F6E\u4E8E\u5DE6\u4E0AHUD"
+      english: Add to HUD
+    - code: UnMonitorResource
+      chinese: "\u4ECEHUD\u4E2D\u79FB\u51FA"
+      english: Remove from HUD
+    - code: AllowEat
+      chinese: "\u5141\u8BB8\u98DF\u7528"
+      english: Allowed to eat
+    - code: ForbiddenEat
+      chinese: "\u7981\u6B62\u98DF\u7528"
+      english: Forbidden to eat
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
+    - code: 
+      chinese: 
+      english: 
     - code: 
       chinese: 
       english: 

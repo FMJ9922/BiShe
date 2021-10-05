@@ -13,4 +13,5 @@
     public const string NoticeBuildFailNoPlace = "NoticeBuildFailNoPlace";//建造失败:缺少空间
     public const string NoticeBuildFailNoNearRoad = "NoticeBuildFailNoNearRoad";//建造失败:需贴近道路
     public const string NoticeBuildFailNoNearSea = "NoticeBuildFailNoNearSea";//建造失败:需放在海岸线上
+
 }

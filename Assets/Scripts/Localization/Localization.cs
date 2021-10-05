@@ -15,7 +15,7 @@ public static class Localization
         "English"
     };
 
-    public static string ToSettingLanguage(string itemName)
+    public static string Get(string itemName)
     {
         switch (language)
         {

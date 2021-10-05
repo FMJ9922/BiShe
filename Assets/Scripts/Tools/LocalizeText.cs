@@ -29,12 +29,12 @@ public class LocalizeText : MonoBehaviour
         Text text;
         if (transform.TryGetComponent<Text>(out text))
         {
-            text.text = Localization.ToSettingLanguage(content);
+            text.text = Localization.Get(content);
         }
         TMP_Text tMP_Text;
         if (transform.TryGetComponent<TMP_Text>(out tMP_Text))
         {
-            tMP_Text.text = Localization.ToSettingLanguage(content);
+            tMP_Text.text = Localization.Get(content);
         }
     }
 

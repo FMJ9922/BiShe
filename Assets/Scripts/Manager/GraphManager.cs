@@ -65,7 +65,7 @@ public class GraphManager : Singleton<GraphManager>
             item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position,
                 Color.yellow);
             string showLabel = building.runtimeBuildData.tabType == BuildTabType.house ?
-                Localization.ToSettingLanguage("Resident") : Localization.ToSettingLanguage("Worker");
+                Localization.Get("Resident") : Localization.Get("Worker");
             item.GetComponent<GraphCube>().SetLabel(building.runtimeBuildData.CurPeople.ToString() + " " + showLabel);
         }
     }
@@ -81,7 +81,7 @@ public class GraphManager : Singleton<GraphManager>
             //Debug.Log(rand);
             item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position,
                 Color.red);
-            string showLabel = Localization.ToSettingLanguage("%");
+            string showLabel = Localization.Get("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand * 100) + showLabel);
         }
     }
@@ -95,7 +95,7 @@ public class GraphManager : Singleton<GraphManager>
             int rand = building.runtimeBuildData.CostPerWeek;
             item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position,
                 rand > 0 ? Color.red:Color.green);
-            string showLabel = "/" + Localization.ToSettingLanguage("Week");
+            string showLabel = "/" + Localization.Get("Week");
             item.GetComponent<GraphCube>().SetLabel((rand<0?"+":"-")+ Mathf.Abs(rand) + showLabel);
         }
     }
@@ -125,7 +125,7 @@ public class GraphManager : Singleton<GraphManager>
             float rand = building.runtimeBuildData.Effectiveness;
             item.GetComponent<GraphCube>().SetHeight((int)(rand >= 0 ? rand * 20 : 0), buildings[i].transform.position,
                 Color.blue);
-            string showLabel = Localization.ToSettingLanguage("%");
+            string showLabel = Localization.Get("%");
             item.GetComponent<GraphCube>().SetLabel((int)(rand >= 0 ? rand * 100 : 0) + showLabel);
         }
     }

@@ -6,20 +6,25 @@ using TMPro;
 
 public class HUDCanvas : CanvasBase
 {
-    [SerializeField] TMP_Text _date, _money, _log, _stone, _food, _population;
-    [SerializeField] TMP_Text _deltaMoney, _deltaLog, _deltaStone, _deltaFood;
+    [SerializeField] TMP_Text _date, _population;
     [SerializeField] GameObject _mainCanvas;
     [SerializeField] private Slider progress;
     [SerializeField] Image _pause;
     [SerializeField] Image[] _scale;
     [SerializeField] Button graphBtn;
-    private string strMoney, strLog, strStone, strFood, strPopulation,strWeek;
+    [SerializeField] Transform hudParent;
+    [SerializeField] private GameObject _pfbHUDItem;
+
+    List<HUDItem> hudItems;
+    private string strPopulation,strWeek;
+
     private void OnDestroy()
     {
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StopListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StopListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
         EventManager.StopListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
+        EventManager.StopListening(ConstEvent.OnHudItemChange, ResetHudItems);
         graphBtn.onClick.RemoveAllListeners();
     }
     public override void InitCanvas()
@@ -28,12 +33,10 @@ public class HUDCanvas : CanvasBase
         EventManager.StartListening(ConstEvent.OnRefreshResources, RefreshResources);
         EventManager.StartListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
         EventManager.StartListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
-        strMoney = Localization.ToSettingLanguage("Money");
-        strLog = Localization.ToSettingLanguage("Log");
-        strStone = Localization.ToSettingLanguage("Stone");
-        strFood = Localization.ToSettingLanguage("Food");
-        strPopulation = Localization.ToSettingLanguage("Population");
-        strWeek = Localization.ToSettingLanguage("Week");
+        EventManager.StartListening(ConstEvent.OnHudItemChange, ResetHudItems);
+        strPopulation = Localization.Get("Population");
+        strWeek = Localization.Get("Week");
+        InitHUDItems();
         RefreshResources();
         RefreshPopulation();
         ChangeTimeScaleImage(GameManager.Instance.GetTimeScale());
@@ -42,9 +45,33 @@ public class HUDCanvas : CanvasBase
         RefreshDate(LevelManager.Instance.LogDate());
     }
 
+    /// <summary>
+    /// 在监视器窗口监视物品有变化时调用
+    /// </summary>
+    public void ResetHudItems()
+    {
+        CleanUpAllAttachedChildren(hudParent,1);
+        InitHUDItems();
+        RefreshResources();
+    }
+
+    private void InitHUDItems()
+    {
+        
+        List<int> list = ResourceManager.Instance._hudList;
+        hudItems = new List<HUDItem>();
+        for (int i = 0; i < list.Count; i++)
+        {
+            GameObject newHudItem = Instantiate(_pfbHUDItem, hudParent);
+            HUDItem item = newHudItem.GetComponent<HUDItem>();
+            item.Init(DataManager.GetItemDataById(list[list.Count - 1-i]));
+            newHudItem.transform.SetAsFirstSibling();
+            hudItems.Add(item);
+        }
+    }
+
     public void TogglePauseGame()
     {
-        Debug.Log("pause");
         GameManager.Instance.TogglePauseGame(out TimeScale scale);
     }
 
@@ -116,23 +143,10 @@ public class HUDCanvas : CanvasBase
     }
     public void RefreshResources()
     {
-        
-        float money = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Money"));
-        float log = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Log"));
-        float stone = ResourceManager.Instance.TryGetResourceNum(DataManager.GetItemIdByName("Stone"));
-        float food = ResourceManager.Instance.GetAllFoodNum();
-        float deltaMoney = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Money"));
-        float deltaLog = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Log"));
-        float deltaStone = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Stone"));
-        float deltaFood = ResourceManager.Instance.GetWeekDeltaNum(DataManager.GetItemIdByName("Food"));
-        _money.text = string.Format("{1}", strMoney, (int)money);
-        _log.text = string.Format("{1}", strLog, (int)log);
-        _stone.text = string.Format("{1}", strStone, (int)stone);
-        _food.text = string.Format("{1}", strFood, (int)food);
-        _deltaMoney.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaMoney), strWeek,deltaMoney>=0?"+":"-");
-        _deltaLog.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaLog), strWeek, deltaLog >= 0 ? "+" : "-");
-        _deltaStone.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaStone), strWeek, deltaStone >= 0 ? "+" : "-");
-        _deltaFood.text = string.Format("{2}{0}/{1}", (int)Mathf.Abs(deltaFood), strWeek, deltaFood >= 0 ? "+" : "-");
+        for (int i = 0; i < hudItems.Count; i++)
+        {
+            hudItems[i].Refresh();
+        }
     }
 
     public void RefreshPopulation()

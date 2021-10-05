@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using System.Xml.Serialization;
+using System.Xml;
+using System.Xml.Schema;
 
 public class GameSaver
 {
@@ -134,7 +136,10 @@ public class SaveData
     #endregion
     #region ResourceManager
     public CostResource[] saveResources;
+    public Dictionary<int, int[]> allTimeResources;
     public int curPopulation;
+    public int[] hudList;
+    public int[] forbiddenFoodList;
     #endregion
     #region MapManager
     #endregion
@@ -231,5 +236,54 @@ public struct Vector2Serializer
             vector2Serializers[i].Fill(vector2s[i]);
         }
         return vector2Serializers;
+    }
+}
+
+[System.Serializable]
+public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
+{
+    public SerializableDictionary() { }
+    public void WriteXml(XmlWriter write)       // Serializer
+    {
+        XmlSerializer KeySerializer = new XmlSerializer(typeof(TKey));
+        XmlSerializer ValueSerializer = new XmlSerializer(typeof(TValue));
+
+        foreach (KeyValuePair<TKey, TValue> kv in this)
+        {
+            write.WriteStartElement("SerializableDictionary");
+            write.WriteStartElement("key");
+            KeySerializer.Serialize(write, kv.Key);
+            write.WriteEndElement();
+            write.WriteStartElement("value");
+            ValueSerializer.Serialize(write, kv.Value);
+            write.WriteEndElement();
+            write.WriteEndElement();
+        }
+    }
+    public void ReadXml(XmlReader reader)       // Deserializer
+    {
+        reader.Read();
+        XmlSerializer KeySerializer = new XmlSerializer(typeof(TKey));
+        XmlSerializer ValueSerializer = new XmlSerializer(typeof(TValue));
+
+        while (reader.NodeType != XmlNodeType.EndElement)
+        {
+            reader.ReadStartElement("SerializableDictionary");
+            reader.ReadStartElement("key");
+            TKey tk = (TKey)KeySerializer.Deserialize(reader);
+            reader.ReadEndElement();
+            reader.ReadStartElement("value");
+            TValue vl = (TValue)ValueSerializer.Deserialize(reader);
+            reader.ReadEndElement();
+            reader.ReadEndElement();
+            this.Add(tk, vl);
+            reader.MoveToContent();
+        }
+        reader.ReadEndElement();
+
+    }
+    public XmlSchema GetSchema()
+    {
+        return null;
     }
 }

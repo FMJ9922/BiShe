@@ -32,7 +32,7 @@ public class IntroduceCanvas : CanvasBase
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, true);
         CameraMovement.Instance.LockMove(true);
         main.SetActive(true);
-        text.text = Localization.ToSettingLanguage(ids[0]);
+        text.text = Localization.Get(ids[0]);
         videoPlayer.clip = clips[0];
         videoPlayer.Play();
         StartCoroutine(DelayRefesh());
@@ -58,7 +58,7 @@ public class IntroduceCanvas : CanvasBase
         int index = btn.transform.GetSiblingIndex();
         videoPlayer.clip = clips[index];
         videoPlayer.Play();
-        text.text = Localization.ToSettingLanguage(ids[index]);
+        text.text = Localization.Get(ids[index]);
         StartCoroutine(DelayRefesh());
     }
 }

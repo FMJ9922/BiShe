@@ -38,7 +38,7 @@ public class BuildIcon : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
         {
             _image.transform.localScale = Vector3.one * 1.5f;
         }
-        _name.text = Localization.ToSettingLanguage(BuildData.Name);
+        _name.text = Localization.Get(BuildData.Name);
     }
 
     public void OnPointerClick(PointerEventData eventData)

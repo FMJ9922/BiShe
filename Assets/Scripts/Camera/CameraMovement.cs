@@ -27,6 +27,12 @@ public class CameraMovement : Singleton<CameraMovement>
 
     private Vector3 lastMousePos;
 
+    public void MoveToTarget(Vector2Int targetGrid)
+    {
+        int x = targetGrid.x * 2 + 110;
+        int z = targetGrid.y * 2 - 114;
+        transform.position = new Vector3(x, 173.2f, z);
+    }
     protected override void InstanceAwake()
     {
         _cameraTrans = transform.GetChild(0);

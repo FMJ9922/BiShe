@@ -331,19 +331,6 @@ public class MapManager : Singleton<MapManager>
     }
 
     /// <summary>
-    /// 为建筑设置起点
-    /// </summary>
-    public void SetBuildingsGrid()
-    {
-        for (int i = 0; i < _buildings.Count; i++)
-        {
-            BuildingBase currentBuilding = _buildings[i];
-            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
-            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
-            //RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
-        }
-    }
-    /// <summary>
     /// 刷地基
     /// </summary>
     public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0,bool recalculate = true)
@@ -625,7 +612,7 @@ public class MapManager : Singleton<MapManager>
         bool hasOutOfMap = CheckOutOfMap(grids);
         if (hasOutOfMap)
         {
-            noticeContent = Localization.ToSettingLanguage("不能在地图外建造");
+            noticeContent = Localization.Get("不能在地图外建造");
             return false;
         }
         //检测安放地点占用
@@ -642,28 +629,28 @@ public class MapManager : Singleton<MapManager>
         bool isFlat = CheckFlat(grids,parkingPos);
         if (!hasNearRoad)
         {
-            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearRoad);
+            noticeContent = Localization.Get(ConstString.NoticeBuildFailNoNearRoad);
         }
         else
         if (hasOverlap)
         {
-            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoPlace);
+            noticeContent = Localization.Get(ConstString.NoticeBuildFailNoPlace);
         }
         if (!isInSea)
         {
-            noticeContent = Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoNearSea);
+            noticeContent = Localization.Get(ConstString.NoticeBuildFailNoNearSea);
         }
         if (isInWater)
         {
-            noticeContent = Localization.ToSettingLanguage("不能在水面下建造建筑");
+            noticeContent = Localization.Get("不能在水面下建造建筑");
         }
         if (!isEntryAvailable)
         {
-            noticeContent = Localization.ToSettingLanguage("建筑入口已被占用！无法建造");
+            noticeContent = Localization.Get("建筑入口已被占用！无法建造");
         }
         if (!isFlat)
         {
-            noticeContent = Localization.ToSettingLanguage("建筑不能建在过于陡峭的位置");
+            noticeContent = Localization.Get("建筑不能建在过于陡峭的位置");
         }
         //if (!isInSea) Debug.Log("不在海里");
         //Debug.Log(!hasOverlap);
@@ -904,7 +891,7 @@ public class MapManager : Singleton<MapManager>
             {
                 continue;
             }
-            int id = Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id;
+            int id = Instance._buildings[i].runtimeBuildData.Id;
             if (id == 20004 || id == 20012 || id == 20013)
             {
                 float cur = GetDistance(Instance._buildings[i].parkingGridIn, grid);
@@ -924,9 +911,9 @@ public class MapManager : Singleton<MapManager>
         GameObject p = null;
         for (int i = 0; i < Instance._buildings.Count; i++)
         {
-            if (Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id == 20003)
+            if (Instance._buildings[i].runtimeBuildData.Id == 20003)
             {
-                float cur = GetDistance(Instance._buildings[i].GetComponent<BuildingBase>().parkingGridIn, grid);
+                float cur = GetDistance(Instance._buildings[i].parkingGridIn, grid);
                 if (cur < dis)
                 {
                     dis = cur;
@@ -935,6 +922,19 @@ public class MapManager : Singleton<MapManager>
             }
         }
         return p;
+    }
+
+    public static int GetHutBuildingNum()
+    {
+        int num = 0;
+        for (int i = 0; i < Instance._buildings.Count; i++)
+        {
+            if (Instance._buildings[i].runtimeBuildData.tabType == BuildTabType.house)
+            {
+                num++;
+            }
+        }
+        return num;
     }
 
 

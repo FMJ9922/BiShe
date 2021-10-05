@@ -50,7 +50,7 @@ public class MarketItem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            tempData.text = Localization.Get(((TradeMode)i).GetDescription());
             modeDrop.options.Add(tempData);
         }
         modeDrop.onValueChanged.AddListener(ChangeMode);
@@ -72,7 +72,7 @@ public class MarketItem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            tempData.text = Localization.Get(((TradeMode)i).GetDescription());
             modeDrop.options.Add(tempData);
         }
         modeDrop.onValueChanged.AddListener(ChangeMode);
@@ -107,11 +107,11 @@ public class MarketItem : MonoBehaviour
                 continue;
             }
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(itemArray[i].Name);
+            tempData.text = Localization.Get(itemArray[i].Name);
             itemDrop.options.Add(tempData);
             idList.Add(itemArray[i].Id);
         }
-        itemDrop.captionText.text = Localization.ToSettingLanguage(data.curItem.Name);
+        itemDrop.captionText.text = Localization.Get(data.curItem.Name);
         icon.SetIcon(curItem.Id, ResourceManager.Instance.TryGetResourceNum(curItem.Id));
         cancelBtn.onClick.AddListener(() => MainInteractCanvas.Instance.GetMarketCanvas().RemoveBuyItem(gameObject));
         itemDrop.onValueChanged.AddListener(ChangeItem);
@@ -121,7 +121,7 @@ public class MarketItem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            tempData.text = Localization.Get(((TradeMode)i).GetDescription());
             modeDrop.options.Add(tempData);
         }
         modeDrop.onValueChanged.AddListener(ChangeMode);
@@ -155,7 +155,7 @@ public class MarketItem : MonoBehaviour
                 continue;
             }
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(itemArray[i].Name);
+            tempData.text = Localization.Get(itemArray[i].Name);
             itemDrop.options.Add(tempData);
             idList.Add(itemArray[i].Id);
         }
@@ -168,7 +168,7 @@ public class MarketItem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             tempData = new TMP_Dropdown.OptionData();
-            tempData.text = Localization.ToSettingLanguage(((TradeMode)i).GetDescription());
+            tempData.text = Localization.Get(((TradeMode)i).GetDescription());
             modeDrop.options.Add(tempData);
         }
         modeDrop.onValueChanged.AddListener(ChangeMode);
@@ -196,7 +196,7 @@ public class MarketItem : MonoBehaviour
     private void ChangeMode(int modeType)
     {
         marketData.curMode = (TradeMode)modeType;
-        modeDrop.captionText.text = Localization.ToSettingLanguage(((TradeMode)modeType).GetDescription());
+        modeDrop.captionText.text = Localization.Get(((TradeMode)modeType).GetDescription());
         RefreshBuyProfitLabel();
         OnResetTrading();
     }
@@ -210,17 +210,15 @@ public class MarketItem : MonoBehaviour
                 marketData.profit = isBuy?-curItem.Price * needNum * 1.5f : curItem.Price * needNum*TechManager.Instance.PriceBuff();
                 break;
             case TradeMode.maintain:
-                float num = (isBuy?1f:-1f)*( needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id));
+                float num = (isBuy?1f:-1f)*(Mathf.Clamp(needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id), 
+                    isBuy ? 0: -200 * TechManager.Instance.SellNumBuff(),
+                    isBuy ? 200 :0));
                 marketData.profit = num > 0 ? (isBuy ? -curItem.Price * num * 1.5f : curItem.Price * num * TechManager.Instance.PriceBuff()) : 0;
                 break;
         }
         profitText.text = profit.ToString();
     }
 
-    public void RefreshItem()
-    {
-        
-    }
 
 
     public void OnAddNum()
@@ -262,9 +260,20 @@ public class MarketItem : MonoBehaviour
         return profit;
     }
 
+
     public CostResource GetCostResource()
     {
-        return new CostResource(curItem.Id,needNum);
+        if (curMode!=TradeMode.maintain)
+        {
+            return new CostResource(curItem.Id, needNum);
+        }
+        else
+        {
+            float num = (isBuy ? 1f : -1f) * (Mathf.Clamp(needNum - ResourceManager.Instance.TryGetResourceNum(curItem.Id),
+                    isBuy ? 0 : -200 * TechManager.Instance.SellNumBuff(),
+                    isBuy ? 200 : 0));
+            return new CostResource(curItem.Id, num);
+        }
     }
 }
     

@@ -100,7 +100,7 @@ public class BuildManager : Singleton<BuildManager>
 
     public void OpenRangeLight(SelectLightInfo info)
     {
-        rangeLight.transform.position = info.pos;
+        rangeLight.transform.position = info.pos+Vector3.down;
         rangeLight.transform.localScale = info.scale;
         rangeLight.transform.rotation = info.quaternion;
         rangeLight.SetActive(true);
@@ -351,12 +351,12 @@ public class BuildManager : Singleton<BuildManager>
         Debug.Log(sum);*/
         if (MapManager.Instance.GetGridType(startGrid) == GridType.occupy)
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路起点不能设在已被占用的位置"));
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get("道路起点不能设在已被占用的位置"));
             return false;
         }
         if (MapManager.CheckIsInWater(startGrid))
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路终点不能在水里"));
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get("道路终点不能在水里"));
             return false;
         }
         return true;
@@ -384,12 +384,12 @@ public class BuildManager : Singleton<BuildManager>
     {
         if (!CheckRoadPreShowAvalible())
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路不能与建筑重叠"));
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get("道路不能与建筑重叠"));
             return;
         }
         if (CheckRoadEndPosInWater())
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage("道路终点不能在水里"));
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get("道路终点不能在水里"));
             return;
         }
         EventManager.StopListening(ConstEvent.OnMouseLeftButtonDown, OnConfirmRoadEndPos);
@@ -701,7 +701,7 @@ public class BuildManager : Singleton<BuildManager>
     private void OnMouseMoveSetBuildingPos(Vector3 p)
     {
         currentBuilding.transform.position = CalculateCenterPos(p, currentBuilding.Size, isTurn);
-        lightInfo.pos = currentBuilding.transform.position;
+        lightInfo.pos = currentBuilding.transform.position+Vector3.down;
         EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, lightInfo);
         //gridHightLight.transform.position = CalculateCenterPos(p, Vector2Int.zero) + new Vector3(0, 0.02f, 0);
         CheckBuildingOverlap();
@@ -750,7 +750,7 @@ public class BuildManager : Singleton<BuildManager>
         {
             MineBuilding mine = (MineBuilding)currentBuilding;
             float rich = mine.SetRichness(targetGrids);
-            NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage("矿脉丰度:") + CastTool.RoundOrFloat(rich * 100) + "%");
+            NoticeManager.Instance.ShowIconNotice(Localization.Get("矿脉丰度:") + CastTool.RoundOrFloat(rich * 100) + "%");
         }
         //gridHightLight.GetComponent<MeshRenderer>().material = isCurOverlap ? mat_grid_red : mat_grid_green;
     }
@@ -786,7 +786,7 @@ public class BuildManager : Singleton<BuildManager>
         }
         else
         {
-            NoticeManager.Instance.InvokeShowNotice(Localization.ToSettingLanguage(ConstString.NoticeBuildFailNoRes));
+            NoticeManager.Instance.InvokeShowNotice(Localization.Get(ConstString.NoticeBuildFailNoRes));
         }
     }
     private IEnumerator PushDownBuilding(GameObject obj)

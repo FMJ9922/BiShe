@@ -50,6 +50,11 @@ public class CostResource
         CostResource res = new CostResource(a.ItemId, a.ItemNum - b.ItemNum);
         return res;
     }
+    public static CostResource operator -(CostResource a)
+    {
+        CostResource res = new CostResource(a.ItemId, -a.ItemNum);
+        return res;
+    }
 
     public static CostResource operator* (CostResource a, float b)
     {

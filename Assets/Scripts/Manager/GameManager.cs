@@ -170,7 +170,7 @@ public class GameManager : Singleton<GameManager>
     {
         FindFadeImage();
         fadeScene.Fade(1f, 0.5f);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在读取存档并序列化");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在读取存档并序列化"));
         StartCoroutine(DelayToInvokeDo(() => {
             sw.Start();
             SceneManager.LoadScene("level", LoadSceneMode.Single);
@@ -335,10 +335,14 @@ public class GameManager : Singleton<GameManager>
         }
 
         //LevelManager
-        data.saveResources = ResourceManager.Instance.GetAllResources();
-        data.curPopulation = ResourceManager.Instance.CurPopulation;
         LevelManager.Instance.SaveLevelManager(ref data);
 
+        //ResourceManager
+        data.saveResources = ResourceManager.Instance.GetAllResources();
+        data.curPopulation = ResourceManager.Instance.CurPopulation;
+        data.hudList = ResourceManager.Instance._hudList.ToArray();
+        data.forbiddenFoodList = ResourceManager.Instance._forbiddenFoodList.ToArray();
+        data.allTimeResources = ResourceManager.Instance._itemHistoryNumDic;
         //MapManager
         //data.gridNodes = MapManager.Instance.GetGrids();
 

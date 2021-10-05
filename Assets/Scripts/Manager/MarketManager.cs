@@ -24,6 +24,84 @@ public class MarketManager : Singleton<MarketManager>
     {
         EventManager.StopListening(ConstEvent.OnSettleAccount, SettleAccount);
     }
+
+    public List<MarketItem> GetTargetData(int itemId)
+    {
+        List<MarketItem> ret = new List<MarketItem>();
+        List<MarketItem> buyItems = marketCanvas.GetBuyItems();
+        for (int i = 0; i < buyItems.Count; i++)
+        {
+            if (buyItems[i].curItem.Id == itemId && buyItems[i].isTrading)
+            {
+                ret.Add(buyItems[i]);
+            }
+        }
+        List<MarketItem> sellItems = marketCanvas.GetSellItems();
+        for (int i = 0; i < sellItems.Count; i++)
+        {
+            if (sellItems[i].curItem.Id == itemId && sellItems[i].isTrading)
+            {
+                ret.Add(sellItems[i]);
+            }
+        }
+        return ret;
+    }
+
+    public List<MarketItem> GetAllFoodData()
+    {
+        List<MarketItem> ret = new List<MarketItem>();
+        List<MarketItem> buyItems = marketCanvas.GetBuyItems();
+        for (int i = 0; i < buyItems.Count; i++)
+        {
+            if (ResourceManager.IsFood(buyItems[i].curItem.Id) && buyItems[i].isTrading)
+            {
+                ret.Add(buyItems[i]);
+            }
+        }
+        List<MarketItem> sellItems = marketCanvas.GetSellItems();
+        for (int i = 0; i < sellItems.Count; i++)
+        {
+            if (ResourceManager.IsFood(sellItems[i].curItem.Id) && sellItems[i].isTrading)
+            {
+                ret.Add(sellItems[i]);
+            }
+        }
+        return ret;
+    }
+
+    public List<CostResource> GetDeltaNum()
+    {
+        if (!marketCanvas)
+        {
+            marketCanvas = MainInteractCanvas.Instance.GetMarketCanvas();
+        }
+        List<MarketItem> buyItems = marketCanvas.GetBuyItems();
+        List<MarketItem> sellItems = marketCanvas.GetSellItems();
+        List<CostResource> ret = new List<CostResource>();
+        for (int i = 0; i < buyItems.Count; i++)
+        {
+            if (buyItems[i].isTrading
+                && ResourceManager.Instance.IsResourceEnough(new CostResource(99999, -buyItems[i].GetProfit())))
+            {
+                ret.Add(new CostResource(99999, buyItems[i].GetProfit()));
+                ret.Add(buyItems[i].GetCostResource());
+            }
+        }
+        for (int i = 0; i < sellItems.Count; i++)
+        {
+            if (sellItems[i].isTrading
+                && ResourceManager.Instance.IsResourceEnough(sellItems[i].GetCostResource()))
+            {
+                ret.Add(new CostResource(99999, sellItems[i].GetProfit()));
+                ret.Add(-sellItems[i].GetCostResource());
+            }
+        }
+        int num = MapManager.GetHutBuildingNum();
+        CostResource costFood = ResourceManager.Instance.GetFoodByMax(num,true);
+        ret.Add(-costFood);
+        return ret;
+    }
+
     public void SettleAccount()
     {
         //Debug.Log("?");
@@ -40,30 +118,30 @@ public class MarketManager : Singleton<MarketManager>
             if (!marketItems[i].isTrading) continue;
             float profit = marketItems[i].GetProfit();
             if (profit == 0) continue;
+            CostResource costResource = marketItems[i].GetCostResource();
             //Debug.Log("profit" + profit);
             switch (marketItems[i].curMode)
             {
                 case TradeMode.once:
                     if (ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
-                        BuyItem(marketItems[i].GetCostResource());
-                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(marketItems[i].GetCostResource(), profit));
+                        BuyItem(costResource);
+                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(costResource, profit));
                         marketItems[i].OnResetTrading();
                     }
                     break;
                 case TradeMode.everyWeek:
                     if (ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
-                        BuyItem(marketItems[i].GetCostResource());
-                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(marketItems[i].GetCostResource(), profit));
+                        BuyItem(costResource);
+                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(costResource, profit));
                     }
                     break;
                 case TradeMode.maintain:
-                    float num = marketItems[i].needNum - ResourceManager.Instance.TryGetResourceNum(marketItems[i].curItem.Id);
-                    if (num > 0 && ResourceManager.Instance.TryUseResource(99999, -profit))
+                    if (costResource.ItemNum > 0 && ResourceManager.Instance.TryUseResource(99999, -profit))
                     {
-                        BuyItem(new CostResource(marketItems[i].curItem.Id, num));
-                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(marketItems[i].GetCostResource(), profit));
+                        BuyItem(costResource);
+                        marketCanvas.AddProfitInfo(GetBuyProfitDescribe(costResource, profit));
                     }
                     break;
             }
@@ -91,11 +169,9 @@ public class MarketManager : Singleton<MarketManager>
                     }
                     break;
                 case TradeMode.maintain:
-                    float num = -costResource.ItemNum + ResourceManager.Instance.TryGetResourceNum(orderItems[i].curItem.Id);
-                    if (num > 0)
+                    if (ResourceManager.Instance.IsResourceEnough(costResource))
                     {
-                        num = Mathf.Clamp(num, 0, 200 * TechManager.Instance.SellNumBuff());
-                        SellItem(new CostResource(costResource.ItemId, num), orderItems[i].curItem.Price);
+                        SellItem(costResource, orderItems[i].curItem.Price);
                     }
                     break;
             }
@@ -106,22 +182,22 @@ public class MarketManager : Singleton<MarketManager>
     public string GetSellProfitDescribe(CostResource costResource, float profit)
     {
         return string.Format("{0} {4} {1},{5} {2},{6} {3}", LevelManager.Instance.LogDate(),
-            Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
+            Localization.Get(DataManager.GetItemNameById(costResource.ItemId)),
             CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(profit),
-            Localization.ToSettingLanguage("Sell1"),
-            Localization.ToSettingLanguage("Amount"),
-            Localization.ToSettingLanguage("GetProfit")
+            Localization.Get("Sell1"),
+            Localization.Get("Amount"),
+            Localization.Get("GetProfit")
             );
     }
 
     public string GetBuyProfitDescribe(CostResource costResource, float profit)
     {
         return string.Format("{0} {4} {1},{5} {2},{6} {3}", LevelManager.Instance.LogDate(),
-             Localization.ToSettingLanguage(DataManager.GetItemNameById(costResource.ItemId)),
+             Localization.Get(DataManager.GetItemNameById(costResource.ItemId)),
             CastTool.RoundOrFloat(costResource.ItemNum), CastTool.RoundOrFloat(-profit),
-            Localization.ToSettingLanguage("Buy1"),
-            Localization.ToSettingLanguage("Amount"),
-            Localization.ToSettingLanguage("Cost")
+            Localization.Get("Buy1"),
+            Localization.Get("Amount"),
+            Localization.Get("Cost")
             );
     }
     public void BuyItem(CostResource costResource)
@@ -164,6 +240,16 @@ public class MarketManager : Singleton<MarketManager>
             sellDatas[i] = items[i].marketData;
         }
         return sellDatas;
+    }
+
+    public MarketItem[] GetBuyItems()
+    {
+        return marketCanvas.buysItems.ToArray();
+    }
+
+    public MarketItem[] GetSellItems()
+    {
+        return marketCanvas.sellsItems.ToArray();
     }
 }
 

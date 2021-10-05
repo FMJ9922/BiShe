@@ -76,6 +76,6 @@ public class TechTreeCanvas : CanvasBase
 
     public void ChangePoint(int point)
     {
-        pointText.text = Localization.ToSettingLanguage("RemainPoints") + point;
+        pointText.text = Localization.Get("RemainPoints") + point;
     }
 }

@@ -34,7 +34,7 @@ public class TechItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
-        NoticeManager.Instance.ShowIconNotice(Localization.ToSettingLanguage(data.Name));
+        NoticeManager.Instance.ShowIconNotice(Localization.Get(data.Name));
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)

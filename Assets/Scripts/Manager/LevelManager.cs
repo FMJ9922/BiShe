@@ -18,6 +18,15 @@ public class LevelManager : Singleton<LevelManager>
     {
         get => dayTime;
     }
+
+    //当前是游戏内的第几周
+    public int WeekIndex
+    {
+        get
+        {
+            return (year - 1) * 48 + (month - 1) * 4 + (week - 1);
+        }
+    }
     public int Year
     {
         get
@@ -80,6 +89,7 @@ public class LevelManager : Singleton<LevelManager>
                 Week++;
                 day = value - 7;
                 ResourceManager.Instance.RecordLastWeekItem();
+                ResourceManager.Instance.UpdateItemHistroyNumDic();
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
                 EventManager.TriggerEvent(ConstEvent.OnSettleAccount);
@@ -156,6 +166,7 @@ public class LevelManager : Singleton<LevelManager>
             Timer = 0;
             string date;
             AddDay(out date);
+            ResourceManager.Instance.UpdateItemDeltaNumDic();
             EventManager.TriggerEvent<string>(ConstEvent.OnDayWentBy, date);
             EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
         }
@@ -215,45 +226,45 @@ public class LevelManager : Singleton<LevelManager>
         pause = saveData.pause;
         Timer = saveData.timer;
         WeekProgress = saveData.weekProgress;
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadTech");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("LoadTech"));
         yield return 0;
         TechManager.Instance.InitTechBySave(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadResources");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("LoadResources"));
         yield return 0;
         ResourceManager.Instance.InitSavedResourceManager(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadTerrain");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("LoadTerrain"));
         yield return 0;
         TerrainGenerator.Instance.LoadTerrainFromSaveData(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "LoadMap");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("LoadMap"));
         yield return 0;
         MapManager.Instance.InitMapManager();
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在种树");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在种树"));
         yield return 0;
         TreePlanter.Instance.PlantSaveTrees(saveData);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载水面");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载水面"));
         yield return 0;
         InitSaveWater(saveData);
         InitWaterMat();
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载已有建筑");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载已有建筑"));
         yield return 0;
         BuildManager.Instance.InitBuildManager();
         BuildManager.Instance.InitSaveBuildings(saveData.buildingDatas);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载桥梁");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载桥梁"));
         yield return 0;
         BuildManager.Instance.InitSaveBridges(saveData.bridgeDatas);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载市场");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载市场"));
         yield return 0;
         MarketManager.Instance.InitSavedMarketManager();
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载小车车");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载小车车"));
         yield return 0;
         TrafficManager.Instance.InitSavedTrafficManager(saveData.driveDatas);
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "正在加载UI");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载UI"));
         yield return 0;
         //sw.Restart();
         MainInteractCanvas.InitCanvas();
         GameManager.Instance.sw.Stop();
         System.TimeSpan dt = GameManager.Instance.sw.Elapsed;
-        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, "加载完毕！用时"+ CastTool.RoundOrFloat((float)dt.TotalSeconds) + "s");
+        EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("加载完毕！用时") + CastTool.RoundOrFloat((float)dt.TotalSeconds) + "s");
         yield return 0;
         GameManager.Instance.sw.Reset();
         EventManager.TriggerEvent(ConstEvent.OnLoadingOver);
