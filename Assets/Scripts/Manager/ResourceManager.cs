@@ -365,7 +365,7 @@ public class ResourceManager : Singleton<ResourceManager>
             }
             else
             {
-                Debug.Log("缺少数量：" + Id + " " + storedNum);
+                //Debug.Log("缺少数量：" + Id + " " + storedNum);
             }
         }
         else

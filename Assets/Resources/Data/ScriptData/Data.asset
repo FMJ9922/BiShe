@@ -346,6 +346,7 @@ MonoBehaviour:
     Level: 1
     iconName: ResidentialL1
     Times: 1
+    SortRank: 10
   - Id: 20002
     Name: CountryRoad
     CostPerWeek: 0
@@ -368,6 +369,7 @@ MonoBehaviour:
     Level: 1
     iconName: RoadL1
     Times: 1
+    SortRank: 1000
   - Id: 20003
     Name: Warehouse
     CostPerWeek: 5
@@ -392,6 +394,7 @@ MonoBehaviour:
     Level: 1
     iconName: WareHouseL1
     Times: 1
+    SortRank: 20
   - Id: 20004
     Name: Bazaar
     CostPerWeek: 9
@@ -416,6 +419,7 @@ MonoBehaviour:
     Level: 1
     iconName: MarketL1
     Times: 1
+    SortRank: 30
   - Id: 20005
     Name: Farmland
     CostPerWeek: 2
@@ -438,6 +442,7 @@ MonoBehaviour:
     Level: 1
     iconName: Wheat
     Times: 1
+    SortRank: 30
   - Id: 20006
     Name: LivestockFarm
     CostPerWeek: 3
@@ -462,6 +467,7 @@ MonoBehaviour:
     Level: 1
     iconName: FarmL1
     Times: 1
+    SortRank: 40
   - Id: 20007
     Name: Workshop
     CostPerWeek: 5
@@ -484,6 +490,7 @@ MonoBehaviour:
     Level: 1
     iconName: FactoryL1
     Times: 1
+    SortRank: 50
   - Id: 20008
     Name: LoggingCamps
     CostPerWeek: 2
@@ -506,6 +513,7 @@ MonoBehaviour:
     Level: 1
     iconName: SawmillL1
     Times: 1
+    SortRank: 60
   - Id: 20009
     Name: PlainResidentialLv2
     CostPerWeek: -6
@@ -530,6 +538,7 @@ MonoBehaviour:
     Level: 2
     iconName: ResidentialL2
     Times: 1
+    SortRank: 11
   - Id: 20010
     Name: Factory
     CostPerWeek: 10
@@ -552,6 +561,7 @@ MonoBehaviour:
     Level: 2
     iconName: FactoryL2
     Times: 1.5
+    SortRank: 51
   - Id: 20011
     Name: Integrated mill
     CostPerWeek: 15
@@ -574,6 +584,7 @@ MonoBehaviour:
     Level: 3
     iconName: FactoryL3
     Times: 2
+    SortRank: 52
   - Id: 20012
     Name: Market
     CostPerWeek: 12
@@ -596,6 +607,7 @@ MonoBehaviour:
     Level: 2
     iconName: MarketL2
     Times: 1
+    SortRank: 30
   - Id: 20013
     Name: Shopping Mall
     CostPerWeek: 16
@@ -618,6 +630,7 @@ MonoBehaviour:
     Level: 3
     iconName: MarketL3
     Times: 1
+    SortRank: 30
   - Id: 20014
     Name: LoggingCampsLv2
     CostPerWeek: 6
@@ -640,6 +653,7 @@ MonoBehaviour:
     Level: 2
     iconName: SawmillL2
     Times: 1.5
+    SortRank: 61
   - Id: 20015
     Name: LoggingCampsLv3
     CostPerWeek: 9
@@ -662,8 +676,9 @@ MonoBehaviour:
     Level: 3
     iconName: SawmillL3
     Times: 2
+    SortRank: 62
   - Id: 20016
-    Name: Warehouse Lv2
+    Name: WarehouseLv2
     CostPerWeek: 8
     Formulas: 
     Population: 10
@@ -684,8 +699,9 @@ MonoBehaviour:
     Level: 2
     iconName: WareHouseL2
     Times: 1
+    SortRank: 21
   - Id: 20017
-    Name: Warehouse Lv3
+    Name: WarehouseLv3
     CostPerWeek: 10
     Formulas: 
     Population: 10
@@ -706,6 +722,7 @@ MonoBehaviour:
     Level: 3
     iconName: WareHouseL3
     Times: 1
+    SortRank: 22
   - Id: 20018
     Name: "Cement\_road"
     CostPerWeek: 0
@@ -728,6 +745,7 @@ MonoBehaviour:
     Level: 2
     iconName: RoadL2
     Times: 1
+    SortRank: 1001
   - Id: 20019
     Name: "Asphalt\_road"
     CostPerWeek: 0
@@ -750,6 +768,7 @@ MonoBehaviour:
     Level: 3
     iconName: RoadL3
     Times: 1
+    SortRank: 1002
   - Id: 20020
     Name: Government
     CostPerWeek: 0
@@ -772,6 +791,7 @@ MonoBehaviour:
     Level: 1
     iconName: 
     Times: 1
+    SortRank: 2
   - Id: 20021
     Name: GovernmentLv2
     CostPerWeek: 0
@@ -798,6 +818,7 @@ MonoBehaviour:
     Level: 2
     iconName: 
     Times: 1
+    SortRank: 1
   - Id: 20022
     Name: GovernmentLv3
     CostPerWeek: 0
@@ -824,6 +845,7 @@ MonoBehaviour:
     Level: 3
     iconName: 
     Times: 1
+    SortRank: 0
   - Id: 20023
     Name: CoachResidential
     CostPerWeek: -3
@@ -846,6 +868,7 @@ MonoBehaviour:
     Level: 1
     iconName: CoachL1
     Times: 1
+    SortRank: 18
   - Id: 20024
     Name: CoachResidentialLv2
     CostPerWeek: -6
@@ -870,6 +893,7 @@ MonoBehaviour:
     Level: 2
     iconName: CoachL2
     Times: 1
+    SortRank: 17
   - Id: 20025
     Name: CoachResidentialLv3
     CostPerWeek: -12
@@ -894,6 +918,7 @@ MonoBehaviour:
     Level: 3
     iconName: CoachL3
     Times: 1
+    SortRank: 16
   - Id: 20026
     Name: HuiResidential
     CostPerWeek: -3
@@ -916,6 +941,7 @@ MonoBehaviour:
     Level: 1
     iconName: HuiL1
     Times: 1
+    SortRank: 13
   - Id: 20027
     Name: HuiResidentialLv2
     CostPerWeek: -6
@@ -940,6 +966,7 @@ MonoBehaviour:
     Level: 2
     iconName: HuiL2
     Times: 1
+    SortRank: 14
   - Id: 20028
     Name: HuiResidentialLv3
     CostPerWeek: -12
@@ -964,6 +991,7 @@ MonoBehaviour:
     Level: 3
     iconName: HuiL3
     Times: 1
+    SortRank: 15
   - Id: 20029
     Name: Mine
     CostPerWeek: 6
@@ -986,6 +1014,7 @@ MonoBehaviour:
     Level: 1
     iconName: MineL1
     Times: 1
+    SortRank: 70
   - Id: 20030
     Name: MineLv2
     CostPerWeek: 8
@@ -1010,6 +1039,7 @@ MonoBehaviour:
     Level: 2
     iconName: MineL2
     Times: 1.5
+    SortRank: 71
   - Id: 20031
     Name: MineLv3
     CostPerWeek: 10
@@ -1034,6 +1064,7 @@ MonoBehaviour:
     Level: 3
     iconName: MineL3
     Times: 2
+    SortRank: 72
   - Id: 20032
     Name: Pier
     CostPerWeek: 8
@@ -1056,6 +1087,7 @@ MonoBehaviour:
     Level: 1
     iconName: HookerL1
     Times: 1
+    SortRank: 80
   - Id: 20033
     Name: PlainResidentialLv3
     CostPerWeek: -12
@@ -1080,6 +1112,7 @@ MonoBehaviour:
     Level: 3
     iconName: ResidentialL3
     Times: 1
+    SortRank: 12
   - Id: 20034
     Name: LivestockFarmLv2
     CostPerWeek: 5
@@ -1102,6 +1135,7 @@ MonoBehaviour:
     Level: 2
     iconName: FarmL2
     Times: 1.5
+    SortRank: 41
   - Id: 20035
     Name: LivestockFarmLv3
     CostPerWeek: 8
@@ -1124,6 +1158,7 @@ MonoBehaviour:
     Level: 3
     iconName: FarmL3
     Times: 2
+    SortRank: 42
   - Id: 20036
     Name: Bridge
     CostPerWeek: 0
@@ -1146,6 +1181,7 @@ MonoBehaviour:
     Level: 1
     iconName: Bridge
     Times: 1
+    SortRank: 1013
   - Id: 20037
     Name: FarmlandII
     CostPerWeek: 3
@@ -1168,6 +1204,7 @@ MonoBehaviour:
     Level: 1
     iconName: Wheat
     Times: 2
+    SortRank: 31
   - Id: 20038
     Name: FarmlandIII
     CostPerWeek: 5
@@ -1190,6 +1227,7 @@ MonoBehaviour:
     Level: 1
     iconName: Wheat
     Times: 4
+    SortRank: 32
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -2411,27 +2449,27 @@ MonoBehaviour:
     - code: ForbiddenEat
       chinese: "\u7981\u6B62\u98DF\u7528"
       english: Forbidden to eat
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
+    - code: "\u6765\u81EA\u5EFA\u7B51"
+      chinese: "\u6765\u81EA\u5EFA\u7B51"
+      english: From Buildings
+    - code: "\u6765\u81EA\u8D38\u6613"
+      chinese: "\u6765\u81EA\u8D38\u6613"
+      english: From Trading
+    - code: "\u65E0"
+      chinese: "\u65E0"
+      english: None
+    - code: WarehouseLv2
+      chinese: "\u4ED3\u5E93\u4E8C\u7EA7"
+      english: WarehouseLv2
+    - code: WarehouseLv3
+      chinese: "\u4ED3\u5E93\u4E09\u7EA7"
+      english: WarehouseLv3
+    - code: Warehouse Lv2
+      chinese: "\u4ED3\u5E93\u4E8C\u7EA7"
+      english: WarehouseLv2
+    - code: Warehouse Lv3
+      chinese: "\u4ED3\u5E93\u4E09\u7EA7"
+      english: WarehouseLv3
     - code: 
       chinese: 
       english: 

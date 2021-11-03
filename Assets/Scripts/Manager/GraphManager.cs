@@ -92,11 +92,11 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
-            int rand = building.runtimeBuildData.CostPerWeek;
+            float rand = building.runtimeBuildData.CostPerWeek* TechManager.Instance.MaintenanceCostBuff();
             item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position,
                 rand > 0 ? Color.red:Color.green);
             string showLabel = "/" + Localization.Get("Week");
-            item.GetComponent<GraphCube>().SetLabel((rand<0?"+":"-")+ Mathf.Abs(rand) + showLabel);
+            item.GetComponent<GraphCube>().SetLabel((rand<0?"+":"-")+ CastTool.RoundOrFloat(Mathf.Abs(rand)) + showLabel);
         }
     }
 

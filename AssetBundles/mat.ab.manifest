@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 31537478
+CRC: 4236895762
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0e157b80c089a78da9360cb8bd670ea4
+    Hash: 3470d2591fe5cc03c976145cd94d6749
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2b170735527de831d5cd81528048abfd
@@ -59,6 +59,7 @@ Assets:
 - Assets/ArtAssets/Texture/Universal_Plant_Wheat.png
 - Assets/ArtAssets/Material/PlantUV.mat
 - Assets/ArtAssets/Model/Building/Materials/WallStone.mat
+- Assets/Scenes Assets/Material/Universal_Plant_FruitTreeLeaves_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
 - Assets/ArtAssets/UI/StartUI/30002preview.png
 - Assets/TextMesh Pro/Fonts/LiberationSans.ttf
@@ -66,6 +67,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Coach_Building_HookerPier_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Texture/Coach_Building_Residential_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Plant_Fruit_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
 - Assets/ArtAssets/Material/Field.mat
 - Assets/ArtAssets/UI/BuildingUI/MarketButton.png

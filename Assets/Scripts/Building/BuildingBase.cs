@@ -181,30 +181,34 @@ public class BuildingBase : MonoBehaviour
     public List<CostResource> GetPerWeekDeltaResources()
     {
         _statistics.Clear();
-        _statistics.Add(new CostResource(99999, -runtimeBuildData.CostPerWeek));
+        _statistics.Add(new CostResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
 
         if (formula != null&& !runtimeBuildData.Pause)
         {
             for (int i = 0; formula.InputItemID!=null&&i < formula.InputItemID.Count; i++)
             {
                 float num = -formula.InputNum[i] * WorkEffect() * runtimeBuildData.Times;
-                _statistics.Add(new CostResource(formula.InputItemID[i], num));
-                if (ResourceManager.IsFood(formula.InputItemID[i])&& formula.InputItemID[i]!=11000)
+                _statistics.Add(new CostResource(formula.InputItemID[i], num*TechManager.Instance.ResourcesBuff()));
+                /*if (ResourceManager.IsFood(formula.InputItemID[i])&& formula.InputItemID[i]!=11000)
                 {
                     //Debug.Log(formula.InputItemID[i]+" "+ formula.InputNum[i] + " " + WorkEffect() + " " + runtimeBuildData.Times);
                     _statistics.Add(new CostResource(11000, num));
-                }
+                }*/
             }
 
             for (int i = 0; formula.OutputItemID != null && i < formula.OutputItemID.Count; i++)
             {
-                float num = formula.ProductNum[i] * WorkEffect() * runtimeBuildData.Times / formula.ProductTime;
+                float num = formula.ProductNum[i] * WorkEffect() * runtimeBuildData.Times / formula.ProductTime * TechManager.Instance.ResourcesBuff();
                 _statistics.Add(new CostResource(formula.OutputItemID[i], num));
-                if (ResourceManager.IsFood(formula.OutputItemID[i]))
+                /*if (ResourceManager.IsFood(formula.OutputItemID[i]))
                 {
                     _statistics.Add(new CostResource(11000, num));
-                }
+                }*/
             }
+        }
+        if (runtimeBuildData.tabType == BuildTabType.house)
+        {
+            _statistics.Add(ResourceManager.Instance.GetFoodByMax(-1, true));
         }
         return _statistics;
     }
@@ -240,6 +244,7 @@ public class BuildingBase : MonoBehaviour
         }
         runtimeBuildData.CurFormula = 0;
         runtimeBuildData.Times = buildData.Times;
+        runtimeBuildData.SortRank = buildData.SortRank;
         return runtimeBuildData;
     }
 
@@ -302,7 +307,7 @@ public class BuildingBase : MonoBehaviour
             CarMission carMission = MakeCarMission(rate);
             if (carMission != null)
             {
-                TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+                TrafficManager.Instance.UseCar(carMission, (bool success) => { runtimeBuildData.AvaliableToMarket = success; });
             }
             else
             {
@@ -327,7 +332,7 @@ public class BuildingBase : MonoBehaviour
     }
     protected virtual void Input()
     {
-        ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek));
+        ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
         runtimeBuildData.Pause = false;
         //ChangeFormula();
         if (formula == null|| formula.InputItemID==null) return;

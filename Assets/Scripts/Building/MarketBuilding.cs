@@ -15,9 +15,12 @@ public class MarketBuilding : BuildingBase
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:
-                BuildRecievedCarMission(carMission);
+                BuildRecievedCarMission(ref carMission);
                 CarMission car = carMission;
-                TrafficManager.Instance.UseCar(car, out bool success,DriveType.once);
+                if (carMission != null)
+                {
+                    TrafficManager.Instance.UseCar(carMission);
+                }
                 break;
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
@@ -40,7 +43,7 @@ public class MarketBuilding : BuildingBase
 
     protected override void Input()
     {
-        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
+        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
         runtimeBuildData.Pause = false;
     }
 
@@ -48,14 +51,15 @@ public class MarketBuilding : BuildingBase
     {
 
     }
-    private void BuildRecievedCarMission(CarMission carMission)
+    private void BuildRecievedCarMission(ref CarMission carMission)
     {
         BuildingBase temp = MapManager.Instance.GetBuilidngByEntry(carMission.StartBuilding);
         if (temp == null)
         {
+            carMission = null;
             return;
         }
-        carMission.StartBuilding = carMission.EndBuilding;
+        carMission.StartBuilding = parkingGridIn;
         carMission.EndBuilding = temp.parkingGridIn;
         //Debug.Log(carMission.StartBuilding);
         //Debug.Log(carMission.EndBuilding);W
@@ -83,8 +87,8 @@ public class MarketBuilding : BuildingBase
                         if (carMission.isAnd)continue;
                         else return;
                     }
-                    EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
                 }
+                EventManager.TriggerEvent(ConstEvent.OnRefreshResources);
                 break;
             default:
                 break;

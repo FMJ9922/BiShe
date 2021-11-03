@@ -40,18 +40,18 @@ public class HutBuilding : BuildingBase
 
     protected override void Input()
     {
-        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
+        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
         //食物少于指定数量就去取货
         if (storage.GetAllFoodNum() < 3)
         {
             CarMission carMission = MakeCarMission();
             if (carMission != null)
             {
-                TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+                TrafficManager.Instance.UseCar(carMission, (bool success) => { runtimeBuildData.AvaliableToMarket = success; });
             }
             else
-            {
-                runtimeBuildData.AvaliableToMarket = true;
+            {   
+                runtimeBuildData.AvaliableToMarket = false;
             }
         }
 

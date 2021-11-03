@@ -13,7 +13,6 @@ public class SoundManager : MonoBehaviour
     public AudioSource[] efxSources;
     private Coroutine[] coroutines; 
     private List<AudioClip> clipList;
-    int[] frameCounter;
 
     private void Awake()
     {
@@ -28,8 +27,6 @@ public class SoundManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);//加载关卡时不销毁GameManager
         clipList = new List<AudioClip>();
-        coroutines = new Coroutine[3];
-        frameCounter = new int[3] { 0,0,0};
         float soundVolume = PlayerPrefs.GetFloat("SoundVolume", 0.1f);
         ValueChangeCheck(soundVolume);
     }
@@ -54,14 +51,6 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        for(int i = 0; i < frameCounter.Length; i++)
-        {
-            frameCounter[i]+=1;
-        }
-        
-    }
     
     public void ValueChangeCheck(float vol)
     {
@@ -116,31 +105,15 @@ public class SoundManager : MonoBehaviour
         for(int i = 0; i < efxSources.Length; i++)
         {
             AudioSource audioSource = efxSources[i];
-            for(int j = 0;j< efxSources.Length; j++)
-            {
-                if(efxSources[j].clip != null && efxSources[j].clip.name == audioClip.name)
-                {
-                    if (frameCounter[j] < 6)
-                    {
-                        return;
-                    }
-                }
-                
-            }
             if (!audioSource.isPlaying)
             {
-                frameCounter[i] = 0;
                 audioSource.clip = audioClip;
                 audioSource.PlayOneShot(audioClip);
-                //Debug.Log("播放器" + i + "正在播放：" + audioClip.name);
-                float time = audioClip.length;
-                coroutines[i] = StartCoroutine(DoSthAfterClipFinished(time, audioSource));
                 return;
             }
 
             
         }
-        AddToSoundList(audioClip);
     }
     IEnumerator DoSthAfterClipFinished(float time,AudioSource self)
     {

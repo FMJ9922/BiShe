@@ -160,6 +160,7 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     }
     public void RefreshUV(int tex, int length, int index, int dir = 0, float adjust = 0.001F)
     {
+        CheckMesh();
         Vector2[] uv = mesh.uv;
         float h = Mathf.FloorToInt(tex / length);
         float x = tex - length * h;
@@ -170,7 +171,11 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         {
             tempdir = Random.Range((int)0, (int)4);
         }
-
+        if(4 * index + tempdir % 4 > uv.Length
+            || 4 * index + (3 + tempdir) % 4 > uv.Length)
+        {
+            return;
+        }
         uv[4 * index + tempdir % 4] = new Vector2((x / length) + adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (1 + tempdir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h - 1) / length) + adjust);
         uv[4 * index + (2 + tempdir) % 4] = new Vector2(((x + 1) / length) - adjust, ((length - h) / length) - adjust);

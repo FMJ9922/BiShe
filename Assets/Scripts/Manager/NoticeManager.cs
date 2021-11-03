@@ -12,7 +12,7 @@ public class NoticeManager : Singleton<NoticeManager>
     {
         if (vis)
         {
-            canvas.gameObject.SetActive(true);
+            canvas.OnOpen();
             if (tracing)
             {
                 EventManager.StartListening<Vector3>(ConstEvent.OnGroundRayPosMove, TraceMouse);
@@ -26,7 +26,7 @@ public class NoticeManager : Singleton<NoticeManager>
         }
         else
         {
-            canvas.gameObject.SetActive(false);
+            canvas.OnClose();
             EventManager.StopListening<Vector3>(ConstEvent.OnGroundRayPosMove, TraceMouse);
         }
     }
@@ -51,7 +51,7 @@ public class NoticeManager : Singleton<NoticeManager>
     public void ShowItemDetailInfo(int itemId)
     {
         CloseNotice();
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseNotice);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseDetailInfo);
         canvas.SetDetailInfo(itemId);
         ToggleVisable(true, false);
     }
@@ -78,6 +78,13 @@ public class NoticeManager : Singleton<NoticeManager>
         lockShow = true;
         StartCoroutine(Close(time));
         
+    }
+    public void CloseDetailInfo()
+    {
+        lockShow = false;
+        ToggleVisable(false);
+        canvas.CloseDetailInfo();
+        EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, CloseDetailInfo);
     }
 
     IEnumerator Close(float time)

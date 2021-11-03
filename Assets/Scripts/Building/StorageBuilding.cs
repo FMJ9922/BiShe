@@ -31,7 +31,7 @@ public class StorageBuilding : BuildingBase
 
     protected override void Input()
     {
-        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek);
+        ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
         runtimeBuildData.Pause = false;
         if (runtimeBuildData.CurPeople < runtimeBuildData.Population)
         {

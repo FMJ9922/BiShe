@@ -45,7 +45,7 @@ public class CameraMovement : Singleton<CameraMovement>
         EventManager.StopListening<bool>(ConstEvent.OnLockMove, LockMove);
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (canMove)
         {

@@ -107,6 +107,10 @@ public class ResourceCanvas : CanvasBase
         int count = 0;
         foreach (KeyValuePair<int, float> keyValuePair in dic)
         {
+            if(keyValuePair.Key == 11000)
+            {
+                continue;
+            }
             InitItemPfb(count, keyValuePair.Key, keyValuePair.Value);
             count++;
         }

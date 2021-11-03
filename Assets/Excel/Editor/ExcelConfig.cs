@@ -153,6 +153,7 @@ public class ExcelTool
                 buildData.iconName = collect[i][20].ToString();
             }
             buildData.Times = float.Parse(collect[i][21].ToString());
+            buildData.SortRank= int.Parse(collect[i][22].ToString());
             array[i - 2] = buildData;
         }
         return array;

@@ -10,6 +10,7 @@ public class FarmLandBuilding : BuildingBase
     [SerializeField] GameObject previewObj;
     public List<GameObject> lists;
     bool isharvesting = false;
+    bool waitNextWeekStart = false;
 
     private PlantController[] plants;
 
@@ -129,15 +130,20 @@ public class FarmLandBuilding : BuildingBase
     {
         if (formula == null || formula.OutputItemID == null) return;
 
-        if (!isharvesting)
+        if (!isharvesting&&!waitNextWeekStart)
         {
             runtimeBuildData.productTime--;
             if (runtimeBuildData.productTime <= 0)
             {
                 isharvesting = true;
                 CarMission mission = MakeHarvestCarMission();
-                TrafficManager.Instance.UseCar(mission, out bool tofiled);
+                TrafficManager.Instance.UseCar(mission);
             }
+        }
+        if (waitNextWeekStart == true)
+        {
+            waitNextWeekStart = false;
+            Replant();
         }
     }
 
@@ -166,7 +172,7 @@ public class FarmLandBuilding : BuildingBase
     {
         //CheckCurPeopleMoreThanMax();
         UpdateEffectiveness();
-        if (!isharvesting)
+        if (!isharvesting&&!waitNextWeekStart)
         {
             runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
             SetProgress(GetProcess());
@@ -177,18 +183,16 @@ public class FarmLandBuilding : BuildingBase
     {
         //Debug.Log("finish");
         isharvesting = false;
-        runtimeBuildData.productTime = formula.ProductTime;
+        waitNextWeekStart = true;
         CarMission carMission = MakeCarMission(rate);
         if (carMission != null)
         {
-            TrafficManager.Instance.UseCar(carMission, out runtimeBuildData.AvaliableToMarket);
+            TrafficManager.Instance.UseCar(carMission,(bool success)=> { runtimeBuildData.AvaliableToMarket = success; });
         }
         else
         {
-            runtimeBuildData.AvaliableToMarket = true;
+            runtimeBuildData.AvaliableToMarket = false;
         }
-        //EventManager.StartListening(ConstEvent.OnDayWentBy, Replant);
-        Invoke("Replant", 5f);
     }
 
     private void Replant()

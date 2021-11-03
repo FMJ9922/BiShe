@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+/*
 public class TreeGenerator : EditorWindow
 {
     private bool canPlantTree = false;
@@ -69,4 +69,4 @@ public class TreeGenerator : EditorWindow
         }
     }
         
-}
+}*/

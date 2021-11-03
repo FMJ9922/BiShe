@@ -96,9 +96,9 @@ public class MarketManager : Singleton<MarketManager>
                 ret.Add(-sellItems[i].GetCostResource());
             }
         }
-        int num = MapManager.GetHutBuildingNum();
+        /*int num = MapManager.GetHutBuildingNum();
         CostResource costFood = ResourceManager.Instance.GetFoodByMax(num,true);
-        ret.Add(-costFood);
+        ret.Add(-costFood);*/
         return ret;
     }
 

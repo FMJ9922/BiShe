@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,6 +23,9 @@ public class TrafficManager : Singleton<TrafficManager>
     public List<GameObject> FakeRoute3;
     public List<GameObject> FakeRoute4;
 
+    private Queue<RuntimeCarMission> queueCarMission = new Queue<RuntimeCarMission>();
+    private RuntimeCarMission tempCarMission;
+
     enum FindRoadState
     {
         straight = 0,//在笔直的路上走
@@ -35,6 +39,18 @@ public class TrafficManager : Singleton<TrafficManager>
         //UseCar(TransportationType.mini, ObjectsToVector3s(FakeRoute2), DriveType.yoyo);
         //UseCar(TransportationType.van, ObjectsToVector3s(FakeRoute3), DriveType.loop);
         //UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute4), DriveType.yoyo);
+        CancelInvoke("SetMission");
+        InvokeRepeating("SetMission", 0, 0.01f);
+    }
+    
+
+    public void SetMission()
+    {
+        if (queueCarMission.Count > 0)
+        {
+            tempCarMission = queueCarMission.Dequeue();
+            RealUse(tempCarMission);
+        }
     }
 
     private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
@@ -62,16 +78,17 @@ public class TrafficManager : Singleton<TrafficManager>
             }
         }
     }
-    public void UseCar(CarMission mission, out bool success, DriveType driveType = DriveType.once)
+
+    public void RealUse(RuntimeCarMission runtimeCarMission)
     {
-        DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
-        Vector2Int start = mission.StartBuilding;
-        Vector2Int end = mission.EndBuilding;
+        DriveSystem driveSystem = GetCarFromPool(runtimeCarMission._carMission.transportationType);
+        Vector2Int start = runtimeCarMission._carMission.StartBuilding;
+        Vector2Int end = runtimeCarMission._carMission.EndBuilding;
         Vector3[] wayPoints = null;
         UnityAction action = null;
-        if (mission.missionType == CarMissionType.harvest)
+        if (runtimeCarMission._carMission.missionType == CarMissionType.harvest)
         {
-            wayPoints = Vector3Serializer.Unbox(mission.wayPoints);
+            wayPoints = Vector3Serializer.Unbox(runtimeCarMission._carMission.wayPoints);
         }
         else
         {
@@ -82,21 +99,28 @@ public class TrafficManager : Singleton<TrafficManager>
             }
         }
         action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
-        if (wayPoints!=null && wayPoints.Length > 0)
+        if (wayPoints != null && wayPoints.Length > 0)
         {
-            mission.wayPoints = Vector3Serializer.Box(wayPoints);
-            driveSystem.StartDriving(mission, driveType, action);
-            success = true;
+            runtimeCarMission._carMission.wayPoints = Vector3Serializer.Box(wayPoints);
+            driveSystem.StartDriving(runtimeCarMission._carMission, runtimeCarMission._driveType, action);
+            runtimeCarMission._callback?.Invoke(true);
         }
         else
         {
-            success = false;
-            //NoticeManager.Instance.InvokeShowNotice("寻路失败！坐标："+start+"=>"+end+"请检查是否有建筑没有连接到道路！");
-            if (action != null)
-            {
-                action.Invoke();
-            }
+            runtimeCarMission._callback?.Invoke(false);
+            action?.Invoke();
         }
+    }
+    public void UseCar(CarMission mission, Action<bool> callback = null, DriveType driveType = DriveType.once)
+    {
+        //Debug.Log(mission.StartBuilding);
+        RuntimeCarMission runtimeCarMission = new RuntimeCarMission
+        {
+            _carMission = mission,
+            _callback = callback,
+            _driveType = driveType
+        };
+        queueCarMission.Enqueue(runtimeCarMission);
     }
 
     public void UseCarBySave(CarMission mission, DriveType driveType = DriveType.once)
@@ -388,4 +412,10 @@ public class CarMission
         get => endBuilding.Vector2Int;
         set => endBuilding = new Vector2IntSerializer(value);
     }
+}
+public class RuntimeCarMission
+{
+    public CarMission _carMission;
+    public Action<bool> _callback;
+    public DriveType _driveType;
 }

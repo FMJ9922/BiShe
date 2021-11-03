@@ -23,6 +23,7 @@ public class BuildData
     public int Level;//等级
     public string iconName;//图标在包中的名称
     public float Times;//资源倍率
+    public int SortRank;//排序
 }
 
 [System.Serializable]

@@ -394,7 +394,7 @@ public class InfoCanvas : CanvasBase
         for (int i = 0; i < list.Count; i++)
         {
             FormulaData cur = data.formulaDatas[data.CurFormula];
-            GameObject resource = CommonIcon.GetIcon(cur.InputItemID[i], cur.InputNum[i] * data.Times * cur.ProductTime);
+            GameObject resource = CommonIcon.GetIcon(cur.InputItemID[i], cur.InputNum[i] * data.Times * cur.ProductTime*TechManager.Instance.ResourcesBuff());
             resource.transform.parent = inIcons;
             resource.transform.localScale = Vector3.one * 1.5f;
         }

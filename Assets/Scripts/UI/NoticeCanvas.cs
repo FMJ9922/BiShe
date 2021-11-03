@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Linq;
 
 public class NoticeCanvas : CanvasBase
 {
@@ -26,13 +27,34 @@ public class NoticeCanvas : CanvasBase
     public Color test;
     private const char enter = '\n';
     private Dictionary<string, List<BuildingBase>> _nameDic = new Dictionary<string, List<BuildingBase>>();
+
+    public override void OnOpen()
+    {
+        base.OnOpen();
+    }
+    public override void OnClose()
+    {
+        if (onlyText.activeInHierarchy)
+        {
+            onlyText.SetActive(false);
+        }
+        if (onlyButtons.activeInHierarchy)
+        {
+            onlyButtons.SetActive(false);
+        }
+        base.OnClose();
+    }
+
     public void SetText(string context)
     {
         onlyText.SetActive(true);
         _onlyItemInfo.SetActive(false);
         text.text = context.Replace('|', '\n');
     }
-
+    int SortBuildingBase(BuildingBase a,BuildingBase b)
+    {
+        return a.runtimeBuildData.SortRank - b.runtimeBuildData.SortRank;
+    }
     public void SetDetailInfo(int itemId)
     {
         _nameDic.Clear();
@@ -40,7 +62,7 @@ public class NoticeCanvas : CanvasBase
         _onlyItemInfo.SetActive(true);
         ItemData itemData = DataManager.GetItemDataById(itemId);
         List<BuildingBase> buildings = MapManager.Instance._buildings;
-
+        buildings.Sort(SortBuildingBase);
         for (int i = 0; i < buildings.Count; i++)
         {
             if (_nameDic.ContainsKey(buildings[i].runtimeBuildData.Name))
@@ -96,6 +118,7 @@ public class NoticeCanvas : CanvasBase
         titleObj2.GetComponent<TMP_Text>().text = Localization.Get("来自贸易");
         GameObject fenge2 = Instantiate(_fenGeLinePfb, _onlyItemInfo.transform.GetChild(0));
 
+        int marketCount = 0;
         if (itemId != 99999)
         {
             if (itemId != 11000)
@@ -159,7 +182,6 @@ public class NoticeCanvas : CanvasBase
         {
             MarketItem[] buyItems = MarketManager.Instance.GetBuyItems();
             MarketItem[] sellItems = MarketManager.Instance.GetSellItems();
-            int count = 0;
             for (int i = 0; i < buyItems.Length; i++)
             {
                 if(buyItems[i].isTrading && ResourceManager.Instance.IsResourceEnough(new CostResource(99999, -buyItems[i].GetProfit())))
@@ -169,7 +191,7 @@ public class NoticeCanvas : CanvasBase
                         Localization.Get(buyItems[i].curItem.Name),
                         $"<#FF7B72>{CastTool.RoundOrFloat(buyItems[i].GetProfit())}</color>", 
                         null);
-                    count++;
+                    marketCount++;
                 }
             }
             for (int i = 0; i < sellItems.Length; i++)
@@ -181,15 +203,18 @@ public class NoticeCanvas : CanvasBase
                         Localization.Get(sellItems[i].curItem.Name),
                         $"<#9FFF8D>+{CastTool.RoundOrFloat(sellItems[i].GetProfit())}</color>",
                         null);
-                    count++;
+                    marketCount++;
                 }
             }
-            if(count == 0)
+            if(marketCount == 0)
             {
                 GameObject titleObj3 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
                 titleObj3.GetComponent<TMP_Text>().text = Localization.Get("无");
             }
         }
+        int moveCount = (marketCount == 0 ? 2 : marketCount+ 1) + (buildingCounter == 0 ? 2 : buildingCounter +1)-4;
+        //Debug.Log(moveCount);
+        _onlyItemInfo.transform.GetChild(0).localPosition = new Vector3(0, -20 * moveCount, 0);
     }
 
     public void SetIconOption(ItemData data)
@@ -273,5 +298,10 @@ public class NoticeCanvas : CanvasBase
             }
         }
         return ret;
+    }
+
+    public void CloseDetailInfo()
+    {
+        _onlyItemInfo.SetActive(false);
     }
 }

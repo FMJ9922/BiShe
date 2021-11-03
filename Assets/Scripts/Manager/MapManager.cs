@@ -955,21 +955,27 @@ public class MapManager : Singleton<MapManager>
 
     public class compare: IComparer<GridNode>
     {
-        public int Compare(GridNode x,GridNode y)
+        public int Compare(GridNode x, GridNode y)
         {
             return x.F - y.F;
         }
     }
 
+    List<GridNode> path = new List<GridNode>();
+    List<GridNode> openList = new List<GridNode>();
+    List<GridNode> closeList = new List<GridNode>(); 
+    List<Vector3> list = new List<Vector3>();
+    GridNode temp;
+    compare com = new compare();
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
+        path.Clear();
+        openList.Clear();
+        closeList.Clear();
         //Debug.Log(start + " " + end);
         //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
         //sw.Start();
         //ClearRoadNodeH();
-        List<GridNode> path = new List<GridNode>();
-        List<GridNode> openList = new List<GridNode>();
-        List<GridNode> closeList = new List<GridNode>();
         //Debug.Log(start);
         GridNode startNode = GetGridNode(start);
         GridNode endNode = GetGridNode(end);
@@ -979,10 +985,10 @@ public class MapManager : Singleton<MapManager>
         }
         openList.Add(startNode);
         path.Add(startNode);
-        GridNode temp = startNode;
+        temp = startNode;
         temp.G = 0;
         temp.F = 0;
-        int n = 2000;
+        int n = 1000;
         while (temp != endNode && n-- > 0)
         {
             if (openList.Count <= 0)
@@ -1005,7 +1011,7 @@ public class MapManager : Singleton<MapManager>
                 //System.TimeSpan dt = sw.Elapsed;
                 //Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
                 //sw.Restart();
-                List<Vector3> list = new List<Vector3>();
+                list.Clear();
                 while (temp != startNode)
                 {
                     //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
@@ -1047,7 +1053,7 @@ public class MapManager : Singleton<MapManager>
                     openList.Add(node);
                 }
             }
-            openList.Sort(new compare());
+            openList.Sort(com);
         }
         //Debug.Log(n);
         //Debug.Log("寻路失败"+start+" "+end);

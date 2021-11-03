@@ -241,6 +241,10 @@ public class BuildManager : Singleton<BuildManager>
         building.transform.position = buildData.SavePosition.V3;
         BuildingBase buildingBase = building.GetComponent<BuildingBase>();
         buildingBase.runtimeBuildData = buildData;
+        if(buildingBase.runtimeBuildData.SortRank == 0)
+        {
+            buildingBase.runtimeBuildData.SortRank =DataManager.GetBuildData(buildData.Id).SortRank;
+        }
         buildingBase.direction = buildData.SaveDir;
         //Debug.Log(buildData.SaveDir);
         buildingBase.buildFlag = true;

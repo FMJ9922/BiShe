@@ -107,7 +107,7 @@ public class Storage:MonoBehaviour
             }
             else
             {
-                Debug.Log("缺少数量：" + Id + " " + storedNum);
+                //Debug.Log("缺少数量：" + Id + " " + storedNum);
                 return false;//不够就返回失败且不消耗物品
             }
         }
