@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 929180650
+CRC: 2727625734
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1e5bd38aa683d4d0a5c78e522a5bb062
+    Hash: 9154e97ef698ae2560f2e95c3c4e0d79
   TypeTreeHash:
     serializedVersion: 2
     Hash: 697da7f04688931ed17c2af27fa448f1
@@ -33,6 +33,7 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_08_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_FruitTree_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_05_Preb.prefab
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_08_Mod.fbx
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_05_Mod.fbx
@@ -55,6 +56,7 @@ Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_06_Preb.prefab
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_09_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_02.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_FruitTree_01_Preb.prefab
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_03_Preb.prefab
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_04_Preb.prefab
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_09_Mod.fbx
@@ -80,4 +82,4 @@ Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_07_Preb.prefab
 - Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_02.prefab
 Dependencies:
-- D:/UnityProjects/BiShe/AssetBundles/mat.ab
+- C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/mat.ab

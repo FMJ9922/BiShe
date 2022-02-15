@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 619443969
+CRC: 3437149224
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3414ca6be1526eb8307748c8cdfc3320
+    Hash: cc67d87a3568f41f1507e6c58f90ed2b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4908fa12115d35930b278507ea5b410b
@@ -69,6 +69,7 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/ResidentialL3.png
 - Assets/ArtAssets/UI/TechIcon/Wengujianzao03.png
 - Assets/ArtAssets/UI/TechIcon/Youxiusheji01.png
+- Assets/Scenes Assets/BuildingIcon/Orchard.png
 - Assets/ArtAssets/UI/TechIcon/unKexueshengchan02.png
 - Assets/Scenes Assets/BuildingIcon/Icon/RawMeatIcon.png
 - Assets/ArtAssets/UI/BuildingUI/NoPeople.png
@@ -137,7 +138,7 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/Icon/RiceIcon.png
 - Assets/Scenes Assets/BuildingIcon/MineL2.png
 - Assets/Scenes Assets/BuildingIcon/HuiL3.png
-- Assets/ArtAssets/UI/BuildUI/UnClickRoadIcon.png
+- Assets/ArtAssets/UI/BuildUI/UnclickRoadIcon.png
 - Assets/ArtAssets/UI/TechIcon/Kuodashichang03.png
 - Assets/ArtAssets/UI/BuildingUI/NoRoad.png
 - Assets/ArtAssets/UI/TechIcon/unXuanchuan02.png
@@ -174,6 +175,7 @@ Assets:
 - Assets/ArtAssets/UI/TechIcon/Rencaiguanli02.png
 - Assets/ArtAssets/UI/TechIcon/JieyingXiao03.png
 - Assets/Scenes Assets/BuildingIcon/Icon/FurnitureIcon.png
+- Assets/Scenes Assets/BuildingIcon/Icon/FruitIcon.png
 - Assets/ArtAssets/UI/TechIcon/Gongchangzhixiao02.png
 - Assets/ArtAssets/UI/BuildUI/UnclickProduceIcon.png
 - Assets/Scenes Assets/BuildingIcon/FactoryL3.png
@@ -196,4 +198,4 @@ Assets:
 - Assets/Scenes Assets/BuildingIcon/MarketL2.png
 - Assets/Scenes Assets/BuildingIcon/Icon/PopulationIcon.png
 Dependencies:
-- D:/UnityProjects/BiShe/AssetBundles/mat.ab
+- C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/mat.ab

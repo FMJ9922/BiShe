@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4236895762
+CRC: 897183623
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3470d2591fe5cc03c976145cd94d6749
+    Hash: 3dac77b17f714870d1935f878d3ec2d2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2b170735527de831d5cd81528048abfd
@@ -62,6 +62,7 @@ Assets:
 - Assets/Scenes Assets/Material/Universal_Plant_FruitTreeLeaves_01_Mat.mat
 - Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
 - Assets/ArtAssets/UI/StartUI/30002preview.png
+- Assets/ArtAssets/Shader/PlantImageEffectShader.shader
 - Assets/TextMesh Pro/Fonts/LiberationSans.ttf
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Bridge_L1L2L3_Tex.tga
 - Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
@@ -89,10 +90,11 @@ Assets:
 - Assets/Scenes Assets/Material/Texture/Universal_Transportation_Trunk_01_Tex.tga
 - Assets/ArtAssets/Shader/OutLine.shader
 - Assets/Scenes Assets/Material/Texture/Universal_Plant_Wheat_01_Tex.tga
-- Assets/Scenes Assets/Animation/Materials/Universal_Building_Mine_L3_Tex.mat
+- Assets/Scenes Assets/BuildingIcon/Animation/Materials/Universal_Building_Mine_L3_Tex.mat
 - Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
 - Assets/ArtAssets/Texture/Universal_Plant_Rice.png
 - Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+- Assets/JMO Assets/Toony Colors Pro/Demo TCP2/SG Demo Assets/_Misc Assets/TCP2_Demo_SmallWaves.png
 - Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/Scenes Assets/Prefab/FX/Material/cloud_2x2_default_AB.mat
 - Assets/TextMesh Pro/Resources/Fonts & Materials/huangyouti SDF.asset
@@ -101,6 +103,7 @@ Assets:
 - Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
 - Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
 - Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
+- Assets/Scenes Assets/Material/TCP2_WaterReflection_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Transportation_Trunk_01_Mat.mat
 - Assets/ArtAssets/Shader/Custom_TransparentGpuInstance.mat
 - Assets/Scenes Assets/Material/Universal_Building_Mine_L1L2_Mat.mat
@@ -109,12 +112,15 @@ Assets:
 - Assets/TextMesh Pro/Resources/Shaders/TMP_SDF.shader
 - Assets/Scenes Assets/Material/Texture/Hui_Building_Residential_L1L2L3_Tex.tga
 - Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/Water/Reflection.shader
 - Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader
+- Assets/JMO Assets/Toony Colors Pro/Demo TCP2/SG Demo Assets/_Misc Assets/TCP2_Water
+  Foam Sponge.png
 - Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L3_Tex.tga
 - Assets/JMO Assets/Toony Colors Pro/Textures/TCP2_NoTileNoise.png
 - Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Hui_Building_Residential_L1L2L3_Mat.mat
 - Assets/ArtAssets/Model/Building/Materials/Ridge.mat
-- Assets/Scenes Assets/Animation/Materials/Universal_Building_Mine_L1L2_Tex.mat
+- Assets/Scenes Assets/BuildingIcon/Animation/Materials/Universal_Building_Mine_L1L2_Tex.mat
 Dependencies: []

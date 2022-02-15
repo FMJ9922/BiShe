@@ -21,17 +21,17 @@ MonoBehaviour:
   - Id: 11001
     Name: Wheat
     ItemType: 1
-    Price: 3
+    Price: 2
     Happiness: 1
   - Id: 11002
     Name: Rice
     ItemType: 1
-    Price: 5
+    Price: 4
     Happiness: 3
   - Id: 12003
     Name: Log
     ItemType: 2
-    Price: 2
+    Price: 1
     Happiness: 0
   - Id: 12004
     Name: Furniture
@@ -41,17 +41,17 @@ MonoBehaviour:
   - Id: 11005
     Name: RawMeat
     ItemType: 1
-    Price: 10
+    Price: 15
     Happiness: 5
   - Id: 12006
     Name: Flour
     ItemType: 2
-    Price: 8
+    Price: 6
     Happiness: 0
   - Id: 11008
     Name: ProcessedMeat
     ItemType: 1
-    Price: 13
+    Price: 20
     Happiness: 6
   - Id: 12009
     Name: Stone
@@ -71,7 +71,7 @@ MonoBehaviour:
   - Id: 11010
     Name: Sausage
     ItemType: 1
-    Price: 15
+    Price: 10
     Happiness: 8
   - Id: 11011
     Name: Fish
@@ -96,7 +96,7 @@ MonoBehaviour:
   - Id: 12015
     Name: StoneMaterial
     ItemType: 2
-    Price: 5
+    Price: 9
     Happiness: 0
   - Id: 11016
     Name: MeatTin
@@ -106,23 +106,28 @@ MonoBehaviour:
   - Id: 11017
     Name: FishTin
     ItemType: 1
-    Price: 26
+    Price: 20
     Happiness: 9
   - Id: 12018
     Name: Clothes
     ItemType: 2
-    Price: 15
+    Price: 30
     Happiness: 0
   - Id: 11019
     Name: Mantou
     ItemType: 1
-    Price: 12
+    Price: 4
     Happiness: 7
   - Id: 12020
     Name: IronMaterial
     ItemType: 2
     Price: 9
     Happiness: 0
+  - Id: 11021
+    Name: Fruit
+    ItemType: 1
+    Price: 8
+    Happiness: 8
   LevelArray:
   - Id: 30001
     Name: "\u5E73\u539F"
@@ -374,7 +379,7 @@ MonoBehaviour:
     Name: Warehouse
     CostPerWeek: 5
     Formulas: 
-    Population: 10
+    Population: 5
     MaxStorage: 1000
     InfluenceRange: 50
     FrontBuildingId: 0
@@ -399,7 +404,7 @@ MonoBehaviour:
     Name: Bazaar
     CostPerWeek: 9
     Formulas: 
-    Population: 10
+    Population: 5
     MaxStorage: 100
     InfluenceRange: 100
     FrontBuildingId: 0
@@ -447,7 +452,7 @@ MonoBehaviour:
     Name: LivestockFarm
     CostPerWeek: 3
     Formulas: 51c3000052c30000
-    Population: 10
+    Population: 7
     MaxStorage: 100
     InfluenceRange: 30
     FrontBuildingId: 0
@@ -658,7 +663,7 @@ MonoBehaviour:
     Name: LoggingCampsLv3
     CostPerWeek: 9
     Formulas: 59c30000
-    Population: 10
+    Population: 12
     MaxStorage: 100
     InfluenceRange: 100
     FrontBuildingId: 20014
@@ -1228,6 +1233,29 @@ MonoBehaviour:
     iconName: Wheat
     Times: 4
     SortRank: 32
+  - Id: 20039
+    Name: Orchard
+    CostPerWeek: 5
+    Formulas: 66c30000
+    Population: 10
+    MaxStorage: 100
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 6
+    Width: 8
+    Price: 180
+    costResources:
+    - ItemId: 12003
+      ItemNum: 80
+    BundleName: building.ab
+    PfbName: Universal_Building_Orchard_L1_01
+    tabType: 2
+    Introduce: "\u4EA7\u51FA\u6C34\u679C"
+    Level: 1
+    iconName: Orchard
+    Times: 1
+    SortRank: 81
   FormulaArray:
   - ID: 50001
     Describe: "\u5C0F\u9EA6\u4EA7\u751F\u8089"
@@ -1255,7 +1283,7 @@ MonoBehaviour:
     InputItemID: e32e0000
     InputNum: 05000000
     OutputItemID: e42e0000
-    ProductNum: 05000000
+    ProductNum: 0a000000
     ProductTime: 4
   - ID: 50005
     Describe: "\u751F\u8089\u4EA7\u814A\u8089"
@@ -1269,7 +1297,7 @@ MonoBehaviour:
     InputItemID: 
     InputNum: 
     OutputItemID: f92a0000
-    ProductNum: 0a000000
+    ProductNum: 0c000000
     ProductTime: 4
   - ID: 50007
     Describe: "\u7530\u5730\u4EA7\u7A3B\u7C73"
@@ -1283,14 +1311,14 @@ MonoBehaviour:
     InputItemID: e62e0000fd2a0000
     InputNum: 0300000002000000
     OutputItemID: 022b0000
-    ProductNum: 14000000
+    ProductNum: 28000000
     ProductTime: 4
   - ID: 50009
     Describe: "\u4F10\u6728\u4EA7\u539F\u6728"
     InputItemID: 
     InputNum: 
     OutputItemID: e32e0000
-    ProductNum: 14000000
+    ProductNum: 1e000000
     ProductTime: 2
   - ID: 50010
     Describe: "\u4F4F\u623F\u63D0\u4F9B\u4EBA\u53E3"
@@ -1311,21 +1339,21 @@ MonoBehaviour:
     InputItemID: 
     InputNum: 
     OutputItemID: 032b0000
-    ProductNum: 0f000000
+    ProductNum: 14000000
     ProductTime: 2
   - ID: 50013
     Describe: "\u6BDB\u76AE\u751F\u4EA7\u8863\u670D"
     InputItemID: ed2e0000
-    InputNum: 04000000
+    InputNum: 06000000
     OutputItemID: f22e0000
-    ProductNum: 02000000
-    ProductTime: 3
+    ProductNum: 06000000
+    ProductTime: 2
   - ID: 50014
     Describe: "\u94C1\u548C\u8089\u751F\u4EA7\u8089\u7F50\u5934"
     InputItemID: f42e0000fd2a0000
     InputNum: 0100000005000000
     OutputItemID: 082b0000
-    ProductNum: 05000000
+    ProductNum: 08000000
     ProductTime: 2
   - ID: 50015
     Describe: "\u94C1\u548C\u9C7C\u751F\u4EA7\u9C7C\u7F50\u5934"
@@ -1358,14 +1386,14 @@ MonoBehaviour:
   - ID: 50019
     Describe: "\u9762\u7C89\u751F\u4EA7\u9992\u5934"
     InputItemID: e62e0000
-    InputNum: 0a000000
+    InputNum: 03000000
     OutputItemID: 0b2b0000
-    ProductNum: 05000000
+    ProductNum: 19000000
     ProductTime: 2
   - ID: 50020
     Describe: "\u5C0F\u9EA6\u751F\u4EA7\u6BDB\u76AE"
     InputItemID: f92a0000
-    InputNum: 0a000000
+    InputNum: 0c000000
     OutputItemID: ed2e0000
     ProductNum: 10000000
     ProductTime: 3
@@ -1376,6 +1404,13 @@ MonoBehaviour:
     OutputItemID: f42e0000
     ProductNum: 28000000
     ProductTime: 8
+  - ID: 50022
+    Describe: "\u679C\u56ED\u751F\u4EA7\u6C34\u679C"
+    InputItemID: 
+    InputNum: 
+    OutputItemID: 0d2b0000
+    ProductNum: 24000000
+    ProductTime: 12
   LocalizationData:
     combines:
     - code: Log
@@ -2470,12 +2505,12 @@ MonoBehaviour:
     - code: Warehouse Lv3
       chinese: "\u4ED3\u5E93\u4E09\u7EA7"
       english: WarehouseLv3
-    - code: 
-      chinese: 
-      english: 
-    - code: 
-      chinese: 
-      english: 
+    - code: Orchard
+      chinese: "\u679C\u56ED"
+      english: Orchard
+    - code: Fruit
+      chinese: "\u6C34\u679C"
+      english: Fruit
     - code: 
       chinese: 
       english: 

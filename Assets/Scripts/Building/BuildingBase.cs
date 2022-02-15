@@ -38,7 +38,6 @@ public class BuildingBase : MonoBehaviour
 
     public virtual void OnConfirmBuild(Vector2Int[] vector2Ints)
     {
-        
         takenGrids = vector2Ints;
         gameObject.tag = "Building";
         transform.GetComponent<BoxCollider>().enabled = false;
@@ -67,8 +66,6 @@ public class BuildingBase : MonoBehaviour
             //TerrainGenerator.Instance.FlatGround
             // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
         }
-
-        
     }
 
     protected void PlayAnim()

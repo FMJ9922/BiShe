@@ -993,7 +993,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (openList.Count <= 0)
             {
-                Debug.Log("路径被阻挡！"+ start+"=>"+end);
+                //Debug.Log("路径被阻挡！"+ start+"=>"+end);
                 return null;
             }
             //Debug.Log("——");

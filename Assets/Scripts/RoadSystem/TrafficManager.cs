@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,6 +26,7 @@ public class TrafficManager : Singleton<TrafficManager>
 
     private Queue<RuntimeCarMission> queueCarMission = new Queue<RuntimeCarMission>();
     private RuntimeCarMission tempCarMission;
+    private bool isRun = false;
 
     enum FindRoadState
     {
@@ -46,10 +48,10 @@ public class TrafficManager : Singleton<TrafficManager>
 
     public void SetMission()
     {
-        if (queueCarMission.Count > 0)
+        if (queueCarMission.Count > 0 && !isRun)
         {
             tempCarMission = queueCarMission.Dequeue();
-            RealUse(tempCarMission);
+            isRun = true;
         }
     }
 
@@ -99,6 +101,7 @@ public class TrafficManager : Singleton<TrafficManager>
             }
         }
         action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
+        isRun = false; 
         if (wayPoints != null && wayPoints.Length > 0)
         {
             runtimeCarMission._carMission.wayPoints = Vector3Serializer.Box(wayPoints);
@@ -121,7 +124,7 @@ public class TrafficManager : Singleton<TrafficManager>
             _driveType = driveType
         };
         queueCarMission.Enqueue(runtimeCarMission);
-    }
+    } 
 
     public void UseCarBySave(CarMission mission, DriveType driveType = DriveType.once)
     {
@@ -159,7 +162,8 @@ public class TrafficManager : Singleton<TrafficManager>
         }
     }
 
-
+    #region 弃用
+    /*
     public bool CloseToTarget(Vector2 cur, Vector2 target)
     {
         return Vector2.Distance(cur, target) >= 2;
@@ -179,7 +183,6 @@ public class TrafficManager : Singleton<TrafficManager>
                 return delta.y > 0 ? Direction.up : Direction.down;
         }
     }
-
     /// <summary>
     /// 获得车辆的行驶路径
     /// </summary>
@@ -335,7 +338,10 @@ public class TrafficManager : Singleton<TrafficManager>
     {
         return MapManager.Instance.GetGridType(nextGrid) == GridType.road;
     }
+    */
+    #endregion
 
+    #region 对象池
     private DriveSystem GetCarFromPool(TransportationType type)
     {
         for (int i = 0; i < carUnusedPool.Count; i++)
@@ -374,7 +380,9 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         //Debug.Log("hide");
     }
+    #endregion
 
+    #region 保存
     public CarMission[] GetDriveDatas()
     {
         List<CarMission> driveDatas = new List<CarMission>();
@@ -387,6 +395,7 @@ public class TrafficManager : Singleton<TrafficManager>
         }
         return driveDatas.ToArray();
     }
+    #endregion
 }
 
 [System.Serializable]

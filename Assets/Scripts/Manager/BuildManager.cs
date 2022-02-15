@@ -136,7 +136,10 @@ public class BuildManager : Singleton<BuildManager>
         arrows.localRotation = Quaternion.identity;
         for (int i = 0; i < meshRenderers.Length; i++)
         {
-            mats[i] = meshRenderers[i].material;
+            if (!meshRenderers[i].gameObject.name.Contains("Color"))
+            {
+                mats[i] = meshRenderers[i].material;
+            }
         }
         GameObject newArrow = Instantiate(arrowPfb, arrows);
         newArrow.transform.localPosition = (currentBuilding.Size.y+1F) * building.transform.right;
@@ -745,7 +748,10 @@ public class BuildManager : Singleton<BuildManager>
         isCurCanBuild = MapManager.CheckCanBuild(targetGrids, currentBuilding.GetInParkingGrid(), isCheckSea);
         for (int i = 0; i < mats.Length; i++)
         {
-            mats[i].color = isCurCanBuild ? Color.green : Color.red;
+            if (mats[i] != null)
+            {
+                mats[i].color = isCurCanBuild ? Color.green : Color.red;
+            }
         }
 
         if (currentBuilding.runtimeBuildData.Id == 20029 ||
@@ -909,7 +915,10 @@ public class BuildManager : Singleton<BuildManager>
         }
         for (int i = 0; i < mats.Length; i++)
         {
-            mats[i].color = Color.white;
+            if (mats[i] != null)
+            {
+                mats[i].color = Color.white;
+            }
         }
         //currentBuilding = null;
         targetGrids = null;
