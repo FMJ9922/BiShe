@@ -224,6 +224,7 @@ public class NoticeCanvas : CanvasBase
         _titleText.text = Localization.Get(data.Name);
         //监视器窗口上下
         _monitorBtn.gameObject.SetActive(true);
+        _monitorBtn.onClick.RemoveAllListeners();
         _monitorBtn.onClick.AddListener(() =>
         {
             ResourceManager.Instance.ToggleHudItem(data);

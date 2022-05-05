@@ -152,24 +152,21 @@ public enum CarMissionType
 
 public enum SoundResource
 {
-    sfx_click_wareHouse,
-    sfx_click_destroy,
-    sfx_click_btn1,
-    sfx_click_btn2,
-    sfx_click_logCamp,
-    sfx_click_factory,
-    sfx_bgm_level1,
-    sfx_bgm_level2,
-    sfx_constuction,
-    sfx_bgm_start,
-    sfx_click_mine,
-    sfx_click_pier,
-    sfx_click_hut,
-    sfx_click_farmland,//农田
-    sfx_upgrade,//升级
-    sfx_click_market,//市场
-    sfx_dropdown,//下拉菜单
-    sfx_click_farm = 17,//农场
+    sfx_click_wareHouse = 0,
+    sfx_click_destroy = 1,
+    sfx_click_btn1 = 2,
+    sfx_click_btn2 = 3,
+    sfx_click_logCamp = 4,
+    sfx_click_factory = 5,
+    sfx_constuction = 6,
+    sfx_click_mine = 7,
+    sfx_click_pier = 8,
+    sfx_click_hut = 9,
+    sfx_click_farmland = 10,//农田
+    sfx_upgrade = 11,//升级
+    sfx_click_market = 12,//市场
+    sfx_dropdown = 13,//下拉菜单
+    sfx_click_farm = 14,//农场
 }
 
 public enum IconDescription

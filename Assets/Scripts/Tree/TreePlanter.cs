@@ -38,7 +38,7 @@ public class TreePlanter : Singleton<TreePlanter>
                 treePosList.Add(pos);
             }
         }
-        Debug.Log("种了" + treePosList.Count + "棵树");
+        //Debug.Log("种了" + treePosList.Count + "棵树");
         for (int i = 0; i < treePosList.Count; i++)
         {
             PlantSingleTree(treePosList[i]);
@@ -99,7 +99,9 @@ public class TreePlanter : Singleton<TreePlanter>
         Vector3 forward = Random.onUnitSphere;
         forward = new Vector3((forward.x != 0 ? forward.x : 1), 0, forward.z);
         GameObject newTree = Instantiate(TreePfbs[index], adjustedPos, Quaternion.LookRotation(forward, Vector3.up), Treeparent);
-        newTree.GetComponent<TreeSystem>().treeData.state = state;
+        var sys = newTree.GetComponent<TreeSystem>();
+        sys.treeData.state = state;
+        sys.Init();
     }
 
     public void PlantSingleTree(TreeData treeSystem,Vector3 pos,Vector3 rotation)

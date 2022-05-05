@@ -32,16 +32,16 @@ public class MenuCanvas : MonoBehaviour
     {
         selectCanvas.gameObject.SetActive(false);
         settingCanvas.gameObject.SetActive(false);
-        infoCanvas.gameObject.SetActive(true);
         saveCanvas.OnClose();
+        infoCanvas.gameObject.SetActive(true);
     }
 
     public void OpenSettingCanvas()
     {
         selectCanvas.gameObject.SetActive(false);
-        settingCanvas.gameObject.SetActive(true);
         infoCanvas.gameObject.SetActive(false);
         saveCanvas.OnClose();
+        settingCanvas.gameObject.SetActive(true);
     }
 
 

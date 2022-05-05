@@ -16,6 +16,7 @@ public class LanguageOption : MonoBehaviour
                 (int)Localization.language;
         if (dropdown!=null)
         {
+            dropdown.onValueChanged.RemoveAllListeners();
             dropdown.onValueChanged.AddListener(ChangeLangauge);
             dropdown.value = PlayerPrefs.GetInt("Language");
             dropdown.captionText.text = Localization.SupportLanguageList[id];
@@ -36,6 +37,7 @@ public class LanguageOption : MonoBehaviour
         Localization.ChangeSettingLanguage((LanguageType)value);
         PlayerPrefs.SetInt("Language", value);
         PlayerPrefs.Save();
+        text.text = Localization.SupportLanguageList[value];
     }
 
     private void OnEnable()

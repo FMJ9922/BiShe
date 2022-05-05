@@ -23,6 +23,7 @@ public class CameraMovement : Singleton<CameraMovement>
     private bool canMove = true;
     private bool canScroll = true;
     private bool canEdge = true;
+    private bool isFocus = true;
 
 
     private Vector3 lastMousePos;
@@ -44,41 +45,61 @@ public class CameraMovement : Singleton<CameraMovement>
         EventManager.StopListening<bool>(ConstEvent.OnLockScroll, LockScroll);
         EventManager.StopListening<bool>(ConstEvent.OnLockMove, LockMove);
     }
-
-    private void LateUpdate()
+    void OnApplicationFocus(bool focus)
     {
-        if (canMove)
+        isFocus = focus;
+        if (!isFocus)
         {
+            _forwardSpeed = 0;
+            _rightSpeed = 0;
+        }
+    }
+
+    private bool isOutOfScene = false;
+
+    private void Update()
+    {
+        if (canMove&& isFocus)
+        {
+            if (Input.mousePosition.y<0|| Input.mousePosition.x<0||
+                Input.mousePosition.y> Screen.height|| Input.mousePosition.x > Screen.width)
+            {
+                isOutOfScene = true;
+            }
+            else
+            {
+                isOutOfScene = false;
+            }
             float time = Time.unscaledDeltaTime;
-            if (Input.GetKey(KeyCode.W)|| (Input.mousePosition.y >= Screen.height - _edgeRange&& canEdge))
+            if (Input.GetKey(KeyCode.W)|| (Input.mousePosition.y >= Screen.height - _edgeRange&& canEdge && !isOutOfScene))
             {
                 _forwardSpeed = _forwardSpeed >= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, MaxSpeed, Accelerate * time) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * time);
             }
-            if (Input.GetKey(KeyCode.S)|| (Input.mousePosition.y <= _edgeRange && canEdge))
+            if (Input.GetKey(KeyCode.S)|| (Input.mousePosition.y <= _edgeRange && canEdge && !isOutOfScene))
             {
                 _forwardSpeed = _forwardSpeed <= 0 ?
                     Mathf.MoveTowards(_forwardSpeed, -MaxSpeed, Accelerate * time) :
                     Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * time);
             }
-            if (Input.GetKey(KeyCode.A)||(Input.mousePosition.x <= _edgeRange && canEdge))
+            if (Input.GetKey(KeyCode.A)||(Input.mousePosition.x <= _edgeRange && canEdge && !isOutOfScene))
             {
                 _rightSpeed = _rightSpeed <= 0 ?
                     Mathf.MoveTowards(_rightSpeed, -MaxSpeed, Accelerate * time) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * time);
             }
-            if (Input.GetKey(KeyCode.D) || (Input.mousePosition.x >= Screen.width - _edgeRange && canEdge))
+            if (Input.GetKey(KeyCode.D) || (Input.mousePosition.x >= Screen.width - _edgeRange && canEdge && !isOutOfScene))
             {
                 _rightSpeed = _rightSpeed >= 0 ?
                     Mathf.MoveTowards(_rightSpeed, MaxSpeed, Accelerate * time) :
                     Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * time);
             }
-            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || (Input.mousePosition.y >= Screen.height - _edgeRange || Input.mousePosition.y <= _edgeRange) && canEdge))
+            if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || (Input.mousePosition.y >= Screen.height - _edgeRange || Input.mousePosition.y <= _edgeRange) && canEdge)|| isOutOfScene)
             {
                 _forwardSpeed = Mathf.MoveTowards(_forwardSpeed, 0, StopAccelerate * time);
             }
-            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || (Input.mousePosition.x <= _edgeRange || Input.mousePosition.x >= Screen.width - _edgeRange) && canEdge))
+            if (!(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || (Input.mousePosition.x <= _edgeRange || Input.mousePosition.x >= Screen.width - _edgeRange) && canEdge) || isOutOfScene)
             {
                 _rightSpeed = Mathf.MoveTowards(_rightSpeed, 0, StopAccelerate * time);
             }

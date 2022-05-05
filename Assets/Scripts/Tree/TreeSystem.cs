@@ -7,7 +7,7 @@ using DG.Tweening;
 public class TreeData
 {
     public TreeState state = TreeState.unInit;
-    public float curHeight = 0;
+    public float curHeight = -101;
     public float targetHeight;
     public int indexType;
     public int counter = 28;
@@ -39,20 +39,21 @@ public class TreeSystem : MonoBehaviour
 
     public void Init()
     {
-        if (IsInvoking()) return;
+        if (IsInvoking()|| treeData.state == TreeState.mature) return;
         if (treeData.state == TreeState.unInit)
         {
             treeData.state = TreeState.growing;
-            treeData.curHeight = 0;
+            treeData.curHeight = 0f;
             treeData.targetHeight = Random.Range(0.8f, 1.2f);
-            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime);
+            TreeGrow();
+            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime*28);
         }
         else
         if (treeData.curHeight < treeData.targetHeight)
         {
 
             transform.localScale = Vector3.one * (treeData.curHeight / treeData.targetHeight);
-            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime);
+            InvokeRepeating("TreeGrow", 0, LevelManager.Instance.DayTime*28);
         }
         else if (treeData.state == TreeState.dead)
         {
@@ -69,13 +70,8 @@ public class TreeSystem : MonoBehaviour
         if (pause) return;
         if (treeData.curHeight < treeData.targetHeight)
         {
-            treeData.counter--;
-            if (treeData.counter < 0)
-            {
-                treeData.counter = 28;
-                treeData.curHeight += 0.1f;
-                transform.localScale = Vector3.one * treeData.curHeight;
-            }
+            treeData.curHeight += 0.1f;
+            transform.localScale = Vector3.one * treeData.curHeight;
         }
         else
         {

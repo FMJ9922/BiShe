@@ -53,11 +53,11 @@ public class MusicManager : MonoBehaviour
     }
     public void PlayMusic()
     {
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 8);
         audioSource.PlayOneShot(audioClips[rand]);
-        //Debug.Log("paly");
+        Debug.Log("play"+ audioClips[rand].name);
         float time = audioClips[rand].length;
-        StartCoroutine(DoSthAfterClipFinished(time*1.1f, audioSource));
+        Invoke("PlayMusic", time + 30);
 
 
     }

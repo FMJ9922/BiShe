@@ -42,7 +42,7 @@ public class HutBuilding : BuildingBase
     {
         ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
         //食物少于指定数量就去取货
-        if (storage.GetAllFoodNum() < 3)
+        //if (storage.GetAllFoodNum() < 3)
         {
             CarMission carMission = MakeCarMission();
             if (carMission != null)
@@ -75,7 +75,7 @@ public class HutBuilding : BuildingBase
     /// </summary>
     /// <param name="ratio">运送多少个周期的货</param>
     /// <returns></returns>
-    protected override CarMission MakeCarMission(float ratio = 10)
+    protected override CarMission MakeCarMission(float ratio = 1)
     {
         CarMission mission = new CarMission();
         BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();

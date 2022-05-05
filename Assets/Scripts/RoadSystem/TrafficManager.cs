@@ -52,6 +52,7 @@ public class TrafficManager : Singleton<TrafficManager>
         {
             tempCarMission = queueCarMission.Dequeue();
             isRun = true;
+            RealUse(tempCarMission);
         }
     }
 
@@ -368,7 +369,7 @@ public class TrafficManager : Singleton<TrafficManager>
         carUsingPool.Remove(driveSystem);
         carUnusedPool.Add(driveSystem);
         driveSystem.transform.position = hidePos;
-        driveSystem.action = null;
+        driveSystem.SetIdle();
         if (destination != null)
         {
             //Debug.Log("des");

@@ -59,11 +59,14 @@ public static class Localization
     public static void ChangeSettingLanguage(LanguageType languageType)
     {
         //Debug.Log("change" + languageType);
-        language = languageType;
-        PlayerPrefs.SetInt("Language", (int)languageType);
-        if (OnChangeLanguage != null)
+        if(languageType != language)
         {
-            OnChangeLanguage();
+            language = languageType;
+            PlayerPrefs.SetInt("Language", (int)languageType);
+            if (OnChangeLanguage != null)
+            {
+                OnChangeLanguage();
+            }
         }
     }
 

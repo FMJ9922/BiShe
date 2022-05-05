@@ -502,7 +502,6 @@ public class MapManager : Singleton<MapManager>
     public static Vector3 GetTerrainWorldPosition()
     {
         return new Vector3(0, 10, 0);
-        return TerrainGenerator.Instance.transform.position;
     }
     /// <summary>
     /// 获取地面某处的坐标
@@ -1012,12 +1011,17 @@ public class MapManager : Singleton<MapManager>
                 //Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
                 //sw.Restart();
                 list.Clear();
+                //Vector2Int delta = new Vector2Int(0,0);
                 while (temp != startNode)
                 {
-                    //Debug.Log(MapManager.Instance.GetTerrainPosition(temp.GridPos));
-                    list.Add(MapManager.GetNotInWaterPosition(temp.GridPos) + new Vector3(1, 0, 1));
+                    //Vector2Int newDelta = temp.GridPos - temp.Parent.GridPos;
+                    //Debug.Log(newDelta+" "+delta);
+                    //if (newDelta!=delta)
+                    {
+                        list.Add(MapManager.GetNotInWaterPosition(temp.GridPos) + new Vector3(1, 0, 1));
+                    }
+                    //delta = newDelta;
                     temp = temp.Parent;
-                    //Instantiate(pfb, MapManager.Instance.GetTerrainPosition(temp.GridPos), Quaternion.identity, transform);
                 }
                 //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
                 list.Add(MapManager.GetNotInWaterPosition(startNode.GridPos) + new Vector3(1, 0, 1));
