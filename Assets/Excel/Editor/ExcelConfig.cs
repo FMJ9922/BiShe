@@ -109,6 +109,24 @@ public class ExcelTool
         }
         return array;
     }
+    
+    public static CarData[] CreateCarArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        CarData[] array = new CarData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            CarData carData = new CarData();
+            carData.CarType = (TransportationType)int.Parse(collect[i][2].ToString());
+            carData.Acceleration = float.Parse(collect[i][3].ToString());
+            carData.MaxSpeed = float.Parse(collect[i][4].ToString());
+            carData.Cost = float.Parse(collect[i][5].ToString());
+            carData.Storage = float.Parse(collect[i][6].ToString());
+            array[i - 2] = carData;
+        }
+        return array;
+    }
 
     public static BuildData[] CreateBuildArrayWithExcel(string filePath)
     {
@@ -168,7 +186,7 @@ public class ExcelTool
         for (int i = 1; i < rowNum; i++)
         {
             combines[i - 1] = new LocalizationCombine(collect[i][0].ToString(),
-                collect[i][1].ToString(), collect[i][2].ToString());
+                collect[i][1].ToString(), collect[i][2].ToString(),collect[i][3].ToString());
         }
         data.combines = combines;
         return data;

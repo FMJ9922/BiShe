@@ -43,6 +43,7 @@ public class ConstEvent
     public const string OnEffectivenessChange = "OnEffectivenessChange";//工作效率变化
     public const string OnSettleAccount = "OnSettleAccount";//市场结算事件
     public const string OnWeekProgress = "OnWeekProgree";//周进度
+    public const string OnOilCost = "OnOilCost";//油费事件
     #endregion
 
     #region 加载事件

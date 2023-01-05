@@ -54,6 +54,11 @@ public class GameManager : Singleton<GameManager>
         return timeScale;
     }
 
+    public bool IsGamePause()
+    {
+        return timeScale == TimeScale.stop;
+    }
+
     public TimeScale GetRealTimeScale()
     {
         if(timeScale == TimeScale.stop)

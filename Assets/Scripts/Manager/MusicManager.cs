@@ -8,6 +8,7 @@ public class MusicManager : MonoBehaviour
     private float musicVolumn = 0.1f;
     public AudioClip[] audioClips;
     public AudioSource audioSource;
+    private string curPlayMusic;
     public static MusicManager Instance
     {
         get

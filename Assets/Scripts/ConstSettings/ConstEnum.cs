@@ -117,6 +117,7 @@ public enum LanguageType
 {
     Chinese = 0,
     English = 1,
+    German = 2,
 }
 
 public enum TimeScale

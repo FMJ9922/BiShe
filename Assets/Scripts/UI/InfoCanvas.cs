@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 public class InfoCanvas : CanvasBase
 {
+    [Header("建筑功能")]
     [SerializeField] GameObject _inputsObj;//挂载输入资源说明的UI
     [SerializeField] GameObject _outputsObj;//输出
     [SerializeField] GameObject _rateObj;//产量

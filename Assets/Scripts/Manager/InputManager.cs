@@ -128,11 +128,8 @@ public partial class InputManager : Singleton<InputManager>
             }
             else if (hit.collider.CompareTag("car"))
             {
-                CarMission carMission = hit.collider.gameObject.GetComponent<DriveSystem>().CurMission;
-                if (carMission.missionType != CarMissionType.harvest)
-                {
-                    MainInteractCanvas.Instance.OpenCarMissionCanvas(hit.collider.gameObject);
-                }
+                var carDriver = hit.collider.gameObject.GetComponent<CarModel>().GetDriver();
+                MainInteractCanvas.Instance.OpenCarMissionCanvas(carDriver);
             }
             else if (hit.collider.CompareTag("Bridge"))
             {

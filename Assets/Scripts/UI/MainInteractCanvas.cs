@@ -100,7 +100,7 @@ public class MainInteractCanvas : CanvasBase
         InfoCanvas infocanvas = (InfoCanvas)canvas[2];
         infocanvas.OnOpen(data);
     }
-    public void OpenCarMissionCanvas(GameObject car)
+    public void OpenCarMissionCanvas(CarDriver car)
     {
         CloseAllOpenedUI();
         CarMissionCanvas carCanvas = (CarMissionCanvas)canvas[5];

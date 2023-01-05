@@ -1,53 +1,89 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CarSensor : MonoBehaviour
 {
-    public delegate void Brake();
-    public Brake OnBrake;
-    public Brake OnStopBrake;
-    public List<Transform> otherCar = new List<Transform>();
+    public List<Transform> _otherCar = new List<Transform>();
+    private Transform _avoidTrans;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("car") && other.transform != transform.parent)
+        var trans = other.transform;
+        if (other.CompareTag("Building")||other.CompareTag("car") && trans != transform.parent)
         {
-            //Debug.Log(Vector3.Dot(transform.forward, other.transform.position - transform.parent.position));
-            if (Vector3.Dot(transform.forward, other.transform.position - transform.parent.position) <= 0)
+            _otherCar.Add(trans);
+            if (GetSqrDis(trans) < GetSqrDis(_avoidTrans))
             {
-                //Debug.Log(transform.name);
-                return;
-            }
-            otherCar.Add(other.transform);
-            if (OnBrake != null)
-            {
-                //Debug.Log(Vector3.Angle(other.transform.forward, transform.forward));
-                if (Vector3.Angle(other.transform.forward, transform.forward) < 20)
-                {
-                    OnBrake();
-                }
+                _avoidTrans = trans;
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("car"))
+        var trans = other.transform;
+        if (other.CompareTag("Building")||other.CompareTag("car"))
         {
             //Debug.Log("exit" + other.transform);
-            if (otherCar.Contains(other.transform))
+            if (_otherCar.Contains(trans))
             {
-                otherCar.Remove(other.transform);
+                _otherCar.Remove(trans);
             }
-            if (OnStopBrake != null&&otherCar.Count==0)
+
+            if (_avoidTrans == trans)
             {
-                OnStopBrake();
+                _avoidTrans = GetNearestTranform();
             }
         }
     }
 
     public void CleanUpSensor()
     {
-        otherCar = new List<Transform>();
+        _otherCar.Clear();
+    }
+
+    public bool IsNeedBrake(out Vector3 brakeDir)
+    {
+        if (_avoidTrans != null)
+        {
+            brakeDir =  _avoidTrans.position -transform.position;
+            if (Vector3.Dot(brakeDir, transform.forward) > 0)
+            {
+                return true;
+            }
+        }
+
+        brakeDir = Vector3.zero;
+        return false;
+    }
+
+    private Transform GetNearestTranform()
+    {
+        Transform ret = null;
+        float near = float.MaxValue;
+        for (int i = 0; i < _otherCar.Count; i++)
+        {
+            float dis = GetSqrDis(_otherCar[i]);
+            if (dis < near)
+            {
+                ret = _otherCar[i];
+                near = dis;
+            }
+        }
+
+        return ret;
+    }
+
+    private float GetSqrDis(Transform a)
+    {
+        if (a)
+        {
+            return (a.position - transform.position).sqrMagnitude;
+        }
+        else
+        {
+            return 999f;
+        }
     }
 }

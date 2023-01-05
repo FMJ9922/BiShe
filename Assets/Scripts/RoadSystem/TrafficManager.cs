@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TrafficManager : Singleton<TrafficManager>
 {
 
     [SerializeField] GameObject[] carPfbs;
-    private List<DriveSystem> carUsingPool = new List<DriveSystem>();
-    private List<DriveSystem> carUnusedPool = new List<DriveSystem>();
+        
+        
+    private List<CarModel> _carUsingPool = new List<CarModel>();
+    private List<CarModel> _carUnusedPool = new List<CarModel>();
+
+    private List<CarDriver> _carDriverUsingPool = new List<CarDriver>();
+    private List<CarDriver> _carDriverUnusedPool = new List<CarDriver>();
 
     //寻路节点
     public List<GridNode> reachable = new List<GridNode>();
@@ -19,42 +25,44 @@ public class TrafficManager : Singleton<TrafficManager>
     private List<Vector2Int> RoadNodes;
     private readonly Vector3 hidePos = new Vector3(-1000, -1000, -1000);
 
-    public List<GameObject> FakeRoute1;
-    public List<GameObject> FakeRoute2;
-    public List<GameObject> FakeRoute3;
-    public List<GameObject> FakeRoute4;
-
     private Queue<RuntimeCarMission> queueCarMission = new Queue<RuntimeCarMission>();
     private RuntimeCarMission tempCarMission;
-    private bool isRun = false;
 
-    enum FindRoadState
-    {
-        straight = 0,//在笔直的路上走
-        backward = 1,//走到死胡同了
-        turing = 2,//在拐弯路口
-    }
+    private List<Vector3> _takenPosList = new List<Vector3>();
 
-    private void Start()
-    {
-        //UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute1), DriveType.yoyo);
-        //UseCar(TransportationType.mini, ObjectsToVector3s(FakeRoute2), DriveType.yoyo);
-        //UseCar(TransportationType.van, ObjectsToVector3s(FakeRoute3), DriveType.loop);
-        //UseCar(TransportationType.medium, ObjectsToVector3s(FakeRoute4), DriveType.yoyo);
-        CancelInvoke("SetMission");
-        InvokeRepeating("SetMission", 0, 0.01f);
-    }
+
+    public float WeeklyCost { get; set; }
+
     
+    
+
 
     public void SetMission()
     {
-        if (queueCarMission.Count > 0 && !isRun)
+        if (queueCarMission.Count > 0)
         {
             tempCarMission = queueCarMission.Dequeue();
-            isRun = true;
             RealUse(tempCarMission);
         }
     }
+
+    public bool IsNearOtherCar(Vector3 pos, Vector3 dir,float brakeDistanceSqr) 
+    {
+        for (int i = 0; i < _takenPosList.Count; i++)
+        {
+            var vector = _takenPosList[0] - pos;
+            if (vector.sqrMagnitude < brakeDistanceSqr)
+            {
+                if (Vector3.Dot(vector, dir) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
 
     private List<Vector3> ObjectsToVector3s(List<GameObject> objs)
     {
@@ -79,12 +87,15 @@ public class TrafficManager : Singleton<TrafficManager>
             {
                 UseCarBySave(carMissions[i]);
             }
-        }
+        } 
     }
 
     public void RealUse(RuntimeCarMission runtimeCarMission)
     {
-        DriveSystem driveSystem = GetCarFromPool(runtimeCarMission._carMission.transportationType);
+        CarDriver carDriver = GetCarDriverFromPool();
+        CarModel model = GetCarModelFromPool(runtimeCarMission._carMission.transportationType);
+        carDriver.SetCarModel(model);
+        model.SetDriver(carDriver);
         Vector2Int start = runtimeCarMission._carMission.StartBuilding;
         Vector2Int end = runtimeCarMission._carMission.EndBuilding;
         Vector3[] wayPoints = null;
@@ -101,12 +112,10 @@ public class TrafficManager : Singleton<TrafficManager>
                 wayPoints = list.ToArray();
             }
         }
-        action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
-        isRun = false; 
         if (wayPoints != null && wayPoints.Length > 0)
         {
             runtimeCarMission._carMission.wayPoints = Vector3Serializer.Box(wayPoints);
-            driveSystem.StartDriving(runtimeCarMission._carMission, runtimeCarMission._driveType, action);
+            carDriver.StartDriving(runtimeCarMission._carMission, RecycleCarDriver);
             runtimeCarMission._callback?.Invoke(true);
         }
         else
@@ -129,36 +138,56 @@ public class TrafficManager : Singleton<TrafficManager>
 
     public void UseCarBySave(CarMission mission, DriveType driveType = DriveType.once)
     {
-        DriveSystem driveSystem = GetCarFromPool(mission.transportationType);
+        CarModel model = GetCarModelFromPool(mission.transportationType);
+        CarDriver carDriver = GetCarDriverFromPool();
+        carDriver.SetCarModel(model);
+        model.SetDriver(carDriver);
         Vector2Int start = MapManager.GetCenterGrid(mission.carPosition.V3);
         Vector2Int end = mission.EndBuilding;
         Vector3[] wayPoints;
-        UnityAction action = null;
         if (mission.missionType == CarMissionType.harvest)
         {
             wayPoints = Vector3Serializer.Unbox(mission.wayPoints);
         }
         else if (start == end)
         {
-            RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
+            RecycleCarDriver(carDriver);
             return;
         }
         else
         {
-            wayPoints = MapManager.Instance?.GetWayPoints(start, end)?.ToArray();
+            wayPoints = MapManager.Instance.GetWayPoints(start, end)?.ToArray();
         }
-
-        action = () => RecycleCar(driveSystem, MapManager.Instance.GetBuilidngByEntry(end));
         mission.wayPoints = Vector3Serializer.Box(wayPoints);
         if (wayPoints != null && wayPoints.Length > 0)
         {
-            driveSystem.StartDriving(mission, driveType, action);
+            carDriver.StartDriving(mission, RecycleCarDriver);
         }
         else
         {
-            if (action != null)
+            RecycleCarDriver(carDriver);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.Instance.IsGamePause())
+        {
+            return;
+        }
+        float deltaTime = Time.fixedDeltaTime;
+        SetMission();
+        _takenPosList.Clear();
+        for (int i = 0; i < _carDriverUsingPool.Count; i++)
+        {
+            _takenPosList.Add(_carDriverUsingPool[i].GetCurrentPos());
+        }
+        if (_carDriverUsingPool.Count>0)
+        {
+            for (int i = 0; i < _carDriverUsingPool.Count; i++)
             {
-                action.Invoke();
+                var car = _carDriverUsingPool[i];
+                car.DriveCar(deltaTime);
             }
         }
     }
@@ -342,44 +371,83 @@ public class TrafficManager : Singleton<TrafficManager>
     */
     #endregion
 
-    #region 对象池
-    private DriveSystem GetCarFromPool(TransportationType type)
+    private void OnDrawGizmos()
     {
-        for (int i = 0; i < carUnusedPool.Count; i++)
+        for (int i = 0; i < _carDriverUsingPool.Count; i++)
         {
-            if (carUnusedPool[i].carType == type)
+            if (_carDriverUsingPool[i]._curState == CarDriver.CarState.driveBrake)
             {
-                DriveSystem driveSystem = carUnusedPool[i];
-                carUnusedPool.RemoveAt(i);
-                carUsingPool.Add(driveSystem);
-                //Debug.Log("get");
-                return driveSystem;
+                
+            }
+            else
+            {
+                Gizmos.DrawLine(_carDriverUsingPool[i]._controlPointA+Vector3.up*3,_carDriverUsingPool[i]._controlPointB+Vector3.up*3);  
+            }
+        }
+    }
+    #region 对象池
+    private CarDriver GetCarDriverFromPool()
+    {
+        for (int i = 0; i < _carDriverUnusedPool.Count; i++)
+        {
+            CarDriver carDriver = _carDriverUnusedPool[i];
+            _carDriverUnusedPool.RemoveAt(i);
+            _carDriverUsingPool.Add(carDriver);
+            return carDriver;
+        }
+
+        CarDriver driver = new CarDriver();
+        _carDriverUsingPool.Add(driver);
+        return driver;
+    }
+
+    private void RecycleCarDriver(CarDriver carDriver)
+    {
+        DriveCost(-carDriver.GetDriveCost());
+        _carDriverUsingPool.Remove(carDriver);
+        _carDriverUnusedPool.Add(carDriver);
+        RecycleCarModel(carDriver.GetCarModel());
+        carDriver.GetTransform().position = hidePos;
+        carDriver.SetIdle();
+        var destination =MapManager.Instance.GetBuilidngByEntry(carDriver.GetCarMission().endBuilding.Vector2Int);
+        
+        if (destination)
+        {
+            destination.OnRecieveCar(carDriver.GetCarMission());
+        }
+    }
+
+    private void DriveCost(float money)
+    {
+        WeeklyCost -= money;
+        ResourceManager.Instance.AddMoney(money);
+        EventManager.TriggerEvent<float>(ConstEvent.OnOilCost,WeeklyCost);
+    }
+
+    private CarModel GetCarModelFromPool(TransportationType type)
+    {
+        for (int i = 0; i < _carUnusedPool.Count; i++)
+        {
+            CarModel carModel = _carUnusedPool[i];
+            if (type == carModel.CarType)
+            {
+                _carUnusedPool.RemoveAt(i);
+                _carUsingPool.Add(carModel);
+                carModel.enabled = true;
+                return carModel;
             }
         }
         GameObject newCar = Instantiate(carPfbs[(int)type], transform);
-        DriveSystem system = newCar.GetComponent<DriveSystem>();
-        carUsingPool.Add(system);
-        //Debug.Log("new");
-        return system;
+        CarModel model = newCar.GetComponent<CarModel>();
+        _carUsingPool.Add(model);
+        return model;
     }
-
-    private void RecycleCar(DriveSystem driveSystem, BuildingBase destination ,UnityAction unityAction = null)
+    
+    private void RecycleCarModel(CarModel carModel)
     {
-        //Debug.Log("recycle");
-        carUsingPool.Remove(driveSystem);
-        carUnusedPool.Add(driveSystem);
-        driveSystem.transform.position = hidePos;
-        driveSystem.SetIdle();
-        if (destination != null)
-        {
-            //Debug.Log("des");
-            destination.OnRecieveCar(driveSystem.CurMission);
-        }
-        if (unityAction != null)
-        {
-            unityAction.Invoke();
-        }
-        //Debug.Log("hide");
+        carModel.enabled = false;
+        _carUsingPool.Remove(carModel);
+        _carUnusedPool.Add(carModel);
     }
     #endregion
 
@@ -387,11 +455,14 @@ public class TrafficManager : Singleton<TrafficManager>
     public CarMission[] GetDriveDatas()
     {
         List<CarMission> driveDatas = new List<CarMission>();
-        for (int i = 0; i < carUsingPool.Count; i++)
+        for (int i = 0; i < _carDriverUsingPool.Count; i++)
         {
-            if (!MapManager.CheckOutOfMap(carUsingPool[i].transform.position))
+            var pos = _carDriverUsingPool[i].GetTransform().position;
+            if (!MapManager.CheckOutOfMap(pos))
             {
-                driveDatas.Add(carUsingPool[i].CurMission);
+                var carMission = _carDriverUsingPool[i].GetCarMission();
+                carMission.carPosition.Fill(pos);
+                driveDatas.Add(carMission);
             }
         }
         return driveDatas.ToArray();

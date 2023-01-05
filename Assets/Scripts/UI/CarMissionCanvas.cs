@@ -12,32 +12,27 @@ public class CarMissionCanvas : CanvasBase
     [SerializeField] private TMP_Text endLabel;
     [SerializeField] private TMP_Text carryLabel;
 
+    private CarDriver _carDriver;
 
-    private GameObject targetCar;
     private bool isTracing = false;
     public override void InitCanvas()
     {
-        EventManager.StartListening<GameObject>(ConstEvent.OnTriggerCarMissionPanel, OnOpen);
+        EventManager.StartListening<CarDriver>(ConstEvent.OnTriggerCarMissionPanel, OnOpen);
+        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown,StopTracing);
     }
-    public void OnOpen(GameObject car)
+    public void OnOpen(CarDriver carDriver)
     {
-        //Debug.Log("open");
-        targetCar = car;
-        CarMission mission = car.GetComponent<DriveSystem>().CurMission;
+        CarMission mission = carDriver.GetCarMission();
 
         InitLabels(mission);
         InitIcons(mission);
-
+        _carDriver = carDriver;
         TraceCarPosition();
         StartTracing();
-        car.GetComponent<DriveSystem>().OnArriveDestination += StopTracing;
         mainCanvas.SetActive(true);
     }
     private void InitLabels(CarMission mission)
     {
-        //Debug.Log(mission.StartBuilding.ToString());
-        //Debug.Log(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding));
-        //Debug.Log(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding).runtimeBuildData.Name);
         nameLabel.text = Localization.Get(mission.transportationType.GetDescription());
         startLabel.text = Localization.Get(MapManager.Instance.GetBuilidngByEntry(mission.StartBuilding).runtimeBuildData.Name);
         endLabel.text = Localization.Get(MapManager.Instance.GetBuilidngByEntry(mission.EndBuilding).runtimeBuildData.Name);
@@ -76,22 +71,22 @@ public class CarMissionCanvas : CanvasBase
     }
     public override void OnClose()
     {
-        if (targetCar)
+        //if (targetCar)
         {
-            targetCar.GetComponent<DriveSystem>().OnArriveDestination -= StopTracing;
-            targetCar = null;
+            //targetCar.GetComponent<CarDriver>().OnArriveDestination -= StopTracing;
+            //targetCar = null;
             mainCanvas.SetActive(false);
         }
     }
     private void OnDestroy()
     {
         mainCanvas.SetActive(false);
-        EventManager.StopListening<GameObject>(ConstEvent.OnTriggerInfoPanel, OnOpen);
+        EventManager.StopListening<CarDriver>(ConstEvent.OnTriggerInfoPanel, OnOpen);
     }
 
     private void TraceCarPosition()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(targetCar.transform.position);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(_carDriver.GetCurrentPos());
         mainCanvas.transform.position = screenPos+new Vector3(0,440,0) * GameManager.Instance.GetScreenRelativeRate(); ;
     }
 
@@ -107,11 +102,15 @@ public class CarMissionCanvas : CanvasBase
         OnClose();
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        if (isTracing && targetCar)
+        if (isTracing &&_carDriver._curState != CarDriver.CarState.idle)
         {
             TraceCarPosition();
+        }
+        else
+        {
+            StopTracing();
         }
     }
 

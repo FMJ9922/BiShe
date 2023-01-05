@@ -4,20 +4,21 @@ using UnityEngine;
 
 public static class Localization
 {
-    public static LanguageType language = LanguageType.Chinese;
+    public static LanguageType Language = LanguageType.Chinese;
 
     public delegate void ChangeLanguage();
     public static event ChangeLanguage OnChangeLanguage;
 
-    public static List<string> SupportLanguageList = new List<string>
+    public static readonly List<string> SupportLanguageList = new List<string>
     {
         "简体中文",
-        "English"
+        "English",
+        "German"
     };
 
     public static string Get(string itemName)
     {
-        switch (language)
+        switch (Language)
         {
             case LanguageType.Chinese:
                 {
@@ -27,6 +28,10 @@ public static class Localization
                 {
                     return ItemNameToEnglish(itemName);
                 }
+            case LanguageType.German:
+            {
+                return ItemNameToGerman(itemName);
+            }
         }
         return itemName;
     }
@@ -56,29 +61,34 @@ public static class Localization
         return itemName;
     }
 
+    public static string ItemNameToGerman(string itemName)
+    {
+        LocalizationCombine[] combines = DataManager.Instance.LocalizationData.combines;
+        for (int i = 0; i < combines.Length; i++)
+        {
+            if (combines[i].code == itemName)
+            {
+                return combines[i].german;
+            }
+        }
+        return itemName;
+    }
+
     public static void ChangeSettingLanguage(LanguageType languageType)
     {
         //Debug.Log("change" + languageType);
-        if(languageType != language)
-        {
-            language = languageType;
-            PlayerPrefs.SetInt("Language", (int)languageType);
-            if (OnChangeLanguage != null)
-            {
-                OnChangeLanguage();
-            }
-        }
+        if (languageType == Language) return;
+        Language = languageType;
+        PlayerPrefs.SetInt("Language", (int)languageType);
+        OnChangeLanguage?.Invoke();
     }
 
     public static void ChangeSettingLanguage(int languageType)
     {
         //Debug.Log("change" + languageType);
-        language = (LanguageType)languageType;
+        Language = (LanguageType)languageType;
         PlayerPrefs.SetInt("Language", (int)languageType);
-        if (OnChangeLanguage != null)
-        {
-            OnChangeLanguage();
-        }
+        OnChangeLanguage?.Invoke();
     }
 
 }

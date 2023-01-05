@@ -93,6 +93,7 @@ public class LevelManager : Singleton<LevelManager>
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
                 EventManager.TriggerEvent(ConstEvent.OnSettleAccount);
+                TrafficManager.Instance.WeeklyCost = 0;
             }
             else
             {

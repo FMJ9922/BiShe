@@ -11,9 +11,9 @@ public class LanguageOption : MonoBehaviour
 
     private void Start()
     {
-        int id = (int)Localization.language > Localization.SupportLanguageList.Count - 1 ?
+        int id = (int)Localization.Language > Localization.SupportLanguageList.Count - 1 ?
                 Localization.SupportLanguageList.Count - 1 :
-                (int)Localization.language;
+                (int)Localization.Language;
         if (dropdown!=null)
         {
             dropdown.onValueChanged.RemoveAllListeners();
@@ -44,16 +44,16 @@ public class LanguageOption : MonoBehaviour
     {
         if (dropdown != null)
         {
-            int id = (int)Localization.language > Localization.SupportLanguageList.Count - 1 ?
+            int id = (int)Localization.Language > Localization.SupportLanguageList.Count - 1 ?
                 Localization.SupportLanguageList.Count - 1 :
-                (int)Localization.language;
+                (int)Localization.Language;
             dropdown.captionText.text = Localization.SupportLanguageList[id];
         }
     }
 
     public void ChangeRelativeLanguage(int delta)
     {
-        int cur = (int)Localization.language;
+        int cur = (int)Localization.Language;
         cur += delta;
         if (cur >= Localization.SupportLanguageList.Count)
         {

@@ -1416,420 +1416,561 @@ MonoBehaviour:
     - code: Log
       chinese: "\u539F\u6728"
       english: Log
+      german: Holz
     - code: Stone
       chinese: "\u77F3\u5934"
       english: Stone
+      german: Stein
     - code: Money
       chinese: "\u91D1\u94B1"
       english: Money
+      german: Geld
     - code: Resource
       chinese: "\u8D44\u6E90"
       english: Resource
+      german: Ressource
     - code: Name
       chinese: "\u540D\u79F0"
       english: Name
+      german: Name
     - code: Amount
       chinese: "\u6570\u91CF"
       english: Amount
+      german: Menge
     - code: Destroy
       chinese: "\u62C6\u9664"
       english: Remove
+      german: Entfernen
     - code: Build
       chinese: "\u5EFA\u9020"
       english: Build
+      german: Bauen
     - code: Market
       chinese: "\u5E02\u573A"
       english: Market
+      german: Markt
     - code: Warehouse
       chinese: "\u4ED3\u5E93"
       english: Warehouse
+      german: Speicher
     - code: PlainResidentialLv1
       chinese: "\u6C11\u623F"
       english: Folk House Lv1
+      german: Wohnhaus Lvl1
     - code: CountryRoad
       chinese: "\u4E61\u95F4\u5C0F\u9053"
       english: Dirt Road
+      german: Feldweg
     - code: Farmland
       chinese: "\u5C0F\u578B\u519C\u7530"
       english: Farmland
+      german: Ackerland
     - code: LivestockFarm
       chinese: "\u517B\u6B96\u573A"
       english: Livestock Farm
+      german: Viehbauernhof
     - code: Factory
       chinese: "\u52A0\u5DE5\u5382"
       english: Factory
+      german: Fabrik
     - code: LoggingCamps
       chinese: "\u4F10\u6728\u573A"
       english: Logging Camps
+      german: "Holzf\xE4llercamps"
     - code: Housing
       chinese: "\u4F4F\u623F"
       english: Housing
+      german: Wohnraum
     - code: Agriculture
       chinese: "\u519C\u4E1A"
       english: Agriculture
+      german: Landwirtschaft
     - code: Produce
       chinese: "\u751F\u4EA7"
       english: Produce
+      german: Lebensmittel
     - code: Manufacturing
       chinese: "\u5236\u9020"
       english: Manufacturing
+      german: Produktion
     - code: Utilitiy
       chinese: "\u670D\u52A1"
       english: Utilitiy
+      german: Infrastruktur
     - code: Road
       chinese: "\u9053\u8DEF"
       english: Road
+      german: "Stra\xDFe"
     - code: Gold
       chinese: "\u91D1\u5E01"
       english: Money
+      german: Gold
     - code: Cost
       chinese: "\u82B1\u8D39"
       english: Cost
+      german: Kosten
     - code: TempIntroduction
       chinese: "\u8FD9\u662F\u7B80\u4ECB"
       english: This is introduction
+      german: "Dies ist die Einf\xFChrung"
     - code: Wheat
       chinese: "\u5C0F\u9EA6"
       english: Wheat
+      german: Getreide
     - code: Rice
       chinese: "\u7A3B\u7C73"
       english: Rice
+      german: Reis
     - code: Log
       chinese: "\u539F\u6728"
       english: Log
+      german: Holz
     - code: Furniture
       chinese: "\u6728\u6599"
       english: Furniture
+      german: "M\xF6bel"
     - code: RawMeat
       chinese: "\u751F\u8089"
       english: Raw Meat
+      german: Rohes Fleisch
     - code: Flour
       chinese: "\u9762\u7C89"
       english: Flour
+      german: Mehl
     - code: LaborForce
       chinese: "\u52B3\u52A8\u529B"
       english: Labor Force
+      german: Arbeitskraft
     - code: ProcessedMeat
       chinese: "\u814A\u8089"
       english: Processed Meat
+      german: Fleisch
     - code: Stock
       chinese: "\u5E93\u5B58"
       english: Stock
+      german: Vorrat
     - code: BidPrice
       chinese: "\u4E70\u5165\u4EF7\u683C"
       english: Buy Price
+      german: Kaufpreis
     - code: OfferPrice
       chinese: "\u5356\u51FA\u4EF7\u683C"
       english: Sell Price
+      german: Verkaufspreis
     - code: Consumption
       chinese: "\u6D88\u8017\u91CF"
       english: Consumption
+      german: Verbrauch
     - code: HumanResource
       chinese: "\u52B3\u52A8\u529B"
       english: Labor Force
+      german: Arbeitskraft
     - code: Food
       chinese: "\u98DF\u7269"
       english: Food
+      german: Nahrung
     - code: Year
       chinese: "\u5E74"
       english: Year
+      german: Jahr
     - code: Month
       chinese: "\u6708"
       english: Month
+      german: Monat
     - code: Week
       chinese: "\u5468"
       english: Week
+      german: Woche
     - code: Day
       chinese: "\u65E5"
       english: Day
+      german: Tag
     - code: Worker
       chinese: "\u5DE5\u4EBA"
       english: Worker
+      german: Arbeiter
     - code: Resident
       chinese: "\u5C45\u6C11"
       english: Resident
+      german: Bewohner
     - code: Population
       chinese: "\u4EBA\u53E3"
       english: Population
+      german: "Bev\xF6lkerung"
     - code: TradeOption
       chinese: "\u8D38\u6613\u76EE\u6807"
       english: Trade Option
+      german: Handelsoption
     - code: ExpectedProfit
       chinese: "\u9884\u671F\u5229\u6DA6"
       english: Expected Profit
+      german: Erwarteter Gewinn
     - code: Sausage
       chinese: "\u9999\u80A0"
       english: Sausage
+      german: Wurst
     - code: PlainResidentialLv2
       chinese: "\u4F4F\u5B85"
       english: Folk House Lv2
+      german: Wohnhaus Lvl2
     - code: Apartment
       chinese: "\u57CE\u9547\u516C\u5BD3"
       english: Apartment
+      german: Apartment
     - code: "Cement\_road"
       chinese: "\u6C34\u6CE5\u8DEF"
       english: "Cement\_road"
+      german: "Zementstra\xDFe"
     - code: "Asphalt\_road"
       chinese: "\u67CF\u6CB9\u8DEF"
       english: Asphalt road
+      german: "Asphaltstra\xDFe"
     - code: Bazaar
       chinese: "\u96C6\u5E02"
       english: Bazaar
+      german: Basar
     - code: Market
       chinese: "\u5E02\u573A"
       english: Market
+      german: Markt
     - code: Shopping Mall
       chinese: "\u5546\u57CE"
       english: Shopping Mall
+      german: Einkaufshalle
     - code: Workshop
       chinese: "\u5DE5\u574A"
       english: Factory
+      german: Werkstatt
     - code: Integrated mill
       chinese: "\u7EFC\u5408\u5DE5\u5382"
       english: Factory
+      german: Fabrik
     - code: Government
       chinese: "\u653F\u5E9C"
       english: Town Hall
+      german: Rathaus
     - code: Van
       chinese: "\u9762\u5305\u8F66"
       english: Van
+      german: Van
     - code: MiniTruck
       chinese: "\u5C0F\u578B\u8D27\u8F66"
       english: Mini Truck
+      german: 'Kleintransporter '
     - code: MediumTruck
       chinese: "\u4E2D\u578B\u8D27\u8F66"
       english: Medium Truck
+      german: LKW
     - code: Goods
       chinese: "\u8D27\u7269"
       english: Goods
+      german: "G\xFCter"
     - code: Request
       chinese: "\u8BF7\u6C42"
       english: Request
+      german: Anfrage
     - code: Transport
       chinese: "\u8FD0\u8F93"
       english: Transport
+      german: Transport
     - code: Government
       chinese: "\u6751\u653F\u5E9C"
       english: Town Hall
+      german: Rathaus
     - code: GovernmentLv2
       chinese: "\u4E61\u653F\u5E9C"
       english: Town Hall Lv2
+      german: Rathaus Lvl2
     - code: GovernmentLv3
       chinese: "\u53BF\u653F\u5E9C"
       english: Town Hall Lv3
+      german: Rathaus Lvl3
     - code: CoachResidential
       chinese: "\u6D77\u5CB8\u6C11\u5C45"
       english: Folk House Lv1
+      german: Wohnhaus Lvl1
     - code: CoachResidentialLv2
       chinese: "\u6D77\u5CB8\u6C11\u5C45Lv2"
       english: Folk House Lv2
+      german: Wohnhaus Lvl2
     - code: CoachResidentialLv3
       chinese: "\u6D77\u5CB8\u6C11\u5C45Lv3"
       english: Folk House Lv3
+      german: Wohnhaus Lvl3
     - code: HuiResidential
       chinese: "\u7696\u5357\u6C11\u5C45"
       english: Folk House Lv1
+      german: Wohnhaus Lvl1
     - code: HuiResidentialLv2
       chinese: "\u7696\u5357\u6C11\u5C45Lv2"
       english: Folk House Lv2
+      german: Wohnhaus Lvl2
     - code: HuiResidentialLv3
       chinese: "\u7696\u5357\u6C11\u5C45Lv3"
       english: Folk House Lv3
+      german: Wohnhaus Lvl3
     - code: Mine
       chinese: "\u5C0F\u578B\u77FF\u4E95"
       english: Mine
+      german: Bergwerk
     - code: MineLv2
       chinese: "\u4E2D\u578B\u77FF\u4E95"
       english: Mine Lv2
+      german: Bergwerk Lvl2
     - code: MineLv3
       chinese: "\u5927\u578B\u77FF\u4E95"
       english: Mine Lv3
+      german: Bergwerk Lvl3
     - code: Input
       chinese: "\u6D88\u8017"
       english: Input
+      german: Input
     - code: Output
       chinese: "\u751F\u4EA7"
       english: Output
+      german: Output
     - code: Open
       chinese: "\u6253\u5F00"
       english: Open
+      german: "\xD6ffnen"
     - code: TechCanvas
       chinese: "\u79D1\u6280\u9762\u677F"
       english: Policy
+      german: Technologie
     - code: Fish
       chinese: "\u9C7C"
       english: Fish
+      german: Fisch
     - code: Once
       chinese: "\u4E00\u6B21"
       english: Once
+      german: Einmal
     - code: EveryWeek
       chinese: "\u6BCF\u5468"
       english: Every Week
+      german: Jede Woche
     - code: Maintain
       chinese: "\u7EF4\u6301"
       english: Maintain
+      german: Wartung
     - code: Iron
       chinese: "\u94C1\u77FF\u77F3"
       english: Iron ore
+      german: Eisenerz
     - code: Fur
       chinese: "\u6BDB\u76AE"
       english: Fur
+      german: Pelze
     - code: Vegetable
       chinese: "\u852C\u83DC"
       english: Vegetable
+      german: "Gem\xFCse"
     - code: StoneMaterial
       chinese: "\u77F3\u6750"
       english: Cut Stone
+      german: "Steinbl\xF6cke"
     - code: MeatTin
       chinese: "\u8089\u7F50\u5934"
       english: Canned Meat
+      german: Fleischkonserven
     - code: FishTin
       chinese: "\u9C7C\u7F50\u5934"
       english: Canned Fish
+      german: Fischkonserven
     - code: Clothes
       chinese: "\u8863\u670D"
       english: Clothes
+      german: 'Kleidung '
     - code: Mantou
       chinese: "\u9992\u5934"
       english: Mantou
+      german: Mantou-Brot
     - code: IronMaterial
       chinese: "\u94C1\u5757"
       english: Iron
+      german: Eisen
     - code: Pier
       chinese: "\u6E14\u6E2F"
       english: Fishing Dock
+      german: "Fischerh\xFCtte"
     - code: Upgrade
       chinese: "\u5347\u7EA7"
       english: Upgrade
+      german: Upgrade
     - code: NoticeUpgradeFail
       chinese: "\u5347\u7EA7\u5931\u8D25"
       english: Upgrade failed
+      german: Upgrade fehlgeschlagen
     - code: NoticeBuildFailNoRes
       chinese: "\u5EFA\u9020\u5931\u8D25\uFF1A\u8D44\u6E90\u4E0D\u8DB3"
       english: 'Construction failed: Lack of resources'
+      german: 'Konstruktion fehlgeschlagen: Nicht genug Ressourcen'
     - code: NoticeBuildFailNoPlace
       chinese: "\u5EFA\u9020\u5931\u8D25\uFF1A\u7A7A\u95F4\u4E0D\u8DB3"
       english: 'Construction failed: Space occupied'
+      german: 'Konstruktion fehlgeschlagen: Ort bereits belegt'
     - code: NoticeBuildFailNoNearRoad
       chinese: "\u5EFA\u9020\u5931\u8D25\uFF1A\u9700\u8981\u653E\u7F6E\u5728\u9053\u8DEF\u65C1"
       english: 'Construction failed: Need to be close to the road'
+      german: "Konstruktion fehlgeschlagen: Nicht an Stra\xDFe angrenzend"
     - code: NoticeBuildFailNoNearSea
       chinese: "\u5EFA\u9020\u5931\u8D25\uFF1A\u9700\u8981\u653E\u7F6E\u5728\u6D77\u5CB8\u7EBF\u4E0A"
       english: 'Construction failed: Need to be close to the coastline'
+      german: "Konstruktion fehlgeschlagen: Nicht an K\xFCste angrenzend"
     - code: TechUsing
       chinese: "\u6B63\u5728\u4F7F\u7528\u7684\u79D1\u6280"
       english: Policy in use
+      german: Derzeitige Technologie
     - code: MusicVolumn
       chinese: "\u97F3\u4E50\u97F3\u91CF"
       english: Music Volumn
+      german: Musik-Volumen
     - code: SoundVolumn
       chinese: "\u97F3\u6548\u97F3\u91CF"
       english: Sound Volumn
+      german: "Ger\xE4usch-Volumen"
     - code: Language
       chinese: "\u8BED\u8A00"
       english: Language
+      german: Sprache
     - code: Settings
       chinese: "\u8BBE\u7F6E"
       english: Settings
+      german: Einstellungen
     - code: PlainResidentialLv3
       chinese: "\u5C0F\u6D0B\u623F"
       english: Folk House Lv3
+      german: Wohnhaus Lvl3
     - code: LivestockFarmLv2
       chinese: "\u517B\u6B96\u573A\u4E8C\u7EA7"
       english: Livestock Farm Lv2
+      german: Viehbauernhof Lvl2
     - code: LivestockFarmLv3
       chinese: "\u517B\u6B96\u573A\u4E09\u7EA7"
       english: Livestock Farm Lv3
+      german: Viehbauernhof Lvl3
     - code: Bridge
       chinese: "\u6865\u6881"
       english: Bridge
+      german: "Br\xFCcke"
     - code: FarmlandII
       chinese: "\u4E2D\u578B\u519C\u7530"
       english: Farmland Lv2
+      german: Ackerland Lvl2
     - code: FarmlandIII
       chinese: "\u5927\u578B\u519C\u7530"
       english: Farmland Lv3
+      german: Ackerland Lvl3
     - code: LoggingCampsLv2
       chinese: "\u4F10\u6728\u573A\u4E8C\u7EA7"
       english: Logging Camps Lv2
+      german: "Holzf\xE4llercamps Lvl2"
     - code: LoggingCampsLv3
       chinese: "\u4F10\u6728\u573A\u4E09\u7EA7"
       english: Logging Camps Lv3
+      german: "Holzf\xE4llercamps Lvl3"
     - code: Buy
       chinese: "\u4E70\u5165"
       english: Buy
+      german: Kaufen
     - code: SelectLevel
       chinese: "\u9009\u62E9\u5173\u5361"
       english: Select Level
+      german: "Level ausw\xE4hlen"
     - code: Load
       chinese: "\u52A0\u8F7D\u5B58\u6863"
       english: Load
+      german: Laden
     - code: Settings
       chinese: "\u6E38\u620F\u8BBE\u7F6E"
       english: Settings
+      german: EInstellungen
     - code: About
       chinese: "\u5173\u4E8E"
       english: About
+      german: "\xDCber"
     - code: Quit
       chinese: "\u9000\u51FA"
       english: Quit
+      german: Beenden
     - code: 30001Aim1
       chinese: "\u8D44\u91D1\u8FBE\u523020000"
       english: Money reaches 20,000
+      german: Erreiche 20,000 Geld
     - code: 30001Aim2
       chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523080"
       english: Average happiness reaches 80
+      german: 'Erreiche 80 durchschnittliche Zufriedenheit '
     - code: 30001Aim3
       chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230300"
       english: Population reaches 300
+      german: "Erreiche 300 Bev\xF6lkerung"
     - code: 30002Aim1
       chinese: "\u8D44\u91D1\u8FBE\u523030000"
       english: Money reaches 30,000
+      german: Erreiche 30,000 Geld
     - code: 30002Aim2
       chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523085"
       english: Average happiness reaches 85
+      german: 'Erreiche 85 durchschnittliche Zufriedenheit '
     - code: 30002Aim3
       chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230400"
       english: Population reaches 400
+      german: "Erreiche 400 Bev\xF6lkerung"
     - code: 30003Aim1
       chinese: "\u8D44\u91D1\u8FBE\u523040000"
       english: Money reaches 40,000
+      german: Erreiche 40,000 Geld
     - code: 30003Aim2
       chinese: "\u603B\u5E78\u798F\u5EA6\u8FBE\u523090"
       english: Average happiness reaches 90
+      german: 'Erreiche 90 durchschnittliche Zufriedenheit '
     - code: 30003Aim3
       chinese: "\u57CE\u9547\u4EBA\u53E3\u8FBE\u5230500"
       english: Population reaches 500
+      german: "Erreiche 500 Bev\xF6lkerung"
     - code: 30001SpcielIntroduce
       chinese: "\u5E73\u539F\u5730\u5F62\uFF0C\u9002\u5408\u53D1\u5C55\u519C\u4E1A"
       english: This town features a vast, fertile plain, which gives it a unique
         advantage on agriculture
+      german: "Diese Stadt verf\xFCgt \xFCber eine weite, fruchtbare Ebene, ideal
+        f\xFCr die Landwirtschaft"
     - code: 30002SpcielIntroduce
       chinese: "\u77FF\u4EA7\u4E30\u5BCC\uFF0C\u9002\u5408\u53D1\u5C55\u5DE5\u4E1A"
       english: Rich in minerals, this town is a dreamland for mining industry to
         bloom
+      german: "Diese Stadt ist reich in mineralischen Rohstoffen, ideal f\xFCr die
+        Bergbauindustrie"
     - code: 30003SpcielIntroduce
       chinese: "\u4E34\u8FD1\u6D77\u5CB8\uFF0C\u9002\u5408\u53D1\u5C55\u5236\u9020\u4E1A"
       english: Lying at seaside, this town will be a future centre for manufactured
         goods trade
+      german: "Diese Stadt liegt an der K\xFCste, ideal f\xFCr die Weiterverarbeitung
+        von G\xFCtern"
     - code: "\u5E73\u539F"
       chinese: "\u5E73\u539F"
       english: Plain
+      german: Ebene
     - code: "\u5C71\u5DDD"
       chinese: "\u5C71\u5DDD"
       english: Mountain
+      german: Berg
     - code: "\u6D77\u5CB8"
       chinese: "\u6D77\u5CB8"
       english: Coast
+      german: "K\xFCste"
     - code: LevelAim
       chinese: "\u5173\u5361\u76EE\u6807"
       english: Goal
+      german: Ziel
     - code: Feature
       chinese: "\u7279\u8272"
       english: Feature
+      german: Feature
     - code: KeyMap
       chinese: "\u952E\u4F4D"
       english: KeyMap
+      german: Karte
     - code: KeyMapIntroduce
       chinese: "WASD/\u6309\u4F4F\u6EDA\u8F6E   \u79FB\u52A8\u6444\u50CF\u673A\n\u9F20\u6807\u5DE6\u952E           
         \u4EA4\u4E92\n\u9F20\u6807\u6EDA\u8F6E            \u7F29\u653E\u6444\u50CF\u673A\n\u9F20\u6807\u53F3\u952E           
@@ -1858,6 +1999,12 @@ MonoBehaviour:
 
         Space             
         Switch between pause and play'
+      german: "WASD                             Kamera bewegen\nLinke Maustaste         
+        Interaktion\nRechte Maustaste       Bau verlassen / Stra\xDFe abrei\xDFen\nMausrad                       
+        Kamerazoom                                     R                                      
+        Geb\xE4ude w\xE4hrend Bau rotieren\nNummerntaste 1         1x Geschwindigkeit\nNummerntaste
+        2         2x Geschwindigkeit\nNummerntaste 3         3x Geschwindigkeit\nLeertaste                       
+        Pause / Fortsetzen"
     - code: AboutLog
       chinese: "\u8FD9\u662F\u4E00\u6B3E\u4EE5\u519C\u6751\u4E3A\u80CC\u666F\u7684\u6A21\u62DF\u7ECF\u8425\u6E38\u620F\u3002\u5EFA\u9020\u519C\u7530\u3001\u4F10\u6728\u573A\u3001\u91C7\u77F3\u573A\u7B49\u5EFA\u7B51\u6765\u751F\u4EA7\u57FA\u7840\u8D44\u6E90\uFF0C\u5EFA\u9020\u52A0\u5DE5\u5382\u6765\u751F\u4EA7\u5229\u6DA6\u66F4\u9AD8\u7684\u4EA7\u54C1\uFF0C\u5728\u5E02\u573A\u552E\u5356\u4EA7\u54C1\u83B7\u5F97\u5229\u6DA6\uFF0C\u4E3A\u6751\u6C11\u5347\u7EA7\u623F\u5C4B\u548C\u5DE5\u4F5C\u573A\u6240\u589E\u52A0\u5E78\u798F\u5EA6\uFF0C\u5728\u4E61\u653F\u5E9C\u89E3\u9501\u653F\u7B56\u8C03\u63A7\u751F\u4EA7\u3002\u6700\u7EC8\u76EE\u6807\u662F\u5EFA\u7ACB\u7F8E\u4E3D\u65B0\u519C\u6751\u3002\n\n\u5185\u6D4B\u73A9\u5BB6\u4EA4\u6D41QQ\u7FA4\u53F7\uFF1A714451531"
       english: Countryside is a rural-town-building simulation game where you will
@@ -1868,51 +2015,76 @@ MonoBehaviour:
         towners' house and workplace and make them happier. You could unlock policies
         at your town hall to make things  go smoothier. Your ultimate aim is to plan
         a happy and bright future for all your towners.
+      german: "Countryside ist eine Kleinstadt-Simulation, in der du die Planung
+        f\xFCr eine kleine l\xE4ndliche Stadt \xFCbernimmst. Du allein entscheidest
+        wo Ackerland, Holzf\xE4llercamps und Steinbr\xFCche angelegt werden, um die
+        dort produzierten Rohstoffe in Fabriken weiterzuverarbeiten und so h\xF6here
+        Gewinne zu erwirtschaften. Mit dem Geld aus dem Verkauf dieser Produkte auf
+        dem Markt, kannst du anschlie\xDFend verschiedene Geb\xE4ude in deiner Stadt
+        verbessern und dadurch die Zufriedenheit der Bev\xF6lkerung steigern. Mit
+        Hilfe neuer Technologien kannst du zudem die Verwaltung deiner Stadt verbessern,
+        mit dem ultimativen Ziel deiner Stadtbev\xF6lkerung eine gl\xFCckliche und
+        strahlende Zukunft zu erm\xF6glichen."
     - code: About
       chinese: "\u5173\u4E8E"
       english: About
+      german: "\xDCber"
     - code: Save
       chinese: "\u5B58\u6863"
       english: Save
+      german: Speichern
     - code: Saving
       chinese: "\u6B63\u5728\u4FDD\u5B58\u2026\u2026"
       english: "Saving\u2026"
+      german: "Wird gespeichert\u2026"
     - code: NameSave
       chinese: "\u8BF7\u4E3A\u65B0\u5EFA\u7684\u5B58\u6863\u547D\u540D"
       english: Please name the save file
+      german: Bitte Name des Speicherstandes eingeben
     - code: NameSave1
       chinese: "\u8F93\u5165\u5B58\u6863\u540D\u79F0\u2026\u2026"
       english: "Enter file name\u2026\u2026"
+      german: Bitte Dateinamen eingeben
     - code: Overwrite
       chinese: "\u8986\u76D6"
       english: Overwrite
+      german: "\xDCberschreiben"
     - code: LoadFile
       chinese: "\u8BFB\u6863"
       english: Load
+      german: Laden
     - code: Delete
       chinese: "\u5220\u6863"
       english: Delete
+      german: "L\xF6schen"
     - code: GameSave
       chinese: "\u6E38\u620F\u5B58\u6863"
       english: Save game
+      german: Spiel speichern
     - code: ExitToMenu
       chinese: "\u9000\u51FA\u81F3\u83DC\u5355"
       english: Exit to menu
+      german: "Zur\xFCck zum Men\xFC"
     - code: ReturnGame
       chinese: "\u8FD4\u56DE\u6E38\u620F"
       english: Continue
+      german: Weiter
     - code: QuitGame
       chinese: "\u9000\u51FA\u6E38\u620F"
       english: Quit game
+      german: Spiel beenden
     - code: WarnNoPeople
       chinese: "\u8B66\u544A\uFF1A\u6CA1\u6709\u5DE5\u4EBA"
       english: Warning:No worker
+      german: 'Achtung: Keine Arbeiter'
     - code: WarnNoMaterials
       chinese: "\u8B66\u544A\uFF1A\u6CA1\u6709\u539F\u6599"
       english: Warning:No raw materials
+      german: 'Achtung: Keine rohen Materialien'
     - code: WarnNoRoad
       chinese: "\u8B66\u544A\uFF1A\u4E0D\u5728\u5E02\u573A\u8303\u56F4\u5185"
       english: Warning:Unable to reach market
+      german: 'Achtung: Markt nicht verbunden'
     - code: IntroCameraMove
       chinese: "    \u79FB\u52A8\uFF08\u4EE5\u4E0B\u5747\u53EF\uFF09\uFF1A\n-\u952E\u76D8\u6309\u952EWASD\n-\u9F20\u6807\u632A\u5230\u5C4F\u5E55\u8FB9\u7F18\n-\u6309\u4F4F\u9F20\u6807\u6EDA\u8F6E\u7684\u540C\u65F6\u79FB\u52A8\u9F20\u6807\n\n   
         \u7F29\u653E\uFF1A\n-\u9F20\u6807\u6EDA\u8F6E\u63A7\u5236\u7F29\u653E\n\n   
@@ -1938,6 +2110,7 @@ MonoBehaviour:
         support this function in the future.)
 
 '
+      german: 'Kamera bewegen (jede der folgenden Optionen funktioniert):'
     - code: IntroBuildRoad
       chinese: "    \u4FEE\u8DEF\u6D41\u7A0B\uFF1A\n-\u70B9\u51FB\u5EFA\u9020\u6309\u94AE\u91CC\u7684\u9053\u8DEF\u9875\u7B7E\uFF0C\u70B9\u51FB\u4E00\u79CD\u9053\u8DEF\u8FDB\u5165\u4FEE\u8DEF\u6A21\u5F0F\n-\u70B9\u51FB\u7B2C\u4E00\u4E0B\u786E\u5B9A\u9053\u8DEF\u7684\u8D77\u70B9\n-\u79FB\u52A8\u9F20\u6807\uFF08\u4E0D\u7528\u6309\u4F4F\u9F20\u6807\u5DE6\u952E\uFF09\n-\u70B9\u51FB\u7B2C\u4E8C\u4E0B\u786E\u5B9A\u9053\u8DEF\u7684\u7EC8\u70B9\n-\u7EC8\u70B9\u786E\u5B9A\u540E\uFF0C\u4F1A\u5F39\u51FA\u786E\u8BA4\u5F39\u7A97\uFF0C\u70B9\u52FE\u786E\u8BA4\u5EFA\u9020\uFF0C\u70B9\u53C9\u53D6\u6D88\u5EFA\u9020\u3002\n-\u8D44\u6E90\u5145\u8DB3\u7684\u60C5\u51B5\u4E0B\uFF0C\u5C06\u5B8C\u6210\u5EFA\u9020\u3002\n\n   
         \u63D0\u793A\uFF1A\n-\u9053\u8DEF\u7684\u8D77\u70B9\u5FC5\u987B\u653E\u7F6E\u5728\u5DF2\u6709\u7684\u9053\u8DEF\u4E0A\uFF0C\u4E14\u7EC8\u70B9\u4E0D\u80FD\u653E\u7F6E\u5728\u6C34\u4E2D\uFF0C\u4E2D\u95F4\u4E0D\u80FD\u7A7F\u8FC7\u5176\u5B83\u5EFA\u7B51\u7269\uFF0C\u53EF\u4EE5\u7A7F\u8FC7\u9053\u8DEF\u3002\n-\u6A2A\u7A7F\u8FC7\u6C34\u9762\u7684\u9053\u8DEF\u4F1A\u81EA\u52A8\u53D8\u6210\u6865\u6881\uFF08\u5E76\u4E14\u4E0D\u989D\u5916\u4EA7\u751F\u8D39\u7528\uFF09\u3002\n-\u53EF\u4EE5\u8986\u76D6\u5DF2\u6709\u9053\u8DEF\u6765\u5B9E\u73B0\u5347\u7EA7\u9053\u8DEF\u3002\n"
@@ -1951,6 +2124,7 @@ MonoBehaviour:
         not cross any structure, except for another road;\n-The overwater part of
         roads will automatically turn into bridges;\n-You can upgrade your roads
         by covering it with an advanced road type.\n"
+      german: "Wie baut man eine Stra\xDFe:"
     - code: IntroConstruction
       chinese: "    \u5EFA\u9020\u63D0\u793A\uFF1A\n-\u70B9\u51FB\u53F3\u4E0B\u89D2\u5EFA\u9020\u6309\u94AE\u5F00\u542F\u5EFA\u7B51\u7269\u5EFA\u9020\u83DC\u5355\u3002\n-\u70B9\u51FB\u9875\u7B7E\u53EF\u4EE5\u5207\u6362\u5EFA\u7B51\u7C7B\u578B\u3002\n-\u70B9\u51FB\u76F8\u5E94\u5EFA\u7B51\u7684\u56FE\u6807\u4F1A\u5728\u9F20\u6807\u5904\u751F\u6210\u5EFA\u7B51\u9884\u89C8\u3002\n-\u5F53\u5EFA\u7B51\u9884\u89C8\u662F\u7EA2\u8272\u7684\u65F6\u5019\u4E0D\u80FD\u5EFA\u9020\uFF0C\u7EFF\u8272\u7684\u65F6\u5019\u624D\u53EF\u4EE5\u5EFA\u9020\u3002\n-\u5EFA\u7B51\u5FC5\u987B\u7D27\u8D34\u653E\u5728\u8DEF\u7684\u65C1\u8FB9\uFF0C\u5C06\u7EFF\u8272\u7BAD\u5934\u4E00\u4FA7\u8D34\u4F4F\u9053\u8DEF\u3002\u4E0D\u80FD\u4E0E\u5176\u4ED6\u5EFA\u7B51\u91CD\u5408\uFF0C\u4E5F\u4E0D\u80FD\u9020\u5728\u6C34\u91CC\u3002\n-\u6309R\u53EF\u4EE5\u65CB\u8F6C\u5EFA\u7B51\u3002\n-\u9F20\u6807\u53F3\u952E\u53EF\u4EE5\u9000\u51FA\u5EFA\u9020\u72B6\u6001\u3002\n-\u53EF\u4EE5\u8FDE\u7EED\u5EFA\u9020\n\n   
         \u7279\u6B8A\u8BF4\u660E\uFF1A\n-\u6E14\u6E2F\u6709\u8239\u7684\u4E00\u8FB9\u9700\u8981\u9020\u5728\u6C34\u91CC\uFF0C\u7BAD\u5934\u7684\u4E00\u904D\u8981\u8D34\u4F4F\u9053\u8DEF\u3002\n-\u77FF\u573A\u5728\u7070\u8272\u5730\u76AE\u4E0A\u624D\u4F1A\u6709\u4EA7\u51FA\u3002\n-\u5F53\u4F10\u6728\u573A\u5468\u56F4\u6CA1\u6709\u6210\u719F\u7684\u6811\u6728\u65F6\u4E0D\u4F1A\u6709\u4EA7\u51FA\u3002\n\n"
@@ -1991,6 +2165,7 @@ MonoBehaviour:
 
         - Logging camps will stop outputting
         logs when there is no fully grown tree nearby.'
+      german: "Klicke auf den Bau-Knopf unten rechts um das Bau-Men\xFC zu \xF6ffnen"
     - code: IntroBuildingInfo
       chinese: "    \u751F\u4EA7\u9762\u677F\uFF1A\n-\u5728\u975E\u5EFA\u9020\u72B6\u6001\u4E0B\u70B9\u51FB\u5EFA\u7B51\u4F1A\u6253\u5F00\u751F\u4EA7\u9762\u677F\u3002\n-\u751F\u4EA7\u9762\u677F\u53EF\u4EE5\u8FDB\u884C\u5207\u6362\u751F\u4EA7\u7269\u54C1\uFF0C\u589E\u51CF\u5DE5\u4EBA\uFF0C\u5347\u7EA7\u548C\u62C6\u9664\u7684\u64CD\u4F5C\u3002\n-\u6548\u7387\u4E0E\u5DE5\u4EBA\u6570\u91CF\u6210\u6B63\u6BD4\u3002\u653F\u7B56\uFF08\u79D1\u6280\uFF09\u53EF\u4EE5\u5F71\u54CD\u6548\u7387\u3002\n-\u751F\u4EA7\u5468\u671F\u7ED3\u675F\u65F6\uFF0C\u4EA7\u51FA\u7269\u54C1\u6570\u91CF=\u751F\u4EA7\u7387*\u6807\u51C6\u4EA7\u51FA\u91CF\u3002\n-\u5347\u7EA7\u9700\u8981\u82B1\u8D39\u6750\u6599\u3002\u5347\u7EA7\u540E\u5EFA\u7B51\u7684\u6807\u51C6\u4EA7\u51FA\u91CF\u66F4\u9AD8\uFF0C\u90E8\u5206\u5EFA\u7B51\u4F1A\u89E3\u9501\u65B0\u914D\u65B9\u3002\n\n   
         \u6CA1\u6709\u4EA7\u51FA\uFF1F\u53EF\u80FD\u7684\u539F\u56E0\n-\u6CA1\u6709\u5DE5\u4EBA\u3002\u6709\u7A7A\u95F2\u5C45\u6C11\u65F6\uFF0C\u65B0\u9020\u751F\u4EA7\u5EFA\u7B51\u4F1A\u81EA\u52A8\u586B\u6EE1\u5DE5\u4EBA\u3002\u4F46\u662F\u9020\u6C11\u623F\u5E76\u4E0D\u4F1A\u81EA\u52A8\u7ED9\u6709\u7A7A\u4F4D\u7684\u751F\u4EA7\u5EFA\u7B51\u589E\u52A0\u5DE5\u4EBA\u3002\n-\u6CA1\u6709\u539F\u6599\u3002\u68C0\u67E5\u5E93\u5B58\uFF08\u901A\u8FC7\u4ED3\u5E93\uFF09\uFF0C\u770B\u770B\u539F\u6599\u662F\u5426\u6709\u5269\u4F59\u3002\u7279\u522B\u5730\uFF0C\u5982\u679C\u4F10\u6728\u573A\u5468\u56F4\u6CA1\u6709\u6210\u5E74\u7684\u6811\u6728\uFF0C\u4E5F\u4E0D\u4F1A\u6709\u4EA7\u51FA\u3002\n-\u6CA1\u80FD\u8FD0\u53BB\u5E02\u573A\u3002\u5F53\u7269\u54C1\u88AB\u751F\u4EA7\u51FA\u6765\u65F6\uFF0C\u5E76\u4E0D\u4F1A\u7B2C\u4E00\u65F6\u95F4\u5C31\u88AB\u7EB3\u5165\u5E93\u5B58\uFF0C\u5FC5\u987B\u901A\u8FC7\u8F66\u8F86\u8FD0\u5F80\u5E02\u573A\u624D\u4F1A\u88AB\u7EDF\u8BA1\u4E3A\u5E93\u5B58\u3002\u5E02\u573A\u6709\u8303\u56F4\u9650\u5236\uFF0C\u79BB\u7684\u592A\u8FDC\u4E0D\u4F1A\u8FD0\u3002\n-\u5E93\u5B58\u6EE1\u4E86\u3002\u70B9\u51FB\u4E00\u4E2A\u4ED3\u5E93\uFF0C\u67E5\u770B\u4ED3\u5E93\u5E93\u5B58\u8FDB\u5EA6\u6761\uFF0C\u662F\u5426\u5DF2\u6EE1\u3002\u6EE1\u4E86\u7684\u8BDD\u65B0\u8FD0\u8FDB\u6765\u7684\u7269\u54C1\u4F1A\u88AB\u76F4\u63A5\u820D\u5F03\u3002\n-Bug\u3002\u5982\u679C\u4EE5\u4E0A\u90FD\u6CA1\u6709\u95EE\u9898\uFF0C\u90A3\u6781\u6709\u53EF\u80FD\u662FBug\u4E86\uFF0C\u5EFA\u8BAE\u7ACB\u5373\u5B58\u6863\u5E76\u8BFB\u6863\uFF0C\u770B\u662F\u5426\u80FD\u89E3\u51B3\u95EE\u9898\u3002"
@@ -2017,6 +2192,7 @@ MonoBehaviour:
         if warehouses are full.\n-Bug. If you check all the items above and find
         no problems with them, you may meet a bug. We recommend you to save the game
         and reload to see if the problem is solved.\n"
+      german: "Geb\xE4ude-Information"
     - code: IntroDestroy
       chinese: "    \u62C6\u9664\uFF1A\n-\u5EFA\u7B51\uFF1A\u70B9\u5EFA\u7B51\u540E\u5F39\u51FA\u751F\u4EA7\u9762\u677F\uFF0C\u70B9\u51FB\u62C6\u9664\u6309\u94AE\u62C6\u9664\u3002\n-\u9053\u8DEF\uFF1A\u70B9\u51FB\u5EFA\u9020\u680F\u5DE6\u4FA7\u7684\u62C6\u9664\u9053\u8DEF\u6309\u94AE\uFF0C\u70B9\u4E00\u6B21\u62C6\u4E00\u6B21\uFF0C\u6682\u65F6\u4E0D\u652F\u6301\u6309\u4F4F\u8FDE\u7EED\u62C6\u9664\u3002\n-\u8FD4\u8FD8\uFF1A\u5EFA\u7B51\u62C6\u9664\u8FD4\u8FD875%\uFF0C\u9053\u8DEF\u62C6\u9664\u4E0D\u8FD4\u8FD8\u8D44\u6E90\u3002\n   
         \n    \u8B66\u544A\uFF1A\n-\u62C6\u9664\u6700\u540E\u4E00\u4E2A\u5E02\u573A\u53EF\u80FD\u5BFC\u81F4\u6E38\u620F\u5D29\u6E83\u3002"
@@ -2026,6 +2202,7 @@ MonoBehaviour:
         of the resources you use in construction will be retrieved when you remove
         a structure, and no resource will be retrieved when you remove a road.\n\nWarning:
         The game will crash when you remove the last market in your town.\n"
+      german: "Wie entfernt man ein Geb\xE4ude:"
     - code: IntroMarket
       chinese: "    \u529F\u80FD\uFF1A\n-\u4E3A\u9644\u8FD1\u7684\u751F\u4EA7\u5EFA\u7B51\u63D0\u4F9B\u670D\u52A1\u3002\n-\u4E3A\u5C0F\u9547\u63D0\u4F9B\u4ECE\u5916\u754C\u8D2D\u4E70\u6216\u5356\u51FA\u7269\u54C1\u7684\u529F\u80FD\u3002\n\n   
         \u4E70\u5356\u89C4\u5219\uFF1A\n-\u6BCF\u5468\u7ED3\u675F\u8FDB\u884C\u4E00\u6B21\u7ED3\u7B97\u3002\n-\u4E70\u5165\u4E0D\u9650\u5236\u7269\u54C1\u79CD\u7C7B\uFF0C\u5356\u51FA\u6BCF\u5173\u9650\u5236\u4E86\u4E0D\u540C\u7684\u7269\u54C1\u79CD\u7C7B\uFF08\u6839\u636E\u73A9\u5BB6\u53CD\u9988\uFF0C\u6B64\u6761\u4EE5\u540E\u4F1A\u6539\uFF09\u3002\n-\u4E0D\u7BA1\u4E70\u5165\u8FD8\u662F\u5356\u51FA\uFF0C\u6BCF\u69FD\u4F4D\u6BCF\u5468\u9650\u5236\u4EA4\u6613\u6570\u91CF\u9ED8\u8BA4\u4E0A\u9650\u4E3A200
@@ -2046,6 +2223,7 @@ MonoBehaviour:
         trade will be done only once.\n-Every week. This trade is to be done every
         week.\n-Maintain. You can choose this when you want maintain the quantity
         of goods at a certain level in your warehouses.\n"
+      german: "Bietet anliegenden Geb\xE4uden die M\xF6glichkeit des Handels"
     - code: IntroTech
       chinese: "    \u89E3\u9501\u65B9\u5F0F\uFF1A\n-\u6BCF20\u4EBA\u53E3\u89E3\u9501\u4E00\u4E2A\u653F\u7B56\u70B9\u3002\uFF08\u6682\u5B9A\uFF09\n-\u70B9\u4E61\u653F\u5E9C\u754C\u9762\u91CC\u7684\u653F\u7B56\u6811\u6309\u94AE\u6253\u5F00\u653F\u7B56\u6811\u3002\n-\u70B9\u653F\u7B56\u56FE\u6807\u53EF\u4EE5\u9605\u8BFB\u5176\u6548\u679C\uFF0C\u70B9\u89E3\u9501\u540E\u70B9\u5E94\u7528\u624D\u662F\u4F7F\u7528\u4E86\u79D1\u6280\u3002\n\n   
         \u89C4\u5219\uFF1A\n-\u76EE\u524D\u6709\u4E09\u6761\u653F\u7B56\u7EBF\uFF0C\u6BCF\u6761\u653F\u7B56\u7EBF\u53EA\u80FD\u751F\u6548\u4E00\u79CD\u653F\u7B56\u3002\uFF08\u6682\u5B9A\uFF09\n-\u6BCF\u4E2A\u653F\u7B56\u53EA\u9700\u8981\u4E00\u4E2A\u70B9\u6570\u89E3\u9501\u3002\uFF08\u6682\u5B9A\uFF09\n-\u76EE\u524D\u51CF\u5C11\u8FD0\u8F93\u8D39\u7528\u76F8\u5173\u7684\u79D1\u6280\u662F\u4E0D\u751F\u6548\u7684\uFF0C\u540E\u7EED\u7248\u672C\u5F00\u53D1\u540E\u624D\u4F1A\u751F\u6548\u3002\n"
@@ -2057,6 +2235,7 @@ MonoBehaviour:
         policy requires one Policy Point to unlock. (Provisionally)\n- At present,
         the policies related to transportation costs reduction are not effective,
         and will be made effective in the future version of game.\n"
+      german: 'Wie man Technologien freischaltet:'
     - code: IntroSave
       chinese: "    \u5B58\u6863\n-\u5B58\u6863\u8DEF\u5F84\uFF1A\u6E38\u620F\u6839\u76EE\u5F55\u4E0BCountryside_Data\\Resources\\Saves\n-\u590D\u5236\u5B58\u6863\u65F6\uFF0C\u8BF7\u5728Saves\u6587\u4EF6\u5939\u91CC\u521B\u5EFA\u540C\u540D\u6587\u4EF6\u5939\uFF0C\u518D\u628A\u5B58\u6863\u6587\u4EF6\u653E\u8FDB\u53BB\uFF08.save\uFF09\uFF0C\u624D\u80FD\u6B63\u5E38\u8BFB\u53D6\u3002"
       english: 'Save
@@ -2068,449 +2247,627 @@ MonoBehaviour:
         a new folder with the same name of this file and paste the file into it (.save).
 
 '
+      german: Speichern
     - code: ScreenRatio
       chinese: "\u5206\u8FA8\u7387\uFF1A"
       english: Screen Ratio
+      german: "Bildschirmverh\xE4ltnis"
     - code: FullScreen
       chinese: "\u5168\u5C4F\uFF1A"
       english: Full Screen
+      german: Vollbildschirm
     - code: Help
       chinese: "\u5E2E\u52A9"
       english: Help
+      german: Hilfe
     - code: Camera
       chinese: "\u955C\u5934"
       english: Camera
+      german: Kamera
     - code: BuildRoad
       chinese: "\u4FEE\u8DEF"
       english: Road
+      german: "Stra\xDFe"
     - code: Technology
       chinese: "\u79D1\u6280"
       english: Technology
+      german: Technologie
     - code: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
       chinese: "\u6D88\u8017\u98DF\u7269\uFF0C\u63D0\u4F9B\u52B3\u52A8\u529B"
       english: Provides labor force while consumes food
+      german: Beherbergt Arbeiter, konsumiert Nahrung
     - code: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
       chinese: "\u516C\u8DEF\u662F\u7ECF\u6D4E\u53D1\u5C55\u7684\u52A8\u8109"
       english: A sound highway network is a key driver for economic growth.
+      german: "Ein gutes ausgebautes Stra\xDFennetzwerk ist der Grundstein f\xFCr
+        \xF6konomisches Wachstum."
     - code: "\u5B58\u50A8\u8D44\u6E90+1000"
       chinese: "\u5B58\u50A8\u8D44\u6E90+1000"
       english: Provides extra storage (+1000)
+      german: "Erh\xF6ht die Lagerkapazit\xE4t (+1000)"
     - code: "\u5B58\u50A8\u8D44\u6E90+4000"
       chinese: "\u5B58\u50A8\u8D44\u6E90+4000"
       english: Provides extra storage (+4000)
+      german: "Erh\xF6ht die Lagerkapazit\xE4t (+4000)"
     - code: "\u5B58\u50A8\u8D44\u6E90+10000"
       chinese: "\u5B58\u50A8\u8D44\u6E90+10000"
       english: Provides extra storage (+10000)
+      german: "Erh\xF6ht die Lagerkapazit\xE4t (+10000)"
     - code: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
       chinese: "\u4E70\u5165\u6216\u5356\u51FA\u4EA7\u54C1"
       english: Allows for the trade with merchants outside the town
+      german: "Erlaubt den Handel mit H\xE4ndlern au\xDFerhalb der Stadt"
     - code: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
       chinese: "\u4EA7\u51FA\u4F5C\u7269\u4EA7\u54C1"
       english: Used to grow crops
+      german: Wird zum Anbau von Nutzpflanzen verwendet
     - code: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
       chinese: "\u4EA7\u51FA\u517B\u6B96\u4EA7\u54C1"
       english: Used to produce livestock products
+      german: Wird zur Haltung von Vieh verwendet
     - code: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
       chinese: "\u5BF9\u539F\u6599\u8FDB\u884C\u52A0\u5DE5\uFF0C\u4EA7\u51FA\u9644\u52A0\u503C\u66F4\u9AD8\u7684\u4EA7\u54C1"
       english: Used to produce manufactured products with higher additional value
+      german: "Wird zur Produktion von weiterverarbeiteten G\xFCtern verwendet"
     - code: "\u4EA7\u51FA\u6728\u6599"
       chinese: "\u4EA7\u51FA\u6728\u6599"
       english: Used to produce timbers
+      german: Wird zur Produktion von Holz verwendet
     - code: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
       chinese: "\u653F\u5E9C\u4E2D\u5FC3\uFF0C\u7814\u7A76\u653F\u7B56"
       english: Town Hall, Policy Research
+      german: Rathaus, Technologieforschung
     - code: "\u751F\u4EA7\u77FF\u7269"
       chinese: "\u751F\u4EA7\u77FF\u7269"
       english: Used to dug minerals
+      german: Wird zum Abbau von mineralischen Rohstoffen verwendet
     - code: "\u6355\u635E\u9C7C\u7C7B"
       chinese: "\u6355\u635E\u9C7C\u7C7B"
       english: Used to catch fish
+      german: Wird zum Fangen von Fisch verwendet
     - code: "\u8FD9\u662F\u4E00\u5EA7\u6865\u6881"
       chinese: "\u8FD9\u662F\u4E00\u5EA7\u6865\u6881"
       english: This is a bridge
+      german: "Br\xFCcke"
     - code: BuildCost
       chinese: "\u5EFA\u9020\u6D88\u8017\uFF1A"
       english: 'Build cost:'
+      german: 'Bau-Kosten:'
     - code: "\u751F\u4EA7\u5468\u671F:"
       chinese: "\u751F\u4EA7\u5468\u671F:"
       english: 'Cycle:'
+      german: 'Zyklus:'
     - code: "\u6548\u7387:"
       chinese: "\u6548\u7387:"
       english: 'Efficiency:'
+      german: 'Effizienz:'
     - code: "\u4EA7\u51FA\u7387:"
       chinese: "\u4EA7\u51FA\u7387:"
       english: 'Productivity:'
+      german: "Produktivit\xE4t:"
     - code: Day1
       chinese: "\u5929"
       english: Day
+      german: Tag
     - code: "\u77FF\u8109\u4E30\u5EA6:"
       chinese: "\u77FF\u8109\u4E30\u5EA6:"
       english: 'Mineral abundance:'
+      german: "Rohstoff-\xDCberschuss"
     - code: Sell
       chinese: "\u5356\u51FA"
       english: Sell
+      german: Verkaufen
     - code: TradeRecord
       chinese: "\u8D38\u6613\u8BB0\u5F55"
       english: Trade record
+      german: Handelsbilanz
     - code: Sell1
       chinese: "\u51FA\u552E"
       english: Sell
+      german: Verkaufen
     - code: GetProfit
       chinese: "\u83B7\u5229"
       english: Earn
+      german: Einnahme
     - code: Buy1
       chinese: "\u8D2D\u4E70"
       english: Buy
+      german: Kaufen
     - code: BuildMode
       chinese: "\u5EFA\u9020\u6A21\u5F0F"
       english: Build mode
+      german: "Bau-Men\xFC"
     - code: RMBExit
       chinese: "\uFF08\u9F20\u6807\u53F3\u952E\u9000\u51FA\uFF09"
       english: Click RMB to exit
+      german: "Rechte Maustaste zum Verlassen dr\xFCcken"
     - code: "\u9053\u8DEF\u4E0D\u80FD\u4E0E\u5EFA\u7B51\u91CD\u53E0"
       chinese: "\u9053\u8DEF\u4E0D\u80FD\u4E0E\u5EFA\u7B51\u91CD\u53E0"
       english: Roads can't be built across structures
+      german: "Stra\xDFen k\xF6nnen nicht \xFCber Geb\xE4ude gebaut werden"
     - code: "\u9053\u8DEF\u7EC8\u70B9\u4E0D\u80FD\u5728\u6C34\u91CC"
       chinese: "\u9053\u8DEF\u7EC8\u70B9\u4E0D\u80FD\u5728\u6C34\u91CC"
       english: Roads can't be extended into the water
+      german: "Stra\xDFen k\xF6nnen nicht \xFCber Wasser gebaut werden"
     - code: "\u9053\u8DEF\u8D77\u70B9\u4E0D\u80FD\u8BBE\u5728\u5DF2\u88AB\u5360\u7528\u7684\u4F4D\u7F6E"
       chinese: "\u9053\u8DEF\u8D77\u70B9\u4E0D\u80FD\u8BBE\u5728\u5DF2\u88AB\u5360\u7528\u7684\u4F4D\u7F6E"
       english: Roads can't start from the space that has been occupied
+      german: "Stra\xDFen k\xF6nnen nicht von einem belegten Ort gebaut werden"
     - code: "\u4E0D\u80FD\u5728\u5730\u56FE\u5916\u5EFA\u9020"
       chinese: "\u4E0D\u80FD\u5728\u5730\u56FE\u5916\u5EFA\u9020"
       english: Can't build outside the map
+      german: "Gebiet liegt au\xDFerhalb der Karte"
     - code: "\u4E0D\u80FD\u5728\u6C34\u9762\u4E0B\u5EFA\u9020\u5EFA\u7B51"
       chinese: "\u4E0D\u80FD\u5728\u6C34\u9762\u4E0B\u5EFA\u9020\u5EFA\u7B51"
       english: Can't build under the water
+      german: Gebiet liegt unter Wasser
     - code: "\u5EFA\u7B51\u5165\u53E3\u5DF2\u88AB\u5360\u7528\uFF01\u65E0\u6CD5\u5EFA\u9020"
       chinese: "\u5EFA\u7B51\u5165\u53E3\u5DF2\u88AB\u5360\u7528\uFF01\u65E0\u6CD5\u5EFA\u9020"
       english: Entrance is blocked!
+      german: Eingang blockiert!
     - code: "\u5EFA\u7B51\u4E0D\u80FD\u5EFA\u5728\u8FC7\u4E8E\u9661\u5CED\u7684\u4F4D\u7F6E"
       chinese: "\u5EFA\u7B51\u4E0D\u80FD\u5EFA\u5728\u8FC7\u4E8E\u9661\u5CED\u7684\u4F4D\u7F6E"
       english: Too steep to build on
+      german: Zu steil zum Bauen
     - code: Happiness
       chinese: "\u5E78\u798F\u5EA6"
       english: Happiness
+      german: Zufriedenheit
     - code: MaintainanceCost
       chinese: "\u7EF4\u62A4\u8D39\u7528"
       english: Maintenance
+      german: Instandhaltung
     - code: ProductionEfficiency
       chinese: "\u751F\u4EA7\u6548\u7387"
       english: Efficiency
+      german: Effizienz
     - code: Congratulation
       chinese: "\u606D\u559C\u8FC7\u5173\uFF01"
       english: Congratulations!
+      german: "Herzlichen Gl\xFCckwunsch!"
     - code: Policy
       chinese: "\u653F\u7B56"
       english: Policy
+      german: Technologie
     - code: RemainPoints
       chinese: "\u5269\u4F59\u70B9\u6570\uFF1A"
       english: 'Points: '
+      german: 'Punkte:'
     - code: Marketing
       chinese: "\u8425\u9500"
       english: Marketing
+      german: Marketing
     - code: Construction
       chinese: "\u5EFA\u8BBE"
       english: Construction
+      german: Bau
     - code: Administrate
       chinese: "\u7BA1\u7406"
       english: Management
+      german: Management
     - code: "\u4F18\u79C0\u8BBE\u8BA1\u2160"
       chinese: "\u4F18\u79C0\u8BBE\u8BA1\u2160"
       english: Improved Design I
+      german: Verbessertes Design I
     - code: "\u4EA4\u901A\u4F18\u5316\u2160"
       chinese: "\u4EA4\u901A\u4F18\u5316\u2160"
       english: Transportation Optimization I
+      german: Transportoptimierung I
     - code: "\u7A33\u56FA\u5EFA\u9020\u2160"
       chinese: "\u7A33\u56FA\u5EFA\u9020\u2160"
       english: Solid Construction I
+      german: "Geb\xE4udestabilit\xE4t I"
     - code: "\u4F18\u5316\u5EFA\u7B51\u2160"
       chinese: "\u4F18\u5316\u5EFA\u7B51\u2160"
       english: Optimized Construction I
+      german: Verbesserte Konstruktion I
     - code: "\u4F18\u79C0\u8BBE\u8BA1\u2161"
       chinese: "\u4F18\u79C0\u8BBE\u8BA1\u2161"
       english: Improved Design II
+      german: Verbessertes Design II
     - code: "\u4EA4\u901A\u4F18\u5316\u2161"
       chinese: "\u4EA4\u901A\u4F18\u5316\u2161"
       english: Transportation Optimization II
+      german: Transportoptimierung II
     - code: "\u4F18\u5316\u5EFA\u7B51\u2161"
       chinese: "\u4F18\u5316\u5EFA\u7B51\u2161"
       english: Optimized Construction II
+      german: Verbesserte Konstruktion II
     - code: "\u4F18\u79C0\u8BBE\u8BA1\u2162"
       chinese: "\u4F18\u79C0\u8BBE\u8BA1\u2162"
       english: Improved Design III
+      german: Verbessertes Design III
     - code: "\u7A33\u56FA\u5EFA\u9020\u2161"
       chinese: "\u7A33\u56FA\u5EFA\u9020\u2161"
       english: Solid Construction II
+      german: "Geb\xE4udestabilit\xE4t II"
     - code: "\u4F18\u5316\u5EFA\u7B51\u2162"
       chinese: "\u4F18\u5316\u5EFA\u7B51\u2162"
       english: Optimized Construction III
+      german: Verbesserte Konstruktion III
     - code: "\u4EA4\u901A\u4F18\u5316\u2162"
       chinese: "\u4EA4\u901A\u4F18\u5316\u2162"
       english: Transportation Optimization III
+      german: Transportoptimierung III
     - code: "\u9644\u52A0\u503C\u2160"
       chinese: "\u9644\u52A0\u503C\u2160"
       english: Added Value I
+      german: "Verbesserte Wertsch\xF6pfung I"
     - code: "\u6269\u5927\u5E02\u573A\u2160"
       chinese: "\u6269\u5927\u5E02\u573A\u2160"
       english: Market Expansion I
+      german: Marktreichweite I
     - code: "\u9965\u997F\u8425\u9500\u2160"
       chinese: "\u9965\u997F\u8425\u9500\u2160"
       english: "Hunger\_Marketing I"
+      german: Nahrungsmittelverwaltung I
     - code: "\u5DE5\u5382\u76F4\u9500\u2160"
       chinese: "\u5DE5\u5382\u76F4\u9500\u2160"
       english: Factory Outlet I
+      german: Fabrikanlagen I
     - code: "\u9644\u52A0\u503C\u2161"
       chinese: "\u9644\u52A0\u503C\u2161"
       english: Added Value II
+      german: "Verbesserte Wertsch\xF6pfung II"
     - code: "\u9965\u997F\u8425\u9500\u2161"
       chinese: "\u9965\u997F\u8425\u9500\u2161"
       english: "Hunger\_Marketing II"
+      german: Nahrungsmittelverwaltung II
     - code: "\u6269\u5927\u5E02\u573A\u2161"
       chinese: "\u6269\u5927\u5E02\u573A\u2161"
       english: Market Expansion II
+      german: Marktreichweite II
     - code: "\u9644\u52A0\u503C\u2162"
       chinese: "\u9644\u52A0\u503C\u2162"
       english: Added Value III
+      german: "Verbesserte Wertsch\xF6pfung III"
     - code: "\u5DE5\u5382\u76F4\u9500\u2161"
       chinese: "\u5DE5\u5382\u76F4\u9500\u2161"
       english: Factory Outlet II
+      german: Fabrikanlagen II
     - code: "\u9965\u997F\u8425\u9500\u2162"
       chinese: "\u9965\u997F\u8425\u9500\u2162"
       english: "Hunger\_Marketing III"
+      german: Nahrungsmittelverwaltung III
     - code: "\u6269\u5927\u5E02\u573A\u2162"
       chinese: "\u6269\u5927\u5E02\u573A\u2162"
       english: Market Expansion III
+      german: Marktreichweite III
     - code: "\u4EBA\u624D\u7BA1\u7406\u2160"
       chinese: "\u4EBA\u624D\u7BA1\u7406\u2160"
       english: Talent Management I
+      german: Weiterbildung I
     - code: "\u79D1\u5B66\u751F\u4EA7\u2160"
       chinese: "\u79D1\u5B66\u751F\u4EA7\u2160"
       english: Smart Production I
+      german: Verbesserte Produktion I
     - code: "\u9AD8\u6548\u751F\u4EA7\u2160"
       chinese: "\u9AD8\u6548\u751F\u4EA7\u2160"
       english: Efficient Production I
+      german: Effiziente Produktion I
     - code: "\u96C6\u4E2D\u751F\u4EA7\u2160"
       chinese: "\u96C6\u4E2D\u751F\u4EA7\u2160"
       english: Centralized Production I
+      german: Zentralisierte Produktion I
     - code: "\u79D1\u5B66\u751F\u4EA7\u2161"
       chinese: "\u79D1\u5B66\u751F\u4EA7\u2161"
       english: Smart Production II
+      german: Verbesserte Produktion II
     - code: "\u4EBA\u624D\u7BA1\u7406\u2161"
       chinese: "\u4EBA\u624D\u7BA1\u7406\u2161"
       english: Talent Management II
+      german: Weiterbildung II
     - code: "\u9AD8\u6548\u751F\u4EA7\u2161"
       chinese: "\u9AD8\u6548\u751F\u4EA7\u2161"
       english: Efficient Production II
+      german: Effiziente Produktion II
     - code: "\u96C6\u4E2D\u751F\u4EA7\u2161"
       chinese: "\u96C6\u4E2D\u751F\u4EA7\u2161"
       english: Centralized Production II
+      german: Zentralisierte Produktion II
     - code: "\u4EBA\u624D\u7BA1\u7406\u2162"
       chinese: "\u4EBA\u624D\u7BA1\u7406\u2162"
       english: Talent Management III
+      german: Weiterbildung III
     - code: "\u79D1\u5B66\u751F\u4EA7\u2162"
       chinese: "\u79D1\u5B66\u751F\u4EA7\u2162"
       english: Smart Production III
+      german: Verbesserte Produktion III
     - code: "\u9AD8\u6548\u751F\u4EA7\u2162"
       chinese: "\u9AD8\u6548\u751F\u4EA7\u2162"
       english: Efficient Production III
+      german: Effiziente Produktion III
     - code: 40001Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E10%"
       english: Build cost reduces by 10% for all the structures
+      german: "Baukosten f\xFCr alle Geb\xE4ude um 10% reduziert"
     - code: 40002Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E5%"
       english: Transportation cost reduces by 5% for all the structures
+      german: "Transportkosten f\xFCr alle Geb\xE4ude um 5% reduziert"
     - code: 40003Intro
       chinese: "\u6240\u6709\u4EA7\u751F\u7EF4\u62A4\u8D39\u7528\u7684\u5EFA\u7B51\u7EF4\u62A4\u8D39\u7528\u964D\u4F4E5%"
       english: Maintenance cost reduces by 5% for all the structures that require
         maintenance
+      german: "Instandhaltungskosten f\xFCr alle Geb\xE4ude mit Instandhaltung um
+        5% reduziert"
     - code: 40004Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E10%"
       english: Material consumption in construction reduces by 10% for all the structures
+      german: "Materialverbrauch f\xFCr den Bau von allen Geb\xE4uden um 10% reduziert"
     - code: 40005Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E15%"
       english: Build cost reduces by 15% for all the structures
+      german: "Baukosten f\xFCr alle Geb\xE4ude um 15% reduziert"
     - code: 40006Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E10%"
       english: Transportation cost reduces by 10% for all the structures
+      german: "Transportkosten f\xFCr alle Geb\xE4ude um 10% reduziert"
     - code: 40007Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E15%"
       english: Material consumption in construction reduces by 15% for all the structures
+      german: "Materialverbrauch f\xFCr den Bau von allen Geb\xE4uden um 15% reduziert"
     - code: 40008Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u8D39\u7528\u964D\u4F4E20%"
       english: Build cost reduces by 20% for all the structures
+      german: "Baukosten f\xFCr alle Geb\xE4ude um 20% reduziert"
     - code: 40009Intro
       chinese: "\u6240\u6709\u4EA7\u751F\u7EF4\u62A4\u8D39\u7528\u7684\u5EFA\u7B51\u7EF4\u62A4\u8D39\u7528\u964D\u4F4E10%"
       english: Maintenance cost reduces by 10% for all the structures that require
         maintenance
+      german: "Instandhaltungskosten f\xFCr alle Geb\xE4ude mit Instandhaltung um
+        10% reduziert"
     - code: 40010Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u5EFA\u9020\u65F6\u6240\u9700\u7684\u539F\u6599\u82B1\u8D39\u964D\u4F4E20%"
       english: Material consumption in construction reduces by 20% for all the structures
+      german: "Materialverbrauch f\xFCr den Bau von allen Geb\xE4uden um 20% reduziert"
     - code: 40011Intro
       chinese: "\u6240\u6709\u5EFA\u7B51\u7684\u8FD0\u8F93\u8D39\u7528\u964D\u4F4E15%"
       english: Transportation cost reduces by 15% for all the structures
+      german: "Transportkosten f\xFCr alle Geb\xE4ude um 15% reduziert"
     - code: 40012Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A03%"
       english: Sell prices increase by 3% for all the products
+      german: "Verkaufspreise f\xFCr alle Produkte um 3% erh\xF6ht"
     - code: 40013Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A05%"
       english: Sales increase by 5% for all the products
+      german: "Gesamtverk\xE4ufe f\xFCr alle Produkte um 5% erh\xF6ht"
     - code: 40014Intro
       chinese: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1110%\uFF0C\u4EF7\u683C\u589E\u52A010%"
       english: Sales reduce by 10%, while sell prices increase by 10%
+      german: "Gesamtverk\xE4ufe um 10% reduziert, Verkaufspreise um 10% erh\xF6ht"
     - code: 40015Intro
       chinese: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D5%\uFF0C\u6BCF\u6B21\u53EF\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A030%"
       english: Sell prices reduce by 5%, while sales increase by 30%
+      german: "Verkaufspreise um 5% reduziert, Gesamtverk\xE4ufe um 30% erh\xF6ht"
     - code: 40016Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A06%"
       english: Sell prices increase by 6% for all the products
+      german: "Verkaufspreise f\xFCr alle Produkte um 6% erh\xF6ht"
     - code: 40017Intro
       chinese: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1115%\uFF0C\u4EF7\u683C\u589E\u52A020%"
       english: Sales reduce by 15%, while sell prices increase by 20%
+      german: "Gesamtverk\xE4ufe um 15% reduziert, Verkaufspreise um 20% erh\xF6ht"
     - code: 40018Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A010%"
       english: Sales increase by 10% for all the products
+      german: "Gesamtverk\xE4ufe f\xFCr alle Produkte um 10% erh\xF6ht"
     - code: 40019Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u4EF7\u683C\u589E\u52A09%"
       english: Sell prices increase by 9% for all the products
+      german: "Verkaufspreise f\xFCr alle Produkte um 9% erh\xF6ht"
     - code: 40020Intro
       chinese: "\u51FA\u552E\u7684\u4EA7\u54C1\u4EF7\u683C\u4E0B\u964D10%\uFF0C\u6BCF\u6B21\u53EF\u51FA\u552E\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A050%"
       english: Sell prices reduce by 10%, while sales increase by 50%
+      german: "Verkaufspreise um 10% reduziert, Gesamtverk\xE4ufe um 50% erh\xF6ht"
     - code: 40021Intro
       chinese: "\u53EF\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u51CF\u5C1120%\uFF0C\u4EF7\u683C\u589E\u52A030%"
       english: Sales reduce by 20%, while sell prices increase by 30%
+      german: "Gesamtverk\xE4ufe um 20% reduziert, Verkaufspreise um 30% erh\xF6ht"
     - code: 40022Intro
       chinese: "\u51FA\u552E\u8BA2\u5355\u7684\u4EA7\u54C1\u6570\u91CF\u589E\u52A015%"
       english: Sales increase by 15% for all the products
+      german: "Gesamtverk\xE4ufe f\xFCr alle Produkte um 15% erh\xF6ht"
     - code: 40023Intro
       chinese: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D1\u5355\u4F4D"
       english: Labor force required in each structure reduces by 1 unit
+      german: "Ben\xF6tigte Arbeiter f\xFCr jedes Geb\xE4ude um 1 Einheit reduziert"
     - code: 40024Intro
       chinese: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C115%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A05%"
       english: 'Material consumption in production reduces by 5%, and production '
+      german: Materialverbrauch in der Produktion um 5% reduziert
     - code: 40025Intro
       chinese: "\u751F\u4EA7\u6548\u7387\u589E\u52A010%"
       english: Production rate increases by 10%
+      german: "Produktionsrate um 10% erh\xF6ht"
     - code: 40026Intro
       chinese: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1110%"
       english: Material comsumption in production reduces by 5%
+      german: Materialverbrauch in der Produktion um 5% reduziert
     - code: 40027Intro
       chinese: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1110%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A010%"
       english: Material comsumption in production reduces by 10%
+      german: Materialverbrauch in der Produktion um 10% reduziert
     - code: 40028Intro
       chinese: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D2\u5355\u4F4D"
       english: Labor force required in each structure reduces by 2 unit
+      german: "Ben\xF6tigte Arbeiter f\xFCr jedes Geb\xE4ude um 2 Einheiten reduziert"
     - code: 40029Intro
       chinese: "\u751F\u4EA7\u6548\u7387\u589E\u52A020%"
       english: Production rate increases by 20%
+      german: "Produktionsrate um 20% erh\xF6ht"
     - code: 40030Intro
       chinese: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1120%"
       english: Material comsumption in production reduces by 20%
+      german: Materialverbrauch in der Produktion um 20% reduziert
     - code: 40031Intro
       chinese: "\u4EE4\u5EFA\u7B51\u6240\u9700\u52B3\u52A8\u529B\u4E0B\u964D3\u5355\u4F4D"
       english: Labor force required in each structure reduces by 3 unit
+      german: "Ben\xF6tigte Arbeiter f\xFCr jedes Geb\xE4ude um 3 Einheiten reduziert"
     - code: 40032Intro
       chinese: "\u751F\u4EA7\u6240\u9700\u539F\u6599\u51CF\u5C1115%\uFF0C\u751F\u4EA7\u6548\u7387\u589E\u52A015%"
       english: Material comsumption in production reduces by 15%
+      german: Materialverbrauch in der Produktion um 15% reduziert
     - code: 40033Intro
       chinese: "\u751F\u4EA7\u6548\u7387\u589E\u52A030%"
       english: Production rate increases by 30%
+      german: "Produktionsrate um 30% erh\xF6ht"
     - code: Unlock
       chinese: "\u89E3\u9501"
       english: Unlock
+      german: Freischalten
     - code: Use
       chinese: "\u91C7\u7528"
       english: Use
+      german: Benutzen
     - code: Using
       chinese: "\u5DF2\u91C7\u7528"
       english: Using
+      german: In Benutzung
     - code: "\u62C6\u9664\u9053\u8DEF"
       chinese: "\u62C6\u9664\u9053\u8DEF"
       english: Road Removal
+      german: "Stra\xDFe entfernen"
     - code: FrameRate
       chinese: "\u5E27\u7387"
       english: Frame Rate
+      german: Frame Rate
     - code: LoadTech
       chinese: "\u6B63\u5728\u52A0\u8F7D\u653F\u7B56"
       english: Loading policies
+      german: Lade Technologien
     - code: LoadResources
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5E93\u5B58\u8D44\u6E90"
       english: Loading storage resources
+      german: Lade gespeicherte Ressourcen
     - code: LoadTerrain
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5730\u5F62\u6A21\u578B"
       english: Loading terrain
+      german: Lade Terrain
     - code: LoadMap
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5730\u56FE\u914D\u7F6E"
       english: Loading map
+      german: Lade Karte
     - code: "\u6B63\u5728\u79CD\u6811"
       chinese: "\u6B63\u5728\u79CD\u6811"
       english: Generating trees
+      german: "Generiere B\xE4ume"
     - code: "\u6B63\u5728\u52A0\u8F7D\u6C34\u9762"
       chinese: "\u6B63\u5728\u52A0\u8F7D\u6C34\u9762"
       english: Generating water
+      german: Generiere Wasser
     - code: "\u6B63\u5728\u52A0\u8F7D\u5DF2\u6709\u5EFA\u7B51"
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5DF2\u6709\u5EFA\u7B51"
       english: Generating buildings
+      german: "Generiere Geb\xE4ude"
     - code: "\u6B63\u5728\u52A0\u8F7D\u6865\u6881"
       chinese: "\u6B63\u5728\u52A0\u8F7D\u6865\u6881"
       english: Generating bridges
+      german: "Generiere Br\xFCcken"
     - code: "\u6B63\u5728\u52A0\u8F7D\u5E02\u573A"
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5E02\u573A"
       english: Generating trades
+      german: Generiere Handel
     - code: "\u6B63\u5728\u52A0\u8F7D\u5C0F\u8F66\u8F66"
       chinese: "\u6B63\u5728\u52A0\u8F7D\u5C0F\u8F66\u8F66"
       english: Generating vehicles
+      german: Generiere Fahrzeuge
     - code: "\u6B63\u5728\u52A0\u8F7DUI"
       chinese: "\u6B63\u5728\u52A0\u8F7DUI"
       english: Initializing UI
+      german: Initialisiere UI
     - code: "\u52A0\u8F7D\u5B8C\u6BD5\uFF01\u7528\u65F6"
       chinese: "\u52A0\u8F7D\u5B8C\u6BD5\uFF01\u7528\u65F6"
       english: 'Loading complete in '
+      german: Laden fertig in
     - code: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
       chinese: "\u6B63\u5728\u8BFB\u53D6\u5B58\u6863\u5E76\u5E8F\u5217\u5316"
       english: Serializing datas
+      german: Daten werden eingespeichert
     - code: "\u5347\u7EA7\u8D44\u6E90\u4E0D\u8DB3"
       chinese: "\u5347\u7EA7\u8D44\u6E90\u4E0D\u8DB3"
       english: No enough resources
+      german: Nicht genug Ressourcen
     - code: MonitorResource
       chinese: "\u7F6E\u4E8E\u5DE6\u4E0AHUD"
       english: Add to HUD
+      german: "Zum HUD hinzuf\xFCgen"
     - code: UnMonitorResource
       chinese: "\u4ECEHUD\u4E2D\u79FB\u51FA"
       english: Remove from HUD
+      german: Aus dem HUD entfernen
     - code: AllowEat
       chinese: "\u5141\u8BB8\u98DF\u7528"
       english: Allowed to eat
+      german: Essbar
     - code: ForbiddenEat
       chinese: "\u7981\u6B62\u98DF\u7528"
       english: Forbidden to eat
+      german: Nicht essbar
     - code: "\u6765\u81EA\u5EFA\u7B51"
       chinese: "\u6765\u81EA\u5EFA\u7B51"
       english: From Buildings
+      german: "Von Geb\xE4uden"
     - code: "\u6765\u81EA\u8D38\u6613"
       chinese: "\u6765\u81EA\u8D38\u6613"
       english: From Trading
+      german: Vom Handel
     - code: "\u65E0"
       chinese: "\u65E0"
       english: None
+      german: Nichts
     - code: WarehouseLv2
       chinese: "\u4ED3\u5E93\u4E8C\u7EA7"
       english: WarehouseLv2
+      german: Speicher Lvl2
     - code: WarehouseLv3
       chinese: "\u4ED3\u5E93\u4E09\u7EA7"
       english: WarehouseLv3
+      german: Speicher Lvl3
     - code: Warehouse Lv2
       chinese: "\u4ED3\u5E93\u4E8C\u7EA7"
       english: WarehouseLv2
+      german: Speicher Lvl2
     - code: Warehouse Lv3
       chinese: "\u4ED3\u5E93\u4E09\u7EA7"
       english: WarehouseLv3
+      german: Speicher Lvl3
     - code: Orchard
       chinese: "\u679C\u56ED"
       english: Orchard
+      german: "Obstb\xE4ume"
     - code: Fruit
       chinese: "\u6C34\u679C"
       english: Fruit
-    - code: 
-      chinese: 
-      english: 
+      german: Obst
+    - code: capacity
+      chinese: "\u5BB9\u91CF"
+      english: capacity
+      german: "Lagerkapazit\xE4t"
+  CarArray:
+  - CarType: 0
+    Acceleration: 1
+    MaxSpeed: 6
+    Cost: 0.1
+    Storage: 10
+  - CarType: 1
+    Acceleration: 0.95
+    MaxSpeed: 5
+    Cost: 0.2
+    Storage: 30
+  - CarType: 2
+    Acceleration: 0.9
+    MaxSpeed: 4.5
+    Cost: 0.25
+    Storage: 50
+  - CarType: 3
+    Acceleration: 1.1
+    MaxSpeed: 3
+    Cost: 0.1
+    Storage: 10
+  - CarType: 4
+    Acceleration: 0.8
+    MaxSpeed: 4
+    Cost: 0.25
+    Storage: 50

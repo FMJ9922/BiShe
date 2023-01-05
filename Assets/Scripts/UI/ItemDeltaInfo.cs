@@ -35,4 +35,9 @@ public class ItemDeltaInfo : MonoBehaviour
             count = 0;
         }
     }
+
+    public void SetText(string content)
+    {
+        _buildingDelta.text = content;
+    }
 }

@@ -78,6 +78,12 @@ public class BuildManager : Singleton<BuildManager>
         EventManager.StartListening(ConstEvent.OnRangeLightClose, CloseRangeLight);
     }
 
+    public void Start()
+    {
+        
+
+    }
+
     private void OnDestroy()
     {
         EventManager.StopListening<SelectLightInfo>(ConstEvent.OnSelectLightOpen, OpenSelectLight);

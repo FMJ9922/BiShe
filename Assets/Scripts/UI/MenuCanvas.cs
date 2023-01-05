@@ -1,56 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MenuCanvas : MonoBehaviour
 {
 
-    public GameSelectCanvas selectCanvas;
-    public GameObject settingCanvas;
-    public GameObject infoCanvas;
-    public SaveCanvas saveCanvas;
+    [SerializeField]private GameSelectCanvas _selectCanvas;
+    [SerializeField]private  GameObject _settingCanvas;
+    [SerializeField]private  GameObject _infoCanvas;
+    [SerializeField]private  SaveCanvas _saveCanvas;
 
     private void Start()
     {
-        saveCanvas.InitCanvas();
+        _saveCanvas.InitCanvas();
         Localization.OnChangeLanguage += OpenSelectCanvas;
     }
+
     private void OnDestroy()
     {
         Localization.OnChangeLanguage -= OpenSelectCanvas;
     }
     public void OpenSelectCanvas()
     {
-        selectCanvas.gameObject.SetActive(true);
-        settingCanvas.gameObject.SetActive(false);
-        infoCanvas.gameObject.SetActive(false);
-        selectCanvas.GetComponent<GameSelectCanvas>().ShowDefault();
-        saveCanvas.OnClose();
+        _selectCanvas.gameObject.SetActive(true);
+        _settingCanvas.gameObject.SetActive(false);
+        _infoCanvas.gameObject.SetActive(false);
+        _selectCanvas.GetComponent<GameSelectCanvas>().ShowDefault();
+        _saveCanvas.OnClose();
     }
 
     public void OpenInfoCanvas()
     {
-        selectCanvas.gameObject.SetActive(false);
-        settingCanvas.gameObject.SetActive(false);
-        saveCanvas.OnClose();
-        infoCanvas.gameObject.SetActive(true);
+        _selectCanvas.gameObject.SetActive(false);
+        _settingCanvas.gameObject.SetActive(false);
+        _saveCanvas.OnClose();
+        _infoCanvas.gameObject.SetActive(true);
     }
 
     public void OpenSettingCanvas()
     {
-        selectCanvas.gameObject.SetActive(false);
-        infoCanvas.gameObject.SetActive(false);
-        saveCanvas.OnClose();
-        settingCanvas.gameObject.SetActive(true);
+        _selectCanvas.gameObject.SetActive(false);
+        _infoCanvas.gameObject.SetActive(false);
+        _saveCanvas.OnClose();
+        _settingCanvas.gameObject.SetActive(true);
     }
 
 
     public void OpenGameSaveCanvas()
     {
-        selectCanvas.gameObject.SetActive(false);
-        settingCanvas.gameObject.SetActive(false);
-        infoCanvas.gameObject.SetActive(false);
-        saveCanvas.OnOpen();
+        _selectCanvas.gameObject.SetActive(false);
+        _settingCanvas.gameObject.SetActive(false);
+        _infoCanvas.gameObject.SetActive(false);
+        _saveCanvas.OnOpen();
     }
 
     public void Exit()

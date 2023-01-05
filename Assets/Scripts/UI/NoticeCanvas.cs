@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,9 +28,11 @@ public class NoticeCanvas : CanvasBase
     public Color test;
     private const char enter = '\n';
     private Dictionary<string, List<BuildingBase>> _nameDic = new Dictionary<string, List<BuildingBase>>();
-
+    private Action<float> _onOilCostChange;
+    
     public override void OnOpen()
     {
+        EventManager.StartListening<float>(ConstEvent.OnOilCost,OnOilCostChange);
         base.OnOpen();
     }
     public override void OnClose()
@@ -42,7 +45,13 @@ public class NoticeCanvas : CanvasBase
         {
             onlyButtons.SetActive(false);
         }
+        EventManager.StopListening<float>(ConstEvent.OnOilCost,OnOilCostChange);
         base.OnClose();
+    }
+
+    private void OnOilCostChange(float f)
+    {
+        _onOilCostChange?.Invoke(f);
     }
 
     public void SetText(string context)
@@ -211,6 +220,21 @@ public class NoticeCanvas : CanvasBase
                 GameObject titleObj3 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
                 titleObj3.GetComponent<TMP_Text>().text = Localization.Get("无");
             }
+        
+        
+            GameObject titleObj5 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
+            titleObj5.GetComponent<TMP_Text>().text = Localization.Get("来自运输");
+            GameObject fenge5 = Instantiate(_fenGeLinePfb, _onlyItemInfo.transform.GetChild(0));
+            GameObject itemObj1 = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
+            itemObj1.GetComponent<ItemDeltaInfo>().Init(
+                Localization.Get("油费"),
+                $"<#FF7B72>{CastTool.RoundOrFloat(-TrafficManager.Instance.WeeklyCost)}</color>",
+                null);
+            var info = itemObj1.GetComponent<ItemDeltaInfo>();
+            _onOilCostChange = delegate(float f)
+            {
+                info.SetText($"<#FF7B72>{CastTool.RoundOrFloat(-f)}</color>");
+            };
         }
         int moveCount = (marketCount == 0 ? 2 : marketCount+ 1) + (buildingCounter == 0 ? 2 : buildingCounter +1)-4;
         //Debug.Log(moveCount);

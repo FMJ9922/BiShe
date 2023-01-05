@@ -181,6 +181,11 @@ public class ResourceManager : Singleton<ResourceManager>
         {
             ret += _deltaItemTradingDic[id];
         }
+
+        if (id == 99999)
+        {
+            ret -= TrafficManager.Instance.WeeklyCost;
+        }
         return ret;
     }
 

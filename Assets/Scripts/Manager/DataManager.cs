@@ -23,6 +23,7 @@ public class DataManager : ScriptableObject
     public BuildData[] BuildArray;
     public FormulaData[] FormulaArray;
     public LocalizationData LocalizationData;
+    public CarData[] CarArray;
     public Dictionary<BuildTabType, List<BuildData>> TabDic;
     public static string[] foodNames;
     public static int[] foodIds;
@@ -95,6 +96,18 @@ public class DataManager : ScriptableObject
         return null;
     }
 
+    public static CarData GetCarData(TransportationType carId)
+    {
+        for (int i = 0; i < Instance.CarArray.Length; i++)
+        {
+            if (Instance.CarArray[i].CarType == carId)
+            {
+                return Instance.CarArray[i];
+            }
+        }
+        Debug.Log("无效的车辆id" + carId);
+        return null;
+    }
     public static string GetItemNameById(int ID)
     {
         for (int i = 0; i < Instance.ItemArray.Length; i++)

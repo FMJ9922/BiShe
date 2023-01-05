@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a592a2f1b79fb48bbe695fcd911ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherCar: []
+  _otherCar: []
 --- !u!1 &340903966225363773
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,9 +177,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5316189703938115389}
-  - component: {fileID: 8077466106737881614}
   - component: {fileID: 7415609330386479524}
   - component: {fileID: 5379866610961072329}
+  - component: {fileID: 3620450868127554735}
   m_Layer: 0
   m_Name: 'Universal_Transportation_SandTruck_01_Preb '
   m_TagString: car
@@ -205,26 +205,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8077466106737881614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686853030541579436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d3108a714792aa4b9702515a24af287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WayPoints: []
-  MaxSpeed: 6
-  StopDistance: 1.5
-  carType: 4
-  isbraking: 0
-  carSensor: {fileID: 773135644661030384}
-  leftWheel: {fileID: 527190023008167528}
-  rightWheel: {fileID: 2201830597992035876}
 --- !u!65 &7415609330386479524
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -249,11 +229,27 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3620450868127554735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686853030541579436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98eec23313e1c044992a2e72eaaa399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CarType: 4
+  CarSensor: {fileID: 773135644661030384}
+  _leftWheel: {fileID: 527190023008167528}
+  _rightWheel: {fileID: 2201830597992035876}
 --- !u!1 &3570111918164572153
 GameObject:
   m_ObjectHideFlags: 0
