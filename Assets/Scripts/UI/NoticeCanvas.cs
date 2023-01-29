@@ -7,6 +7,8 @@ using TMPro;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Linq;
+using Building;
+using Tools;
 
 public class NoticeCanvas : CanvasBase
 {

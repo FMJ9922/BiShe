@@ -1,226 +1,388 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Tools;
 using UnityEngine;
 
-public class FarmLandBuilding : BuildingBase
+namespace Building
 {
-    public Color yellow;
-    public Color green;
-    [SerializeField] Transform wheatTrans;
-    [SerializeField] GameObject previewObj;
-    public List<GameObject> lists;
-    bool isharvesting = false;
-    bool waitNextWeekStart = false;
-
-    private PlantController[] plants;
-
-    public Texture wheat;
-    public Texture rice;
-
-    private Material mat;
-    public override void InitBuildingFunction()
+    public class FarmLandBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
     {
-        Invoke("InitPlant", 1f);
-        previewObj.SetActive(false);
-        base.InitBuildingFunction();
-    }
+        public Color yellow;
+        public Color green;
+        [SerializeField] Transform wheatTrans;
+        [SerializeField] GameObject previewObj;
+        public List<GameObject> lists;
+        bool isharvesting = false;
+        bool waitNextWeekStart = false;
 
-    public override void RestartBuildingFunction()
-    {
-        base.RestartBuildingFunction();
-        InitPlant();
-        previewObj.SetActive(false);
-        //Debug.Log(GetProcess());
-        SetProgress(GetProcess());
-    }
+        private PlantController[] plants;
 
-    public override void OnConfirmBuild(Vector2Int[] vector2Ints)
-    {
-        takenGrids = vector2Ints;
-        gameObject.tag = "Building";
+        public Texture wheat;
+        public Texture rice;
 
-        transform.GetComponent<BoxCollider>().enabled = false;
-        transform.GetComponent<BoxCollider>().enabled = true;
+        private Material mat;
+        
+        #region IBuildingBasic
+        public void OnConfirmBuild(Vector2Int[] vector2Ints)
+        {
+            takenGrids = vector2Ints;
+            gameObject.tag = "Building";
+
+            transform.GetComponent<BoxCollider>().enabled = false;
+            transform.GetComponent<BoxCollider>().enabled = true;
 
         
-        if (!buildFlag)
-        {
-            buildFlag = true;
-            if (hasAnima)
+            if (!buildFlag)
             {
-                Invoke("PlayAnim", 0.2f);
-            }
-            direction = CastTool.CastVector3ToDirection(transform.right);
-            runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-            Invoke("FillUpPopulation", 1f);
-            InitBuildingFunction();
-            //地基
-            MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
-            TerrainGenerator.Instance.FlatGround
-            (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
-        }
-        else
-        {
-            RestartBuildingFunction();
-            //MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4, false);
-            //TerrainGenerator.Instance.FlatGround
-            // (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y, false);
-        }
-    }
-
-    private void ShowPlant()
-    {
-        for (int i = 0; i < plants.Length; i++)
-        {
-            plants[i].Show();
-        }
-    }
-
-    private void InitPlant()
-    {
-        GameObject pfb = Instantiate(LoadAB.Load("mat.ab", "PlantPfb"), transform);
-        pfb.transform.position -= Vector3.up * 2000f;
-        plants = new PlantController[Size.x * Size.y];
-        mat = pfb.GetComponent<PlantController>().mesh.material;
-        Texture tex = formula.ID == 50006 ?
-            wheat : rice;
-        //Debug.Log(mat == null);
-        mat.SetTexture("_MainTex", tex);
-        SetProgress(GetProcess());
-        for (int i = 0; i < Size.x; i++)
-        {
-            for (int j = 0; j < Size.y; j++)
-            {
-                GameObject newGrid = Instantiate(pfb, wheatTrans);
-                plants[i * Size.y + j] = newGrid.GetComponent<PlantController>();
-                plants[i * Size.y + j].SetMat(mat);
-                Vector3 random = Random.insideUnitSphere / 5;
-                Vector3 pos;
-                if (j % 2 == 1)
+                buildFlag = true;
+                if (hasAnima)
                 {
-                    pos = new Vector3(j * 2 - 2, 0, i * 2 + 1);
+                    Invoke("PlayAnim", 0.2f);
+                }
+                direction = CastTool.CastVector3ToDirection(transform.right);
+                runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
+                Invoke("FillUpPopulation", 1f);
+                InitBuildingFunction();
+                //地基
+                MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
+                TerrainGenerator.Instance.FlatGround
+                    (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
+            }
+            else
+            {
+                RestartBuildingFunction();
+            }
+        }
+
+        public void PlayAnim()
+        {
+            //none
+        }
+
+        public void InitBuildingFunction()
+        {
+            Invoke("InitPlant", 1f);
+            previewObj.SetActive(false);
+            parkingGridIn = GetInParkingGrid();
+            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+            EventManager.StartListening(ConstEvent.OnOutputResources, Output);
+            EventManager.StartListening(ConstEvent.OnInputResources, Input);
+            EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+            ChangeFormula();
+        }
+
+        public void RestartBuildingFunction()
+        {
+            if (runtimeBuildData.formulaDatas.Length>0)
+            {
+                formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+            }
+            parkingGridIn = GetInParkingGrid();
+            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+            EventManager.StartListening(ConstEvent.OnOutputResources, Output);
+            EventManager.StartListening(ConstEvent.OnInputResources, Input);
+            EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
+            if (runtimeBuildData.tabType!=BuildTabType.house)
+            {
+                ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
+            }
+            InitPlant();
+            previewObj.SetActive(false);
+            SetProgress(GetProcess());
+        }
+
+        public void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
+        {
+            if (returnResources)
+            {
+                ReturnBuildResources();
+            }
+            MapManager.Instance._buildings.Remove(this);
+            MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
+        
+            if (repaint)
+            {
+                MapManager.SetGridTypeToEmpty(takenGrids);
+                MapManager.Instance.BuildOriginFoundation(takenGrids);
+            }
+            if (returnPopulation)
+            {
+                if (runtimeBuildData.Population < 0)
+                {
+                    ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
                 }
                 else
                 {
-                    pos = new Vector3(j * 2, 0, i * 2);
+                    ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
                 }
-                newGrid.transform.localPosition =pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
-                plants[i * Size.y + j].SetPos(newGrid.transform.localPosition);
+                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
             }
+        
+            Destroy(this.gameObject);
         }
-    }
 
-    public void SetProgress(float progress)
-    {
-        if (mat != null)
+        public bool ReturnBuildResources()
         {
-            if (progress <= 0)
+            List<CostResource> rescources = runtimeBuildData.costResources;
+            for (int i = 0; i < rescources.Count; i++)
             {
-                progress = 0.01f;
+                rescources[i].ItemNum *= 0.75f;
+                ResourceManager.Instance.AddResource(rescources[i]);
             }
-            if(progress >= 1)
+            return true;
+        }
+
+        #endregion IBuildingBasic
+        
+        #region IProduct
+        public void Input()
+        {
+            ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
+            runtimeBuildData.Pause = false;
+            if (formula == null|| formula.InputItemID==null) return;
+            List<CostResource> costResources = new List<CostResource>();
+            for (int i = 0; i < formula.InputItemID.Count; i++)
             {
-                progress = 0.99F;
+                costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]* WorkEffect()* runtimeBuildData.Times));
             }
-            mat.SetFloat("_Progress", progress);
-        }
-    }
 
-    protected override void Output()
-    {
-        if (formula == null || formula.OutputItemID == null) return;
-
-        if (!isharvesting&&!waitNextWeekStart)
-        {
-            runtimeBuildData.productTime--;
-            if (runtimeBuildData.productTime <= 0)
+            bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
+            if (!res)
             {
-                isharvesting = true;
-                CarMission mission = MakeHarvestCarMission();
-                TrafficManager.Instance.UseCar(mission);
+                runtimeBuildData.Pause = true;
+            }
+            else
+            {
+                ResourceManager.Instance.TryUseResources(costResources);
             }
         }
-        if (waitNextWeekStart == true)
-        {
-            waitNextWeekStart = false;
-            Replant();
-        }
-    }
 
-    public override void OnRecieveCar(CarMission carMission)
-    {
-        if (carMission == null)
+        public void Output()
         {
-            return;
-        }
-        switch (carMission.missionType)
-        {
-            case CarMissionType.transportResources:
-                ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
-                break;
-            case CarMissionType.harvest:
+            if (formula == null || formula.OutputItemID == null) return;
+
+            if (!isharvesting&&!waitNextWeekStart)
+            {
+                runtimeBuildData.productTime--;
+                if (runtimeBuildData.productTime <= 0)
                 {
-                    //Debug.Log("harvest");
-                    OnFinishHarvest(runtimeBuildData.Rate);
+                    isharvesting = true;
+                    CarMission mission = MakeHarvestCarMission();
+                    TrafficManager.Instance.UseCar(mission);
+                }
+            }
+            if (waitNextWeekStart == true)
+            {
+                waitNextWeekStart = false;
+                Replant();
+            }
+        }
+
+        public float GetProcess()
+        {
+            return 1 - (float)runtimeBuildData.productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
+        }
+
+        public float WorkEffect()
+        {
+            if(runtimeBuildData.tabType == BuildTabType.house)
+            {
+                return 1;
+            }
+            return (float)runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
+        }
+
+        public void AddCurPeople(int num)
+        {
+            int cur = runtimeBuildData.CurPeople;
+            int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+            if (cur + num <= max)
+            {
+                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
+            }
+            else
+            {
+                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(max-cur);
+            }
+            UpdateEffectiveness();
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+        }
+
+        public void DeleteCurPeople(int num)
+        {
+            int cur = runtimeBuildData.CurPeople;
+            int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+            if (cur - num >= 0)
+            {
+                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
+            }
+            else
+            {
+                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
+            }
+            UpdateEffectiveness();
+            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+        }
+        
+        public virtual void UpdateRate(string date)
+        {
+            UpdateEffectiveness();
+            if (!isharvesting&&!waitNextWeekStart)
+            {
+                runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+                SetProgress(GetProcess());
+            }
+        }
+        
+        public void UpdateEffectiveness()
+        {
+            int cur = runtimeBuildData.CurPeople;
+            int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+            runtimeBuildData.Effectiveness = runtimeBuildData.Pause ? 0 : ((float)cur) / (float)max * TechManager.Instance.EffectivenessBuff();
+        }
+        
+        public void ChangeFormula()
+        {
+            if (runtimeBuildData.formulaDatas.Length > 0)
+            {
+                formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+                runtimeBuildData.productTime = formula.ProductTime;
+                runtimeBuildData.Rate = 0;
+            }
+        }
+
+        #endregion
+
+        #region ITransportation
+
+        public CarMission MakeCarMission(float rate)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnRecieveCar(CarMission carMission)
+        {
+            if (carMission == null)
+            {
+                return;
+            }
+            switch (carMission.missionType)
+            {
+                case CarMissionType.transportResources:
+                    ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
+                    break;
+                case CarMissionType.harvest:
+                {
+                    isharvesting = false;
+                    waitNextWeekStart = true;
+                    CarMission hCarMission = MakeCarMission(runtimeBuildData.Rate);
+                    if (hCarMission != null)
+                    {
+                        TrafficManager.Instance.UseCar(hCarMission,(bool success)=> { runtimeBuildData.AvaliableToMarket = success; });
+                    }
+                    else
+                    {
+                        runtimeBuildData.AvaliableToMarket = false;
+                    }
                     break;
                 }
-            default:
-                break;
+            }
         }
-    }
-    public override void UpdateRate(string date)
-    {
-        //CheckCurPeopleMoreThanMax();
-        UpdateEffectiveness();
-        if (!isharvesting&&!waitNextWeekStart)
+
+        public Vector2Int GetInParkingGrid()
         {
-            runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+            return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
+
+        }
+
+        #endregion
+
+        #region Private
+        
+        private void SetProgress(float progress)
+        {
+            if (mat != null)
+            {
+                if (progress <= 0)
+                {
+                    progress = 0.01f;
+                }
+                if(progress >= 1)
+                {
+                    progress = 0.99F;
+                }
+                mat.SetFloat("_Progress", progress);
+            }
+        }
+
+        private void InitPlant()
+        {
+            GameObject pfb = Instantiate(LoadAB.Load("mat.ab", "PlantPfb"), transform);
+            pfb.transform.position -= Vector3.up * 2000f;
+            plants = new PlantController[Size.x * Size.y];
+            mat = pfb.GetComponent<PlantController>().mesh.material;
+            Texture tex = formula.ID == 50006 ?
+                wheat : rice;
+            //Debug.Log(mat == null);
+            mat.SetTexture("_MainTex", tex);
             SetProgress(GetProcess());
+            for (int i = 0; i < Size.x; i++)
+            {
+                for (int j = 0; j < Size.y; j++)
+                {
+                    GameObject newGrid = Instantiate(pfb, wheatTrans);
+                    plants[i * Size.y + j] = newGrid.GetComponent<PlantController>();
+                    plants[i * Size.y + j].SetMat(mat);
+                    Vector3 random = Random.insideUnitSphere / 5;
+                    Vector3 pos;
+                    if (j % 2 == 1)
+                    {
+                        pos = new Vector3(j * 2 - 2, 0, i * 2 + 1);
+                    }
+                    else
+                    {
+                        pos = new Vector3(j * 2, 0, i * 2);
+                    }
+                    newGrid.transform.localPosition =pos + new Vector3(random.x + 2, 0, random.z + 0.5f);
+                    plants[i * Size.y + j].SetPos(newGrid.transform.localPosition);
+                }
+            }
         }
-        //Debug.Log(runtimeBuildData.Rate);
-    }
-    public void OnFinishHarvest(float rate)
-    {
-        //Debug.Log("finish");
-        isharvesting = false;
-        waitNextWeekStart = true;
-        CarMission carMission = MakeCarMission(rate);
-        if (carMission != null)
+        
+        private void ShowPlant()
         {
-            TrafficManager.Instance.UseCar(carMission,(bool success)=> { runtimeBuildData.AvaliableToMarket = success; });
+            for (int i = 0; i < plants.Length; i++)
+            {
+                plants[i].Show();
+            }
         }
-        else
+        
+        private void Replant()
         {
-            runtimeBuildData.AvaliableToMarket = false;
+            //EventManager.StopListening(ConstEvent.OnDayWentBy, Replant);
+            runtimeBuildData.Rate = 0;
+            runtimeBuildData.productTime = formula.ProductTime;
+            ShowPlant();
         }
-    }
 
-    private void Replant()
-    {
-        //EventManager.StopListening(ConstEvent.OnDayWentBy, Replant);
-        runtimeBuildData.Rate = 0;
-        runtimeBuildData.productTime = formula.ProductTime;
-        ShowPlant();
-    }
-
-    private CarMission MakeHarvestCarMission()
-    {
-        CarMission mission = new CarMission();
-        mission.transportationType = TransportationType.harvester;
-        mission.missionType = CarMissionType.harvest;
-
-        Vector3[] vecs = new Vector3[lists.Count];
-        for (int i = 0; i < lists.Count; i++)
+        private CarMission MakeHarvestCarMission()
         {
-            vecs[i] = (lists[i].transform.position);
-        }
-        mission.EndBuilding = parkingGridIn;
-        mission.wayPoints = Vector3Serializer.Box(vecs);
-        return mission;
-    }
-    protected override void Input()
-    {
-        base.Input();
-    }
+            CarMission mission = new CarMission();
+            mission.transportationType = TransportationType.harvester;
+            mission.missionType = CarMissionType.harvest;
 
+            Vector3[] vecs = new Vector3[lists.Count];
+            for (int i = 0; i < lists.Count; i++)
+            {
+                vecs[i] = (lists[i].transform.position);
+            }
+            mission.EndBuilding = parkingGridIn;
+            mission.wayPoints = Vector3Serializer.Box(vecs);
+            return mission;
+        }
+        #endregion
+        
+        
+    }
 }

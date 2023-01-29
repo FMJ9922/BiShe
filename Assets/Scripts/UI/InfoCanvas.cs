@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Building;
 using UnityEngine;
 using TMPro;
+using Tools;
 using UnityEngine.UI;
 using UnityEngine.Events;
 public class InfoCanvas : CanvasBase

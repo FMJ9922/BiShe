@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Building;
 using UnityEngine;
 
 public class HutBuilding : BuildingBase
@@ -93,9 +94,7 @@ public class HutBuilding : BuildingBase
         mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(ratio));
         return mission;
     }
-    /// <summary>
-    /// 食物充足时，住房提供人口
-    /// </summary>
+    
     public void ProvidePopulation()
     {
         int num = -runtimeBuildData.Population;//负人口表示增加
@@ -104,9 +103,7 @@ public class HutBuilding : BuildingBase
         EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange,runtimeBuildData);
     }
 
-    /// <summary>
-    /// 移除住房提供的人口
-    /// </summary>
+    
     public void RemovePopulation()
     {
         int num = -runtimeBuildData.Population;//负人口表示增加
@@ -159,7 +156,7 @@ public class HutBuilding : BuildingBase
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
             DestroyBuilding(false, false, false);
-            buildingData.RegisterBuildingEntry();
+            MapManager.Instance.AddBuildingEntry(buildingData.GetInParkingGrid(), buildingData);
             issuccess = true;
         }
         else
