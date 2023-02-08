@@ -34,6 +34,13 @@ namespace Building
 
         bool ReturnBuildResources();
 
+        void FillUpPopulation();
+        
+        /// <summary>
+        /// 升级
+        /// </summary>
+        void Upgrade(out bool issuccess, out BuildingBase buildingData);
+
     }
 
     /// <summary>
@@ -50,18 +57,14 @@ namespace Building
         /// 移除住房提供的人口
         /// </summary>
         void RemovePopulation();
+
+        /// <summary>
+        /// 住房消耗食物
+        /// </summary>
+        void InputFood();
     }
 
-    /// <summary>
-    /// 可升级的
-    /// </summary>
-    public interface IUpgradeable
-    {
-        /// <summary>
-        /// 升级
-        /// </summary>
-        void Upgrade(out bool issuccess, out BuildingBase buildingData);
-    }
+    
     
     /// <summary>
     /// 生产建筑
@@ -102,7 +105,6 @@ namespace Building
         /// </summary>
         /// <param name="carMission"></param>
         void OnRecieveCar(CarMission carMission);
-        Vector2Int GetInParkingGrid();
     }
 
     public interface IBridge

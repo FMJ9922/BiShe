@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Building;
-using Tools;
+using CSTools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -79,7 +79,7 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
-            float rand = building.GetHappiness();
+            float rand = building.runtimeBuildData.Happiness;
             //Debug.Log(rand);
             item.GetComponent<GraphCube>().SetHeight((int)(rand * 20), buildings[i].transform.position,
                 Color.red);

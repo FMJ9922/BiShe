@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.Linq;
 using Building;
-using Tools;
+using CSTools;
 
 public class NoticeCanvas : CanvasBase
 {
@@ -96,7 +96,7 @@ public class NoticeCanvas : CanvasBase
             temp.Clear();
             for (int i = 0; i < item.Value.Count; i++)
             {
-                temp.AddRange(item.Value[i].GetPerWeekDeltaResources());
+                temp.AddRange(BuildingTools.GetBuildingWeekDeltaResources(item.Value[i].runtimeBuildData));
             }
             p = GetListSum(temp, itemId);
             float num = p.ItemNum;

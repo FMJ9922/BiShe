@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Building;
+using CSTools;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class MapManager : Singleton<MapManager>
 {
@@ -13,10 +15,8 @@ public class MapManager : Singleton<MapManager>
     public const int TexLength = 8;//贴图长度为8
     public List<BuildingBase> _buildings = new List<BuildingBase>();
     [SerializeField] private static TerrainGenerator generator;
-    //[SerializeField] GameObject gridPfb;
     public static string noticeContent;
     private Dictionary<Vector2Int, BuildingBase> _buildingEntryDic;
-    //private MapData mapData;
 
     public void InitMapManager()
     {
@@ -35,22 +35,7 @@ public class MapManager : Singleton<MapManager>
     }
     private void InitGrid(SaveData saveData)
     {
-        /*if (MapSize == null || MapSize.x <= 0 || MapSize.y <= 0)
-        {
-            Debug.LogError("地图尺寸没有初始化！");
-            return;
-        }*/
-        //Debug.Log(saveData.isOffcial);
-        //if (saveData.isOffcial)
-        //{
-            //Debug.Log("InitGrids");
-            SetUp();
-        //}
-        //else
-        //{
-        //    _grids = saveData.gridNodes;
-            //Debug.Log(_grids == GameManager.saveData.gridNodes);
-        //}
+        SetUp();
         MapSize = saveData.mapSize.Vector2Int;
 
         Debug.Log("初始化中");
@@ -607,7 +592,7 @@ public class MapManager : Singleton<MapManager>
         }
     }
     */
-    public static bool CheckCanBuild(Vector2Int[] grids, Vector2Int parkingPos, bool checkInSea)
+    public static bool CheckCanBuild(Vector2Int[] grids, BuildingBase buildingBase, bool checkInSea)
     {
         bool hasOutOfMap = CheckOutOfMap(grids);
         if (hasOutOfMap)
@@ -615,6 +600,10 @@ public class MapManager : Singleton<MapManager>
             noticeContent = Localization.Get("不能在地图外建造");
             return false;
         }
+        var buildingBasic = buildingBase as IBuildingBasic;
+        
+        Assert.IsNull(buildingBasic,"糟糕！此处理论上不为空");
+        var parkingPos = BuildingTools.GetInParkingGrid(buildingBase);
         //检测安放地点占用
         bool hasOverlap = checkInSea? CheckOverlapSea(grids): CheckOverlap(grids);
         //检测道路是否贴近

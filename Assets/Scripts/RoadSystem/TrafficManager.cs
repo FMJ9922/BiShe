@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Building;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -409,12 +410,8 @@ public class TrafficManager : Singleton<TrafficManager>
         RecycleCarModel(carDriver.GetCarModel());
         carDriver.GetTransform().position = hidePos;
         carDriver.SetIdle();
-        var destination =MapManager.Instance.GetBuilidngByEntry(carDriver.GetCarMission().endBuilding.Vector2Int);
-        
-        if (destination)
-        {
-            destination.OnRecieveCar(carDriver.GetCarMission());
-        }
+        var destination =MapManager.Instance.GetBuilidngByEntry(carDriver.GetCarMission().endBuilding.Vector2Int) as ITransportation;
+        destination?.OnRecieveCar(carDriver.GetCarMission());
     }
 
     private void DriveCost(float money)

@@ -33,16 +33,20 @@ public class ResourceCanvas : CanvasBase
         building = _building;
         CreateItemList();
         SetProgress();
-        destroy.onClick.AddListener(() => { building.DestroyBuilding(true, true, true); OnClose(); });
-        upgrade.onClick.AddListener(() => 
-        { 
-            building.Upgrade(out bool success,out BuildingBase buildingData);
-            if (success)
-            {
-                OnClose();
-                OnOpen((StorageBuilding)buildingData);
-            } 
-        });
+        if (building is IBuildingBasic b)
+        {
+            destroy.onClick.AddListener(() => { building.DestroyBuilding(true, true, true); OnClose(); });
+            upgrade.onClick.AddListener(() => 
+            { 
+                b.Upgrade(out bool success,out BuildingBase buildingData);
+                if (success)
+                {
+                    OnClose();
+                    OnOpen((StorageBuilding)buildingData);
+                } 
+            });
+        }
+        
         EventManager.StartListening(ConstEvent.OnInputResources, CreateItemList);
         EventManager.StartListening(ConstEvent.OnRefreshResources, CreateItemList);
         mainCanvas.SetActive(true);

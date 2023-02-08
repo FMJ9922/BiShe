@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Building;
+using CSTools;
 using UnityEngine;
 using TMPro;
-using Tools;
 using UnityEngine.UI;
 using UnityEngine.Events;
 public class InfoCanvas : CanvasBase
@@ -161,33 +161,44 @@ public class InfoCanvas : CanvasBase
     private void AddBtnsListener(BuildingBase buildingBase)
     {
         RemoveBtnsListener();
-        _populationBtns[0].onClick.AddListener(() =>
+        if (buildingBase is IProduct productBuilding)
         {
-            buildingBase.DeleteCurPeople(100);
-        });
-        _populationBtns[1].onClick.AddListener(() =>
-        {
-            buildingBase.DeleteCurPeople(1);
-        });
-        _populationBtns[2].onClick.AddListener(() =>
-        {
-            buildingBase.AddCurPeople(1);
-        });
-        _populationBtns[3].onClick.AddListener(() =>
-        {
-            buildingBase.AddCurPeople(100);
-        });
-        _destroyBtn.onClick.AddListener(() => { buildingBase.DestroyBuilding(true, true, true); OnClose(); });
-        _upgradeBtn.onClick.AddListener(() =>
-        {
-            buildingBase.Upgrade(out bool success, out BuildingBase NewBase);
-            if (success)
+            _populationBtns[0].onClick.AddListener(() =>
             {
+                productBuilding.DeleteCurPeople(100);
+            });
+            _populationBtns[1].onClick.AddListener(() =>
+            {
+                productBuilding.DeleteCurPeople(1);
+            });
+            _populationBtns[2].onClick.AddListener(() =>
+            {
+                productBuilding.AddCurPeople(1);
+            });
+            _populationBtns[3].onClick.AddListener(() =>
+            {
+                productBuilding.AddCurPeople(100);
+            }); 
+        }
+
+        if (buildingBase is IBuildingBasic building)
+        {
+            _destroyBtn.onClick.AddListener(() =>
+            {
+                building.DestroyBuilding(true, true, true);
                 OnClose();
-                buildingBase = NewBase;
-                OnOpen(buildingBase);
-            }
-        });
+            });
+            _upgradeBtn.onClick.AddListener(() =>
+            {
+                building.Upgrade(out bool success, out BuildingBase NewBase);
+                if (success)
+                {
+                    OnClose();
+                    buildingBase = NewBase;
+                    OnOpen(buildingBase);
+                }
+            });
+        }
     }
 
     IEnumerator DelayOpen(BuildingBase buildingBase)
@@ -247,17 +258,20 @@ public class InfoCanvas : CanvasBase
 
     public void OnDropDownValueChanged(int n)
     {
-        //Debug.Log(n);
-        _buildData.CurFormula += n + _buildData.formulaDatas.Length;
-        _buildData.CurFormula %= _buildData.formulaDatas.Length;
-        //Debug.Log(_buildData.CurFormula);
-        CleanUpAllAttachedChildren(inIcons);
-        CleanUpAllAttachedChildren(outIcons);
-        ChangeOutputIcon(_buildData);
-        ChangeInputIcon(_buildData);
-        _buildingBase.ChangeFormula();
-        _daysLabel.text = Localization.Get("生产周期:") + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + Localization.Get("Day1");
+        if (_buildingBase is IProduct p)
+        {
+            //Debug.Log(n);
+            _buildData.CurFormula += n + _buildData.formulaDatas.Length;
+            _buildData.CurFormula %= _buildData.formulaDatas.Length;
+            //Debug.Log(_buildData.CurFormula);
+            CleanUpAllAttachedChildren(inIcons);
+            CleanUpAllAttachedChildren(outIcons);
+            ChangeOutputIcon(_buildData);
+            ChangeInputIcon(_buildData);
+            p.ChangeFormula();
+            _daysLabel.text = Localization.Get("生产周期:") + _buildData.formulaDatas[_buildData.CurFormula].ProductTime * 7 + Localization.Get("Day1");
 
+        }
     }
     /// <summary>
     /// 修改显示的条目
@@ -349,7 +363,7 @@ public class InfoCanvas : CanvasBase
 
     public void ChangeWarning()
     {
-        List<WarningType> warns = _buildingBase.GetWarnings();
+        List<WarningType> warns = BuildingTools.GetWarnings(_buildingBase.runtimeBuildData);
         for (int i = 0; i < warnings.Length; i++)
         {
             bool open = false;
@@ -422,11 +436,14 @@ public class InfoCanvas : CanvasBase
         {
             ChangeWarning();
         }
-        //Debug.Log(buildData.Effectiveness+" " +buildData.Pause);
-        RuntimeBuildData data = buildData.runtimeBuildData;
-        _rateLabel.text = Localization.Get("效率:") + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
-        rateImage.fillAmount = buildData.GetProcess();
 
-        _outputLabel.text = Localization.Get("产出率:") + CastTool.RoundOrFloat(data.Rate * 100) + "%";
+        if (buildData is IProduct p)
+        {
+            RuntimeBuildData data = buildData.runtimeBuildData;
+            _rateLabel.text = Localization.Get("效率:") + CastTool.RoundOrFloat(data.Effectiveness * 100) + "%";
+            rateImage.fillAmount = p.GetProcess();
+
+            _outputLabel.text = Localization.Get("产出率:") + CastTool.RoundOrFloat(data.Rate * 100) + "%";
+        }
     }
 }

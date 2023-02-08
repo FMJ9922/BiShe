@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Tools;
+using CSTools;
 using UnityEngine;
 
 namespace Building
@@ -22,7 +22,7 @@ namespace Building
             transform.GetComponent<BoxCollider>().isTrigger = true;
             transform.GetComponent<BoxCollider>().enabled = true;
             buildFlag = false;
-            Invoke("SetBuildFlag", 1f);
+            Invoke(nameof(SetBuildFlag), 1f);
         }
 
         //桥梁目前还没有动画
@@ -102,7 +102,26 @@ namespace Building
         {
             return LoadAB.Load("building.ab", string.Format("Universal_Building_Bridge_L{0}_01_Preb", level));
         }
+        
+        public void FillUpPopulation()
+        {
+            if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
+            {
+                if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
+                {
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                }
+                //CheckCurPeopleMoreThanMax();
+                runtimeBuildData.Pause = true;
+            }
+        }
 
+        public void Upgrade(out bool issuccess, out BuildingBase buildingData)
+        {
+            issuccess = false;
+            buildingData = null;
+        }
     }
 
     [System.Serializable]

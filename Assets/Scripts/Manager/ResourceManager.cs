@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Building;
+using CSTools;
 using UnityEngine;
 
 /// <summary>
@@ -144,16 +145,20 @@ public class ResourceManager : Singleton<ResourceManager>
         List<CostResource> p;
         for (int i = 0; i < buildings.Count; i++)
         {
-            p = buildings[i].GetPerWeekDeltaResources();
-            for (int j = 0; j < p.Count; j++)
+            var productBuilding = buildings[i] as IProduct;
+            if (productBuilding != null)
             {
-                if (_deltaItemBuildingDic.ContainsKey(p[j].ItemId))
+                p = BuildingTools.GetBuildingWeekDeltaResources(buildings[i].runtimeBuildData);
+                for (int j = 0; j < p.Count; j++)
                 {
-                    _deltaItemBuildingDic[p[j].ItemId] += p[j].ItemNum;
-                }
-                else
-                {
-                    _deltaItemBuildingDic.Add(p[j].ItemId, p[j].ItemNum);
+                    if (_deltaItemBuildingDic.ContainsKey(p[j].ItemId))
+                    {
+                        _deltaItemBuildingDic[p[j].ItemId] += p[j].ItemNum;
+                    }
+                    else
+                    {
+                        _deltaItemBuildingDic.Add(p[j].ItemId, p[j].ItemNum);
+                    }
                 }
             }
         }
@@ -646,5 +651,7 @@ public class ResourceManager : Singleton<ResourceManager>
             _forbiddenFoodList.Add(Id);
         }
     }
+    
+    
 }
 

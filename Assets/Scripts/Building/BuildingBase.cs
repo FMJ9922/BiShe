@@ -27,14 +27,12 @@ namespace Building
 
         public Vector2Int[] takenGrids;
 
-        protected FormulaData formula = new FormulaData();
-
 
         public Vector2Int parkingGridIn;
         //public Vector2Int parkingGridOut;
 
 
-        public Direction direction;
+        
 
         protected Storage storage;
 
@@ -437,5 +435,8 @@ namespace Building
         public Vector2IntSerializer[] SaveTakenGrids;
         public Direction SaveDir;
         public int SaveOutLookType;
+        
+        public FormulaData formula;//正在使用的配方
+        public Direction direction;
     }
 }

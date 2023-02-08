@@ -334,7 +334,7 @@ public class GameManager : Singleton<GameManager>
             data.buildingDatas[i].SavePosition.Fill(p.position);
             data.buildingDatas[i].SaveTakenGrids = 
                 Vector2IntSerializer.Box(building.takenGrids);
-            data.buildingDatas[i].SaveDir = building.direction;
+            data.buildingDatas[i].SaveDir = building.runtimeBuildData.direction;
             //Debug.Log(building.direction);
             data.buildingDatas[i].SaveOutLookType = CheckOutLook(data.buildingDatas[i].Id, p.name);
             //Debug.Log(building.runtimeBuildData.PfbName);

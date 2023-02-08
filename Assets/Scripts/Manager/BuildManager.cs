@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Building;
-using Tools;
+using CSTools;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -135,7 +135,7 @@ public class BuildManager : Singleton<BuildManager>
         CleanUpAllAttachedChildren(roadParent);
         GameObject building = InitBuilding(buildData);
         building.transform.position = Input.mousePosition;
-        currentBuilding.direction = lastDir;
+        currentBuilding.runtimeBuildData.direction = lastDir;
         var meshRenderers = building.transform.GetComponentsInChildren<MeshRenderer>();
         mats = new Material[meshRenderers.Length];
         arrows = new GameObject().transform;
@@ -176,7 +176,7 @@ public class BuildManager : Singleton<BuildManager>
         GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         building.name = pfbName;
         currentBuilding = building.GetComponent<BuildingBase>();
-        currentBuilding.runtimeBuildData = BuildingBase.CastBuildDataToRuntime(buildData);
+        currentBuilding.runtimeBuildData = CastTool.CastBuildDataToRuntime(buildData);
         return building;
     }
 
@@ -213,11 +213,7 @@ public class BuildManager : Singleton<BuildManager>
         
         for (int i = 0; i < buildDatas.Length; i++)
         {
-            //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            //sw.Start();
             InitSaveBuilding(buildDatas[i]);
-            //System.TimeSpan dt = sw.Elapsed;
-            //Debug.Log(buildDatas[i].Name+" 耗时:" + dt.TotalSeconds + "秒");
         }
         TerrainGenerator.Instance.ReCalculateMesh();
     }
@@ -230,6 +226,7 @@ public class BuildManager : Singleton<BuildManager>
             obj.transform.SetParent(TransformFinder.Instance.bridgeParent);
             BridgeBuilding bridge = obj.AddComponent<BridgeBuilding>();
             bridge.SetBridgeData(bridgeDatas[i]);
+            bridge.InitBuildingFunction();
             bridge.OnConfirmBuild(Vector2IntSerializer.Unbox(bridgeDatas[i].takenGrids));
         }
     }
@@ -256,14 +253,14 @@ public class BuildManager : Singleton<BuildManager>
         {
             buildingBase.runtimeBuildData.SortRank =DataManager.GetBuildData(buildData.Id).SortRank;
         }
-        buildingBase.direction = buildData.SaveDir;
+        buildingBase.runtimeBuildData.direction = buildData.SaveDir;
         //Debug.Log(buildData.SaveDir);
         buildingBase.buildFlag = true;
         
         Vector2Int[] vector2Ints = Vector2IntSerializer.Unbox(buildData.SaveTakenGrids);
         
-        buildingBase.OnConfirmBuild(vector2Ints);
-        buildingBase.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)buildingBase.direction+1));
+        (buildingBase as IBuildingBasic)?.OnConfirmBuild(vector2Ints);
+        buildingBase.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)buildingBase.runtimeBuildData.direction+1));
         
     }
 
@@ -724,11 +721,11 @@ public class BuildManager : Singleton<BuildManager>
 
     private void OnRotateBuilding()
     {
-        Direction dir = currentBuilding.direction;
+        Direction dir = currentBuilding.runtimeBuildData.direction;
         currentBuilding.transform.rotation = Quaternion.LookRotation(CastTool.CastDirectionToVector((int)dir + 2), Vector3.up);
-        currentBuilding.direction = (Direction)(((int)dir + 1) % 4);
+        currentBuilding.runtimeBuildData.direction = (Direction)(((int)dir + 1) % 4);
         //Debug.Log(currentBuilding.direction);
-        if (currentBuilding.direction == Direction.down || currentBuilding.direction == Direction.up)
+        if (currentBuilding.runtimeBuildData.direction == Direction.down || currentBuilding.runtimeBuildData.direction == Direction.up)
         {
             isTurn = false;
         }
@@ -752,8 +749,7 @@ public class BuildManager : Singleton<BuildManager>
         //Debug.Log(curPos);
         targetGrids = GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, curPos, out width, out height);
         bool isCheckSea = currentBuilding.runtimeBuildData.Id == 20032;
-
-        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, currentBuilding.GetInParkingGrid(), isCheckSea);
+        isCurCanBuild = MapManager.CheckCanBuild(targetGrids, currentBuilding, isCheckSea);
         for (int i = 0; i < mats.Length; i++)
         {
             if (mats[i] != null)
@@ -784,11 +780,8 @@ public class BuildManager : Singleton<BuildManager>
         }
         if (CheckBuildResourcesEnoughAndUse(currentBuilding.runtimeBuildData))
         {
-            currentBuilding.OnConfirmBuild(targetGrids);
+            (currentBuilding as IBuildingBasic)?.OnConfirmBuild(targetGrids);
             MapManager.SetGridTypeToOccupy(targetGrids);
-            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridIn, currentBuilding.direction);
-            //RoadManager.Instance.AddCrossNode(currentBuilding.parkingGridOut, currentBuilding.direction);
-            //RoadManager.Instance.AddTurnNode(currentBuilding.parkingGridIn, currentBuilding.parkingGridOut);
 
             WhenFinishBuild();
             if (currentBuilding.runtimeBuildData.Id != 20005 &&
@@ -796,10 +789,10 @@ public class BuildManager : Singleton<BuildManager>
                 currentBuilding.runtimeBuildData.Id != 20038)
             {
                 currentBuilding.transform.position += Vector3.up * 5;
-                StartCoroutine("PushDownBuilding", currentBuilding.gameObject);
+                StartCoroutine(nameof(PushDownBuilding), currentBuilding.gameObject);
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_constuction);
             }
-            lastDir = currentBuilding.direction-1;
+            lastDir = currentBuilding.runtimeBuildData.direction-1;
             EventManager.TriggerEvent(ConstEvent.OnContinueBuild);
         }
         else
@@ -844,7 +837,7 @@ public class BuildManager : Singleton<BuildManager>
             building.transform.position = pos;
             building.transform.rotation = quaternion;
             currentBuilding = building.GetComponent<BuildingBase>();
-            currentBuilding.OnConfirmBuild(grids);
+            (currentBuilding as IBuildingBasic)?.OnConfirmBuild(grids);
 
             //MapManager.SetGridTypeToOccupy(targetGrids);
             //terrainGenerator.OnFlatGround(currentBuilding.transform.position, 3, currentBuilding.transform.position.y);
@@ -862,8 +855,11 @@ public class BuildManager : Singleton<BuildManager>
     private bool CheckBuildResourcesEnoughAndUse(RuntimeBuildData runtimeBuildData)
     {
         List<CostResource> rescources = runtimeBuildData.costResources;
-        //Debug.Log(runtimeBuildData.Price * TechManager.Instance.BuildPriceBuff());
-        //Debug.Log(TechManager.Instance.BuildPriceBuff());
+
+        if (rescources == null || rescources.Count <=0)
+        {
+            return false;
+        }
 
         if (!ResourceManager.Instance.IsResourcesEnough(rescources, TechManager.Instance.BuildResourcesBuff()))
         {

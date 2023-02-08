@@ -1,7 +1,7 @@
 ﻿using Building;
 using UnityEngine;
 
-namespace Tools
+namespace CSTools
 {
     public class CastTool : MonoBehaviour
     {

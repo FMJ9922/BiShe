@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tools;
+using CSTools;
 using UnityEngine;
 
 namespace Building
@@ -36,14 +36,14 @@ namespace Building
                 buildFlag = true;
                 if (hasAnima)
                 {
-                    Invoke("PlayAnim", 0.2f);
+                    Invoke(nameof(PlayAnim), 0.2f);
                 }
-                direction = CastTool.CastVector3ToDirection(transform.right);
+                runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-                Invoke("FillUpPopulation", 1f);
+                Invoke(nameof(FillUpPopulation), 1f);
                 InitBuildingFunction();
                 //地基
-                MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)direction + 1) % 4);
+                MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int)runtimeBuildData.direction + 1) % 4);
                 TerrainGenerator.Instance.FlatGround
                     (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
             }
@@ -51,6 +51,26 @@ namespace Building
             {
                 RestartBuildingFunction();
             }
+        }
+        public void FillUpPopulation()
+        {
+            if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
+            {
+                if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
+                {
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                }
+                //CheckCurPeopleMoreThanMax();
+                runtimeBuildData.Pause = true;
+                UpdateEffectiveness();
+            }
+        }
+
+        public void Upgrade(out bool issuccess, out BuildingBase buildingData)
+        {
+            issuccess = false;
+            buildingData = null;
         }
 
         public void PlayAnim()
@@ -62,7 +82,7 @@ namespace Building
         {
             Invoke("InitPlant", 1f);
             previewObj.SetActive(false);
-            parkingGridIn = GetInParkingGrid();
+            parkingGridIn = BuildingTools.GetInParkingGrid(this);
             MapManager.Instance._buildings.Add(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
             EventManager.StartListening(ConstEvent.OnOutputResources, Output);
@@ -75,9 +95,9 @@ namespace Building
         {
             if (runtimeBuildData.formulaDatas.Length>0)
             {
-                formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+                runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
             }
-            parkingGridIn = GetInParkingGrid();
+            parkingGridIn = BuildingTools.GetInParkingGrid(this);
             MapManager.Instance._buildings.Add(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
             EventManager.StartListening(ConstEvent.OnOutputResources, Output);
@@ -140,11 +160,11 @@ namespace Building
         {
             ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
             runtimeBuildData.Pause = false;
-            if (formula == null|| formula.InputItemID==null) return;
+            if (runtimeBuildData.formula == null|| runtimeBuildData.formula.InputItemID==null) return;
             List<CostResource> costResources = new List<CostResource>();
-            for (int i = 0; i < formula.InputItemID.Count; i++)
+            for (int i = 0; i < runtimeBuildData.formula.InputItemID.Count; i++)
             {
-                costResources.Add(new CostResource(formula.InputItemID[i], formula.InputNum[i]* WorkEffect()* runtimeBuildData.Times));
+                costResources.Add(new CostResource(runtimeBuildData.formula.InputItemID[i], runtimeBuildData.formula.InputNum[i]* WorkEffect()* runtimeBuildData.Times));
             }
 
             bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
@@ -160,7 +180,7 @@ namespace Building
 
         public void Output()
         {
-            if (formula == null || formula.OutputItemID == null) return;
+            if (runtimeBuildData.formula == null || runtimeBuildData.formula.OutputItemID == null) return;
 
             if (!isharvesting&&!waitNextWeekStart)
             {
@@ -181,7 +201,7 @@ namespace Building
 
         public float GetProcess()
         {
-            return 1 - (float)runtimeBuildData.productTime / formula.ProductTime + (float)LevelManager.Instance.Day / 7 / formula.ProductTime;
+            return 1 - (float)runtimeBuildData.productTime / runtimeBuildData.formula.ProductTime + (float)LevelManager.Instance.Day / 7 / runtimeBuildData.formula.ProductTime;
         }
 
         public float WorkEffect()
@@ -230,7 +250,7 @@ namespace Building
             UpdateEffectiveness();
             if (!isharvesting&&!waitNextWeekStart)
             {
-                runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / formula.ProductTime;
+                runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / runtimeBuildData.formula.ProductTime;
                 SetProgress(GetProcess());
             }
         }
@@ -246,8 +266,8 @@ namespace Building
         {
             if (runtimeBuildData.formulaDatas.Length > 0)
             {
-                formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
-                runtimeBuildData.productTime = formula.ProductTime;
+                runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
+                runtimeBuildData.productTime = runtimeBuildData.formula.ProductTime;
                 runtimeBuildData.Rate = 0;
             }
         }
@@ -290,11 +310,7 @@ namespace Building
             }
         }
 
-        public Vector2Int GetInParkingGrid()
-        {
-            return MapManager.GetCenterGrid(transform.position+CastTool.CastDirectionToVector(direction)*(Size.y/2+0.5f));
-
-        }
+        
 
         #endregion
 
@@ -322,7 +338,7 @@ namespace Building
             pfb.transform.position -= Vector3.up * 2000f;
             plants = new PlantController[Size.x * Size.y];
             mat = pfb.GetComponent<PlantController>().mesh.material;
-            Texture tex = formula.ID == 50006 ?
+            Texture tex = runtimeBuildData.formula.ID == 50006 ?
                 wheat : rice;
             //Debug.Log(mat == null);
             mat.SetTexture("_MainTex", tex);
@@ -362,7 +378,7 @@ namespace Building
         {
             //EventManager.StopListening(ConstEvent.OnDayWentBy, Replant);
             runtimeBuildData.Rate = 0;
-            runtimeBuildData.productTime = formula.ProductTime;
+            runtimeBuildData.productTime = runtimeBuildData.formula.ProductTime;
             ShowPlant();
         }
 
