@@ -7,20 +7,19 @@ using TMPro;
 public class MarketCanvas : CanvasBase
 {
     [SerializeField] private GameObject mainCanvas;
-    public List<MarketItem> buysItems = new List<MarketItem>();
-    public List<MarketItem> sellsItems = new List<MarketItem>();
-    [SerializeField] GameObject buyContent,sellContent;
-    [SerializeField] GameObject marketItemPfb;
-    [SerializeField] Button buyBtn, sellBtn;
-    [SerializeField] TMP_Text buyText, sellText,profitText;
-    [SerializeField] GameObject buyItems, sellItems;
-    [SerializeField] TMP_Text profitInfoPfb;
-    [SerializeField] GameObject profitContent,profitItems;
-    enum MarketOption
-    {
-        buy = 0,
-        sell = 1,
-    }
+    [SerializeField] private Button _accept;
+    [SerializeField] private Button _generate;
+    [SerializeField] private Button _buy;
+    [SerializeField] private GameObject _acceptViewRoot;
+    [SerializeField] private GameObject _generateViewRoot;
+    [SerializeField] private GameObject _buyViewRoot;
+    [SerializeField] private GameObject _offerPfb;
+    [SerializeField] private GameObject _orderPfb;
+    [SerializeField] private GameObject _noOrderAvailableTip;
+    [SerializeField] private GameObject _noHavingOrderAvailableTip;
+    [SerializeField] private MarketBuyItem _marketBuyItem;
+    private List<MarketItem> _orderItems = new List<MarketItem>();
+    private List<MarketItem> _havingOrderItems = new List<MarketItem>();
     #region 实现基类
     public override void InitCanvas()
     {
@@ -28,10 +27,18 @@ public class MarketCanvas : CanvasBase
     }
     public override void OnOpen()
     {
-        OnClickBuyBtn();
         mainCanvas.SetActive(true);
         GameManager.Instance.PauseGame();
         EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll,true);
+        EventManager.StartListening(ConstEvent.OnMarketOrderDealing,RefreshPanel);
+        if (MarketManager.Instance.GetRuntimeOrderDatas().Count <= 0)
+        {
+            OnClickGenerate();
+        }
+        else
+        {
+            OnClickAccepted();
+        }
     }
 
     public override void OnClose()
@@ -41,135 +48,140 @@ public class MarketCanvas : CanvasBase
             mainCanvas.SetActive(false);
             GameManager.Instance.ContinueGame();
             EventManager.TriggerEvent<bool>(ConstEvent.OnLockScroll, false);
+            EventManager.StopListening(ConstEvent.OnMarketOrderDealing,RefreshPanel);
         }
     }
     #endregion
 
-    public void OnClickBuyBtn()
+
+
+    #region NewMarket
+
+    public void OnClickAccepted()
     {
-        //Debug.Log("buy");
-        buyText.color = Color.white;
-        sellText.color = Color.gray;
-        profitText.color = Color.gray;
-        buyItems.SetActive(true);
-        sellItems.SetActive(false);
-        profitItems.SetActive(false);
+        _accept.transform.localScale = Vector3.one * 1.3f;
+        _generate.transform.localScale = Vector3.one;
+        _buy.transform.localScale = Vector3.one;
+        _acceptViewRoot.SetActive(true);
+        _generateViewRoot.SetActive(false);
+        _buyViewRoot.SetActive(false);
+        InitAcceptOrders();
     }
 
-    public void OnClickSellBtn()
+    public void OnClickGenerate()
     {
-        //Debug.Log("sell");
-        buyText.color = Color.gray;
-        profitText.color = Color.gray;
-        sellText.color = Color.white;
-        buyItems.SetActive(false);
-        sellItems.SetActive(true);
-        profitItems.SetActive(false);
-
+        _accept.transform.localScale = Vector3.one;
+        _generate.transform.localScale = Vector3.one * 1.3f;
+        _buy.transform.localScale = Vector3.one;
+        _acceptViewRoot.SetActive(false);
+        _generateViewRoot.SetActive(true);
+        _buyViewRoot.SetActive(false);
+        InitMarketOrders();
     }
 
-    public void AddProfitInfo(string content)
+    /// <summary>
+    /// 点击生成买入订单
+    /// </summary>
+    public void OnClickBuy()
     {
-        GameObject newInfo = Instantiate(profitInfoPfb.gameObject, profitContent.transform);
-        newInfo.SetActive(true);
-        newInfo.transform.SetAsFirstSibling();
-        newInfo.GetComponent<TMP_Text>().text = content;
+        _accept.transform.localScale = Vector3.one;
+        _generate.transform.localScale = Vector3.one;
+        _buy.transform.localScale = Vector3.one * 1.3f;
+        _acceptViewRoot.SetActive(false);
+        _generateViewRoot.SetActive(false);
+        _buyViewRoot.SetActive(true);
+        ResetBuyView();
     }
-    public void OnClickProfitInfoBtn()
+
+    /// <summary>
+    /// 点击生成订单
+    /// </summary>
+    public void OnClickGenerateOrder()
     {
-        buyText.color = Color.gray;
-        profitText.color = Color.white; 
-        sellText.color = Color.gray;
-        buyItems.SetActive(false);
-        sellItems.SetActive(false);
-        profitItems.SetActive(true);
+        MarketManager.Instance.GenerateOrder();
+        InitMarketOrders();
     }
-    public void InitSellItems()
+
+    private void InitMarketOrders()
     {
-        int[] ids = DataManager.GetLevelData(LevelManager.LevelID).orderIds;
-        int[] nums = DataManager.GetLevelData(LevelManager.LevelID).orderNums;
-        //Debug.Log(ids[0]);
-        //Debug.Log(nums[0]);
-        for (int i = 0; i < ids.Length; i++)
+        var orders = MarketManager.Instance.GetOrderList();
+        _noOrderAvailableTip.SetActive(orders.Count ==0);
+        for (int i = 0; i < orders.Count; i++)
         {
-            GameObject obj = Instantiate(marketItemPfb, sellContent.transform);
-            obj.SetActive(true);
-            obj.transform.SetParent(sellContent.transform);
-            MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.marketData.maxNum = (int)(nums[i] * TechManager.Instance.SellNumBuff());
-            marketItem.InitSellItem(ids[i]);
-            sellsItems.Add(marketItem);
+            if (i < _orderItems.Count)
+            {
+                var data = DataManager.GetOrderData(orders[i]);
+                _orderItems[i].InitMarketItem(data,OnAcceptOrder);
+                _orderItems[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                GameObject obj = Instantiate(_offerPfb, _offerPfb.transform.parent);
+                obj.SetActive(true);
+                var data = DataManager.GetOrderData(orders[i]);
+                var comp = obj.GetComponent<MarketItem>();
+                comp.InitMarketItem(data,OnAcceptOrder);
+                _orderItems.Add(comp);
+            }
+        }
+
+        for (int i = orders.Count; i < _orderItems.Count; i++)
+        {
+            _orderItems[i].gameObject.SetActive(false);
         }
     }
 
-    public void InitSavedSellItems(MarketData[] selldatas)
+    private void OnAcceptOrder(int orderId)
     {
-        for (int i = 0; i < selldatas.Length; i++)
-        {
-            GameObject obj = Instantiate(marketItemPfb, sellContent.transform);
-            obj.SetActive(true);
-            obj.transform.SetParent(sellContent.transform);
-            MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.InitSavedSellItem(selldatas[i]);
-            sellsItems.Add(marketItem);
-        }
-    }
-    public List<MarketItem> GetBuyItems()
-    {
-        return buysItems;
+        MarketManager.Instance.RemoveFromOrderList(orderId);
+        MarketManager.Instance.AddSellOrder(orderId);
     }
 
-    public List<MarketItem> GetSellItems()
+    private void InitAcceptOrders()
     {
-        return sellsItems;
-    }
-
-    public void InitSavedBuyItems(MarketData[] buyDatas)
-    {
-        for (int i = 0; i < buyDatas.Length; i++)
+        var orders = MarketManager.Instance.GetRuntimeOrderDatas();
+        _noHavingOrderAvailableTip.SetActive(orders.Count ==0);
+        for (int i = 0; i < orders.Count; i++)
         {
-            GameObject obj = Instantiate(marketItemPfb, buyContent.transform);
-            obj.SetActive(true);
-            obj.transform.SetParent(buyContent.transform);
-            obj.transform.SetSiblingIndex(buyContent.transform.childCount - 2);
-            MarketItem marketItem = obj.GetComponent<MarketItem>();
-            marketItem.InitSavedBuyItem(buyDatas[i]);
-            buysItems.Add(marketItem);
+            if (i < _havingOrderItems.Count)
+            {
+                _havingOrderItems[i].InitAcceptItem(orders[i],OnCancelOrder);
+                _havingOrderItems[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                GameObject obj = Instantiate(_orderPfb, _orderPfb.transform.parent);
+                obj.SetActive(true);
+                var comp = obj.GetComponent<MarketItem>();
+                comp.InitAcceptItem(orders[i],OnCancelOrder);
+                _havingOrderItems.Add(comp);
+            }
         }
 
-    }
-    public void InitBuyItem()
-    {
-        GameObject obj = Instantiate(marketItemPfb, buyContent.transform);
-        obj.SetActive(true);
-        obj.transform.SetParent(buyContent.transform);
-        obj.transform.SetSiblingIndex(buyContent.transform.childCount - 2);
-        MarketItem marketItem = obj.GetComponent<MarketItem>();
-        marketItem.InitBuyItem();
-        buysItems.Add(marketItem);
+        for (int i = orders.Count; i < _havingOrderItems.Count; i++)
+        {
+            _havingOrderItems[i].gameObject.SetActive(false);
+        }
     }
 
-    public void RemoveBuyItem(GameObject obj)
+    private void OnCancelOrder(int index)
     {
-        MarketItem item = obj.GetComponent<MarketItem>();
-        buysItems.Remove(item);
-        Destroy(obj);
-    }
-    public void RefreshBuyItems()
-    {
-        foreach (var item in buysItems)
-        {
-            Destroy(item.gameObject);
-        }
-        buysItems.Clear();
+        MarketManager.Instance.RemoveRuntimeOrderData(index);
     }
 
-    public void RefreshSellItems()
+    private void RefreshPanel()
     {
-        foreach (var item in sellsItems)
+        if (_acceptViewRoot.activeInHierarchy)
         {
-            Destroy(item.gameObject);
+            InitAcceptOrders();
         }
-        sellsItems.Clear();
     }
+
+    private void ResetBuyView()
+    {
+        _marketBuyItem.ResetView();
+        _marketBuyItem._onClickOkJumpAction = OnClickAccepted;
+    }
+
+    #endregion
 }

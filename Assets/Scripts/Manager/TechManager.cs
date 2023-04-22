@@ -92,7 +92,7 @@ public class TechManager : Singleton<TechManager>
 
     public void RefreshTechPoint()
     {
-        point =  (int)(ResourceManager.Instance.MaxPopulation / 20) - techLighted;
+        point =  (int)(ResourceManager.Instance.AllPopulation / 20) - techLighted;
         treeCanvas.ChangePoint(point);
     }
 

@@ -26,6 +26,7 @@ public class ConstEvent
     #region 交互事件
     public const string OnTriggerInfoPanel = "OnTriggerInfoPanel";//点击建筑显示详细面板
     public const string OnTriggerCarMissionPanel = "OnTriggerCarMissionPanel";//点击车辆详情面板
+    public const string OnSelectIcon = "OnSelectIcon";//点击通用icon
     #endregion
 
     #region 时间倍速事件
@@ -39,11 +40,13 @@ public class ConstEvent
     public const string OnInputResources = "OnInputResources";//每周输入资源结算
     public const string OnDayWentBy = "OnDayWentBy";//一天过去事件
     public const string OnRefreshResources = "OnRefreshResources";//资源更新显示事件
-    public const string OnPopulaitionChange = "OnPopulaitioChange";//人口增减事件
+    public const string OnPopulationHudChange = "OnPopulationHudChange";//人口增减事件
     public const string OnEffectivenessChange = "OnEffectivenessChange";//工作效率变化
     public const string OnSettleAccount = "OnSettleAccount";//市场结算事件
     public const string OnWeekProgress = "OnWeekProgree";//周进度
     public const string OnOilCost = "OnOilCost";//油费事件
+    public const string OnPopulationChange = "OnPopulationChange";//人口发生变化
+    public const string OnMarketOrderDealing = "OnMarketOrderDealing";//市场订单结算
     #endregion
 
     #region 加载事件
@@ -58,5 +61,11 @@ public class ConstEvent
     public const string OnRangeLightOpen = "OnRangeLightOpen";
     public const string OnRangeLightClose = "OnRangeLightClose";
     public const string OnHudItemChange = "OnHudItemChange";
+    #endregion
+    
+    #region 交通事件
+
+    public const string OnTransportingNumChange = "OnTransportingNumChange";//当车辆运输的数量发生变化的时候
+
     #endregion
 }

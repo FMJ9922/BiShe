@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7344211662753821149}
-  - component: {fileID: 5900956477771699137}
   - component: {fileID: 6792142832722427367}
   - component: {fileID: 8822926729722855625}
   - component: {fileID: 3362447837265235401}
+  - component: {fileID: 6255507798637460333}
   m_Layer: 0
   m_Name: Universal_Building_Farm_L3_01
   m_TagString: Untagged
@@ -35,64 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5900956477771699137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5936395063179857716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Width: 6
-  Height: 10
-  hasAnima: 0
-  animation: {fileID: 0}
-  body: {fileID: 0}
-  runtimeBuildData:
-    Id: 0
-    Name: 
-    CostPerWeek: 0
-    Formulas: 
-    Population: 0
-    MaxStorage: 0
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Length: 0
-    Width: 0
-    Price: 0
-    costResources: []
-    BundleName: 
-    PfbName: 
-    tabType: 0
-    Introduce: 
-    Level: 0
-    iconName: 
-    Times: 0
-    Pause: 0
-    CurLevel: 0
-    CurFormula: 0
-    formulaDatas: []
-    CurPeople: 0
-    Rate: 0
-    Effectiveness: 0
-    Happiness: 0.6
-    productTime: 0
-    SavePosition:
-      x: 0
-      y: 0
-      z: 0
-    SaveTakenGrids: []
-    SaveDir: 0
-    SaveOutLookType: 0
-  buildFlag: 0
-  takenGrids: []
-  parkingGridIn: {x: 0, y: 0}
-  direction: 0
 --- !u!54 &6792142832722427367
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,6 +76,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6255507798637460333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5936395063179857716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c33e81665d7f54d819c0cc74c8db14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 6
+  Height: 10
+  hasAnima: 0
+  animation: {fileID: 0}
+  body: {fileID: 8253730070303130684}
+  runtimeBuildData:
+    Id: 0
+    Name: 
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 0
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 0
+    Width: 0
+    Price: 0
+    costResources: []
+    BundleName: 
+    PfbName: 
+    tabType: 0
+    Introduce: 
+    Level: 0
+    iconName: 
+    Times: 0
+    SortRank: 0
+    Pause: 0
+    CurLevel: 0
+    CurFormula: 0
+    formulaDatas: []
+    CurPeople: 0
+    Rate: 0
+    Effectiveness: 0
+    Happiness: 0.6
+    productTime: 0
+    AvaliableToMarket: 1
+    SavePosition:
+      x: 0
+      y: 0
+      z: 0
+    SaveTakenGrids: []
+    SaveDir: 0
+    SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
+  buildFlag: 0
+  takenGrids: []
+  parkingGridIn: {x: 0, y: 0}
 --- !u!1001 &1124833136182403907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +151,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7344211662753821149}
     m_Modifications:
+    - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,6 +173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -170,16 +190,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,
         type: 3}
@@ -203,6 +213,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a675e122077c6e446a51fd81a9415467, type: 3}
+--- !u!1 &8253730070303130684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9013697384732780415, guid: a675e122077c6e446a51fd81a9415467,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124833136182403907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8773279703375060614 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8528910250654121413, guid: a675e122077c6e446a51fd81a9415467,

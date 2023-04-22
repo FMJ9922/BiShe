@@ -22,7 +22,7 @@ public class HUDCanvas : CanvasBase
     {
         EventManager.StopListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StopListening(ConstEvent.OnRefreshResources, RefreshResources);
-        EventManager.StopListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        EventManager.StopListening(ConstEvent.OnPopulationHudChange, RefreshPopulation);
         EventManager.StopListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
         EventManager.StopListening(ConstEvent.OnHudItemChange, ResetHudItems);
         graphBtn.onClick.RemoveAllListeners();
@@ -31,7 +31,7 @@ public class HUDCanvas : CanvasBase
     {
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, RefreshDate);
         EventManager.StartListening(ConstEvent.OnRefreshResources, RefreshResources);
-        EventManager.StartListening(ConstEvent.OnPopulaitionChange, RefreshPopulation);
+        EventManager.StartListening(ConstEvent.OnPopulationHudChange, RefreshPopulation);
         EventManager.StartListening<TimeScale>(ConstEvent.OnTimeScaleChanged, OnTimeScaleChangeImage);
         EventManager.StartListening(ConstEvent.OnHudItemChange, ResetHudItems);
         strPopulation = Localization.Get("Population");
@@ -153,6 +153,6 @@ public class HUDCanvas : CanvasBase
     {
         //Debug.Log(ResourceManager.Instance.CurPopulation + " " + ResourceManager.Instance.MaxPopulation);
         _population.text = string.Format("{1}/{2}", strPopulation,
-            ResourceManager.Instance.CurPopulation,ResourceManager.Instance.MaxPopulation);
+            ResourceManager.Instance.WorkerPopulation,ResourceManager.Instance.AllPopulation);
     }
 }

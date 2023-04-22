@@ -1,0 +1,357 @@
+ManifestFileVersion: 0
+CRC: 3361192476
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5dc03752f9f3df191d6509436f03b07c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 45be4721200ff6eb65355b285640554f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aa73b900a65e9ba46bc6e19a5558ed5a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b8b91f30e43cbf04881ade7af8ee24ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c2c33e81665d7f54d819c0cc74c8db14, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 850726b275ceab3498f5634474ab05cb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d909abf314d0eda418a4c337bc5d965b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2a2b6607be4669b4390ff446c6594104, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 84627a6822a66094698454c3a5edf869, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6a3cda19b6bc9b148b8f77bc2cf13f46, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ed36183c39531034ab93806cf2034535, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6883a93cb9e9e9645853de0e726afc2c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: df27a4bc07c150c4d9eaef67a727a571, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb6927bc663d62145b5384a4899ae21e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ad6a99ec1dcf0694bb541a40fd1f4a81, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c708b5ced0d0f9149ab1436d0a084330, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 05c3d32fc8f266f4db9dd32e87b92ddf, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1cc9395f6527b494b8d19dfa03cd637c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 73eecc9f0eeee0044a06bb58885ec9fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 13a439e141656eb468c8c25c0a3ab07c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 1183024399
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/GraphPfb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_02.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_01_Preb.prefab
+- Assets/Prefabs/MarketItemPfb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_02.prefab
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L2_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_02_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L3_01.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L1_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Bridge_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_04_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L3_03.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L3_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L3_01.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L1_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Farm_L3_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Pier_add_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L3_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L1_04_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L2_01_Preb.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/RiceGrow.anim
+- Assets/Scenes Assets/Finish/Universal_Building_Mine_L3.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_02.prefab
+- Assets/Scenes Assets/Prefab/FX/SmokeWhiteBig.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L1_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Coach_Building_Pier_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_03_Preb.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_01.prefab
+- Assets/Scenes Assets/Finish/TradeCenter.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L3_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_02.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L2_04_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_02.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L1_01.prefab
+- Assets/Prefabs/ww.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_02.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_03_Preb.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/Universal_Building_Mine_L3_02_Ani.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_01.prefab
+- Assets/Scenes Assets/Prefab/Animation/Plain_Building_Residential_L1_03_Ani_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L2_01_Mod.fbx
+- Assets/Scenes Assets/BuildingIcon/Animation/Plain_Building_Residential_L1_03_Ani.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L2_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Hooker_L1_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L2_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Mine_L2.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_02_Preb.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/RicePfb.controller
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_02.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L1_01_Preb.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/Universal_Building_Mine_L1_02_Ani.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L1_01_Mod.fbx
+- Assets/Scenes Assets/Finish/WheatPfb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Mine_L3_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L1_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Hooker_L1_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L3_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L3_03.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Sawmill_L1_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Sawmill_L2_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Hooker_L1_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Animation/Universal_Building_Sawmill_L1_01_Ani_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Market_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Bridge_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_02_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Factory_L3_01.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L2_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Pier_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Hooker_L1_02_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Mine_L1.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_L3_01_Mod.fbx
+- Assets/Scenes Assets/Material/Texture/Universal_Plant_WheatRice_01_Tex.tga
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_03_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Bridge_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L1_03.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L1_02.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L2_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L3_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L2_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Government_L2_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Farmland_L1_03.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L3_03.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L2_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L3_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Sawmill_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L1_04.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L3_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L3_02_Ani_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L1_03_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L3_01_Preb.prefab
+- Assets/Scenes Assets/Finish/RicePfb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_04_Mod.fbx
+- Assets/Scenes Assets/Finish/Coach_Building_Pier_add.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Hooker_L1_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L2_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_04.prefab
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L3_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Bridge_L1_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Farm_L1_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Farm_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L3_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L2_02_Preb.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L2_03.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Farm_L1_01.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_03_Mod.fbx
+- Assets/ArtAssets/Particle/ParticleFactory.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L2_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_04_Mod.fbx
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L3_02.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/Universal_Building_Sawmill_L1_01_Ani.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_03_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Market_L3_01.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Warehouse_L3_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L3_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L1_02_Ani_Preb.prefab
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L2_03.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/WheatGrow.controller
+- Assets/Scenes Assets/Prefab/Building/Coach_Building_Residential_L1_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Government_L2_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_01_Preb.prefab
+- Assets/Scenes Assets/BuildingIcon/Animation/WheatGrow.anim
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_02_Mod.fbx
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L2_03_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Factory_attachment_03_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_03_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L1_03.prefab
+- Assets/Scenes Assets/Finish/Universal_Building_Orchard_L1_01.prefab
+- Assets/Scenes Assets/Prefab/FX/SmokeWhiteSmall.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_03.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L1_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Hooker_L1_01_Mod.fbx
+- Assets/ArtAssets/Particle/ParticleResidential.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L3_01.prefab
+- Assets/Scenes Assets/Finish/Hui_Building_Residential_L3_02.prefab
+- Assets/Scenes Assets/Model/Building/Coach_Building_Pier_01_Mod.fbx
+- Assets/Prefabs/LevelSelectPfb.prefab
+- Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L2_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Farm_L2_01_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L1_04_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Building_Government_L1_01.prefab
+- Assets/Scenes Assets/Prefab/Building/Hui_Building_Residential_L2_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L2_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L1_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Universal_Building_Warehouse_L3_01_Mod.fbx
+- Assets/Scenes Assets/Finish/Plain_Building_Residential_L3_03.prefab
+- Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_03.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Mine_L2_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Building/Universal_Building_Warehouse_L2_02_Preb.prefab
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L1_01_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L3_02_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_03_Mod.fbx
+- Assets/Scenes Assets/Model/Building/Hui_Building_Residential_L2_02_Mod.fbx
+Dependencies:
+- C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/icon.ab
+- C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/mat.ab
+- C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/plant.ab

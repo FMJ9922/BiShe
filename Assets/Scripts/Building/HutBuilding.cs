@@ -43,17 +43,7 @@ namespace Building
         
         public void FillUpPopulation()
         {
-            if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
-            {
-                if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
-                {
-                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-                }
-                //CheckCurPeopleMoreThanMax();
-                runtimeBuildData.Pause = true;
-                UpdateEffectiveness();
-            }
+            
         }
         
         private void UpdateEffectiveness()
@@ -82,8 +72,11 @@ namespace Building
         public void InitBuildingFunction()
         {
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+            runtimeBuildData.CurPeople = runtimeBuildData.Population;
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
+            EventManager.StartListening(ConstEvent.OnInputResources,InputFood);
         }
 
         public void RestartBuildingFunction()
@@ -96,12 +89,11 @@ namespace Building
                 runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
             }
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
-            if (runtimeBuildData.tabType!=BuildTabType.house)
-            {
-                ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
-            }
+            runtimeBuildData.CurPeople = runtimeBuildData.Population;
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
+            EventManager.StartListening(ConstEvent.OnInputResources,InputFood);
         }
 
         public void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
@@ -110,7 +102,7 @@ namespace Building
             {
                 ReturnBuildResources();
             }
-            MapManager.Instance._buildings.Remove(this);
+            MapManager.Instance.RemoveBuilding(this);
             MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
         
             if (repaint)
@@ -120,15 +112,8 @@ namespace Building
             }
             if (returnPopulation)
             {
-                if (runtimeBuildData.Population < 0)
-                {
-                    ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
-                }
-                else
-                {
-                    ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
-                }
-                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                runtimeBuildData.CurPeople = 0;
+                EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
             }
         
             Destroy(this.gameObject);
@@ -148,23 +133,19 @@ namespace Building
         public void ProvidePopulation()
         {
             int num = -runtimeBuildData.Population;//负人口表示增加
-            hasProvidePopulation = ResourceManager.Instance.AddMaxPopulation(num);
             runtimeBuildData.CurPeople = num;
-            EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange,runtimeBuildData);
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void RemovePopulation()
         {
-            int num = -runtimeBuildData.Population;//负人口表示增加
-            hasProvidePopulation = !ResourceManager.Instance.AddMaxPopulation(-num);
-            //todo:表现出饥饿
-            runtimeBuildData.CurPeople = num;
-            EventManager.TriggerEvent<RuntimeBuildData>(ConstEvent.OnPopulaitionChange, runtimeBuildData);
+            runtimeBuildData.CurPeople = 0;
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void InputFood()
         {
-            ResourceManager.Instance.AddResource(99999, -runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
+            ResourceManager.Instance.AddMoney(-runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
             //食物少于指定数量就去取货
             if (storage.GetAllFoodNum() < 3)
             {
@@ -208,7 +189,7 @@ namespace Building
             if (buildingData != null)
             {
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
-                DestroyBuilding(false, false, false);
+                DestroyBuilding(true, true, false);
                 MapManager.Instance.AddBuildingEntry(BuildingTools.GetInParkingGrid(this), buildingData);
                 issuccess = true;
             }
@@ -218,6 +199,11 @@ namespace Building
                 ProvidePopulation();
                 NoticeManager.Instance.InvokeShowNotice("升级资源不足");
             }
+        }
+
+        public EBuildingType GetBuildingType()
+        {
+            return EBuildingType.HutBuilding;
         }
 
         public CarMission MakeCarMission(float rate)
@@ -233,7 +219,6 @@ namespace Building
             //Debug.Log(MapManager.GetNearestMarket(parkingGridIn).name);
             mission.EndBuilding = target.parkingGridIn;
             mission.missionType = CarMissionType.requestResources;
-            mission.isAnd = false;
             mission.requestResources = new List<CostResource>();
             mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(rate));
             return mission;

@@ -44,12 +44,14 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
     public void InitBuildingFunction()
     {
         parkingGridIn = BuildingTools.GetInParkingGrid(this);
-        MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuilding(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         ChangeFormula();
+        runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population);
+        EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
     }
 
     public void RestartBuildingFunction()
@@ -60,15 +62,12 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         }
 
         parkingGridIn = BuildingTools.GetInParkingGrid(this);
-        MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuilding(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
-        if (runtimeBuildData.tabType != BuildTabType.house)
-        {
-            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople, true);
-        }
+        EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
     }
 
     public void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
@@ -78,7 +77,7 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
             ReturnBuildResources();
         }
 
-        MapManager.Instance._buildings.Remove(this);
+        MapManager.Instance.RemoveBuilding(this);
         MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
 
         if (repaint)
@@ -89,16 +88,8 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
 
         if (returnPopulation)
         {
-            if (runtimeBuildData.Population < 0)
-            {
-                ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
-            }
-            else
-            {
-                ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
-            }
-
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            runtimeBuildData.CurPeople = 0;
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         Destroy(this.gameObject);
@@ -130,8 +121,9 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
 
     public float GetProcess()
     {
-        return 1 - (float) runtimeBuildData.productTime / runtimeBuildData.formula.ProductTime +
-               (float) LevelManager.Instance.Day / 7 / runtimeBuildData.formula.ProductTime;
+        return 0;
+        //return 1 - (float) runtimeBuildData.productTime / runtimeBuildData.formula.ProductTime +
+        //       (float) LevelManager.Instance.Day / 7 / runtimeBuildData.formula.ProductTime;
     }
 
     public float WorkEffect()
@@ -145,39 +137,7 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
                (runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
     }
 
-    public void AddCurPeople(int num)
-    {
-        int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        if (cur + num <= max)
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
-        }
-        else
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(max - cur);
-        }
-
-        UpdateEffectiveness();
-        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-    }
-
-    public void DeleteCurPeople(int num)
-    {
-        int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        if (cur - num >= 0)
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
-        }
-        else
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
-        }
-
-        UpdateEffectiveness();
-        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-    }
+    
 
     public void UpdateEffectiveness()
     {
@@ -200,7 +160,6 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
 
     public CarMission MakeCarMission(float rate)
     {
-        //Debug.Log(rate);
         CarMission mission = new CarMission();
         BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
         if (target == null)
@@ -211,12 +170,10 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         mission.StartBuilding = parkingGridIn;
         mission.EndBuilding = target.parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
-        mission.isAnd = true;
         mission.transportResources = new List<CostResource>();
         mission.transportationType = TransportationType.mini;
         for (int i = 0; i < runtimeBuildData.formula.OutputItemID.Count; i++)
         {
-            //Debug.Log(formula.OutputItemID[i]);
             mission.transportResources.Add(new CostResource(runtimeBuildData.formula.OutputItemID[i],
                 runtimeBuildData.formula.ProductNum[i] * rate * runtimeBuildData.Times));
         }
@@ -235,7 +192,6 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         {
             case CarMissionType.requestResources:
                 BuildRecievedCarMission(ref carMission);
-                CarMission car = carMission;
                 if (carMission != null)
                 {
                     TrafficManager.Instance.UseCar(carMission);
@@ -245,6 +201,9 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
             case CarMissionType.transportResources:
                 ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
                 break;
+            case CarMissionType.backFromOrder:
+                //todo
+                break;
             default:
                 break;
         }
@@ -253,7 +212,6 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
     public void UpdateRate(string date)
     {
         UpdateEffectiveness();
-        runtimeBuildData.Rate += runtimeBuildData.Effectiveness / 7f / runtimeBuildData.formula.ProductTime;
         if (runtimeBuildData.CurPeople < runtimeBuildData.Population)
         {
             FillUpPopulation();
@@ -266,11 +224,9 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         {
             if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
             }
-            //CheckCurPeopleMoreThanMax();
-            runtimeBuildData.Pause = true;
             UpdateEffectiveness();
         }
     }
@@ -288,7 +244,7 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         if (buildingData != null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
-            DestroyBuilding(false, false, false);
+            DestroyBuilding(true, true, false);
             MapManager.Instance.AddBuildingEntry(BuildingTools.GetInParkingGrid(this), buildingData);
             issuccess = true;
         }
@@ -297,6 +253,59 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
             issuccess = false;
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }
+    }
+
+    public EBuildingType GetBuildingType()
+    {
+        return EBuildingType.MarketBuilding;
+    }
+
+    public bool HasTransportCapability()
+    {
+        //todo
+        return true;
+    }
+
+    public void StartOrder(RuntimeOrderData orderData)
+    {
+        var carMission = BuildOrderCarMission(orderData);
+        if (carMission != null)
+        {
+            TrafficManager.Instance.UseCar(carMission);  
+        }
+    }
+
+    private CarMission BuildOrderCarMission(RuntimeOrderData orderData)
+    {
+        var configData = DataManager.GetOrderData(orderData.OrderId);
+        CarMission carMission = new CarMission();
+        var targetBuilding = MapManager.Instance.GetEnoughGoodsStorageBuilding(configData.ItemId,configData.ItemNum,parkingGridIn);
+        if (targetBuilding == null)
+        {
+            return null;
+        }
+        carMission.StartBuilding = parkingGridIn;
+        carMission.EndBuilding = targetBuilding.parkingGridIn;
+        carMission.transportationType = TransportationType.medium;
+        
+        
+        var carData = DataManager.GetCarData(carMission.transportationType);
+        float carCapacity = carData.Storage;
+        float num = Mathf.Min(carCapacity,
+            configData.ItemNum - orderData.HasTransportGoodsNum - orderData.PromiseTransportGoodsNum);
+        num = Mathf.Max(num, 0);
+        orderData.PromiseTransportGoodsNum += num;
+        carMission.orderIndex = (int)orderData.Index;
+        carMission.missionType = CarMissionType.collectOrderGoods;
+        carMission.requestResources = new List<CostResource>()
+            {new CostResource(configData.ItemId, num)};
+        carMission.transportResources = null;
+        carMission.BelongToBuilding = parkingGridIn;
+        if (num == 0)
+        {
+            return null;
+        }
+        return carMission;
     }
 
     private void BuildRecievedCarMission(ref CarMission carMission)
@@ -310,8 +319,6 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
 
         carMission.StartBuilding = parkingGridIn;
         carMission.EndBuilding = temp.parkingGridIn;
-        //Debug.Log(carMission.StartBuilding);
-        //Debug.Log(carMission.EndBuilding);W
         switch (carMission.missionType)
         {
             case CarMissionType.requestResources:
@@ -336,8 +343,6 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
                     if (transport != null)
                     {
                         carMission.transportResources.Add(transport);
-                        if (carMission.isAnd) continue;
-                        else return;
                     }
                 }
 

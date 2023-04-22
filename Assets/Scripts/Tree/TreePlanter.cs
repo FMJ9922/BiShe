@@ -116,7 +116,7 @@ public class TreePlanter : Singleton<TreePlanter>
     {
         for (int i = 0; i < saveData.treeData.Length; i++)
         {
-            PlantSingleTree(saveData.treeData[i], MapManager.GetTerrainPosition(saveData.treePosition[i].V3), saveData.treeRotation[i].V3);
+            PlantSingleTree(saveData.treeData[i], saveData.treePosition[i].V3, saveData.treeRotation[i].V3);
         }
     }
 }

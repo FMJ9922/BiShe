@@ -52,7 +52,7 @@ public class InfoCanvas : CanvasBase
         AddBtnsListener(buildbase);
         ChangeOpenCanvas(buildbase.runtimeBuildData.Id);
         mainCanvas.SetActive(true);
-        EventManager.StartListening(ConstEvent.OnPopulaitionChange, populationChange);
+        EventManager.StartListening(ConstEvent.OnPopulationHudChange, populationChange);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, effectivenessChange);
         EventManager.TriggerEvent(ConstEvent.OnSelectLightOpen, new SelectLightInfo
         {
@@ -165,19 +165,19 @@ public class InfoCanvas : CanvasBase
         {
             _populationBtns[0].onClick.AddListener(() =>
             {
-                productBuilding.DeleteCurPeople(100);
+                BuildingTools.ChangeBuildingWorker(buildingBase.runtimeBuildData, -100);
             });
             _populationBtns[1].onClick.AddListener(() =>
             {
-                productBuilding.DeleteCurPeople(1);
+                BuildingTools.ChangeBuildingWorker(buildingBase.runtimeBuildData, -1);
             });
             _populationBtns[2].onClick.AddListener(() =>
             {
-                productBuilding.AddCurPeople(1);
+                BuildingTools.ChangeBuildingWorker(buildingBase.runtimeBuildData, 1);
             });
             _populationBtns[3].onClick.AddListener(() =>
             {
-                productBuilding.AddCurPeople(100);
+                BuildingTools.ChangeBuildingWorker(buildingBase.runtimeBuildData, 100);
             }); 
         }
 
@@ -253,7 +253,7 @@ public class InfoCanvas : CanvasBase
     private void OnDestroy()
     {
         EventManager.StopListening(ConstEvent.OnDayWentBy, effectivenessChange);
-        EventManager.StopListening(ConstEvent.OnPopulaitionChange, populationChange);
+        EventManager.StopListening(ConstEvent.OnPopulationHudChange, populationChange);
     }
 
     public void OnDropDownValueChanged(int n)
@@ -424,7 +424,7 @@ public class InfoCanvas : CanvasBase
     private void ChangeLabels(RuntimeBuildData buildData)
     {
         _nameLabel.text = Localization.Get(buildData.Name);
-        _populationLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population);
+        _populationLabel.text = Mathf.Abs(buildData.CurPeople) + "/" + Mathf.Abs(buildData.Population);
         _workerLabel.text = buildData.CurPeople + "/" + Mathf.Abs(buildData.Population + TechManager.Instance.PopulationBuff());
         _introduceLabel.text = Localization.Get(buildData.Introduce);
 

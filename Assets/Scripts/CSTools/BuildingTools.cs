@@ -61,6 +61,25 @@ namespace CSTools
             return MapManager.GetCenterGrid(buildingBase.transform.position+CastTool.CastDirectionToVector(buildingBase.runtimeBuildData.direction)*((float)buildingBase.Size.y/2+0.5f));
 
         }
+
+        public static void ChangeBuildingWorker(RuntimeBuildData runtimeBuildData,int deltaNum)
+        {
+            int curWorkerNum = runtimeBuildData.CurPeople;
+            int beforeAdjustNum = curWorkerNum + deltaNum;
+            if (beforeAdjustNum < 0)
+            {
+                runtimeBuildData.CurPeople = 0;
+            }
+            else if (beforeAdjustNum > runtimeBuildData.Population + TechManager.Instance.PopulationBuff())
+            {
+                runtimeBuildData.CurPeople = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
+            }
+            else
+            {
+                runtimeBuildData.CurPeople = beforeAdjustNum;
+            }
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
+        }
     }
     
     

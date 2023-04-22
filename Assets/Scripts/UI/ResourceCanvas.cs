@@ -123,7 +123,8 @@ public class ResourceCanvas : CanvasBase
 
     public void SetProgress()
     {
-        progress.value = ResourceManager.Instance.GetCurStorage() / ResourceManager.Instance.maxStorage;
+        var resInst = ResourceManager.Instance;
+        progress.value = resInst.GetCurStorage() / resInst.GetMaxStorage();
     }
     private void DestroyList()
     {

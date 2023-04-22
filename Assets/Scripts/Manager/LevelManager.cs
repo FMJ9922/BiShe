@@ -93,7 +93,6 @@ public class LevelManager : Singleton<LevelManager>
                 ResourceManager.Instance.UpdateItemHistroyNumDic();
                 EventManager.TriggerEvent(ConstEvent.OnOutputResources);
                 EventManager.TriggerEvent(ConstEvent.OnInputResources);
-                EventManager.TriggerEvent(ConstEvent.OnSettleAccount);
                 TrafficManager.Instance.WeeklyCost = 0;
             }
             else
@@ -256,7 +255,7 @@ public class LevelManager : Singleton<LevelManager>
         BuildManager.Instance.InitSaveBridges(saveData.bridgeDatas);
         EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载市场"));
         yield return 0;
-        MarketManager.Instance.InitSavedMarketManager();
+        MarketManager.Instance.InitSavedMarketManager(saveData);
         EventManager.TriggerEvent(ConstEvent.OnLoadingTips, Localization.Get("正在加载小车车"));
         yield return 0;
         TrafficManager.Instance.InitSavedTrafficManager(saveData.driveDatas);
@@ -309,7 +308,7 @@ public class LevelManager : Singleton<LevelManager>
         int aimHappiness = DataManager.GetLevelData(LevelID).AimHappiness;
 
         if (ResourceManager.Instance.TryGetResourceNum(99999) >= aimMoney
-            && ResourceManager.Instance.MaxPopulation >= aimPopulation
+            && ResourceManager.Instance.AllPopulation >= aimPopulation
             && MapManager.Instance.GetHappiness() >= aimHappiness)
         {
             MainInteractCanvas.OpenSuccessCanvas();

@@ -58,11 +58,10 @@ namespace Building
             {
                 if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
                 {
-                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                    EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
                 }
                 //CheckCurPeopleMoreThanMax();
-                runtimeBuildData.Pause = true;
                 UpdateEffectiveness();
             }
         }
@@ -71,6 +70,11 @@ namespace Building
         {
             issuccess = false;
             buildingData = null;
+        }
+
+        public EBuildingType GetBuildingType()
+        {
+            return EBuildingType.FarmLandBuilding;
         }
 
         public void PlayAnim()
@@ -83,12 +87,14 @@ namespace Building
             Invoke("InitPlant", 1f);
             previewObj.SetActive(false);
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
             EventManager.StartListening(ConstEvent.OnOutputResources, Output);
             EventManager.StartListening(ConstEvent.OnInputResources, Input);
             EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
             ChangeFormula();
+            runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population);
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void RestartBuildingFunction()
@@ -98,15 +104,12 @@ namespace Building
                 runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
             }
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
             EventManager.StartListening(ConstEvent.OnOutputResources, Output);
             EventManager.StartListening(ConstEvent.OnInputResources, Input);
             EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
-            if (runtimeBuildData.tabType!=BuildTabType.house)
-            {
-                ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
-            }
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
             InitPlant();
             previewObj.SetActive(false);
             SetProgress(GetProcess());
@@ -118,7 +121,7 @@ namespace Building
             {
                 ReturnBuildResources();
             }
-            MapManager.Instance._buildings.Remove(this);
+            MapManager.Instance.RemoveBuilding(this);
             MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
         
             if (repaint)
@@ -128,15 +131,8 @@ namespace Building
             }
             if (returnPopulation)
             {
-                if (runtimeBuildData.Population < 0)
-                {
-                    ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
-                }
-                else
-                {
-                    ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
-                }
-                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                runtimeBuildData.CurPeople = 0;
+                EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
             }
         
             Destroy(this.gameObject);
@@ -212,38 +208,6 @@ namespace Building
             }
             return (float)runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
         }
-
-        public void AddCurPeople(int num)
-        {
-            int cur = runtimeBuildData.CurPeople;
-            int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-            if (cur + num <= max)
-            {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
-            }
-            else
-            {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(max-cur);
-            }
-            UpdateEffectiveness();
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-        }
-
-        public void DeleteCurPeople(int num)
-        {
-            int cur = runtimeBuildData.CurPeople;
-            int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-            if (cur - num >= 0)
-            {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
-            }
-            else
-            {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
-            }
-            UpdateEffectiveness();
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-        }
         
         public virtual void UpdateRate(string date)
         {
@@ -278,7 +242,23 @@ namespace Building
 
         public CarMission MakeCarMission(float rate)
         {
-            throw new System.NotImplementedException();
+            CarMission mission = new CarMission();
+            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            if (target == null)
+            {
+                return null;
+            }
+            mission.StartBuilding = parkingGridIn;
+            mission.EndBuilding = target.parkingGridIn;
+            mission.missionType = CarMissionType.transportResources;
+            mission.transportResources = new List<CostResource>();
+            mission.transportationType = TransportationType.mini;
+            for (int i = 0; i < runtimeBuildData.formula.OutputItemID.Count; i++)
+            {
+                //Debug.Log(formula.OutputItemID[i]);
+                mission.transportResources.Add(new CostResource(runtimeBuildData.formula.OutputItemID[i], runtimeBuildData.formula.ProductNum[i]*rate*runtimeBuildData.Times));
+            }
+            return mission;
         }
 
         public void OnRecieveCar(CarMission carMission)
@@ -296,20 +276,23 @@ namespace Building
                 {
                     isharvesting = false;
                     waitNextWeekStart = true;
-                    CarMission hCarMission = MakeCarMission(runtimeBuildData.Rate);
-                    if (hCarMission != null)
-                    {
-                        TrafficManager.Instance.UseCar(hCarMission,(bool success)=> { runtimeBuildData.AvaliableToMarket = success; });
-                    }
-                    else
-                    {
-                        runtimeBuildData.AvaliableToMarket = false;
-                    }
+                    OnFinishHarvest(runtimeBuildData.Rate);
                     break;
                 }
             }
         }
+        private CarMission MakeHarvestCarMission()
+        {
+            CarMission mission = new CarMission();
+            mission.transportationType = TransportationType.harvester;
+            mission.missionType = CarMissionType.harvest;
 
+            Vector3[] vecs = new Vector3[lists.Count];
+            for (int i = 0; i < lists.Count; i++)
+                vecs[i] = (lists[i].transform.position);mission.EndBuilding = parkingGridIn;
+            mission.wayPoints = Vector3Serializer.Box(vecs);
+            return mission;
+        }
         
 
         #endregion
@@ -381,21 +364,21 @@ namespace Building
             runtimeBuildData.productTime = runtimeBuildData.formula.ProductTime;
             ShowPlant();
         }
-
-        private CarMission MakeHarvestCarMission()
+        
+        public void OnFinishHarvest(float rate)
         {
-            CarMission mission = new CarMission();
-            mission.transportationType = TransportationType.harvester;
-            mission.missionType = CarMissionType.harvest;
-
-            Vector3[] vecs = new Vector3[lists.Count];
-            for (int i = 0; i < lists.Count; i++)
+            //Debug.Log("finish");
+            isharvesting = false;
+            waitNextWeekStart = true;
+            CarMission carMission = MakeCarMission(rate);
+            if (carMission != null)
             {
-                vecs[i] = (lists[i].transform.position);
+                TrafficManager.Instance.UseCar(carMission,(bool success)=> { runtimeBuildData.AvaliableToMarket = success; });
             }
-            mission.EndBuilding = parkingGridIn;
-            mission.wayPoints = Vector3Serializer.Box(vecs);
-            return mission;
+            else
+            {
+                runtimeBuildData.AvaliableToMarket = false;
+            }
         }
         #endregion
         

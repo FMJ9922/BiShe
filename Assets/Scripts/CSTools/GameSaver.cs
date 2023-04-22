@@ -143,10 +143,14 @@ public class SaveData
     public int[] forbiddenFoodList;
     #endregion
     #region MapManager
+    public GridNode[][] gridNodes;
     #endregion
     #region MarketManager
-    public MarketData[] buyDatas;
-    public MarketData[] sellDatas;
+    public MarketData[] buyDatas;//no use anymore
+    public MarketData[] sellDatas;//no use anymore
+    public RuntimeOrderData[] runtimeOrderDatas;
+    public long OrderIndex;
+    public float[] OrderAppearValueArray;
     #endregion
     #region TrafficManager
     public CarMission[] driveDatas;
@@ -238,6 +242,19 @@ public struct Vector2Serializer
         }
         return vector2Serializers;
     }
+}
+
+[System.Serializable]
+public class MarketData
+{
+    public ItemData curItem;
+    public List<int> idList = new List<int>();
+    public bool isTrading = false;
+    public int needNum = 0;
+    public TradeMode curMode;
+    public float profit;
+    public bool isBuy = true;
+    public int maxNum;
 }
 
 [System.Serializable]

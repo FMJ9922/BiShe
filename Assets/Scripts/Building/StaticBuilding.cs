@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Building;
 using CSTools;
@@ -17,6 +18,7 @@ public class StaticBuilding : MonoBehaviour
     }
     public void SetGrids()
     {
+        //Debug.Log(gameObject.name);
         currentBuilding = transform.GetComponent<BuildingBase>();
         Vector2Int[] targetGrids = BuildManager.Instance.GetAllGrids(currentBuilding.Size.x, currentBuilding.Size.y, 
             currentBuilding.transform.position, isFacingX);
@@ -24,5 +26,10 @@ public class StaticBuilding : MonoBehaviour
         currentBuilding.runtimeBuildData = CastTool.CastBuildDataToRuntime(DataManager.GetBuildData(BuildID));
         transform.tag = "Building";
         (currentBuilding as IBuildingBasic)?.OnConfirmBuild(targetGrids);
+    }
+
+    private void OnDestroy()
+    {
+        //Debug.Log("destroy"+gameObject.name);
     }
 }

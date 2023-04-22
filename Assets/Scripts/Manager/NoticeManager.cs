@@ -50,10 +50,10 @@ public class NoticeManager : Singleton<NoticeManager>
 
     public void ShowItemDetailInfo(int itemId)
     {
-        CloseNotice();
-        EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseDetailInfo);
-        canvas.SetDetailInfo(itemId);
-        ToggleVisable(true, false);
+        //CloseNotice();
+        //EventManager.StartListening(ConstEvent.OnMouseRightButtonDown, CloseDetailInfo);
+        //canvas.SetDetailInfo(itemId);
+        //ToggleVisable(true, false);
     }
 
     //显示图标操作
@@ -68,6 +68,7 @@ public class NoticeManager : Singleton<NoticeManager>
     {
         lockShow = false;
         ToggleVisable(false);
+        CommonIcon.IsShowingOption = false;
         EventManager.StopListening(ConstEvent.OnMouseRightButtonDown, CloseNotice);
     }
 

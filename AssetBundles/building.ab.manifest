@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2117743455
+CRC: 3361192476
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b0a623a960fec5a220bf63d02c2350cc
+    Hash: 5dc03752f9f3df191d6509436f03b07c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b2b678558f3c8513b9a589d2297b19a9
+    Hash: 45be4721200ff6eb65355b285640554f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -42,17 +42,15 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: aa73b900a65e9ba46bc6e19a5558ed5a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b8b91f30e43cbf04881ade7af8ee24ea, type: 3}
 - Class: 114
@@ -60,9 +58,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 55004c61267794f4c8964793f5adc8c5, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
+  Script: {fileID: 11500000, guid: c2c33e81665d7f54d819c0cc74c8db14, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 13a439e141656eb468c8c25c0a3ab07c, type: 3}
+  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 75e830d10bc88744d983e8837ca4463b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
 - Class: 114
@@ -74,8 +74,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d909abf314d0eda418a4c337bc5d965b, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 2a2b6607be4669b4390ff446c6594104, type: 3}
@@ -83,6 +81,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 8ecde01703a7f2147ad0b344e76495da, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 84627a6822a66094698454c3a5edf869, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6a3cda19b6bc9b148b8f77bc2cf13f46, type: 3}
 - Class: 114
@@ -108,9 +108,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: c708b5ced0d0f9149ab1436d0a084330, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 05c3d32fc8f266f4db9dd32e87b92ddf, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 1cc9395f6527b494b8d19dfa03cd637c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 73eecc9f0eeee0044a06bb58885ec9fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 13a439e141656eb468c8c25c0a3ab07c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 135
@@ -131,6 +135,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 1183024399
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Prefabs/GraphPfb.prefab
 - Assets/Scenes Assets/Model/Building/Universal_Building_Factory_attachment_02_Mod.fbx
@@ -182,6 +187,7 @@ Assets:
 - Assets/Scenes Assets/Model/Building/Plain_Building_Residential_L3_02_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Plain_Building_Residential_L3_03_Preb.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L1_01.prefab
+- Assets/Scenes Assets/Finish/TradeCenter.prefab
 - Assets/Scenes Assets/Finish/Coach_Building_Residential_L2_01.prefab
 - Assets/Scenes Assets/Model/Building/Coach_Building_Residential_L3_01_Mod.fbx
 - Assets/Scenes Assets/Prefab/Building/Universal_Building_Market_L2_01_Preb.prefab

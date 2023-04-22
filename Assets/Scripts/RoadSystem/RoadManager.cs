@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using CSTools;
 using UnityEngine;
 
+/// <summary>
+/// not use any more
+/// </summary>
 public class RoadManager : Singleton<RoadManager>
-{
+{/*
     public GameObject pfb;
     public Dictionary<Vector2Int, GridNode> RoadNodeDic { get; private set; }
     public List<GridNode> RoadNodes { get; private set; }
@@ -126,13 +129,13 @@ public class RoadManager : Singleton<RoadManager>
                 }
             }
         }
-        /*for (int i = 0; i < RoadNodes.Count; i++)
+        for (int i = 0; i < RoadNodes.Count; i++)
         {
             for (int j = 0; j < RoadNodes[i].NearbyNode.Count; j++)
             {
                 Instantiate(pfb, MapManager.GetTerrainStaticPosition(RoadNodes[i].GridPos)+new Vector3(0,j,0), Quaternion.identity, transform);
             }
-        }*/
+        }
         TrafficManager.Instance.reachable = RoadNodes;
         CrossNodes = RoadNodes;
         //删除反向的结点
@@ -225,14 +228,14 @@ public class RoadManager : Singleton<RoadManager>
     {
         return (a.GridPos.x - b.GridPos.x) * 1000 + (a.GridPos.y - b.GridPos.y);
     }
-    /*
+    
     public void AddRoadNode(Vector2Int grid)
     {
         if (!RoadNodeDic.TryGetValue(grid, out GridNode node))
         {
             RoadNodeDic.Add(grid,new GridNode(grid));
         }
-    }*/
+    }
 
     public void CheckAndAddCrossNode(GridNode node)
     {
@@ -475,6 +478,6 @@ public class GridNode
         }
         return false;
     }
-
+*/
 
 }

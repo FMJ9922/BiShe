@@ -345,7 +345,7 @@ public class GameManager : Singleton<GameManager>
 
         //ResourceManager
         data.saveResources = ResourceManager.Instance.GetAllResources();
-        data.curPopulation = ResourceManager.Instance.CurPopulation;
+        data.curPopulation = ResourceManager.Instance.WorkerPopulation;
         data.hudList = ResourceManager.Instance._hudList.ToArray();
         data.forbiddenFoodList = ResourceManager.Instance._forbiddenFoodList.ToArray();
         data.allTimeResources = ResourceManager.Instance._itemHistoryNumDic;
@@ -353,9 +353,9 @@ public class GameManager : Singleton<GameManager>
         //data.gridNodes = MapManager.Instance.GetGrids();
 
         //MarketManager
-        data.buyDatas = MarketManager.Instance.GetBuyDatas();
-        data.sellDatas = MarketManager.Instance.GetSellDatas();
-
+        data.runtimeOrderDatas = MarketManager.Instance.GetRuntimeOrderDatas().ToArray();
+        data.OrderIndex = MarketManager.Instance.OrderIndex;
+        data.OrderAppearValueArray = MarketManager.Instance.GetOrderAppearValueArray();
         //TrafficManager
         data.driveDatas = TrafficManager.Instance.GetDriveDatas();
 

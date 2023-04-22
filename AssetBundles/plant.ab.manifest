@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2727625734
+CRC: 3655293856
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9154e97ef698ae2560f2e95c3c4e0d79
+    Hash: d110f203dcec2f1c4e7141264a9a4807
   TypeTreeHash:
     serializedVersion: 2
     Hash: 697da7f04688931ed17c2af27fa448f1
@@ -31,6 +31,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_08_Preb.prefab
 - Assets/Scenes Assets/Model/Plant/Universal_Plant_FruitTree_01_Mod.fbx

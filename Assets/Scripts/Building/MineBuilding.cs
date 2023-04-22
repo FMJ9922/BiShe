@@ -61,12 +61,14 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
     public void InitBuildingFunction()
     {
         parkingGridIn = BuildingTools.GetInParkingGrid(this);
-        MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuilding(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
         ChangeFormula();
+        runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population);
+        EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
     }
 
     public void RestartBuildingFunction()
@@ -76,15 +78,12 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
             runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
         }
         parkingGridIn = BuildingTools.GetInParkingGrid(this);
-        MapManager.Instance._buildings.Add(this);
+        MapManager.Instance.AddBuilding(this);
         MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
         EventManager.StartListening(ConstEvent.OnOutputResources, Output);
         EventManager.StartListening(ConstEvent.OnInputResources, Input);
         EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
-        if (runtimeBuildData.tabType!=BuildTabType.house)
-        {
-            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
-        }
+        EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
     }
 
     public void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
@@ -93,7 +92,7 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         {
             ReturnBuildResources();
         }
-        MapManager.Instance._buildings.Remove(this);
+        MapManager.Instance.RemoveBuilding(this);
         MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
         if (repaint)
         {
@@ -101,15 +100,8 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         }
         if (returnPopulation)
         {
-            if (runtimeBuildData.Population < 0)
-            {
-                ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
-            }
-            else
-            {
-                ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
-            }
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+            runtimeBuildData.CurPeople = 0;
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         Destroy(this.gameObject);
@@ -193,37 +185,6 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         return (float)runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
     }
 
-    public void AddCurPeople(int num)
-    {
-        int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        if (cur + num <= max)
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(num);
-        }
-        else
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(max-cur);
-        }
-        UpdateEffectiveness();
-        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-    }
-
-    public void DeleteCurPeople(int num)
-    {
-        int cur = runtimeBuildData.CurPeople;
-        int max = runtimeBuildData.Population + TechManager.Instance.PopulationBuff();
-        if (cur - num >= 0)
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-num);
-        }
-        else
-        {
-            runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(-cur);
-        }
-        UpdateEffectiveness();
-        EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-    }
 
     public void UpdateRate(string date)
     {
@@ -259,7 +220,6 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         mission.StartBuilding = parkingGridIn;
         mission.EndBuilding = target.parkingGridIn;
         mission.missionType = CarMissionType.transportResources;
-        mission.isAnd = true;
         mission.transportResources = new List<CostResource>();
         mission.transportationType = TransportationType.mini;
         for (int i = 0; i < runtimeBuildData.formula.OutputItemID.Count; i++)
@@ -281,11 +241,10 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         {
             if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
             }
             //CheckCurPeopleMoreThanMax();
-            runtimeBuildData.Pause = true;
             UpdateEffectiveness();
         }
     }
@@ -303,7 +262,7 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
         if (buildingData != null)
         {
             SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
-            DestroyBuilding(false, false, false);
+            DestroyBuilding(true, true, false);
             MapManager.Instance.AddBuildingEntry(BuildingTools.GetInParkingGrid(this), buildingData);
             issuccess = true;
         }
@@ -312,5 +271,10 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
             issuccess = false;
             NoticeManager.Instance.InvokeShowNotice("升级资源不足");
         }
+    }
+
+    public EBuildingType GetBuildingType()
+    {
+        return EBuildingType.MineBuilding;
     }
 }

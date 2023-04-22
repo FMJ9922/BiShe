@@ -176,6 +176,34 @@ public class ExcelTool
         }
         return array;
     }
+    
+    public static OrderData[] CreateOrderDataArrayWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        OrderData[] array = new OrderData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            OrderData orderData = new OrderData();
+            orderData.ID = int.Parse(collect[i][0].ToString());
+            orderData.Type = int.Parse(collect[i][1].ToString());
+            orderData.ItemId = int.Parse(collect[i][2].ToString());
+            orderData.ItemNum = int.Parse(collect[i][3].ToString());
+            orderData.GoodsPrice = float.Parse(collect[i][4].ToString());
+            orderData.Destination = collect[i][5].ToString();
+            orderData.Distance = float.Parse(collect[i][6].ToString());
+            orderData.StartRate = float.Parse(collect[i][7].ToString());
+            orderData.MaxRate = float.Parse(collect[i][8].ToString());
+            orderData.TimeLimit = int.Parse(collect[i][9].ToString());
+            orderData.RepeatTime = int.Parse(collect[i][10].ToString());
+            orderData.DescriptionIds = collect[i][11].ToString();
+            orderData.LevelLimit = int.Parse(collect[i][12].ToString());
+            orderData.CheckItemId = int.Parse(collect[i][13].ToString());
+            orderData.AddRateTarget = StringToIntList(collect[i][14].ToString());
+            array[i - 2] = orderData;
+        }
+        return array;
+    }
 
     public static LocalizationData CreateLocalizationDataWithExcel(string filePath)
     {

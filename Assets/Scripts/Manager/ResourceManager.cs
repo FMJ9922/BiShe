@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Building;
 using CSTools;
@@ -24,12 +25,10 @@ public class ResourceManager : Singleton<ResourceManager>
 
     public Dictionary<int, int[]> _itemHistoryNumDic = new Dictionary<int, int[]>();
 
-    private int curPopulation = 0;
-    private int maxPopulation = 0;
-    public int MaxPopulation { get { return maxPopulation; } }
-    public int CurPopulation { get { return curPopulation; } }
-
-    public float maxStorage = 1000;
+    private int _workerPopulation = 0;
+    private int _allPopulation = 0;
+    public int AllPopulation { get { return _allPopulation; } }
+    public int WorkerPopulation { get { return _workerPopulation; } }
 
     public List<int> _hudList;//玩家设置资源监视窗口名单
 
@@ -45,27 +44,35 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice, false);
         AddResource(DataManager.GetItemIdByName("Money"), data.money, false);
         AddResource(DataManager.GetItemIdByName("Stone"), data.stone, false);
-#if UNITY_EDITOR
-        AddResource(12015, 100);
-        AddResource(12020, 100);
-        AddResource(12009, 100);
-        AddResource(12004, 100);
-#endif
+/*#if UNITY_EDITOR
+        foreach (var item in DataManager.Instance.ItemArray)
+        {
+            AddResource(item.Id, 999,false);
+        }
+        AddResource(99999, 999,false);
+#endif*/
         InitHUDList(null);
         InitForbiddenFoodList(null);
         InitAllTimeResourcesList(null);
         RecordLastWeekItem();
+        StartListening();
     }
 
     public void InitSavedResourceManager(SaveData saveData)
     {
         AddResources(saveData.saveResources, false);
-        curPopulation = 0;
+        _workerPopulation = 0;
         //Debug.Log(saveData.curPopulation);
         InitHUDList(saveData.hudList);
         InitForbiddenFoodList(saveData.forbiddenFoodList);
         InitAllTimeResourcesList(saveData.allTimeResources);
         RecordLastWeekItem();
+        StartListening();
+    }
+
+    private void StartListening()
+    {
+        EventManager.StartListening(ConstEvent.OnPopulationChange,RecalculatePopulation);
     }
 
     private void InitForbiddenFoodList(int[] list)
@@ -141,12 +148,11 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         _deltaItemBuildingDic.Clear();
         _deltaItemTradingDic.Clear();
-        List<BuildingBase> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         List<CostResource> p;
         for (int i = 0; i < buildings.Count; i++)
         {
-            var productBuilding = buildings[i] as IProduct;
-            if (productBuilding != null)
+            if ((buildings[i] is IProduct) || (buildings[i] is IHabitable))
             {
                 p = BuildingTools.GetBuildingWeekDeltaResources(buildings[i].runtimeBuildData);
                 for (int j = 0; j < p.Count; j++)
@@ -163,17 +169,32 @@ public class ResourceManager : Singleton<ResourceManager>
             }
         }
         p = MarketManager.Instance.GetDeltaNum();
-        for (int j = 0; j < p.Count; j++)
+        if (p != null)
         {
-            if (_deltaItemTradingDic.ContainsKey(p[j].ItemId))
+            for (int j = 0; j < p.Count; j++)
             {
-                _deltaItemTradingDic[p[j].ItemId] += p[j].ItemNum;
-            }
-            else
-            {
-                _deltaItemTradingDic.Add(p[j].ItemId, p[j].ItemNum);
-            }
+                if (_deltaItemTradingDic.ContainsKey(p[j].ItemId))
+                {
+                    _deltaItemTradingDic[p[j].ItemId] += p[j].ItemNum;
+                }
+                else
+                {
+                    _deltaItemTradingDic.Add(p[j].ItemId, p[j].ItemNum);
+                }
+            } 
         }
+    }
+
+    public float GetMaxStorage()
+    {
+        float max = 0;
+        var storageBuildings = MapManager.Instance.GetAllBuildings(EBuildingType.StorageBuilding);
+        for (int i = 0; i < storageBuildings.Count; i++)
+        {
+            max += storageBuildings[i].runtimeBuildData.MaxStorage;
+        }
+
+        return max;
     }
 
     public float GetWeekDeltaNum(int id)
@@ -190,7 +211,8 @@ public class ResourceManager : Singleton<ResourceManager>
 
         if (id == 99999)
         {
-            ret -= TrafficManager.Instance.WeeklyCost;
+            //todo
+            //ret -= TrafficManager.Instance.WeeklyCost;
         }
         return ret;
     }
@@ -336,6 +358,41 @@ public class ResourceManager : Singleton<ResourceManager>
         }
     }
 
+    /// <summary>
+    /// 尝试消耗物品
+    /// </summary>
+    /// <param name="id">物品id</param>
+    /// <param name="num">物品数量</param>
+    /// <returns>实际消耗的数量</returns>
+    public float UseResources(int id,float num)
+    {
+        if (_storedItemDic.TryGetValue(id, out float hasNum))//字典里已存该物品
+        {
+            if (hasNum >= num)
+            {
+                _storedItemDic[id] -= num;
+                return num;
+            }
+            else
+            {
+                _storedItemDic[id] = 0;
+                return hasNum;
+            }
+        }
+        return 0;
+    }
+
+    public List<CostResource> UseResources(List<CostResource> costResources)
+    {
+        var ret = new List<CostResource>();
+        for (int i = 0; i < costResources.Count; i++)
+        {
+            float realUseNum = UseResources(costResources[i].ItemId, costResources[i].ItemNum);
+            ret.Add(new CostResource(costResources[i].ItemId,realUseNum));
+        }
+        return ret;
+    }
+
     public float TryGetLastResourceNum(int Id)
     {
         float storedNum;
@@ -422,6 +479,18 @@ public class ResourceManager : Singleton<ResourceManager>
             //Debug.Log("不存在物品：" + Id);
             return false;//不存在该物品就返回失败
         }
+    }
+    
+    public bool IsResourceEnough(int itemId, float itemNum)
+    {
+        if (_storedItemDic.TryGetValue(itemId, out float storedNum))
+        {
+            if (itemNum <= storedNum)//物品数量足够消耗
+            {
+                return true;//返回成功
+            }
+        }
+        return false;
     }
     public float GetAllFoodNum()
     {
@@ -541,17 +610,28 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     /// <param name="num"></param>
     /// <returns></returns>
-    public bool AddMaxPopulation(int num)
+
+    /// <summary>
+    /// 重新统计人口信息
+    /// </summary>
+    public void RecalculatePopulation()
     {
-        maxPopulation += num;
-        if (maxPopulation >= 0 && maxPopulation <= 10000)
+        _workerPopulation = 0;
+        _allPopulation = 0;
+        var buildings = MapManager.Instance.GetAllBuildings();
+        for (int i = 0; i < buildings.Count; i++)
         {
-            EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
-            return true;
+            var data = buildings[i].runtimeBuildData;
+            if (data.CurPeople > 0)
+            {
+                _workerPopulation += data.CurPeople;
+            }
+            else
+            {
+                _allPopulation -= data.CurPeople;
+            }
         }
-        maxPopulation = Mathf.Clamp(maxPopulation, 0, 10000);
-        Debug.Log("人口操作可能有问题，请检查");
-        return false;
+        EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
     }
 
     /// <summary>
@@ -559,39 +639,17 @@ public class ResourceManager : Singleton<ResourceManager>
     /// </summary>
     /// <param name="num">申请的人口数量</param>
     /// <returns>实际提供下来的人口数量</returns>
-    public int TryAddCurPopulation(int num,bool ignore = false)
+    public int GetMaxWorkerRemain(int num)
     {
-        //Debug.Log(num);
-        curPopulation += num;
-        if (ignore)
+        int remain = _allPopulation - _workerPopulation;
+        if (num > remain)
         {
-            return num;
-        }
-        if (curPopulation <= 0)
-        {
-            curPopulation -= num;
-            int maxProvide = 0 - curPopulation;
-            curPopulation += maxProvide;
-            return maxProvide;
-        }
-        else
-        if (curPopulation <= maxPopulation)
-        {
-            return num;
+            return remain;
         }
         else
         {
-            curPopulation -= num;
-            int maxProvide = maxPopulation - curPopulation;
-            curPopulation += maxProvide;
-            //Debug.Log(maxProvide);
-            return maxProvide;
+            return num;
         }
-    }
-
-    public void AddMaxStorage(float max)
-    {
-        maxStorage += max;
     }
 
     public float GetCurStorage()
@@ -612,7 +670,7 @@ public class ResourceManager : Singleton<ResourceManager>
     /// <returns></returns>
     public float GetRemainStorage()
     {
-        return maxStorage - GetCurStorage();
+        return GetMaxStorage() - GetCurStorage();
     }
 
     public bool IsInHudList(int Id)

@@ -33,6 +33,7 @@ public class MusicManager : MonoBehaviour
         if (instance != null && instance != this)//检测Instance是否存在且只有一个
         {
             Destroy(this.gameObject);
+            return;
         }
         else
         {
@@ -42,9 +43,6 @@ public class MusicManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);//加载关卡时不销毁GameManager
         musicVolumn = PlayerPrefs.GetFloat("MusicVolumn", 0.1f);
         ValueChangeCheck(musicVolumn);
-    }
-    private void Start()
-    {
         PlayMusic();
     }
     public void ValueChangeCheck(float vol)

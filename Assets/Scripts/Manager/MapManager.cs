@@ -10,20 +10,34 @@ public class MapManager : Singleton<MapManager>
     public static Vector2Int MapSize = new Vector2Int(300, 300);
     private GridNode[][] _grids;
     private LevelData _leveldata;
-    private static Vector3[] _vertices;//存储地形顶点数据
-    public const int unit = 2;//地形一格的长度（单位米）
-    public const int TexLength = 8;//贴图长度为8
-    public List<BuildingBase> _buildings = new List<BuildingBase>();
+    private static Vector3[] _vertices; //存储地形顶点数据
+    public const int unit = 2; //地形一格的长度（单位米）
+    public const int TexLength = 8; //贴图长度为8
+    private List<BuildingBase> _buildings = new List<BuildingBase>(); //所有建筑数据
+    public Dictionary<EBuildingType, List<BuildingBase>> _buildingDic; //分类建筑数据
     [SerializeField] private static TerrainGenerator generator;
     public static string noticeContent;
     private Dictionary<Vector2Int, BuildingBase> _buildingEntryDic;
+
+    #region Map
 
     public void InitMapManager()
     {
         InitLevelData();
         InitGrid(GameManager.saveData);
         InitBuilidngEntryDic();
+        _buildingDic = new Dictionary<EBuildingType, List<BuildingBase>>();
     }
+
+    public void InitSaveMapManager()
+    {
+        InitLevelData();
+        InitGrid(GameManager.saveData);
+        InitBuilidngEntryDic();
+        _buildingDic = new Dictionary<EBuildingType, List<BuildingBase>>();
+        
+    }
+
     /// <summary>
     /// 加载关卡的时候调用
     /// </summary>
@@ -33,6 +47,7 @@ public class MapManager : Singleton<MapManager>
         generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
         //mapData = TerrainGenerator.Instance.GetMapData();
     }
+
     private void InitGrid(SaveData saveData)
     {
         SetUp();
@@ -47,13 +62,14 @@ public class MapManager : Singleton<MapManager>
     {
         _buildingEntryDic = new Dictionary<Vector2Int, BuildingBase>();
     }
+
     [ContextMenu("SetUp")]
     public void SetUp()
     {
         _grids = SetUpGrid();
     }
 
-    public void AddBuildingEntry(Vector2Int entry,BuildingBase building)
+    public void AddBuildingEntry(Vector2Int entry, BuildingBase building)
     {
         if (!_buildingEntryDic.ContainsKey(entry))
         {
@@ -97,6 +113,7 @@ public class MapManager : Singleton<MapManager>
             return null;
         }
     }
+
     public GridNode[][] GetGrids()
     {
         /*if (_grids == null)*/
@@ -136,7 +153,7 @@ public class MapManager : Singleton<MapManager>
                 _grids[i][j].y = j;
                 _grids[i][j].passSpeed = GetPassSpeed(tex);
                 _grids[i][j].enterCost = GetEnterCost(tex);
-                _grids[i][j].direction = (Direction)dir;
+                _grids[i][j].direction = (Direction) dir;
                 _grids[i][j].height = verticles[index].y;
                 _grids[i][j].mineValue = mines[i][j];
                 /*if(i == 152)
@@ -151,6 +168,7 @@ public class MapManager : Singleton<MapManager>
                 }
             }
         }
+
         for (int i = 0; i < MapSize.x; i++)
         {
             for (int j = 0; j < MapSize.y; j++)
@@ -163,6 +181,7 @@ public class MapManager : Singleton<MapManager>
                 {
                     _grids[i][j - 1].AddNearbyNode(_grids[i][j]);
                 }
+
                 if (j % 2 == 0 && i < MapSize.x - 1)
                 {
                     _grids[i][j].AddNearbyNode(_grids[i + 1][j]);
@@ -173,6 +192,7 @@ public class MapManager : Singleton<MapManager>
                 }
             }
         }
+
         System.TimeSpan dt = sw.Elapsed;
         Debug.Log("记录地图耗时:" + dt.TotalSeconds + "秒");
         return _grids;
@@ -206,13 +226,13 @@ public class MapManager : Singleton<MapManager>
 
     public GridType GetGridType(int tex)
     {
-        if(tex == 4 || tex == 5 || tex == 6
-           ||tex == 9 || tex == 10 || tex == 8
-           || tex == 12 || tex == 13 || tex == 14)
+        if (tex == 4 || tex == 5 || tex == 6
+            || tex == 9 || tex == 10 || tex == 8
+            || tex == 12 || tex == 13 || tex == 14)
         {
             return GridType.road;
         }
-        else if(tex == 2||tex ==11||tex == 15)
+        else if (tex == 2 || tex == 11 || tex == 15)
         {
             return GridType.occupy;
         }
@@ -244,6 +264,7 @@ public class MapManager : Singleton<MapManager>
         {
             return 1.5f;
         }
+
         return 0.1f;
     }
 
@@ -269,6 +290,7 @@ public class MapManager : Singleton<MapManager>
         {
             return 1;
         }
+
         return 100;
     }
 
@@ -287,7 +309,6 @@ public class MapManager : Singleton<MapManager>
 
     public void InitRoad()
     {
-
         List<StaticBuilding> lists = StaticBuilding.lists;
         //RoadManager.Instance.InitRoadManager();
         SetGrid(lists);
@@ -300,32 +321,27 @@ public class MapManager : Singleton<MapManager>
             //Debug.Log("??");
             lists[i].SetGrids();
         }
+
         Debug.Log("地图已初始化！");
     }
 
     public List<Vector2Int> GetAllRoadGrid()
     {
         List<Vector2Int> res = new List<Vector2Int>();
-        /*foreach(var item in _gridDic)
-        {
-            if(item.Value.GridType == GridType.road)
-            {
-                res.Add(item.Key);
-            }
-        }*/
         return res;
     }
 
     /// <summary>
     /// 刷地基
     /// </summary>
-    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0,bool recalculate = true)
+    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0, bool recalculate = true)
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
             generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
             SetPassInfo(takenGirds[i], tex);
         }
+
         if (recalculate)
         {
             generator.ReCalculateNormal();
@@ -338,39 +354,46 @@ public class MapManager : Singleton<MapManager>
         {
             int index = takenGirds[i].x + takenGirds[i].y * MapSize.x;
             //int dir = GameManager.saveData.meshDir[index];
-            generator.RefreshToOriginUV(index,out int tex);
-            if(tex == 12||tex ==13||tex == 14)
+            generator.RefreshToOriginUV(index, out int tex);
+            if (tex == 12 || tex == 13 || tex == 14)
             {
-                generator.RefreshUV(0,8,index,4);
+                generator.RefreshUV(0, 8, index, 4);
             }
+
             SetPassInfo(takenGirds[i], tex);
         }
+
         generator.ReCalculateNormal();
     }
+
     public void BuildOutCornerRoad(int level, Vector2Int roadGrid, Direction direction)
     {
         int index = roadGrid.x + roadGrid.y * MapSize.x;
-        generator.RefreshUV(12 - level * 4 + 2, 8, index, (int)direction);
+        generator.RefreshUV(12 - level * 4 + 2, 8, index, (int) direction);
         SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
+
     public void BuildInCornerRoad(int level, Vector2Int roadGrid, Direction direction)
     {
         int index = roadGrid.x + roadGrid.y * MapSize.x;
-        generator.RefreshUV(12 - level * 4 + 1, 8, index, (int)direction);
+        generator.RefreshUV(12 - level * 4 + 1, 8, index, (int) direction);
         SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
+
     public void BuildStraightRoad(int level, Vector2Int roadGrid, Direction direction)
     {
         int index = roadGrid.x + roadGrid.y * MapSize.x;
-        generator.RefreshUV(12 - level * 4, 8, index, (int)direction);
+        generator.RefreshUV(12 - level * 4, 8, index, (int) direction);
         SetPassInfo(roadGrid, 12 - level * 4 + 2);
     }
+
     public void GenerateRoad(Vector2Int[] roadGrid, int level = 1)
     {
         for (int i = 0; i < roadGrid.Length; i++)
         {
             SetGridTypeToRoad(roadGrid[i]);
         }
+
         TerrainGenerator.Instance.CheckMesh();
         for (int i = 0; i < roadGrid.Length; i++)
         {
@@ -391,9 +414,8 @@ public class MapManager : Singleton<MapManager>
                     break;
             }
         }
-        //Debug.Log("Build");
+
         generator.ReCalculateNormal();
-        //RoadManager.Instance.InitRoadNodeDic();
     }
 
     public void GetRoadTypeAndDir(Vector2Int roadGrid, out RoadOption roadOption, out Direction direction)
@@ -414,6 +436,7 @@ public class MapManager : Singleton<MapManager>
         {
             if (around[i]) count++;
         }
+
         //Debug.Log(count);
         if (count == 7)
         {
@@ -422,25 +445,25 @@ public class MapManager : Singleton<MapManager>
             {
                 if (around[i] && !around[(i + 1) % 4])
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i) % 4);
+                    direction = (Direction) System.Enum.ToObject(typeof(Direction), (i) % 4);
                     return;
                 }
             }
         }
-        else
-        if (count > 3)
+        else if (count > 3)
         {
             roadOption = RoadOption.straight;
             for (int i = 0; i < 4; i++)
             {
                 if (around[i] && around[(i + 1) % 4] && count != 6)
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
+                    direction = (Direction) System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
                     return;
                 }
+
                 if (!around[(i + 4)] && count == 6)
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 3) % 4);
+                    direction = (Direction) System.Enum.ToObject(typeof(Direction), (i + 3) % 4);
                     //Debug.Log((int)direction);
                     return;
                 }
@@ -453,7 +476,7 @@ public class MapManager : Singleton<MapManager>
             {
                 if (around[i] && !around[(i + 1) % 4])
                 {
-                    direction = (Direction)System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
+                    direction = (Direction) System.Enum.ToObject(typeof(Direction), (i + 1) % 4);
                     return;
                 }
             }
@@ -462,23 +485,23 @@ public class MapManager : Singleton<MapManager>
 
     public static GridNode GetGridNode(Vector2Int gridPos)
     {
-        if(gridPos.x < 0 || gridPos.x > MapSize.x - 1 || gridPos.y < 0 || gridPos.y > MapSize.y)
+        if (gridPos.x < 0 || gridPos.x > MapSize.x - 1 || gridPos.y < 0 || gridPos.y > MapSize.y)
         {
             return null;
         }
+
         //Debug.Log(gridPos);
         return MapManager.Instance._grids[gridPos.x][gridPos.y];
     }
 
-    public static void SetPassInfo(Vector2Int gridPos,int tex)
+    public static void SetPassInfo(Vector2Int gridPos, int tex)
     {
         GridNode node = GetGridNode(gridPos);
-        if (node!=null)
+        if (node != null)
         {
             node.passSpeed = GetPassSpeed(tex);
             node.enterCost = GetEnterCost(tex);
         }
-
     }
 
     /// <summary>
@@ -489,6 +512,7 @@ public class MapManager : Singleton<MapManager>
     {
         return new Vector3(0, 10, 0);
     }
+
     /// <summary>
     /// 获取地面某处的坐标
     /// </summary>
@@ -496,15 +520,16 @@ public class MapManager : Singleton<MapManager>
     /// 
     public static Vector3 GetTerrainPosition(Vector2Int gridPos)
     {
-        return new Vector3(gridPos.x * 2, GetGridNode(gridPos)?.height??10, gridPos.y * 2); 
+        return new Vector3(gridPos.x * 2, GetGridNode(gridPos)?.height ?? 10, gridPos.y * 2);
     }
 
     public static Vector3 GetStaticTerrainPosition(Vector2Int gridPos)
     {
-        if(generator == null)
+        if (generator == null)
         {
             generator = GameObject.Find("TerrainGenerator").GetComponent<TerrainGenerator>();
         }
+
         return generator.GetStaticPoition(gridPos, generator);
     }
 
@@ -515,6 +540,7 @@ public class MapManager : Singleton<MapManager>
         {
             return new Vector3(vec.x, 10, vec.z);
         }
+
         return vec;
     }
 
@@ -522,6 +548,7 @@ public class MapManager : Singleton<MapManager>
     {
         return new Vector3(gridPos.x * 2, 10, gridPos.y * 2);
     }
+
     public List<Vector3> GetTerrainPosition(List<Vector2Int> gridPos)
     {
         List<Vector3> result = new List<Vector3>();
@@ -529,14 +556,17 @@ public class MapManager : Singleton<MapManager>
         {
             result.Add(GetTerrainPosition(gridPos[i]));
         }
+
         return result;
     }
+
     public static Vector3 GetTerrainPosition(Vector3 mistakeHeightWorldPos)
     {
         Vector3 localPos = mistakeHeightWorldPos - GetTerrainWorldPosition();
         Vector2Int gridPos = GetCenterGrid(localPos);
         return GetTerrainPosition(gridPos);
     }
+
     public static Vector3 GetStaticTerrainPosition(Vector3 mistakeHeightWorldPos)
     {
         Vector3 localPos = mistakeHeightWorldPos - GetTerrainWorldPosition();
@@ -551,6 +581,7 @@ public class MapManager : Singleton<MapManager>
         int z = Mathf.FloorToInt(centerGrid.z);
         return new Vector2Int(x, z);
     }
+
     public GridType GetGridType(Vector2Int grid)
     {
         if (CheckInMap(grid))
@@ -575,23 +606,10 @@ public class MapManager : Singleton<MapManager>
         {
             return true;
         }
+
         return false;
     }
-    /*
-    public SingleGrid GetSingleGrid(Vector2Int grid)
-    {
-        SingleGrid result;
-        if (_gridDic.TryGetValue(grid, out result))
-        {
-            return result;
-        }
-        else
-        {
-            Debug.LogError("不合法输入" + grid.ToString());
-            return null;
-        }
-    }
-    */
+
     public static bool CheckCanBuild(Vector2Int[] grids, BuildingBase buildingBase, bool checkInSea)
     {
         bool hasOutOfMap = CheckOutOfMap(grids);
@@ -600,12 +618,12 @@ public class MapManager : Singleton<MapManager>
             noticeContent = Localization.Get("不能在地图外建造");
             return false;
         }
+
         var buildingBasic = buildingBase as IBuildingBasic;
-        
-        Assert.IsNull(buildingBasic,"糟糕！此处理论上不为空");
+
         var parkingPos = BuildingTools.GetInParkingGrid(buildingBase);
         //检测安放地点占用
-        bool hasOverlap = checkInSea? CheckOverlapSea(grids): CheckOverlap(grids);
+        bool hasOverlap = checkInSea ? CheckOverlapSea(grids) : CheckOverlap(grids);
         //检测道路是否贴近
         bool hasNearRoad = CheckNearRoad(parkingPos);
         //检测是否靠近海岸线
@@ -615,37 +633,41 @@ public class MapManager : Singleton<MapManager>
         //检测入口是否已经被占用
         bool isEntryAvailable = CheckEntryAvailble(parkingPos);
         //检测坡度是否平缓
-        bool isFlat = CheckFlat(grids,parkingPos);
+        bool isFlat = CheckFlat(grids, parkingPos);
         if (!hasNearRoad)
         {
             noticeContent = Localization.Get(ConstString.NoticeBuildFailNoNearRoad);
         }
-        else
-        if (hasOverlap)
+        else if (hasOverlap)
         {
             noticeContent = Localization.Get(ConstString.NoticeBuildFailNoPlace);
         }
+
         if (!isInSea)
         {
             noticeContent = Localization.Get(ConstString.NoticeBuildFailNoNearSea);
         }
+
         if (isInWater)
         {
             noticeContent = Localization.Get("不能在水面下建造建筑");
         }
+
         if (!isEntryAvailable)
         {
             noticeContent = Localization.Get("建筑入口已被占用！无法建造");
         }
+
         if (!isFlat)
         {
             noticeContent = Localization.Get("建筑不能建在过于陡峭的位置");
         }
+
         //if (!isInSea) Debug.Log("不在海里");
         //Debug.Log(!hasOverlap);
         //Debug.Log(isInSea);
         //Debug.Log(!isInWater);
-        return !hasOverlap  && isInSea && !isInWater && isEntryAvailable && isFlat && hasNearRoad;
+        return !hasOverlap && isInSea && !isInWater && isEntryAvailable && isFlat && hasNearRoad;
     }
 
     /// <summary>
@@ -671,21 +693,24 @@ public class MapManager : Singleton<MapManager>
 
     public static bool CheckEntryAvailble(Vector2Int vector2Int)
     {
-        return Instance.IsBuildingEntryAvalible(vector2Int)&& (GetGridNode(vector2Int)?.gridType?? GridType.occupy) != GridType.occupy;
+        return Instance.IsBuildingEntryAvalible(vector2Int) &&
+               (GetGridNode(vector2Int)?.gridType ?? GridType.occupy) != GridType.occupy;
     }
 
-    public static bool CheckFlat(Vector2Int[] vector2Ints,Vector2Int entrance)
+    public static bool CheckFlat(Vector2Int[] vector2Ints, Vector2Int entrance)
     {
-        float height = GetGridNode(entrance)?.height??10;
-        for (int i = 0; i < vector2Ints.Length; i+=4)
+        float height = GetGridNode(entrance)?.height ?? 10;
+        for (int i = 0; i < vector2Ints.Length; i += 4)
         {
-            if (Mathf.Abs(height - GetGridNode(vector2Ints[i])?.height??10) > 2)
+            if (Mathf.Abs(height - GetGridNode(vector2Ints[i])?.height ?? 10) > 2)
             {
                 return false;
             }
         }
+
         return true;
     }
+
     /// <summary>
     /// 获得平地位置
     /// </summary>
@@ -701,6 +726,7 @@ public class MapManager : Singleton<MapManager>
         }
         else return Vector3.zero;
     }
+
     public static bool CheckOverlap(Vector2Int[] grids)
     {
         for (int i = 0; i < grids.Length; i++)
@@ -710,13 +736,16 @@ public class MapManager : Singleton<MapManager>
                 //Debug.Log("建筑重叠");
                 return true;
             }
+
             if (!Instance.IsBuildingEntryAvalible(grids[i]))
             {
                 return true;
             }
         }
+
         return false;
     }
+
     /// <summary>
     /// 允许造在海里
     /// </summary>
@@ -727,20 +756,20 @@ public class MapManager : Singleton<MapManager>
         for (int i = 0; i < grids.Length; i++)
         {
             GridType gridType = Instance.GetGridType(grids[i]);
-            if (gridType != GridType.empty&&gridType!=GridType.water)
+            if (gridType != GridType.empty && gridType != GridType.water)
             {
                 //Debug.Log("建筑重叠");
                 return true;
             }
         }
+
         return false;
     }
 
     public static bool CheckOutOfMap(Vector2Int[] grids)
     {
         Vector2Int temp;
-        //只用检查一头一尾
-        for (int i = 0; i < grids.Length; i+= grids.Length-1)
+        for (int i = 0; i < grids.Length; i += grids.Length - 1)
         {
             temp = grids[i];
             if (!CheckInMap(temp))
@@ -748,6 +777,7 @@ public class MapManager : Singleton<MapManager>
                 return true;
             }
         }
+
         return false;
     }
 
@@ -778,45 +808,13 @@ public class MapManager : Singleton<MapManager>
                 return true;
             }
         }
+
         return false;
     }
+
     public static bool CheckNearRoad(Vector2Int parkingPos)
     {
-        //Debug.Log(Instance.GetGridType(parkingPos));
         return Instance.GetGridType(parkingPos) == GridType.road;
-    }
-    public static bool CheckNearRoad(Vector2Int[] grids, int width, int height)
-    {
-        Vector2Int start = grids[0];
-        for (int i = 0; i < width; i++)
-        {
-            if (Instance.GetGridType(start + new Vector2Int(i, -1)) == GridType.road)
-            {
-                //direction = Direction.down;
-                return true;
-            }
-            if (Instance.GetGridType(start + new Vector2Int(i, height)) == GridType.road)
-            {
-                //direction = Direction.up;
-                return true;
-            }
-        }
-        for (int i = 0; i < height; i++)
-        {
-            if (Instance.GetGridType(start + new Vector2Int(-1, i)) == GridType.road)
-            {
-                //direction = Direction.left;
-                return true;
-            }
-            if (Instance.GetGridType(start + new Vector2Int(width, i)) == GridType.road)
-            {
-                //direction = Direction.right;
-                return true;
-            }
-        }
-        //direction = Direction.right;
-        //Debug.Log("不贴合道路");
-        return false;
     }
 
     private void SetGridType(Vector2Int grid, GridType gridType)
@@ -827,24 +825,12 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    public void ShowGrid(Vector2Int[] grids)
-    {
-        for (int i = 0; i < grids.Length; i++)
-        {
-            //Instantiate(gridPfb, new Vector3(grids[i].x*3, 0.1f, grids[i].y*3), Quaternion.identity, transform);
-        }
-    }
-    public static void SetGridTypeToEmpty(Vector2Int grid)
-    {
-        Instance.SetGridType(grid, GridType.empty);
-    }
-
     public static void SetGridTypeToEmpty(Vector2Int[] grids)
     {
         for (int i = 0; i < grids.Length; i++)
         {
             GridType type = GetGridNode(grids[i]).gridType;
-            if (type == GridType.road|| type== GridType.occupy)
+            if (type == GridType.road || type == GridType.occupy)
             {
                 Instance.SetGridType(grids[i], GridType.empty);
             }
@@ -869,28 +855,100 @@ public class MapManager : Singleton<MapManager>
         Instance.SetGridType(grid, GridType.road);
     }
 
+    public float GetHappiness()
+    {
+        float sum = 0;
+        ;
+        for (int i = 0; i < _buildings.Count; i++)
+        {
+            sum += _buildings[i].runtimeBuildData.CurLevel;
+        }
+
+        return (sum / _buildings.Count) * 10 + 80;
+    }
+
+    #endregion
+
+    #region Buildings
+
+    public List<BuildingBase> GetAllBuildings()
+    {
+        return _buildings;
+    }
+
+    public List<BuildingBase> GetAllBuildings(EBuildingType bt)
+    {
+        if (_buildingDic.TryGetValue(bt, out List<BuildingBase> buildings))
+        {
+            return buildings;
+        }
+
+        var newList = new List<BuildingBase>();
+        _buildingDic.Add(bt, newList);
+        return newList;
+    }
+
+    public void AddBuilding(BuildingBase buildingBase)
+    {
+        if (buildingBase is IBuildingBasic iBasic)
+        {
+            _buildings.Add(buildingBase);
+            EBuildingType bt = iBasic.GetBuildingType();
+            if (_buildingDic.TryGetValue(bt, out List<BuildingBase> buildings))
+            {
+                buildings.Add(buildingBase);
+            }
+            else
+            {
+                var newList = new List<BuildingBase> {buildingBase};
+                _buildingDic.Add(bt, newList);
+            }
+        }
+    }
+
+    public void RemoveBuilding(BuildingBase buildingBase)
+    {
+        if (buildingBase is IBuildingBasic iBasic)
+        {
+            _buildings.Remove(buildingBase);
+            EBuildingType bt = iBasic.GetBuildingType();
+            if (_buildingDic.TryGetValue(bt, out List<BuildingBase> buildings))
+            {
+                buildings.Remove(buildingBase);
+            }
+            else
+            {
+                Debug.LogError("删除了一个不在种类建筑集合里的建筑!" + bt.ToString());
+            }
+        }
+    }
+
     public static GameObject GetNearestMarket(Vector2Int grid)
     {
         float dis = Mathf.Infinity;
         GameObject p = null;
         for (int i = 0; i < Instance._buildings.Count; i++)
         {
-            //Debug.Log(Instance._buildings[i].GetComponent<BuildingBase>().runtimeBuildData.Id);
-            if(Instance._buildings[i] == null)
+            var curBuilding = Instance._buildings[i] as IBuildingBasic;
+            if (curBuilding == null)
             {
                 continue;
             }
-            int id = Instance._buildings[i].runtimeBuildData.Id;
-            if (id == 20004 || id == 20012 || id == 20013)
+
+            var buildingType = curBuilding.GetBuildingType();
+            if (buildingType == EBuildingType.MarketBuilding)
             {
                 float cur = GetDistance(Instance._buildings[i].parkingGridIn, grid);
-                if (cur < dis && Vector3.Distance(Instance._buildings[i].transform.position, GetTerrainStaticPosition(grid))<= Instance._buildings[i].runtimeBuildData.InfluenceRange)
+                if (cur < dis &&
+                    Vector3.Distance(Instance._buildings[i].transform.position, GetTerrainStaticPosition(grid)) <=
+                    Instance._buildings[i].runtimeBuildData.InfluenceRange)
                 {
                     dis = cur;
                     p = Instance._buildings[i].gameObject;
                 }
             }
         }
+
         return p;
     }
 
@@ -910,39 +968,62 @@ public class MapManager : Singleton<MapManager>
                 }
             }
         }
+
         return p;
     }
 
-    public static int GetHutBuildingNum()
+    public StorageBuilding GetEnoughGoodsStorageBuilding(int itemId, float itemNum, Vector2Int startGrid)
     {
-        int num = 0;
-        for (int i = 0; i < Instance._buildings.Count; i++)
+        //todo 改成从满足商品数量的所有建筑里取物品
+        float dis = Mathf.Infinity;
+        StorageBuilding p = null;
+        var storageBuildings = GetAllBuildings(EBuildingType.StorageBuilding);
+        for (int i = 0; i < storageBuildings.Count; i++)
         {
-            if (Instance._buildings[i].runtimeBuildData.tabType == BuildTabType.house)
+            float cur = GetDistance(storageBuildings[i].parkingGridIn, startGrid);
+            if (cur < dis)
             {
-                num++;
+                dis = cur;
+                p = storageBuildings[i] as StorageBuilding;
             }
         }
-        return num;
+        return p;
     }
 
-
-    public float GetHappiness()
+    public StorageBuilding GetEnoughStorageBuilding(float needNum, Vector2Int startGrid)
     {
-        float sum = 0; ;
-        for (int i = 0; i < _buildings.Count; i++)
+        float dis = Mathf.Infinity;
+        StorageBuilding p = null;
+        var storageBuildings = GetAllBuildings(EBuildingType.StorageBuilding);
+        for (int i = 0; i < storageBuildings.Count; i++)
         {
-            sum += _buildings[i].runtimeBuildData.CurLevel;
+            float cur = GetDistance(storageBuildings[i].parkingGridIn, startGrid);
+            //todo 之后所有物品不会公用仓库
+            if (cur < dis)
+            {
+                dis = cur;
+                p = storageBuildings[i] as StorageBuilding;
+            }
         }
-        return (sum / _buildings.Count) * 10 + 80;
+        return p;
     }
+
+    public TradeBuilding GetTradeBuilding()
+    {
+        var tradeBuildings = GetAllBuildings(EBuildingType.TradeBuilding);
+        return tradeBuildings[0] as TradeBuilding;
+    }
+
+    #endregion
+
+    #region AStar 寻路
 
     private static int GetDistance(Vector2Int cur, Vector2Int target)
     {
         return Mathf.Abs(cur.x - target.x) + Mathf.Abs(cur.y - target.y);
     }
 
-    public class compare: IComparer<GridNode>
+    private class CompareGridNode : IComparer<GridNode>
     {
         public int Compare(GridNode x, GridNode y)
         {
@@ -952,26 +1033,23 @@ public class MapManager : Singleton<MapManager>
 
     List<GridNode> path = new List<GridNode>();
     List<GridNode> openList = new List<GridNode>();
-    List<GridNode> closeList = new List<GridNode>(); 
+    List<GridNode> closeList = new List<GridNode>();
     List<Vector3> list = new List<Vector3>();
     GridNode temp;
-    compare com = new compare();
+    CompareGridNode com = new CompareGridNode();
+
     public List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end)
     {
         path.Clear();
         openList.Clear();
         closeList.Clear();
-        //Debug.Log(start + " " + end);
-        //System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-        //sw.Start();
-        //ClearRoadNodeH();
-        //Debug.Log(start);
         GridNode startNode = GetGridNode(start);
         GridNode endNode = GetGridNode(end);
         if (startNode == null || endNode == null)
         {
             return null;
         }
+
         openList.Add(startNode);
         path.Add(startNode);
         temp = startNode;
@@ -982,57 +1060,34 @@ public class MapManager : Singleton<MapManager>
         {
             if (openList.Count <= 0)
             {
-                //Debug.Log("路径被阻挡！"+ start+"=>"+end);
                 return null;
             }
-            //Debug.Log("——");
+
             temp = openList[0];
-            /*while (openList.Count > 10)
-            {
-                openList.RemoveRange(10, openList.Count - 10);
-            }*/
             openList.Remove(temp);
             closeList.Add(temp);
-            //Debug.Log("选择:"+temp.GridPos);
             if (temp == endNode)
             {
-                //sw.Stop();
-                //System.TimeSpan dt = sw.Elapsed;
-                //Debug.Log("寻路耗时:" + dt.TotalSeconds + "秒");
-                //sw.Restart();
                 list.Clear();
-                //Vector2Int delta = new Vector2Int(0,0);
                 while (temp != startNode)
                 {
-                    //Vector2Int newDelta = temp.GridPos - temp.Parent.GridPos;
-                    //Debug.Log(newDelta+" "+delta);
-                    //if (newDelta!=delta)
-                    {
-                        list.Add(MapManager.GetNotInWaterPosition(temp.GridPos) + new Vector3(1, 0, 1));
-                    }
-                    //delta = newDelta;
+                    list.Add(MapManager.GetNotInWaterPosition(temp.GridPos) + new Vector3(1, 0, 1));
                     temp = temp.Parent;
                 }
-                //Debug.Log(MapManager.Instance.GetTerrainPosition(startNode.GridPos));
+
                 list.Add(MapManager.GetNotInWaterPosition(startNode.GridPos) + new Vector3(1, 0, 1));
                 list.Reverse();
-                //sw.Stop();
-                //System.TimeSpan dt1 = sw.Elapsed;
-                //Debug.Log("翻转道路:" + dt1.TotalSeconds + "秒");
-                //WayPointDic.Add(start.ToString() + end.ToString(), list);
-                //Debug.Log(n);
                 return list;
             }
-            //Debug.Log("当前结点："+temp.GridPos+ " "+temp.NearbyNode.Count);
+
             for (int i = 0; i < temp.NearbyNode.Count; i++)
             {
                 GridNode node = temp.NearbyNode[i];
-                //Debug.Log(temp.GridPos + "=>" + node.GridPos);
                 if (closeList.Contains(node)) continue;
                 if (openList.Contains(node))
                 {
                     int g = node.G;
-                    if(g > temp.G + node.enterCost)
+                    if (g > temp.G + node.enterCost)
                     {
                         node.G = temp.G + node.enterCost;
                         node.F = node.G + 3 * GetDistance(node.GridPos, end);
@@ -1047,30 +1102,105 @@ public class MapManager : Singleton<MapManager>
                     openList.Add(node);
                 }
             }
+
             openList.Sort(com);
         }
-        //Debug.Log(n);
-        //Debug.Log("寻路失败"+start+" "+end);
+
         return null;
+    }
+
+    #endregion
+}
+
+#region RoadGrid
+
+[System.Serializable]
+public class GridNode
+{
+    public GridNode()
+    {
+        NearbyNode = new List<GridNode>();
+        Parent = null;
+        G = 0;
+        NearNodeCount = 0;
+    }
+
+    public List<GridNode> NearbyNode { get; private set; }
+
+    public int NearNodeCount = 0; //上面只存可通向的的节点，这个存储所有邻点的个数
+
+    public Vector2Int GridPos
+    {
+        get { return new Vector2Int(x, y); }
+    }
+
+    public int x, y;
+
+    public float passSpeed;
+
+    public float height;
+
+    public int enterCost;
+
+    public float mineValue;
+
+    public Direction direction;
+
+    public GridType gridType;
+    public GridNode Parent { get; set; }
+    public int G { get; set; }
+
+    public int F { get; set; }
+
+    public void Clear()
+    {
+        Parent = null;
+        G = 0;
+        NearNodeCount = 0;
+    }
+
+    public void AddNearbyNode(GridNode roadNode)
+    {
+        //如果不是就加入
+        if (!IsNearbyRoad(roadNode))
+        {
+            NearbyNode.Add(roadNode);
+        }
+        else
+        {
+            Debug.Log(GridPos + "已经添加过" + roadNode.GridPos);
+        }
+    }
+
+    public void RemoveNearbyNode(GridNode roadNode)
+    {
+        if (IsNearbyRoad(roadNode))
+        {
+            NearbyNode.Remove(roadNode);
+        }
+        else
+        {
+            Debug.Log("没用正确删除" + roadNode.GridPos);
+        }
+    }
+
+    public bool IsNearbyRoad(GridNode node)
+    {
+        if (NearbyNode.Count <= 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < NearbyNode.Count; i++)
+        {
+            if (NearbyNode[i] == node)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
 
-/*
-[System.Serializable]
-public class SingleGrid
-{
-    public Vector2IntSerializer GridPos { get; private set; }
-    public GridType GridType { get; set; }
-
-    public int TexIndex;
-
-    public int Dir;
-
-    public int enterCost;//经过的代价
-    public SingleGrid(Vector2Int pos, GridType gridType)
-    {
-        this.GridPos = new Vector2IntSerializer(pos.x, pos.y);
-        GridType = gridType;
-    }
-
-}*/
+#endregion

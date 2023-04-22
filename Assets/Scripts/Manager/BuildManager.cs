@@ -242,7 +242,7 @@ public class BuildManager : Singleton<BuildManager>
             pfbName = pfbName.Substring(0, pfbName.Length - 1);
             pfbName += buildData.SaveOutLookType.ToString();
         }
-        //Debug.Log(pfbName);
+        Debug.Log(pfbName);
         GameObject pfb = LoadAB.Load(bundleName, pfbName);
         GameObject building = Instantiate(pfb, TransformFinder.Instance.buildingParent);
         building.name = pfbName;
@@ -530,6 +530,7 @@ public class BuildManager : Singleton<BuildManager>
             }
             bridgeData.gridsPos = Vector3Serializer.Box(bridges.ToArray());
             building.SetBridgeData(bridgeData);
+            building.InitBuildingFunction();
             building.OnConfirmBuild(bridgeGrids.ToArray());
         }
         //Debug.Log("generate");

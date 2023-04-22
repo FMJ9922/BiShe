@@ -64,8 +64,10 @@ namespace Building
         public void InitBuildingFunction()
         {
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
+            runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population);
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void RestartBuildingFunction()
@@ -75,9 +77,9 @@ namespace Building
                 runtimeBuildData.formula = runtimeBuildData.formulaDatas[runtimeBuildData.CurFormula];
             }
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
-            MapManager.Instance._buildings.Add(this);
+            MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
-            ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.CurPeople,true);
+            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void DestroyBuilding(bool returnResources, bool returnPopulation, bool repaint = true)
@@ -86,7 +88,7 @@ namespace Building
             {
                 ReturnBuildResources();
             }
-            MapManager.Instance._buildings.Remove(this);
+            MapManager.Instance.RemoveBuilding(this);
             MapManager.Instance.RemoveBuildingEntry(parkingGridIn);
         
             if (repaint)
@@ -96,15 +98,8 @@ namespace Building
             }
             if (returnPopulation)
             {
-                if (runtimeBuildData.Population < 0)
-                {
-                    ResourceManager.Instance.AddMaxPopulation(runtimeBuildData.Population);
-                }
-                else
-                {
-                    ResourceManager.Instance.TryAddCurPopulation(-runtimeBuildData.CurPeople);
-                }
-                EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                runtimeBuildData.CurPeople = 0;
+                EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
             }
         
             Destroy(this.gameObject);
@@ -132,7 +127,6 @@ namespace Building
             mission.StartBuilding = parkingGridIn;
             mission.EndBuilding = target.parkingGridIn;
             mission.missionType = CarMissionType.transportResources;
-            mission.isAnd = true;
             mission.transportResources = new List<CostResource>();
             mission.transportationType = TransportationType.mini;
             for (int i = 0; i < runtimeBuildData.formula.OutputItemID.Count; i++)
@@ -153,18 +147,40 @@ namespace Building
             {
                 if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
                 {
-                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                    EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
                 }
                 //CheckCurPeopleMoreThanMax();
-                runtimeBuildData.Pause = true;
             }
         }
 
         public void Upgrade(out bool issuccess, out BuildingBase buildingData)
         {
-            issuccess = false;
-            buildingData = null;
+            int nextId = runtimeBuildData.RearBuildingId;
+            BuildData data = DataManager.GetBuildData(nextId);
+            RuntimeBuildData buildData = CastTool.CastBuildDataToRuntime(data);
+            buildData.Pause = runtimeBuildData.Pause;
+            buildData.CurLevel = runtimeBuildData.CurLevel + 1;
+            buildData.CurFormula = runtimeBuildData.CurFormula;
+            buildData.Happiness = (80f + 10 * buildData.CurLevel) / 100;
+            buildingData = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
+            if (buildingData != null)
+            {
+                SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
+                DestroyBuilding(true, true, false);
+                MapManager.Instance.AddBuildingEntry(BuildingTools.GetInParkingGrid(this), buildingData);
+                issuccess = true;
+            }
+            else
+            {
+                issuccess = false;
+                NoticeManager.Instance.InvokeShowNotice("升级资源不足");
+            }
+        }
+
+        public EBuildingType GetBuildingType()
+        {
+            return EBuildingType.GovernmentBuilding;
         }
     }
 }

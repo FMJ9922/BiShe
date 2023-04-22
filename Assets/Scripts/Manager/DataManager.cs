@@ -24,6 +24,7 @@ public class DataManager : ScriptableObject
     public FormulaData[] FormulaArray;
     public LocalizationData LocalizationData;
     public CarData[] CarArray;
+    public OrderData[] OrderArray;
     public Dictionary<BuildTabType, List<BuildData>> TabDic;
     public static string[] foodNames;
     public static int[] foodIds;
@@ -107,6 +108,25 @@ public class DataManager : ScriptableObject
         }
         Debug.Log("无效的车辆id" + carId);
         return null;
+    }
+
+    
+    public static OrderData GetOrderData(int orderId)
+    {
+        for (int i = 0; i < Instance.OrderArray.Length; i++)
+        {
+            if (Instance.OrderArray[i].ID == orderId)
+            {
+                return Instance.OrderArray[i];
+            }
+        }
+        Debug.Log("无效的订单id" + orderId);
+        return null;
+    }
+
+    public static int GetOrderLength()
+    {
+        return Instance.OrderArray.Length;
     }
     public static string GetItemNameById(int ID)
     {

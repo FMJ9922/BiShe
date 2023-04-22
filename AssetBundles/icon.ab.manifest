@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3437149224
+CRC: 896043775
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cc67d87a3568f41f1507e6c58f90ed2b
+    Hash: 06c82ef1b421e3c83c5d8eb80577fd55
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4908fa12115d35930b278507ea5b410b
+    Hash: 962c81a0582adefca5a1f738e927fd98
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -33,6 +33,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 224
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/ArtAssets/UI/TechIcon/unJieyingXiao01.png
 - Assets/Scenes Assets/BuildingIcon/HookerL1.png

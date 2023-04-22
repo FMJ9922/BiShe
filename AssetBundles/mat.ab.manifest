@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 897183623
+CRC: 4161341811
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3dac77b17f714870d1935f878d3ec2d2
+    Hash: 7d7f85d962f4e0959d0b4c716390b5ce
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2b170735527de831d5cd81528048abfd
+    Hash: be43a2f8618a78f029304d6b6e4e37f1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -37,6 +37,7 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat 1.mat
 - Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat

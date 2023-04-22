@@ -42,18 +42,21 @@ public class CarMissionCanvas : CanvasBase
         switch (mission.missionType)
         {
             case CarMissionType.requestResources:
+            case CarMissionType.collectOrderGoods:
+            {
+                carryLabel.text = Localization.Get("Request") + Localization.Get("Goods") + ":";
+                CleanUpAllAttachedChildren(_iconsParent);
+                for (int i = 0; i < mission.requestResources.Count; i++)
                 {
-                    carryLabel.text = Localization.Get("Request") + Localization.Get("Goods") + ":";
-                    CleanUpAllAttachedChildren(_iconsParent);
-                    for (int i = 0; i < mission.requestResources.Count; i++)
-                    {
-                        GameObject resource = CommonIcon.GetIcon(mission.requestResources[i].ItemId, mission.requestResources[i].ItemNum);
-                        resource.transform.parent = _iconsParent;
-                        resource.transform.localScale = Vector3.one * 1.5f;
-                    }
+                    GameObject resource = CommonIcon.GetIcon(mission.requestResources[i].ItemId,
+                        mission.requestResources[i].ItemNum);
+                    resource.transform.parent = _iconsParent;
+                    resource.transform.localScale = Vector3.one * 1.5f;
                 }
+            }
                 break;
             case CarMissionType.transportResources:
+            case CarMissionType.goForOrder:
                 {
                     carryLabel.text = Localization.Get("Transport") + Localization.Get("Goods") + ":";
                     CleanUpAllAttachedChildren(_iconsParent);
@@ -64,6 +67,9 @@ public class CarMissionCanvas : CanvasBase
                         resource.transform.localScale = Vector3.one * 1.5f;
                     }
                 }
+                break;
+            case CarMissionType.backFromOrder:
+                carryLabel.text = Localization.Get("BackFromOrder");
                 break;
             default:
                 break;

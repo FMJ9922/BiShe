@@ -30,6 +30,7 @@ public class TrafficManager : Singleton<TrafficManager>
     private RuntimeCarMission tempCarMission;
 
     private List<Vector3> _takenPosList = new List<Vector3>();
+    private int _carIndexCounter = 0;
 
 
     public float WeeklyCost { get; set; }
@@ -125,14 +126,12 @@ public class TrafficManager : Singleton<TrafficManager>
             action?.Invoke();
         }
     }
-    public void UseCar(CarMission mission, Action<bool> callback = null, DriveType driveType = DriveType.once)
+    public void UseCar(CarMission mission, Action<bool> callback = null)
     {
-        //Debug.Log(mission.StartBuilding);
         RuntimeCarMission runtimeCarMission = new RuntimeCarMission
         {
             _carMission = mission,
             _callback = callback,
-            _driveType = driveType
         };
         queueCarMission.Enqueue(runtimeCarMission);
     } 
@@ -193,184 +192,6 @@ public class TrafficManager : Singleton<TrafficManager>
         }
     }
 
-    #region 弃用
-    /*
-    public bool CloseToTarget(Vector2 cur, Vector2 target)
-    {
-        return Vector2.Distance(cur, target) >= 2;
-    }
-
-    private Direction ChooseStartDirection(Vector2Int start, Vector2Int end, Direction roadDir)
-    {
-        Vector2Int delta = end - start;
-        switch (roadDir)
-        {
-            case Direction.left:
-            case Direction.right:
-                return delta.x > 0 ? Direction.right : Direction.left;
-            case Direction.down:
-            case Direction.up:
-            default:
-                return delta.y > 0 ? Direction.up : Direction.down;
-        }
-    }
-    /// <summary>
-    /// 获得车辆的行驶路径
-    /// </summary>
-    /// <returns></returns>
-    private List<Vector3> GetWayPoints(Vector2Int start, Vector2Int end, Direction direction)
-    {
-        RoadNodes = new List<Vector2Int>();
-        Vector2Int tempGrid = start;
-        Direction curDir = direction;
-        Vector2Int forwardVec = CastTool.CastDirectionToVector2Int((int)curDir);
-        FindRoadState state = FindRoadState.straight;
-        RoadNodes.Add(start);
-        int count = 500;
-        while (CloseToTarget(tempGrid, end) && count > 0)
-        {
-            //Debug.Log(tempGrid+" "+forwardVec + " "+ state);
-            count--;
-            switch (state)
-            {
-                case FindRoadState.straight:
-                    {
-                        //int delta = forwardVec.x * (end - tempGrid).x+ forwardVec.y * (end - tempGrid).y;
-                        //if(delta<=0)
-                        if (IsGridRoad(tempGrid + forwardVec))
-                        {
-                            tempGrid += forwardVec;
-                        }
-                        else
-                        {
-                            state = FindRoadState.turing;
-                        }
-                        break;
-                    }
-                case FindRoadState.backward:
-                    {
-                        Vector3 forward = new Vector3(forwardVec.x, 0, forwardVec.y);
-                        Vector2 target2 = (Vector2)end - tempGrid;
-                        Vector3 target = new Vector3(target2.x, 0, target2.y);
-                        curDir = CastTool.CastVector2ToDirection(forwardVec);
-                        bool canLeft = IsGridRoad(tempGrid + CastTool.CastDirectionToVector2Int((int)curDir + 1));
-                        bool canRight = IsGridRoad(tempGrid + CastTool.CastDirectionToVector2Int((int)curDir - 1));
-                        if (canLeft && canRight)
-                        {
-                            forwardVec = Vector3.Cross(forward, target).y <= 0 ?
-                                CastTool.CastDirectionToVector2Int((int)curDir + 1) :
-                                CastTool.CastDirectionToVector2Int((int)curDir - 1);
-                            state = FindRoadState.straight;
-                            //Debug.Log("1");
-                            RoadNodes.Add(tempGrid);
-                            break;
-                        }
-                        else if (canLeft)
-                        {
-                            forwardVec = CastTool.CastDirectionToVector2Int((int)curDir + 1);
-                            state = FindRoadState.straight;
-                            //Debug.Log("2" + tempGrid);
-                            RoadNodes.Add(tempGrid);
-                            break;
-                        }
-                        else if (canRight)
-                        {
-                            forwardVec = CastTool.CastDirectionToVector2Int((int)curDir - 1);
-                            state = FindRoadState.straight;
-                            //Debug.Log("3" + tempGrid);
-                            RoadNodes.Add(tempGrid);
-                            break;
-
-                        }
-                        else
-                        {
-                            tempGrid += forwardVec;
-                            //直行直到找到第一个能转弯的路口
-                            break;
-                        }
-                    }
-                case FindRoadState.turing:
-                    {
-                        Vector3 forward = new Vector3(forwardVec.x, 0, forwardVec.y);
-                        Vector2 target2 = (Vector2)end - tempGrid;
-                        Vector3 target = new Vector3(target2.x, 0, target2.y);
-                        //选择一个靠近目标的方向
-                        curDir = CastTool.CastVector2ToDirection(forwardVec);
-                        switch (curDir)
-                        {
-                            case Direction.down:
-                                if (!IsGridRoad(tempGrid + Vector2Int.down))
-                                {
-                                    tempGrid += Vector2Int.up;
-                                }
-                                break;
-                            case Direction.up:
-                                if (IsGridRoad(tempGrid + Vector2Int.up))
-                                {
-                                    tempGrid += Vector2Int.up;
-                                }
-                                break;
-                            case Direction.right:
-                                if (IsGridRoad(tempGrid + Vector2Int.right))
-                                {
-                                    tempGrid += Vector2Int.right;
-                                }
-                                break;
-                            case Direction.left:
-                                if (!IsGridRoad(tempGrid + Vector2Int.left))
-                                {
-                                    tempGrid -= Vector2Int.left;
-                                }
-                                break;
-                        }
-                        bool canLeft = IsGridRoad(tempGrid + CastTool.CastDirectionToVector2Int((int)curDir + 1));
-                        bool canRight = IsGridRoad(tempGrid + CastTool.CastDirectionToVector2Int((int)curDir - 1));
-                        if (canLeft && canRight)
-                        {
-                            forwardVec = Vector3.Cross(forward, target).y <= 0 ?
-                                CastTool.CastDirectionToVector2Int((int)curDir + 1) :
-                                CastTool.CastDirectionToVector2Int((int)curDir - 1);
-                            state = FindRoadState.straight;
-                            //Debug.Log("4"+ tempGrid);
-                            RoadNodes.Add(tempGrid);
-                            break;
-                        }
-                        else if (canLeft)
-                        {
-                            forwardVec = CastTool.CastDirectionToVector2Int((int)curDir + 1);
-                            state = FindRoadState.straight;
-                            //Debug.Log("5" + tempGrid);
-                            RoadNodes.Add(tempGrid);
-                            break;
-                        }
-                        else if (canRight)
-                        {
-                            forwardVec = CastTool.CastDirectionToVector2Int((int)curDir - 1);
-                            state = FindRoadState.straight;
-                            RoadNodes.Add(tempGrid);
-                            //Debug.Log("6");
-                            break;
-
-                        }
-                        else
-                        {
-                            forwardVec = -forwardVec;
-                            state = FindRoadState.backward;
-                            break;
-                        }
-                    }
-            }
-        }
-        RoadNodes.Add(end);
-        return MapManager.Instance.GetTerrainPosition(RoadNodes);
-    }
-
-    private bool IsGridRoad(Vector2Int nextGrid)
-    {
-        return MapManager.Instance.GetGridType(nextGrid) == GridType.road;
-    }
-    */
-    #endregion
 
     private void OnDrawGizmos()
     {
@@ -402,6 +223,7 @@ public class TrafficManager : Singleton<TrafficManager>
         return driver;
     }
 
+
     private void RecycleCarDriver(CarDriver carDriver)
     {
         DriveCost(-carDriver.GetDriveCost());
@@ -416,9 +238,9 @@ public class TrafficManager : Singleton<TrafficManager>
 
     private void DriveCost(float money)
     {
-        WeeklyCost -= money;
-        ResourceManager.Instance.AddMoney(money);
-        EventManager.TriggerEvent<float>(ConstEvent.OnOilCost,WeeklyCost);
+        //WeeklyCost -= money;
+        //ResourceManager.Instance.AddMoney(money);
+        //EventManager.TriggerEvent<float>(ConstEvent.OnOilCost,WeeklyCost);
     }
 
     private CarModel GetCarModelFromPool(TransportationType type)
@@ -473,13 +295,14 @@ public class CarMission
     public Vector3Serializer[] wayPoints;
     public int wayCount;
     public Vector3Serializer carPosition =  new Vector3Serializer();
-    public bool isAnd;//资源是否是并，而不是或
     public List<CostResource> requestResources;//请求的资源
     public List<CostResource> transportResources;//运输的资源
     public CarMissionType missionType;//任务种类
     public TransportationType transportationType;
     public Vector2IntSerializer startBuilding;
     public Vector2IntSerializer endBuilding;
+    public Vector2IntSerializer belongToBuilding;
+    public int orderIndex;//正在进行的订单index
     public Vector2Int StartBuilding 
     { 
         get => startBuilding.Vector2Int;
@@ -490,10 +313,16 @@ public class CarMission
         get => endBuilding.Vector2Int;
         set => endBuilding = new Vector2IntSerializer(value);
     }
+    
+    public Vector2Int BelongToBuilding 
+    {
+        get => belongToBuilding.Vector2Int;
+        set => belongToBuilding = new Vector2IntSerializer(value);
+    }
 }
 public class RuntimeCarMission
 {
     public CarMission _carMission;
     public Action<bool> _callback;
-    public DriveType _driveType;
+    
 }

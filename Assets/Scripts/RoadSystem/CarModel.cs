@@ -5,7 +5,6 @@ using UnityEngine;
 public class CarModel : MonoBehaviour
 {
     public TransportationType CarType;
-    public CarSensor CarSensor;
     private CarDriver _carDriver;
     private Transform _thisTrans;
     private Vector3 _leftOriginPos;

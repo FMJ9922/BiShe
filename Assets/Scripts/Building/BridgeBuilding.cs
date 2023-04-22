@@ -109,8 +109,8 @@ namespace Building
             {
                 if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
                 {
-                    runtimeBuildData.CurPeople += ResourceManager.Instance.TryAddCurPopulation(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
-                    EventManager.TriggerEvent(ConstEvent.OnPopulaitionChange);
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                    EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
                 }
                 //CheckCurPeopleMoreThanMax();
                 runtimeBuildData.Pause = true;
@@ -121,6 +121,11 @@ namespace Building
         {
             issuccess = false;
             buildingData = null;
+        }
+
+        public EBuildingType GetBuildingType()
+        {
+            return EBuildingType.BridgeBuilding;
         }
     }
 

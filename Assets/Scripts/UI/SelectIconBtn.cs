@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class SelectIconBtn : MonoBehaviour, IPointerClickHandler
 {
@@ -13,7 +14,7 @@ public class SelectIconBtn : MonoBehaviour, IPointerClickHandler
     //该槽位可选科技的类型,读配置
     public TechType techType;
     //该槽位已选的建筑类型，玩家选择
-    public BuildingType buildingType;
+    [FormerlySerializedAs("buildingType")] public EBuildingType eBuildingType;
     #endregion
 
     #region 接口

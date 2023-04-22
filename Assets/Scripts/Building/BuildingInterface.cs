@@ -41,6 +41,11 @@ namespace Building
         /// </summary>
         void Upgrade(out bool issuccess, out BuildingBase buildingData);
 
+        /// <summary>
+        /// 获取建筑类型
+        /// </summary>
+        EBuildingType GetBuildingType();
+
     }
 
     /// <summary>
@@ -79,10 +84,6 @@ namespace Building
         float GetProcess();
 
         float WorkEffect();
-
-        void AddCurPeople(int num);
-
-        void DeleteCurPeople(int num);
 
         void UpdateRate(string date);
 

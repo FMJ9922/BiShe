@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 218992800
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: icon.ab
+      Dependencies:
+        Dependency_0: mat.ab
+    Info_1:
+      Name: building.ab
+      Dependencies:
+        Dependency_0: icon.ab
+        Dependency_1: mat.ab
+        Dependency_2: plant.ab
+    Info_2:
+      Name: mat.ab
+      Dependencies: {}
+    Info_3:
+      Name: plant.ab
+      Dependencies:
+        Dependency_0: mat.ab

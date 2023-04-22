@@ -56,6 +56,7 @@ public class SaveItem : MonoBehaviour
 
     public void Load()
     {
+        StaticBuilding.lists.Clear();
         GameManager.Instance.LoadLevelFromSaveData(fileName);
     }
 

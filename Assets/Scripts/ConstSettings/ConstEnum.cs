@@ -14,17 +14,21 @@ public enum TechType
 /// <summary>
 /// 建筑类型枚举，每种建筑必有相应的科技枚举，而多种建筑可以对应同一个科技枚举
 /// </summary>
-public enum BuildingType
+public enum EBuildingType
 {
-    Farmland = 0,               //农田
-    Sawmill = 1,                //伐木场
-    Orchard = 2,                //果园
-    Mine = 3,                   //矿井
-
-    ProcessingFactory = 100,    //加工厂
-    Mill = 101,                 //磨坊
-
-    FurnitureFactory = 200,     //家具制造厂
+    Null,
+    BridgeBuilding,
+    FactoryBuilding,
+    FarmLandBuilding,
+    GovernmentBuilding,
+    HutBuilding,
+    LoggingCampBuilding,
+    MarketBuilding,
+    MineBuilding,
+    OrchardBuilding,
+    PierBuilding,
+    StorageBuilding,
+    TradeBuilding,
 }
 
 /// <summary>
@@ -149,6 +153,9 @@ public enum CarMissionType
     requestResources = 0,//请求物资
     transportResources = 1,//运输物资
     harvest = 2,//收割
+    collectOrderGoods = 3,//取订单
+    goForOrder = 4,//去运输订单
+    backFromOrder = 5,//从运输订单返回
 }
 
 public enum SoundResource
@@ -196,12 +203,14 @@ public enum IconDescription
 [System.Serializable]
 public enum TradeMode
 {
+    [Description("None")]
+    none = 0,
     [Description("Once")]
-    once = 0,
+    once = 1,
     [Description("EveryWeek")]
-    everyWeek = 1,
-    [Description("Maintain")]
-    maintain = 2,
+    everyWeek = 2,
+    [Description("EveryMonth")]
+    everyMonth = 3,
 }
 
 

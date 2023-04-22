@@ -72,7 +72,7 @@ public class NoticeCanvas : CanvasBase
         CleanUpAllAttachedChildren(_onlyItemInfo.transform.GetChild(0));
         _onlyItemInfo.SetActive(true);
         ItemData itemData = DataManager.GetItemDataById(itemId);
-        List<BuildingBase> buildings = MapManager.Instance._buildings;
+        List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         buildings.Sort(SortBuildingBase);
         for (int i = 0; i < buildings.Count; i++)
         {
@@ -130,114 +130,6 @@ public class NoticeCanvas : CanvasBase
         GameObject fenge2 = Instantiate(_fenGeLinePfb, _onlyItemInfo.transform.GetChild(0));
 
         int marketCount = 0;
-        if (itemId != 99999)
-        {
-            if (itemId != 11000)
-            {
-                List<MarketItem> marketItem = MarketManager.Instance.GetTargetData(itemId);
-                if (marketItem == null || marketItem.Count < 1)
-                {
-                    GameObject titleObj4 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
-                    titleObj4.GetComponent<TMP_Text>().text = Localization.Get("无");
-                }
-                else
-                {
-                    for (int i = 0; i < marketItem.Count; i++)
-                    {
-                        string title = Localization.Get(marketItem[i].curMode.GetDescription());
-                        string deltaNum;
-                        if (marketItem[i].isBuy)
-                        {
-                            deltaNum = $"<#9FFF8D>+{CastTool.RoundOrFloat(marketItem[i].GetCostResource().ItemNum)}</color>";
-                        }
-                        else
-                        {
-                            deltaNum = $"<#FF7B72>-{CastTool.RoundOrFloat(marketItem[i].GetCostResource().ItemNum)}</color>";
-                        }
-                        GameObject itemObj = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
-                        itemObj.GetComponent<ItemDeltaInfo>().Init(title, deltaNum, null);
-                    }
-                }
-            }
-            else
-            {
-                List<MarketItem> marketItems = MarketManager.Instance.GetAllFoodData();
-                if (marketItems == null ||marketItems.Count<1)
-                {
-                    GameObject titleObj4 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
-                    titleObj4.GetComponent<TMP_Text>().text = Localization.Get("无");
-                }
-                else
-                {
-                    for (int i = 0; i < marketItems.Count; i++)
-                    {
-                        string title = Localization.Get(marketItems[i].curItem.Name);
-                        string deltaNum;
-                        if (marketItems[i].marketData.isBuy)
-                        {
-                            deltaNum = $"<#9FFF8D>+{CastTool.RoundOrFloat(marketItems[i].GetCostResource().ItemNum)}</color>";
-                        }
-                        else
-                        {
-                            deltaNum = $"<#FF7B72>-{CastTool.RoundOrFloat(marketItems[i].GetCostResource().ItemNum)}</color>";
-                        }
-                        GameObject itemObj = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
-                        itemObj.GetComponent<ItemDeltaInfo>().Init(title, deltaNum, null);
-                    }
-                }
-                    
-            }
-            
-        }
-        else 
-        {
-            MarketItem[] buyItems = MarketManager.Instance.GetBuyItems();
-            MarketItem[] sellItems = MarketManager.Instance.GetSellItems();
-            for (int i = 0; i < buyItems.Length; i++)
-            {
-                if(buyItems[i].isTrading && ResourceManager.Instance.IsResourceEnough(new CostResource(99999, -buyItems[i].GetProfit())))
-                {
-                    GameObject itemObj = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
-                    itemObj.GetComponent<ItemDeltaInfo>().Init(
-                        Localization.Get(buyItems[i].curItem.Name),
-                        $"<#FF7B72>{CastTool.RoundOrFloat(buyItems[i].GetProfit())}</color>", 
-                        null);
-                    marketCount++;
-                }
-            }
-            for (int i = 0; i < sellItems.Length; i++)
-            {
-                if (sellItems[i].isTrading && ResourceManager.Instance.IsResourceEnough(sellItems[i].GetCostResource()))
-                {
-                    GameObject itemObj = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
-                    itemObj.GetComponent<ItemDeltaInfo>().Init(
-                        Localization.Get(sellItems[i].curItem.Name),
-                        $"<#9FFF8D>+{CastTool.RoundOrFloat(sellItems[i].GetProfit())}</color>",
-                        null);
-                    marketCount++;
-                }
-            }
-            if(marketCount == 0)
-            {
-                GameObject titleObj3 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
-                titleObj3.GetComponent<TMP_Text>().text = Localization.Get("无");
-            }
-        
-        
-            GameObject titleObj5 = Instantiate(_titlePfb, _onlyItemInfo.transform.GetChild(0));
-            titleObj5.GetComponent<TMP_Text>().text = Localization.Get("来自运输");
-            GameObject fenge5 = Instantiate(_fenGeLinePfb, _onlyItemInfo.transform.GetChild(0));
-            GameObject itemObj1 = Instantiate(_itemInfoPfb, _onlyItemInfo.transform.GetChild(0));
-            itemObj1.GetComponent<ItemDeltaInfo>().Init(
-                Localization.Get("油费"),
-                $"<#FF7B72>{CastTool.RoundOrFloat(-TrafficManager.Instance.WeeklyCost)}</color>",
-                null);
-            var info = itemObj1.GetComponent<ItemDeltaInfo>();
-            _onOilCostChange = delegate(float f)
-            {
-                info.SetText($"<#FF7B72>{CastTool.RoundOrFloat(-f)}</color>");
-            };
-        }
         int moveCount = (marketCount == 0 ? 2 : marketCount+ 1) + (buildingCounter == 0 ? 2 : buildingCounter +1)-4;
         //Debug.Log(moveCount);
         _onlyItemInfo.transform.GetChild(0).localPosition = new Vector3(0, -20 * moveCount, 0);
@@ -295,7 +187,6 @@ public class NoticeCanvas : CanvasBase
         onlyText.SetActive(false);
         _monitorBtn.onClick.RemoveAllListeners();
         _foodBtn.onClick.RemoveAllListeners();
-        CommonIcon.IsShowingOption = false;
     }
 
     public static int GetHanNumFromString(string str)
