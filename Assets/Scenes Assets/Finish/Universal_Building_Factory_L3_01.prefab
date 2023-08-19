@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1369329232848544975}
-  - component: {fileID: 7732428703527030263}
   - component: {fileID: 1872165269728432904}
   - component: {fileID: 8347379121064515223}
   - component: {fileID: -7347359130341883536}
+  - component: {fileID: 2235941114234708678}
   m_Layer: 0
   m_Name: Universal_Building_Factory_L3_01
   m_TagString: Untagged
@@ -35,64 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7732428703527030263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836150510921796063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f97b72ce7927b743846beafe10f3dd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Width: 6
-  Height: 10
-  hasAnima: 0
-  animation: {fileID: 0}
-  body: {fileID: 2523193626720690671}
-  runtimeBuildData:
-    Id: 0
-    Name: 
-    CostPerWeek: 0
-    Formulas: 
-    Population: 0
-    MaxStorage: 0
-    InfluenceRange: 0
-    FrontBuildingId: 0
-    RearBuildingId: 0
-    Length: 0
-    Width: 0
-    Price: 0
-    costResources: []
-    BundleName: 
-    PfbName: 
-    tabType: 0
-    Introduce: 
-    Level: 0
-    iconName: 
-    Times: 0
-    Pause: 0
-    CurLevel: 0
-    CurFormula: 0
-    formulaDatas: []
-    CurPeople: 0
-    Rate: 0
-    Effectiveness: 0
-    Happiness: 0.6
-    productTime: 0
-    SavePosition:
-      x: 0
-      y: 0
-      z: 0
-    SaveTakenGrids: []
-    SaveDir: 0
-    SaveOutLookType: 0
-  buildFlag: 0
-  takenGrids: []
-  parkingGridIn: {x: 0, y: 0}
-  direction: 0
 --- !u!65 &1872165269728432904
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -101,7 +43,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836150510921796063}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 11.871794, y: 2, z: 16.66029}
@@ -134,6 +76,74 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2235941114234708678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836150510921796063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c33e81665d7f54d819c0cc74c8db14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Width: 6
+  Height: 10
+  hasAnima: 0
+  animation: {fileID: 0}
+  body: {fileID: 2523193626720690671}
+  runtimeBuildData:
+    Id: 0
+    Name: 
+    CostPerWeek: 0
+    Formulas: 
+    Population: 0
+    MaxStorage: 0
+    InfluenceRange: 0
+    FrontBuildingId: 0
+    RearBuildingId: 0
+    Length: 0
+    Width: 0
+    Price: 0
+    costResources: []
+    BundleName: 
+    PfbName: 
+    tabType: 0
+    Introduce: 
+    Level: 0
+    iconName: 
+    Times: 0
+    SortRank: 0
+    Pause: 0
+    CurLevel: 0
+    CurFormula: 0
+    formulaDatas: []
+    CurPeople: 0
+    Rate: 0
+    Effectiveness: 0
+    Happiness: 0.6
+    productTime: 0
+    AvaliableToMarket: 1
+    SavePosition:
+      x: 0
+      y: 0
+      z: 0
+    SaveTakenGrids: []
+    SaveDir: 0
+    SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
+  buildFlag: 0
+  takenGrids: []
+  parkingGridIn: {x: 0, y: 0}
 --- !u!1001 &849691777823039079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +151,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1369329232848544975}
     m_Modifications:
+    - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -158,6 +173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -170,16 +190,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2559533031797908786, guid: 15842ed360cf8734ba0572cb0266788a,
         type: 3}

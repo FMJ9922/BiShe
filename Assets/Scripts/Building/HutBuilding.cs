@@ -28,10 +28,10 @@ namespace Building
                 }
                 runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-                Invoke(nameof(FillUpPopulation), 1f);
+                FillUpPopulation();
                 InitBuildingFunction();
                 //地基
-                MapManager.Instance.BuildFoundation(vector2Ints, 15);
+                MapManager.Instance.BuildFoundation(vector2Ints,TexIndex.Cement);
                 TerrainGenerator.Instance.FlatGround
                     (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
             }
@@ -74,8 +74,6 @@ namespace Building
             parkingGridIn = BuildingTools.GetInParkingGrid(this);
             MapManager.Instance.AddBuilding(this);
             MapManager.Instance.AddBuildingEntry(parkingGridIn, this);
-            runtimeBuildData.CurPeople = runtimeBuildData.Population;
-            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
             EventManager.StartListening(ConstEvent.OnInputResources,InputFood);
         }
 
@@ -132,7 +130,7 @@ namespace Building
 
         public void ProvidePopulation()
         {
-            int num = -runtimeBuildData.Population;//负人口表示增加
+            int num = runtimeBuildData.Population;//负人口表示增加
             runtimeBuildData.CurPeople = num;
             EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }

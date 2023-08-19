@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UI;
 
 public class SaveItem : MonoBehaviour
 {
@@ -56,7 +57,7 @@ public class SaveItem : MonoBehaviour
 
     public void Load()
     {
-        StaticBuilding.lists.Clear();
+        StaticBuilding.lists = null;
         GameManager.Instance.LoadLevelFromSaveData(fileName);
     }
 

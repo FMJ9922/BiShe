@@ -11,7 +11,7 @@ namespace AssetBundleBrowser
 
         internal SingleBundleInspector() { }
 
-        private Editor m_Editor = null;
+        private UnityEditor.Editor m_Editor = null;
 
         private Rect m_Position;
 
@@ -32,7 +32,7 @@ namespace AssetBundleBrowser
             m_Editor = null;
             if(bundle != null)
             {
-                m_Editor = Editor.CreateEditor(bundle);
+                m_Editor = UnityEditor.Editor.CreateEditor(bundle);
             }
         }
 
@@ -77,7 +77,7 @@ namespace AssetBundleBrowser
     }
 
     [CustomEditor(typeof(AssetBundle))]
-    internal class AssetBundleEditor : Editor
+    internal class AssetBundleEditor : UnityEditor.Editor
     {
         internal bool pathFoldout = false;
         internal bool advancedFoldout = false;

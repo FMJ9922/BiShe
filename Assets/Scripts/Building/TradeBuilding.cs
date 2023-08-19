@@ -86,6 +86,10 @@ namespace Building
             {
                 case CarMissionType.goForOrder:
                     var orderData = MarketManager.Instance.GetRuntimeOrderData(carMission.orderIndex);
+                    if (carMission.transportResources == null || carMission.transportResources.Count < 1)
+                    {
+                        return;
+                    }
                     float transportedNum = carMission.transportResources[0].ItemNum;
                     orderData.PromiseTransportGoodsNum -= transportedNum;
                     orderData.HasTransportGoodsNum += transportedNum;

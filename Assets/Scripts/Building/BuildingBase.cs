@@ -31,6 +31,11 @@ namespace Building
         
         protected Storage storage;
 
+        protected void FillMaxPeople()
+        {
+            runtimeBuildData.CurPeople = runtimeBuildData.Population;
+        }
+
     }
 
     [System.Serializable] 

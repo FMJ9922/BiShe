@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using CSTools;
+using UI;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : Singleton<LevelManager>

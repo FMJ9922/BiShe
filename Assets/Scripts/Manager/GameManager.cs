@@ -142,7 +142,7 @@ public class GameManager : Singleton<GameManager>
     public void LoadMenuScene()
     {
         saveData = null;
-        StaticBuilding.lists = new List<StaticBuilding>();
+        StaticBuilding.lists = null;
         FindFadeImage();
         fadeScene.Fade(1f, 0.5f);
         StartCoroutine(DelayToInvokeDo(() => { SceneManager.LoadScene("MenuScene", LoadSceneMode.Single); }, 1f));
@@ -189,7 +189,7 @@ public class GameManager : Singleton<GameManager>
     {
         saveData = GameSaver.ReadSaveData(levelNum, false);
         Debug.Log("load");
-        StaticBuilding.lists = new List<StaticBuilding>();
+        StaticBuilding.lists = null;
 
     }
 

@@ -3143,6 +3143,18 @@ MonoBehaviour:
       chinese: "\u5982\u679C\u4F59\u989D\u8DB3\u591F\u81EA\u52A8\u4ED8\u6B3E\uFF0C{0}\u5468\u540E\u5C06\u81EA\u52A8\u91CD\u590D\u672C\u8BA2\u5355"
       english: 
       german: 
+    - code: LiKe_skill
+      chinese: "\u7406\u79D1"
+      english: 
+      german: 
+    - code: WenKe_skill
+      chinese: "\u6587\u79D1"
+      english: 
+      german: 
+    - code: YiShu_Skill
+      chinese: "\u827A\u672F"
+      english: 
+      german: 
   CarArray:
   - CarType: 0
     Acceleration: 1
@@ -3680,3 +3692,47 @@ MonoBehaviour:
     LevelLimit: 0
     CheckItemId: 11021
     AddRateTarget: 
+  ChooseSkillArray:
+  - Id: 70001
+    NameIds: LiKe_skill
+    BuffList: 8138010082380100
+    BuffValueList: 6400000064000000
+    Stage: 0
+    RefSkill: 0
+  - Id: 70002
+    NameIds: WenKe_skill
+    BuffList: 8338010084380100
+    BuffValueList: 5000000078000000
+    Stage: 0
+    RefSkill: 0
+  - Id: 70003
+    NameIds: YiShu_Skill
+    BuffList: 853801008c380100
+    BuffValueList: 5a0000006e000000
+    Stage: 0
+    RefSkill: 0
+  SkillBuffArray:
+  - Id: 80001
+    NameIds: "\u903B\u8F91"
+  - Id: 80002
+    NameIds: "\u7406\u6027"
+  - Id: 80003
+    NameIds: "\u6C9F\u901A"
+  - Id: 80004
+    NameIds: "\u6D1E\u5BDF"
+  - Id: 80005
+    NameIds: "\u60F3\u8C61\u529B"
+  - Id: 80006
+    NameIds: "\u4F53\u529B"
+  - Id: 80007
+    NameIds: "\u5916\u5411"
+  - Id: 80008
+    NameIds: "\u5185\u5411"
+  - Id: 80009
+    NameIds: "\u611F\u6027"
+  - Id: 80010
+    NameIds: "\u60C5\u5546"
+  - Id: 80011
+    NameIds: "\u76F4\u89C9"
+  - Id: 80012
+    NameIds: "\u52A8\u624B\u80FD\u529B"

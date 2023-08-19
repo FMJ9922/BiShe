@@ -24,10 +24,10 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
 
             runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-            Invoke("FillUpPopulation", 1f);
+            FillMaxPeople();
             InitBuildingFunction();
             //地基
-            MapManager.Instance.BuildFoundation(vector2Ints, 15);
+            MapManager.Instance.BuildFoundation(vector2Ints, TexIndex.Cement);
             TerrainGenerator.Instance.FlatGround
                 (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
         }
@@ -224,7 +224,7 @@ public class MarketBuilding : BuildingBase, IBuildingBasic, IProduct, ITransport
         {
             if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
             {
-                runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
+                runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
                 EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
             }
             UpdateEffectiveness();

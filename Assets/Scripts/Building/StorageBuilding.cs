@@ -7,6 +7,7 @@ namespace Building
     public class StorageBuilding : BuildingBase, IBuildingBasic, IProduct, ITransportation
     {
         public float Max;
+
         public void OnConfirmBuild(Vector2Int[] vector2Ints)
         {
             takenGrids = vector2Ints;
@@ -24,10 +25,11 @@ namespace Building
 
                 runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-                Invoke(nameof(FillUpPopulation), 1f);
+                FillMaxPeople();
                 InitBuildingFunction();
                 //地基
-                MapManager.Instance.BuildFoundation(vector2Ints, 15, ((int) runtimeBuildData.direction + 1) % 4);
+                MapManager.Instance.BuildFoundation(vector2Ints, TexIndex.Cement,
+                    ((int) runtimeBuildData.direction + 1) % 4);
                 TerrainGenerator.Instance.FlatGround
                     (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
             }
@@ -51,7 +53,6 @@ namespace Building
             EventManager.StartListening<string>(ConstEvent.OnDayWentBy, UpdateRate);
             ChangeFormula();
             runtimeBuildData.CurPeople = ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population);
-            EventManager.TriggerEvent(ConstEvent.OnPopulationChange);
         }
 
         public void RestartBuildingFunction()
@@ -125,12 +126,9 @@ namespace Building
         {
             if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)
             {
-                if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople >
-                    0)
+                if (runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople > 0)
                 {
-                    runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(
-                        runtimeBuildData.Population + TechManager.Instance.PopulationBuff() -
-                        runtimeBuildData.CurPeople);
+                    runtimeBuildData.CurPeople += ResourceManager.Instance.GetMaxWorkerRemain(runtimeBuildData.Population + TechManager.Instance.PopulationBuff() - runtimeBuildData.CurPeople);
                     EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);
                 }
                 UpdateEffectiveness();
@@ -146,7 +144,8 @@ namespace Building
             buildData.CurLevel = runtimeBuildData.CurLevel + 1;
             buildData.CurFormula = runtimeBuildData.CurFormula;
             buildData.Happiness = (80f + 10 * buildData.CurLevel) / 100;
-            buildingData = BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
+            buildingData =
+                BuildManager.Instance.UpgradeBuilding(buildData, takenGrids, transform.position, transform.rotation);
             if (buildingData != null)
             {
                 SoundManager.Instance.PlaySoundEffect(SoundResource.sfx_upgrade);
@@ -195,6 +194,7 @@ namespace Building
             return (float) runtimeBuildData.CurPeople /
                    (runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
         }
+
         public void UpdateRate(string date)
         {
             UpdateEffectiveness();
@@ -241,6 +241,7 @@ namespace Building
             {
                 return;
             }
+
             Debug.Log(carMission);
             switch (carMission.missionType)
             {
@@ -250,6 +251,7 @@ namespace Building
                     {
                         TrafficManager.Instance.UseCar(newMission);
                     }
+
                     break;
                 case CarMissionType.transportResources:
                     ResourceManager.Instance.AddResources(carMission.transportResources.ToArray());
@@ -258,6 +260,7 @@ namespace Building
                     {
                         TrafficManager.Instance.UseCar(returnCarMission);
                     }
+
                     break;
             }
         }

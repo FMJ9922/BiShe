@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Minimalist
 {
-	public class EditorGUILayoutExtended : Editor
+	public class EditorGUILayoutExtended : UnityEditor.Editor
 	{
 		private static readonly Type editorGUIType = typeof(EditorGUI);
 

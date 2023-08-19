@@ -11,10 +11,15 @@ public class StaticBuilding : MonoBehaviour
     public bool isFacingX;
     public int BuildID;
     BuildingBase currentBuilding;
-    public static List<StaticBuilding> lists = new List<StaticBuilding>();
+    public int InitIndex;
+    public static StaticBuilding[] lists;
     private void Start()
     {
-        lists.Add(this);
+        if (lists == null)
+        {
+            lists = new StaticBuilding[10];
+        }
+        lists[InitIndex] = this;
     }
     public void SetGrids()
     {

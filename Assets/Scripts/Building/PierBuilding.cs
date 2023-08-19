@@ -32,7 +32,7 @@ namespace Building
                 }
                 runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-                Invoke(nameof(FillUpPopulation), 1f);
+                FillUpPopulation();
                 InitBuildingFunction();
             }
             else

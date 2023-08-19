@@ -64,11 +64,12 @@ public class GraphManager : Singleton<GraphManager>
         {
             GameObject item = Instantiate(cubePfb, transform);
             BuildingBase building = buildings[i];
-            item.GetComponent<GraphCube>().SetHeight(building.runtimeBuildData.CurPeople, buildings[i].transform.position,
+            int curPeople = Mathf.Abs(building.runtimeBuildData.CurPeople);
+            item.GetComponent<GraphCube>().SetHeight(curPeople, buildings[i].transform.position,
                 Color.yellow);
             string showLabel = building.runtimeBuildData.tabType == BuildTabType.house ?
                 Localization.Get("Resident") : Localization.Get("Worker");
-            item.GetComponent<GraphCube>().SetLabel(Mathf.Abs(building.runtimeBuildData.CurPeople).ToString() + " " + showLabel);
+            item.GetComponent<GraphCube>().SetLabel(curPeople + " " + showLabel);
         }
     }
 

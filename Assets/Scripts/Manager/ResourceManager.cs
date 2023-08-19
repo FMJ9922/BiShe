@@ -44,13 +44,13 @@ public class ResourceManager : Singleton<ResourceManager>
         AddResource(DataManager.GetItemIdByName("Rice"), data.rice, false);
         AddResource(DataManager.GetItemIdByName("Money"), data.money, false);
         AddResource(DataManager.GetItemIdByName("Stone"), data.stone, false);
-/*#if UNITY_EDITOR
+#if UNITY_EDITOR
         foreach (var item in DataManager.Instance.ItemArray)
         {
             AddResource(item.Id, 999,false);
         }
         AddResource(99999, 999,false);
-#endif*/
+#endif
         InitHUDList(null);
         InitForbiddenFoodList(null);
         InitAllTimeResourcesList(null);
@@ -618,6 +618,7 @@ public class ResourceManager : Singleton<ResourceManager>
     {
         _workerPopulation = 0;
         _allPopulation = 0;
+        //Debug.Log("CLEAR");
         var buildings = MapManager.Instance.GetAllBuildings();
         for (int i = 0; i < buildings.Count; i++)
         {
@@ -625,10 +626,12 @@ public class ResourceManager : Singleton<ResourceManager>
             if (data.CurPeople > 0)
             {
                 _workerPopulation += data.CurPeople;
+                //Debug.Log(data.Name +"Add" + data.CurPeople);
             }
             else
             {
                 _allPopulation -= data.CurPeople;
+                //Debug.Log(data.Name +"ALL" + data.CurPeople);
             }
         }
         EventManager.TriggerEvent(ConstEvent.OnPopulationHudChange);

@@ -46,7 +46,7 @@ namespace Building
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
                 InitBuildingFunction();
                 //地基
-                MapManager.Instance.BuildFoundation(vector2Ints, 15);
+                MapManager.Instance.BuildFoundation(vector2Ints, TexIndex.Cement);
                 TerrainGenerator.Instance.FlatGround
                     (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
             }

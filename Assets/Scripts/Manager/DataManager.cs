@@ -26,6 +26,8 @@ public class DataManager : ScriptableObject
     public CarData[] CarArray;
     public OrderData[] OrderArray;
     public Dictionary<BuildTabType, List<BuildData>> TabDic;
+    public ChooseSkillData[] ChooseSkillArray;
+    public SkillBuffData[] SkillBuffArray;
     public static string[] foodNames;
     public static int[] foodIds;
     public static int[] itemIds;
@@ -251,6 +253,19 @@ public class DataManager : ScriptableObject
             itemIds = list.ToArray();
         }
         return itemIds;
+    }
+
+    public static SkillBuffData GetSkillBuffData(int id)
+    {
+        for (int i = 0; i < Instance.SkillBuffArray.Length; i++)
+        {
+            if (Instance.SkillBuffArray[i].Id == id)
+            {
+                return Instance.SkillBuffArray[i];
+            }
+        }
+        Debug.Log("无效的物品ID" + id);
+        return null;
     }
     public static int GetItemIdByName(string name)
     {

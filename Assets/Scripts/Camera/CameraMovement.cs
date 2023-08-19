@@ -57,7 +57,7 @@ public class CameraMovement : Singleton<CameraMovement>
 
     private bool isOutOfScene = false;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (canMove&& isFocus)
         {

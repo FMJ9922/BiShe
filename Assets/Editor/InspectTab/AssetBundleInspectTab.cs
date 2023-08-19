@@ -22,7 +22,7 @@ namespace AssetBundleBrowser
         [SerializeField]
         private TreeViewState m_BundleTreeState;
 
-        internal Editor m_Editor = null;
+        internal UnityEditor.Editor m_Editor = null;
 
         private SingleBundleInspector m_SingleInspector;
 

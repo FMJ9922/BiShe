@@ -221,3 +221,29 @@ public enum WarningType
     noRoad = 2,
 }
 
+public enum TexIndex
+{
+    NormalGrass = 0,
+    NormalSand = 1,
+    FarmLand = 2,
+    GrassSand = 3,
+    RoadStraight3 = 4,
+    RoadInCorner3 = 5,
+    RoadOutCorner3 = 6,
+    MixMudGrassDark = 7,
+    RoadStraight2 = 8,
+    RoadInCorner2 = 9,
+    RoadOutCorner2 = 10,
+    FarmLandSandBorder = 11,
+    RoadStraight1 = 12,
+    RoadInCorner1 = 13,
+    RoadOutCorner1 = 14,
+    Cement = 15,
+    DarkMud = 16,
+    MudGrass = 17,
+    DarkGrass = 18,
+    LightGrass = 19,
+    MixSandRock = 20,
+    MixMudGrassLight = 21,
+}
+

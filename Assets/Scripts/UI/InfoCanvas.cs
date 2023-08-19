@@ -4,6 +4,7 @@ using Building;
 using CSTools;
 using UnityEngine;
 using TMPro;
+using UI;
 using UnityEngine.UI;
 using UnityEngine.Events;
 public class InfoCanvas : CanvasBase

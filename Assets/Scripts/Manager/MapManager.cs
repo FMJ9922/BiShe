@@ -309,17 +309,20 @@ public class MapManager : Singleton<MapManager>
 
     public void InitRoad()
     {
-        List<StaticBuilding> lists = StaticBuilding.lists;
         //RoadManager.Instance.InitRoadManager();
-        SetGrid(lists);
+        SetGrid(StaticBuilding.lists);
     }
 
-    void SetGrid(List<StaticBuilding> lists)
+    void SetGrid(StaticBuilding[] lists)
     {
-        for (int i = 0; i < lists.Count; i++)
+        if (lists == null)
+        {
+            return;
+        }
+        for (int i = 0; i < lists.Length; i++)
         {
             //Debug.Log("??");
-            lists[i].SetGrids();
+            lists[i]?.SetGrids();
         }
 
         Debug.Log("地图已初始化！");
@@ -334,12 +337,12 @@ public class MapManager : Singleton<MapManager>
     /// <summary>
     /// 刷地基
     /// </summary>
-    public void BuildFoundation(Vector2Int[] takenGirds, int tex, int dir = 0, bool recalculate = true)
+    public void BuildFoundation(Vector2Int[] takenGirds, TexIndex tex, int dir = 0, bool recalculate = true)
     {
         for (int i = 0; i < takenGirds.Length; i++)
         {
-            generator.RefreshUV(tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
-            SetPassInfo(takenGirds[i], tex);
+            generator.RefreshUV((int)tex, 8, takenGirds[i].x + takenGirds[i].y * MapSize.x, dir);
+            SetPassInfo(takenGirds[i], (int)tex);
         }
 
         if (recalculate)

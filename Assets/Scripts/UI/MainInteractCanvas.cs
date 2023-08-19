@@ -1,186 +1,236 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Building;
+﻿using Building;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class MainInteractCanvas : CanvasBase
+namespace UI
 {
-    [SerializeField] private Button[] buttons;
-    [SerializeField] public CanvasBase[] canvas;
-
-    public Button returnBtn;
-    private static MainInteractCanvas _instance;
-
-    public static MainInteractCanvas Instance { get { return _instance; } }
-
-
-    #region 实现接口
-    public override void InitCanvas()
+    public enum CanvasType
     {
-        if (null == Instance)
+        BuildCanvas = 0,
+        ResourceCanvas = 1,
+        InfoCanvas = 2,
+        HUDCanvas =3,
+        MarketCanvas = 4,
+        CarMissionCanvas = 5,
+        TechCanvas = 6,
+        SuccessCanvas = 7,
+        ReturnCanvas = 8,
+        SaveCanvas = 9,
+        IntroduceCanvas = 10,
+        ChooseSkillCanvas = 11,
+        Max = 12,
+    }
+    public class MainInteractCanvas : CanvasBase
+    {
+        [SerializeField] private Button[] _buttons;
+        [SerializeField] public CanvasBase[] _canvas;
+        [SerializeField] private GameObject _childParentObj;
+
+        public Button returnBtn;
+        private static MainInteractCanvas _instance;
+
+        public static MainInteractCanvas Instance { get { return _instance; } }
+
+
+
+        #region 实现接口
+        public override void InitCanvas()
         {
-            _instance = this;
+            if (null == Instance)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+            foreach (var item in _canvas)
+            {
+                item.InitCanvas();
+            }
+            returnBtn.onClick.AddListener(OpenReturnCanvas);
+            EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
+            
+            //ToggleCanvas(CanvasType.ChooseSkillCanvas,true);
         }
-        else
+
+        private void OnDestroy()
         {
-            Destroy(this);
+            EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
         }
-        foreach (var item in canvas)
+
+        public override void OnOpen()
         {
-            item.InitCanvas();
+
         }
-        returnBtn.onClick.AddListener(OpenReturnCanvas);
-        EventManager.StartListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
-    }
 
-    private void OnDestroy()
-    {
-        EventManager.StopListening<BuildingBase>(ConstEvent.OnTriggerInfoPanel, OpenInfoCanvas);
-    }
+        public override void OnClose()
+        {
 
-    public override void OnOpen()
-    {
+        }
+        #endregion
 
-    }
+        public void ToggleCanvas(CanvasType type,bool isActive)
+        {
+            var canvas = _canvas[(int) type];
+            if (isActive)
+            {
+                canvas.OnOpen();
+            }
+            else
+            {
+                canvas.OnClose();
+            }
+        }
 
-    public override void OnClose()
-    {
+        public void ToggleBuildingCanvas()
+        {
+            BuildingCanvas build = (BuildingCanvas)_canvas[0];
+            bool open = build.ToggleBuildingCanvas();
+            _buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", open ? "BuildSelect" : "BuildUnselect");
+            CloseInfoCanvas();
+            CloseMarketCanvas();
+            CloseResourcesCanvas();
+            CloseCarMissionCanvas();
+        }
 
-    }
-    #endregion
+        public void OpenBuildingCanvas()
+        {
+            _canvas[0].OnOpen();
+            _buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
+        }
 
-    public void ToggleBuildingCanvas()
-    {
-        BuildingCanvas build = (BuildingCanvas)canvas[0];
-        bool open = build.ToggleBuildingCanvas();
-        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", open ? "BuildSelect" : "BuildUnselect");
-        CloseInfoCanvas();
-        CloseMarketCanvas();
-        CloseResourcesCanvas();
-        CloseCarMissionCanvas();
-    }
+        public void CloseBuildingCanvas()
+        {
+            _canvas[0].OnClose();
+            _buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildSelect");
+        }
 
-    public void OpenBuildingCanvas()
-    {
-        canvas[0].OnOpen();
-        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildUnselect");
-    }
+        public void OpenResourceCanvas(BuildingBase data)
+        {
+            CloseAllOpenedUI();
+            ((ResourceCanvas)_canvas[1]).OnOpen((StorageBuilding)data);
+        }
 
-    public void CloseBuildingCanvas()
-    {
-        canvas[0].OnClose();
-        buttons[0].image.sprite = LoadAB.LoadSprite("icon.ab", "BuildSelect");
-    }
 
-    public void OpenResourceCanvas(BuildingBase data)
-    {
-        CloseAllOpenedUI();
-        ((ResourceCanvas)canvas[1]).OnOpen((StorageBuilding)data);
-    }
+        public SaveCanvas GetSaveCanvas()
+        {
+            return (SaveCanvas)_canvas[9];
+        }
 
-    public MarketCanvas GetMarketCanvas()
-    {
-        return (MarketCanvas)canvas[4];
-    }
+        public ChooseSkillCanvas GetChooseSkillCanvas()
+        {
+            return (ChooseSkillCanvas)_canvas[11];
+        }
 
-    public SaveCanvas GetSaveCanvas()
-    {
-        return (SaveCanvas)canvas[9];
-    }
-
-    public void OpenMarketCanvas()
-    {
-        CloseAllOpenedUI();
-        GetMarketCanvas().OnOpen();
-    }
-
-    public void OpenInfoCanvas(BuildingBase data)
-    {
-        CloseAllOpenedUI();
-        InfoCanvas infocanvas = (InfoCanvas)canvas[2];
-        infocanvas.OnOpen(data);
-    }
-    public void OpenCarMissionCanvas(CarDriver car)
-    {
-        CloseAllOpenedUI();
-        CarMissionCanvas carCanvas = (CarMissionCanvas)canvas[5];
-        carCanvas.OnOpen(car);
-    }
-
-    public void OpenTechCanvas()
-    {
-        CloseAllOpenedUI();
-        TechTreeCanvas techCanvas = (TechTreeCanvas)canvas[6];
-        techCanvas.OnOpen();
-    }
-
-    public void OpenSuccessCanvas()
-    {
-        CloseAllOpenedUI();
-        SuccessCanvas successCanvas = (SuccessCanvas)canvas[7];
-        successCanvas.OnOpen();
-    }
-    public void OpenReturnCanvas()
-    {
-        CloseAllOpenedUI();
-        ReturnCanvas returnCanvas = (ReturnCanvas)canvas[8];
-        returnCanvas.OnOpen();
-    }
-
-    public void OpenSaveCanvas()
-    {
-        CloseAllOpenedUI();
-        SaveCanvas saveCanvas = (SaveCanvas)canvas[9];
-        saveCanvas.OnOpen();
-    }
-    public void CloseCarMissionCanvas()
-    {
-        canvas[5].OnClose();
-    }
-    public void OpenIntroduceCanvas()
-    {
-        IntroduceCanvas intro = canvas[10] as IntroduceCanvas;
-        intro.OnOpen();
-    }
-
-    public void CloseIntroduceCanvas()
-    {
-        IntroduceCanvas intro = canvas[10] as IntroduceCanvas;
-        intro.OnClose();
-    }
-
-    public void CloseResourcesCanvas()
-    {
-        canvas[1].OnClose();
-    }
-
-    public void CloseMarketCanvas()
-    {
-        canvas[4].OnClose();
-    }
-
-    public void CloseInfoCanvas()
-    {
-        canvas[2].OnClose();
-    }
-    public void CloseAllOpenedUI()
-    {
-        CloseBuildingCanvas();
-        CloseInfoCanvas();
-        CloseMarketCanvas();
-        CloseResourcesCanvas();
-        CloseCarMissionCanvas();
-    }
-
-    public void HideBuildingButton()
-    {
-        buttons[0].gameObject.SetActive(false);
-    }
-
-    public void ShowBuildingButton()
-    {
-        buttons[0].gameObject.SetActive(true);
-    }
+        public void OpenChooseSkillCanvas()
+        {
+            CloseAllOpenedUI();
+            GetChooseSkillCanvas().OnOpen();
+        }
     
+
+        public void OpenMarketCanvas()
+        {
+            CloseAllOpenedUI();
+            ToggleCanvas(CanvasType.MarketCanvas,true);
+        }
+
+        public void OpenInfoCanvas(BuildingBase data)
+        {
+            CloseAllOpenedUI();
+            (_canvas[(int)CanvasType.InfoCanvas] as InfoCanvas)?.OnOpen(data);
+        }
+        public void OpenCarMissionCanvas(CarDriver car)
+        {
+            CloseAllOpenedUI();
+            (_canvas[(int)CanvasType.CarMissionCanvas] as CarMissionCanvas)?.OnOpen(car);
+        }
+
+        public void OpenTechCanvas()
+        {
+            CloseAllOpenedUI();
+            ToggleCanvas(CanvasType.TechCanvas,true);
+        }
+
+        public void OpenSuccessCanvas()
+        {
+            CloseAllOpenedUI();
+            ToggleCanvas(CanvasType.SuccessCanvas,true);
+        }
+        public void OpenReturnCanvas()
+        {
+            CloseAllOpenedUI();
+            ToggleCanvas(CanvasType.ReturnCanvas,true);
+        }
+
+        public void OpenSaveCanvas()
+        {
+            CloseAllOpenedUI();
+            ToggleCanvas(CanvasType.SaveCanvas,true);
+        }
+        public void CloseCarMissionCanvas()
+        {
+            ToggleCanvas(CanvasType.CarMissionCanvas,false);
+        }
+        public void OpenIntroduceCanvas()
+        {
+            ToggleCanvas(CanvasType.IntroduceCanvas,true);
+        }
+
+        public void CloseIntroduceCanvas()
+        {
+            ToggleCanvas(CanvasType.IntroduceCanvas,false);
+        }
+
+        public void CloseResourcesCanvas()
+        {
+            ToggleCanvas(CanvasType.ResourceCanvas,false);
+        }
+
+        public void CloseMarketCanvas()
+        {
+            ToggleCanvas(CanvasType.MarketCanvas,false);
+        }
+
+        public void CloseInfoCanvas()
+        {
+            ToggleCanvas(CanvasType.InfoCanvas,false);
+        }
+        public void CloseAllOpenedUI()
+        {
+            CloseBuildingCanvas();
+            CloseInfoCanvas();
+            CloseMarketCanvas();
+            CloseResourcesCanvas();
+            CloseCarMissionCanvas();
+        }
+
+        public void HideBuildingButton()
+        {
+            _buttons[0].gameObject.SetActive(false);
+        }
+
+        public void ShowBuildingButton()
+        {
+            _buttons[0].gameObject.SetActive(true);
+        }
+
+        //开关所有非canvasUI元素
+        public void ToggleInteractUI(bool isActive)
+        {
+            _childParentObj.SetActive(isActive);
+            if (isActive)
+            {
+                _instance._canvas[3].OnOpen();
+            }
+            else
+            {
+                _instance._canvas[3].OnClose();
+            }
+        
+        }
+    
+    }
 }

@@ -30,7 +30,7 @@ public class MineBuilding : BuildingBase,IBuildingBasic,IProduct,ITransportation
             }
             runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
             runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-            Invoke(nameof(FillUpPopulation), 1f);
+            FillMaxPeople();
             InitBuildingFunction();
             TerrainGenerator.Instance.FlatGround
                 (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);

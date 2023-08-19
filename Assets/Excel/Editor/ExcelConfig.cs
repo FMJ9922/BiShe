@@ -218,8 +218,43 @@ public class ExcelTool
         }
         data.combines = combines;
         return data;
-
     }
+
+    public static ChooseSkillData[] CreateChooseSkillDataWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        ChooseSkillData[] array = new ChooseSkillData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            ChooseSkillData orderData = new ChooseSkillData();
+            orderData.Id = int.Parse(collect[i][0].ToString());
+            orderData.NameIds = collect[i][1].ToString();
+            orderData.BuffList = StringToIntList(collect[i][3].ToString());
+            orderData.BuffValueList = StringToIntList(collect[i][4].ToString());
+            orderData.Stage = int.Parse(collect[i][5].ToString());
+            orderData.RefSkill = int.Parse(collect[i][6].ToString());
+            array[i - 2] = orderData;
+        }
+        return array;
+    }
+    
+    public static SkillBuffData[] CreateSkillBuffDataWithExcel(string filePath)
+    {
+        int columnNum = 0, rowNum = 0;
+        DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
+        SkillBuffData[] array = new SkillBuffData[rowNum - 2];
+        for (int i = 2; i < rowNum; i++)
+        {
+            SkillBuffData orderData = new SkillBuffData();
+            orderData.Id = int.Parse(collect[i][0].ToString());
+            orderData.NameIds = collect[i][1].ToString();
+            array[i - 2] = orderData;
+        }
+        return array;
+    }
+    
+    
     static DataRowCollection ReadExcel(string filePath, ref int columnNum, ref int rowNum)
     {
         FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);

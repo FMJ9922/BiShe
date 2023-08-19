@@ -23,10 +23,10 @@ namespace Building
 
                 runtimeBuildData.direction = CastTool.CastVector3ToDirection(transform.right);
                 runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100;
-                Invoke(nameof(FillUpPopulation), 1f);
+                FillUpPopulation();
                 InitBuildingFunction();
                 //地基
-                MapManager.Instance.BuildFoundation(vector2Ints, 2, ((int) runtimeBuildData.direction + 1) % 4);
+                MapManager.Instance.BuildFoundation(vector2Ints, TexIndex.Cement, ((int) runtimeBuildData.direction + 1) % 4);
                 TerrainGenerator.Instance.FlatGround
                     (takenGrids, MapManager.GetTerrainPosition(parkingGridIn).y);
             }
@@ -146,7 +146,7 @@ namespace Building
 
         public void Output()
         {
-            if (runtimeBuildData.formula == null || runtimeBuildData.formula.OutputItemID == null) return;
+            if (runtimeBuildData.formula?.OutputItemID == null) return;
             runtimeBuildData.productTime--;
             if (runtimeBuildData.productTime <= 0)
             {
