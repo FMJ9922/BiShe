@@ -1,21 +1,22 @@
 ManifestFileVersion: 0
-CRC: 1987152640
+UnityVersion: 6000.0.0f1c1
+CRC: 752895846
+HashAppended: 0
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: icon.ab
-      Dependencies:
-        Dependency_0: mat.ab
-    Info_1:
       Name: building.ab
       Dependencies:
         Dependency_0: icon.ab
-        Dependency_1: mat.ab
-        Dependency_2: plant.ab
-    Info_2:
-      Name: mat.ab
+        Dependency_1: plant.ab
+        Dependency_2: mat.ab
+    Info_1:
+      Name: icon.ab
       Dependencies: {}
-    Info_3:
+    Info_2:
       Name: plant.ab
       Dependencies:
         Dependency_0: mat.ab
+    Info_3:
+      Name: mat.ab
+      Dependencies: {}

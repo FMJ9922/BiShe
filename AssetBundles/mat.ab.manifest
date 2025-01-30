@@ -1,12 +1,16 @@
 ManifestFileVersion: 0
-CRC: 3946683769
+UnityVersion: 6000.0.0f1c1
+CRC: 3494493500
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2cf890b0b089d04b584634e4b540a9be
+    Hash: 7435cf9dfe4a561ffe56d571a3823ef6
   TypeTreeHash:
     serializedVersion: 2
-    Hash: be43a2f8618a78f029304d6b6e4e37f1
+    Hash: 8652f31fbb975573618e78e76ed998d1
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 7db0d5906525136a619337f442b3c745
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,9 +30,9 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: bcb640de7994de44d964d3aa0ac75be8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -37,91 +41,115 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
-SerializeReferenceClassIdentifiers: []
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphAdjustmentRecord
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphPairAdjustmentRecord
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.LowLevel.GlyphValueRecord
 Assets:
-- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat 1.mat
-- Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
-- Assets/Scenes Assets/Material/Universal_Terrain_GrassLand_01_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
-- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Flag Wind.shader
-- Assets/Scenes Assets/Finish/PlantPfb.prefab
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_Flag_Tex.tga
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L1L2_Tex.tga
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Factory_L1L2L3_Tex.tga
-- Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat
-- Assets/ArtAssets/UI/StartUI/30003preview.png
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Sawmill_L1L2L3_Tex.tga
-- Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
-- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Wheat Wind.shader
-- Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Farm_L1L2L3_Tex.tga
-- Assets/ArtAssets/Texture/Universal_Plant_Wheat.png
-- Assets/ArtAssets/Material/PlantUV.mat
-- Assets/ArtAssets/Model/Building/Materials/WallStone.mat
-- Assets/Scenes Assets/Material/Universal_Plant_FruitTreeLeaves_01_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
-- Assets/ArtAssets/UI/StartUI/30002preview.png
-- Assets/ArtAssets/Shader/PlantImageEffectShader.shader
-- Assets/TextMesh Pro/Fonts/LiberationSans.ttf
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Bridge_L1L2L3_Tex.tga
-- Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Coach_Building_HookerPier_L1L2L3_Tex.tga
-- Assets/Scenes Assets/Material/Texture/Coach_Building_Residential_L1L2L3_Tex.tga
-- Assets/Scenes Assets/Material/Universal_Plant_Fruit_01_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
-- Assets/ArtAssets/Material/Field.mat
-- Assets/ArtAssets/UI/BuildingUI/MarketButton.png
-- Assets/Scenes Assets/Material/Universal_Building_MarketWarehouse_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Terrain_BareGround_01_Mat.mat
-- Assets/Scenes Assets/Material/Coach_Building_HookerPier_L1L2L3_Mat.mat
-- Assets/JMO Assets/Toony Colors Pro/Textures/Ramps/TCP2_Ramp_UnityGradient.png
-- Assets/Scenes Assets/Material/Universal_Building_Factory_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Plain_Building_Ground_Mat.mat
-- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
-- Assets/Scenes Assets/Material/Universal_Plant_TreeTrunk_01_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat.mat
-- Assets/ArtAssets/UI/StartUI/30001preview.png
-- Assets/Scenes Assets/Material/Coach_Building_Residential_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Universal_Building_Mine_L3_Mat.mat
-- Assets/ArtAssets/Model/Building/Materials/Door.mat
-- Assets/ArtAssets/Shader/Custom_OutLine.mat
-- Assets/Scenes Assets/Prefab/FX/Texture/cloud_2x2_hard_softshadow.png
-- Assets/Scenes Assets/Material/Texture/Universal_Transportation_Trunk_01_Tex.tga
-- Assets/ArtAssets/Shader/OutLine.shader
-- Assets/Scenes Assets/Material/Texture/Universal_Plant_Wheat_01_Tex.tga
-- Assets/Scenes Assets/BuildingIcon/Animation/Materials/Universal_Building_Mine_L3_Tex.mat
-- Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
-- Assets/ArtAssets/Texture/Universal_Plant_Rice.png
-- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
-- Assets/JMO Assets/Toony Colors Pro/Demo TCP2/SG Demo Assets/_Misc Assets/TCP2_Demo_SmallWaves.png
-- Assets/ArtAssets/Model/Building/Materials/Roof.mat
-- Assets/Scenes Assets/Prefab/FX/Material/cloud_2x2_default_AB.mat
-- Assets/TextMesh Pro/Resources/Fonts & Materials/huangyouti SDF.asset
-- Assets/Scenes Assets/Material/Universal_Plant_Wheat_01_Mat.mat
+- Assets/ArtAssets/Model/Building/Materials/Wall.mat
 - Assets/Scenes Assets/Material/Universal_Building_Bridge_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
-- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
-- Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
-- Assets/Scenes Assets/Material/TCP2_WaterReflection_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Terrain_Water_01_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L1L2_Tex.tga
+- Assets/Scenes Assets/Material/Hui_Building_Residential_L1L2L3_Mat.mat
+- Assets/ArtAssets/Texture/Universal_Plant_Rice.png
+- Assets/ArtAssets/Model/Building/Materials/Ridge.mat
+- Assets/ArtAssets/UI/StartUI/30001preview.png
+- Assets/Scenes Assets/Material/Universal_Plant_Wheat_01_Mat.mat
+- Assets/ArtAssets/Model/Building/Materials/WallStone.mat
+- Assets/Scenes Assets/Material/Universal_Building_Factory_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Transportation_Trunk_01_Mat.mat
-- Assets/ArtAssets/Shader/Custom_TransparentGpuInstance.mat
-- Assets/Scenes Assets/Material/Universal_Building_Mine_L1L2_Mat.mat
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Universal_Building_MarketWarehouse_L1L2L3_Tex.tga
+- Assets/ArtAssets/UI/BuildingUI/MarketButton.png
+- Assets/Scenes Assets/Material/Texture/Universal_Terrain_Mix_01_Tex.tga
+- Assets/JMO Assets/Toony Colors Pro/Textures/Ramps/TCP2_Ramp_UnityGradient.png
+- Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2L3_Mat.mat
+- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+- Assets/Scenes Assets/BuildingIcon/Animation/Materials/Universal_Building_Mine_L3_Tex.mat
+- Assets/Scenes Assets/Material/Universal_Building_Government_L1L2L3_Mat.mat
 - Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat 1.mat
-- Assets/TextMesh Pro/Resources/Shaders/TMP_SDF.shader
-- Assets/Scenes Assets/Material/Texture/Hui_Building_Residential_L1L2L3_Tex.tga
-- Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
-- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/Water/Reflection.shader
-- Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile.shader
+- Assets/ArtAssets/Texture/Universal_Plant_Wheat.png
+- Assets/ArtAssets/Model/Building/Materials/Door.mat
+- Assets/ArtAssets/Material/PlantUV.mat
+- Assets/Scenes Assets/Finish/PlantPfb.prefab
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Factory_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Plant_Fruit_01_Mat.mat
+- Assets/JMO Assets/Toony Colors Pro/Textures/TCP2_NoTileNoise.png
+- Assets/ArtAssets/Shader/Custom_TransparentGpuInstance.mat
+- Assets/ArtAssets/Model/Building/Materials/Roofvary.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Bridge_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_Sawmill_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Prefab/FX/Texture/cloud_2x2_hard_softshadow.png
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Flag Wind.shader
+- Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat 1.mat
+- Assets/Scenes Assets/Material/Plain_Building_Ground_Mat.mat
+- Assets/ArtAssets/Material/Field.mat
 - Assets/JMO Assets/Toony Colors Pro/Demo TCP2/SG Demo Assets/_Misc Assets/TCP2_Water
   Foam Sponge.png
-- Assets/ArtAssets/Model/Building/Materials/Wall.mat
-- Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L3_Tex.tga
-- Assets/JMO Assets/Toony Colors Pro/Textures/TCP2_NoTileNoise.png
-- Assets/Scenes Assets/Material/Plain_Building_Residential_L1L2L3_Mat.mat
-- Assets/Scenes Assets/Material/Hui_Building_Residential_L1L2L3_Mat.mat
-- Assets/ArtAssets/Model/Building/Materials/Ridge.mat
+- Assets/Scenes Assets/Material/Universal_Building_Government_Flag_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_01_Mat.mat
+- Assets/ArtAssets/Shader/PlantImageEffectShader.shader
+- Assets/ArtAssets/Model/Building/Materials/Roof.mat
 - Assets/Scenes Assets/BuildingIcon/Animation/Materials/Universal_Building_Mine_L1L2_Tex.mat
+- Assets/Scenes Assets/Material/Coach_Building_Residential_L1L2L3_Mat.mat
+- Assets/ArtAssets/UI/BuildingUI/ScienceButton.png
+- Assets/Scenes Assets/Material/Texture/Coach_Building_Residential_L1L2L3_Tex.tga
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Wheat Wind.shader
+- Assets/Scenes Assets/Material/Universal_Plant_TreeTrunk_01_Mat.mat
+- Assets/Scenes Assets/Material/Coach_Building_HookerPier_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_L1L2L3_Tex.tga
+- Assets/ArtAssets/Shader/OutLine.shader
+- Assets/ArtAssets/UI/StartUI/30003preview.png
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Sawmill_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_Farm_L1L2L3_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Farm_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Prefab/FX/Material/cloud_2x2_default_AB.mat
+- Assets/ArtAssets/Model/Building/Materials/WindowWood.mat
+- Assets/Scenes Assets/Material/TCP2_WaterReflection_Mat.mat
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/SG2/Leaves Wind.shader
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Mine_L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Terrain_BareGround_01_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Coach_Building_HookerPier_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_Mine_L3_Mat.mat
+- Assets/Scenes Assets/Material/Texture/Universal_Building_Government_Flag_Tex.tga
+- Assets/JMO Assets/Toony Colors Pro/Demo TCP2/SG Demo Assets/_Misc Assets/TCP2_Demo_SmallWaves.png
+- Assets/Scenes Assets/Material/Universal_Terrain_GrassLand_01_Mat.mat
+- Assets/TextMesh Pro/Resources/Fonts & Materials/huangyouti SDF.asset
+- Assets/Scenes Assets/Material/Texture/Universal_Transportation_Trunk_01_Tex.tga
+- Assets/JMO Assets/Toony Colors Pro/Shaders Generated/Examples/Water/Reflection.shader
+- Assets/ArtAssets/Model/Building/Materials/WindowGlass.mat
+- Assets/ArtAssets/UI/StartUI/30002preview.png
+- Assets/Scenes Assets/Material/Texture/Universal_Plant_Wheat_01_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Plain_Building_Residential_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Texture/Hui_Building_Residential_L1L2L3_Tex.tga
+- Assets/Scenes Assets/Material/Universal_Building_Mine_L1L2_Mat.mat
+- Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+- Assets/ArtAssets/Shader/Custom_OutLine.mat
+- Assets/Scenes Assets/Material/Universal_Plant_FruitTreeLeaves_01_Mat.mat
+- Assets/Scenes Assets/Material/Universal_Building_MarketWarehouse_L1L2L3_Mat.mat
+- Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+- Assets/Scenes Assets/Material/Universal_Plant_TreeLeaves_02_Mat.mat
 Dependencies: []

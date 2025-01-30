@@ -1,12 +1,16 @@
 ManifestFileVersion: 0
-CRC: 3655293856
+UnityVersion: 6000.0.0f1c1
+CRC: 88109299
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d110f203dcec2f1c4e7141264a9a4807
+    Hash: 91ca668205c51904cb4f22f2c21db2f1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 697da7f04688931ed17c2af27fa448f1
+    Hash: 9cbda6ec8143d559d25fbb432101a473
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 8efb9ce57f374980fa27b96cd6ca2f1c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,56 +35,60 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 136
   Script: {instanceID: 0}
-SerializeReferenceClassIdentifiers: []
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: .TreeData
+- AssemblyName: Assembly-CSharp
+  ClassName: .TreeState
 Assets:
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_08_Preb.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_FruitTree_01_Mod.fbx
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_05_Preb.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_08_Mod.fbx
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_05_Mod.fbx
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_08.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_07.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_06_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_04_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_01_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_04.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_09_Preb.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_01_Mod.fbx
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_01_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_06.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_03_Mod.fbx
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_02_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_05_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_07_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_08.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_08_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_06_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_09_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_02.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_FruitTree_01_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_03_Preb.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_04_Preb.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_09_Mod.fbx
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_03.prefab
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_Wheat_01_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_09.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Wheat_01_Mod.fbx
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_06.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_01.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_04.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_03.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_04_Mod.fbx
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_02_Mod.fbx
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_02_Preb.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_06_Mod.fbx
-- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_03_Preb.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_05.prefab
 - Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_09.prefab
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_05.prefab
-- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_07_Mod.fbx
-- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_07.prefab
 - Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_01.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_06_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_09_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_09.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_04_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_04_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_06_Mod.fbx
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Wheat_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_08_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_07_Mod.fbx
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_FruitTree_01_Mod.fbx
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_01_Mod.fbx
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_06_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_04.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_08_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_03.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_01_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_08.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_07_Preb.prefab
 - Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_07_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_05_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_06.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_03_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_01.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_04_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_03.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_Wheat_01_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_03_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_05.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_02_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_05_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_02_Mod.fbx
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_05_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_07.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_FruitTree_01_Preb.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_03_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_05.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeDark_09_Preb.prefab
+- Assets/Scenes Assets/Prefab/Plant/Universal_Plant_TreeLight_08_Preb.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_06.prefab
 - Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_02.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeDark_08.prefab
+- Assets/Scenes Assets/Model/Plant/Universal_Plant_Tree_09_Mod.fbx
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_02.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_07.prefab
+- Assets/Scenes Assets/Finish/Universal_Plant_TreeLight_04.prefab
 Dependencies:
 - C:/Users/FMJ/Documents/GitHub/BiShe/AssetBundles/mat.ab
