@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1750822809274348193}
   - component: {fileID: 2770809222375797073}
   - component: {fileID: 5314370595090824069}
-  - component: {fileID: -7029138062204309740}
   - component: {fileID: -711504067360786487}
   m_Layer: 10
   m_Name: Universal_Building_Farmland_L1_02
@@ -80,6 +79,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0
@@ -96,10 +97,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
   yellow: {r: 0.9245283, g: 0.8257092, b: 0.3270737, a: 1}
   green: {r: 0.50363296, g: 0.8962264, b: 0.26633143, a: 1}
   wheatTrans: {fileID: 3005787282694144635}
@@ -126,18 +135,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 2, z: 16}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-7029138062204309740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618332924111315248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-711504067360786487
 Rigidbody:
   m_ObjectHideFlags: 0

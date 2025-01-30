@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Building;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 [RequireComponent(typeof(BuildingBase))]

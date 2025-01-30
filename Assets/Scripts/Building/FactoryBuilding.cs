@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 namespace Building
@@ -120,50 +121,30 @@ namespace Building
 
         public void Input()
         {
-            ResourceManager.Instance.TryUseUpResource(new CostResource(99999,
-                runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
-            runtimeBuildData.Pause = false;
-            //ChangeFormula();
-            if (runtimeBuildData.formula == null || runtimeBuildData.formula.InputItemID == null) return;
-            List<CostResource> costResources = new List<CostResource>();
-            for (int i = 0; i < runtimeBuildData.formula.InputItemID.Count; i++)
-            {
-                costResources.Add(new CostResource(runtimeBuildData.formula.InputItemID[i],
-                    runtimeBuildData.formula.InputNum[i] * WorkEffect() * runtimeBuildData.Times));
-            }
-
-            bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
-            if (!res)
-            {
-                runtimeBuildData.Pause = true;
-                return;
-            }
-            else
-            {
-                ResourceManager.Instance.TryUseResources(costResources);
-            }
+            BuildingTools.DoInput(runtimeBuildData);
         }
 
         public void Output()
         {
-            if (runtimeBuildData.formula?.OutputItemID == null) return;
-            runtimeBuildData.productTime--;
-            if (runtimeBuildData.productTime <= 0)
+            BuildingTools.DoOutput(runtimeBuildData);
+            var list = BuildingTools.CheckCanSendCar(runtimeBuildData);
+            if (list != null)
             {
-                runtimeBuildData.productTime = runtimeBuildData.formula.ProductTime;
-                float rate = runtimeBuildData.Rate;
-                CarMission carMission = MakeCarMission(rate);
-                if (carMission != null)
-                {
-                    TrafficManager.Instance.UseCar(carMission,
-                        (bool success) => { runtimeBuildData.AvaliableToMarket = success; });
-                }
-                else
-                {
-                    runtimeBuildData.AvaliableToMarket = false;
-                }
+                CheckSendOutputCar(list);
+            }
+        }
 
-                runtimeBuildData.Rate = 0;
+        public void CheckSendOutputCar(List<CostResource> costResources)
+        {
+            CarMission carMission = MakeCarMission(costResources);
+            if (carMission != null)
+            {
+                TrafficManager.Instance.UseCar(carMission,
+                    (bool success) => { runtimeBuildData.AvaliableToMarket = success; });
+            }
+            else
+            {
+                runtimeBuildData.AvaliableToMarket = false;
             }
         }
 
@@ -171,17 +152,6 @@ namespace Building
         {
             return 1 - (float) runtimeBuildData.productTime / runtimeBuildData.formula.ProductTime +
                    (float) LevelManager.Instance.Day / 7 / runtimeBuildData.formula.ProductTime;
-        }
-
-        public float WorkEffect()
-        {
-            if (runtimeBuildData.tabType == BuildTabType.house)
-            {
-                return 1;
-            }
-
-            return (float) runtimeBuildData.CurPeople /
-                   (runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
         }
 
         public void UpdateRate(string date)
@@ -209,10 +179,10 @@ namespace Building
             }
         }
 
-        public CarMission MakeCarMission(float rate)
+        public CarMission MakeCarMission(List<CostResource> costResources)
         {
             CarMission mission = new CarMission();
-            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            BuildingBase target = MapManager.Instance.GetNearestMarket(parkingGridIn);
             if (target == null)
             {
                 return null;
@@ -225,9 +195,7 @@ namespace Building
             mission.transportationType = TransportationType.mini;
             for (int i = 0; i < runtimeBuildData.formula.OutputItemID.Count; i++)
             {
-                //Debug.Log(formula.OutputItemID[i]);
-                mission.transportResources.Add(new CostResource(runtimeBuildData.formula.OutputItemID[i],
-                    runtimeBuildData.formula.ProductNum[i] * rate * runtimeBuildData.Times));
+                mission.transportResources.Add(new CostResource(costResources[i].ItemId,costResources[i].ItemNum));
             }
 
             return mission;

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7136370389998904837}
   - component: {fileID: 5342944592773076099}
   - component: {fileID: 3049577207797192420}
-  - component: {fileID: 5530204322415910879}
   - component: {fileID: 8938374155955714654}
   m_Layer: 0
   m_Name: Universal_Building_Farm_L2_01
@@ -64,18 +63,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12, y: 2, z: 20}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5530204322415910879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472102272759600499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8938374155955714654
 MonoBehaviour:
   m_ObjectHideFlags: 0

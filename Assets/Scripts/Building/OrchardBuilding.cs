@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 namespace Building
@@ -217,7 +218,7 @@ namespace Building
         {
             //Debug.Log(rate);
             CarMission mission = new CarMission();
-            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            BuildingBase target = MapManager.Instance.GetNearestMarket(parkingGridIn);
             if (target == null)
             {
                 return null;
@@ -242,7 +243,12 @@ namespace Building
         {
             
         }
-        
+
+        public void CheckSendOutputCar(float rate)
+        {
+            
+        }
+
         public void FillUpPopulation()
         {
             if (runtimeBuildData.Population > 0 && runtimeBuildData.tabType != BuildTabType.house)

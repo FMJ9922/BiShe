@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2022324933582318536}
   - component: {fileID: 2022324933582318537}
   - component: {fileID: 2022324933582318538}
-  - component: {fileID: 2022324933582318539}
   m_Layer: 0
   m_Name: Hui_Building_Residential_L1_01
   m_TagString: Untagged
@@ -73,6 +72,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -82,6 +82,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0
@@ -89,10 +90,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
 --- !u!54 &2022324933582318537
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -122,18 +131,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 2, z: 8}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2022324933582318539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022324933582318532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2022324932071787621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,6 +155,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
       objectReference: {fileID: 0}
@@ -173,6 +175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -184,16 +191,6 @@ PrefabInstance:
     - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4838012446396551267, guid: e6a0af00f481d6e4280bf7ad3c8600bf,

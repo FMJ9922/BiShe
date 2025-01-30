@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 81144118949428293}
   - component: {fileID: 926625565854183398}
   - component: {fileID: 8028426315819605774}
-  - component: {fileID: 5704800856775718843}
   m_Layer: 0
   m_Name: Hui_Building_Residential_L1_04
   m_TagString: Untagged
@@ -102,6 +101,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -111,6 +111,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0
@@ -118,22 +119,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
---- !u!114 &5704800856775718843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7821212322518047719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4315522066331212493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hui_Building_Residential_L1_04_Preb
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
         type: 3}
@@ -163,6 +165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -175,16 +182,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2065609691431030045, guid: bbb10692d380cf3418ebe6a6d195752e,
         type: 3}

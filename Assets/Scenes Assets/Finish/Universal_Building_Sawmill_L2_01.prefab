@@ -84,7 +84,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2151437240810148693}
   - component: {fileID: 4524741797051577223}
-  - component: {fileID: -7792054937391746929}
   - component: {fileID: 98133261654414338}
   - component: {fileID: 3038256570106568768}
   m_Layer: 0
@@ -123,18 +122,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 13.077263, y: 2, z: 15.737605}
   m_Center: {x: -0.39878964, y: 1, z: 0.041710377}
---- !u!114 &-7792054937391746929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181180776102677635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &98133261654414338
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,6 +176,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -206,10 +194,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
   sensor: {fileID: 7159458318891938758}
 --- !u!1001 &4119412554621548555
 PrefabInstance:
@@ -222,6 +218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Universal_Building_Sawmill_L2_01_Preb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
         type: 3}
@@ -240,6 +241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -252,16 +258,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4467611221780937818, guid: fcac12e6fc7971241a4df935985fdb2f,
         type: 3}

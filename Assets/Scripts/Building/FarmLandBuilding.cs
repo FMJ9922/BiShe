@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 namespace Building
@@ -154,24 +155,6 @@ namespace Building
         #region IProduct
         public void Input()
         {
-            ResourceManager.Instance.TryUseUpResource(new CostResource(99999, runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff()));
-            runtimeBuildData.Pause = false;
-            if (runtimeBuildData.formula == null|| runtimeBuildData.formula.InputItemID==null) return;
-            List<CostResource> costResources = new List<CostResource>();
-            for (int i = 0; i < runtimeBuildData.formula.InputItemID.Count; i++)
-            {
-                costResources.Add(new CostResource(runtimeBuildData.formula.InputItemID[i], runtimeBuildData.formula.InputNum[i]* WorkEffect()* runtimeBuildData.Times));
-            }
-
-            bool res = ResourceManager.Instance.IsResourcesEnough(costResources, TechManager.Instance.ResourcesBuff());
-            if (!res)
-            {
-                runtimeBuildData.Pause = true;
-            }
-            else
-            {
-                ResourceManager.Instance.TryUseResources(costResources);
-            }
         }
 
         public void Output()
@@ -198,15 +181,6 @@ namespace Building
         public float GetProcess()
         {
             return 1 - (float)runtimeBuildData.productTime / runtimeBuildData.formula.ProductTime + (float)LevelManager.Instance.Day / 7 / runtimeBuildData.formula.ProductTime;
-        }
-
-        public float WorkEffect()
-        {
-            if(runtimeBuildData.tabType == BuildTabType.house)
-            {
-                return 1;
-            }
-            return (float)runtimeBuildData.CurPeople/(runtimeBuildData.Population + TechManager.Instance.PopulationBuff());
         }
         
         public virtual void UpdateRate(string date)
@@ -243,7 +217,7 @@ namespace Building
         public CarMission MakeCarMission(float rate)
         {
             CarMission mission = new CarMission();
-            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            BuildingBase target = MapManager.Instance.GetNearestMarket(parkingGridIn);
             if (target == null)
             {
                 return null;
@@ -281,6 +255,12 @@ namespace Building
                 }
             }
         }
+
+        public void CheckSendOutputCar(float rate)
+        {
+            
+        }
+
         private CarMission MakeHarvestCarMission()
         {
             CarMission mission = new CarMission();

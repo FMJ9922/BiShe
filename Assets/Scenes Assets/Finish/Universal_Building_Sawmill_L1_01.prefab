@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2777044009752049682}
   - component: {fileID: 7029621906015999455}
-  - component: {fileID: 9023254816225749810}
   - component: {fileID: -2597777306280376452}
   - component: {fileID: 362941943476900421}
   m_Layer: 0
@@ -50,18 +49,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.367195, y: 2, z: 14.881308}
   m_Center: {x: -0.9947376, y: 1, z: 0.17246246}
---- !u!114 &9023254816225749810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6732961294193183716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-2597777306280376452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,6 +103,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -133,10 +121,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
   sensor: {fileID: 4169398781723423611}
 --- !u!1 &6913928871226948752
 GameObject:
@@ -221,6 +217,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
       objectReference: {fileID: 0}
@@ -236,6 +237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -248,16 +254,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3512986815188691911, guid: 3d8337e2188ea454798df0dacf061752,
         type: 3}
@@ -312,6 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
       objectReference: {fileID: 0}
@@ -327,6 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -339,16 +345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3310467219726937053, guid: aff86817aadae06478653c8fcfb6dbb8,
         type: 3}

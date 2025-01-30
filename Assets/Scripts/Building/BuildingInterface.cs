@@ -83,8 +83,6 @@ namespace Building
 
         float GetProcess();
 
-        float WorkEffect();
-
         void UpdateRate(string date);
 
         void UpdateEffectiveness();
@@ -106,6 +104,10 @@ namespace Building
         /// </summary>
         /// <param name="carMission"></param>
         void OnRecieveCar(CarMission carMission);
+
+        void CheckSendOutputCar();
+
+        void CheckSendInputCar();
     }
 
     public interface IBridge

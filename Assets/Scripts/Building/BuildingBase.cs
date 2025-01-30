@@ -28,8 +28,6 @@ namespace Building
         public Vector2Int[] takenGrids;
 
         public Vector2Int parkingGridIn;
-        
-        protected Storage storage;
 
         protected void FillMaxPeople()
         {
@@ -59,5 +57,7 @@ namespace Building
         
         public FormulaData formula;//正在使用的配方
         public Direction direction;
+
+        public Dictionary<int, float> StoredItemDic;//该建筑的仓库
     }
 }

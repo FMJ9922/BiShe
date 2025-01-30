@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 namespace Building
@@ -11,8 +12,6 @@ namespace Building
        
         public void OnConfirmBuild(Vector2Int[] vector2Ints)
         {
-            storage = transform.GetComponent<Storage>();
-            storage.AddResource(11001, 1);
             ProvidePopulation();
             takenGrids = vector2Ints;
             gameObject.tag = "Building";
@@ -79,8 +78,6 @@ namespace Building
 
         public void RestartBuildingFunction()
         {
-            storage = transform.GetComponent<Storage>();
-            storage.AddResource(11001, Random.Range(3,13));
             ProvidePopulation();
             if (runtimeBuildData.formulaDatas.Length>0)
             {
@@ -143,7 +140,7 @@ namespace Building
 
         public void InputFood()
         {
-            ResourceManager.Instance.AddMoney(-runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
+            /*ResourceManager.Instance.AddMoney(-runtimeBuildData.CostPerWeek * TechManager.Instance.MaintenanceCostBuff());
             //食物少于指定数量就去取货
             if (storage.GetAllFoodNum() < 3)
             {
@@ -170,7 +167,7 @@ namespace Building
                 }
             }
             this.runtimeBuildData.Happiness = (80f + 10 * runtimeBuildData.CurLevel) / 100f;
-            hasFoodThisWeek = false;
+            hasFoodThisWeek = false;*/
         }
 
         public void Upgrade(out bool issuccess, out BuildingBase buildingData)
@@ -207,7 +204,7 @@ namespace Building
         public CarMission MakeCarMission(float rate)
         {
             CarMission mission = new CarMission();
-            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            BuildingBase target = MapManager.Instance.GetNearestMarket(parkingGridIn);
             if (target == null)
             {
                 return null;
@@ -220,6 +217,11 @@ namespace Building
             mission.requestResources = new List<CostResource>();
             mission.requestResources.Add(ResourceManager.Instance.GetFoodByMax(rate));
             return mission;
+        }
+
+        public void CheckSendOutputCar(float rate)
+        {
+            
         }
 
         public void OnRecieveCar(CarMission carMission)
@@ -239,7 +241,7 @@ namespace Building
                     foreach (var goods in carMission.transportResources)
                     {
                         //Debug.Log("recieve:" + goods.ToString());
-                        storage.AddResource(goods);
+                        //storage.AddResource(goods);
                     }
                 }
                     break;

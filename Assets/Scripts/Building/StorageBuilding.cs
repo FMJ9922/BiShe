@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 
 namespace Building
@@ -214,7 +215,7 @@ namespace Building
         public CarMission MakeCarMission(float rate)
         {
             CarMission mission = new CarMission();
-            BuildingBase target = MapManager.GetNearestMarket(parkingGridIn)?.GetComponent<BuildingBase>();
+            BuildingBase target = MapManager.Instance.GetNearestMarket(parkingGridIn);
             if (target == null)
             {
                 return null;
@@ -263,6 +264,11 @@ namespace Building
 
                     break;
             }
+        }
+
+        public void CheckSendOutputCar(float rate)
+        {
+            
         }
 
         private CarMission BuildGoForOrderCarMission(CarMission carMission)

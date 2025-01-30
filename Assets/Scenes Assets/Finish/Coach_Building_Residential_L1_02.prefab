@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5688932438324115568}
-  - component: {fileID: 2819449655179224132}
   - component: {fileID: 2307403359996163497}
   - component: {fileID: 6344187544168638388}
   - component: {fileID: 5976826198298342472}
@@ -35,18 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2819449655179224132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2192416644814877913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &2307403359996163497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,6 +101,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -123,6 +111,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0
@@ -130,10 +119,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
 --- !u!1001 &525540153308399998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Coach_Building_Residential_L1_02_Preb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
         type: 3}
@@ -163,6 +165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -174,16 +181,6 @@ PrefabInstance:
     - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,
-        type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4574546306777344736, guid: b251f501a4455524a8159ebe1598e3d8,

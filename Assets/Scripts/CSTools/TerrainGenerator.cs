@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Manager;
 using UnityEngine.SceneManagement;
 
 public class TerrainGenerator : Singleton<TerrainGenerator>

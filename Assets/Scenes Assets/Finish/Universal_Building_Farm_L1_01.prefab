@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 281695158702977174}
   - component: {fileID: 9212104786680185746}
   - component: {fileID: 7635756241919994507}
-  - component: {fileID: 6325556495357599334}
   - component: {fileID: 2464015998813835597}
   m_Layer: 0
   m_Name: Universal_Building_Farm_L1_01
@@ -64,18 +63,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6325556495357599334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1535759066058278121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2464015998813835597
 MonoBehaviour:
   m_ObjectHideFlags: 0

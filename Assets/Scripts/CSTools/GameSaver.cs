@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Schema;
 using Building;
+using Manager;
 
 public class GameSaver
 {

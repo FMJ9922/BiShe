@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using CSTools;
+using Manager;
 using UI;
 using UnityEngine.SceneManagement;
 
@@ -92,8 +93,7 @@ public class LevelManager : Singleton<LevelManager>
                 day = value - 7;
                 ResourceManager.Instance.RecordLastWeekItem();
                 ResourceManager.Instance.UpdateItemHistroyNumDic();
-                EventManager.TriggerEvent(ConstEvent.OnOutputResources);
-                EventManager.TriggerEvent(ConstEvent.OnInputResources);
+                ProduceManager.Instance.DoProduce();
                 TrafficManager.Instance.WeeklyCost = 0;
             }
             else

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CSTools;
+using Manager;
 using UnityEngine;
 namespace Building
 {
@@ -100,6 +101,11 @@ namespace Building
                     }
                     break;
             }
+        }
+
+        public void CheckSendOutputCar(float rate)
+        {
+            
         }
 
         private CarMission BuildBackFromOrderCarMission(CarMission carMission)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 建筑附属仓库
+/// 建筑附属仓库(不再使用)
 /// </summary>
 public class Storage:MonoBehaviour
 {

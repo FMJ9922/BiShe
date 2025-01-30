@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Building;
+using Manager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -18,11 +19,7 @@ public class TrafficManager : Singleton<TrafficManager>
 
     private List<CarDriver> _carDriverUsingPool = new List<CarDriver>();
     private List<CarDriver> _carDriverUnusedPool = new List<CarDriver>();
-
-    //寻路节点
-    public List<GridNode> reachable = new List<GridNode>();
-    public List<GridNode> explored = new List<GridNode>();
-
+    
     private List<Vector2Int> RoadNodes;
     private readonly Vector3 hidePos = new Vector3(-1000, -1000, -1000);
 

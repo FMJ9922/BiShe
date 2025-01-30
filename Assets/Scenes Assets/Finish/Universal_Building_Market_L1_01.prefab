@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7352129176716051139}
   - component: {fileID: 3510254696242742979}
-  - component: {fileID: 5378275941670728986}
   - component: {fileID: 5508090792526046556}
   - component: {fileID: -1632058404701652984}
   m_Layer: 0
@@ -48,18 +47,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12.148535, y: 2, z: 15.7737465}
   m_Center: {x: -0.0007123947, y: 1, z: 0.026008606}
---- !u!114 &5378275941670728986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238825812732076753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 689bf37a4fe06e24d9437679453c3226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5508090792526046556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +85,7 @@ MonoBehaviour:
     Level: 0
     iconName: 
     Times: 0
+    SortRank: 0
     Pause: 0
     CurLevel: 0
     CurFormula: 0
@@ -107,6 +95,7 @@ MonoBehaviour:
     Effectiveness: 0
     Happiness: 0.6
     productTime: 0
+    AvaliableToMarket: 1
     SavePosition:
       x: 0
       y: 0
@@ -114,10 +103,18 @@ MonoBehaviour:
     SaveTakenGrids: []
     SaveDir: 0
     SaveOutLookType: 0
+    formula:
+      ID: 0
+      Describe: 
+      InputItemID: 
+      InputNum: 
+      OutputItemID: 
+      ProductNum: 
+      ProductTime: 0
+    direction: 0
   buildFlag: 0
   takenGrids: []
   parkingGridIn: {x: 0, y: 0}
-  direction: 0
 --- !u!54 &-1632058404701652984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,6 +145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
       objectReference: {fileID: 0}
@@ -163,6 +165,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -175,16 +182,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5578432906061022548, guid: d0af32b1b8573d8418ca0c471692ff1b,
         type: 3}

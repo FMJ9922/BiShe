@@ -9,6 +9,7 @@ using System.Text;
 using System.Linq;
 using Building;
 using CSTools;
+using Manager;
 
 public class NoticeCanvas : CanvasBase
 {
