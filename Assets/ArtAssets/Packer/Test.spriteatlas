@@ -28,10 +28,23 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 0
       enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 610cb00362b865c469b86e68e02430f1, type: 3}
     bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - f6911ac70c5508f4daa705d5124ddb28: 21300000
+    - 9d38be08e9a5923448d019767040a442: 21300000
+    - 5276b1c87dbca4c4c8714879e03a31e7: 21300000
+    - 0a6527aaec336d04a92417d8e088e672: 21300000
+    - 42b5982beb6a8e848bdc8882c3634da4: 21300000
+    - f6c0dadc6fb47d64290ef1f56778c3db: 21300000
+    - e5d081be49d3bad4dabdbffeb4a3391e: 21300000
+    - 00ecbc4fa32938b468a384731d3b5213: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: f6911ac70c5508f4daa705d5124ddb28, type: 3}
@@ -51,5 +64,6 @@ SpriteAtlas:
   - Soldier (1)
   - Soldier (5)
   - Soldier (2)
+  m_RenderDataMap: {}
   m_Tag: Test
   m_IsVariant: 0

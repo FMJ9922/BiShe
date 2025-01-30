@@ -104,10 +104,6 @@ namespace Building
         /// </summary>
         /// <param name="carMission"></param>
         void OnRecieveCar(CarMission carMission);
-
-        void CheckSendOutputCar();
-
-        void CheckSendInputCar();
     }
 
     public interface IBridge

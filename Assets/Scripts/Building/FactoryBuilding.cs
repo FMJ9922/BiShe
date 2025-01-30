@@ -200,6 +200,11 @@ namespace Building
 
             return mission;
         }
+        
+        public CarMission MakeCarMission(float rate)
+        {
+            return null;
+        }
 
         public void OnRecieveCar(CarMission carMission)
         {

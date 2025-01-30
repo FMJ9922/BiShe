@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Boo.Lang.Runtime;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +13,7 @@ namespace Assets.Editor.Tests.Util
         /// </summary>
         /// <param name="testCodeBlock">The test code</param>
         /// <param name="listOfPrefabs">List of paths to assets created for the test</param>
-        public static void ExecuteCodeAndCleanupAssets(RuntimeServices.CodeBlock testCodeBlock, List<string> listOfPrefabs)
+        public static void ExecuteCodeAndCleanupAssets(Action testCodeBlock, List<string> listOfPrefabs)
         {
             try
             {
