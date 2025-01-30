@@ -1,0 +1,433 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: mat.ab
+  m_EditorClassIdentifier: 
+  m_GroupName: mat.ab
+  m_GUID: d097b9172ace5324c8ee82cc3679f7b6
+  m_SerializeEntries:
+  - m_GUID: b58833462cdadf945835ced620f1ba36
+    m_Address: mat.ab/Field
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ca9aa735edd30d4391afddd29cf9881
+    m_Address: mat.ab/PlantUV
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a60949ad054b3140b4eb2d9634314e1
+    m_Address: mat.ab/Door
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f4a63fffbdf95a4cadc1b74548df349
+    m_Address: mat.ab/Ridge
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2253d78c266bd9f4c8ba89c3cb498255
+    m_Address: mat.ab/Roof
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4b77c6dd67b65d43b496fb659e60555
+    m_Address: mat.ab/Roofvary
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a5a79feaaf8b8f4b94c00d0f952f3c2
+    m_Address: mat.ab/Wall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0f4c783a4de8ee4b9ecfdde75a214ca
+    m_Address: mat.ab/WallStone
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afae25106218d564894889a5f23d495f
+    m_Address: mat.ab/WindowGlass
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bcada0c576bf5c45ae4714a9324b5fb
+    m_Address: mat.ab/WindowWood
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ca03bda29fab3846b1b4c15239c6278
+    m_Address: mat.ab/Custom_OutLine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85b3979dd2c946a43b49c70777b8a45f
+    m_Address: mat.ab/Custom_TransparentGpuInstance
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6bcc83b606a94b428511160db69d641
+    m_Address: mat.ab/OutLine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fecfe644dbbbe04b80035c61bedc048
+    m_Address: mat.ab/PlantImageEffectShader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce8d9d0cfcdf0bd488207bba070cd72e
+    m_Address: mat.ab/Universal_Plant_Rice
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bfb5af536d717844e907b29e35798ed1
+    m_Address: mat.ab/Universal_Plant_Wheat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d5169b6eecc93e40a72902464323470
+    m_Address: mat.ab/MarketButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4067a16eb105b584f9abd218d8708a96
+    m_Address: mat.ab/ScienceButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f2a45990b3fdbb42ba0bee2905ffed0
+    m_Address: mat.ab/30001preview
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d271144eef522043a24b8e0c70e6376
+    m_Address: mat.ab/30002preview
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75fe5c42211dcbf41927bcf0af0ba1c5
+    m_Address: mat.ab/30003preview
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9de4a6ca27ab52479c42e95c4ec1194
+    m_Address: mat.ab/TCP2_Demo_SmallWaves
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 869319dead08c3b4a9c074af06b585f4
+    m_Address: mat.ab/TCP2_Water Foam Sponge
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3d79b2125dc5df4fa69cd3df797ead8
+    m_Address: mat.ab/Flag Wind
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 969d155db50059e4781fe2908c3d67cb
+    m_Address: mat.ab/Leaves Wind
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef1e52f271e016d47bd114f494e0876a
+    m_Address: mat.ab/Wheat Wind
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bcde38e6d372b9438d01e647bd5dfec
+    m_Address: mat.ab/Reflection
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ffc1bc2bbb1ef64f84b552b2d2f0619
+    m_Address: mat.ab/TCP2 Hybrid Shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ccad9b0732473ee4e95de81e50e9050f
+    m_Address: mat.ab/TCP2_Ramp_UnityGradient
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af5515bfe14f1af4a9b8b3bf306b9261
+    m_Address: mat.ab/TCP2_NoTileNoise
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bba4cffd1a962d47bffc6d786c26cb0
+    m_Address: mat.ab/Universal_Building_Mine_L1L2_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 830e53ebb850b0b4dbfd9fe132c4b755
+    m_Address: mat.ab/Universal_Building_Mine_L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 080a19811a254574f91bdad2c86bfaa5
+    m_Address: mat.ab/PlantPfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0af2280756204614aab68a89b4c1c802
+    m_Address: mat.ab/Coach_Building_HookerPier_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b793f799f668d2043a30f875c5672c6d
+    m_Address: mat.ab/Coach_Building_Residential_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a7f1eef18ebc2541823399f6b13afe5
+    m_Address: mat.ab/Hui_Building_Residential_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7fafa874a3250e4ea7a85dd8f449ef0
+    m_Address: mat.ab/Plain_Building_Ground_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ea775bff5de65346ac29e41c64e6585
+    m_Address: mat.ab/Plain_Building_Residential_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f13297d830ef934eb5a8597a22aeadd
+    m_Address: mat.ab/TCP2_WaterReflection_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3353f2c4efa182e4092a1c8dd3c9a64b
+    m_Address: mat.ab/Coach_Building_HookerPier_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15bad525484fb3e45b98631df37c73ce
+    m_Address: mat.ab/Coach_Building_Residential_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6572224e0a6c8924e8dbabcfed0e64d8
+    m_Address: mat.ab/Hui_Building_Residential_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c96d7034765d1984aaf05fbadbbd7474
+    m_Address: mat.ab/Plain_Building_Residential_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ffdeab4b6e665a40a6a253e3b1528d4
+    m_Address: mat.ab/Universal_Building_Bridge_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a5751f1b2410a84f9d8d6cc15ca7f43
+    m_Address: mat.ab/Universal_Building_Factory_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 593cfa53b08f7144b97822c583a60919
+    m_Address: mat.ab/Universal_Building_Farm_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05f536c17bc97d04ab3dc4f125971c99
+    m_Address: mat.ab/Universal_Building_Government_Flag_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d98999ed62aa732428996db33030da77
+    m_Address: mat.ab/Universal_Building_Government_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a83aafcdf263ef44ae3203a30eca24d
+    m_Address: mat.ab/Universal_Building_MarketWarehouse_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3bf482e19d6fad340893669e597e65bd
+    m_Address: mat.ab/Universal_Building_Mine_L1L2_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 563ceb3f4b5b6094a9b9d2ece2a6994f
+    m_Address: mat.ab/Universal_Building_Mine_L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0ac8b8264817344bb03f9820d1e3e5d
+    m_Address: mat.ab/Universal_Building_Sawmill_L1L2L3_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 557a8b7b44faeba46b7c5229f90e96df
+    m_Address: mat.ab/Universal_Plant_Wheat_01_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa421236fdb29fd40ad53e2cbe712f08
+    m_Address: mat.ab/Universal_Terrain_Mix_01_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94d5681bd88b6c441a9361e8ae8e310d
+    m_Address: mat.ab/Universal_Transportation_Trunk_01_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89878aecd2068da4799532e584cb8237
+    m_Address: mat.ab/Universal_Building_Bridge_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d5d5ac2757478de4284138bdc8b0e6b0
+    m_Address: mat.ab/Universal_Building_Factory_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 939943036d1847c4da392c4a2fd0420b
+    m_Address: mat.ab/Universal_Building_Farm_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 468c1111bc76bfc4a816a9ca45122906
+    m_Address: mat.ab/Universal_Building_Government_Flag_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17f53c424ff201c4e995983e7004613f
+    m_Address: mat.ab/Universal_Building_Government_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d9aacd629a7b7d42b760bde10793a4f
+    m_Address: mat.ab/Universal_Building_MarketWarehouse_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c92b3b9dcca13074b84cb5757911eb02
+    m_Address: mat.ab/Universal_Building_Mine_L1L2_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79cc4db939823bd49a2012cbfabe05b4
+    m_Address: mat.ab/Universal_Building_Mine_L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 033a01d0c44e5a7489c7e93bee247bf0
+    m_Address: mat.ab/Universal_Building_Sawmill_L1L2L3_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 733fa285bc095f740a648c16446bdf69
+    m_Address: mat.ab/Universal_Plant_Fruit_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 055c7f249ea255944a9005c218c01972
+    m_Address: mat.ab/Universal_Plant_FruitTreeLeaves_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dea5caed1fa70c74e9b2374bb66c7391
+    m_Address: mat.ab/Universal_Plant_TreeLeaves_01_Mat 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31668013eb350e1448ae2e40e6eb6549
+    m_Address: mat.ab/Universal_Plant_TreeLeaves_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 923e7100a167ec549ac1fbdc7ecc4b05
+    m_Address: mat.ab/Universal_Plant_TreeLeaves_02_Mat 1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 515e57290189f374f874d7d1cca382b7
+    m_Address: mat.ab/Universal_Plant_TreeLeaves_02_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb88359801cd49c4baa5bb61923f2489
+    m_Address: mat.ab/Universal_Plant_TreeTrunk_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ad57bdc0ceaf8c488bdf11f522ee79c
+    m_Address: mat.ab/Universal_Plant_Wheat_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2aa95fd62af574b4aad9a36b0a43a411
+    m_Address: mat.ab/Universal_Terrain_BareGround_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 408cb4801e937934ca7e882af866d242
+    m_Address: mat.ab/Universal_Terrain_GrassLand_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47e602c4ccec0c54a93338518bc7f525
+    m_Address: mat.ab/Universal_Terrain_Water_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7bb02d8ddda0d4643b1f7766fcf559cb
+    m_Address: mat.ab/Universal_Transportation_Trunk_01_Mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b640698c0ddc40045924e1371efb6407
+    m_Address: mat.ab/cloud_2x2_default_AB
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a15450b5fc1a5040b711ff398fa5032
+    m_Address: mat.ab/cloud_2x2_hard_softshadow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3265ab4bf004d28a9537516768c1c75
+    m_Address: mat.ab/LiberationSans
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78e17d9c26301c249a0ef1f0645335f3
+    m_Address: mat.ab/huangyouti SDF
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e498d1c8094910479dc3e1b768306a4
+    m_Address: mat.ab/LiberationSans SDF - Fallback
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f586378b4e144a9851e7b34d9b748ee
+    m_Address: mat.ab/LiberationSans SDF
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3df2ba8e2ccbf4743986fcad059ce825, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: de7c994b0a3ff0c478fd5a886441c506, type: 2}
+    - {fileID: 11400000, guid: be458b223261faf4cb9518ffc86a997b, type: 2}

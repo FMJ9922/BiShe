@@ -9,9 +9,11 @@ using UnityEngine.UI;
 public class GraphManager : Singleton<GraphManager>
 {
     GameObject cubePfb;
+    [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject subCamera;
     [SerializeField] GameObject handle;
     [SerializeField] Image graphIcon;
+    [SerializeField] Transform graphParent;
     private bool[] openState = new bool[4] { false, false, false, false };
     protected override void InstanceAwake()
     {
@@ -30,7 +32,7 @@ public class GraphManager : Singleton<GraphManager>
 
     public void ShowGraph(int type)
     {
-        CleanUpAllAttachedChildren(transform);
+        CleanUpAllAttachedChildren(graphParent);
         if (openState[type])
         {
             CloseGraph();
@@ -63,7 +65,7 @@ public class GraphManager : Singleton<GraphManager>
         List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         for (int i = 0; i < buildings.Count; i++)
         {
-            GameObject item = Instantiate(cubePfb, transform);
+            GameObject item = Instantiate(cubePfb, graphParent);
             BuildingBase building = buildings[i];
             int curPeople = Mathf.Abs(building.runtimeBuildData.CurPeople);
             item.GetComponent<GraphCube>().SetHeight(curPeople, buildings[i].transform.position,
@@ -79,7 +81,7 @@ public class GraphManager : Singleton<GraphManager>
         List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         for (int i = 0; i < buildings.Count; i++)
         {
-            GameObject item = Instantiate(cubePfb, transform);
+            GameObject item = Instantiate(cubePfb, graphParent);
             BuildingBase building = buildings[i];
             float rand = building.runtimeBuildData.Happiness;
             //Debug.Log(rand);
@@ -94,7 +96,7 @@ public class GraphManager : Singleton<GraphManager>
         List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         for (int i = 0; i < buildings.Count; i++)
         {
-            GameObject item = Instantiate(cubePfb, transform);
+            GameObject item = Instantiate(cubePfb, graphParent);
             BuildingBase building = buildings[i];
             float rand = building.runtimeBuildData.CostPerWeek* TechManager.Instance.MaintenanceCostBuff();
             item.GetComponent<GraphCube>().SetHeight(Mathf.Abs(rand), buildings[i].transform.position,
@@ -124,7 +126,7 @@ public class GraphManager : Singleton<GraphManager>
         List<BuildingBase> buildings = MapManager.Instance.GetAllBuildings();
         for (int i = 0; i < buildings.Count; i++)
         {
-            GameObject item = Instantiate(cubePfb, transform);
+            GameObject item = Instantiate(cubePfb, graphParent);
             BuildingBase building = buildings[i];
             float rand = building.runtimeBuildData.Effectiveness;
             item.GetComponent<GraphCube>().SetHeight((int)(rand >= 0 ? rand * 20 : 0), buildings[i].transform.position,
@@ -138,13 +140,13 @@ public class GraphManager : Singleton<GraphManager>
     private void OpenGraph()
     {
         cubePfb = LoadAB.Load("building.ab", "GraphPfb");
-        Camera.main.GetComponent<PostEffect>().isStart = true;
+        mainCamera.GetComponent<PostEffect>().isStart = true;
         subCamera.SetActive(true);
     }
 
     private void CloseGraph()
     {
-        Camera.main.GetComponent<PostEffect>().isStart = false;
+        mainCamera.GetComponent<PostEffect>().isStart = false;
         subCamera.SetActive(false);
     }
 

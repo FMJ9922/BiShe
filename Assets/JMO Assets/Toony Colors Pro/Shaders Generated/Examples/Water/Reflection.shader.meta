@@ -8,5 +8,5 @@ ShaderImporter:
   nonModifiableTextures: []
   userData: USER,FWORLDSPACE_UV,FRIM,FVSW_2,FVSW_WORLDPOS,FNORMAL_MAP,FDEPTH_BUFFER_ALPHA,FVERTEX_SIN_NORMALS,FSMOOTH_FOAM,FUSW_NORMAL,FSPECULAR,FNORMAL_MAP_DEPTH,FDEPTH_BUFFER_FOAM,FPLANAR_REFLECTION,fnolightmap,KCOLORMASK_CHANNEL:.a,KUV_mask1:Main
     Tex UV,KREFL_MASK_CHANNEL:.a,KSHADER_TARGET:3.0,ch6F28F7D0,cSM:30,cCT:water,cCF:TCP2_ShaderTemplate_Water
-  assetBundleName: mat
-  assetBundleVariant: ab
+  assetBundleName: 
+  assetBundleVariant: 

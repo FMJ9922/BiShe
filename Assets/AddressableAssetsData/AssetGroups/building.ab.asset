@@ -1,0 +1,1093 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: building.ab
+  m_EditorClassIdentifier: 
+  m_GroupName: building.ab
+  m_GUID: 9b2bff66216b116418ebb511c459df83
+  m_SerializeEntries:
+  - m_GUID: f7cc8c5c2d798cf409e95f450b496f5d
+    m_Address: building.ab/ParticleFactory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae1e9b1e0d5d3a54a93a96794030f1e4
+    m_Address: building.ab/ParticleResidential
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc4de1005013beb43bd9d13768d6775c
+    m_Address: building.ab/GraphPfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed60f24e71e122141942163592e52b7e
+    m_Address: building.ab/LevelSelectPfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6a5df1002a2a6e45a131d918cb589d7
+    m_Address: building.ab/MarketItemPfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 185b2b045322bd948a6d553280ecc9aa
+    m_Address: building.ab/ww
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44f903f4456f0f845a7cc7764601989d
+    m_Address: building.ab/Plain_Building_Residential_L1_03_Ani
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 482ae9a280d39a04ba5e18aeb71803c8
+    m_Address: building.ab/RiceGrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77780695d1a665243b966ba6c8fda5c0
+    m_Address: building.ab/RicePfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46fc7dd52ead1e549861d99c4221ab1b
+    m_Address: building.ab/Universal_Building_Mine_L1_02_Ani
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 577885542971de64cb5aecd36235e4b0
+    m_Address: building.ab/Universal_Building_Mine_L3_02_Ani
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c5c26bca2d57264cbfde4a35aadf5b2
+    m_Address: building.ab/Universal_Building_Sawmill_L1_01_Ani
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ba6055dc6b2c4b4883253c36f65be7b
+    m_Address: building.ab/WheatGrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8df8bc3d33ac3f444a6d95848acdc3db
+    m_Address: building.ab/WheatGrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8a7cd03d94cd6c41855376b4bf2d4f7
+    m_Address: building.ab/Coach_Building_Pier_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb483e0b5d1bb0549b2a0f4e889a8d4d
+    m_Address: building.ab/Coach_Building_Pier_add
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6847dd53a1d50c64d93dea343b47cc95
+    m_Address: building.ab/Coach_Building_Residential_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6fd08d631306734418a1e8995a03767d
+    m_Address: building.ab/Coach_Building_Residential_L1_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac897b0efa26edd47b89db24da8ef58e
+    m_Address: building.ab/Coach_Building_Residential_L1_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fda6f5362e9ffc41bb3040d20c9b6b0
+    m_Address: building.ab/Coach_Building_Residential_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5edae006e3741348a50813445762174
+    m_Address: building.ab/Coach_Building_Residential_L2_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95d7b83fde1552a44b740337da71214a
+    m_Address: building.ab/Coach_Building_Residential_L2_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57c0457a04ea83645936d15f8e7ec3ca
+    m_Address: building.ab/Coach_Building_Residential_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db806f8ce52057d44894d114a4240bc1
+    m_Address: building.ab/Coach_Building_Residential_L3_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e2988c9f1e25ac4a92e370dd1560a71
+    m_Address: building.ab/Coach_Building_Residential_L3_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: accc6de019026fa4681d648bdff11184
+    m_Address: building.ab/Hui_Building_Residential_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26ad6cc8789913846828e798758082cc
+    m_Address: building.ab/Hui_Building_Residential_L1_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fd72b58338307c4d9cfc758b207da9b
+    m_Address: building.ab/Hui_Building_Residential_L1_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f09576a125e62744a5ca2d3e06e55c7
+    m_Address: building.ab/Hui_Building_Residential_L1_04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cfb036893f7f4c4caca127c53b96cbc
+    m_Address: building.ab/Hui_Building_Residential_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da4156b24a8b3c54e9c1756c948701df
+    m_Address: building.ab/Hui_Building_Residential_L2_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a7444cbe45997248aa44b66839cf77a
+    m_Address: building.ab/Hui_Building_Residential_L2_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac02d33b11a5ceb46b53ac2c3143b3de
+    m_Address: building.ab/Hui_Building_Residential_L2_04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04c1213e8f3a463479b34d5df52ace7d
+    m_Address: building.ab/Hui_Building_Residential_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cc3e53ed47b77d42bb707b12b9e4a52
+    m_Address: building.ab/Hui_Building_Residential_L3_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c1218713b0eef0458ffa1f3cb3cc951
+    m_Address: building.ab/Hui_Building_Residential_L3_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec929d998b7fc6943957c3ed1a696c32
+    m_Address: building.ab/Plain_Building_Residential_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 995634f3876c1854885e06b25e780577
+    m_Address: building.ab/Plain_Building_Residential_L1_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb877d9decb17404d8ce94c4cbb79c76
+    m_Address: building.ab/Plain_Building_Residential_L1_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b48bccc4bac57e646bc9b47a17842abb
+    m_Address: building.ab/Plain_Building_Residential_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c7968346cb41f74fa9eb16537eae946
+    m_Address: building.ab/Plain_Building_Residential_L2_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6af2e91daac54ec41b6ea425bb8a1b0c
+    m_Address: building.ab/Plain_Building_Residential_L2_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30da0777d44603040b6813013287333b
+    m_Address: building.ab/Plain_Building_Residential_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27a264c5022187145bb2feb5b8cfb261
+    m_Address: building.ab/Plain_Building_Residential_L3_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5098b2f76bad7c4a9311c23b1388e38
+    m_Address: building.ab/Plain_Building_Residential_L3_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29ed9cea653f5e34a8a31a7d2eb5dce7
+    m_Address: building.ab/RicePfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 38b51f535a105ec49b14944c53875455
+    m_Address: building.ab/TradeCenter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 405eea47c76d5c947a1fcd7722271f33
+    m_Address: building.ab/Universal_Building_Bridge_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e871be922a9b53249930386e2a738ad1
+    m_Address: building.ab/Universal_Building_Bridge_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: adf15c060f6d70442b949ac51b959a6a
+    m_Address: building.ab/Universal_Building_Bridge_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ec661867ae9aa441bc443be8cc43328
+    m_Address: building.ab/Universal_Building_Factory_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac5c513338a6d5e4fa9a7db70faeddf4
+    m_Address: building.ab/Universal_Building_Factory_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 45c1de677f7ecde4d9f455151e9ef9f4
+    m_Address: building.ab/Universal_Building_Factory_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc28e6db999ccfb458586de4a53a0d32
+    m_Address: building.ab/Universal_Building_Farm_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23f0cde8c651ed34c9eec8134e4b1ba2
+    m_Address: building.ab/Universal_Building_Farm_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0874e2e11d2b1d549b0a3b86d583d639
+    m_Address: building.ab/Universal_Building_Farm_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f00f9394f34c91742bcd1b15d1e718cf
+    m_Address: building.ab/Universal_Building_Farmland_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f719d40c0694c3489e2fd410002dfff
+    m_Address: building.ab/Universal_Building_Farmland_L1_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c928cca91100f6547955a4d856237031
+    m_Address: building.ab/Universal_Building_Farmland_L1_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a13ca3be4f04148479d993686e6910bb
+    m_Address: building.ab/Universal_Building_Government_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8312bf7955f2335429e9c3cd58904478
+    m_Address: building.ab/Universal_Building_Government_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 589ee3b6a4b19b545956ba47869449d5
+    m_Address: building.ab/Universal_Building_Government_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a2054f14f8039d4e90ff9d9c1770af6
+    m_Address: building.ab/Universal_Building_Market_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d01be8187a11cad46b6e96997d8f67e1
+    m_Address: building.ab/Universal_Building_Market_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 901c5ddc41bb7aa4e99d63a18cdaa147
+    m_Address: building.ab/Universal_Building_Market_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 998321e7fe179644daa47705ce19d0cf
+    m_Address: building.ab/Universal_Building_Mine_L1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 33933275e162908439acc56ceb6f8c08
+    m_Address: building.ab/Universal_Building_Mine_L2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2198fa22a0d4dd479c94974b1268a7f
+    m_Address: building.ab/Universal_Building_Mine_L3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb92ffdde8f4d73498de97347fde8c70
+    m_Address: building.ab/Universal_Building_Orchard_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34ead4d66c5ef4842ad2e35bffdeb5e4
+    m_Address: building.ab/Universal_Building_Sawmill_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5869a05510cc3f4ba0fd819ae9a689c
+    m_Address: building.ab/Universal_Building_Sawmill_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 384d56e0dc65c744fbf9d669cbfb66b1
+    m_Address: building.ab/Universal_Building_Sawmill_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdc3fbf3b1f5e4544b2398f388e3e4f9
+    m_Address: building.ab/Universal_Building_Warehouse_L1_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6aa34f5ca7c65c41b2850a84cfda0f8
+    m_Address: building.ab/Universal_Building_Warehouse_L2_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80bb99fc9558be945b3ca22a864c81cf
+    m_Address: building.ab/Universal_Building_Warehouse_L3_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f55e60634c10324c9cd2f1c7c3d0241
+    m_Address: building.ab/WheatPfb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe6f7bf7a5db1d84c931fc2b57dcdbac
+    m_Address: building.ab/Universal_Plant_WheatRice_01_Tex
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed63ba1ed667e574087b5dd9e92eea42
+    m_Address: building.ab/Coach_Building_Hooker_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9017321beff3320458398ac5d87f9200
+    m_Address: building.ab/Coach_Building_Hooker_L1_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68661517057423f4f8fb4a9d0fba7d3f
+    m_Address: building.ab/Coach_Building_Hooker_L1_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13fa4e3ea43e6c9498c23f99f9b3c0fd
+    m_Address: building.ab/Coach_Building_Pier_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 197bd0426f697744385f07402f3ae088
+    m_Address: building.ab/Coach_Building_Pier_add_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a8424163dec0ee4f8aa4f76002c37a2
+    m_Address: building.ab/Coach_Building_Residential_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa99ce47c9730d9449b0ff485ca5bbe9
+    m_Address: building.ab/Coach_Building_Residential_L1_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40f1a8aa6258f6c45a537653241a3f13
+    m_Address: building.ab/Coach_Building_Residential_L1_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9e3a9a0a1e8f3449acac36059be73d5
+    m_Address: building.ab/Coach_Building_Residential_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79afd37cecae0054497efc209643f608
+    m_Address: building.ab/Coach_Building_Residential_L2_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f9be9978d19a8a4d82796eb5f0e04d1
+    m_Address: building.ab/Coach_Building_Residential_L2_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 37a63863fa15b4846b94d1ec1f3f85ae
+    m_Address: building.ab/Coach_Building_Residential_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1dc1dcab10ea8b747a26459f762f421b
+    m_Address: building.ab/Coach_Building_Residential_L3_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85166e3922bcbe8418e4b156c27e69ee
+    m_Address: building.ab/Hui_Building_Residential_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 08cf3918910dd6345980fb2d4d1e2ee7
+    m_Address: building.ab/Hui_Building_Residential_L1_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 625ebe7b27b3ab041a07f928dbd86cd6
+    m_Address: building.ab/Hui_Building_Residential_L1_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 996c355e19c965c4ab173eba47da1706
+    m_Address: building.ab/Hui_Building_Residential_L1_04_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0111c36944735a4eb6d40ba84de124c
+    m_Address: building.ab/Hui_Building_Residential_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1bfd9ff173ada344928c3c1f0e95ed6
+    m_Address: building.ab/Hui_Building_Residential_L2_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 65a168604cbbb3c4d853eb2375cd192d
+    m_Address: building.ab/Hui_Building_Residential_L2_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a76d918cd5c2ee744930fb65aa173e5f
+    m_Address: building.ab/Hui_Building_Residential_L2_04_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e8382020b7cc7a4c9feb27fbdc3c853
+    m_Address: building.ab/Hui_Building_Residential_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25b842bfe143e244e83bee42bc657b21
+    m_Address: building.ab/Hui_Building_Residential_L3_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c81712af5af599145abeadb01cda9bba
+    m_Address: building.ab/Plain_Building_Residential_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8ccc96d76a33384a98e13de5ce6fe26
+    m_Address: building.ab/Plain_Building_Residential_L1_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90c3e7dc7d8622b4eaf1d238cd98bcf9
+    m_Address: building.ab/Plain_Building_Residential_L1_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53b8d4382cbc09c4fba469eb78e0518d
+    m_Address: building.ab/Plain_Building_Residential_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f60b62e0f8940c641bff07cb218c42d0
+    m_Address: building.ab/Plain_Building_Residential_L2_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bd547d9e3614ad4293cdb88e385c95f
+    m_Address: building.ab/Plain_Building_Residential_L2_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 962eddcb9834c014db4145f6e2a7fda9
+    m_Address: building.ab/Plain_Building_Residential_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c65f36331603c644386f73281d9d5191
+    m_Address: building.ab/Plain_Building_Residential_L3_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0fa3f8cf7e9d1e44cb8a05671d0eb53d
+    m_Address: building.ab/Plain_Building_Residential_L3_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17294c6b4aefcab4581ae0ec80731c70
+    m_Address: building.ab/Universal_Building_Bridge_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b81ca048f0ae8f54984105b139e88fd3
+    m_Address: building.ab/Universal_Building_Bridge_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6dc11ee021f03914b84ba7b45f6e8d12
+    m_Address: building.ab/Universal_Building_Bridge_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80b710ca16e81a049b909c78d4e0bf25
+    m_Address: building.ab/Universal_Building_Factory_attachment_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00f58400a7acabe49954176113643f8a
+    m_Address: building.ab/Universal_Building_Factory_attachment_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 481aa95c8bccd2942bbab668454ba868
+    m_Address: building.ab/Universal_Building_Factory_attachment_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4289e816018205d49be3535e6152e8fe
+    m_Address: building.ab/Universal_Building_Factory_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b0430e4dc38a5c47a53fdf33b4fc935
+    m_Address: building.ab/Universal_Building_Factory_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9666bf76a321a447a7525fd1ee5d70a
+    m_Address: building.ab/Universal_Building_Factory_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dfd511ab1d7a27f4d889ea9bad2261ec
+    m_Address: building.ab/Universal_Building_Farm_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19bb5f8058424a2438429e845900a2ac
+    m_Address: building.ab/Universal_Building_Farm_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af536159211270840833a209fd66268d
+    m_Address: building.ab/Universal_Building_Farm_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b298bf57323bf24eaa18be45073b731
+    m_Address: building.ab/Universal_Building_Government_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6685cb99a29afde4b837a321ddf0becb
+    m_Address: building.ab/Universal_Building_Government_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5db363b257b284a4e9d4721ab0960672
+    m_Address: building.ab/Universal_Building_Government_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15f4b172f032c2a4a8318e1c6e03ebfd
+    m_Address: building.ab/Universal_Building_Market_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e56a7477b76e104d862f5816fe4fa4d
+    m_Address: building.ab/Universal_Building_Market_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85ecbb11619d1eb4dac23d560fcebbae
+    m_Address: building.ab/Universal_Building_Market_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b63c8722f655cb4a9a1aa6c862bce25
+    m_Address: building.ab/Universal_Building_Mine_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e72dcf228586ce4dbd4a45567fe90e5
+    m_Address: building.ab/Universal_Building_Mine_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f70ec5451a504424eb5b1eedd1f5d019
+    m_Address: building.ab/Universal_Building_Mine_L2_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: addd8836d8a678a4cacc1c03e8414433
+    m_Address: building.ab/Universal_Building_Mine_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29340aa1401146748875eb92402b6421
+    m_Address: building.ab/Universal_Building_Sawmill_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8b41e95ce27d504194fea99f5657f50
+    m_Address: building.ab/Universal_Building_Sawmill_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c23c80abd188994680fc4b93c2fead2
+    m_Address: building.ab/Universal_Building_Sawmill_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81b18f239484c684dad8a234c5393d96
+    m_Address: building.ab/Universal_Building_Warehouse_L1_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b19730fe48fa2b84a8d6637c89ad4795
+    m_Address: building.ab/Universal_Building_Warehouse_L1_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7935d62f4136fe4a9c9c988f25b9c8b
+    m_Address: building.ab/Universal_Building_Warehouse_L1_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b061501d67af97d41960b47455e23995
+    m_Address: building.ab/Universal_Building_Warehouse_L2_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8edc87ee41628b5479402c179d4df6e8
+    m_Address: building.ab/Universal_Building_Warehouse_L2_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1edec7f19b0b407478b0e314f298d8bb
+    m_Address: building.ab/Universal_Building_Warehouse_L2_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2a556faddfb5564ab821815de170c80
+    m_Address: building.ab/Universal_Building_Warehouse_L2_04_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3287782fe7e260545bebc876a84fda9a
+    m_Address: building.ab/Universal_Building_Warehouse_L3_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a3c145e6b15002448a3d6e8a05f42a2
+    m_Address: building.ab/Universal_Building_Warehouse_L3_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdd0508d18471cc4e843507ad24aa046
+    m_Address: building.ab/Universal_Building_Warehouse_L3_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b659dfc471fc6e24eade46463decad00
+    m_Address: building.ab/Plain_Building_Residential_L1_03_Ani_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aff86817aadae06478653c8fcfb6dbb8
+    m_Address: building.ab/Universal_Building_Sawmill_L1_01_Ani_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02d54586df4743546aad96b7e8799916
+    m_Address: building.ab/Coach_Building_Hooker_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 609194d7944bcde41b62f61db069f28f
+    m_Address: building.ab/Coach_Building_Hooker_L1_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa887f357086c0e49af5903fbac1d255
+    m_Address: building.ab/Coach_Building_Hooker_L1_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3870e7c7e81f02e488ba541b7c9fc5c7
+    m_Address: building.ab/Coach_Building_Pier_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1ffda4564eb0b64f97cc2ef7b836322
+    m_Address: building.ab/Coach_Building_Residential_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b251f501a4455524a8159ebe1598e3d8
+    m_Address: building.ab/Coach_Building_Residential_L1_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27241f4d1d96ee1489c2ff2de9ca9d6f
+    m_Address: building.ab/Coach_Building_Residential_L1_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07114a87288dca54c9baa2adf7cc9b00
+    m_Address: building.ab/Coach_Building_Residential_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b21a5dabd2c3a0c4f9e5f8b3705b0b15
+    m_Address: building.ab/Coach_Building_Residential_L2_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03c2bdb779b1a544692cf2c6cd8584d3
+    m_Address: building.ab/Coach_Building_Residential_L2_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b26c74b44aaca8469eb1b950a4a62ed
+    m_Address: building.ab/Coach_Building_Residential_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f032191282a26146844b8bbefca1185
+    m_Address: building.ab/Coach_Building_Residential_L3_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1daddcb64c98baf44af64390db9274c3
+    m_Address: building.ab/Coach_Building_Residential_L3_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6a0af00f481d6e4280bf7ad3c8600bf
+    m_Address: building.ab/Hui_Building_Residential_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4291a712a1a50a24581c434bd0aaac59
+    m_Address: building.ab/Hui_Building_Residential_L1_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9407d71ceef1af47acc07262f7f8bbd
+    m_Address: building.ab/Hui_Building_Residential_L1_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bbb10692d380cf3418ebe6a6d195752e
+    m_Address: building.ab/Hui_Building_Residential_L1_04_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5d6a12bf546bc9429c9ad4858d70101
+    m_Address: building.ab/Hui_Building_Residential_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 771054be9c8df6849b94861ff9c7ea9d
+    m_Address: building.ab/Hui_Building_Residential_L2_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9b5117dd0a13f242872c090c865df2b
+    m_Address: building.ab/Hui_Building_Residential_L2_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce009bc3f42dc6e4ebf389c07ee60bfb
+    m_Address: building.ab/Hui_Building_Residential_L2_04_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 01e8540a1bab41149be97d709e80ba9d
+    m_Address: building.ab/Hui_Building_Residential_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5ac0fe8c98baf14f9523295896815d2
+    m_Address: building.ab/Hui_Building_Residential_L3_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 859d6faa464c22c4a82064ed97a702b6
+    m_Address: building.ab/Plain_Building_Residential_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 693bcf297122f9745993f674c80deb39
+    m_Address: building.ab/Plain_Building_Residential_L1_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96d9c4831eac19f41a6575f03e65e822
+    m_Address: building.ab/Plain_Building_Residential_L1_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 481303227aa8c2f4f8ae0612b6cff8e4
+    m_Address: building.ab/Plain_Building_Residential_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b90374e52376e641af2e3549626172f
+    m_Address: building.ab/Plain_Building_Residential_L2_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cae212791895cc4ea66e8bebdfe98e3
+    m_Address: building.ab/Plain_Building_Residential_L2_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09fc1726ac13cd345a87ce4474e302f7
+    m_Address: building.ab/Plain_Building_Residential_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95b38595573c8804391f527f73066b12
+    m_Address: building.ab/Plain_Building_Residential_L3_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20bce753043f702439c0eff2755d00a3
+    m_Address: building.ab/Plain_Building_Residential_L3_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c62f9321aca67c40aa872534b3395c5
+    m_Address: building.ab/Universal_Building_Factory_attachment_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c20b3caae31891f48978ad43ceddf870
+    m_Address: building.ab/Universal_Building_Factory_attachment_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac905a7d0c59c384ea707725b4a1a5b9
+    m_Address: building.ab/Universal_Building_Factory_attachment_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4be8ca873d85c354a8285d3c45f8309c
+    m_Address: building.ab/Universal_Building_Factory_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c4c4da4017e89c4080962c5e3ac7dee
+    m_Address: building.ab/Universal_Building_Factory_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15842ed360cf8734ba0572cb0266788a
+    m_Address: building.ab/Universal_Building_Factory_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 807bef6bdd1a4454ca02471bb5cdb320
+    m_Address: building.ab/Universal_Building_Farm_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf54f05ee43b9974c850d3a40dd850a5
+    m_Address: building.ab/Universal_Building_Farm_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a675e122077c6e446a51fd81a9415467
+    m_Address: building.ab/Universal_Building_Farm_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1d2b7c55e6ab4241996db5f74713176
+    m_Address: building.ab/Universal_Building_Government_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4317525d78ffcc04b9894a91edf7d344
+    m_Address: building.ab/Universal_Building_Government_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81410bf9361946d428dff11c388ed5e1
+    m_Address: building.ab/Universal_Building_Government_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0af32b1b8573d8418ca0c471692ff1b
+    m_Address: building.ab/Universal_Building_Market_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8d763b63823de7847a5296a77f04c034
+    m_Address: building.ab/Universal_Building_Market_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd80c9b82ffffc84bbb1694fc5858832
+    m_Address: building.ab/Universal_Building_Market_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4735511ebb9527c48b3159090dff91f6
+    m_Address: building.ab/Universal_Building_Mine_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 279af11dff2db8641986dd4246c6822c
+    m_Address: building.ab/Universal_Building_Mine_L1_02_Ani_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24e2d1a9b68d33447b9cb193d01a3519
+    m_Address: building.ab/Universal_Building_Mine_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03db1d3fddad2d147a885ad86726252d
+    m_Address: building.ab/Universal_Building_Mine_L2_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c05afcda50516734bb48ba0415053c6c
+    m_Address: building.ab/Universal_Building_Mine_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a0b9e9a458a3234c851e24134c67457
+    m_Address: building.ab/Universal_Building_Mine_L3_02_Ani_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d8337e2188ea454798df0dacf061752
+    m_Address: building.ab/Universal_Building_Sawmill_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcac12e6fc7971241a4df935985fdb2f
+    m_Address: building.ab/Universal_Building_Sawmill_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3803682321c03949ac9dfa28d803eb8
+    m_Address: building.ab/Universal_Building_Sawmill_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd72937b57bd5b94ca83dcb91f91d15e
+    m_Address: building.ab/Universal_Building_Warehouse_L1_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5697b2d4e1b2dc44d8f5ff5d46c336d2
+    m_Address: building.ab/Universal_Building_Warehouse_L1_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 882a3b787614871449e6eedc492bac5a
+    m_Address: building.ab/Universal_Building_Warehouse_L1_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9143245de28fdb7499a982017f101d58
+    m_Address: building.ab/Universal_Building_Warehouse_L2_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed27099ff8c057a4e852bca4caeee02b
+    m_Address: building.ab/Universal_Building_Warehouse_L2_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 565f4408b6000dc409ba3d6ba46d18e0
+    m_Address: building.ab/Universal_Building_Warehouse_L2_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67782a111f425e741be167309374dc6c
+    m_Address: building.ab/Universal_Building_Warehouse_L2_04_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31eeebe2f7c66864989d9c85dbff65d6
+    m_Address: building.ab/Universal_Building_Warehouse_L3_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4573500d33d0d6d4b90ca48d5a24f0f5
+    m_Address: building.ab/Universal_Building_Warehouse_L3_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60c47344fef4a464f86445f42a2ab814
+    m_Address: building.ab/Universal_Building_Warehouse_L3_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 733cd6b254cc0fb438081efea3d4bd10
+    m_Address: building.ab/SmokeWhiteBig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba41b90e9ec68164eaee105df4172b8a
+    m_Address: building.ab/SmokeWhiteSmall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3df2ba8e2ccbf4743986fcad059ce825, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c6c551e9c17cb0e409b4dffb7f81fab0, type: 2}
+    - {fileID: 11400000, guid: 3b4d3d4308eb45c44b67fcf4a180f74c, type: 2}

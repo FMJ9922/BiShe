@@ -1,0 +1,268 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: plant.ab
+  m_EditorClassIdentifier: 
+  m_GroupName: plant.ab
+  m_GUID: b944b218d5a4060479c80a5521b2e33c
+  m_SerializeEntries:
+  - m_GUID: bd60b02a5ce9d164698dbf92ddd191cf
+    m_Address: plant.ab/Universal_Plant_TreeDark_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7054cddf134beba4d9f1ef7a6ada0f81
+    m_Address: plant.ab/Universal_Plant_TreeDark_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15ba5d2acb9bcbc4793b7375db21236c
+    m_Address: plant.ab/Universal_Plant_TreeDark_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 465fcb2a81071424ca59a1aaa81b3bbe
+    m_Address: plant.ab/Universal_Plant_TreeDark_04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f538d5fdbd9a8c0439a885c3dee1779c
+    m_Address: plant.ab/Universal_Plant_TreeDark_05
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1940bee98238fed45808bf796ca3eee9
+    m_Address: plant.ab/Universal_Plant_TreeDark_06
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b7ce482087aca44cb2f2c44ceaf3ec6
+    m_Address: plant.ab/Universal_Plant_TreeDark_07
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a130d4b61357aec4eba48065fa988846
+    m_Address: plant.ab/Universal_Plant_TreeDark_08
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87dc02c992521f54f9d40fabce042620
+    m_Address: plant.ab/Universal_Plant_TreeDark_09
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d854c92f6c476cd459d88bb1b7d8a27c
+    m_Address: plant.ab/Universal_Plant_TreeLight_01
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28d2dd881c1d2d94ebd65e4c606b732a
+    m_Address: plant.ab/Universal_Plant_TreeLight_02
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 43a8ef1999cec1d48ba12a1a51016a96
+    m_Address: plant.ab/Universal_Plant_TreeLight_03
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 667563936af2fb94ab05c6ee663f2347
+    m_Address: plant.ab/Universal_Plant_TreeLight_04
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 952568fc7ab376d4ab13267dcaed0e23
+    m_Address: plant.ab/Universal_Plant_TreeLight_05
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fe7e8b4d9dc4634087a308cab0f4f32
+    m_Address: plant.ab/Universal_Plant_TreeLight_06
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 11b3cfbe416cad547a1496c93dce6bee
+    m_Address: plant.ab/Universal_Plant_TreeLight_07
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f62ec46251b37404d8257501d3643005
+    m_Address: plant.ab/Universal_Plant_TreeLight_08
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 633054fdb53c53648bbf72305bc73f07
+    m_Address: plant.ab/Universal_Plant_TreeLight_09
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 12bccf11ca7e3f447a4b61501a3d69d6
+    m_Address: plant.ab/Universal_Plant_FruitTree_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88d0711439769ee4fa58993be98d5f9e
+    m_Address: plant.ab/Universal_Plant_Tree_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 454a8e1c37b58d7428ba1a7669e83b52
+    m_Address: plant.ab/Universal_Plant_Tree_02_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88d734b5bc6714143a61488673b00879
+    m_Address: plant.ab/Universal_Plant_Tree_03_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cbe1aeab0a5c524f918bd0cec351716
+    m_Address: plant.ab/Universal_Plant_Tree_04_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 909cbd52d18a2ca47abb6385acf32c05
+    m_Address: plant.ab/Universal_Plant_Tree_05_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7205829c04b5e704ba79d450263dd8c4
+    m_Address: plant.ab/Universal_Plant_Tree_06_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79ffec8e6df7b3741b50edff6725f253
+    m_Address: plant.ab/Universal_Plant_Tree_07_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51bb8d323e9a0e149aed77d35ae66f43
+    m_Address: plant.ab/Universal_Plant_Tree_08_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f963ff8ced72e74ca4c21b31668ddc4
+    m_Address: plant.ab/Universal_Plant_Tree_09_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 455aa8e9cb1c224479f89ce25b54e4ea
+    m_Address: plant.ab/Universal_Plant_Wheat_01_Mod
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1f0e8b844f144542934b3f1d109e1cd
+    m_Address: plant.ab/Universal_Plant_FruitTree_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fd8f78428554dd4fb3399daf2f314d4
+    m_Address: plant.ab/Universal_Plant_TreeDark_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca368756c831f4841bdadd8313172580
+    m_Address: plant.ab/Universal_Plant_TreeDark_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a09addc496275e48b5794b9c1b0aedc
+    m_Address: plant.ab/Universal_Plant_TreeDark_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77c260e8193e9584f90e7ec235b4a516
+    m_Address: plant.ab/Universal_Plant_TreeDark_04_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 715260a6d4f99914b96dc28c29d572ff
+    m_Address: plant.ab/Universal_Plant_TreeDark_05_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c428a1182f1788448b1d1f6bdb26b9ee
+    m_Address: plant.ab/Universal_Plant_TreeDark_06_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0823aa6fcc0530409499e6be928641c
+    m_Address: plant.ab/Universal_Plant_TreeDark_07_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa0a9dc6a11bf1043bf5a24597791348
+    m_Address: plant.ab/Universal_Plant_TreeDark_08_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0c830168dc79bde4ebca0651720bf666
+    m_Address: plant.ab/Universal_Plant_TreeDark_09_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 634def33655c6144da6668a962f0f811
+    m_Address: plant.ab/Universal_Plant_TreeLight_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c7ccd2c770bd7d439c0de022170bca2
+    m_Address: plant.ab/Universal_Plant_TreeLight_02_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1790ac8f01a18a48938d0c3d0aedf0f
+    m_Address: plant.ab/Universal_Plant_TreeLight_03_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb2787f263db6ee47b0691332eb56afc
+    m_Address: plant.ab/Universal_Plant_TreeLight_04_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aef7edf100bf20a478afa16b68d1501a
+    m_Address: plant.ab/Universal_Plant_TreeLight_05_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97e20fe2832a5dc4f97cf6e263e8d35d
+    m_Address: plant.ab/Universal_Plant_TreeLight_06_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f914dccf461211f46968aa6d172879b3
+    m_Address: plant.ab/Universal_Plant_TreeLight_07_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0c90e60308cd834d8fd7bff466e7ebf
+    m_Address: plant.ab/Universal_Plant_TreeLight_08_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bce245b35cef5524285944d5a6b9e6e4
+    m_Address: plant.ab/Universal_Plant_TreeLight_09_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29d7ed49139427044b0ecf35217916c0
+    m_Address: plant.ab/Universal_Plant_Wheat_01_Preb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3df2ba8e2ccbf4743986fcad059ce825, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3f34c6ebccfe02b428d5ad1efa89e74d, type: 2}
+    - {fileID: 11400000, guid: 45763ef64fc5a7b4794d6ffc49f0a74f, type: 2}

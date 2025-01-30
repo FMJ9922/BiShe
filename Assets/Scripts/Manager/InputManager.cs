@@ -9,6 +9,7 @@ public partial class InputManager : Singleton<InputManager>
 {
     #region 字段
     public Vector3 LastGroundRayPos = new Vector3(0, 0, 0);
+    [SerializeField] Camera mainCamera;
     #endregion
 
     private void Start()
@@ -32,7 +33,7 @@ public partial class InputManager : Singleton<InputManager>
             EventManager.TriggerEvent(ConstEvent.OnCameraMove);
         }
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray,out hit,10000,1<<LayerMask.NameToLayer("Ground")))
         {
