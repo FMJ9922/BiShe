@@ -1,0 +1,29 @@
+#pragma kernel TerrainUpdate
+
+RWStructuredBuffer<float3> _Vertices;
+Texture2D<float> _HeightMap;
+float2 _HeightMapScale;
+float _Intensity;
+float _TimeParam;
+
+SamplerState sampler_LinearRepeat;
+
+[numthreads(64,1,1)]
+void TerrainUpdate (uint3 id : SV_DispatchThreadID)
+{
+    uint idx = id.x;
+    float3 pos = _Vertices[idx];
+    
+    // 从高度图采样（基于原始XZ坐标）
+    float2 uv = float2(
+        pos.x * _HeightMapScale.x, 
+        pos.z * _HeightMapScale.y
+    );
+    
+    // 基础高度 + 动态波浪
+    //float wave = sin(pos.x * 0.3 + _TimeParam) * cos(pos.z * 0.4);
+    float height = _HeightMap.SampleLevel(sampler_LinearRepeat, uv, 0) * _Intensity;
+    
+    pos.y = height;
+    _Vertices[idx] = pos;
+}

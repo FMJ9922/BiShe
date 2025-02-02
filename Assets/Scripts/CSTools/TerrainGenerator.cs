@@ -20,6 +20,8 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
     public GameObject shower;
     private Mesh originMesh;
 
+    public GameObject _newTerrain;
+
 
     private void Start()
     {
@@ -31,6 +33,10 @@ public class TerrainGenerator : Singleton<TerrainGenerator>
         //Mesh mesh = CopyMesh(Resources.Load<Mesh>("MapData/" + SceneManager.GetActiveScene().name + "meshData"));
         //mesh.name = SceneManager.GetActiveScene().name + "meshData Instance";
         //transform.GetComponent<MeshFilter>().mesh = mesh;
+    }
+
+    public void InitNewTerrain(){
+        _newTerrain.SetActive(true);
     }
 
     public Vector3 GetStaticPoition(Vector2Int gridPos,TerrainGenerator generator)

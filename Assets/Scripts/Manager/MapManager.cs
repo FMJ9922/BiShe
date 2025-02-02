@@ -29,6 +29,7 @@ namespace Manager
             InitGrid(GameManager.saveData);
             InitBuilidngEntryDic();
             _buildingDic = new Dictionary<EBuildingType, List<BuildingBase>>();
+            TerrainGenerator.Instance.InitNewTerrain();
         }
 
         /// <summary>
